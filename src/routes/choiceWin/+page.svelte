@@ -1,9 +1,12 @@
 <script lang="ts">
   import { invoke } from '@tauri-apps/api/core';
+  
+  async function openmainwin() {
+      await invoke("open_main_window");
 
-  function openmainwin() {
-    invoke("open_main_window")
-    invoke("kill_window", { windowName: "crushBoostrapChoiceWindow" });
+      setTimeout(() => { // wait before killing to prevent crash
+          invoke("kill_window", { windowName: "crushBoostrapChoiceWindow" });
+      }, 100);
   }
 </script>
 
