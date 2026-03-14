@@ -8,6 +8,14 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
+#[tauri::command]
+fn kill_window(app: tauri::AppHandle, window_name: &str) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window(window_name) {
+        window.close().map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
 #[tauri::command] // THIS HAVE TO BE ASYNC otherwise its will freezes
 async fn open_main_window(app: tauri::AppHandle) -> Result<(), String> {
     let label = "CrushMainWindow";
@@ -25,7 +33,7 @@ async fn open_main_window(app: tauri::AppHandle) -> Result<(), String> {
     tauri::WebviewWindowBuilder::new(&app, label, url)
         .title("Crush")
         .closable(true)
-        .inner_size(800.0, 600.0)
+        .inner_size(800.0, 440.0)
         .build()
         .map_err(|e| e.to_string())?;
 
@@ -52,7 +60,7 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, open_main_window])
+        .invoke_handler(tauri::generate_handler![greet, open_main_window, kill_window])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

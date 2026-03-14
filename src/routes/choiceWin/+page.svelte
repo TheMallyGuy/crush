@@ -3,6 +3,7 @@
 
   function openmainwin() {
     invoke("open_main_window")
+    invoke("kill_window", { windowName: "crushBoostrapChoiceWindow" });
   }
 </script>
 
