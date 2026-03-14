@@ -12,11 +12,11 @@
   "app": {
     "windows": [
       {
-        "label" : "crushBoostrapChoiceWindow",
+        "label": "crushBoostrapChoiceWindow",
         "title": "crushBoostrapChoiceWindow",
         "width": 500,
         "height": 250,
-        "url" : "/choiceWin"
+        "url": "/choiceWin"
       }
     ],
     "security": {
