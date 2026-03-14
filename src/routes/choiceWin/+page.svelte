@@ -35,17 +35,3 @@
     firstLaunchValue = await checkLaunch();
   });
 </script>
-
-<h1 class="text-4xl font-bold text-blue-500">
-  choice box
-</h1>
-{#if firstLaunchValue}
-<h1>this is first launch</h1>
-{:else}
-<h1>this is not first launch</h1>
-{/if}
-
-
-<button on:click={openmainwin}>
-  open main win
-</button>

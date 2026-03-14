@@ -32,6 +32,7 @@ async fn open_main_window(app: tauri::AppHandle, url: &str) -> Result<(), String
         .title("Crush")
         .closable(true)
         .inner_size(800.0, 440.0)
+        .decorations(false)
         .build()
         .map_err(|e| e.to_string())?;
 
@@ -55,6 +56,7 @@ async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
         .closable(true)
         .inner_size(500.0, 250.0)
         .min_inner_size(500.0, 250.0)
+        .decorations(false)
         .build()
         .map_err(|e| e.to_string())?;
 

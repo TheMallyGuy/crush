@@ -16,7 +16,8 @@
         "title": "crushBoostrapChoiceWindow",
         "width": 500,
         "height": 250,
-        "url": "/choiceWin"
+        "url": "/choiceWin",
+        "decorations": false
       }
     ],
     "security": {
