@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
-use tauri_plugin_dialog::{DialogExt};
-use tauri::{Manager};
+use tauri::Manager;
+use tauri_plugin_dialog::DialogExt;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -17,7 +17,7 @@ fn kill_window(app: tauri::AppHandle, window_name: &str) -> Result<(), String> {
 }
 
 #[tauri::command] // THIS HAVE TO BE ASYNC otherwise its will freezes
-async fn open_main_window(app: tauri::AppHandle) -> Result<(), String> {
+async fn open_main_window(app: tauri::AppHandle, url: &str) -> Result<(), String> {
     let label = "CrushMainWindow";
 
     if let Some(window) = app.get_webview_window(label) {
@@ -26,9 +26,7 @@ async fn open_main_window(app: tauri::AppHandle) -> Result<(), String> {
         return Ok(());
     }
 
-    let url = tauri::WebviewUrl::App(
-        "mainWin/firstStarted".parse().unwrap()
-    );
+    let url = tauri::WebviewUrl::App(url.parse().unwrap());
 
     tauri::WebviewWindowBuilder::new(&app, label, url)
         .title("Crush")
@@ -50,9 +48,7 @@ async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
         return Ok(());
     }
 
-    let url = tauri::WebviewUrl::App(
-        "choiceWin".parse().unwrap()
-    );
+    let url = tauri::WebviewUrl::App("choiceWin".parse().unwrap());
 
     tauri::WebviewWindowBuilder::new(&app, label, url)
         .title("crushBoostrapChoiceWindow")
@@ -68,6 +64,7 @@ async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
             let platform: &str = tauri_plugin_os::platform();
 
@@ -85,7 +82,12 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, open_main_window, open_choice_window, kill_window])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            open_main_window,
+            open_choice_window,
+            kill_window
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
