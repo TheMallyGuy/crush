@@ -17,7 +17,8 @@
         "width": 500,
         "height": 250,
         "url": "/choiceWin",
-        "decorations": false
+        "decorations": false,
+        "center" : true
       }
     ],
     "security": {
