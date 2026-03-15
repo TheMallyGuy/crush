@@ -8,7 +8,7 @@
   const close = () => appWindow.close();
 </script>
 
-<nav class="flex items-center justify-between h-8 bg-zinc-900 text-white select-none fixed top-0 left-0 right-0 z-50">
+<nav class="flex items-center justify-between h-8 text-white select-none fixed top-0 left-0 right-0 z-50">
   
   <div data-tauri-drag-region class="flex-grow h-full flex items-center pl-3 text-xs font-medium cursor-default">
     Crush
