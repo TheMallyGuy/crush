@@ -1,21 +1,23 @@
-<script>
+<script lang="ts">
   import { 
     Puzzle, HardDrive, Hammer, Flag, Palette, 
     Settings, Info, Menu
   } from '@lucide/svelte';
   import { page } from '$app/stores'; 
 
+  let baseUiUrl: string = "/mainWin/Ui"
+
   const mainNav = [
-    { name: 'Integrations', icon: Puzzle, href: '/integrations' },
-    { name: 'Installation', icon: HardDrive, href: '/installation' },
-    { name: 'Mods', icon: Hammer, href: '/mods' },
-    { name: 'FastFlag', icon: Flag, href: '/fastflags' },
-    { name: 'Appearance', icon: Palette, href: '/appearance' },
+    { name: 'Integrations', icon: Puzzle, href: `${baseUiUrl}/integrations` },
+    { name: 'Installation', icon: HardDrive, href: `${baseUiUrl}/installation` },
+    { name: 'Mods', icon: Hammer, href: `${baseUiUrl}/mods` },
+    { name: 'FastFlag', icon: Flag, href: `${baseUiUrl}/fastflags` },
+    { name: 'Appearance', icon: Palette, href: `${baseUiUrl}/appearance` },
   ];
 
   const footerNav = [
-    { name: 'Settings', icon: Settings, href: '/settings' },
-    { name: 'About', icon: Info, href: '/about' },
+    { name: 'Settings', icon: Settings, href: `${baseUiUrl}/settings` },
+    { name: 'About', icon: Info, href: `${baseUiUrl}/about` },
   ];
 </script>
 
