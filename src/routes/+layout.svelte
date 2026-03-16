@@ -1,5 +1,5 @@
 <script>
-  import Topbar from "./Topbar.svelte";
+  import Topbar from "$lib/components/Topbar.svelte";
   import "./style.css";
   import "./font.css";
 </script>
