@@ -24,6 +24,8 @@
     [] Appearance
     [] Settings
     [] About
+    [] Hello homepage
+    [] Game history
 [] Support localization
 [] Launch menu
     [] Customization
