@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
+  import type { ComponentType } from "svelte";
+
   export let title = "";
   export let description = "";
-  export let icon = null;
+  export let icon: ComponentType | null = null;
   export let clickable = false;
 
   let className = "";
