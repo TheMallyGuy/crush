@@ -1,0 +1,35 @@
+name: goodcode
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Type check
+        run: pnpm tsc --noEmit
+
+      - name: Rust checks
+        run: |
+          cargo fmt -- --check
+          cargo clippy -- -D warnings
+
+      - name: Build
+        run: pnpm tauri build
