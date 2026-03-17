@@ -11,28 +11,28 @@
 </script>
 
 <div
-  class="group relative flex w-full max-w-sm flex-col rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 
-  {clickable ? 'cursor-pointer hover:border-gray-300 hover:shadow-md active:scale-[0.98]' : ''} 
+  class="group relative flex w-full flex-col rounded-xl bg-[#0f0f0f] p-5 transition-all duration-200 
+  {clickable ? 'cursor-pointer hover:bg-[#161616] active:scale-[0.995]' : ''} 
   {className}"
 >
-  <div class="flex items-start gap-4">
+  <div class="flex items-center gap-5">
     {#if icon || $$slots.icon}
-      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-gray-50 text-gray-600">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center text-gray-400">
         <slot name="icon">
-           <svelte:component this={icon} size={20} />
+           <svelte:component this={icon} size={24} />
         </slot>
       </div>
     {/if}
 
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-grow flex-col gap-0.5">
       {#if title || $$slots.title}
-        <h3 class="text-sm font-semibold leading-tight text-gray-900">
+        <h3 class="text-base tracking-tight text-white">
           <slot name="title">{title}</slot>
         </h3>
       {/if}
       
       {#if description || $$slots.description}
-        <p class="text-xs leading-normal text-gray-500">
+        <p class="text-sm font-medium text-gray-500">
           <slot name="description">{description}</slot>
         </p>
       {/if}
