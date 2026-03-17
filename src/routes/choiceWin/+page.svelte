@@ -25,7 +25,7 @@
       if (firstLaunchValue) {
         await invoke("open_main_window", { url : "mainWin/crushHello"}); 
       } else {
-        await invoke("open_main_window", { url : "mainWin/Ui"}); 
+        await invoke("open_main_window", { url : "mainWin/Ui/installation"}); 
       }
       setTimeout(() => { // wait before killing to prevent crash
           invoke("kill_window", { windowName: "crushBoostrapChoiceWindow" });
