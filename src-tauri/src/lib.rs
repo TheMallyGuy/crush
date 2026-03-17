@@ -1,6 +1,8 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use tauri_plugin_dialog::DialogExt;
+use tauri::Manager;
+use window_vibrancy::*;
 use commands::window::{ open_choice_window, open_main_window, kill_window };
 mod commands;
 
@@ -25,6 +27,9 @@ pub fn run() {
                     .blocking_show();
                 std::process::exit(1);
             }
+
+            let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
+            let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
             Ok(())
         })
