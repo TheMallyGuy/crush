@@ -6,7 +6,6 @@
     - [ ] Download Roblox
     - [ ] Launch Roblox
     - [ ] Change channels
-    - [ ] Download & use custom builds
 
 
 - [ ] Intergrate bloxstrapRPC
