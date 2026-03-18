@@ -35,7 +35,7 @@ pub async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
         return Ok(());
     }
 
-    let url = tauri::WebviewUrl::App("choiceWin".parse().unwrap());
+    let url = tauri::WebviewUrl::App("mainWin/choiceWin".parse().unwrap());
 
     tauri::WebviewWindowBuilder::new(&app, label, url)
         .title("crushBoostrapChoiceWindow")
