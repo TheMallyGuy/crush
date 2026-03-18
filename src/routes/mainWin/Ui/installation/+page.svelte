@@ -18,12 +18,5 @@
 
 
 <div class="flex-col flex gap-4">
-    <SettingCard title="do balls" description="balls are good" icon={Balloon}>
-    </SettingCard>
-    <SettingCard title="do balls" description="balls are good" icon={Balloon}>
-    </SettingCard>
-    <SettingCard title="do balls" description="balls are good" icon={Balloon}>
-    </SettingCard>
-    <SettingCard title="do balls" description="balls are good" icon={Balloon}>
-    </SettingCard>
+
 </div>
