@@ -6,6 +6,16 @@
 
   let firstLaunchValue: boolean | undefined;
 
+  
+  async function download() {
+    try {
+      const url = await invoke("download_roblox");
+      console.log("download URL debug thinggy:", url);
+    } catch (e) {
+      console.error("error:", e);
+    }
+  }
+
   async function checkLaunch() {
     const store = await load('config.json');
 
@@ -43,7 +53,7 @@
   </div>
 
   <div class="flex flex-col gap-2 w-full max-w-sm">
-    <button class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200">
+    <button on:click={download} class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200">
       <Gamepad2 class="size-5"/> 
       <span class="font-medium">Play Roblox</span>
     </button>
