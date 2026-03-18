@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { openUrl } from "@tauri-apps/plugin-opener";
   import { invoke } from '@tauri-apps/api/core';
   import { load } from '@tauri-apps/plugin-store';
   import { Gamepad2, Wrench, Info } from "@lucide/svelte";
@@ -42,6 +43,10 @@
       }, 100);
   }
 
+  async function openDiscordServer() {
+    openUrl("https://discord.gg/EwhG5y5Yw9")
+  }
+
   onMount(async () => {
     firstLaunchValue = await checkLaunch();
   });
@@ -64,7 +69,7 @@
         Config
       </button>
 
-      <button class="w-1/2 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center">
+      <button on:click={openDiscordServer} class="w-1/2 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center">
         <Info class="size-5"/> 
         Discord
       </button>
