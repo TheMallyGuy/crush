@@ -1,9 +1,9 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
-use tauri_plugin_dialog::DialogExt;
+use commands::window::{kill_window, open_choice_window, open_main_window};
 use tauri::Manager;
+use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
-use commands::window::{ open_choice_window, open_main_window, kill_window };
 mod commands;
 
 #[tauri::command]
@@ -11,10 +11,10 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
             let platform: &str = tauri_plugin_os::platform();

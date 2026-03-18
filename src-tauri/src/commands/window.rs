@@ -1,4 +1,3 @@
-
 use tauri::command;
 use tauri::Manager;
 
@@ -26,7 +25,6 @@ pub async fn open_main_window(app: tauri::AppHandle, url: &str) -> Result<(), St
     Ok(())
 }
 
-
 #[command] // THIS HAVE TO BE ASYNC otherwise its will freezes
 pub async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
     let label = "crushBoostrapChoiceWindow"; // trying to be diffrent here | EDIT : dont
@@ -51,7 +49,6 @@ pub async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
 
     Ok(())
 }
-
 
 #[tauri::command]
 pub async fn kill_window(app: tauri::AppHandle, window_name: &str) -> Result<(), String> {

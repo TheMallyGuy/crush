@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier . --write",
-    "clean" : "cd ./src-tauri && cargo clean",
+    "clean": "cd ./src-tauri && cargo clean",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "tauri": "tauri"
@@ -19,6 +19,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-dialog": "~2.6.0",
+    "@tauri-apps/plugin-http": "^2.5.7",
     "@tauri-apps/plugin-opener": "~2",
     "@tauri-apps/plugin-os": "~2.3.2",
     "@tauri-apps/plugin-store": "~2",
