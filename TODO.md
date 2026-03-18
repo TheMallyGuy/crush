@@ -2,7 +2,7 @@
 
 ## Functions
 
-- [ ] Able to download & launch roblox
+- [ ] Able to download & launch roblox [ this first ]
     - [ ] Download Roblox
     - [ ] Launch Roblox
     - [ ] Change channels
@@ -10,9 +10,9 @@
 
 
 - [ ] Intergrate bloxstrapRPC
-- [ ] Modify Roblox Files (mods, fastflag... etc)
+- [ ] Modify Roblox Files (mods, fastflag... etc) [ next 1 ]
 - [ ] Mods
-- [ ] Fastflag(clientsetting.json)
+- [ ] Fastflag(clientsetting.json) [ next 2 ]
 
 
 - [ ] Community mods
@@ -26,7 +26,7 @@
 
 - [ ] Pages
     - [ ] Integrations
-    - [ ] Installation
+    - [ ] Installation [ next 4 ]
     - [ ] Mods
     - [ ] FastFlag
     - [ ] Appearance
@@ -37,7 +37,7 @@
 
 
 - [ ] Support localization
-- [ ] Launch menu
+- [ ] Launch menu [ next 1 ]
     - [ ] Customization
     - [ ] Support bloxstrap's custom launch menu (possible)
 
