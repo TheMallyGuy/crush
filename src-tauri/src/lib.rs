@@ -1,10 +1,13 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::window::{kill_window, open_choice_window, open_main_window};
+use commands::downloadingroblox::{download_roblox, get_best_region};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
 mod commands;
+
+pub mod rd;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -45,7 +48,9 @@ pub fn run() {
             greet,
             open_main_window,
             open_choice_window,
-            kill_window
+            kill_window,
+            download_roblox,
+            get_best_region
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
