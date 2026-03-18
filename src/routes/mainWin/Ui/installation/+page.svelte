@@ -12,13 +12,10 @@
     }
 </script>
 
-<h1 class="text-4xl font-bold text-blue-500">
-    something that very cool and tuff too
+<h1 class="text-4xl font-bold text-white">
+    Installation
 </h1>
 
-<button on:click={openmainwin}>
-  open choice win
-</button>
 
 <div class="flex-col flex gap-4">
     <SettingCard title="do balls" description="balls are good" icon={Balloon}>
