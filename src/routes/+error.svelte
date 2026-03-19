@@ -2,7 +2,15 @@
   import { invoke } from '@tauri-apps/api/core';
 
   async function openchoicewin() {
-      await invoke("open_choice_window");
+        await invoke("create_or_focus_window", {
+          label: "crushBootstrapChoiceWindow",
+          url: "mainWin/choiceWin",
+          title: "Crush",
+          width: 500.0,
+          height: 250.0,
+          minWidth: 500,
+          minHeight: 250.0
+        });
 
       setTimeout(() => { // wait before killing to prevent crash
           invoke("kill_window", { windowName: "CrushMainWindow" });

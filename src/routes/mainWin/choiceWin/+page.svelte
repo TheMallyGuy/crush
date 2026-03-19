@@ -34,9 +34,17 @@
 
   async function openmainwin() {
       if (firstLaunchValue) {
-        await invoke("open_main_window", { url : "mainWin/crushHello"}); 
+        await invoke("open_main_window", { url : "mainWin/crushHello"});  // TODO : migrate to the new tauri command
       } else {
-        await invoke("open_main_window", { url : "mainWin/Ui/installation"}); 
+        await invoke("create_or_focus_window", {
+          label: "CrushMainWindow",
+          url: "mainWin/Ui/installation",
+          title: "Crush",
+          width: 1000,
+          height: 600,
+          minWidth: 1000,
+          minHeight: 600
+        });
       }
       setTimeout(() => { // wait before killing to prevent crash
           invoke("kill_window", { windowName: "crushBoostrapChoiceWindow" });
