@@ -1,6 +1,6 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
-use commands::window::{kill_window, open_choice_window, open_main_window};
+use commands::window::{kill_window, create_or_focus_window};
 use commands::downloadingroblox::{download_roblox, get_best_region};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
@@ -46,11 +46,10 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
-            open_main_window,
-            open_choice_window,
             kill_window,
             download_roblox,
-            get_best_region
+            get_best_region,
+            create_or_focus_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
