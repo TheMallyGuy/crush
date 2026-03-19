@@ -4,17 +4,25 @@
   import { invoke } from '@tauri-apps/api/core';
   import { load } from '@tauri-apps/plugin-store';
   import { Gamepad2, Wrench, Info } from "@lucide/svelte";
+  import { getCurrentWindow } from "@tauri-apps/api/window";
 
   let firstLaunchValue: boolean | undefined;
 
   
-  async function download() {
-    try {
-      const url = await invoke("download_roblox");
-      console.log("download URL debug thinggy:", url);
-    } catch (e) {
-      console.error("error:", e);
-    }
+  async function launchBoostrap() {
+    await invoke("create_or_focus_window", { 
+          label: "CrushBoostrap",
+          url: "boostrapWin",
+          title: "Crush",
+          width: 500.0,
+          height: 250.0,
+          minWidth: 500,
+          minHeight: 250.0
+        });
+      
+    setTimeout(() => { // wait before killing to prevent crash
+      getCurrentWindow().close();
+    }, 100);
   }
 
   async function checkLaunch() {
@@ -75,7 +83,7 @@
   </div>
 
   <div class="flex flex-col gap-2 w-full max-w-sm">
-    <button on:click={download} class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200">
+    <button on:click={launchBoostrap} class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200">
       <Gamepad2 class="size-5"/> 
       <span class="font-medium">Play Roblox</span>
     </button>
