@@ -1,22 +1,22 @@
 <script lang="ts">
-    import { invoke } from "@tauri-apps/api/core";
+    import { invoke } from '@tauri-apps/api/core'
 
-    let description = "Preveiii!!";
+    let description = 'Preveiii!!'
 
     function setDescription(text: string) {
-        description = text;
+        description = text
     }
 
     function changeDescription() {
-        setDescription("something is working idfk");
+        setDescription('something is working idfk')
     }
 
     async function downloadBackround() {
         try {
-            const url = await invoke("download_roblox");
-            console.log("download URL debug thinggy:", url);
+            const url = await invoke('download_roblox')
+            console.log('download URL debug thinggy:', url)
         } catch (e) {
-            console.error("error:", e);
+            console.error('error:', e)
         }
     }
 </script>

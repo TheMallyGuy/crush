@@ -2,12 +2,8 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "semi": false,
-    "plugins": [
-        "prettier-plugin-svelte"
-    ],
-    "pluginSearchDirs": [
-        "."
-    ],
+    "plugins": ["prettier-plugin-svelte"],
+    "pluginSearchDirs": ["."],
     "overrides": [
         {
             "files": "*.svelte",

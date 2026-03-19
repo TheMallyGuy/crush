@@ -1,50 +1,50 @@
 name: Tauri CI Build
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+    push:
+        branches:
+            - master
+    pull_request:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: windows-latest
+    build:
+        runs-on: windows-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v5
-        with:
-          version: 9
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v5
+              with:
+                  version: 9
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: "pnpm"
+            - name: Setup Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+            - name: Setup Rust
+              uses: dtolnay/rust-toolchain@stable
 
-      - name: Cache Rust
-        uses: Swatinem/rust-cache@v2
+            - name: Cache Rust
+              uses: Swatinem/rust-cache@v2
 
-      - name: Install frontend deps
-        run: pnpm install --frozen-lockfile
+            - name: Install frontend deps
+              run: pnpm install --frozen-lockfile
 
-      - name: Build Tauri
-        run: pnpm tauri build
+            - name: Build Tauri
+              run: pnpm tauri build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: tauri-windows-build
-          path: |
-            src-tauri/target/release/bundle/msi/*.msi
-            src-tauri/target/release/bundle/nsis/*.exe
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v7
+              with:
+                  name: tauri-windows-build
+                  path: |
+                      src-tauri/target/release/bundle/msi/*.msi
+                      src-tauri/target/release/bundle/nsis/*.exe

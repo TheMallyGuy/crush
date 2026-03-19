@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { invoke } from '@tauri-apps/api/core';
+    import { invoke } from '@tauri-apps/api/core'
 </script>
 
 <h1 class="text-4xl font-bold text-blue-500">

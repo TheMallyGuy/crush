@@ -1,24 +1,24 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html,
 body {
-  background: transparent;
-  overflow: hidden;
+    background: transparent;
+    overflow: hidden;
 }
 
 /* hiding scroll frame */
 main::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 main {
-  scrollbar-width: none;
-  -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE/Edge */
 }
 
 :global(body) {
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow: hidden;
 }

@@ -1,40 +1,40 @@
 name: goodcode
 
 on:
-  push:
-    branches: [master]
-  pull_request:
+    push:
+        branches: [master]
+    pull_request:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  check:
-    runs-on: windows-latest
+    check:
+        runs-on: windows-latest
 
-    steps:
-      - uses: actions/checkout@v6
+        steps:
+            - uses: actions/checkout@v6
 
-      - name: Install Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
+            - name: Install Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 20
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+            - name: Install pnpm
+              run: npm install -g pnpm
 
-      - name: Install deps
-        run: pnpm install
+            - name: Install deps
+              run: pnpm install
 
-      - name: Type check
-        run: pnpm check
+            - name: Type check
+              run: pnpm check
 
-      - name: Rust checks
-        working-directory: ./src-tauri
-        run: |
-          cargo fmt -- --check
-          cargo clippy -- -D warnings
+            - name: Rust checks
+              working-directory: ./src-tauri
+              run: |
+                  cargo fmt -- --check
+                  cargo clippy -- -D warnings
 
-      - name: Build
-        run: pnpm tauri build
+            - name: Build
+              run: pnpm tauri build
