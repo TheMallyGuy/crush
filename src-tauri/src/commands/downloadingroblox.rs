@@ -1,14 +1,14 @@
-use crate::rd::{get_download_url, best_region};
+use crate::rd::{get_download_urls, best_region};
 
 #[tauri::command]
-pub async fn download_roblox() -> Result<String, String> {
-    let url = get_download_url(None, None)
+pub async fn download_roblox() -> Result<Vec<String>, String> {
+    let urls = get_download_urls(None, None)
         .await
         .map_err(|e| e.to_string())?;
 
-    log::info!("download url : {}", url);
+    log::info!("download urls: {:?}", urls);
 
-    Ok(url)
+    Ok(urls)
 }
 
 #[tauri::command]

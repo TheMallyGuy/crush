@@ -18,6 +18,37 @@ const URLS: &[&str] = &[
     "https://setup-cfly.rbxcdn.com" // us region
     ];
 
+const FILES: &[&str] = &[
+    "RobloxApp.zip",
+    "Redist",
+    "WebView2RuntimeInstaller.zip",
+    "content-avatar.zip", 
+    "shaders.zip",
+    "ssl.zip",
+
+    "WebView2.zip",
+    "WebView2RuntimeInstaller.zip",
+
+    "content-avatar.zip",
+    "content-configs.zip",
+    "content-fonts.zip",
+    "content-sky.zip",
+    "content-sounds.zip",
+    "content-textures2.zip",
+    "content-models.zip",
+
+    "content-platform-fonts.zip",
+    "content-platform-dictionaries.zip",
+    "content-terrain.zip",
+    "content-textures3.zip",
+
+    "extracontent-luapackages.zip",
+    "extracontent-translations.zip",
+    "extracontent-models.zip",
+    "extracontent-textures.zip",
+    "extracontent-places.zip"
+    ];
+
 pub async fn best_region() -> Option<&'static str> {
     let client = reqwest::Client::new();
     log::info!("[BACKEND] testing for best regions");
@@ -66,10 +97,10 @@ async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
     Ok(parsed)
 }
 
-pub async fn get_download_url(
+pub async fn get_download_urls(
     versionhash: Option<&str>,
     region_url: Option<&str>,
-) -> Result<String, Box<dyn std::error::Error>> {
+) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     let version = latest_version().await?;
 
     let base_version = versionhash
@@ -82,8 +113,6 @@ pub async fn get_download_url(
         format!("version-{}", base_version)
     };
 
-    let file = format!("{}-RobloxApp.zip", base_version);
-
     let base = match region_url {
         Some(r) => r.to_string(),
         None => {
@@ -94,7 +123,10 @@ pub async fn get_download_url(
         }
     };
 
-    let url = format!("{}/{}", base, file);
+    let urls: Vec<String> = FILES
+        .iter()
+        .map(|file| format!("{}/{}-{}", base, base_version, file))
+        .collect();
 
-    Ok(url)
+    Ok(urls)
 }
