@@ -3,9 +3,14 @@
 ## Functions
 
 - [ ] Able to download & launch roblox [ this first ]
-    - [ ] Download Roblox
-    - [ ] Launch Roblox
-    - [ ] Change channels
+    - Player
+        - [ ] Download Roblox
+        - [ ] Launch Roblox
+        - [ ] Change channels
+    - Studio
+        - [ ] Download Roblox
+        - [ ] Launch Roblox
+        - [ ] Change channels
 
 
 - [ ] Intergrate bloxstrapRPC
