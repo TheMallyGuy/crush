@@ -1,57 +1,43 @@
-use tauri::command;
-use tauri::Manager;
+use tauri::{command, Manager, AppHandle, WebviewUrl, WebviewWindowBuilder};
 
-#[command] // THIS HAVE TO BE ASYNC otherwise its will freezes
-pub async fn open_main_window(app: tauri::AppHandle, url: &str) -> Result<(), String> {
-    let label = "CrushMainWindow";
-
-    if let Some(window) = app.get_webview_window(label) {
+#[command]
+pub async fn create_or_focus_window(
+    app: AppHandle,
+    label: String,
+    url: String,
+    title: String,
+    width: f64,
+    height: f64,
+    min_width: Option<f64>,
+    min_height: Option<f64>,
+) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window(&label) {
         window.show().map_err(|e| e.to_string())?;
         window.set_focus().map_err(|e| e.to_string())?;
         return Ok(());
     }
 
-    let url = tauri::WebviewUrl::App(url.parse().unwrap());
+    let webview_url = WebviewUrl::App(url.parse().unwrap());
 
-    tauri::WebviewWindowBuilder::new(&app, label, url)
-        .title("Crush")
+    let mut builder = WebviewWindowBuilder::new(&app, label, webview_url)
+        .title(&title)
         .closable(true)
-        .inner_size(1000.0, 600.0)
+        .inner_size(width, height)
         .center()
-        .decorations(false)
-        .build()
-        .map_err(|e| e.to_string())?;
+        .decorations(false);
 
-    Ok(())
-}
-
-#[command] // THIS HAVE TO BE ASYNC otherwise its will freezes
-pub async fn open_choice_window(app: tauri::AppHandle) -> Result<(), String> {
-    let label = "crushBoostrapChoiceWindow"; // trying to be diffrent here | EDIT : dont
-
-    if let Some(window) = app.get_webview_window(label) {
-        window.show().map_err(|e| e.to_string())?;
-        window.set_focus().map_err(|e| e.to_string())?;
-        return Ok(());
+    if let (Some(w), Some(h)) = (min_width, min_height) {
+        builder = builder.min_inner_size(w, h);
     }
 
-    let url = tauri::WebviewUrl::App("mainWin/choiceWin".parse().unwrap());
-
-    tauri::WebviewWindowBuilder::new(&app, label, url)
-        .title("crushBoostrapChoiceWindow")
-        .closable(true)
-        .inner_size(500.0, 250.0)
-        .min_inner_size(500.0, 250.0)
-        .center()
-        .decorations(false)
-        .build()
-        .map_err(|e| e.to_string())?;
+    builder.build().map_err(|e| e.to_string())?;
 
     Ok(())
 }
 
-#[tauri::command]
-pub async fn kill_window(app: tauri::AppHandle, window_name: &str) -> Result<(), String> {
+
+#[command]
+pub async fn kill_window(app: AppHandle, window_name: &str) -> Result<(), String> {
     if let Some(window) = app.get_webview_window(window_name) {
         window.close().map_err(|e| e.to_string())?;
     }
