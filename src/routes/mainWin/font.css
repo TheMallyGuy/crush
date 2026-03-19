@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Outfit';
+  font-family: "Outfit";
   font-style: normal;
   font-weight: 400;
-  src: url('/fonts/Outfit-Regular.ttf') format('truetype');
+  src: url("/fonts/Outfit-Regular.ttf") format("truetype");
 }
 
 :root {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }

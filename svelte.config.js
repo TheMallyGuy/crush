@@ -12,17 +12,17 @@ const config = {
 
   kit: {
     alias: {
-      $lib: path.resolve("./src/lib")
+      $lib: path.resolve("./src/lib"),
     },
 
     adapter: adapter({
-      fallback: "index.html"
+      fallback: "index.html",
     }),
 
     paths: {
-      relative: true
-    }
-  }
+      relative: true,
+    },
+  },
 };
 
 export default config;
