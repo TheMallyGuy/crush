@@ -2,10 +2,21 @@
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "default",
     "description": "Capability for the main window",
-    "windows": ["crushBoostrapChoiceWindow", "CrushMainWindow"],
+    "windows": [
+        "crushBoostrapChoiceWindow",
+        "CrushMainWindow"
+    ],
     "permissions": [
         "core:default",
         "opener:default",
+        {
+            "identifier": "opener:allow-open-url",
+            "allow": [
+                {
+                    "url": "https://discord.gg/EwhG5y5Yw9"
+                }
+            ]
+        },
         "os:default",
         "dialog:default",
         "store:default",
