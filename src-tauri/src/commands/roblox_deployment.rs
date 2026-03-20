@@ -1,7 +1,7 @@
 use crate::rd::{get_download_urls, best_region};
 
 #[tauri::command]
-pub async fn download_roblox() -> Result<Vec<String>, String> {
+pub async fn get_download_deployment_urls() -> Result<Vec<String>, String> {
     let urls = get_download_urls(None, None)
         .await
         .map_err(|e| e.to_string())?;

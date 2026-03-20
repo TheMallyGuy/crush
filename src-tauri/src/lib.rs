@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::window::{kill_window, create_or_focus_window};
-use commands::downloadingroblox::{download_roblox, get_best_region};
+use commands::roblox_deployment::{get_download_deployment_urls, get_best_region};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
@@ -47,7 +47,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             kill_window,
-            download_roblox,
+            get_download_deployment_urls,
             get_best_region,
             create_or_focus_window
         ])
