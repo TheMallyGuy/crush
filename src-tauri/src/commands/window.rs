@@ -1,4 +1,4 @@
-use tauri::{command, Manager, AppHandle, WebviewUrl, WebviewWindowBuilder};
+use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 #[allow(clippy::too_many_arguments)]
 #[command]
@@ -35,7 +35,6 @@ pub async fn create_or_focus_window(
 
     Ok(())
 }
-
 
 #[command]
 pub async fn kill_window(app: AppHandle, window_name: &str) -> Result<(), String> {

@@ -1,31 +1,32 @@
 {
-    "$schema": "../gen/schemas/desktop-schema.json",
-    "identifier": "default",
-    "description": "Capability for the main window",
-    "windows": [
-        "crushBoostrapChoiceWindow",
-        "CrushMainWindow"
-    ],
-    "permissions": [
-        "core:default",
-        "opener:default",
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "crushBoostrapChoiceWindow",
+    "CrushMainWindow"
+  ],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
         {
-            "identifier": "opener:allow-open-url",
-            "allow": [
-                {
-                    "url": "https://discord.gg/EwhG5y5Yw9"
-                }
-            ]
-        },
-        "os:default",
-        "dialog:default",
-        "store:default",
-        "core:window:default",
-        "core:window:allow-close",
-        "core:window:allow-minimize",
-        "core:window:allow-toggle-maximize",
-        "core:window:allow-start-dragging",
-        "http:default",
-        "log:default"
-    ]
+          "url": "https://discord.gg/EwhG5y5Yw9"
+        }
+      ]
+    },
+    "os:default",
+    "dialog:default",
+    "store:default",
+    "core:window:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    "http:default",
+    "log:default",
+    "fs:default"
+  ]
 }

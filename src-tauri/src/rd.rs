@@ -1,34 +1,31 @@
 // roblox downloader i guess
 
-use tauri_plugin_http::reqwest;
-use std::time::Instant;
 use futures::future::join_all;
 use serde::Deserialize;
+use std::time::Instant;
+use tauri_plugin_http::reqwest;
 
 #[derive(Deserialize)]
 struct LatestVersion {
-
     #[serde(rename = "clientVersionUpload")]
     client_version_upload: String,
 }
 
 const URLS: &[&str] = &[
     "https://setup-aws.rbxcdn.com", // fallback!! only use this if none of the urls are functioning
-    "https://setup-ak.rbxcdn.com", // asia, eu, region (akamai best)
-    "https://setup-cfly.rbxcdn.com" // us region
-    ];
+    "https://setup-ak.rbxcdn.com",  // asia, eu, region (akamai best)
+    "https://setup-cfly.rbxcdn.com", // us region
+];
 
 const FILES: &[&str] = &[
     "RobloxApp.zip",
     "Redist",
     "WebView2RuntimeInstaller.zip",
-    "content-avatar.zip", 
+    "content-avatar.zip",
     "shaders.zip",
     "ssl.zip",
-
     "WebView2.zip",
     "WebView2RuntimeInstaller.zip",
-
     "content-avatar.zip",
     "content-configs.zip",
     "content-fonts.zip",
@@ -36,18 +33,16 @@ const FILES: &[&str] = &[
     "content-sounds.zip",
     "content-textures2.zip",
     "content-models.zip",
-
     "content-platform-fonts.zip",
     "content-platform-dictionaries.zip",
     "content-terrain.zip",
     "content-textures3.zip",
-
     "extracontent-luapackages.zip",
     "extracontent-translations.zip",
     "extracontent-models.zip",
     "extracontent-textures.zip",
-    "extracontent-places.zip"
-    ];
+    "extracontent-places.zip",
+];
 
 pub async fn best_region() -> Option<&'static str> {
     let client = reqwest::Client::new();
@@ -115,12 +110,10 @@ pub async fn get_download_urls(
 
     let base = match region_url {
         Some(r) => r.to_string(),
-        None => {
-            best_region()
-                .await
-                .unwrap_or("https://setup.rbxcdn.com")
-                .to_string()
-        }
+        None => best_region()
+            .await
+            .unwrap_or("https://setup.rbxcdn.com")
+            .to_string(),
     };
 
     let urls: Vec<String> = FILES

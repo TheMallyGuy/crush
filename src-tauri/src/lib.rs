@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
-use commands::window::{kill_window, create_or_focus_window};
-use commands::roblox_deployment::{get_download_deployment_urls, get_best_region};
+use commands::roblox_deployment::{get_best_region, get_download_deployment_urls};
+use commands::window::{create_or_focus_window, kill_window};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
@@ -17,6 +17,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
         .plugin(
             tauri_plugin_log::Builder::new()
                 .level(tauri_plugin_log::log::LevelFilter::Info)
