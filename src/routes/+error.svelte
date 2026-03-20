@@ -1,5 +1,6 @@
 <script lang="ts">
     import { invoke } from '@tauri-apps/api/core'
+    import { getCurrentWindow } from '@tauri-apps/api/window';
 
     async function openchoicewin() {
         await invoke('create_or_focus_window', {
@@ -14,7 +15,7 @@
 
         setTimeout(() => {
             // wait before killing to prevent crash
-            invoke('kill_window', { windowName: 'CrushMainWindow' })
+            getCurrentWindow().close()
         }, 100)
     }
 </script>

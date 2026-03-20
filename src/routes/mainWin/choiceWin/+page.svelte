@@ -65,7 +65,7 @@
         }
         setTimeout(() => {
             // wait before killing to prevent crash
-            invoke('kill_window', { windowName: 'crushBoostrapChoiceWindow' })
+            getCurrentWindow().close()
         }, 100)
     }
 
