@@ -1,7 +1,6 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "boostrap",
-  "description": "Capability for the boostrap window",
   "windows": [
     "CrushBoostrap"
   ],
@@ -9,25 +8,50 @@
     "core:default",
     "opener:default",
     "store:default",
-    "core:window:default",
-    "core:window:allow-close",
-    "core:window:allow-minimize",
-    "core:window:allow-toggle-maximize",
-    "core:window:allow-start-dragging",
+    "log:default",
+    {
+      "identifier": "fs:allow-create",
+      "allow": [
+        "$APPCACHE/**",
+        "$APPDATA/**"
+      ]
+    },
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [
+        "$APPCACHE/**",
+        "$APPDATA/**"
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "allow": [
+        "$APPCACHE/**",
+        "$APPDATA/**"
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-file",
+      "allow": [
+        "$APPCACHE/**",
+        "$APPDATA/**"
+      ]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        "$APPCACHE/**",
+        "$APPDATA/**"
+      ]
+    },
+    "fs:default",
     {
       "identifier": "http:default",
       "allow": [
         {
           "url": "https://*.rbxcdn.com"
         }
-      ],
-      "deny": [
-        {
-          "url": "*"
-        }
       ]
-    },
-    "log:default",
-    "fs:default"
+    }
   ]
 }
