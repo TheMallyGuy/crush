@@ -2,6 +2,7 @@
 
 use commands::roblox_deployment::{get_best_region, get_download_deployment_urls};
 use commands::window::{create_or_focus_window, kill_window};
+use commands::archive::extract_zip;
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
@@ -50,7 +51,8 @@ pub fn run() {
             kill_window,
             get_download_deployment_urls,
             get_best_region,
-            create_or_focus_window
+            create_or_focus_window,
+            extract_zip
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
