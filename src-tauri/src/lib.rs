@@ -1,9 +1,11 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::archive::extract_zip;
-use commands::roblox_deployment::{get_best_region, get_download_deployment_urls, get_latest_version_player};
-use commands::window::{create_or_focus_window, kill_window};
 use commands::launch_roblox::launch;
+use commands::roblox_deployment::{
+    get_best_region, get_download_deployment_urls, get_latest_version_player,
+};
+use commands::window::{create_or_focus_window, kill_window};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
@@ -20,6 +22,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(
