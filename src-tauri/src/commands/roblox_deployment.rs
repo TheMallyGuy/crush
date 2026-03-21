@@ -1,4 +1,4 @@
-use crate::rd::{best_region, get_download_urls};
+use crate::rd::{best_region, get_download_urls, latest_version};
 
 #[tauri::command]
 pub async fn get_download_deployment_urls(region: Option<&str>) -> Result<Vec<String>, String> {
@@ -21,4 +21,13 @@ pub async fn get_best_region() -> String {
     log::info!("best download url : {}", url);
 
     url
+}
+
+
+#[tauri::command]
+pub async fn get_latest_version_player() -> Result<String, String> {
+    latest_version()
+        .await
+        .map(|v| v.client_version_upload)
+        .map_err(|e| e.to_string())
 }

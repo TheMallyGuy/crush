@@ -6,9 +6,9 @@ use std::time::Instant;
 use tauri_plugin_http::reqwest;
 
 #[derive(Deserialize)]
-struct LatestVersion {
+pub struct LatestVersion {
     #[serde(rename = "clientVersionUpload")]
-    client_version_upload: String,
+    pub client_version_upload: String,
 }
 
 const URLS: &[&str] = &[
@@ -25,7 +25,6 @@ const FILES: &[&str] = &[
     "shaders.zip",
     "ssl.zip",
     "WebView2.zip",
-    "WebView2RuntimeInstaller.zip",
     "content-avatar.zip",
     "content-configs.zip",
     "content-fonts.zip",
@@ -77,7 +76,7 @@ pub async fn best_region() -> Option<&'static str> {
     fastest
 }
 
-async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
+pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
 
     let text = client

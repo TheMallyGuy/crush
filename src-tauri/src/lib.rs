@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::archive::extract_zip;
-use commands::roblox_deployment::{get_best_region, get_download_deployment_urls};
+use commands::roblox_deployment::{get_best_region, get_download_deployment_urls, get_latest_version_player};
 use commands::window::{create_or_focus_window, kill_window};
 use commands::launch_roblox::launch;
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
@@ -60,7 +60,8 @@ pub fn run() {
             get_best_region,
             create_or_focus_window,
             extract_zip,
-            launch
+            launch,
+            get_latest_version_player
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
