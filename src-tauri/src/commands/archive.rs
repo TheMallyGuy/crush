@@ -5,11 +5,11 @@ use zip::ZipArchive;
 
 #[tauri::command]
 pub fn extract_zip(zip_path: String, dest: String) -> Result<(), String> {
-    let file = File::open(&zip_path)
-        .map_err(|e| format!("Cannot open zip '{}': {}", zip_path, e))?;
+    let file =
+        File::open(&zip_path).map_err(|e| format!("Cannot open zip '{}': {}", zip_path, e))?;
 
-    let mut archive = ZipArchive::new(file)
-        .map_err(|e| format!("Cannot read zip archive: {}", e))?;
+    let mut archive =
+        ZipArchive::new(file).map_err(|e| format!("Cannot read zip archive: {}", e))?;
 
     let dest_path = Path::new(&dest);
 
@@ -17,7 +17,8 @@ pub fn extract_zip(zip_path: String, dest: String) -> Result<(), String> {
         .map_err(|e| format!("Cannot create dest dir '{}': {}", dest_path.display(), e))?;
 
     for i in 0..archive.len() {
-        let mut entry = archive.by_index(i)
+        let mut entry = archive
+            .by_index(i)
             .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
 
         let entry_name = match entry.enclosed_name() {
