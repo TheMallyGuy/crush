@@ -23,7 +23,7 @@ discord-rich-presence = { git = "https://github.com/vionya/discord-rich-presence
 zip = "8.3.0"
 log = "0.4.29"
 futures = "0.3"
-tauri = { version = "2", features = [] }
+tauri = { version = "2", features = ["protocol-asset"] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
