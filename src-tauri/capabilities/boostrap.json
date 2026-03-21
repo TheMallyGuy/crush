@@ -1,59 +1,45 @@
 {
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "boostrap",
-  "windows": [
-    "CrushBoostrap"
-  ],
-  "permissions": [
-    "core:default",
-    "opener:default",
-    "store:default",
-    "log:default",
-    "core:window:allow-close",
-    {
-      "identifier": "fs:allow-create",
-      "allow": [
-        "$APPCACHE/**",
-        "$APPDATA/**"
-      ]
-    },
-    {
-      "identifier": "fs:allow-mkdir",
-      "allow": [
-        "$APPCACHE/**",
-        "$APPDATA/**"
-      ]
-    },
-    {
-      "identifier": "fs:allow-write-file",
-      "allow": [
-        "$APPCACHE/**",
-        "$APPDATA/**"
-      ]
-    },
-    {
-      "identifier": "fs:allow-read-file",
-      "allow": [
-        "$APPCACHE/**",
-        "$APPDATA/**"
-      ]
-    },
-    {
-      "identifier": "fs:allow-exists",
-      "allow": [
-        "$APPCACHE/**",
-        "$APPDATA/**"
-      ]
-    },
-    "fs:default",
-    {
-      "identifier": "http:default",
-      "allow": [
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "boostrap",
+    "windows": ["CrushBoostrap"],
+    "permissions": [
+        "core:default",
+        "opener:default",
+        "store:default",
+        "log:default",
+        "core:window:allow-close",
+        "core:window:allow-set-size",
+        "core:window:allow-center",
+        "core:window:allow-show",
         {
-          "url": "https://*.rbxcdn.com"
-        }
-      ]
-    },
-    "process:default"
-  ]
+            "identifier": "fs:allow-create",
+            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+        },
+        {
+            "identifier": "fs:allow-mkdir",
+            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+        },
+        {
+            "identifier": "fs:allow-write-file",
+            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+        },
+        {
+            "identifier": "fs:allow-read-file",
+            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+        },
+        {
+            "identifier": "fs:allow-exists",
+            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+        },
+        "fs:default",
+        {
+            "identifier": "http:default",
+            "allow": [
+                {
+                    "url": "https://*.rbxcdn.com"
+                }
+            ]
+        },
+        "process:default"
+    ]
 }
