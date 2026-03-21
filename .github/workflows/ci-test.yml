@@ -12,7 +12,8 @@ concurrency:
 
 jobs:
     build:
-        runs-on: windows-latest
+      environment: Production
+      runs-on: windows-latest
 
         steps:
             - name: Checkout repository

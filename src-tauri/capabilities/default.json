@@ -10,6 +10,8 @@
     "permissions": [
         "core:default",
         "opener:default",
+        "updater:allow-check",
+        "updater:allow-download-and-install",
         {
             "identifier": "opener:allow-open-url",
             "allow": [{ "url": "https://discord.gg/EwhG5y5Yw9" }]
