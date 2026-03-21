@@ -126,45 +126,70 @@ async function extractAll(
     }
 }
 
-export async function downloadRoblox(onProgress: ProgressCallback):  Promise<string> {
-    onProgress({ type: "status", message: "Preparing download..." });
+type Versions = {
+    versions: string[];
+};
 
-    const conf = await load("config.json");
-    let bestRegion = await conf.get<string>("bestRegion");
-    if (!bestRegion) {
-        onProgress({ type: "status", message: "Finding best region..." });
-        bestRegion = await invoke<string>("get_best_region");
-        await conf.set("bestRegion", bestRegion);
-        await conf.save();
-    }
+async function checkForUpdates(CurrentVersions: Versions): Promise<boolean> {
+    const latest: string = await invoke("get_latest_version_player");
 
-    onProgress({ type: "status", message: "Fetching asset URLs..." });
-    const assetsUrls: string[] = await invoke("get_download_deployment_urls", { region: bestRegion });
+    return !CurrentVersions.versions.includes(latest);
+}
 
-    onProgress({ type: "status", message: "Downloading assets..." });
-    await downloadAssets(assetsUrls, onProgress);
+export async function downloadRoblox(onProgress: ProgressCallback): Promise<string> {
+    const versionStore = await load("versions.json");
 
-    onProgress({ type: "status", message: "Extracting files..." });
-    const match = assetsUrls[1].match(/(version-[^-]+)-/);
-    const version_hash = match?.[1] ?? "unknownversion";
-    await extractAll(version_hash, onProgress);
+    const versionList =
+        (await versionStore.get<string[]>("versions")) ?? [];
 
-    onProgress({ type: "status", message: "Writing AppSettings.xml..." });
-    const dataDir = await appDataDir();
-    const xmlPath = await join(dataDir, "Player", "Versions", version_hash, "AppSettings.xml");
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    let version_hash = "unknownversion";
+
+    onProgress({ type: "status", message: "Checking for updates" });
+
+    if (await checkForUpdates({ versions: versionList })) {
+        onProgress({ type: "status", message: "Preparing download..." });
+
+        const conf = await load("config.json");
+        let bestRegion = await conf.get<string>("bestRegion");
+
+        if (!bestRegion) {
+            onProgress({ type: "status", message: "Finding best region..." });
+            bestRegion = await invoke<string>("get_best_region");
+            await conf.set("bestRegion", bestRegion);
+            await conf.save();
+        }
+
+        onProgress({ type: "status", message: "Fetching asset URLs..." });
+        const assetsUrls: string[] = await invoke("get_download_deployment_urls", { region: bestRegion });
+
+        onProgress({ type: "status", message: "Downloading assets..." });
+        await downloadAssets(assetsUrls, onProgress);
+
+        onProgress({ type: "status", message: "Extracting files..." });
+        const match = assetsUrls[1].match(/(version-[^-]+)-/);
+        version_hash = match?.[1] ?? "unknownversion"; // ✅ assign, not declare
+
+        await extractAll(version_hash, onProgress);
+
+        onProgress({ type: "status", message: "Writing AppSettings.xml..." });
+        const dataDir = await appDataDir();
+        const xmlPath = await join(dataDir, "Player", "Versions", version_hash, "AppSettings.xml");
+
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 \t<ContentFolder>content</ContentFolder>
 \t<BaseUrl>http://www.roblox.com</BaseUrl>
 </Settings>`;
-    await writeFile(xmlPath, new TextEncoder().encode(xml));
 
-    onProgress({ type: "status", message: "Saving version info..." });
-    const versionStore = await Store.load("versions.json");
-    const versionList = (await versionStore.get<string[]>("versions")) ?? [];
-    versionList.push(version_hash);
-    await versionStore.set("versions", versionList);
+        await writeFile(xmlPath, new TextEncoder().encode(xml));
 
-    onProgress({ type: "status", message: "Installation complete!" });
-    return version_hash
+        onProgress({ type: "status", message: "Saving version info..." });
+
+        const updatedList = Array.from(new Set([...versionList, version_hash]));
+        await versionStore.set("versions", updatedList);
+
+        onProgress({ type: "status", message: "Installation complete!" });
+    }
+
+    return await invoke("get_latest_version_player");
 }

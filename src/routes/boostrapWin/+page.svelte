@@ -30,7 +30,7 @@
     onMount(async () => {
         let version = await downloadRoblox(handleProgress)
         done = true
-        status = 'Installation complete, launching'
+        status = 'Launching'
 
         await launchPlayer(version)
     })
