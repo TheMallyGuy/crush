@@ -1,0 +1,172 @@
+import { open } from '@tauri-apps/plugin-dialog'
+import { readFile, writeFile, mkdir, exists } from '@tauri-apps/plugin-fs'
+import { appDataDir, join, dirname, basename } from '@tauri-apps/api/path'
+import { convertFileSrc } from '@tauri-apps/api/core'
+import { parseXml } from '$lib/theme/xmlParser'
+import type { BootstrapConfig } from '$lib/theme/xmlParser'
+import { themeStore, normalizeAssetKey } from '$lib/theme/themeStore'
+import type { ThemeState } from '$lib/theme/themeStore'
+
+function toErr(e: unknown): string {
+    if (typeof e === 'string') return e
+    if (e instanceof Error) return e.message
+    try {
+        return JSON.stringify(e)
+    } catch {
+        return 'Unknown error'
+    }
+}
+
+function collectAssets(config: BootstrapConfig): string[] {
+    const seen = new Set<string>()
+    for (const el of config.elements) {
+        const src =
+            el.props.source ||
+            el.props.Source ||
+            el.props.ImageSource ||
+            el.props.Background
+        if (typeof src !== 'string') continue
+
+        if (src.startsWith('theme://')) {
+            seen.add(src.slice(8))
+        } else if (!src.includes('://') && !src.includes(':')) {
+            seen.add(src)
+        }
+    }
+    return [...seen]
+}
+
+function safeName(name: string): string {
+    return name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 64)
+}
+
+export interface LoadResult {
+    state: ThemeState
+    themeName: string
+    destDir: string
+    missing: string[]
+}
+
+export async function loadThemeFromDialog(): Promise<LoadResult | null> {
+    const selected = await open({
+        title: 'Select Bootstrapper Theme XML',
+        filters: [{ name: 'XML', extensions: ['xml'] }],
+        multiple: false,
+    }).catch((e) => {
+        throw new Error(`Dialog failed: ${toErr(e)}`)
+    })
+
+    if (!selected || typeof selected !== 'string') return null
+
+    const xmlPath = selected
+    const xmlDir = await dirname(xmlPath)
+    const rawBase = await basename(xmlPath)
+    const nameOnly = rawBase.replace(/\.[^.]+$/, '')
+    const themeName = safeName(nameOnly)
+
+    const xmlBytes = await readFile(xmlPath)
+    const config = parseXml(new TextDecoder().decode(xmlBytes))
+
+    const appData = await appDataDir()
+    const destDir = await join(appData, 'themes', themeName)
+    await mkdir(destDir, { recursive: true })
+
+    const assetNames = collectAssets(config)
+    const assetMap: Record<string, string> = {}
+    const missing: string[] = []
+
+    await Promise.all(
+        assetNames.map(async (filename) => {
+            const srcPath = await join(xmlDir, filename)
+            const destPath = await join(destDir, filename)
+
+            if (!(await exists(srcPath).catch(() => false))) {
+                missing.push(filename)
+                return
+            }
+
+            const bytes = await readFile(srcPath)
+            await writeFile(destPath, bytes)
+
+            assetMap[normalizeAssetKey(filename)] = convertFileSrc(destPath)
+        })
+    )
+
+    const destXmlPath = await join(destDir, `${themeName}.xml`)
+    await writeFile(destXmlPath, xmlBytes).catch(() => {})
+
+    const state: ThemeState = { themeName, config, assetMap }
+    themeStore.set(state)
+
+    return { state, themeName, destDir, missing }
+}
+
+export async function saveActiveTheme(themeName: string | null): Promise<void> {
+    const appData = await appDataDir()
+    const themesDir = await join(appData, 'themes')
+    if (!(await exists(themesDir))) {
+        await mkdir(themesDir, { recursive: true })
+    }
+    const activeJson = await join(themesDir, 'active.json')
+    const content = JSON.stringify({ active: themeName })
+    await writeFile(activeJson, new TextEncoder().encode(content))
+}
+
+export async function loadSavedTheme(): Promise<void> {
+    try {
+        const appData = await appDataDir()
+        const activeJson = await join(appData, 'themes', 'active.json')
+        if (await exists(activeJson)) {
+            const bytes = await readFile(activeJson)
+            const data = JSON.parse(new TextDecoder().decode(bytes))
+            if (data.active) {
+                await loadThemeFromAppData(data.active)
+            }
+        }
+    } catch (e) {
+        console.error('Failed to load saved theme:', e)
+    }
+}
+
+export async function listThemes(): Promise<string[]> {
+    try {
+        const appData = await appDataDir()
+        const themesDir = await join(appData, 'themes')
+        if (!(await exists(themesDir))) return []
+    } catch {
+        return []
+    }
+    return []
+}
+
+export async function loadThemeFromAppData(
+    themeName: string
+): Promise<LoadResult | null> {
+    const appData = await appDataDir()
+    const destDir = await join(appData, 'themes', themeName)
+    const xmlPath = await join(destDir, `${themeName}.xml`)
+
+    if (!(await exists(xmlPath).catch(() => false))) return null
+
+    const xmlBytes = await readFile(xmlPath)
+    const config = parseXml(new TextDecoder().decode(xmlBytes))
+
+    const assetNames = collectAssets(config)
+    const assetMap: Record<string, string> = {}
+    const missing: string[] = []
+
+    await Promise.all(
+        assetNames.map(async (filename) => {
+            const destPath = await join(destDir, filename)
+            if (await exists(destPath).catch(() => false)) {
+                assetMap[normalizeAssetKey(filename)] = convertFileSrc(destPath)
+            } else {
+                missing.push(filename)
+            }
+        })
+    )
+
+    const state: ThemeState = { themeName, config, assetMap }
+    themeStore.set(state)
+    return { state, themeName, destDir, missing }
+}
