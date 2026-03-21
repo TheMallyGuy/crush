@@ -9,6 +9,7 @@
     "opener:default",
     "store:default",
     "log:default",
+    "core:window:allow-close",
     {
       "identifier": "fs:allow-create",
       "allow": [
