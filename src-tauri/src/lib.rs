@@ -3,6 +3,7 @@
 use commands::archive::extract_zip;
 use commands::roblox_deployment::{get_best_region, get_download_deployment_urls};
 use commands::window::{create_or_focus_window, kill_window};
+use commands::launch_roblox::launch;
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
@@ -58,7 +59,8 @@ pub fn run() {
             get_download_deployment_urls,
             get_best_region,
             create_or_focus_window,
-            extract_zip
+            extract_zip,
+            launch
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
