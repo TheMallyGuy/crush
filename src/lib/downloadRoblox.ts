@@ -151,7 +151,7 @@ export async function downloadRoblox(onProgress: ProgressCallback) {
 
     onProgress({ type: "status", message: "Writing AppSettings.xml..." });
     const dataDir = await appDataDir();
-    const xmlPath = await join(dataDir, "Versions", version_hash, "AppSettings.xml");
+    const xmlPath = await join(dataDir, "Player", "Versions", version_hash, "AppSettings.xml");
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 \t<ContentFolder>content</ContentFolder>
