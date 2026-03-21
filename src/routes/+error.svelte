@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from '@tauri-apps/api/core'
-    import { getCurrentWindow } from '@tauri-apps/api/window';
+    import { getCurrentWindow } from '@tauri-apps/api/window'
 
     async function openchoicewin() {
         await invoke('create_or_focus_window', {
