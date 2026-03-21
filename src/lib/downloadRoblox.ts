@@ -126,7 +126,7 @@ async function extractAll(
     }
 }
 
-export async function downloadRoblox(onProgress: ProgressCallback) {
+export async function downloadRoblox(onProgress: ProgressCallback):  Promise<string> {
     onProgress({ type: "status", message: "Preparing download..." });
 
     const conf = await load("config.json");
@@ -166,4 +166,5 @@ export async function downloadRoblox(onProgress: ProgressCallback) {
     await versionStore.set("versions", versionList);
 
     onProgress({ type: "status", message: "Installation complete!" });
+    return version_hash
 }

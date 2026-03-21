@@ -1,5 +1,6 @@
 <script lang="ts">
     import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
+    import { launchPlayer } from '$lib/launchRoblox';
     import { relaunch } from '@tauri-apps/plugin-process';
     import { onMount } from 'svelte'
 
@@ -27,9 +28,11 @@
     }
 
     onMount(async () => {
-        await downloadRoblox(handleProgress)
+        let version = await downloadRoblox(handleProgress)
         done = true
-        status = 'Installation complete'
+        status = 'Installation complete, launching'
+
+        await launchPlayer(version)
     })
 </script>
 
@@ -77,18 +80,12 @@
 
     <div class="absolute bottom-6 left-0 w-full flex justify-center p-3">
         <div class="w-full max-w-sm">
-            {#if done}
-                <button class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200">
-                    <span class="font-medium">Launch</span>
-                </button>
-            {:else}
                 <button
                     on:click={cancel}
                     class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
                     <span class="font-medium">Cancel</span>
-                </button>
-            {/if}
+                </button>        
         </div>
     </div>
 </div>
