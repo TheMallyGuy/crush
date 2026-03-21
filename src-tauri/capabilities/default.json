@@ -4,7 +4,8 @@
   "description": "Capability for the main window",
   "windows": [
     "crushBoostrapChoiceWindow",
-    "CrushMainWindow"
+    "CrushMainWindow",
+    "crushBootstrapChoiceWindow"
   ],
   "permissions": [
     "core:default",
