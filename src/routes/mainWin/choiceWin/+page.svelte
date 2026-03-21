@@ -14,9 +14,9 @@
             url: 'boostrapWin',
             title: 'Crush',
             width: 500.0,
-            height: 250.0,
+            height: 350.0,
             minWidth: 500,
-            minHeight: 250.0,
+            minHeight: 350.0,
         })
 
         setTimeout(() => {
