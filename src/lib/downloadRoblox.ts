@@ -1,6 +1,6 @@
 import { fetch } from '@tauri-apps/plugin-http';
 import { invoke } from '@tauri-apps/api/core';
-import { load } from '@tauri-apps/plugin-store';
+import { load, Store } from '@tauri-apps/plugin-store';
 import { info } from '@tauri-apps/plugin-log';
 import { exists, BaseDirectory, writeFile, mkdir } from '@tauri-apps/plugin-fs';
 import { appCacheDir, appDataDir, join } from "@tauri-apps/api/path";
@@ -42,10 +42,10 @@ async function ensureDir(path: string) {
     }
 }
 
-async function extractAll() {
+async function extractAll(hash_version: string) {
     const cacheDir = await appCacheDir();
     const dataDir = await appDataDir();
-    const installRoot = await join(dataDir, "Roblox");
+    const installRoot = await join(dataDir, "Player", `Versions`, hash_version); // change this later, this will be a reusable comopent for both player and studio
     await ensureDir(installRoot);
 
     const extractRootsLower = Object.fromEntries(
@@ -150,11 +150,13 @@ export async function downloadRoblox() {
     await downloadAssets(assetsUrls);
 
     info("Begins extracting...");
-    await extractAll();
+    const match = assetsUrls[1].match(/(version-[^-]+)-/);
+    let version_hash:string = match?.[1] ?? `unkownversion`;
+    await extractAll(version_hash);
 
     info("Creating AppSettings.xml")
     const dataDir = await appDataDir();
-    const installRoot = await join(dataDir, "Roblox", "AppSettings.xml");
+    const xmlPath = await join(dataDir, "Versions", version_hash, "AppSettings.xml");
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <Settings>
@@ -162,7 +164,14 @@ export async function downloadRoblox() {
 \t<BaseUrl>http://www.roblox.com</BaseUrl>
 </Settings>`;
     const encoder = new TextEncoder();
-    await writeFile(installRoot, encoder.encode(xml));
+    await writeFile(xmlPath, encoder.encode(xml));
 
-    info("Installed!")
+    info("Installed!, writing installed versions")
+    let version = await Store.load("versions.json")
+
+    const versionList = (await version.get<string[]>("versions")) ?? [];
+
+    versionList.push(version_hash)
+    
+    version.set("versions", versionList)
 }
