@@ -8,3 +8,5 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+~/.tauri/crush.key
+~/.tauri/crush.key.pub
