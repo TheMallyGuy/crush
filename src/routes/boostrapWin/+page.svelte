@@ -1,6 +1,6 @@
 <script lang="ts">
     import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
-    import { getCurrentWindow } from '@tauri-apps/api/window'
+    import { relaunch } from '@tauri-apps/plugin-process';
     import { onMount } from 'svelte'
 
     let status = 'Preparing...'
@@ -23,7 +23,7 @@
     }
 
     async function cancel() {
-        await getCurrentWindow().close()
+        await relaunch();
     }
 
     onMount(async () => {
