@@ -5,7 +5,7 @@
 - [ ] Able to download & launch roblox [ this first ]
     - Player
         - [x] Download Roblox
-        - [ ] Launch Roblox
+        - [x] Launch Roblox
         - [ ] Change channels
     - Studio
         - [ ] Download Roblox
