@@ -34,4 +34,5 @@ window-vibrancy = "0.7.1"
 tauri-plugin-http = "2"
 tauri-plugin-log = "2"
 tauri-plugin-fs = "2"
+tauri-plugin-process = "2"
 
