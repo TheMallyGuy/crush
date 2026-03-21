@@ -151,4 +151,18 @@ export async function downloadRoblox() {
 
     info("Begins extracting...");
     await extractAll();
+
+    info("Creating AppSettings.xml")
+    const dataDir = await appDataDir();
+    const installRoot = await join(dataDir, "Roblox", "AppSettings.xml");
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+\t<ContentFolder>content</ContentFolder>
+\t<BaseUrl>http://www.roblox.com</BaseUrl>
+</Settings>`;
+    const encoder = new TextEncoder();
+    await writeFile(installRoot, encoder.encode(xml));
+
+    info("Installed!")
 }
