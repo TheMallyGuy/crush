@@ -43,7 +43,10 @@
     "plugins" : {
         "updater" : {
             "endpoint" : "https://raw.githubusercontent.com/TheMallyGuy/crush/refs/heads/master/.github/latest.json",
-            "pubkey" : "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVDRDEzQjg3RjMyNzYwQgpSV1FMZGpKL3VCUE5EcXZKWFNRMTFKNXNqTXNUVXhwK0k1YUlRVExTZXVRVnhvYWViVlVFWXE2Vwo="
+            "pubkey" : "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVDRDEzQjg3RjMyNzYwQgpSV1FMZGpKL3VCUE5EcXZKWFNRMTFKNXNqTXNUVXhwK0k1YUlRVExTZXVRVnhvYWViVlVFWXE2Vwo=",
+            "windows": {
+                "installMode": "basicUi"
+            }
         }
     }
 }
