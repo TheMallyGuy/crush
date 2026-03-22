@@ -135,15 +135,5 @@
         {/if}
       </div>
     </SettingCard>
-
-    <div class="bg-stone-900/30 border border-stone-800/50 rounded-2xl p-6">
-      <h3 class="text-stone-300 font-medium mb-2 text-sm uppercase tracking-wider">How it works</h3>
-      <ul class="text-sm text-stone-500 space-y-2 list-disc list-inside">
-        <li>Choose an XML file that defines the bootstrapper layout.</li>
-        <li>Ensure all images and gifs are in the same folder as the XML.</li>
-        <li>Custom themes are stored in your app data folder.</li>
-        <li>If no custom theme is set, the default Crush theme is used.</li>
-      </ul>
-    </div>
   </div>
 </div>
