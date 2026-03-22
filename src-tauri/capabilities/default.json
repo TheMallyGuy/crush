@@ -9,6 +9,7 @@
     ],
     "permissions": [
         "core:default",
+        "fs-pro:default",
         "opener:default",
         "updater:allow-check",
         "updater:allow-download-and-install",
@@ -31,8 +32,13 @@
         "http:default",
         "log:default",
         "fs:default",
+        "opener:allow-open-path",
         {
             "identifier": "fs:allow-mkdir",
+            "allow": [{ "path": "$APPDATA/**" }]
+        },
+        {
+            "identifier": "fs:allow-remove",
             "allow": [{ "path": "$APPDATA/**" }]
         },
         {
