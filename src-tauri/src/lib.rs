@@ -6,6 +6,7 @@ use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
 use commands::window::{create_or_focus_window, kill_window};
+use commands::rename::{rename};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
@@ -22,6 +23,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs_pro::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_fs::init())
@@ -64,7 +66,8 @@ pub fn run() {
             create_or_focus_window,
             extract_zip,
             launch,
-            get_latest_version_player
+            get_latest_version_player,
+            rename
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
