@@ -2,11 +2,11 @@
 
 use commands::archive::extract_zip;
 use commands::launch_roblox::launch;
+use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
 use commands::window::{create_or_focus_window, kill_window};
-use commands::rename::{rename};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;

@@ -29,7 +29,6 @@ export function resolveAsset(
 
     if (mapped) return mapped
 
-
     if (source.includes(':') || source.startsWith('/')) {
         return convertFileSrc(source)
     }
