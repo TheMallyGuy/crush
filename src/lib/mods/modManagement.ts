@@ -10,14 +10,20 @@ export type Mod = {
     enabled: boolean
 }
 
-const store = await load('mods.json')
+let storePromise = load('mods.json')
+
+async function getStore() {
+    return await storePromise
+}
 
 export async function loadMods(): Promise<Mod[]> {
+    const store = await getStore()
     return (await store.get<Mod[]>('mods')) ?? []
 }
 
 export async function createNewMod(name: string) {
     let modsList = await loadMods()
+    const store = await getStore()
 
     const id = crypto.randomUUID()
 
@@ -31,6 +37,7 @@ export async function createNewMod(name: string) {
 }
 
 export async function renameMod(id: string, new_name: string) {
+    const store = await getStore()
     const base = await appDataDir()
     let modsList = await loadMods()
 
@@ -51,6 +58,7 @@ export async function renameMod(id: string, new_name: string) {
 }
 
 export async function deleteMod(id: string) {
+    const store = await getStore()
     const base = await appDataDir()
     let modsList = await loadMods()
 
@@ -70,6 +78,7 @@ export async function deleteMod(id: string) {
 }
 
 export async function toggleMod(id: string) {
+    const store = await getStore()
     let modsList = await loadMods()
     const updated = modsList.map((m) =>
         m.id === id ? { ...m, enabled: !m.enabled } : m
@@ -79,6 +88,7 @@ export async function toggleMod(id: string) {
 }
 
 export async function saveModsOrder(mods: Mod[]) {
+    const store = await getStore()
     await store.set('mods', mods)
     await store.save()
 }
