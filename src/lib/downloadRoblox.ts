@@ -170,7 +170,7 @@ export async function downloadRoblox(
 
         onProgress({ type: 'status', message: 'Extracting files...' })
         const match = assetsUrls[1].match(/(version-[^-]+)-/)
-        version_hash = match?.[1] ?? 'unknownversion' // ✅ assign, not declare
+        version_hash = match?.[1] ?? 'unknownversion'
 
         await extractAll(version_hash, onProgress)
 
