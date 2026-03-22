@@ -2,6 +2,7 @@
   import { loadThemeFromDialog, saveActiveTheme } from '$lib/theme/themeLoader'
   import { themeStore } from '$lib/theme/themeStore'
   import { onMount } from 'svelte'
+  import { Brush } from '@lucide/svelte';
   import SettingCard from '$lib/components/SettingCard.svelte'
   import Dropdown from '$lib/components/Dropdown.svelte'
 
@@ -81,9 +82,7 @@
       description="Choose between the default Crush theme or a custom XML theme."
     >
       <div slot="icon">
-        <svg class="w-6 h-6 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122l9.37-9.37m0 0l-1.01-1.01a1.125 1.125 0 00-1.59 0l-1.102 1.101m2.102 1.01l-2.102-1.01m0 0l-9.37 9.37a1.125 1.125 0 000 1.59l1.01 1.01a1.125 1.125 0 001.59 0l9.37-9.37zm0 0l1.101-1.102m-7.034 7.034l2.102 1.01m1.59 1.591l-2.102-1.01m0 0l-1.01-1.01a1.125 1.125 0 00-1.59 0l-1.101 1.101m2.101 1.01l-2.101-1.01m0 0l-9.37 9.37a1.125 1.125 0 000 1.59l1.01 1.01a1.125 1.125 0 001.59 0l9.37-9.37z" />
-        </svg>
+        <Brush/>
       </div>
       
       <div slot="footer" class="flex flex-col w-full gap-4">
