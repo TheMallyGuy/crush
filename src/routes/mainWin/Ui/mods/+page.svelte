@@ -31,6 +31,13 @@
     async function handleNewMod() {
         const name = prompt('Enter mod name:')
         if (name) {
+            const exists = items.some(
+                (mod) => mod.name.toLowerCase() === name.toLowerCase()
+            )
+            if (exists) {
+                alert(`A mod named "${name}" already exists.`)
+                return
+            }
             await createNewMod(name)
             items = await loadMods()
         }
