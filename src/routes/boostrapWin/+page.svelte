@@ -1,6 +1,6 @@
 <script lang="ts">
     import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
-    import { launchPlayer } from '$lib/launchRoblox'
+    import { launchPlayer, applyMods } from '$lib/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { onMount, onDestroy } from 'svelte'
@@ -23,7 +23,6 @@
         extractTotal = 0
     let done = false
 
-    // Runtime text values for XML themes
     let textValues: Record<string, string> = {}
 
     function handleProgress(e: ProgressEvent) {
@@ -49,7 +48,6 @@
     onMount(async () => {
         const win = getCurrentWindow()
         if (state) {
-            // Seed initial values for every named TextBlock
             for (const el of state.config.elements) {
                 if (el.name) {
                     textValues[el.name] =
@@ -62,7 +60,6 @@
             await win.setSize(new LogicalSize(config.width, config.height))
             await win.center()
 
-            // Handle TitleBar
             const titleBar = state.config.elements.find(
                 (e) => e.type === 'TitleBar'
             )
@@ -77,6 +74,8 @@
 
         let version = await downloadRoblox(handleProgress)
         done = true
+        status = 'Applying modification'
+        await applyMods(version)
         status = 'Launching'
         textValues['StatusText'] = 'Launching'
         textValues = { ...textValues }
