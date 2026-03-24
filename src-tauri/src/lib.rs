@@ -6,6 +6,7 @@ use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
+use commands::mods::apply_mod;
 use commands::window::{create_or_focus_window, kill_window};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
@@ -67,7 +68,8 @@ pub fn run() {
             extract_zip,
             launch,
             get_latest_version_player,
-            rename
+            rename,
+            apply_mod
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
