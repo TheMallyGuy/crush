@@ -4,7 +4,7 @@
 
     async function openchoicewin() {
         await invoke('create_or_focus_window', {
-            label: 'crushBootstrapChoiceWindow',
+            label: 'crushBoostrapChoiceWindow',
             url: 'mainWin/choiceWin',
             title: 'Crush',
             width: 500.0,
