@@ -16,7 +16,8 @@
 - [ ] Modify Roblox Files (mods, fastflag... etc) [ next 1 ]
 - [x] Mods
     - [x] Apply mods on launch
-    - [ ] Reset roblox before that mod is applied
+    - [x] Reset roblox before that mod is applied
+    - [ ] Prebuilt mods
 - [ ] Fastflag(clientsetting.json) [ next 2 ]
 
 - [ ] Community mods
