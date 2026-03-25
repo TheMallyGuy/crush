@@ -3,6 +3,7 @@ import { mkdir, remove } from '@tauri-apps/plugin-fs'
 import { join, appDataDir } from '@tauri-apps/api/path'
 import { load } from '@tauri-apps/plugin-store'
 import { openPath } from '@tauri-apps/plugin-opener'
+import { applyMods } from '$lib/launchRoblox'
 
 export type Mod = {
     id: string
@@ -85,6 +86,15 @@ export async function toggleMod(id: string) {
     )
     await store.set('mods', updated)
     await store.save()
+
+    // Run in background to avoid UI lag
+    load('versions.json').then(async (versionStore) => {
+        const versionList = (await versionStore.get<string[]>('versions')) ?? []
+        const latestVersion = versionList.at(-1)
+        if (latestVersion) {
+            applyMods(latestVersion).catch(console.error)
+        }
+    })
 }
 
 export async function saveModsOrder(mods: Mod[]) {
