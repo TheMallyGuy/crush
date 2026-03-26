@@ -18,7 +18,7 @@
     - [x] Apply mods on launch
     - [x] Reset roblox before that mod is applied
     - [ ] Prebuilt mods
-- [ ] Fastflag(clientsetting.json) [ next 2 ]
+- [x] Fastflag(clientsetting.json)
 
 - [ ] Community mods
     - [ ] Community mods from other sources (Frostrap, Kilo's modloader... etc mod library)
@@ -31,9 +31,9 @@
 - [ ] Pages
     - [ ] Integrations
     - [ ] Installation [ next 4 ]
-    - [ ] Mods
-    - [ ] FastFlag
-    - [ ] Appearance
+    - [x] Mods
+    - [x] FastFlag
+    - [x] Appearance
     - [ ] Settings
     - [ ] About
     - [ ] Hello homepage
