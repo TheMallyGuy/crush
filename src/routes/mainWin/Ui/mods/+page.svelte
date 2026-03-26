@@ -100,7 +100,7 @@
             <div
                 class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
             >
-                <p class="text-stone-500">No mods installed yet.</p>
+                <p class="text-stone-500">We found no mods here, Yuppies.</p>
                 <button
                     on:click={handleNewMod}
                     class="text-blue-500 hover:underline text-sm mt-2"
