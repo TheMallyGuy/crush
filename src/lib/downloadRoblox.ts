@@ -139,6 +139,14 @@ async function checkForUpdates(CurrentVersions: Versions): Promise<boolean> {
     return !CurrentVersions.versions.includes(latest)
 }
 
+export async function getLatestVersion(): Promise<string> {
+    const versionStore = await load('versions.json')
+    const versionList = (await versionStore.get<string[]>('versions')) ?? []
+    const latestVersion = versionList.at(-1) ?? ""
+
+    return latestVersion
+}
+
 export async function downloadRoblox(
     onProgress: ProgressCallback
 ): Promise<string> {
