@@ -14,6 +14,8 @@
     import { themeStore, resolveAsset } from '$lib/theme/themeStore'
     import type { ThemeState } from '$lib/theme/themeStore'
     import type { BootstrapElement } from '$lib/theme/xmlParser'
+    import { invoke } from '@tauri-apps/api/core'
+    import { listen } from '@tauri-apps/api/event'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -93,6 +95,10 @@
         textValues['StatusText'] = 'Launching'
         textValues = { ...textValues }
         await launchPlayer(version)
+        invoke("watch_logs")
+        listen("log-found", (event) => {
+            console.log("Log file:", event.payload);
+        });
     })
 
     function getPosStyle(h?: string, v?: string) {
