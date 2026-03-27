@@ -1,3 +1,10 @@
+<!--
+    NOTICE DO NOT REMOVE!!!
+    This page is in fact, genarated by Gemini & Claude AI. Although I'm good at making things, but using these tools to make this easier.
+    You can call this "AI slop" or whatever, but its a developer tools & I'd to use it.
+    Any opinion on this?  
+-->
+
 <script lang="ts">
     import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
     import { launchPlayer, applyMods } from '$lib/launchRoblox'
@@ -39,6 +46,7 @@
             extractTotal = e.total
         }
         textValues = { ...textValues }
+        window.dispatchEvent(new CustomEvent('crush:progress', { detail: e }))
     }
 
     async function cancel() {
@@ -48,23 +56,28 @@
     onMount(async () => {
         const win = getCurrentWindow()
         if (state) {
-            for (const el of state.config.elements) {
-                if (el.name) {
-                    textValues[el.name] =
-                        el.name === 'StatusText' ? 'Preparing...' : ''
+            if (!state.isHtmlTheme && state.config) {
+                for (const el of state.config.elements) {
+                    if (el.name) {
+                        textValues[el.name] =
+                            el.name === 'StatusText' ? 'Preparing...' : ''
+                    }
                 }
-            }
-            textValues = { ...textValues }
+                textValues = { ...textValues }
 
-            const { config } = state
-            await win.setSize(new LogicalSize(config.width, config.height))
-            await win.center()
+                const { config } = state
+                await win.setSize(new LogicalSize(config.width, config.height))
+                await win.center()
 
-            const titleBar = state.config.elements.find(
-                (e) => e.type === 'TitleBar'
-            )
-            if (titleBar?.props?.Title) {
-                await win.setTitle(titleBar.props.Title)
+                const titleBar = state.config.elements.find(
+                    (e) => e.type === 'TitleBar'
+                )
+                if (titleBar?.props?.Title) {
+                    await win.setTitle(titleBar.props.Title)
+                }
+            } else if (state.isHtmlTheme) {
+                await win.setSize(new LogicalSize(600, 400))
+                await win.center()
             }
         } else {
             await win.setSize(new LogicalSize(630, 363))
@@ -82,16 +95,29 @@
         await launchPlayer(version)
     })
 
-    function hPos(h?: string) {
-        if (h === 'Right') return 'right:0;'
-        if (h === 'Center') return 'left:50%;transform:translateX(-50%);'
-        return 'left:0;'
+    function getPosStyle(h?: string, v?: string) {
+        let styles = []
+        let transforms = []
+
+        if (h === 'Right') styles.push('right:0;')
+        else if (h === 'Center') {
+            styles.push('left:50%;')
+            transforms.push('translateX(-50%)')
+        } else styles.push('left:0;')
+
+        if (v === 'Bottom') styles.push('bottom:0;')
+        else if (v === 'Center') {
+            styles.push('top:50%;')
+            transforms.push('translateY(-50%)')
+        } else styles.push('top:0;')
+
+        if (transforms.length > 0) {
+            styles.push(`transform:${transforms.join(' ')};`)
+        }
+
+        return styles.join('')
     }
-    function vPos(v?: string) {
-        if (v === 'Bottom') return 'bottom:0;'
-        if (v === 'Center') return 'top:50%;transform:translateY(-50%);'
-        return 'top:0;'
-    }
+
     function opStyle(op?: number) {
         return op !== undefined && op !== 0 ? `opacity:${op};` : ''
     }
@@ -120,96 +146,165 @@
     $: isDark = cfg?.theme === 'Dark'
     $: noRound = cfg?.windowCornerPreference === 'DoNotRound'
     $: elements = cfg?.elements ?? []
+
+    function mountHtml(node: HTMLElement, content: string) {
+        if (!content) return
+        node.innerHTML = content
+        const scripts = node.querySelectorAll('script')
+        scripts.forEach((oldScript) => {
+            const newScript = document.createElement('script')
+            Array.from(oldScript.attributes).forEach((attr) =>
+                newScript.setAttribute(attr.name, attr.value)
+            )
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML))
+            oldScript.parentNode?.replaceChild(newScript, oldScript)
+        })
+    }
+
+    async function loadHtml(src?: string) {
+        if (!src) return ''
+        if (!state) return ''
+        const url = resolveAsset(state, src)
+        try {
+            const res = await fetch(url)
+            return await res.text()
+        } catch (e) {
+            console.error('Failed to load html:', e)
+            return ''
+        }
+    }
 </script>
 
-{#if state && cfg}
-    <div
-        class="relative overflow-hidden h-screen w-screen"
-        style="
-            background:{isDark ? '#000' : '#fff'};
-            color:{isDark ? '#fff' : '#000'};
-            border-radius:{noRound ? '0' : '8px'};
-        "
-    >
-        {#each elements as el}
-            {#if el.type === 'Image' || el.props.source}
-                <img
-                    src={asset(
-                        el.props.source ||
-                            el.props.Source ||
-                            el.props.ImageSource
-                    )}
-                    class="absolute object-cover"
-                    style="
-                        {hPos(el.hAlign)} {vPos(el.vAlign)}
-                        {el.width ? `width:${el.width}px;` : ''}
-                        {el.height ? `height:${el.height}px;` : ''}
-                        {opStyle(el.opacity)}
-                        {marginStyle(el.margin)}
-                        z-index:{el.zIndex ?? 0};
-                    "
-                    alt=""
-                />
-            {:else if el.type === 'TextBlock'}
-                <span
-                    id={el.name}
-                    class="absolute whitespace-nowrap pointer-events-none leading-none"
-                    style="
-                        {hPos(el.hAlign)} {vPos(el.vAlign)}
-                        {opStyle(el.opacity)}
-                        {marginStyle(el.margin)}
-                        {el.props.Foreground
-                        ? `color:${el.props.Foreground};`
-                        : ''}
-                        {el.props.FontSize
-                        ? `font-size:${el.props.FontSize}px;`
-                        : ''}
-                        z-index:{el.zIndex ?? 0};
-                    ">{textValues[el.name ?? ''] ?? el.props.Text ?? ''}</span
-                >
-            {:else if el.type === 'Button'}
-                <button
-                    id={el.name}
-                    on:click={cancel}
-                    class="absolute bg-transparent border-0 cursor-pointer focus:outline-none focus:ring-0"
-                    style="
-                        {hPos(el.hAlign)} {vPos(el.vAlign)}
-                        {el.width ? `width:${el.width}px;` : ''}
-                        {el.height ? `height:${el.height}px;` : ''}
-                        {opStyle(el.opacity)}
-                        {marginStyle(el.margin)}
-                        z-index:{el.zIndex ?? 2};
-                    ">{el.props.Content || el.props.Label || ''}</button
-                >
-            {:else if el.type === 'ProgressBar'}
-                <div
-                    class="absolute overflow-hidden bg-white/10"
-                    style="
-                        {hPos(el.hAlign)} {vPos(el.vAlign)}
-                        {el.width ? `width:${el.width}px;` : ''}
-                        {el.height ? `height:${el.height}px;` : ''}
-                        {opStyle(el.opacity)}
-                        border-radius:{el.props.CornerRadius ?? 0}px;
-                        z-index:{el.zIndex ?? 0};
-                    "
-                >
-                    {#if !done}
+{#if state}
+    {#if state.isHtmlTheme}
+        <div
+            class="relative overflow-hidden h-screen w-screen bg-black"
+            use:mountHtml={state.customHtml || ''}
+        ></div>
+    {:else if cfg}
+        <div
+            class="relative overflow-hidden h-screen w-screen"
+            style="
+                background:{isDark ? '#000' : '#fff'};
+                color:{isDark ? '#fff' : '#000'};
+                border-radius:{noRound ? '0' : '8px'};
+            "
+        >
+            {#each elements as el}
+                {#if el.type === 'Image' || el.props.source}
+                    <img
+                        src={asset(
+                            el.props.source ||
+                                el.props.Source ||
+                                el.props.ImageSource
+                        )}
+                        class="absolute object-cover {el.props.class ||
+                            el.props.Class ||
+                            ''}"
+                        style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            {el.width ? `width:${el.width}px;` : ''}
+                            {el.height ? `height:${el.height}px;` : ''}
+                            {opStyle(el.opacity)}
+                            {marginStyle(el.margin)}
+                            z-index:{el.zIndex ?? 0};
+                        "
+                        alt=""
+                    />
+                {:else if el.type === 'TextBlock'}
+                    <span
+                        id={el.name}
+                        class="absolute whitespace-nowrap pointer-events-none leading-none {el
+                            .props.class ||
+                            el.props.Class ||
+                            ''}"
+                        style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            {opStyle(el.opacity)}
+                            {marginStyle(el.margin)}
+                            {el.props.Foreground
+                            ? `color:${el.props.Foreground};`
+                            : ''}
+                            {el.props.FontSize
+                            ? `font-size:${el.props.FontSize}px;`
+                            : ''}
+                            z-index:{el.zIndex ?? 0};
+                        "
+                        >{textValues[el.name ?? ''] ??
+                            el.props.Text ??
+                            ''}</span
+                    >
+                {:else if el.type === 'Button'}
+                    <button
+                        id={el.name}
+                        on:click={cancel}
+                        class="absolute bg-transparent border-0 cursor-pointer focus:outline-none focus:ring-0 {el
+                            .props.class ||
+                            el.props.Class ||
+                            ''}"
+                        style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            {el.width ? `width:${el.width}px;` : ''}
+                            {el.height ? `height:${el.height}px;` : ''}
+                            {opStyle(el.opacity)}
+                            {marginStyle(el.margin)}
+                            z-index:{el.zIndex ?? 2};
+                        ">{el.props.Content || el.props.Label || ''}</button
+                    >
+                {:else if el.type === 'ProgressBar'}
+                    <div
+                        class="absolute overflow-hidden bg-white/10 {el.props
+                            .class ||
+                            el.props.Class ||
+                            ''}"
+                        style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            {el.width ? `width:${el.width}px;` : ''}
+                            {el.height ? `height:${el.height}px;` : ''}
+                            {opStyle(el.opacity)}
+                            border-radius:{el.props.CornerRadius ?? 0}px;
+                            z-index:{el.zIndex ?? 0};
+                        "
+                    >
+                        {#if !done}
+                            <div
+                                class="h-full w-2/5 animate-indeterminate"
+                                style="background:{el.props.Foreground ??
+                                    '#919191'};border-radius:inherit;"
+                            ></div>
+                        {:else}
+                            <div
+                                class="h-full w-full transition-[width] duration-300 ease-out"
+                                style="background:{el.props.Foreground ??
+                                    '#919191'};border-radius:inherit;"
+                            ></div>
+                        {/if}
+                    </div>
+                {:else if el.type === 'Html'}
+                    {#await loadHtml(el.props.Source || el.props.File) then htmlContent}
                         <div
-                            class="h-full w-2/5 animate-indeterminate"
-                            style="background:{el.props.Foreground ??
-                                '#919191'};border-radius:inherit;"
+                            id={el.name}
+                            class="absolute {el.props.class ||
+                                el.props.Class ||
+                                ''}"
+                            style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            {el.width ? `width:${el.width}px;` : ''}
+                            {el.height ? `height:${el.height}px;` : ''}
+                            {opStyle(el.opacity)}
+                            {marginStyle(el.margin)}
+                            z-index:{el.zIndex ?? 0};
+                        "
+                            use:mountHtml={htmlContent ||
+                                el.props.Content ||
+                                el.props.Html ||
+                                ''}
                         ></div>
-                    {:else}
-                        <div
-                            class="h-full w-full transition-[width] duration-300 ease-out"
-                            style="background:{el.props.Foreground ??
-                                '#919191'};border-radius:inherit;"
-                        ></div>
-                    {/if}
-                </div>
-            {/if}
-        {/each}
-    </div>
+                    {/await}
+                {/if}
+            {/each}
+        </div>
+    {/if}
 {:else}
     <div
         class="relative h-screen bg-stone-950 text-white selection:bg-stone-800"

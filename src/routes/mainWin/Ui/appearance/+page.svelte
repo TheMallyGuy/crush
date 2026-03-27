@@ -2,10 +2,13 @@
     import {
         loadThemeFromDialog,
         saveActiveTheme,
+        listThemes,
+        loadThemeFromAppData,
+        removeTheme,
     } from '$lib/theme/themeLoader'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
-    import { Brush } from '@lucide/svelte'
+    import { Brush, Trash2, Plus, Check } from '@lucide/svelte'
     import SettingCard from '$lib/components/SettingCard.svelte'
     import Dropdown from '$lib/components/Dropdown.svelte'
 
@@ -15,6 +18,7 @@
     let error = ''
     let missing: string[] = []
     let activeName = ''
+    let themes: string[] = []
 
     let themeType = 'default'
     const typeOptions = [
@@ -23,6 +27,10 @@
     ]
 
     let isInitialized = false
+
+    async function refreshThemes() {
+        themes = await listThemes()
+    }
 
     async function pick() {
         state = 'loading'
@@ -41,6 +49,7 @@
             activeName = result.themeName
             missing = result.missing
             themeType = 'custom'
+            await refreshThemes()
             state = 'idle'
         } catch (e: any) {
             error = e.message ?? 'Unknown error'
@@ -49,16 +58,43 @@
         }
     }
 
+    async function selectTheme(name: string) {
+        state = 'loading'
+        try {
+            const result = await loadThemeFromAppData(name)
+            if (result) {
+                await saveActiveTheme(name)
+                activeName = name
+                missing = result.missing
+            }
+        } catch (e: any) {
+            error = e.message ?? 'Unknown error'
+        } finally {
+            state = 'idle'
+        }
+    }
+
+    async function delTheme(name: string) {
+        if (activeName === name) {
+            themeStore.set(null)
+            await saveActiveTheme(null)
+            activeName = ''
+            themeType = 'default'
+        }
+        await removeTheme(name)
+        await refreshThemes()
+    }
+
     $: if (isInitialized && themeType) {
         if (themeType === 'default' && activeName) {
             themeStore.set(null)
             saveActiveTheme(null)
-        } else if (themeType === 'custom' && !activeName) {
-            pick()
+            activeName = ''
         }
     }
 
     onMount(() => {
+        refreshThemes()
         const unsub = themeStore.subscribe((v) => {
             activeName = v?.themeName || ''
             const newType = v ? 'custom' : 'default'
@@ -99,35 +135,67 @@
                     {#if themeType === 'custom'}
                         <button
                             on:click={pick}
-                            class="text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold"
+                            class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold"
                         >
-                            Import New XML
+                            <Plus size={14} />
+                            Import New
                         </button>
                     {/if}
                 </div>
 
-                {#if themeType === 'custom' && activeName}
-                    <div
-                        class="flex items-center gap-2 px-3 py-2 bg-stone-900/50 border border-stone-800 rounded-lg"
-                    >
-                        <svg
-                            class="w-4 h-4 text-green-500"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-                        <span class="text-sm text-stone-300"
-                            >Active: <span class="text-stone-100 font-medium"
-                                >{activeName}</span
-                            ></span
-                        >
+                {#if themeType === 'custom'}
+                    <div class="flex flex-col gap-2">
+                        {#if themes.length === 0}
+                            <p class="text-xs text-stone-500 italic py-2">
+                                No custom themes imported yet.
+                            </p>
+                        {:else}
+                            <div class="grid gap-2">
+                                {#each themes as theme}
+                                    <div
+                                        class="group flex items-center justify-between px-3 py-2 bg-stone-900/50 border {activeName ===
+                                        theme
+                                            ? 'border-stone-700 bg-stone-800/50'
+                                            : 'border-stone-800'} rounded-lg transition-all"
+                                    >
+                                        <button
+                                            on:click={() => selectTheme(theme)}
+                                            class="flex items-center gap-3 flex-grow text-left"
+                                        >
+                                            <div
+                                                class="w-2 h-2 rounded-full {activeName ===
+                                                theme
+                                                    ? 'bg-green-500'
+                                                    : 'bg-stone-700'}"
+                                            ></div>
+                                            <span
+                                                class="text-sm {activeName ===
+                                                theme
+                                                    ? 'text-stone-100 font-medium'
+                                                    : 'text-stone-400'}"
+                                                >{theme}</span
+                                            >
+                                        </button>
+
+                                        <div class="flex items-center gap-1">
+                                            {#if activeName === theme}
+                                                <div
+                                                    class="p-1.5 text-green-500"
+                                                >
+                                                    <Check size={14} />
+                                                </div>
+                                            {/if}
+                                            <button
+                                                on:click={() => delTheme(theme)}
+                                                class="p-1.5 text-stone-600 hover:text-red-400 hover:bg-red-400/10 rounded-md transition-all opacity-0 group-hover:opacity-100"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                {/each}
+                            </div>
+                        {/if}
                     </div>
                 {/if}
 

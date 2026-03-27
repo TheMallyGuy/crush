@@ -4,7 +4,9 @@ import type { BootstrapConfig } from '$lib/theme/xmlParser'
 
 export interface ThemeState {
     themeName: string
-    config: BootstrapConfig
+    config?: BootstrapConfig
+    customHtml?: string
+    isHtmlTheme: boolean
     assetMap: Record<string, string>
 }
 
@@ -21,7 +23,6 @@ export function resolveAsset(
 ): string {
     if (!source) return ''
 
-    // If it's already a tauri asset or http URL, return it
     if (source.includes('://') && !source.startsWith('theme://')) return source
 
     const key = normalizeAssetKey(source)
