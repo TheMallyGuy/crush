@@ -95,10 +95,7 @@
         textValues['StatusText'] = 'Launching'
         textValues = { ...textValues }
         await launchPlayer(version)
-        invoke("watch_logs")
-        listen("log-found", (event) => {
-            console.log("Log file:", event.payload);
-        });
+        await invoke("watch_logs")
     })
 
     function getPosStyle(h?: string, v?: string) {
