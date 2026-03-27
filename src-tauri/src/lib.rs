@@ -11,6 +11,11 @@ use commands::window::{create_or_focus_window, kill_window};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
+use tauri::{
+  menu::{Menu, MenuItem},
+  tray::{TrayIconBuilder, MouseButtonState, MouseButton, TrayIconEvent},
+};
+use commands::watcher::watch_logs;
 use window_vibrancy::*;
 mod commands;
 
@@ -24,6 +29,12 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_log::Builder::default()
+            .target(tauri_plugin_log::Target::new(
+                tauri_plugin_log::TargetKind::Stdout
+            ))
+            .build()
+        )
         .plugin(tauri_plugin_fs_pro::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
@@ -54,7 +65,43 @@ pub fn run() {
             client.connect()?;
             client.set_activity(activity::Activity::new().state("Playing").details("Crush"))?;
 
+            let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
+            let menu = Menu::with_items(app, &[&quit_i])?;
+
+            let _tray = TrayIconBuilder::new()
+                .icon(app.default_window_icon().unwrap().clone())
+                .menu(&menu)
+                .show_menu_on_left_click(false)
+                .on_menu_event(|app, event| match event.id.as_ref() {
+                    "quit" => app.exit(0),
+                    _ => {}
+                })
+                .on_tray_icon_event(|tray, event| {
+                    if let TrayIconEvent::Click {
+                        button: MouseButton::Left,
+                        button_state: MouseButtonState::Up,
+                        ..
+                    } = event {
+                        let app = tray.app_handle();
+                        if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
+                            let _ = window.show();
+                            let _ = window.set_focus();
+                        }
+                    }
+                })
+                .build(app)?;
+
+
             Ok(())
+        })
+        .on_window_event(|window, event| {
+            match event {
+                tauri::WindowEvent::CloseRequested { api, .. } => {
+                    window.hide().unwrap();
+                    api.prevent_close();
+                }
+                _ => {}
+            }
         })
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_os::init())
@@ -69,7 +116,8 @@ pub fn run() {
             launch,
             get_latest_version_player,
             rename,
-            apply_mod
+            apply_mod,
+            watch_logs
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
