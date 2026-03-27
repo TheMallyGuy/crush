@@ -1,16 +1,17 @@
 use dirs_next::data_local_dir;
-use reqwest;
 use regex::Regex;
+use reqwest;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
     path::PathBuf,
-    time::Duration,
+    time::{Duration, Instant},
 };
-use tauri::AppHandle;
-use tauri::Manager;
-use crate::rpc::{RpcState, apply_rpc};
+use tauri::{AppHandle, Manager};
+use crate::rpc::{RpcState, apply_rpc, kill_rpc};
 use serde::Deserialize;
+use sysinfo::{System, ProcessesToUpdate};
+
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -22,21 +23,18 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     Ok(())
 }
 
-fn get_latest_log() -> Option<PathBuf> {
-    let log_dir = data_local_dir()?.join("Roblox").join("logs");
 
-    std::fs::read_dir(log_dir)
-        .ok()?
-        .flatten()
-        .filter(|e| {
-            e.path().extension().map(|x| x == "log").unwrap_or(false)
-        })
-        .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
-        .map(|e| e.path())
+#[derive(Default, Debug)]
+struct Activity {
+    place_id: Option<u64>,
+    in_game: bool,
 }
+
+
 #[derive(Deserialize)]
 struct UniverseResponse {
-    universeId: u64,
+    #[serde(alias = "universeId")]
+    universe_id: u64,
 }
 
 #[derive(Deserialize)]
@@ -49,76 +47,163 @@ struct GamesResponse {
     data: Vec<GameData>,
 }
 
+fn is_roblox_running(system: &mut System) -> bool {
+    system.refresh_processes(ProcessesToUpdate::All, true);
+
+    system.processes().values().any(|p| {
+        p.name()
+            .to_string_lossy()
+            .to_lowercase()
+            .contains("robloxplayerbeta")
+    })
+}
+
+fn get_latest_log() -> Option<PathBuf> {
+    let dir = data_local_dir()?.join("Roblox").join("logs");
+
+    std::fs::read_dir(dir)
+        .ok()?
+        .flatten()
+        .filter(|e| e.path().extension().map(|x| x == "log").unwrap_or(false))
+        .filter(|e| {
+            e.metadata()
+                .and_then(|m| m.created())
+                .map(|t| t.elapsed().unwrap_or_default().as_secs() < 20)
+                .unwrap_or(false)
+        })
+        .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
+        .map(|e| e.path())
+}
+
+
 async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
-    let re = Regex::new(r"Joining game '.*?' place (\d+)").unwrap();
-    let mut current_path: Option<PathBuf> = None;
-    let mut offset: u64 = 0;
+    let re_join = Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap();
+    let re_joined = Regex::new(r"serverId: ([0-9\.]+)\|").unwrap();
+    let re_leave = Regex::new(r"Time to disconnect replication data").unwrap();
+
+    let mut current_file: Option<PathBuf> = None;
+    let mut offset = 0;
+
+    let mut activity = Activity::default();
+    let mut last_rpc = Instant::now();
+
+    let mut system = System::new();
+    let mut was_running = false;
 
     loop {
-        // check if there's a newer log file (new Roblox session started)
-        if let Some(latest) = get_latest_log() {
-            if current_path.as_ref() != Some(&latest) {
-                log::info!("Watching new log file: {:?}", latest);
-                current_path = Some(latest);
-                offset = 0; // reset offset for new file
+        let running = is_roblox_running(&mut system);
+
+        if was_running && !running {
+            activity = Activity::default();
+
+            let state = app.state::<RpcState>();
+            let _ = kill_rpc(&state.client).await;
+        }
+        
+        was_running = running;
+
+
+        if let Some(path) = get_latest_log() {
+            if current_file.as_ref() != Some(&path) {
+                log::info!("New log file: {:?}", path);
+                current_file = Some(path);
+                offset = 0;
+                activity = Activity::default();
             }
         }
 
-        if let Some(ref path) = current_path {
+        if let Some(ref path) = current_file {
             if let Ok(mut file) = File::open(path) {
                 if file.seek(SeekFrom::Start(offset)).is_ok() {
                     let mut reader = BufReader::new(&mut file);
                     let mut line = String::new();
 
-                    loop {
-                        line.clear();
-                        match reader.read_line(&mut line) {
-                            Ok(0) => break, // no new content yet
-                            Ok(_) => {
-                                if let Some(caps) = re.captures(&line) {
-                                    let place_id = caps[1].to_string();
-                                    log::info!("new join: {}", place_id);
+                    while reader.read_line(&mut line).unwrap_or(0) > 0 {
+                        if let Some(caps) = re_join.captures(&line) {
+                            let place_id: u64 = caps[2].parse().unwrap_or(0);
 
-                                    let res = reqwest::get(format!(
-                                        "https://apis.roblox.com/universes/v1/places/{}/universe",
-                                        place_id
-                                    ))
-                                    .await?;
+                            activity.place_id = Some(place_id);
+                            activity.in_game = false;
 
-                                    let universe: UniverseResponse = res.json().await?;
-                                    let universe_id = universe.universeId;
+                            log::info!("Joining place {}", place_id);
+                        }
 
-                                    let res2 = reqwest::get(format!(
-                                        "https://games.roblox.com/v1/games?universeIds={}",
-                                        universe_id
-                                    ))
-                                    .await?;
+                        if re_joined.is_match(&line) {
+                            if let Some(place_id) = activity.place_id {
+                                if !activity.in_game {
+                                    activity.in_game = true;
 
-                                    let games: GamesResponse = res2.json().await?;
+                                    log::info!("joined game {}", place_id);
 
-                                    if let Some(game) = games.data.first() {
-                                        let place_name = game.name.clone();
-                                        log::info!("Game name: {}", place_name);
+                                    // debounce RPC
+                                    if last_rpc.elapsed().as_secs() > 2 {
+                                        if let Some(name) =
+                                            fetch_place_name(place_id).await?
+                                        {
+                                            let state = app.state::<RpcState>();
 
-                                        let state = app.state::<RpcState>();
-                                        if let Err(e) = apply_rpc(&state.client, "Playing roblox", &place_name).await {
-                                            log::error!("failed to set RPC: {}", e);
+                                            if let Err(e) = apply_rpc(
+                                                &state.client,
+                                                "Playing Roblox",
+                                                &name,
+                                            )
+                                            .await
+                                            {
+                                                log::error!("RPC failed: {}", e);
+                                            }
+
+                                            last_rpc = Instant::now();
                                         }
                                     }
-
                                 }
                             }
-                            Err(_) => break,
                         }
+
+                        if re_leave.is_match(&line) {
+                            if activity.in_game {
+                                log::info!("left game");
+
+                                activity = Activity::default();
+
+                                let state = app.state::<RpcState>();
+                                let _ = apply_rpc(
+                                    &state.client,
+                                    "Idle",
+                                    "Not in game",
+                                )
+                                .await;
+                            }
+                        }
+
+                        line.clear();
                     }
 
-                    // save true byte position
-                    if let Ok(pos) = reader.stream_position() {
-                        offset = pos;
-                    }
+                    offset = reader.stream_position().unwrap_or(offset);
                 }
             }
         }
+
         tokio::time::sleep(Duration::from_millis(500)).await;
     }
+}
+
+
+async fn fetch_place_name(place_id: u64) -> Result<Option<String>, reqwest::Error> {
+    let res = reqwest::get(format!(
+        "https://apis.roblox.com/universes/v1/places/{}/universe",
+        place_id
+    ))
+    .await?;
+
+    let universe: UniverseResponse = res.json().await?;
+
+    let res2 = reqwest::get(format!(
+        "https://games.roblox.com/v1/games?universeIds={}",
+        universe.universe_id
+    ))
+    .await?;
+
+    let games: GamesResponse = res2.json().await?;
+
+    Ok(games.data.first().map(|g| g.name.clone()))
 }
