@@ -1,7 +1,15 @@
 <script lang="ts">
-    import { invoke } from '@tauri-apps/api/core'
+    import SettingCard from "$lib/components/SettingCard.svelte";
 </script>
 
-<h1 class="text-4xl font-bold text-blue-500">
-    something that very cool and tuff too
-</h1>
+<div class="flex flex-col gap-8 max-w-2xl">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+                Intergrations
+            </h1>
+            <p class="text-stone-400 mt-1">Config intergrations outside roblox</p>
+        </div>
+
+    </div>
+</div>
