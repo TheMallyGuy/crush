@@ -16,7 +16,7 @@ use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
 };
-use tauri_plugin_dialog::DialogExt;
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
@@ -32,6 +32,13 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
+            let ans = app.dialog()
+                .message("There is another crush instance running in a backround, find it in your tray.")
+                .kind(MessageDialogKind::Warning)
+                .title("Warning")
+                .blocking_show();
+        }))
         .plugin(tauri_plugin_notification::init())
         .manage(RpcState::new())
         .plugin(
