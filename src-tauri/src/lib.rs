@@ -6,9 +6,10 @@ use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
+use commands::discord_rpc::set_rpc;
 use commands::mods::apply_mod;
 use commands::window::{create_or_focus_window, kill_window};
-use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
+use filthy_rich::DiscordIPC; 
 use tauri::Manager;
 use tauri_plugin_dialog::DialogExt;
 use tauri::{
@@ -18,7 +19,9 @@ use tauri::{
 use commands::watcher::watch_logs;
 use window_vibrancy::*;
 mod commands;
+use rpc::RpcState;
 
+pub mod rpc;
 pub mod rd;
 
 #[tauri::command]
@@ -29,6 +32,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .manage(RpcState::new())
         .plugin(tauri_plugin_log::Builder::default()
             .target(tauri_plugin_log::Target::new(
                 tauri_plugin_log::TargetKind::Stdout
@@ -61,9 +65,24 @@ pub fn run() {
             let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
-            let mut client = DiscordIpcClient::new("1484521125550620813");
-            client.connect()?;
-            client.set_activity(activity::Activity::new().state("Playing").details("Crush"))?;
+            // Clone the handle BEFORE the async block so `app` doesn't escape
+            let app_handle = app.handle().clone();
+
+            tauri::async_runtime::spawn(async move {
+                let state = app_handle.state::<RpcState>();
+
+                let mut client = DiscordIPC::new("1484521125550620813")
+                    .on_ready(|data| println!("Connected to user: {}", data.user.username));
+
+                if let Err(e) = client.run(true).await {
+                    eprintln!("RPC error: {:?}", e);
+                    return;
+                }
+
+                // lock is acquired and used within the same block, fixing the scope issue
+                let mut lock = state.client.lock().await;
+                *lock = Some(client);
+            });
 
             let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&quit_i])?;
@@ -91,7 +110,6 @@ pub fn run() {
                 })
                 .build(app)?;
 
-
             Ok(())
         })
         .on_window_event(|window, event| {
@@ -117,7 +135,8 @@ pub fn run() {
             get_latest_version_player,
             rename,
             apply_mod,
-            watch_logs
+            watch_logs,
+            set_rpc
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

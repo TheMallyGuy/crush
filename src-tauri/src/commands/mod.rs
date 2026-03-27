@@ -5,3 +5,4 @@ pub mod roblox_deployment;
 pub mod window;
 pub mod mods;
 pub mod watcher;
+pub mod discord_rpc;

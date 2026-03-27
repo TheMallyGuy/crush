@@ -940,6 +940,7 @@ version = "0.1.0"
 dependencies = [
  "dirs-next",
  "discord-rich-presence",
+ "filthy-rich",
  "futures",
  "log",
  "md5",
@@ -958,6 +959,7 @@ dependencies = [
  "tauri-plugin-process",
  "tauri-plugin-store",
  "tauri-plugin-updater",
+ "tokio",
  "walkdir",
  "window-vibrancy 0.7.1",
  "zip 8.4.0",
@@ -1180,7 +1182,8 @@ dependencies = [
 [[package]]
 name = "discord-rich-presence"
 version = "1.1.0"
-source = "git+https://github.com/vionya/discord-rich-presence.git#cf51648ef0745da8c56d5da9a5e9d64135a1735c"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "90c55d69cab17c19677ce3a5f8face993a9e6eaf847fecac3547f3a3ff4a2494"
 dependencies = [
  "log",
  "serde",
@@ -1530,6 +1533,19 @@ dependencies = [
  "cfg-if",
  "libc",
  "libredox",
+]
+
+[[package]]
+name = "filthy-rich"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd632cb00aaec4564ec5cfc2c3129602b7859487911e8e607baef068ad1d286f"
+dependencies = [
+ "anyhow",
+ "serde",
+ "serde_json",
+ "tokio",
+ "uuid 1.22.0",
 ]
 
 [[package]]
@@ -6173,7 +6189,9 @@ dependencies = [
  "bytes",
  "libc",
  "mio",
+ "parking_lot",
  "pin-project-lite",
+ "signal-hook-registry",
  "socket2",
  "tokio-macros",
  "windows-sys 0.61.2",
