@@ -13,6 +13,12 @@ impl RpcState {
     }
 }
 
+impl Default for RpcState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub async fn apply_rpc(
     client_lock: &Mutex<Option<DiscordIPC>>,
     details: &str,
@@ -31,5 +37,21 @@ pub async fn apply_rpc(
         Ok(())
     } else {
         Err("RPC not initialized".into())
+    }
+}
+
+pub async fn kill_rpc(
+    client_lock: &tokio::sync::Mutex<Option<filthy_rich::DiscordIPC>>,
+) -> Result<(), String> {
+    let mut lock = client_lock.lock().await;
+
+    if let Some(mut client) = lock.take() {
+        let _ = client.clear_activity().await;
+
+        client.close();
+
+        Ok(())
+    } else {
+        Err("RPC not running".into())
     }
 }
