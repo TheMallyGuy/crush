@@ -1,28 +1,28 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::archive::extract_zip;
+use commands::discord_rpc::set_rpc;
 use commands::launch_roblox::launch;
+use commands::mods::apply_mod;
 use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
-use commands::discord_rpc::set_rpc;
-use commands::mods::apply_mod;
-use commands::window::{create_or_focus_window, kill_window};
-use filthy_rich::DiscordIPC; 
-use tauri::Manager;
-use tauri_plugin_dialog::DialogExt;
-use tauri::{
-  menu::{Menu, MenuItem},
-  tray::{TrayIconBuilder, MouseButtonState, MouseButton, TrayIconEvent},
-};
 use commands::watcher::watch_logs;
+use commands::window::{create_or_focus_window, kill_window};
+use filthy_rich::DiscordIPC;
+use tauri::Manager;
+use tauri::{
+    menu::{Menu, MenuItem},
+    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
+};
+use tauri_plugin_dialog::DialogExt;
 use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
 
-pub mod rpc;
 pub mod rd;
+pub mod rpc;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -32,12 +32,14 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_notification::init())
         .manage(RpcState::new())
-        .plugin(tauri_plugin_log::Builder::default()
-            .target(tauri_plugin_log::Target::new(
-                tauri_plugin_log::TargetKind::Stdout
-            ))
-            .build()
+        .plugin(
+            tauri_plugin_log::Builder::default()
+                .target(tauri_plugin_log::Target::new(
+                    tauri_plugin_log::TargetKind::Stdout,
+                ))
+                .build(),
         )
         .plugin(tauri_plugin_fs_pro::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
@@ -101,7 +103,8 @@ pub fn run() {
                         button: MouseButton::Left,
                         button_state: MouseButtonState::Up,
                         ..
-                    } = event {
+                    } = event
+                    {
                         let app = tray.app_handle();
                         if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
                             let _ = window.show();
