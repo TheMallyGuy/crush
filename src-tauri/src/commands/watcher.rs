@@ -2,9 +2,7 @@ use crate::rpc::{apply_rpc, kill_rpc, RpcState};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use reqwest;
-use tauri_plugin_store::StoreExt;
 use serde::Deserialize;
-use tauri_plugin_notification::NotificationExt;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
@@ -13,6 +11,8 @@ use std::{
 };
 use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
+use tauri_plugin_notification::NotificationExt;
+use tauri_plugin_store::StoreExt;
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -80,7 +80,7 @@ fn get_latest_log() -> Option<PathBuf> {
         .map(|e| e.path())
 }
 
-async fn run_watcher(app: AppHandle) -> Result<(), String> { 
+async fn run_watcher(app: AppHandle) -> Result<(), String> {
     let re_join = Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap();
     let re_joined = Regex::new(r"serverId: ([0-9\.]+)\|").unwrap();
     let re_leave = Regex::new(r"Time to disconnect replication data").unwrap();
@@ -137,25 +137,30 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                         if let Some(caps) = re_udmux.captures(&line) {
                             let ip = caps.get(1).unwrap().as_str().to_string();
                             log::info!("UDMUX IP: {}", ip);
-                            
+
                             let res = reqwest::get(format!("https://ipinfo.io/{}/json", ip))
                                 .await
                                 .map_err(|e| e.to_string())?;
                             let infoip: IpInfo = res.json().await.map_err(|e| e.to_string())?;
-                            
-                            let should_notify = if let Some(integrations) = store.get("intergrations") {
-                                integrations.get("serverLocationNotifier")
-                                    .and_then(|v| v.as_bool())
-                                    .unwrap_or(false)
-                            } else {
-                                false
-                            };
+
+                            let should_notify =
+                                if let Some(integrations) = store.get("intergrations") {
+                                    integrations
+                                        .get("serverLocationNotifier")
+                                        .and_then(|v| v.as_bool())
+                                        .unwrap_or(false)
+                                } else {
+                                    false
+                                };
 
                             if should_notify {
                                 app.notification()
                                     .builder()
                                     .title("Connected to a server!")
-                                    .body(format!("IP : {} \nLocation : {}, {}", ip, infoip.city, infoip.region ))
+                                    .body(format!(
+                                        "IP : {} \nLocation : {}, {}",
+                                        ip, infoip.city, infoip.region
+                                    ))
                                     .show()
                                     .map_err(|e| e.to_string())?;
                             }
@@ -167,14 +172,16 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                                     activity.in_game = true;
 
                                     log::info!("joined game {}", place_id);
-                                    
-                                    let should_rpc = if let Some(integrations) = store.get("intergrations") {
-                                        integrations.get("crushRpc")
-                                            .and_then(|v| v.as_bool())
-                                            .unwrap_or(false)
-                                    } else {
-                                        false
-                                    };
+
+                                    let should_rpc =
+                                        if let Some(integrations) = store.get("intergrations") {
+                                            integrations
+                                                .get("crushRpc")
+                                                .and_then(|v| v.as_bool())
+                                                .unwrap_or(false)
+                                        } else {
+                                            false
+                                        };
 
                                     if should_rpc {
                                         // debounce RPC
@@ -182,9 +189,12 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                                             if let Some(name) = fetch_place_name(place_id).await? {
                                                 let state = app.state::<RpcState>();
 
-                                                if let Err(e) =
-                                                    apply_rpc(&state.client, "Playing Roblox", &name)
-                                                        .await
+                                                if let Err(e) = apply_rpc(
+                                                    &state.client,
+                                                    "Playing Roblox",
+                                                    &name,
+                                                )
+                                                .await
                                                 {
                                                     log::error!("RPC failed: {}", e);
                                                 }
