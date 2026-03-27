@@ -1,17 +1,17 @@
+use crate::rpc::{apply_rpc, kill_rpc, RpcState};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use reqwest;
+use serde::Deserialize;
+use tauri_plugin_notification::NotificationExt;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
     path::PathBuf,
     time::{Duration, Instant},
 };
+use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
-use crate::rpc::{RpcState, apply_rpc, kill_rpc};
-use serde::Deserialize;
-use sysinfo::{System, ProcessesToUpdate};
-
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -23,13 +23,11 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     Ok(())
 }
 
-
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
     in_game: bool,
 }
-
 
 #[derive(Deserialize)]
 struct UniverseResponse {
@@ -40,6 +38,12 @@ struct UniverseResponse {
 #[derive(Deserialize)]
 struct GameData {
     name: String,
+}
+#[derive(Deserialize)]
+struct IpInfo {
+    ip: String,
+    city: String,
+    region: String,
 }
 
 #[derive(Deserialize)]
@@ -75,11 +79,11 @@ fn get_latest_log() -> Option<PathBuf> {
         .map(|e| e.path())
 }
 
-
 async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
     let re_join = Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap();
     let re_joined = Regex::new(r"serverId: ([0-9\.]+)\|").unwrap();
     let re_leave = Regex::new(r"Time to disconnect replication data").unwrap();
+    let re_udmux = Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap();
 
     let mut current_file: Option<PathBuf> = None;
     let mut offset = 0;
@@ -99,9 +103,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
             let state = app.state::<RpcState>();
             let _ = kill_rpc(&state.client).await;
         }
-        
-        was_running = running;
 
+        was_running = running;
 
         if let Some(path) = get_latest_log() {
             if current_file.as_ref() != Some(&path) {
@@ -125,7 +128,23 @@ async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
                             activity.place_id = Some(place_id);
                             activity.in_game = false;
 
-                            log::info!("Joining place {}", place_id);
+                            log::info!("joining place {}", place_id);
+                        }
+
+                        if let Some(caps) = re_udmux.captures(&line) {
+                            let ip = caps.get(1).unwrap().as_str().to_string();
+                            log::info!("UDMUX IP: {}", ip);
+
+                            let res = reqwest::get(format!("https://ipinfo.io/{}/json", ip)).await?;
+                            let infoip: IpInfo = res.json().await?;
+
+                            app.notification()
+                                .builder()
+                                .title("Connected to a server!")
+                                .body(format!("IP : {} \nLocation : {}, {}", ip, infoip.city, infoip.region ))
+                                .show()
+                                .unwrap();
+
                         }
 
                         if re_joined.is_match(&line) {
@@ -137,17 +156,12 @@ async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
 
                                     // debounce RPC
                                     if last_rpc.elapsed().as_secs() > 2 {
-                                        if let Some(name) =
-                                            fetch_place_name(place_id).await?
-                                        {
+                                        if let Some(name) = fetch_place_name(place_id).await? {
                                             let state = app.state::<RpcState>();
 
-                                            if let Err(e) = apply_rpc(
-                                                &state.client,
-                                                "Playing Roblox",
-                                                &name,
-                                            )
-                                            .await
+                                            if let Err(e) =
+                                                apply_rpc(&state.client, "Playing Roblox", &name)
+                                                    .await
                                             {
                                                 log::error!("RPC failed: {}", e);
                                             }
@@ -166,12 +180,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
                                 activity = Activity::default();
 
                                 let state = app.state::<RpcState>();
-                                let _ = apply_rpc(
-                                    &state.client,
-                                    "Idle",
-                                    "Not in game",
-                                )
-                                .await;
+                                let _ = apply_rpc(&state.client, "Idle", "Not in game").await;
                             }
                         }
 
@@ -186,7 +195,6 @@ async fn run_watcher(app: AppHandle) -> Result<(), reqwest::Error> {
         tokio::time::sleep(Duration::from_millis(500)).await;
     }
 }
-
 
 async fn fetch_place_name(place_id: u64) -> Result<Option<String>, reqwest::Error> {
     let res = reqwest::get(format!(
