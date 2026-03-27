@@ -70,7 +70,7 @@
     }
 
     async function openDiscordServer() {
-        openUrl('https://discord.gg/EwhG5y5Yw9')
+        openUrl('https://discord.gg/ER64xhvQkw')
     }
 
     onMount(async () => {
