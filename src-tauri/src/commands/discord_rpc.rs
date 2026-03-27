@@ -1,5 +1,5 @@
+use crate::rpc::{apply_rpc, RpcState};
 use tauri::State;
-use crate::rpc::{RpcState, apply_rpc};
 
 #[tauri::command]
 pub async fn set_rpc(

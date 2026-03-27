@@ -6,14 +6,16 @@ use walkdir::WalkDir;
 
 #[command]
 pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
-    let mod_dir     = PathBuf::from(&mod_dir);
+    let mod_dir = PathBuf::from(&mod_dir);
     let version_dir = PathBuf::from(&version_dir);
-    let mut copied  = Vec::new();
+    let mut copied = Vec::new();
 
     for entry in WalkDir::new(&mod_dir).into_iter().filter_map(|e| e.ok()) {
-        if !entry.file_type().is_file() { continue; }
+        if !entry.file_type().is_file() {
+            continue;
+        }
 
-        let src      = entry.path();
+        let src = entry.path();
         let relative = match src.strip_prefix(&mod_dir) {
             Ok(r) => r,
             Err(_) => continue,
@@ -39,6 +41,8 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
 }
 
 fn md5_file(path: &std::path::Path) -> String {
-    let Ok(bytes) = fs::read(path) else { return String::new() };
+    let Ok(bytes) = fs::read(path) else {
+        return String::new();
+    };
     format!("{:x}", md5::compute(&bytes))
 }

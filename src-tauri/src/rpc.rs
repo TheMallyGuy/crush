@@ -26,10 +26,7 @@ pub async fn apply_rpc(
 ) -> Result<(), String> {
     let lock = client_lock.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new()
-            .details(details)
-            .state(state_text)
-            .build();
+        let activity = Activity::new().details(details).state(state_text).build();
         client
             .set_activity(activity)
             .await
