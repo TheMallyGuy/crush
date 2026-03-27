@@ -1,9 +1,9 @@
 # Crush
-[![Discord][discordBadge][discord]]
-[![Rust][rustBadge][rust]]
-[![Svelte][svelteBadge][svelte]]
-[![tauri][tauriBadge][tauri]]
-[![tailwindcss][tailwindcssBadge][tailwindcss]]
+[![Discord][discordBadge]][discord]
+[![Rust][rustBadge]][rust]
+[![Svelte][svelteBadge]][svelte]
+[![tauri][tauriBadge]][tauri]
+[![tailwindcss][tailwindcssBadge]][tailwindcss]
 
 Crush is a Roblox Boostrapper written from scratch, inpsired by many other boostrappers.
 
