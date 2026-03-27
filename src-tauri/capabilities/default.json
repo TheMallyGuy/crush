@@ -1,83 +1,131 @@
 {
-    "$schema": "../gen/schemas/desktop-schema.json",
-    "identifier": "default",
-    "description": "Capability for the main window",
-    "windows": [
-        "crushBoostrapChoiceWindow",
-        "CrushMainWindow"
-    ],
-    "permissions": [
-        "core:default",
-        "fs-pro:default",
-        "opener:default",
-        "updater:allow-check",
-        "updater:allow-download-and-install",
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "crushBoostrapChoiceWindow",
+    "CrushMainWindow"
+  ],
+  "permissions": [
+    "core:default",
+    "fs-pro:default",
+    "opener:default",
+    "updater:allow-check",
+    "updater:allow-download-and-install",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
         {
-            "identifier": "opener:allow-open-url",
-            "allow": [{ "url": "https://discord.gg/EwhG5y5Yw9" }]
-        },
-        "os:default",
-        "dialog:default",
-        "dialog:allow-open",
-        "store:default",
-        "core:window:default",
-        "core:window:allow-close",
-        "core:window:allow-minimize",
-        "core:window:allow-toggle-maximize",
-        "core:window:allow-start-dragging",
-        "core:window:allow-set-size",
-        "core:window:allow-center",
-        "core:window:allow-show",
-        "http:default",
-        "log:default",
-        "fs:default",
-        "opener:allow-open-path",
-        {
-            "identifier": "fs:allow-mkdir",
-            "allow": [{ "path": "$APPDATA/**" }]
-        },
-        {
-            "identifier": "fs:allow-remove",
-            "allow": [{ "path": "$APPDATA/**" }]
-        },
-        {
-            "identifier": "fs:allow-read-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$HOME/**" },
-                { "path": "$DOCUMENT/**" },
-                { "path": "$DOWNLOAD/**" },
-                { "path": "$DESKTOP/**" },
-                { "path": "**" }
-            ]
-        },
-         {
-            "identifier": "fs:allow-read-text-file",
-            "allow": [
-                { "path": "$APPDATA/**" }
-            ]
-        },
-        { 
-            "identifier": "fs:allow-write-text-file",
-            "allow": [
-                { "path": "$APPDATA/**" }
-            ]
-        },
-        {
-            "identifier": "fs:allow-write-file",
-            "allow": [{ "path": "$APPDATA/**" }]
-        },
-        {
-            "identifier": "opener:allow-open-path",
-            "allow": [{"path": "$APPDATA/**"}]
-        },
-        {
-            "identifier": "fs:allow-exists",
-            "allow": [{ "path": "$APPDATA/**" }, { "path": "**" }]
-        },
-        {
-            "identifier": "fs:allow-read-dir",
-            "allow": [{ "path": "$APPDATA/**" }]
+          "url": "https://discord.gg/EwhG5y5Yw9"
         }
-    ]
+      ]
+    },
+    "os:default",
+    "dialog:default",
+    "dialog:allow-open",
+    "store:default",
+    "core:window:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-size",
+    "core:window:allow-center",
+    "core:window:allow-show",
+    "http:default",
+    "log:default",
+    "fs:default",
+    "opener:allow-open-path",
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$HOME/**"
+        },
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$DOWNLOAD/**"
+        },
+        {
+          "path": "$DESKTOP/**"
+        },
+        {
+          "path": "**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-text-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-text-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-dir",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    "notification:default"
+  ]
 }

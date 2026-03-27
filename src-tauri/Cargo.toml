@@ -44,6 +44,7 @@ tokio = "1.50.0"
 regex = "1.12.3"
 reqwest = "0.13.2"
 sysinfo = "0.38.4"
+tauri-plugin-notification = "2"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-updater = "2"
