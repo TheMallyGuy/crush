@@ -1,5 +1,12 @@
 <script lang="ts">
     import SettingCard from "$lib/components/SettingCard.svelte";
+    import { invoke } from "@tauri-apps/api/core"
+    import { onMount } from "svelte";
+
+    onMount(async () => {
+        await invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "In Intergrations Route" })
+    })
+
 </script>
 
 <div class="flex flex-col gap-8 max-w-2xl">

@@ -21,10 +21,13 @@
         type Mod,
     } from '$lib/mods/modManagement'
     import { ask } from '@tauri-apps/plugin-dialog'
+    import { invoke } from '@tauri-apps/api/core'
 
     let items: Mod[] = []
 
     onMount(async () => {
+        await invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "In Mods Route" })
+
         items = await loadMods()
     })
 

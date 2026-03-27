@@ -3,11 +3,13 @@
     import FastFlagTable from '$lib/components/FastFlagTable.svelte';
     import { getLatestVersion } from '$lib/downloadRoblox';
     import { getFastFlags, saveFastFlags } from '$lib/fastflag/fastflagManagement';
+    import { invoke } from '@tauri-apps/api/core'
 
     let flags: Record<string, string> = {};
     let version = '';
 
     onMount(async () => {
+        await invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "In Fastflag Route" })
         version = await getLatestVersion();
         flags = await getFastFlags(version);
     });

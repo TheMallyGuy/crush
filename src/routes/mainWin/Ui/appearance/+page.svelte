@@ -11,6 +11,7 @@
     import { Brush, Trash2, Plus, Check } from '@lucide/svelte'
     import SettingCard from '$lib/components/SettingCard.svelte'
     import Dropdown from '$lib/components/Dropdown.svelte'
+    import { invoke } from '@tauri-apps/api/core'
 
     type State = 'idle' | 'loading' | 'error'
 
@@ -94,6 +95,8 @@
     }
 
     onMount(() => {
+        invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "In Appearance Route" })
+
         refreshThemes()
         const unsub = themeStore.subscribe((v) => {
             activeName = v?.themeName || ''
