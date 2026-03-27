@@ -131,14 +131,14 @@
                 <Brush />
             </div>
 
-            <div slot="footer" class="flex flex-col w-full gap-4">
-                <div class="flex items-center justify-between w-full">
+            <div slot="footer" class="flex flex-col gap-4">
+                <div class="flex items-center justify-between gap-3">
                     <Dropdown bind:value={themeType} options={typeOptions} />
 
                     {#if themeType === 'custom'}
                         <button
                             on:click={pick}
-                            class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold"
+                            class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />
                             Import New
