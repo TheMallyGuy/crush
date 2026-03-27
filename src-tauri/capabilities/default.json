@@ -74,6 +74,10 @@
         {
             "identifier": "fs:allow-exists",
             "allow": [{ "path": "$APPDATA/**" }, { "path": "**" }]
+        },
+        {
+            "identifier": "fs:allow-read-dir",
+            "allow": [{ "path": "$APPDATA/**" }]
         }
     ]
 }
