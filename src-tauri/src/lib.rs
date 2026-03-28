@@ -12,13 +12,13 @@ use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
 use filthy_rich::DiscordIPC;
 use log::info;
-use tauri::{Emitter, Manager};
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
 };
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri::{Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
@@ -37,19 +37,19 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
-            let is_deep_link = args.iter().any(|a| {
-                    a.starts_with("roblox-player:") || a.starts_with("roblox:")
-                });
+            let is_deep_link = args
+                .iter()
+                .any(|a| a.starts_with("roblox-player:") || a.starts_with("roblox:"));
 
-                if is_deep_link {
-                    return;
-                }
+            if is_deep_link {
+                return;
+            }
 
-                app.dialog()
-                    .message("The app is already running! Look for it in your system tray.")
-                    .kind(MessageDialogKind::Info)
-                    .title("Already Running")
-                    .blocking_show();
+            app.dialog()
+                .message("The app is already running! Look for it in your system tray.")
+                .kind(MessageDialogKind::Info)
+                .title("Already Running")
+                .blocking_show();
         }))
         .plugin(tauri_plugin_notification::init())
         .manage(RpcState::new())
@@ -86,15 +86,17 @@ pub fn run() {
             let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
-
             app.deep_link().register_all()?;
             let app_handle_dl = app.handle().clone();
             app.deep_link().on_open_url(move |event| {
                 let urls = event.urls();
                 if let Some(url) = urls.first() {
-                    app_handle_dl.emit("deep-link-received", url.to_string()).ok();
+                    app_handle_dl
+                        .emit("deep-link-received", url.to_string())
+                        .ok();
 
-                    if let Some(win) = app_handle_dl.get_webview_window("crushBoostrapChoiceWindow") {
+                    if let Some(win) = app_handle_dl.get_webview_window("crushBoostrapChoiceWindow")
+                    {
                         let _ = win.show();
                         let _ = win.set_focus();
                     }
