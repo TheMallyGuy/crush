@@ -146,7 +146,7 @@ async fn process_line(
     line: &str,
     activity: &mut Activity,
     last_rpc: &mut Instant,
-    store: Arc<tauri_plugin_store::Store<tauri::Runtime>>,
+    store: Arc<tauri_plugin_store::Store<tauri::Wry>>,
 ) -> Result<(), String> {
     let re_join = RE_JOIN.get_or_init(|| {
         Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").expect("Failed to compile RE_JOIN")
@@ -187,7 +187,7 @@ async fn process_line(
 async fn handle_udmux_ip(
     app: &AppHandle,
     ip: String,
-    store: &tauri_plugin_store::Store<tauri::Runtime>,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     log::info!("UDMUX IP: {}", ip);
 
@@ -198,8 +198,8 @@ async fn handle_udmux_ip(
 
     let should_notify = store
         .get("intergrations")
-        .and_then(|v| v.get("serverLocationNotifier"))
-        .and_then(|v| v.as_bool())
+        .and_then(|v: &serde_json::Value| v.get("serverLocationNotifier"))
+        .and_then(|v: &serde_json::Value| v.as_bool())
         .unwrap_or(false);
 
     if should_notify {
@@ -221,7 +221,7 @@ async fn handle_joined_event(
     app: &AppHandle,
     activity: &mut Activity,
     last_rpc: &mut Instant,
-    store: &tauri_plugin_store::Store<tauri::Runtime>,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     let Some(place_id) = activity.place_id else {
         return Ok(());
@@ -236,8 +236,8 @@ async fn handle_joined_event(
 
     let should_rpc = store
         .get("intergrations")
-        .and_then(|v| v.get("crushRpc"))
-        .and_then(|v| v.as_bool())
+        .and_then(|v: &serde_json::Value| v.get("crushRpc"))
+        .and_then(|v: &serde_json::Value| v.as_bool())
         .unwrap_or(false);
 
     if !should_rpc || last_rpc.elapsed().as_secs() <= 2 {
