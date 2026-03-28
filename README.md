@@ -28,4 +28,4 @@ Lab rat? Download the nightly builds using [nightly.link!](https://nightly.link/
 [svelte]: https://svelte.dev
 [discord]: https://discord.gg/ER64xhvQkw
 [rust]: https://rust-lang.org/
-[julesBadge]: https://jules.google/
+[jules]: https://jules.google/
