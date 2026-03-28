@@ -1,7 +1,7 @@
+use crate::rd::get_client;
 use crate::rpc::{apply_rpc, kill_rpc, RpcState};
 use dirs_next::data_local_dir;
 use regex::Regex;
-use reqwest;
 use serde::Deserialize;
 use std::{
     fs::File,
@@ -139,7 +139,9 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                             let ip = caps.get(1).unwrap().as_str().to_string();
                             log::info!("UDMUX IP: {}", ip);
 
-                            let res = reqwest::get(format!("https://ipinfo.io/{}/json", ip))
+                            let res = get_client()
+                                .get(format!("https://ipinfo.io/{}/json", ip))
+                                .send()
                                 .await
                                 .map_err(|e| e.to_string())?;
                             let infoip: IpInfo = res.json().await.map_err(|e| e.to_string())?;
@@ -230,21 +232,26 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
 }
 
 async fn fetch_place_name(place_id: u64) -> Result<Option<String>, String> {
-    let res = reqwest::get(format!(
-        "https://apis.roblox.com/universes/v1/places/{}/universe",
-        place_id
-    ))
-    .await
-    .map_err(|e| e.to_string())?;
+    let client = get_client();
+    let res = client
+        .get(format!(
+            "https://apis.roblox.com/universes/v1/places/{}/universe",
+            place_id
+        ))
+        .send()
+        .await
+        .map_err(|e| e.to_string())?;
 
     let universe: UniverseResponse = res.json().await.map_err(|e| e.to_string())?;
 
-    let res2 = reqwest::get(format!(
-        "https://games.roblox.com/v1/games?universeIds={}",
-        universe.universe_id
-    ))
-    .await
-    .map_err(|e| e.to_string())?;
+    let res2 = client
+        .get(format!(
+            "https://games.roblox.com/v1/games?universeIds={}",
+            universe.universe_id
+        ))
+        .send()
+        .await
+        .map_err(|e| e.to_string())?;
 
     let games: GamesResponse = res2.json().await.map_err(|e| e.to_string())?;
 
