@@ -11,15 +11,18 @@ use commands::roblox_deployment::{
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
 use filthy_rich::DiscordIPC;
-use tauri::Manager;
+use log::info;
+use tauri::{Emitter, Manager};
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
 };
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_deep_link::DeepLinkExt;
 use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
+use std::sync::Mutex;
 
 pub mod rd;
 pub mod rpc;
@@ -32,12 +35,9 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
-            let ans = app.dialog()
-                .message("There is another crush instance running in a backround, find it in your tray.")
-                .kind(MessageDialogKind::Warning)
-                .title("Warning")
-                .blocking_show();
+        .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
+
         }))
         .plugin(tauri_plugin_notification::init())
         .manage(RpcState::new())
@@ -74,7 +74,30 @@ pub fn run() {
             let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
-            // Clone the handle BEFORE the async block so `app` doesn't escape
+
+            app.deep_link().register_all()?;
+            let app_handle_dl = app.handle().clone();
+            app.deep_link().on_open_url(move |event| {
+                let urls = event.urls();
+                if let Some(url) = urls.first() {
+                    app_handle_dl.emit("deep-link-received", url.to_string()).ok();
+
+                    if let Some(win) = app_handle_dl.get_webview_window("crushBoostrapChoiceWindow") {
+                        let _ = win.show();
+                        let _ = win.set_focus();
+                    }
+                    log::info!("{}", url)
+                }
+            });
+
+            if let Ok(urls) = app.deep_link().get_current() {
+                if let Some(urls) = urls {
+                    if let Some(url) = urls.first() {
+                        app.emit("deep-link-received", url.to_string()).ok();
+                    }
+                }
+            }
+
             let app_handle = app.handle().clone();
 
             tauri::async_runtime::spawn(async move {
