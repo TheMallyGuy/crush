@@ -1,10 +1,10 @@
 // roblox downloader i guess
 
 use futures::future::join_all;
+use reqwest;
 use serde::Deserialize;
 use std::sync::OnceLock;
 use std::time::Instant;
-use tauri_plugin_http::reqwest;
 
 pub fn get_client() -> &'static reqwest::Client {
     static CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
