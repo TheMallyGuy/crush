@@ -48,7 +48,8 @@ struct GameData {
 }
 #[derive(Deserialize)]
 struct IpInfo {
-    ip: String,
+    #[serde(rename = "ip")]
+    _ip: String,
     city: String,
     region: String,
 }

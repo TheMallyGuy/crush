@@ -27,9 +27,14 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
         let dest = version_dir.join(relative);
 
         // Skip copying if the file already exists and has the same hash
-        if dest.exists() && md5_file(src) == md5_file(&dest) {
-            copied.push(relative.to_string_lossy().to_string());
-            continue;
+        if dest.exists() {
+            let src_md5 = md5_file(src);
+            let dest_md5 = md5_file(&dest);
+
+            if src_md5.is_some() && src_md5 == dest_md5 {
+                copied.push(relative.to_string_lossy().to_string());
+                continue;
+            }
         }
 
         if let Some(parent) = dest.parent() {
@@ -44,12 +49,9 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     copied
 }
 
-/// Computes MD5 hash of a file using streaming I/O to maintain a low memory footprint.
-fn md5_file(path: &std::path::Path) -> String {
-    let Ok(file) = File::open(path) else {
-        return String::new();
-    };
-
+/// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
+fn md5_file(path: &std::path::Path) -> Option<md5::Digest> {
+    let file = File::open(path).ok()?;
     let mut reader = BufReader::new(file);
     let mut context = md5::Context::new();
     let mut buffer = [0u8; 8192];
@@ -61,5 +63,5 @@ fn md5_file(path: &std::path::Path) -> String {
         context.consume(&buffer[..n]);
     }
 
-    format!("{:x}", context.finalize())
+    Some(context.finalize())
 }

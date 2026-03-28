@@ -45,8 +45,6 @@ pub async fn kill_rpc(client_lock: &Mutex<Option<DiscordIPC>>) -> Result<(), Str
         return Err("RPC not running".into());
     };
 
-    let _ = client.clear_activity().await;
-
     // DiscordIPC::close() is async and returns a Result.
     if let Err(e) = client.close().await {
         log::error!("Failed to close Discord RPC: {:?}", e);
