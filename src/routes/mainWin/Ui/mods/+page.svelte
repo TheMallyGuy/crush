@@ -26,7 +26,10 @@
     let items: Mod[] = []
 
     onMount(async () => {
-        await invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "In Mods Route" })
+        await invoke('set_rpc', {
+            details: 'A roblox boostrapper written from scratch',
+            stateText: 'In Mods Route',
+        })
 
         items = await loadMods()
     })

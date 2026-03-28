@@ -43,28 +43,26 @@ const FILES: &[&str] = &[
     "extracontent-places.zip",
 ];
 
+async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str, u128) {
+    log::info!("[BACKEND] testing : {}", url);
+    let start = Instant::now();
+
+    let res = client.head(url).send().await;
+    let duration = start.elapsed().as_millis();
+
+    log::info!("[BACKEND] {} returned in {}ms", url, duration);
+
+    match res {
+        Ok(_) => (url, duration),
+        Err(_) => (url, u128::MAX),
+    }
+}
+
 pub async fn best_region() -> Option<&'static str> {
     let client = reqwest::Client::new();
     log::info!("[BACKEND] testing for best regions");
 
-    let futures = URLS.iter().map(|&url| {
-        let client = client.clone();
-
-        async move {
-            log::info!("[BACKEND] testing : {}", url);
-            let start = Instant::now();
-
-            let res = client.head(url).send().await;
-            let duration = start.elapsed().as_millis();
-
-            log::info!("[BACKEND] {} returned in {}ms", url, duration);
-
-            match res {
-                Ok(_) => (url, duration),
-                Err(_) => (url, u128::MAX),
-            }
-        }
-    });
+    let futures = URLS.iter().map(|&url| ping_url(&client, url));
 
     let mut results = join_all(futures).await;
     results.sort_by_key(|&(_, time)| time);
@@ -97,14 +95,11 @@ pub async fn get_download_urls(
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     let version = latest_version().await?;
 
-    let base_version = versionhash
-        .map(|v| v.to_string())
-        .unwrap_or(version.client_version_upload);
-
-    let base_version = if base_version.starts_with("version-") {
-        base_version
+    let raw_version = versionhash.unwrap_or(&version.client_version_upload);
+    let base_version = if raw_version.starts_with("version-") {
+        raw_version.to_string()
     } else {
-        format!("version-{}", base_version)
+        format!("version-{}", raw_version)
     };
 
     let base = match region_url {
@@ -115,7 +110,7 @@ pub async fn get_download_urls(
             .to_string(),
     };
 
-    let urls: Vec<String> = FILES
+    let urls = FILES
         .iter()
         .map(|file| format!("{}/{}-{}", base, base_version, file))
         .collect();

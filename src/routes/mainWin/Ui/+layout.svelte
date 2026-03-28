@@ -13,9 +13,7 @@
             <slot />
         </main>
 
-        <footer
-            class="flex justify-end items-end shrink-0"
-        >
+        <footer class="flex justify-end items-end shrink-0">
             <LaunchBar />
         </footer>
     </div>

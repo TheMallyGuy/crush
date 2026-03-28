@@ -30,9 +30,8 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
-pub fn run() {
-    tauri::Builder::default()
+fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
+    builder
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
             let is_deep_link = args
@@ -50,7 +49,6 @@ pub fn run() {
                 .blocking_show();
         }))
         .plugin(tauri_plugin_notification::init())
-        .manage(RpcState::new())
         .plugin(
             tauri_plugin_log::Builder::default()
                 .target(tauri_plugin_log::Target::new(
@@ -69,8 +67,96 @@ pub fn run() {
         )
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_store::Builder::new().build())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_os::init())
+        .plugin(tauri_plugin_opener::init())
+}
+
+fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    app.deep_link().register_all()?;
+
+    let app_handle = app.handle().clone();
+    app.deep_link().on_open_url(move |event| {
+        let urls = event.urls();
+        let Some(url) = urls.first() else { return };
+
+        app_handle.emit("deep-link-received", url.to_string()).ok();
+
+        if let Some(win) = app_handle.get_webview_window("crushBoostrapChoiceWindow") {
+            let _ = win.show();
+            let _ = win.set_focus();
+        }
+        log::info!("{}", url);
+    });
+
+    if let Ok(Some(urls)) = app.deep_link().get_current() {
+        if let Some(url) = urls.first() {
+            app.emit("deep-link-received", url.to_string()).ok();
+        }
+    }
+
+    Ok(())
+}
+
+fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
+    tauri::async_runtime::spawn(async move {
+        let state = app_handle.state::<RpcState>();
+
+        let mut client = DiscordIPC::new("1484521125550620813")
+            .on_ready(|data| println!("Connected to user: {}", data.user.username));
+
+        if let Err(e) = client.run(true).await {
+            eprintln!("RPC error: {:?}", e);
+            return;
+        }
+
+        let mut lock = state.client.lock().await;
+        *lock = Some(client);
+    });
+}
+
+fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
+    let menu = Menu::with_items(app, &[&quit_i])?;
+
+    let _tray = TrayIconBuilder::new()
+        .icon(app.default_window_icon().unwrap().clone())
+        .menu(&menu)
+        .show_menu_on_left_click(false)
+        .on_menu_event(|app, event| {
+            if event.id.as_ref() == "quit" {
+                app.exit(0);
+            }
+        })
+        .on_tray_icon_event(|tray, event| {
+            if let TrayIconEvent::Click {
+                button: MouseButton::Left,
+                button_state: MouseButtonState::Up,
+                ..
+            } = event
+            {
+                let app = tray.app_handle();
+                if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
+                    let _ = window.show();
+                    let _ = window.set_focus();
+                }
+            }
+        })
+        .build(app)?;
+
+    Ok(())
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+    let mut builder = tauri::Builder::default();
+
+    builder = register_plugins(builder);
+
+    builder
+        .manage(RpcState::new())
         .setup(|app| {
-            let platform: &str = tauri_plugin_os::platform();
+            let platform = tauri_plugin_os::platform();
 
             if platform != "windows" {
                 app.dialog()
@@ -84,87 +170,18 @@ pub fn run() {
             let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
-            app.deep_link().register_all()?;
-            let app_handle_dl = app.handle().clone();
-            app.deep_link().on_open_url(move |event| {
-                let urls = event.urls();
-                if let Some(url) = urls.first() {
-                    app_handle_dl
-                        .emit("deep-link-received", url.to_string())
-                        .ok();
-
-                    if let Some(win) = app_handle_dl.get_webview_window("crushBoostrapChoiceWindow")
-                    {
-                        let _ = win.show();
-                        let _ = win.set_focus();
-                    }
-                    log::info!("{}", url)
-                }
-            });
-
-            if let Ok(Some(urls)) = app.deep_link().get_current() {
-                if let Some(url) = urls.first() {
-                    app.emit("deep-link-received", url.to_string()).ok();
-                }
-            }
-
-            let app_handle = app.handle().clone();
-
-            tauri::async_runtime::spawn(async move {
-                let state = app_handle.state::<RpcState>();
-
-                let mut client = DiscordIPC::new("1484521125550620813")
-                    .on_ready(|data| println!("Connected to user: {}", data.user.username));
-
-                if let Err(e) = client.run(true).await {
-                    eprintln!("RPC error: {:?}", e);
-                    return;
-                }
-
-                // lock is acquired and used within the same block, fixing the scope issue
-                let mut lock = state.client.lock().await;
-                *lock = Some(client);
-            });
-
-            let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-            let menu = Menu::with_items(app, &[&quit_i])?;
-
-            let _tray = TrayIconBuilder::new()
-                .icon(app.default_window_icon().unwrap().clone())
-                .menu(&menu)
-                .show_menu_on_left_click(false)
-                .on_menu_event(|app, event| {
-                    if event.id.as_ref() == "quit" {
-                        app.exit(0);
-                    }
-                })
-                .on_tray_icon_event(|tray, event| {
-                    if let TrayIconEvent::Click {
-                        button: MouseButton::Left,
-                        button_state: MouseButtonState::Up,
-                        ..
-                    } = event
-                    {
-                        let app = tray.app_handle();
-                        if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
-                            let _ = window.show();
-                            let _ = window.set_focus();
-                        }
-                    }
-                })
-                .build(app)?;
+            setup_deep_links(app)?;
+            spawn_discord_rpc(app.handle().clone());
+            setup_tray(app)?;
 
             Ok(())
         })
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
-                window.hide().unwrap();
+                let _ = window.hide();
                 api.prevent_close();
             }
         })
-        .plugin(tauri_plugin_dialog::init())
-        .plugin(tauri_plugin_os::init())
-        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
             kill_window,

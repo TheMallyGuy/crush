@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher } from 'svelte'
 
-    export let checked = false;
-    export let disabled = false;
-    export let id: string | undefined = undefined;
+    export let checked = false
+    export let disabled = false
+    export let id: string | undefined = undefined
 
-    let className = '';
-    export { className as class };
+    let className = ''
+    export { className as class }
 
-    const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher()
 
     function toggle() {
         if (!disabled) {
-            checked = !checked;
-            dispatch('change', checked); 
+            checked = !checked
+            dispatch('change', checked)
         }
     }
 </script>
