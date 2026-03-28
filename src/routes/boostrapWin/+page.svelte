@@ -16,6 +16,10 @@
     import type { BootstrapElement } from '$lib/theme/xmlParser'
     import { invoke } from '@tauri-apps/api/core'
     import { listen } from '@tauri-apps/api/event'
+    import { deepLinkUrl } from '$lib/stores/deeplink'
+    import { goto } from '$app/navigation'
+    import { get } from 'svelte/store'
+    import { page } from '$app/stores'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -94,8 +98,25 @@
         status = 'Launching'
         textValues['StatusText'] = 'Launching'
         textValues = { ...textValues }
-        await launchPlayer(version)
+        const url: string = $deepLinkUrl ?? ""
+        await launchPlayer(version, url)
         await invoke("watch_logs")
+        
+        await invoke('create_or_focus_window', {
+                label: 'crushBoostrapChoiceWindow',
+                url: 'mainWin/choiceWin',
+                title: 'Crush',
+                width: 500.0,
+                height: 250.0,
+                minWidth: 500.0,
+                minHeight: 250.0,
+        })
+
+        setTimeout(() => {
+            goto("/mainWin/choiceWin");
+            // wait before killing to prevent crash
+            getCurrentWindow().close()
+        }, 100)
     })
 
     function getPosStyle(h?: string, v?: string) {
