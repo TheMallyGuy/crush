@@ -1,4 +1,8 @@
-use std::{fs, path::PathBuf};
+use std::{
+    fs::{self, File},
+    io::{BufReader, Read},
+    path::PathBuf,
+};
 
 use md5;
 use tauri::command;
@@ -16,13 +20,13 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
         }
 
         let src = entry.path();
-        let relative = match src.strip_prefix(&mod_dir) {
-            Ok(r) => r,
-            Err(_) => continue,
+        let Ok(relative) = src.strip_prefix(&mod_dir) else {
+            continue;
         };
 
         let dest = version_dir.join(relative);
 
+        // Skip copying if the file already exists and has the same hash
         if dest.exists() && md5_file(src) == md5_file(&dest) {
             copied.push(relative.to_string_lossy().to_string());
             continue;
@@ -40,9 +44,22 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     copied
 }
 
+/// Computes MD5 hash of a file using streaming I/O to maintain a low memory footprint.
 fn md5_file(path: &std::path::Path) -> String {
-    let Ok(bytes) = fs::read(path) else {
+    let Ok(file) = File::open(path) else {
         return String::new();
     };
-    format!("{:x}", md5::compute(&bytes))
+
+    let mut reader = BufReader::new(file);
+    let mut context = md5::Context::new();
+    let mut buffer = [0u8; 8192];
+
+    while let Ok(n) = reader.read(&mut buffer) {
+        if n == 0 {
+            break;
+        }
+        context.consume(&buffer[..n]);
+    }
+
+    format!("{:x}", context.finalize())
 }

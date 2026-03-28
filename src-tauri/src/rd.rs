@@ -2,6 +2,7 @@
 
 use futures::future::join_all;
 use serde::Deserialize;
+use std::sync::OnceLock;
 use std::time::Instant;
 use tauri_plugin_http::reqwest;
 
@@ -43,26 +44,28 @@ const FILES: &[&str] = &[
     "extracontent-places.zip",
 ];
 
+static CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
+
+fn get_client() -> &'static reqwest::Client {
+    CLIENT.get_or_init(reqwest::Client::new)
+}
+
 pub async fn best_region() -> Option<&'static str> {
-    let client = reqwest::Client::new();
+    let client = get_client();
     log::info!("[BACKEND] testing for best regions");
 
-    let futures = URLS.iter().map(|&url| {
-        let client = client.clone();
+    let futures = URLS.iter().map(|&url| async move {
+        log::info!("[BACKEND] testing : {}", url);
+        let start = Instant::now();
 
-        async move {
-            log::info!("[BACKEND] testing : {}", url);
-            let start = Instant::now();
+        let res = client.head(url).send().await;
+        let duration = start.elapsed().as_millis();
 
-            let res = client.head(url).send().await;
-            let duration = start.elapsed().as_millis();
+        log::info!("[BACKEND] {} returned in {}ms", url, duration);
 
-            log::info!("[BACKEND] {} returned in {}ms", url, duration);
-
-            match res {
-                Ok(_) => (url, duration),
-                Err(_) => (url, u128::MAX),
-            }
+        match res {
+            Ok(_) => (url, duration),
+            Err(_) => (url, u128::MAX),
         }
     });
 
@@ -77,7 +80,7 @@ pub async fn best_region() -> Option<&'static str> {
 }
 
 pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
-    let client = reqwest::Client::new();
+    let client = get_client();
 
     let text = client
         .get("https://clientsettings.roblox.com/v2/client-version/WindowsPlayer")
@@ -95,24 +98,23 @@ pub async fn get_download_urls(
     versionhash: Option<&str>,
     region_url: Option<&str>,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-    let version = latest_version().await?;
-
-    let base_version = versionhash
-        .map(|v| v.to_string())
-        .unwrap_or(version.client_version_upload);
-
-    let base_version = if base_version.starts_with("version-") {
-        base_version
-    } else {
-        format!("version-{}", base_version)
-    };
-
     let base = match region_url {
         Some(r) => r.to_string(),
         None => best_region()
             .await
             .unwrap_or("https://setup.rbxcdn.com")
             .to_string(),
+    };
+
+    let raw_version = match versionhash {
+        Some(v) => v.to_string(),
+        None => latest_version().await?.client_version_upload,
+    };
+
+    let base_version = if raw_version.starts_with("version-") {
+        raw_version
+    } else {
+        format!("version-{}", raw_version)
     };
 
     let urls: Vec<String> = FILES

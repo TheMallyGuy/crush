@@ -25,30 +25,32 @@ pub async fn apply_rpc(
     state_text: &str,
 ) -> Result<(), String> {
     let lock = client_lock.lock().await;
-    if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().details(details).state(state_text).build();
-        client
-            .set_activity(activity)
-            .await
-            .map_err(|e| e.to_string())?;
-        Ok(())
-    } else {
-        Err("RPC not initialized".into())
-    }
+    let Some(client) = lock.as_ref() else {
+        return Err("RPC not initialized".into());
+    };
+
+    let activity = Activity::new().details(details).state(state_text).build();
+    client
+        .set_activity(activity)
+        .await
+        .map_err(|e| e.to_string())?;
+
+    Ok(())
 }
 
-pub async fn kill_rpc(
-    client_lock: &tokio::sync::Mutex<Option<filthy_rich::DiscordIPC>>,
-) -> Result<(), String> {
+pub async fn kill_rpc(client_lock: &Mutex<Option<DiscordIPC>>) -> Result<(), String> {
     let mut lock = client_lock.lock().await;
 
-    if let Some(mut client) = lock.take() {
-        let _ = client.clear_activity().await;
+    let Some(mut client) = lock.take() else {
+        return Err("RPC not running".into());
+    };
 
-        client.close();
+    let _ = client.clear_activity().await;
 
-        Ok(())
-    } else {
-        Err("RPC not running".into())
+    // DiscordIPC::close() is async and returns a Result.
+    if let Err(e) = client.close().await {
+        log::error!("Failed to close Discord RPC: {:?}", e);
     }
+
+    Ok(())
 }
