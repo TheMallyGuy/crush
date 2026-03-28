@@ -59,5 +59,5 @@ fn md5_file(path: &std::path::Path) -> Option<md5::Digest> {
         context.consume(&buffer[..n]);
     }
 
-    Some(context.compute())
+    Some(context.finalize())
 }

@@ -45,7 +45,7 @@ pub async fn kill_rpc(
     if let Some(mut client) = lock.take() {
         let _ = client.clear_activity().await;
 
-        client.close();
+        client.close().await;
 
         Ok(())
     } else {

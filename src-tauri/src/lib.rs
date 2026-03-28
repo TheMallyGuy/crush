@@ -11,7 +11,6 @@ use commands::roblox_deployment::{
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
 use filthy_rich::DiscordIPC;
-use log::info;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
@@ -22,7 +21,6 @@ use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
-use std::sync::Mutex;
 
 pub mod rd;
 pub mod rpc;
@@ -104,11 +102,9 @@ pub fn run() {
                 }
             });
 
-            if let Ok(urls) = app.deep_link().get_current() {
-                if let Some(urls) = urls {
-                    if let Some(url) = urls.first() {
-                        app.emit("deep-link-received", url.to_string()).ok();
-                    }
+            if let Ok(Some(urls)) = app.deep_link().get_current() {
+                if let Some(url) = urls.first() {
+                    app.emit("deep-link-received", url.to_string()).ok();
                 }
             }
 
