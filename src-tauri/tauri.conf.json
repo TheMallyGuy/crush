@@ -41,6 +41,11 @@
         ]
     },
     "plugins": {
+        "deep-link" : {
+            "desktop" : {
+                "schemes" : ["roblox", "roblox-player"]
+            }
+        },
         "updater": {
             "endpoints": [
                 "https://github.com/TheMallyGuy/crush/releases/latest/download/latest.json"
