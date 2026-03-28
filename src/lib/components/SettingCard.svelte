@@ -18,7 +18,9 @@
     <div class="flex items-center justify-between gap-5">
         <div class="flex items-center gap-5">
             {#if icon || $$slots.icon}
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center text-gray-400">
+                <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center text-gray-400"
+                >
                     <slot name="icon">
                         <svelte:component this={icon} size={24} />
                     </slot>

@@ -54,6 +54,30 @@ async function ensureDir(path: string) {
     }
 }
 
+async function downloadAssetFile(
+    assetUrl: string,
+    onProgress: ProgressCallback,
+    done: number,
+    total: number
+) {
+    const match = assetUrl.match(/version-[^-]+-(.+)$/)
+    let fileName = match?.[1] ?? `file-${Date.now()}`
+    if (!fileName.endsWith('.zip')) fileName += '.zip'
+    fileName = fileName.toLowerCase()
+
+    try {
+        const res = await fetch(assetUrl)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const buffer = await res.arrayBuffer()
+        await writeFile(fileName, new Uint8Array(buffer), {
+            baseDir: BaseDirectory.AppCache,
+        })
+        onProgress({ type: 'download', file: fileName, done, total })
+    } catch (err) {
+        info(`Failed (${fileName}): ${err}`)
+    }
+}
+
 async function downloadAssets(
     assetsUrls: string[],
     onProgress: ProgressCallback,
@@ -67,23 +91,9 @@ async function downloadAssets(
         while (queue.length > 0) {
             const assetUrl = queue.shift()
             if (!assetUrl) return
-            const match = assetUrl.match(/version-[^-]+-(.+)$/)
-            let fileName = match?.[1] ?? `file-${Date.now()}`
-            if (!fileName.endsWith('.zip')) fileName += '.zip'
-            fileName = fileName.toLowerCase()
+            const currentDone = ++done
 
-            try {
-                const res = await fetch(assetUrl)
-                if (!res.ok) throw new Error(`HTTP ${res.status}`)
-                const buffer = await res.arrayBuffer()
-                await writeFile(fileName, new Uint8Array(buffer), {
-                    baseDir: BaseDirectory.AppCache,
-                })
-                done++
-                onProgress({ type: 'download', file: fileName, done, total })
-            } catch (err) {
-                info(`Failed (${fileName}): ${err}`)
-            }
+            await downloadAssetFile(assetUrl, onProgress, currentDone, total)
         }
     })
 
@@ -142,9 +152,63 @@ async function checkForUpdates(CurrentVersions: Versions): Promise<boolean> {
 export async function getLatestVersion(): Promise<string> {
     const versionStore = await load('versions.json')
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
-    const latestVersion = versionList.at(-1) ?? ""
+    const latestVersion = versionList.at(-1) ?? ''
 
     return latestVersion
+}
+
+async function resolveBestRegion(
+    onProgress: ProgressCallback
+): Promise<string> {
+    const conf = await load('config.json')
+    let bestRegion = await conf.get<string>('bestRegion')
+
+    if (!bestRegion) {
+        onProgress({ type: 'status', message: 'Finding best region...' })
+        bestRegion = await invoke<string>('get_best_region')
+        await conf.set('bestRegion', bestRegion)
+        await conf.save()
+    }
+    return bestRegion
+}
+
+async function performFullInstallation(
+    onProgress: ProgressCallback
+): Promise<string> {
+    onProgress({ type: 'status', message: 'Preparing download...' })
+
+    const bestRegion = await resolveBestRegion(onProgress)
+
+    onProgress({ type: 'status', message: 'Fetching asset URLs...' })
+    const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        region: bestRegion,
+    })
+
+    onProgress({ type: 'status', message: 'Downloading assets...' })
+    await downloadAssets(assetsUrls, onProgress)
+
+    onProgress({ type: 'status', message: 'Extracting files...' })
+    const match = assetsUrls[0].match(/(version-[^-]+)/)
+    const version_hash = match?.[1] ?? 'unknownversion'
+    await extractAll(version_hash, onProgress)
+
+    onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })
+    const dataDir = await appDataDir()
+    const xmlPath = await join(
+        dataDir,
+        'Player',
+        'Versions',
+        version_hash,
+        'AppSettings.xml'
+    )
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+\t<ContentFolder>content</ContentFolder>
+\t<BaseUrl>http://www.roblox.com</BaseUrl>
+</Settings>`
+    await writeFile(xmlPath, new TextEncoder().encode(xml))
+
+    return version_hash
 }
 
 export async function downloadRoblox(
@@ -152,7 +216,6 @@ export async function downloadRoblox(
 ): Promise<string> {
     const versionStore = await load('versions.json')
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
-    let version_hash = 'unknownversion'
 
     onProgress({ type: 'status', message: 'Checking for updates' })
 
@@ -166,51 +229,13 @@ export async function downloadRoblox(
             'Player',
             'Versions',
             latestVersion,
-            'RobloxPlayerBeta.exe'  
+            'RobloxPlayerBeta.exe'
         )
         filesExist = await exists(exePath)
     }
 
-    if (await checkForUpdates({ versions: versionList }) || !filesExist) {
-        onProgress({ type: 'status', message: 'Preparing download...' })
-
-        const conf = await load('config.json')
-        let bestRegion = await conf.get<string>('bestRegion')
-
-        if (!bestRegion) {
-            onProgress({ type: 'status', message: 'Finding best region...' })
-            bestRegion = await invoke<string>('get_best_region')
-            await conf.set('bestRegion', bestRegion)
-            await conf.save()
-        }
-
-        onProgress({ type: 'status', message: 'Fetching asset URLs...' })
-        const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
-            region: bestRegion,
-        })
-
-        onProgress({ type: 'status', message: 'Downloading assets...' })
-        await downloadAssets(assetsUrls, onProgress)
-
-        onProgress({ type: 'status', message: 'Extracting files...' })
-        const match = assetsUrls[0].match(/(version-[^-]+)/)
-        version_hash = match?.[1] ?? 'unknownversion'
-        await extractAll(version_hash, onProgress)
-
-        onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })
-        const xmlPath = await join(
-            dataDir,
-            'Player',
-            'Versions',
-            version_hash,
-            'AppSettings.xml'
-        )
-        const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<Settings>
-\t<ContentFolder>content</ContentFolder>
-\t<BaseUrl>http://www.roblox.com</BaseUrl>
-</Settings>`
-        await writeFile(xmlPath, new TextEncoder().encode(xml))
+    if ((await checkForUpdates({ versions: versionList })) || !filesExist) {
+        const version_hash = await performFullInstallation(onProgress)
 
         onProgress({ type: 'status', message: 'Saving version info...' })
         const updatedList = Array.from(new Set([...versionList, version_hash]))
@@ -224,8 +249,10 @@ export async function downloadRoblox(
 
 export function getPackageForFile(relativePath: string): string | null {
     const normalized = relativePath.replace(/\\/g, '/')
-    const [packageName] = sortedExtractRoots
-        .find(([, prefix]) => prefix === '' || normalized.startsWith(prefix)) ?? []
+    const [packageName] =
+        sortedExtractRoots.find(
+            ([, prefix]) => prefix === '' || normalized.startsWith(prefix)
+        ) ?? []
     return packageName ?? null
 }
 
@@ -236,17 +263,19 @@ export async function restoreFileFromPackage(
     isPackageInput = false
 ) {
     let packageName: string | null = null
-    let prefix = ""
+    let prefix = ''
 
     if (isPackageInput) {
         packageName = input
-        prefix = extractRoots[packageName] ?? ""
+        prefix = extractRoots[packageName] ?? ''
     } else {
         const normalized = input.replace(/\\/g, '/')
-        const [pkg, pfx] = sortedExtractRoots
-            .find(([, p]) => p === '' || normalized.startsWith(p)) ?? []
+        const [pkg, pfx] =
+            sortedExtractRoots.find(
+                ([, p]) => p === '' || normalized.startsWith(p)
+            ) ?? []
         packageName = pkg ?? null
-        prefix = pfx ?? ""
+        prefix = pfx ?? ''
     }
 
     if (!packageName) {
@@ -255,13 +284,14 @@ export async function restoreFileFromPackage(
     }
 
     const cacheDir = await appCacheDir()
-    const zipPath  = await join(cacheDir, packageName.toLowerCase())
+    const zipPath = await join(cacheDir, packageName.toLowerCase())
 
-    if (!await exists(zipPath)) {
+    if (!(await exists(zipPath))) {
         info(`Downloading ${packageName} to restore ${input}...`)
         const url = `https://setup.rbxcdn.com/${versionGuid}-${packageName}`
         const res = await fetch(url)
-        if (!res.ok) throw new Error(`Failed to download ${packageName}: ${res.status}`)
+        if (!res.ok)
+            throw new Error(`Failed to download ${packageName}: ${res.status}`)
         const buffer = await res.arrayBuffer()
         await writeFile(zipPath, new Uint8Array(buffer))
     }

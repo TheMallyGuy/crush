@@ -59,37 +59,43 @@
         await relaunch()
     }
 
-    onMount(async () => {
+    async function setupWindow() {
         const win = getCurrentWindow()
-        if (state) {
-            if (!state.isHtmlTheme && state.config) {
-                for (const el of state.config.elements) {
-                    if (el.name) {
-                        textValues[el.name] =
-                            el.name === 'StatusText' ? 'Preparing...' : ''
-                    }
-                }
-                textValues = { ...textValues }
-
-                const { config } = state
-                await win.setSize(new LogicalSize(config.width, config.height))
-                await win.center()
-
-                const titleBar = state.config.elements.find(
-                    (e) => e.type === 'TitleBar'
-                )
-                if (titleBar?.props?.Title) {
-                    await win.setTitle(titleBar.props.Title)
-                }
-            } else if (state.isHtmlTheme) {
-                await win.setSize(new LogicalSize(600, 400))
-                await win.center()
-            }
-        } else {
+        if (!state) {
             await win.setSize(new LogicalSize(630, 363))
             await win.center()
+            await win.show()
+            return
+        }
+
+        if (state.isHtmlTheme) {
+            await win.setSize(new LogicalSize(600, 400))
+            await win.center()
+        } else if (state.config) {
+            for (const el of state.config.elements) {
+                if (el.name) {
+                    textValues[el.name] =
+                        el.name === 'StatusText' ? 'Preparing...' : ''
+                }
+            }
+            textValues = { ...textValues }
+
+            const { config } = state
+            await win.setSize(new LogicalSize(config.width, config.height))
+            await win.center()
+
+            const titleBar = state.config.elements.find(
+                (e) => e.type === 'TitleBar'
+            )
+            if (titleBar?.props?.Title) {
+                await win.setTitle(titleBar.props.Title)
+            }
         }
         await win.show()
+    }
+
+    onMount(async () => {
+        await setupWindow()
 
         let version = await downloadRoblox(handleProgress)
         done = true
@@ -98,53 +104,60 @@
         status = 'Launching'
         textValues['StatusText'] = 'Launching'
         textValues = { ...textValues }
-        const url: string = $deepLinkUrl ?? ""
+        const url: string = $deepLinkUrl ?? ''
         await launchPlayer(version, url)
-        await invoke("watch_logs")
-        
+        await invoke('watch_logs')
+
         await invoke('create_or_focus_window', {
-                label: 'crushBoostrapChoiceWindow',
-                url: 'mainWin/choiceWin',
-                title: 'Crush',
-                width: 500.0,
-                height: 250.0,
-                minWidth: 500.0,
-                minHeight: 250.0,
+            label: 'crushBoostrapChoiceWindow',
+            url: 'mainWin/choiceWin',
+            title: 'Crush',
+            width: 500.0,
+            height: 250.0,
+            minWidth: 500.0,
+            minHeight: 250.0,
         })
 
         setTimeout(() => {
-            goto("/mainWin/choiceWin");
+            goto('/mainWin/choiceWin')
             // wait before killing to prevent crash
             getCurrentWindow().close()
         }, 100)
     })
 
     function getPosStyle(h?: string, v?: string) {
-        let styles = []
-        let transforms = []
+        const styles = []
+        const transforms = []
 
-        if (h === 'Right') styles.push('right:0;')
-        else if (h === 'Center') {
-            styles.push('left:50%;')
+        if (h === 'Right') {
+            styles.push('right:0')
+        } else if (h === 'Center') {
+            styles.push('left:50%')
             transforms.push('translateX(-50%)')
-        } else styles.push('left:0;')
-
-        if (v === 'Bottom') styles.push('bottom:0;')
-        else if (v === 'Center') {
-            styles.push('top:50%;')
-            transforms.push('translateY(-50%)')
-        } else styles.push('top:0;')
-
-        if (transforms.length > 0) {
-            styles.push(`transform:${transforms.join(' ')};`)
+        } else {
+            styles.push('left:0')
         }
 
-        return styles.join('')
+        if (v === 'Bottom') {
+            styles.push('bottom:0')
+        } else if (v === 'Center') {
+            styles.push('top:50%')
+            transforms.push('translateY(-50%)')
+        } else {
+            styles.push('top:0')
+        }
+
+        if (transforms.length > 0) {
+            styles.push(`transform:${transforms.join(' ')}`)
+        }
+
+        return styles.map((s) => `${s};`).join('')
     }
 
     function opStyle(op?: number) {
-        return op !== undefined && op !== 0 ? `opacity:${op};` : ''
+        return op ? `opacity:${op};` : ''
     }
+
     function marginStyle(m?: {
         top: number
         right: number
@@ -152,13 +165,17 @@
         left: number
     }) {
         if (!m) return ''
-        return [
-            m.top ? `margin-top:${m.top}px;` : '',
-            m.right ? `margin-right:${m.right}px;` : '',
-            m.bottom ? `margin-bottom:${m.bottom}px;` : '',
-            m.left ? `margin-left:${m.left}px;` : '',
-        ]
-            .filter(Boolean)
+        const sides = {
+            top: 'top',
+            right: 'right',
+            bottom: 'bottom',
+            left: 'left',
+        }
+        return Object.entries(sides)
+            .map(([key, label]) => {
+                const val = m[key as keyof typeof m]
+                return val ? `margin-${label}:${val}px;` : ''
+            })
             .join('')
     }
     function asset(src?: string) {

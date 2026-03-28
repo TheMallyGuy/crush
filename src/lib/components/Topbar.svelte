@@ -1,6 +1,6 @@
 <script>
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import { X, Minus } from '@lucide/svelte';
+    import { X, Minus } from '@lucide/svelte'
     const appWindow = getCurrentWindow()
 
     const minimize = () => appWindow.minimize()
@@ -23,9 +23,8 @@
             class="inline-flex items-center justify-center w-11 h-full hover:bg-zinc-800 transition-colors"
             title="Minimize"
         >
-            <Minus class="w-4 h-4"/>
+            <Minus class="w-4 h-4" />
         </button>
-
 
         <button
             on:click={close}

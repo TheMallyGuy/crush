@@ -74,7 +74,10 @@
     }
 
     onMount(async () => {
-        await invoke("set_rpc", { details: "A roblox boostrapper written from scratch", stateText: "Loading..." })
+        await invoke('set_rpc', {
+            details: 'A roblox boostrapper written from scratch',
+            stateText: 'Loading...',
+        })
         firstLaunchValue = await checkLaunch()
     })
 </script>

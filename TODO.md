@@ -2,7 +2,7 @@
 
 ## Functions
 
-- [ ] Able to download & launch roblox 
+- [ ] Able to download & launch roblox
     - Player
         - [x] Download Roblox
         - [x] Launch Roblox

@@ -1,55 +1,55 @@
 <script lang="ts">
-    import SettingCard from "$lib/components/SettingCard.svelte";
-    import Switch from "$lib/components/Switch.svelte";
-    import { invoke } from "@tauri-apps/api/core";
-    import { onMount } from "svelte";
-    import { load } from "@tauri-apps/plugin-store";
+    import SettingCard from '$lib/components/SettingCard.svelte'
+    import Switch from '$lib/components/Switch.svelte'
+    import { invoke } from '@tauri-apps/api/core'
+    import { onMount } from 'svelte'
+    import { load } from '@tauri-apps/plugin-store'
 
     type Intergrations = {
-        crushRpc: boolean,
+        crushRpc: boolean
         serverLocationNotifier: boolean
     }
 
     type Config = {
-        FirstLaunch: string,
-        bestRegion: string,
+        FirstLaunch: string
+        bestRegion: string
         intergrations: Intergrations
     }
 
-    let crushRpc = false;
-    let serverLocationNotifier = false;
+    let crushRpc = false
+    let serverLocationNotifier = false
 
     async function loadConfig() {
-        const store = await load("config.json");
-        const savedIntergrations = await store.get<Intergrations>("intergrations");
-        
+        const store = await load('config.json')
+        const savedIntergrations =
+            await store.get<Intergrations>('intergrations')
+
         if (savedIntergrations) {
-            crushRpc = savedIntergrations.crushRpc;
-            serverLocationNotifier = savedIntergrations.serverLocationNotifier;
+            crushRpc = savedIntergrations.crushRpc
+            serverLocationNotifier = savedIntergrations.serverLocationNotifier
         }
     }
 
     onMount(async () => {
-        await loadConfig(); 
+        await loadConfig()
 
-        await invoke("set_rpc", { 
-            details: "A roblox bootrapper written from scratch", 
-            stateText: "In Intergrations Route" 
-        });
-    });
+        await invoke('set_rpc', {
+            details: 'A roblox bootrapper written from scratch',
+            stateText: 'In Intergrations Route',
+        })
+    })
 
     async function handleChanges() {
-        const store = await load("config.json");
-
+        const store = await load('config.json')
 
         const newIntergrations: Intergrations = {
             crushRpc,
-            serverLocationNotifier
-        };
+            serverLocationNotifier,
+        }
 
-        await store.set("intergrations", newIntergrations);
-        
-        await store.save(); 
+        await store.set('intergrations', newIntergrations)
+
+        await store.save()
     }
 </script>
 
@@ -59,7 +59,9 @@
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
                 Intergrations
             </h1>
-            <p class="text-stone-400 mt-1">Config intergrations outside roblox</p>
+            <p class="text-stone-400 mt-1">
+                Config intergrations outside roblox
+            </p>
         </div>
     </div>
 
@@ -68,13 +70,21 @@
             title="Server Location Notifier"
             description="Get notify when client connect to a server."
         >
-            <Switch slot="action" bind:checked={serverLocationNotifier} on:change={handleChanges}/>
+            <Switch
+                slot="action"
+                bind:checked={serverLocationNotifier}
+                on:change={handleChanges}
+            />
         </SettingCard>
-            <SettingCard
+        <SettingCard
             title="Discord RPC (Crush)"
             description="Replace the Roblox Rich Presence with Crush's"
         >
-            <Switch slot="action" bind:checked={crushRpc} on:change={handleChanges}/>
+            <Switch
+                slot="action"
+                bind:checked={crushRpc}
+                on:change={handleChanges}
+            />
         </SettingCard>
     </div>
 </div>
