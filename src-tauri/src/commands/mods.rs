@@ -1,4 +1,4 @@
-use std::{fs, path::PathBuf};
+use std::{fs, io::Read, path::PathBuf};
 
 use md5;
 use tauri::command;
@@ -23,9 +23,14 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
 
         let dest = version_dir.join(relative);
 
-        if dest.exists() && md5_file(src) == md5_file(&dest) {
-            copied.push(relative.to_string_lossy().to_string());
-            continue;
+        if dest.exists() {
+            let src_md5 = md5_file(src);
+            let dest_md5 = md5_file(&dest);
+
+            if src_md5.is_some() && src_md5 == dest_md5 {
+                copied.push(relative.to_string_lossy().to_string());
+                continue;
+            }
         }
 
         if let Some(parent) = dest.parent() {
@@ -40,9 +45,19 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     copied
 }
 
-fn md5_file(path: &std::path::Path) -> String {
-    let Ok(bytes) = fs::read(path) else {
-        return String::new();
-    };
-    format!("{:x}", md5::compute(&bytes))
+/// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
+fn md5_file(path: &std::path::Path) -> Option<md5::Digest> {
+    let mut file = fs::File::open(path).ok()?;
+    let mut context = md5::Context::new();
+    let mut buffer = [0u8; 8192];
+
+    loop {
+        let n = file.read(&mut buffer).ok()?;
+        if n == 0 {
+            break;
+        }
+        context.consume(&buffer[..n]);
+    }
+
+    Some(context.finalize())
 }

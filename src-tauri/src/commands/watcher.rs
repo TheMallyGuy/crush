@@ -42,7 +42,8 @@ struct GameData {
 }
 #[derive(Deserialize)]
 struct IpInfo {
-    ip: String,
+    #[serde(rename = "ip")]
+    _ip: String,
     city: String,
     region: String,
 }
@@ -207,15 +208,13 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                             }
                         }
 
-                        if re_leave.is_match(&line) {
-                            if activity.in_game {
-                                log::info!("left game");
+                        if re_leave.is_match(&line) && activity.in_game {
+                            log::info!("left game");
 
-                                activity = Activity::default();
+                            activity = Activity::default();
 
-                                let state = app.state::<RpcState>();
-                                let _ = apply_rpc(&state.client, "Idle", "Not in game").await;
-                            }
+                            let state = app.state::<RpcState>();
+                            let _ = apply_rpc(&state.client, "Idle", "Not in game").await;
                         }
 
                         line.clear();
