@@ -37,7 +37,19 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
+            let is_deep_link = args.iter().any(|a| {
+                    a.starts_with("roblox-player:") || a.starts_with("roblox:")
+                });
 
+                if is_deep_link {
+                    return;
+                }
+
+                app.dialog()
+                    .message("The app is already running! Look for it in your system tray.")
+                    .kind(MessageDialogKind::Info)
+                    .title("Already Running")
+                    .blocking_show();
         }))
         .plugin(tauri_plugin_notification::init())
         .manage(RpcState::new())
