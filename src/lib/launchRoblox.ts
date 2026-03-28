@@ -65,7 +65,7 @@ export async function removeMod(mod: Mod, roblox_hash: string) {
     await modStore.save()
 }
 
-export async function launchPlayer(hash: string) {
+export async function launchPlayer(hash: string, deeplink: string | null) {
     const playerLocation = await join(
         await appDataDir(),
         'Player',
@@ -73,5 +73,9 @@ export async function launchPlayer(hash: string) {
         hash,
         'RobloxPlayerBeta.exe'
     )
-    await invoke('launch', { path: playerLocation })
+    const args = deeplink
+        ? ['--play', '--deeplink', deeplink]
+        : ['--play']
+
+    await invoke('launch', { path: playerLocation, arguments: args })
 }
