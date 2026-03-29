@@ -24,7 +24,7 @@
             icon: HardDrive,
             href: `${baseUiUrl}/installation`,
         },
-        { name: 'Mods', icon: Hammer, href: `${baseUiUrl}/mods` },
+        { name: 'Mods', icon: Hammer, href: `${baseUiUrl}/mods/modManagement`, activePrefix: `${baseUiUrl}/mods` },
         { name: 'FastFlag', icon: Flag, href: `${baseUiUrl}/fastflags` },
         { name: 'Appearance', icon: Palette, href: `${baseUiUrl}/appearance` },
     ]
@@ -46,7 +46,7 @@
 
     <nav class="flex flex-col gap-1 overflow-hidden">
         {#each mainNav as item}
-            {@const isActive = $page.url.pathname.startsWith(item.href)}
+           {@const isActive = $page.url.pathname.startsWith(item.activePrefix ?? item.href)}
 
             <a
                 href={item.href}
