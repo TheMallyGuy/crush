@@ -6,7 +6,7 @@ use serde::Deserialize;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
-    path::{Path, PathBuf},
+    path::PathBuf,
     sync::OnceLock,
     time::{Duration, Instant},
 };
