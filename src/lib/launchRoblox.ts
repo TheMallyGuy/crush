@@ -1,12 +1,12 @@
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { invoke } from '@tauri-apps/api/core'
-import { load } from '@tauri-apps/plugin-store'
+import { load, Store } from '@tauri-apps/plugin-store'
 import { type Mod } from './mods/modManagement'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 
 async function revertDisabledMods(
     mods: Mod[],
-    modStore: any,
+    modStore: Store,
     roblox_hash: string,
     versionDir: string
 ) {
@@ -38,7 +38,7 @@ async function revertDisabledMods(
 
 async function applyEnabledMods(
     mods: Mod[],
-    modStore: any,
+    modStore: Store,
     versionDir: string,
     appData: string
 ) {
