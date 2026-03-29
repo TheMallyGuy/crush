@@ -23,12 +23,12 @@
 </script>
 
 <div
-    class="bg-anthracite border-t border-l border-stone-800/40 p-4 px-8 rounded-tl-3xl shadow-glow-sapphire-lg flex items-center transition-all duration-150"
+    class="bg-[#1a1c20] border-t border-l border-[#2a2d32] p-4 px-8 rounded-tl-3xl shadow-2xl flex items-center"
 >
     <Button
         variant="primary"
         size="md"
-        class="rounded-full px-10"
+        class="rounded-full px-10 shadow-lg shadow-blue-600/20"
         on:click={launchBoostrap}
     >
         <Rocket class="size-4 mr-2" />
