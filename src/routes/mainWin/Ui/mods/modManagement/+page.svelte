@@ -91,7 +91,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Mods
+                Mods Management
             </h1>
             <p class="text-stone-400 mt-1">Manage your Roblox mods</p>
         </div>
