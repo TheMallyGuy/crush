@@ -100,41 +100,46 @@ async function downloadAssets(
     await Promise.all(workers)
 }
 
+async function extractIndividualZip(
+    zipName: string,
+    dest: string,
+    installRoot: string,
+    cacheDir: string
+) {
+    const zipPath = await join(cacheDir, zipName)
+    const destPath = dest ? await join(installRoot, dest) : installRoot
+
+    const zipExists = await exists(zipName, {
+        baseDir: BaseDirectory.AppCache,
+    })
+
+    if (!zipExists) return false
+
+    await ensureDir(destPath)
+    await invoke('extract_zip', { zipPath, dest: destPath })
+    return true
+}
+
 async function extractAll(hash_version: string, onProgress: ProgressCallback) {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
     const installRoot = await join(dataDir, 'Player', 'Versions', hash_version)
     await ensureDir(installRoot)
 
-    const extractRootsLower = Object.fromEntries(
-        Object.entries(extractRoots).map(([k, v]) => [k.toLowerCase(), v])
-    )
-
-    const entries = Object.entries(extractRootsLower)
+    const entries = Object.entries(extractRoots).map(([k, v]) => [
+        k.toLowerCase(),
+        v,
+    ])
     const total = entries.length
     let done = 0
 
     for (const [zipName, dest] of entries) {
-        const zipPath = await join(cacheDir, zipName)
-        const destPath = dest ? await join(installRoot, dest) : installRoot
-
         try {
-            const existsZip = await exists(zipName, {
-                baseDir: BaseDirectory.AppCache,
-            })
-            if (!existsZip) {
-                done++
-                onProgress({ type: 'extract', file: zipName, done, total })
-                continue
-            }
-            await ensureDir(destPath)
-            await invoke('extract_zip', { zipPath, dest: destPath })
-            done++
-            onProgress({ type: 'extract', file: zipName, done, total })
+            await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         } catch (err) {
-            info(`Failed (${zipName}): ${err}`)
-            done++
-            onProgress({ type: 'extract', file: zipName, done, total })
+            info(`Failed to extract (${zipName}): ${err}`)
+        } finally {
+            onProgress({ type: 'extract', file: zipName, done: ++done, total })
         }
     }
 }
@@ -172,27 +177,7 @@ async function resolveBestRegion(
     return bestRegion
 }
 
-async function performFullInstallation(
-    onProgress: ProgressCallback
-): Promise<string> {
-    onProgress({ type: 'status', message: 'Preparing download...' })
-
-    const bestRegion = await resolveBestRegion(onProgress)
-
-    onProgress({ type: 'status', message: 'Fetching asset URLs...' })
-    const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
-        region: bestRegion,
-    })
-
-    onProgress({ type: 'status', message: 'Downloading assets...' })
-    await downloadAssets(assetsUrls, onProgress)
-
-    onProgress({ type: 'status', message: 'Extracting files...' })
-    const match = assetsUrls[0].match(/(version-[^-]+)/)
-    const version_hash = match?.[1] ?? 'unknownversion'
-    await extractAll(version_hash, onProgress)
-
-    onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })
+async function writeAppSettings(version_hash: string) {
     const dataDir = await appDataDir()
     const xmlPath = await join(
         dataDir,
@@ -207,8 +192,43 @@ async function performFullInstallation(
 \t<BaseUrl>http://www.roblox.com</BaseUrl>
 </Settings>`
     await writeFile(xmlPath, new TextEncoder().encode(xml))
+}
+
+async function performFullInstallation(
+    onProgress: ProgressCallback
+): Promise<string> {
+    onProgress({ type: 'status', message: 'Preparing download...' })
+    const bestRegion = await resolveBestRegion(onProgress)
+
+    onProgress({ type: 'status', message: 'Fetching asset URLs...' })
+    const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        region: bestRegion,
+    })
+
+    onProgress({ type: 'status', message: 'Downloading assets...' })
+    await downloadAssets(assetsUrls, onProgress)
+
+    onProgress({ type: 'status', message: 'Extracting files...' })
+    const version_hash = assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
+    await extractAll(version_hash, onProgress)
+
+    onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })
+    await writeAppSettings(version_hash)
 
     return version_hash
+}
+
+async function checkInstallationExists(version?: string): Promise<boolean> {
+    if (!version) return false
+    const dataDir = await appDataDir()
+    const exePath = await join(
+        dataDir,
+        'Player',
+        'Versions',
+        version,
+        'RobloxPlayerBeta.exe'
+    )
+    return await exists(exePath)
 }
 
 export async function downloadRoblox(
@@ -219,22 +239,10 @@ export async function downloadRoblox(
 
     onProgress({ type: 'status', message: 'Checking for updates' })
 
-    const latestVersion = versionList.at(-1)
-    const dataDir = await appDataDir()
-    let filesExist = false
+    const needsUpdate = await checkForUpdates({ versions: versionList })
+    const isMissing = !(await checkInstallationExists(versionList.at(-1)))
 
-    if (latestVersion) {
-        const exePath = await join(
-            dataDir,
-            'Player',
-            'Versions',
-            latestVersion,
-            'RobloxPlayerBeta.exe'
-        )
-        filesExist = await exists(exePath)
-    }
-
-    if ((await checkForUpdates({ versions: versionList })) || !filesExist) {
+    if (needsUpdate || isMissing) {
         const version_hash = await performFullInstallation(onProgress)
 
         onProgress({ type: 'status', message: 'Saving version info...' })
