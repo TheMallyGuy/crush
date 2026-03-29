@@ -15,6 +15,7 @@ name = "crush_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
+vergen = { version = "9.0.0", features = ["build", "rustc"] }
 tauri-build = { version = "2", features = [] }
 
 [dependencies]

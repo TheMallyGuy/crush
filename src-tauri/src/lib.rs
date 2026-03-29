@@ -146,6 +146,15 @@ fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+fn print_debug_info() {
+    log::info!("Debug Info:");
+    log::info!("OS: {}", tauri_plugin_os::platform());
+    log::info!("Git hash: {}", env!("VERGEN_RUSTC_COMMIT_HASH"));
+    log::info!("Build date: {}", env!("VERGEN_BUILD_DATE"));
+    log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
+}
+
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let mut builder = tauri::Builder::default();
@@ -155,6 +164,8 @@ pub fn run() {
     builder
         .manage(RpcState::new())
         .setup(|app| {
+            print_debug_info();
+
             let platform = tauri_plugin_os::platform();
 
             if platform != "windows" {
