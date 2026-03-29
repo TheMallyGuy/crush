@@ -6,13 +6,20 @@ use serde::Deserialize;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
-    path::PathBuf,
+    path::{Path, PathBuf},
+    sync::OnceLock,
     time::{Duration, Instant},
 };
 use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
+
+static RE_JOIN: OnceLock<Regex> = OnceLock::new();
+static RE_JOINED: OnceLock<Regex> = OnceLock::new();
+static RE_LEAVE: OnceLock<Regex> = OnceLock::new();
+static RE_UDMUX: OnceLock<Regex> = OnceLock::new();
+static RE_ROBLOX: OnceLock<Regex> = OnceLock::new();
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -56,12 +63,12 @@ struct GamesResponse {
 fn is_roblox_running(system: &mut System) -> bool {
     system.refresh_processes(ProcessesToUpdate::All, true);
 
-    system.processes().values().any(|p| {
-        p.name()
-            .to_string_lossy()
-            .to_lowercase()
-            .contains("robloxplayerbeta")
-    })
+    let re = RE_ROBLOX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+
+    system
+        .processes()
+        .values()
+        .any(|p| re.is_match(&p.name().to_string_lossy()))
 }
 
 fn get_latest_log() -> Option<PathBuf> {
@@ -70,7 +77,12 @@ fn get_latest_log() -> Option<PathBuf> {
     std::fs::read_dir(dir)
         .ok()?
         .flatten()
-        .filter(|e| e.path().extension().map(|x| x == "log").unwrap_or(false))
+        .filter(|e| {
+            e.file_name()
+                .to_str()
+                .map(|s| s.ends_with(".log"))
+                .unwrap_or(false)
+        })
         .filter(|e| {
             e.metadata()
                 .and_then(|m| m.created())
@@ -82,10 +94,19 @@ fn get_latest_log() -> Option<PathBuf> {
 }
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
-    let re_join = Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap();
-    let re_joined = Regex::new(r"serverId: ([0-9\.]+)\|").unwrap();
-    let re_leave = Regex::new(r"Time to disconnect replication data").unwrap();
-    let re_udmux = Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap();
+    let re_join = RE_JOIN.get_or_init(|| {
+        Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)")
+            .expect("Failed to compile RE_JOIN")
+    });
+    let re_joined = RE_JOINED.get_or_init(|| {
+        Regex::new(r"serverId: ([0-9\.]+)\|").expect("Failed to compile RE_JOINED")
+    });
+    let re_leave = RE_LEAVE.get_or_init(|| {
+        Regex::new(r"Time to disconnect replication data").expect("Failed to compile RE_LEAVE")
+    });
+    let re_udmux = RE_UDMUX.get_or_init(|| {
+        Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").expect("Failed to compile RE_UDMUX")
+    });
 
     let mut current_file: Option<PathBuf> = None;
     let mut offset = 0;

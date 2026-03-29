@@ -1,4 +1,4 @@
-use vergen::{BuildBuilder, RustcBuilder, Emitter};
+use vergen::{BuildBuilder, Emitter, RustcBuilder};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let rustc = RustcBuilder::all_rustc()?;

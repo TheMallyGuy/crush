@@ -154,7 +154,6 @@ fn print_debug_info() {
     log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
 }
 
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let mut builder = tauri::Builder::default();
