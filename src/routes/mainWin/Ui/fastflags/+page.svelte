@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import FastFlagTable from '$lib/components/FastFlagTable.svelte'
+    import FastFlagTable from '$lib/components/organisms/FastFlagTable.svelte'
     import { getLatestVersion } from '$lib/downloadRoblox'
     import {
         getFastFlags,

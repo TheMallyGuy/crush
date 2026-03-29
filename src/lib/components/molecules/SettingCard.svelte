@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { ComponentType } from 'svelte'
+    import type { Component } from 'svelte'
 
     export let title = ''
     export let description = ''
-    export let icon: ComponentType | null = null
+    export let icon: Component | null = null
     export let clickable = false
 
     let className = ''
@@ -11,15 +11,17 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-col rounded-xl bg-[#0f0f0f] p-5 transition-all duration-200
-    {clickable ? 'cursor-pointer hover:bg-[#161616] active:scale-[0.995]' : ''} 
+    class="group relative flex w-full flex-col rounded-xl bg-anthracite p-5 transition-all duration-150 border border-stone-800/20
+    {clickable
+        ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
+        : ''}
     {className}"
 >
     <div class="flex items-center justify-between gap-5">
         <div class="flex items-center gap-5">
             {#if icon || $$slots.icon}
                 <div
-                    class="flex h-10 w-10 shrink-0 items-center justify-center text-gray-400"
+                    class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 group-hover:text-sapphire transition-colors duration-150"
                 >
                     <slot name="icon">
                         <svelte:component this={icon} size={24} />
@@ -29,13 +31,15 @@
 
             <div class="flex flex-col gap-0.5">
                 {#if title || $$slots.title}
-                    <h3 class="text-base tracking-tight text-white">
+                    <h3
+                        class="text-base font-semibold tracking-tight text-stone-100"
+                    >
                         <slot name="title">{title}</slot>
                     </h3>
                 {/if}
 
                 {#if description || $$slots.description}
-                    <p class="text-sm font-medium text-gray-500">
+                    <p class="text-sm font-medium text-stone-500">
                         <slot name="description">{description}</slot>
                     </p>
                 {/if}

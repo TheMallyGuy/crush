@@ -1,9 +1,8 @@
 <script lang="ts">
-    import Button from './Button.svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import { createEventDispatcher } from 'svelte'
 
     async function launchBoostrap() {
         await invoke('create_or_focus_window', {
@@ -21,17 +20,15 @@
             getCurrentWindow().close()
         }, 100)
     }
-
-    const dispatch = createEventDispatcher()
 </script>
 
 <div
-    class="bg-[#1a1c20] border-t border-l border-[#2a2d32] p-4 px-8 rounded-tl-3xl shadow-2xl flex items-center"
+    class="bg-anthracite border-t border-l border-stone-800/40 p-4 px-8 rounded-tl-3xl shadow-glow-sapphire-lg flex items-center transition-all duration-150"
 >
     <Button
         variant="primary"
         size="md"
-        class="rounded-full px-10 shadow-lg shadow-blue-600/20"
+        class="rounded-full px-10"
         on:click={launchBoostrap}
     >
         <Rocket class="size-4 mr-2" />

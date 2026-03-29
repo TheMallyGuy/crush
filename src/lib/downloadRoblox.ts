@@ -209,7 +209,8 @@ async function performFullInstallation(
     await downloadAssets(assetsUrls, onProgress)
 
     onProgress({ type: 'status', message: 'Extracting files...' })
-    const version_hash = assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
+    const version_hash =
+        assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
     await extractAll(version_hash, onProgress)
 
     onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })

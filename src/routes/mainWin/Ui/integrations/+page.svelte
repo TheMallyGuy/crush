@@ -1,6 +1,6 @@
 <script lang="ts">
-    import SettingCard from '$lib/components/SettingCard.svelte'
-    import Switch from '$lib/components/Switch.svelte'
+    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import Switch from '$lib/components/atoms/Switch.svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
