@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Sidebar from '$lib/components/Sidebar.svelte'
-    import LaunchBar from '$lib/components/LaunchBar.svelte'
+    import Sidebar from '$lib/components/molecules/Sidebar.svelte'
+    import LaunchBar from '$lib/components/molecules/LaunchBar.svelte'
 </script>
 
 <div class="flex h-screen w-screen overflow-hidden bg-black text-white">

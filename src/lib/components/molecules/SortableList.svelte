@@ -1,15 +1,15 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import { flip } from 'svelte/animate'
-    import { dndzone, SOURCES, TRIGGERS } from 'svelte-dnd-action'
-    import Card from './Card.svelte'
+    import { dndzone } from 'svelte-dnd-action'
+    import Card from '$lib/components/molecules/Card.svelte'
     import { GripVertical } from '@lucide/svelte'
 
     const dispatch = createEventDispatcher()
 
     export let items: any[] = []
 
-    const flipDurationMs = 200
+    const flipDurationMs = 150
 
     function handleDndConsider(e: CustomEvent<{ items: any[] }>) {
         items = e.detail.items
@@ -37,7 +37,7 @@
                 </div>
                 <div class="flex-grow">
                     <slot {item}>
-                        <span class="text-stone-200"
+                        <span class="text-stone-200 font-medium"
                             >{item.label || item.id}</span
                         >
                     </slot>

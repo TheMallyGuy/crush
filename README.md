@@ -21,7 +21,6 @@ Lab rat? Download the nightly builds using [nightly.link!](https://nightly.link/
 [svelteBadge]: https://img.shields.io/badge/sveltekit-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white
 [tailwindcssBadge]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tauriBadge]: https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
-
 [julesBadge]: https://img.shields.io/badge/jules-purple?style=for-the-badge&logo=googlejules
 [tailwindcss]: https://tailwindcss.com/
 [tauri]: https://tauri.app/

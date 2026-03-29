@@ -1,9 +1,8 @@
 <script lang="ts">
-    import Button from './Button.svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import { createEventDispatcher } from 'svelte'
 
     async function launchBoostrap() {
         await invoke('create_or_focus_window', {
@@ -21,8 +20,6 @@
             getCurrentWindow().close()
         }, 100)
     }
-
-    const dispatch = createEventDispatcher()
 </script>
 
 <div
