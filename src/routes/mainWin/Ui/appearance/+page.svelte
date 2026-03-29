@@ -9,8 +9,8 @@
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
     import { Brush, Trash2, Plus, Check } from '@lucide/svelte'
-    import SettingCard from '$lib/components/SettingCard.svelte'
-    import Dropdown from '$lib/components/Dropdown.svelte'
+    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import Dropdown from '$lib/components/atoms/Dropdown.svelte'
     import { invoke } from '@tauri-apps/api/core'
 
     type State = 'idle' | 'loading' | 'error'

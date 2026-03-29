@@ -1,9 +1,24 @@
 @import 'tailwindcss';
 
+@theme {
+    --color-obsidian: #0a0a0a;
+    --color-anthracite: #121212;
+    --color-anthracite-light: #1a1a1a;
+    --color-sapphire: #3b82f6;
+    --color-sapphire-muted: #1d4ed8;
+
+    --radius-card: 12px;
+    --radius-item: 8px;
+
+    --shadow-sapphire: 0 0 20px -5px rgba(59, 130, 246, 0.5);
+}
+
 html,
 body {
-    background: transparent;
+    background: var(--color-obsidian);
+    color: #e5e7eb; /* stone-200 */
     overflow: hidden;
+    font-family: 'Outfit', sans-serif;
 }
 
 /* hiding scroll frame */
@@ -19,6 +34,6 @@ main {
 :global(body) {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: var(--color-obsidian);
     overflow: hidden;
 }

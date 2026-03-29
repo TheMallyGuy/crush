@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import Button from '$lib/components/Button.svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
     import {
         SquarePen,
         Trash2,
@@ -9,7 +9,7 @@
         Power,
         PowerOff,
     } from '@lucide/svelte'
-    import SortableList from '$lib/components/SortableList.svelte'
+    import SortableList from '$lib/components/atoms/SortableList.svelte'
     import {
         createNewMod,
         loadMods,

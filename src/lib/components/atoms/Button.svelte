@@ -19,13 +19,13 @@
     export { className as class }
 
     const variants = {
-        primary: 'bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98]',
+        primary: 'bg-sapphire text-white hover:bg-sapphire/90 active:scale-[0.98] shadow-sapphire/20',
         secondary:
-            'bg-stone-800 text-stone-200 hover:bg-stone-700 active:scale-[0.98]',
+            'bg-anthracite-light text-stone-200 hover:bg-white/10 active:scale-[0.98]',
         outline:
-            'border border-stone-700 text-stone-300 hover:bg-stone-800 hover:border-stone-600 active:scale-[0.98]',
-        danger: 'bg-red-600 text-white hover:bg-red-700 active:scale-[0.98]',
-        ghost: 'text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 active:scale-[0.98]',
+            'border border-white/10 text-stone-300 hover:bg-white/5 hover:border-white/20 active:scale-[0.98]',
+        danger: 'bg-red-500 text-white hover:bg-red-600 active:scale-[0.98]',
+        ghost: 'text-stone-400 hover:bg-white/5 hover:text-white active:scale-[0.98]',
     }
 
     const sizes = {
@@ -44,7 +44,7 @@
 <button
     {type}
     {disabled}
-    class="relative inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed
+    class="relative inline-flex items-center justify-center gap-2 rounded-item transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapphire focus:ring-offset-2 focus:ring-offset-obsidian disabled:opacity-50 disabled:cursor-not-allowed
     {variants[variant]} 
     {sizes[size]} 
     {fullWidth ? 'w-full' : ''} 

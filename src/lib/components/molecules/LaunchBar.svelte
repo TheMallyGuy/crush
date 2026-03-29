@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from './Button.svelte'
+    import Button from '../atoms/Button.svelte'
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -26,15 +26,15 @@
 </script>
 
 <div
-    class="bg-[#1a1c20] border-t border-l border-[#2a2d32] p-4 px-8 rounded-tl-3xl shadow-2xl flex items-center"
+    class="bg-anthracite/50 backdrop-blur-xl border border-white/5 p-5 px-10 rounded-tl-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.5)] flex items-center mb-0 mr-0 transition-all group hover:bg-anthracite/70"
 >
     <Button
         variant="primary"
-        size="md"
-        class="rounded-full px-10 shadow-lg shadow-blue-600/20"
+        size="lg"
+        class="rounded-full px-12 shadow-sapphire group-hover:scale-105 active:scale-95 transition-transform font-bold tracking-widest uppercase text-xs"
         on:click={launchBoostrap}
     >
-        <Rocket class="size-4 mr-2" />
+        <Rocket class="size-4 mr-3" />
         Launch
     </Button>
 </div>

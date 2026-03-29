@@ -1,19 +1,14 @@
 <script lang="ts">
-    import SettingCard from '$lib/components/SettingCard.svelte'
-    import Switch from '$lib/components/Switch.svelte'
+    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import Switch from '$lib/components/atoms/Switch.svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
+    import { Puzzle } from '@lucide/svelte'
 
-    type Intergrations = {
+    type Integrations = {
         crushRpc: boolean
         serverLocationNotifier: boolean
-    }
-
-    type Config = {
-        FirstLaunch: string
-        bestRegion: string
-        intergrations: Intergrations
     }
 
     let crushRpc = false
@@ -21,12 +16,12 @@
 
     async function loadConfig() {
         const store = await load('config.json')
-        const savedIntergrations =
-            await store.get<Intergrations>('intergrations')
+        const savedIntegrations =
+            await store.get<Integrations>('integrations')
 
-        if (savedIntergrations) {
-            crushRpc = savedIntergrations.crushRpc
-            serverLocationNotifier = savedIntergrations.serverLocationNotifier
+        if (savedIntegrations) {
+            crushRpc = savedIntegrations.crushRpc ?? false
+            serverLocationNotifier = savedIntegrations.serverLocationNotifier ?? false
         }
     }
 
@@ -34,41 +29,40 @@
         await loadConfig()
 
         await invoke('set_rpc', {
-            details: 'A roblox bootrapper written from scratch',
-            stateText: 'In Intergrations Route',
+            details: 'A roblox bootstrapper written from scratch',
+            stateText: 'In Integrations Route',
         })
     })
 
     async function handleChanges() {
         const store = await load('config.json')
 
-        const newIntergrations: Intergrations = {
+        const newIntegrations: Integrations = {
             crushRpc,
             serverLocationNotifier,
         }
 
-        await store.set('intergrations', newIntergrations)
-
+        await store.set('integrations', newIntegrations)
         await store.save()
     }
 </script>
 
-<div class="flex flex-col gap-8 max-w-2xl">
-    <div class="flex items-center justify-between">
-        <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Intergrations
-            </h1>
-            <p class="text-stone-400 mt-1">
-                Config intergrations outside roblox
-            </p>
-        </div>
-    </div>
+<div class="flex flex-col gap-10 max-w-3xl">
+    <header class="flex flex-col gap-2">
+        <h1 class="text-clamp-3xl font-black tracking-tight text-white uppercase">
+            Integrations
+        </h1>
+        <p class="text-stone-500 font-medium max-w-xl">
+            Configure external services and background processes that enhance your Roblox experience.
+        </p>
+    </header>
 
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
         <SettingCard
             title="Server Location Notifier"
-            description="Get notify when client connect to a server."
+            description="Receive desktop notifications when connecting to a new game server."
+            icon={Puzzle}
+            delay={100}
         >
             <Switch
                 slot="action"
@@ -76,9 +70,12 @@
                 on:change={handleChanges}
             />
         </SettingCard>
+
         <SettingCard
             title="Discord RPC (Crush)"
-            description="Replace the Roblox Rich Presence with Crush's"
+            description="Showcase your current game status on Discord using Crush's enhanced Rich Presence."
+            icon={Puzzle}
+            delay={200}
         >
             <Switch
                 slot="action"
@@ -88,3 +85,9 @@
         </SettingCard>
     </div>
 </div>
+
+<style>
+    .text-clamp-3xl {
+        font-size: clamp(1.875rem, 5vw, 3rem);
+    }
+</style>
