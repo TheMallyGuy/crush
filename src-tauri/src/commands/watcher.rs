@@ -82,17 +82,8 @@ fn get_latest_log() -> Option<PathBuf> {
 }
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
-    let re_join = Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap();
-    let re_joined = Regex::new(r"serverId: ([0-9\.]+)\|").unwrap();
-    let re_leave = Regex::new(r"Time to disconnect replication data").unwrap();
-    let re_udmux = Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap();
-
-    let mut current_file: Option<PathBuf> = None;
-    let mut offset = 0;
-
-    let mut activity = Activity::default();
-    let mut last_rpc = Instant::now();
-
+    let regexes = WatcherRegexes::new();
+    let mut state = WatcherState::default();
     let mut system = System::new();
     let mut was_running = false;
 
@@ -100,135 +91,189 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
 
     loop {
         let running = is_roblox_running(&mut system);
-
         if was_running && !running {
-            activity = Activity::default();
-
-            let state = app.state::<RpcState>();
-            let _ = kill_rpc(&state.client).await;
+            state.activity = Activity::default();
+            let rpc_state = app.state::<RpcState>();
+            let _ = kill_rpc(&rpc_state.client).await;
         }
-
         was_running = running;
 
         if let Some(path) = get_latest_log() {
-            if current_file.as_ref() != Some(&path) {
+            if state.current_file.as_ref() != Some(&path) {
                 log::info!("New log file: {:?}", path);
-                current_file = Some(path);
-                offset = 0;
-                activity = Activity::default();
+                state.current_file = Some(path);
+                state.offset = 0;
+                state.activity = Activity::default();
             }
         }
 
-        if let Some(ref path) = current_file {
-            if let Ok(mut file) = File::open(path) {
-                if file.seek(SeekFrom::Start(offset)).is_ok() {
-                    let mut reader = BufReader::new(&mut file);
-                    let mut line = String::new();
-
-                    while reader.read_line(&mut line).unwrap_or(0) > 0 {
-                        if let Some(caps) = re_join.captures(&line) {
-                            let place_id: u64 = caps[2].parse().unwrap_or(0);
-
-                            activity.place_id = Some(place_id);
-                            activity.in_game = false;
-
-                            log::info!("joining place {}", place_id);
-                        }
-
-                        if let Some(caps) = re_udmux.captures(&line) {
-                            let ip = caps.get(1).unwrap().as_str().to_string();
-                            log::info!("UDMUX IP: {}", ip);
-
-                            let res = get_client()
-                                .get(format!("https://ipinfo.io/{}/json", ip))
-                                .send()
-                                .await
-                                .map_err(|e| e.to_string())?;
-                            let infoip: IpInfo = res.json().await.map_err(|e| e.to_string())?;
-
-                            let should_notify =
-                                if let Some(integrations) = store.get("intergrations") {
-                                    integrations
-                                        .get("serverLocationNotifier")
-                                        .and_then(|v| v.as_bool())
-                                        .unwrap_or(false)
-                                } else {
-                                    false
-                                };
-
-                            if should_notify {
-                                app.notification()
-                                    .builder()
-                                    .title("Connected to a server!")
-                                    .body(format!(
-                                        "IP : {} \nLocation : {}, {}",
-                                        ip, infoip.city, infoip.region
-                                    ))
-                                    .show()
-                                    .map_err(|e| e.to_string())?;
-                            }
-                        }
-
-                        if re_joined.is_match(&line) {
-                            if let Some(place_id) = activity.place_id {
-                                if !activity.in_game {
-                                    activity.in_game = true;
-
-                                    log::info!("joined game {}", place_id);
-
-                                    let should_rpc =
-                                        if let Some(integrations) = store.get("intergrations") {
-                                            integrations
-                                                .get("crushRpc")
-                                                .and_then(|v| v.as_bool())
-                                                .unwrap_or(false)
-                                        } else {
-                                            false
-                                        };
-
-                                    if should_rpc {
-                                        // debounce RPC
-                                        if last_rpc.elapsed().as_secs() > 2 {
-                                            if let Some(name) = fetch_place_name(place_id).await? {
-                                                let state = app.state::<RpcState>();
-
-                                                if let Err(e) = apply_rpc(
-                                                    &state.client,
-                                                    "Playing Roblox",
-                                                    &name,
-                                                )
-                                                .await
-                                                {
-                                                    log::error!("RPC failed: {}", e);
-                                                }
-
-                                                last_rpc = Instant::now();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if re_leave.is_match(&line) && activity.in_game {
-                            log::info!("left game");
-
-                            activity = Activity::default();
-
-                            let state = app.state::<RpcState>();
-                            let _ = apply_rpc(&state.client, "Idle", "Not in game").await;
-                        }
-
-                        line.clear();
-                    }
-
-                    offset = reader.stream_position().unwrap_or(offset);
-                }
+        if let Some(ref path) = state.current_file {
+            if let Err(e) = process_log_file(&app, path, &regexes, &mut state, &store).await {
+                log::error!("Error processing log file: {}", e);
             }
         }
 
         tokio::time::sleep(Duration::from_millis(500)).await;
     }
+}
+
+struct WatcherRegexes {
+    join: Regex,
+    joined: Regex,
+    leave: Regex,
+    udmux: Regex,
+}
+
+impl WatcherRegexes {
+    fn new() -> Self {
+        Self {
+            join: Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap(),
+            joined: Regex::new(r"serverId: ([0-9\.]+)\|").unwrap(),
+            leave: Regex::new(r"Time to disconnect replication data").unwrap(),
+            udmux: Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap(),
+        }
+    }
+}
+
+#[derive(Default)]
+struct WatcherState {
+    current_file: Option<PathBuf>,
+    offset: u64,
+    activity: Activity,
+    last_rpc: Option<Instant>,
+}
+
+async fn process_log_file(
+    app: &AppHandle,
+    path: &PathBuf,
+    regexes: &WatcherRegexes,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    let Ok(mut file) = File::open(path) else {
+        return Ok(());
+    };
+
+    if file.seek(SeekFrom::Start(state.offset)).is_err() {
+        return Ok(());
+    }
+
+    let mut reader = BufReader::new(&mut file);
+    let mut line = String::new();
+
+    while reader.read_line(&mut line).unwrap_or(0) > 0 {
+        handle_log_line(app, &line, regexes, state, store).await?;
+        line.clear();
+    }
+
+    state.offset = reader.stream_position().unwrap_or(state.offset);
+    Ok(())
+}
+
+async fn handle_log_line(
+    app: &AppHandle,
+    line: &str,
+    regexes: &WatcherRegexes,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    if let Some(caps) = regexes.join.captures(line) {
+        let place_id: u64 = caps[2].parse().unwrap_or(0);
+        state.activity.place_id = Some(place_id);
+        state.activity.in_game = false;
+        log::info!("joining place {}", place_id);
+    }
+
+    if let Some(caps) = regexes.udmux.captures(line) {
+        handle_udmux_event(app, caps.get(1).unwrap().as_str(), store).await?;
+    }
+
+    if regexes.joined.is_match(line) {
+        handle_joined_event(app, state, store).await?;
+    }
+
+    if regexes.leave.is_match(line) && state.activity.in_game {
+        log::info!("left game");
+        state.activity = Activity::default();
+        let rpc_state = app.state::<RpcState>();
+        let _ = apply_rpc(&rpc_state.client, "Idle", "Not in game").await;
+    }
+
+    Ok(())
+}
+
+async fn handle_udmux_event(
+    app: &AppHandle,
+    ip: &str,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    log::info!("UDMUX IP: {}", ip);
+
+    let res = get_client()
+        .get(format!("https://ipinfo.io/{}/json", ip))
+        .send()
+        .await
+        .map_err(|e| e.to_string())?;
+    let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
+
+    let should_notify = store
+        .get("intergrations")
+        .and_then(|v| v.get("serverLocationNotifier"))
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
+
+    if should_notify {
+        app.notification()
+            .builder()
+            .title("Connected to a server!")
+            .body(format!("IP : {} \nLocation : {}, {}", ip, info.city, info.region))
+            .show()
+            .map_err(|e| e.to_string())?;
+    }
+
+    Ok(())
+}
+
+async fn handle_joined_event(
+    app: &AppHandle,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    let Some(place_id) = state.activity.place_id else {
+        return Ok(());
+    };
+
+    if state.activity.in_game {
+        return Ok(());
+    }
+
+    state.activity.in_game = true;
+    log::info!("joined game {}", place_id);
+
+    let should_rpc = store
+        .get("intergrations")
+        .and_then(|v| v.get("crushRpc"))
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
+
+    if should_rpc {
+        let now = Instant::now();
+        let debounce_ok = state
+            .last_rpc
+            .map_or(true, |last| now.duration_since(last).as_secs() > 2);
+
+        if debounce_ok {
+            if let Some(name) = fetch_place_name(place_id).await? {
+                let rpc_state = app.state::<RpcState>();
+                if let Err(e) = apply_rpc(&rpc_state.client, "Playing Roblox", &name).await {
+                    log::error!("RPC failed: {}", e);
+                }
+                state.last_rpc = Some(now);
+            }
+        }
+    }
+
+    Ok(())
 }
 
 async fn fetch_place_name(place_id: u64) -> Result<Option<String>, String> {

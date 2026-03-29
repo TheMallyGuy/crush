@@ -68,8 +68,7 @@ pub async fn best_region() -> Option<&'static str> {
     let client = get_client();
     log::info!("[BACKEND] testing for best regions");
 
-    let futures = URLS.iter().map(|&url| ping_url(client, url));
-    let results = join_all(futures).await;
+    let results = join_all(URLS.iter().map(|&url| ping_url(client, url))).await;
 
     let fastest = results
         .into_iter()
@@ -97,19 +96,19 @@ pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error
 }
 
 pub async fn get_download_urls(
-    versionhash: Option<&str>,
+    version_hash: Option<&str>,
     region_url: Option<&str>,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-    let version = latest_version().await?;
+    let latest = latest_version().await?;
+    let raw_hash = version_hash.unwrap_or(&latest.client_version_upload);
 
-    let raw_version = versionhash.unwrap_or(&version.client_version_upload);
     let base_version = format!(
         "version-{}",
-        raw_version.strip_prefix("version-").unwrap_or(raw_version)
+        raw_hash.strip_prefix("version-").unwrap_or(raw_hash)
     );
 
-    let base = match region_url {
-        Some(r) => r.to_string(),
+    let base_url = match region_url {
+        Some(url) => url.to_string(),
         None => best_region()
             .await
             .unwrap_or("https://setup.rbxcdn.com")
@@ -118,7 +117,7 @@ pub async fn get_download_urls(
 
     let urls = FILES
         .iter()
-        .map(|file| format!("{}/{}-{}", base, base_version, file))
+        .map(|file| format!("{base_url}/{base_version}-{file}"))
         .collect();
 
     Ok(urls)

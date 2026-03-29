@@ -83,17 +83,13 @@ async function downloadAssets(
     onProgress: ProgressCallback,
     limit = 4
 ) {
-    const queue = [...new Set(assetsUrls)]
+    const queue = Array.from(new Set(assetsUrls))
     const total = queue.length
     let done = 0
 
     const workers = Array.from({ length: limit }, async () => {
-        while (queue.length > 0) {
-            const assetUrl = queue.shift()
-            if (!assetUrl) return
-            const currentDone = ++done
-
-            await downloadAssetFile(assetUrl, onProgress, currentDone, total)
+        for (let assetUrl = queue.shift(); assetUrl; assetUrl = queue.shift()) {
+            await downloadAssetFile(assetUrl, onProgress, ++done, total)
         }
     })
 
@@ -120,10 +116,10 @@ async function extractIndividualZip(
     return true
 }
 
-async function extractAll(hash_version: string, onProgress: ProgressCallback) {
+async function extractAll(version_hash: string, onProgress: ProgressCallback) {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
-    const installRoot = await join(dataDir, 'Player', 'Versions', hash_version)
+    const installRoot = await join(dataDir, 'Player', 'Versions', version_hash)
     await ensureDir(installRoot)
 
     const entries = Object.entries(extractRoots).map(([k, v]) => [
@@ -131,15 +127,14 @@ async function extractAll(hash_version: string, onProgress: ProgressCallback) {
         v,
     ])
     const total = entries.length
-    let done = 0
 
-    for (const [zipName, dest] of entries) {
+    for (const [index, [zipName, dest]] of entries.entries()) {
         try {
             await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         } catch (err) {
             info(`Failed to extract (${zipName}): ${err}`)
         } finally {
-            onProgress({ type: 'extract', file: zipName, done: ++done, total })
+            onProgress({ type: 'extract', file: zipName, done: index + 1, total })
         }
     }
 }
@@ -271,21 +266,7 @@ export async function restoreFileFromPackage(
     versionDir: string,
     isPackageInput = false
 ) {
-    let packageName: string | null = null
-    let prefix = ''
-
-    if (isPackageInput) {
-        packageName = input
-        prefix = extractRoots[packageName] ?? ''
-    } else {
-        const normalized = input.replace(/\\/g, '/')
-        const [pkg, pfx] =
-            sortedExtractRoots.find(
-                ([, p]) => p === '' || normalized.startsWith(p)
-            ) ?? []
-        packageName = pkg ?? null
-        prefix = pfx ?? ''
-    }
+    const { packageName, prefix } = resolvePackageInfo(input, isPackageInput)
 
     if (!packageName) {
         info(`No package found for ${input}, skipping restore`)
@@ -296,16 +277,46 @@ export async function restoreFileFromPackage(
     const zipPath = await join(cacheDir, packageName.toLowerCase())
 
     if (!(await exists(zipPath))) {
-        info(`Downloading ${packageName} to restore ${input}...`)
-        const url = `https://setup.rbxcdn.com/${versionGuid}-${packageName}`
-        const res = await fetch(url)
-        if (!res.ok)
-            throw new Error(`Failed to download ${packageName}: ${res.status}`)
-        const buffer = await res.arrayBuffer()
-        await writeFile(zipPath, new Uint8Array(buffer))
+        await downloadMissingPackage(packageName, versionGuid, zipPath)
     }
 
     const destDir = prefix ? await join(versionDir, prefix) : versionDir
     await ensureDir(destDir)
     await invoke('extract_zip', { zipPath, dest: destDir })
+}
+
+function resolvePackageInfo(input: string, isPackageInput: boolean) {
+    if (isPackageInput) {
+        return {
+            packageName: input,
+            prefix: extractRoots[input] ?? '',
+        }
+    }
+
+    const normalized = input.replace(/\\/g, '/')
+    const [packageName, prefix] =
+        sortedExtractRoots.find(
+            ([, p]) => p === '' || normalized.startsWith(p)
+        ) ?? []
+
+    return {
+        packageName: packageName ?? null,
+        prefix: prefix ?? '',
+    }
+}
+
+async function downloadMissingPackage(
+    packageName: string,
+    versionGuid: string,
+    zipPath: string
+) {
+    info(`Downloading ${packageName} for restore...`)
+    const url = `https://setup.rbxcdn.com/${versionGuid}-${packageName}`
+    const res = await fetch(url)
+    if (!res.ok) {
+        throw new Error(`Failed to download ${packageName}: ${res.status}`)
+    }
+
+    const buffer = await res.arrayBuffer()
+    await writeFile(zipPath, new Uint8Array(buffer))
 }

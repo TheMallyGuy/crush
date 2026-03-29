@@ -8,46 +8,35 @@ use walkdir::WalkDir;
 pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     let mod_dir = PathBuf::from(&mod_dir);
     let version_dir = PathBuf::from(&version_dir);
-    let mut copied = Vec::new();
 
-    for entry in WalkDir::new(&mod_dir).into_iter().filter_map(|e| e.ok()) {
-        if !entry.file_type().is_file() {
-            continue;
-        }
+    WalkDir::new(&mod_dir)
+        .into_iter()
+        .filter_map(|e| e.ok())
+        .filter(|e| e.file_type().is_file())
+        .filter_map(|entry| {
+            let src = entry.path();
+            let relative = src.strip_prefix(&mod_dir).ok()?;
+            let dest = version_dir.join(relative);
+            let rel_str = relative.to_string_lossy().to_string();
 
-        let src = entry.path();
-        let Ok(relative) = src.strip_prefix(&mod_dir) else {
-            continue;
-        };
+            if is_file_up_to_date(src, &dest) {
+                return Some(rel_str);
+            }
 
-        let dest = version_dir.join(relative);
+            if let Some(parent) = dest.parent() {
+                let _ = fs::create_dir_all(parent);
+            }
 
-        if is_file_up_to_date(src, &dest) {
-            copied.push(relative.to_string_lossy().to_string());
-            continue;
-        }
-
-        if let Some(parent) = dest.parent() {
-            let _ = fs::create_dir_all(parent);
-        }
-
-        if fs::copy(src, &dest).is_ok() {
-            copied.push(relative.to_string_lossy().to_string());
-        }
-    }
-
-    copied
+            fs::copy(src, &dest).ok().map(|_| rel_str)
+        })
+        .collect()
 }
 
 fn is_file_up_to_date(src: &std::path::Path, dest: &std::path::Path) -> bool {
-    if !dest.exists() {
-        return false;
-    }
-
-    let src_md5 = md5_file(src);
-    let dest_md5 = md5_file(dest);
-
-    src_md5.is_some() && src_md5 == dest_md5
+    dest.exists()
+        && md5_file(src)
+            .zip(md5_file(dest))
+            .map_or(false, |(s, d)| s == d)
 }
 
 /// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
