@@ -36,7 +36,7 @@ fn is_file_up_to_date(src: &std::path::Path, dest: &std::path::Path) -> bool {
     dest.exists()
         && md5_file(src)
             .zip(md5_file(dest))
-            .map_or(false, |(s, d)| s == d)
+            .is_some_and(|(s, d)| s == d)
 }
 
 /// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.

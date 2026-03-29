@@ -216,7 +216,7 @@ async fn handle_udmux_event(
         .map_err(|e| e.to_string())?;
     let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
 
-    let should_notify = store.get("intergrations").map_or(false, |v| {
+    let should_notify = store.get("intergrations").is_some_and(|v| {
         v.get("serverLocationNotifier")
             .and_then(|n| n.as_bool())
             .unwrap_or(false)
@@ -250,7 +250,7 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
-    let should_rpc = store.get("intergrations").map_or(false, |v| {
+    let should_rpc = store.get("intergrations").is_some_and(|v| {
         v.get("crushRpc")
             .and_then(|r| r.as_bool())
             .unwrap_or(false)
@@ -260,7 +260,7 @@ async fn handle_joined_event(
         let now = Instant::now();
         let debounce_ok = state
             .last_rpc
-            .map_or(true, |last| now.duration_since(last).as_secs() > 2);
+            .is_none_or(|last| now.duration_since(last).as_secs() > 2);
 
         if debounce_ok {
             if let Some(name) = fetch_place_name(place_id).await? {
