@@ -107,8 +107,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             }
         }
 
-        if let Some(ref path) = state.current_file {
-            if let Err(e) = process_log_file(&app, path, &regexes, &mut state, &store).await {
+        if let Some(path) = state.current_file.clone() {
+            if let Err(e) = process_log_file(&app, &path, &regexes, &mut state, &store).await {
                 log::error!("Error processing log file: {}", e);
             }
         }
@@ -216,11 +216,11 @@ async fn handle_udmux_event(
         .map_err(|e| e.to_string())?;
     let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
 
-    let should_notify = store
-        .get("intergrations")
-        .and_then(|v| v.get("serverLocationNotifier"))
-        .and_then(|v| v.as_bool())
-        .unwrap_or(false);
+    let should_notify = store.get("intergrations").map_or(false, |v| {
+        v.get("serverLocationNotifier")
+            .and_then(|n| n.as_bool())
+            .unwrap_or(false)
+    });
 
     if should_notify {
         app.notification()
@@ -250,11 +250,11 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
-    let should_rpc = store
-        .get("intergrations")
-        .and_then(|v| v.get("crushRpc"))
-        .and_then(|v| v.as_bool())
-        .unwrap_or(false);
+    let should_rpc = store.get("intergrations").map_or(false, |v| {
+        v.get("crushRpc")
+            .and_then(|r| r.as_bool())
+            .unwrap_or(false)
+    });
 
     if should_rpc {
         let now = Instant::now();
