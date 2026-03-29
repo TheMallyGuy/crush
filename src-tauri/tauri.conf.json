@@ -40,7 +40,8 @@
             "icons/icon.ico"
         ],
         "resources": [
-            "./resources/**/*.png"
+            "./resources/**/*.png",
+            "./resources/tortellini.jpg"
         ]
     },
     "plugins": {
