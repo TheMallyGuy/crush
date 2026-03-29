@@ -1,9 +1,15 @@
 // roblox downloader i guess
 
 use futures::future::join_all;
+use reqwest;
 use serde::Deserialize;
+use std::sync::OnceLock;
 use std::time::Instant;
-use tauri_plugin_http::reqwest;
+
+pub fn get_client() -> &'static reqwest::Client {
+    static CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
+    CLIENT.get_or_init(reqwest::Client::new)
+}
 
 #[derive(Deserialize)]
 pub struct LatestVersion {
@@ -59,10 +65,10 @@ async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str,
 }
 
 pub async fn best_region() -> Option<&'static str> {
-    let client = reqwest::Client::new();
+    let client = get_client();
     log::info!("[BACKEND] testing for best regions");
 
-    let futures = URLS.iter().map(|&url| ping_url(&client, url));
+    let futures = URLS.iter().map(|&url| ping_url(client, url));
 
     let mut results = join_all(futures).await;
     results.sort_by_key(|&(_, time)| time);
@@ -75,7 +81,7 @@ pub async fn best_region() -> Option<&'static str> {
 }
 
 pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
-    let client = reqwest::Client::new();
+    let client = get_client();
 
     let text = client
         .get("https://clientsettings.roblox.com/v2/client-version/WindowsPlayer")
