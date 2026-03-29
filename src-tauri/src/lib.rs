@@ -50,21 +50,17 @@ fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Bui
         }))
         .plugin(tauri_plugin_notification::init())
         .plugin(
-            tauri_plugin_log::Builder::default()
+            tauri_plugin_log::Builder::new()
                 .target(tauri_plugin_log::Target::new(
                     tauri_plugin_log::TargetKind::Stdout,
                 ))
+                .level(tauri_plugin_log::log::LevelFilter::Info)
                 .build(),
         )
         .plugin(tauri_plugin_fs_pro::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_fs::init())
-        .plugin(
-            tauri_plugin_log::Builder::new()
-                .level(tauri_plugin_log::log::LevelFilter::Info)
-                .build(),
-        )
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_dialog::init())
@@ -72,26 +68,29 @@ fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Bui
         .plugin(tauri_plugin_opener::init())
 }
 
+fn handle_received_url(app_handle: &tauri::AppHandle, url: String) {
+    app_handle.emit("deep-link-received", url.clone()).ok();
+
+    if let Some(win) = app_handle.get_webview_window("crushBoostrapChoiceWindow") {
+        let _ = win.show();
+        let _ = win.set_focus();
+    }
+    log::info!("{}", url);
+}
+
 fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     app.deep_link().register_all()?;
 
     let app_handle = app.handle().clone();
     app.deep_link().on_open_url(move |event| {
-        let urls = event.urls();
-        let Some(url) = urls.first() else { return };
-
-        app_handle.emit("deep-link-received", url.to_string()).ok();
-
-        if let Some(win) = app_handle.get_webview_window("crushBoostrapChoiceWindow") {
-            let _ = win.show();
-            let _ = win.set_focus();
+        if let Some(url) = event.urls().first() {
+            handle_received_url(&app_handle, url.to_string());
         }
-        log::info!("{}", url);
     });
 
     if let Ok(Some(urls)) = app.deep_link().get_current() {
         if let Some(url) = urls.first() {
-            app.emit("deep-link-received", url.to_string()).ok();
+            handle_received_url(app.handle(), url.to_string());
         }
     }
 

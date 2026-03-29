@@ -69,11 +69,12 @@ pub async fn best_region() -> Option<&'static str> {
     log::info!("[BACKEND] testing for best regions");
 
     let futures = URLS.iter().map(|&url| ping_url(client, url));
+    let results = join_all(futures).await;
 
-    let mut results = join_all(futures).await;
-    results.sort_by_key(|&(_, time)| time);
-
-    let fastest = results.first().map(|(url, _)| *url);
+    let fastest = results
+        .into_iter()
+        .min_by_key(|&(_, time)| time)
+        .map(|(url, _)| url);
 
     log::info!("[BACKEND] best url: {:?}", fastest);
 
@@ -102,11 +103,10 @@ pub async fn get_download_urls(
     let version = latest_version().await?;
 
     let raw_version = versionhash.unwrap_or(&version.client_version_upload);
-    let base_version = if raw_version.starts_with("version-") {
-        raw_version.to_string()
-    } else {
-        format!("version-{}", raw_version)
-    };
+    let base_version = format!(
+        "version-{}",
+        raw_version.strip_prefix("version-").unwrap_or(raw_version)
+    );
 
     let base = match region_url {
         Some(r) => r.to_string(),

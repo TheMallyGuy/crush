@@ -16,21 +16,15 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
         }
 
         let src = entry.path();
-        let relative = match src.strip_prefix(&mod_dir) {
-            Ok(r) => r,
-            Err(_) => continue,
+        let Ok(relative) = src.strip_prefix(&mod_dir) else {
+            continue;
         };
 
         let dest = version_dir.join(relative);
 
-        if dest.exists() {
-            let src_md5 = md5_file(src);
-            let dest_md5 = md5_file(&dest);
-
-            if src_md5.is_some() && src_md5 == dest_md5 {
-                copied.push(relative.to_string_lossy().to_string());
-                continue;
-            }
+        if is_file_up_to_date(src, &dest) {
+            copied.push(relative.to_string_lossy().to_string());
+            continue;
         }
 
         if let Some(parent) = dest.parent() {
@@ -43,6 +37,17 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     }
 
     copied
+}
+
+fn is_file_up_to_date(src: &std::path::Path, dest: &std::path::Path) -> bool {
+    if !dest.exists() {
+        return false;
+    }
+
+    let src_md5 = md5_file(src);
+    let dest_md5 = md5_file(dest);
+
+    src_md5.is_some() && src_md5 == dest_md5
 }
 
 /// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
