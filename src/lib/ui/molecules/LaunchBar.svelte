@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from '$lib/components/atoms/Button.svelte'
+    import Button from '$lib/ui/atoms/Button.svelte'
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -23,7 +23,7 @@
 </script>
 
 <div
-    class="bg-[#1a1c20] border-t border-l border-[#2a2d32] p-4 px-8 rounded-tl-3xl shadow-2xl flex items-center"
+    class="bg-anthracite border-t border-l border-stone-800/40 p-4 px-8 rounded-tl-xl shadow-2xl flex items-center"
 >
     <Button
         variant="primary"

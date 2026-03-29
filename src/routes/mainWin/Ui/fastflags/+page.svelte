@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import FastFlagTable from '$lib/components/organisms/FastFlagTable.svelte'
-    import { getLatestVersion } from '$lib/downloadRoblox'
+    import FastFlagTable from '$lib/ui/organisms/FastFlagTable.svelte'
+    import { getLatestVersion } from '$lib/services/downloadRoblox'
     import {
         getFastFlags,
         saveFastFlags,
-    } from '$lib/fastflag/fastflagManagement'
+    } from '$lib/features/fastflag/fastflagManagement'
     import { invoke } from '@tauri-apps/api/core'
 
     let flags: Record<string, string> = {}

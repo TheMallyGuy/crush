@@ -45,7 +45,7 @@
 <button
     {type}
     {disabled}
-    class="relative inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian disabled:opacity-50 disabled:cursor-not-allowed
+    class="relative inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed
     {variants[variant]} 
     {sizes[size]} 
     {fullWidth ? 'w-full' : ''} 

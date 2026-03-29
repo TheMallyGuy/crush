@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import Button from '$lib/components/atoms/Button.svelte'
+    import Button from '$lib/ui/atoms/Button.svelte'
     import {
         SquarePen,
         Trash2,
@@ -9,7 +9,7 @@
         Power,
         PowerOff,
     } from '@lucide/svelte'
-    import SortableList from '$lib/components/molecules/SortableList.svelte'
+    import SortableList from '$lib/ui/molecules/SortableList.svelte'
     import {
         createNewMod,
         loadMods,
@@ -19,7 +19,7 @@
         openModFolder,
         saveModsOrder,
         type Mod,
-    } from '$lib/mods/modManagement'
+    } from '$lib/features/mods/modManagement'
     import { ask } from '@tauri-apps/plugin-dialog'
     import { invoke } from '@tauri-apps/api/core'
 

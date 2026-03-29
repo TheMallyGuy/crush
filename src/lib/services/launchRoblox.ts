@@ -1,8 +1,8 @@
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
-import { type Mod } from './mods/modManagement'
-import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
+import { type Mod } from '$lib/features/mods/modManagement'
+import { restoreFileFromPackage, getPackageForFile } from '$lib/services/downloadRoblox'
 
 async function revertDisabledMods(
     mods: Mod[],

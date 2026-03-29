@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ClickableCard from "$lib/components/molecules/ClickableCard.svelte";
+    import ClickableCard from "$lib/ui/molecules/ClickableCard.svelte";
     import { Archive, Hammer, HouseHeart } from "@lucide/svelte";
     import { goto } from '$app/navigation';
 

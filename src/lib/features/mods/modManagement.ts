@@ -3,7 +3,7 @@ import { mkdir, remove } from '@tauri-apps/plugin-fs'
 import { join, appDataDir } from '@tauri-apps/api/path'
 import { load } from '@tauri-apps/plugin-store'
 import { openPath } from '@tauri-apps/plugin-opener'
-import { applyMods } from '$lib/launchRoblox'
+import { applyMods } from '$lib/services/launchRoblox'
 
 export type Mod = {
     id: string

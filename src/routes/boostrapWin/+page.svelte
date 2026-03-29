@@ -6,8 +6,8 @@
 -->
 
 <script lang="ts">
-    import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
-    import { launchPlayer, applyMods } from '$lib/launchRoblox'
+    import { downloadRoblox, type ProgressEvent } from '$lib/services/downloadRoblox'
+    import { launchPlayer, applyMods } from '$lib/services/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { onMount, onDestroy } from 'svelte'

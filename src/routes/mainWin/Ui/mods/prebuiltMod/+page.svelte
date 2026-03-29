@@ -1,7 +1,7 @@
 <script lang="ts">
-    import SettingCard from "$lib/components/molecules/SettingCard.svelte";
-    import Dropdown from "$lib/components/molecules/Dropdown.svelte";
-    import Button from "$lib/components/atoms/Button.svelte";
+    import SettingCard from "$lib/ui/molecules/SettingCard.svelte";
+    import Dropdown from "$lib/ui/molecules/Dropdown.svelte";
+    import Button from "$lib/ui/atoms/Button.svelte";
 
     let cursorOptions =  [
         { value: "default", label: "Default" },

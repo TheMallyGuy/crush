@@ -1,6 +1,6 @@
 <script lang="ts">
     import { invoke } from '@tauri-apps/api/core'
-    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import SettingCard from '$lib/ui/molecules/SettingCard.svelte'
     import { Balloon } from '@lucide/svelte'
     import { onMount } from 'svelte'
 

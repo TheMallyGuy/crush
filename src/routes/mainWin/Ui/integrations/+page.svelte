@@ -1,11 +1,11 @@
 <script lang="ts">
-    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
-    import Switch from '$lib/components/atoms/Switch.svelte'
+    import SettingCard from '$lib/ui/molecules/SettingCard.svelte'
+    import Switch from '$lib/ui/atoms/Switch.svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
 
-    type Intergrations = {
+    type Integrations = {
         crushRpc: boolean
         serverLocationNotifier: boolean
     }
@@ -13,7 +13,7 @@
     type Config = {
         FirstLaunch: string
         bestRegion: string
-        intergrations: Intergrations
+        integrations: Integrations
     }
 
     let crushRpc = false
@@ -21,12 +21,12 @@
 
     async function loadConfig() {
         const store = await load('config.json')
-        const savedIntergrations =
-            await store.get<Intergrations>('intergrations')
+        const savedIntegrations =
+            await store.get<Integrations>('integrations')
 
-        if (savedIntergrations) {
-            crushRpc = savedIntergrations.crushRpc
-            serverLocationNotifier = savedIntergrations.serverLocationNotifier
+        if (savedIntegrations) {
+            crushRpc = savedIntegrations.crushRpc
+            serverLocationNotifier = savedIntegrations.serverLocationNotifier
         }
     }
 
@@ -35,19 +35,19 @@
 
         await invoke('set_rpc', {
             details: 'A roblox bootrapper written from scratch',
-            stateText: 'In Intergrations Route',
+            stateText: 'In Integrations Route',
         })
     })
 
     async function handleChanges() {
         const store = await load('config.json')
 
-        const newIntergrations: Intergrations = {
+        const newIntegrations: Integrations = {
             crushRpc,
             serverLocationNotifier,
         }
 
-        await store.set('intergrations', newIntergrations)
+        await store.set('integrations', newIntegrations)
 
         await store.save()
     }
@@ -57,10 +57,10 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Intergrations
+                Integrations
             </h1>
             <p class="text-stone-400 mt-1">
-                Config intergrations outside roblox
+                Config integrations outside roblox
             </p>
         </div>
     </div>

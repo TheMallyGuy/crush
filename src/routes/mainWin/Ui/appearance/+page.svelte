@@ -8,9 +8,10 @@
     } from '$lib/theme/themeLoader'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
+    import { fade } from 'svelte/transition'
     import { Brush, Trash2, Plus, Check } from '@lucide/svelte'
-    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
-    import Dropdown from '$lib/components/molecules/Dropdown.svelte'
+    import SettingCard from '$lib/ui/molecules/SettingCard.svelte'
+    import Dropdown from '$lib/ui/molecules/Dropdown.svelte'
     import { invoke } from '@tauri-apps/api/core'
 
     type State = 'idle' | 'loading' | 'error'
@@ -207,6 +208,7 @@
 
                 {#if missing.length > 0}
                     <div
+                        transition:fade={{ duration: 150 }}
                         class="bg-yellow-950/30 border border-yellow-900/50 rounded-xl px-4 py-3 text-yellow-500 text-sm"
                     >
                         <div class="flex items-center gap-2 mb-1">
@@ -237,6 +239,7 @@
 
                 {#if error}
                     <div
+                        transition:fade={{ duration: 150 }}
                         class="bg-red-950/30 border border-red-900/50 rounded-xl px-4 py-3 text-red-400 text-sm flex items-center gap-2"
                     >
                         <svg

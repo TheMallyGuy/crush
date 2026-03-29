@@ -1,12 +1,12 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
-    import Button from '$lib/components/atoms/Button.svelte'
+    import Button from '$lib/ui/atoms/Button.svelte'
     import { Search, Plus, Trash2 } from '@lucide/svelte'
     import {
         detectType,
         validateValue,
         type FlagType,
-    } from '$lib/fastflag/flagTypes'
+    } from '$lib/features/fastflag/flagTypes'
 
     export let flags: Record<string, string> = {}
 

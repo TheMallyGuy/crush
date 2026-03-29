@@ -44,7 +44,7 @@
         </button>
     </div>
 
-    <nav class="flex flex-col gap-1 overflow-hidden">
+    <nav class="flex flex-col gap-2 overflow-hidden">
         {#each mainNav as item}
            {@const isActive = $page.url.pathname.startsWith(item.activePrefix ?? item.href)}
 
@@ -70,7 +70,7 @@
     <div class="flex-grow"></div>
 
     <nav
-        class="flex flex-col gap-1 border-t border-stone-800/40 pt-4 overflow-hidden"
+        class="flex flex-col gap-2 border-t border-stone-800/40 pt-4 overflow-hidden"
     >
         {#each footerNav as item}
             {@const isActive = $page.url.pathname === item.href}

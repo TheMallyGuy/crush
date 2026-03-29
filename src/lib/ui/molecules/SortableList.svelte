@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import { flip } from 'svelte/animate'
     import { dndzone } from 'svelte-dnd-action'
-    import Card from '$lib/components/molecules/Card.svelte'
+    import Card from '$lib/ui/molecules/Card.svelte'
     import { GripVertical } from '@lucide/svelte'
 
     const dispatch = createEventDispatcher()
