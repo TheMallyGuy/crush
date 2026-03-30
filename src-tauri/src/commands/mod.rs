@@ -6,3 +6,4 @@ pub mod rename;
 pub mod roblox_deployment;
 pub mod watcher;
 pub mod window;
+pub mod fs;
