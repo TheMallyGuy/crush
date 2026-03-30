@@ -1,4 +1,4 @@
-use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
+use tauri::{command, AppHandle, Emitter, Manager, WebviewUrl, WebviewWindowBuilder};
 
 #[allow(clippy::too_many_arguments)]
 #[command]
