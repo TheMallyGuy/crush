@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
-import { mkdir, remove } from '@tauri-apps/plugin-fs'
+import { mkdir, remove, exists } from '@tauri-apps/plugin-fs'
 import { join, appDataDir } from '@tauri-apps/api/path'
 import { load } from '@tauri-apps/plugin-store'
 import { openPath } from '@tauri-apps/plugin-opener'
@@ -106,4 +106,13 @@ export async function saveModsOrder(mods: Mod[]) {
 export async function openModFolder(name: string) {
     const modLocation = await join(await appDataDir(), 'Mods', name)
     await openPath(modLocation)
+}
+
+export async function getModPath(name:string): Promise<string> {
+    return await join(await appDataDir(), 'Mods', name)
+}
+
+export async function modExists(name: string): Promise<boolean> {
+    const modLocation = await join(await appDataDir(), 'Mods', name)    
+    return exists(modLocation)
 }
