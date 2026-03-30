@@ -104,6 +104,18 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                 state.current_file = Some(path);
                 state.offset = 0;
                 state.activity = Activity::default();
+                
+                let should_rpc = store.get("intergrations").is_some_and(|v| {
+                    v.get("crushRpc")
+                        .and_then(|r| r.as_bool())
+                        .unwrap_or(false)
+                });
+
+                if should_rpc {
+                    apply_rpc(&app.state::<RpcState>().client, "Playing Roblox", "Not in game")
+                        .await
+                        .ok();
+                }
             }
         }
 
