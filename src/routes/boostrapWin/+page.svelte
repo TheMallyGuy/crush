@@ -95,6 +95,11 @@
     }
 
     onMount(async () => {
+        const unlisten = await listen('crush:show', () => {
+            window.location.reload()
+        })
+        onDestroy(unlisten)
+
         await setupWindow()
 
         let version = await downloadRoblox(handleProgress)
