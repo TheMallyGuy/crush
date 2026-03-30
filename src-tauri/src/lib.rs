@@ -102,10 +102,10 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
         let state = app_handle.state::<RpcState>();
 
         let mut client = DiscordIPC::new("1484521125550620813")
-            .on_ready(|data| println!("Connected to user: {}", data.user.username));
+            .on_ready(|data| log::info!("Connected to user: {}", data.user.username));
 
         if let Err(e) = client.run(true).await {
-            eprintln!("RPC error: {:?}", e);
+            log::error!("RPC error: {:?}", e);
             return;
         }
 
