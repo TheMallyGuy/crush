@@ -320,3 +320,26 @@ async function downloadMissingPackage(
     const buffer = await res.arrayBuffer()
     await writeFile(zipPath, new Uint8Array(buffer))
 }
+
+export async function getCurrentInstallation(): Promise<{
+    version: string
+    installPath: string
+    exists: boolean
+} | null> {
+    const versionStore = await load('versions.json')
+    const versionList = (await versionStore.get<string[]>('versions')) ?? []
+    const latestVersion = versionList.at(-1)
+
+    if (!latestVersion) return null
+
+    const dataDir = await appDataDir()
+    const installPath = await join(dataDir, 'Player', 'Versions', latestVersion)
+    const exePath = await join(installPath, 'RobloxPlayerBeta.exe')
+    const installExists = await exists(exePath)
+
+    return {
+        version: latestVersion,
+        installPath,
+        exists: installExists,
+    }
+}
