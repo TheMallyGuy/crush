@@ -1,34 +1,34 @@
 import { resolveResource, join, BaseDirectory, appDataDir } from '@tauri-apps/api/path';
 import { mkdir, copyFile, readDir, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
-import { error } from '@tauri-apps/plugin-log';
+import { error, info } from '@tauri-apps/plugin-log';
 import { createNewMod, getModPath, modExists, deleteMod, loadMods } from '$lib/mods/modManagement'
 import { invoke } from '@tauri-apps/api/core';
 
-async function processFontAssets(inputDir: string, outputDir: string) { // work like the bloxstrap one
-  const entries = await readDir(inputDir);
+async function processFontAssets(inputDir: string, outputDir: string, fontName: string) { // work like the bloxstrap one
+    const entries = await readDir(inputDir);
+    await mkdir(outputDir, { recursive: true });
 
-  for (const entry of entries) {
-    if (!entry.name?.endsWith(".json")) continue;
+    for (const entry of entries) {
+        if (!entry.name?.endsWith(".json")) continue;
 
-    const inputPath = await join(inputDir, entry.name);
-    const raw = await readTextFile(inputPath);
-    const data = JSON.parse(raw);
+        const inputPath = await join(inputDir, entry.name);
+        const outputPath = await join(outputDir, entry.name);
 
-    if (!Array.isArray(data.Faces)) continue;
+        await copyFile(inputPath, outputPath); // always copy first
 
-    let changed = false;
-    for (const face of data.Faces) {
-      if (face.AssetId !== undefined) {
-        face.AssetId = "rbxasset://fonts/CustomFont.ttf";
-        changed = true;
-      }
+        const raw = await readTextFile(outputPath);
+        const data = JSON.parse(raw);
+
+        if (!Array.isArray(data.faces)) continue;
+
+        for (const face of data.faces) {
+            if (face.assetId !== undefined) {
+                face.assetId = `rbxasset://fonts/${fontName}`;
+            }
+        }
+
+        await writeTextFile(outputPath, JSON.stringify(data, null, 2));
     }
-
-    if (changed) {
-      const outputPath = await join(outputDir, entry.name);
-      await writeTextFile(outputPath, JSON.stringify(data, null, 2));
-    }
-  }
 }
 
 async function getModIdByName(name: string): Promise<string | undefined> {
@@ -37,31 +37,30 @@ async function getModIdByName(name: string): Promise<string | undefined> {
   return mod?.id;
 }
 
-export async function customFont(Fontpath: string, rblxFamiliesDir: string) {
+export async function customFont(fontPath: string, rblxFamiliesDir: string) {
     const modName = `[BUILT-IN] Custom Font`
 
     if (await modExists(modName)) {
         try {
-            const id = await getModIdByName(modName);
-            deleteMod(id!)
+            const id = await getModIdByName(modName)
+            await deleteMod(id!)
         } catch (err) {
-            await error(`BUILT-IN MOD FAILED; something went wrong during deleting duplicate mod ${error}`)
+            await error(`BUILT-IN MOD FAILED; something went wrong during deleting duplicate mod ${err}`)
         }
     }
 
-    createNewMod(modName);
-    const modPath = getModPath(modName)
+    await createNewMod(modName)
 
     try {
-        mkdir(`Mods/${modName}`, {baseDir: BaseDirectory.AppData})
+        await mkdir(`Mods/${modName}/content/fonts/families`, { baseDir: BaseDirectory.AppData, recursive: true })
 
-        const copyDest = await join(await appDataDir(), "Mods", modName, "content", "fonts")
+        const fileName = fontPath.split(/[\\/]/).at(-1)!
+        const copyDest = await join(await appDataDir(), "Mods", modName, "content", "fonts", fileName)
         const famDest = await join(await appDataDir(), "Mods", modName, "content", "fonts", "families")
 
-        invoke("copy_file", {from : Fontpath, to: copyDest})
-        processFontAssets(rblxFamiliesDir, famDest)
-
+        await invoke("copy_file", { from: fontPath, to: copyDest })
+        await processFontAssets(rblxFamiliesDir, famDest, fileName)
     } catch (err) {
-        error(`BUILT-IN MOD FAILED; something went wrong when trying to create font mod`)
+        await error(`BUILT-IN MOD FAILED; something went wrong when trying to create font mod: ${err}`)
     }
 }
