@@ -120,7 +120,6 @@
 
         setTimeout(() => {
             // wait before killing to prevent crash
-            // @pochita, everytime i launch into roblox then do this to close the window, it's just not gonna reload this page therefore its cannot open into roblox because its preloaded. can you search a solution for this?
             getCurrentWindow().close()
         }, 100)
     })
