@@ -42,6 +42,14 @@
             ]
         },
         {
+            "identifier": "fs:allow-copy-file",
+            "allow": [
+                {
+                    "path": "$APPDATA/**"
+                }
+            ]
+        },
+        {
             "identifier": "fs:allow-remove",
             "allow": [
                 {
