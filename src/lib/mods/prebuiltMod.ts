@@ -31,7 +31,7 @@ async function processFontAssets(inputDir: string, outputDir: string, fontName: 
     }
 }
 
-async function getModIdByName(name: string): Promise<string | undefined> {
+export async function getModIdByName(name: string): Promise<string | undefined> {
   const mods = await loadMods();
   const mod = mods.find(m => m.name === name);
   return mod?.id;
@@ -62,5 +62,50 @@ export async function customFont(fontPath: string, rblxFamiliesDir: string) {
         await processFontAssets(rblxFamiliesDir, famDest, fileName)
     } catch (err) {
         await error(`BUILT-IN MOD FAILED; something went wrong when trying to create font mod: ${err}`)
+    }
+}
+
+export async function customCursor(arrowCursor: string, arrowFarCursor: string) {
+    const modName = `[BUILT-IN] Custom Cursor`
+
+    if (await modExists(modName)) {
+        try {
+            const id = await getModIdByName(modName)
+            await deleteMod(id!)
+        } catch (err) {
+            await error(`BUILT-IN MOD FAILED; something went wrong during deleting duplicate mod ${err}`)
+        }
+    }
+
+    await createNewMod(modName)
+
+    try {
+        await mkdir(`Mods/${modName}/content/textures/`, { baseDir: BaseDirectory.AppData, recursive: true })
+
+        const fileNameArrow = arrowCursor.split(/[\\/]/).at(-1)!
+        const fileNameArrowFar = arrowFarCursor.split(/[\\/]/).at(-1)!
+
+        const copyDestArrow = await join(await appDataDir(), "Mods", modName, "content", "textures", "Cursors", "KeyboardMouse", fileNameArrow)
+        const copyDestArrowFar = await join(await appDataDir(), "Mods", modName, "content", "textures", "Cursors", "KeyboardMouse", fileNameArrowFar)
+
+
+        await invoke("copy_file", { from: arrowCursor, to: copyDestArrow })
+        await invoke("copy_file", { from: arrowFarCursor, to: copyDestArrowFar })
+        // that was easy
+    } catch (err) { 
+        await error(`BUILT-IN MOD FAILED; something went wrong when trying to copy cursors: ${err}`)
+    }
+}
+
+export async function ensureCursor() {
+    const modName = `[BUILT-IN] Custom Cursor`
+
+    if (await modExists(modName)) {
+        try {
+            const id = await getModIdByName(modName)
+            await deleteMod(id!)
+        } catch (err) {
+            await error(`BUILT-IN MOD FAILED; something went wrong during deleting duplicate mod ${err}`)
+        }
     }
 }
