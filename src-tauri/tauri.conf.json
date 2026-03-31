@@ -41,6 +41,7 @@
         ],
         "resources": [
             "./resources/**/*.png",
+
             "./resources/tortellini.jpg"
         ]
     },
