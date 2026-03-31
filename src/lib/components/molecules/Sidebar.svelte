@@ -31,7 +31,6 @@
 
     const footerNav = [
         { name: 'Settings', icon: Settings, href: `${baseUiUrl}/settings` },
-        { name: 'About', icon: Info, href: `${baseUiUrl}/about` },
     ]
 </script>
 
