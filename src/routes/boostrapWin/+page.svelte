@@ -100,7 +100,7 @@
     }
 
     onMount(async () => {
-        unlisten = await listen('crush:show', () => {
+        unlisten = await getCurrentWindow().listen('crush:show', () => {
             window.location.reload()
         })
 
