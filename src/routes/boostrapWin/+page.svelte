@@ -38,6 +38,11 @@
 
     let textValues: Record<string, string> = {}
 
+    let unlisten: (() => void) | undefined
+    onDestroy(() => {
+        if (unlisten) unlisten()
+    })
+
     function handleProgress(e: ProgressEvent) {
         if (e.type === 'status') {
             status = e.message
@@ -95,10 +100,9 @@
     }
 
     onMount(async () => {
-        const unlisten = await listen('crush:show', () => {
+        unlisten = await listen('crush:show', () => {
             window.location.reload()
         })
-        onDestroy(unlisten)
 
         await setupWindow()
 
