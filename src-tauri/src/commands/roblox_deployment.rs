@@ -1,4 +1,5 @@
 use crate::rd::{best_region, get_download_urls, latest_version};
+// @pochita hey! can you add error handling to this? when the download is failed/paused its its do something in the frontend and then prompt user to reinstall (or just do it anyway best) that would be nice thanks
 
 #[tauri::command]
 pub async fn get_download_deployment_urls(region: Option<&str>) -> Result<Vec<String>, String> {
