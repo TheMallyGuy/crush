@@ -1,4 +1,4 @@
-use tauri::{command, AppHandle, Emitter, Manager, WebviewUrl, WebviewWindowBuilder};
+use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 #[allow(clippy::too_many_arguments)]
 #[command]
@@ -15,7 +15,6 @@ pub async fn create_or_focus_window(
     if let Some(window) = app.get_webview_window(&label) {
         window.show().map_err(|e| e.to_string())?;
         window.set_focus().map_err(|e| e.to_string())?;
-        let _ = window.emit("crush:show", ());
         return Ok(());
     }
 

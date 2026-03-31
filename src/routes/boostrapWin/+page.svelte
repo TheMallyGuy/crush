@@ -38,11 +38,6 @@
 
     let textValues: Record<string, string> = {}
 
-    let unlisten: (() => void) | undefined
-    onDestroy(() => {
-        if (unlisten) unlisten()
-    })
-
     function handleProgress(e: ProgressEvent) {
         if (e.type === 'status') {
             status = e.message
@@ -100,10 +95,6 @@
     }
 
     onMount(async () => {
-        unlisten = await getCurrentWindow().listen('crush:show', () => {
-            window.location.reload()
-        })
-
         await setupWindow()
 
         let version = await downloadRoblox(handleProgress)

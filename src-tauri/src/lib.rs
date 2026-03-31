@@ -189,6 +189,12 @@ pub fn run() {
         })
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                // Secondary windows like "CrushBoostrap" should close and be destroyed normally.
+                // The main Choice window (the tray entry point) and the config window should stay in the tray.
+                if window.label() == "CrushBoostrap" || window.label() == "crushBoostrap" {
+                    return;
+                }
+
                 let _ = window.hide();
                 api.prevent_close();
             }
