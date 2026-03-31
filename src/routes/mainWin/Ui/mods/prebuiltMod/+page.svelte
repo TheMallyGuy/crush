@@ -2,16 +2,22 @@
     import SettingCard from "$lib/components/molecules/SettingCard.svelte";
     import Dropdown from "$lib/components/molecules/Dropdown.svelte";
     import Button from "$lib/components/atoms/Button.svelte";
-    import { customFont } from "$lib/mods/prebuiltMod";
+    import { customCursor, customFont, ensureCursor, getModIdByName } from "$lib/mods/prebuiltMod";
     import { getCurrentInstallation } from "$lib/downloadRoblox";
     import { open } from '@tauri-apps/plugin-dialog';
-    import { appDataDir, join } from "@tauri-apps/api/path"
+    import { appDataDir, join, resolveResource } from "@tauri-apps/api/path"
+    import { info } from "@tauri-apps/plugin-log"
+    import { load } from "@tauri-apps/plugin-store"
+    import { onMount } from "svelte"
+
+    let config
 
     let cursorOptions =  [
         { value: "default", label: "Default" },
         { value: "2006", label: "2006" },
-        { value: "2007", label: "2007" }
+        { value: "2013", label: "2013" }
     ];
+
     let cursorValue = "default";
 
     async function handleCustomFont() {
@@ -31,11 +37,33 @@
         customFont(file, rblxFamilies)
     }
 
+    async function handleCustomCursor() {
+        const config = await load("config.json")
+        
+        if (cursorValue == "default") {
+            await config.set("mod", "default")
+            ensureCursor()
+            return
+        }
+
+        const Arrow = await resolveResource(`resources/Mods/Cursors/${cursorValue}/ArrowCursor.png`)
+        const Far = await resolveResource(`resources/Mods/Cursors/${cursorValue}/ArrowFarCursor.png`)
+        
+        await config.set("mod", cursorValue)
+        customCursor(Arrow, Far)
+    }
+
+    onMount(async () => {
+        config = await load("config.json")
+
+        cursorValue = await config.get('mod') ?? "default"
+    })
+
 </script>
 
 <div class="flex flex-col gap-3">
     <SettingCard title="Cursor" description="Change your roblox cursor to the old one.">
-        <Dropdown slot="action" options={cursorOptions} bind:value={cursorValue} />
+        <Dropdown slot="action" options={cursorOptions} bind:value={cursorValue} on:change={handleCustomCursor} />
     </SettingCard>
 
     <SettingCard title="Custom Font" description="Change your roblox font to whatever you like.">
