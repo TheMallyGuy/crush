@@ -2,9 +2,9 @@
 
 use commands::archive::extract_zip;
 use commands::discord_rpc::set_rpc;
+use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
-use commands::fs::copy_file;
 use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
@@ -154,7 +154,6 @@ fn print_debug_info() {
     log::info!("Build date: {}", env!("VERGEN_BUILD_DATE"));
     log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
 }
-
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {

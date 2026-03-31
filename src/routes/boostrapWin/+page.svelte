@@ -35,6 +35,8 @@
         extractDone = 0,
         extractTotal = 0
     let done = false
+    let error = false
+    let errorMessage = ''
 
     let textValues: Record<string, string> = {}
 
@@ -94,34 +96,55 @@
         await win.show()
     }
 
+    async function runBootstrap() {
+        error = false
+        errorMessage = ''
+        done = false
+        status = 'Preparing...'
+        textValues['StatusText'] = 'Preparing...'
+        textValues = { ...textValues }
+
+        try {
+            let version = await downloadRoblox(handleProgress)
+            done = true
+            status = 'Applying modification'
+            textValues['StatusText'] = 'Applying modification'
+            textValues = { ...textValues }
+            await applyMods(version)
+            status = 'Launching'
+            textValues['StatusText'] = 'Launching'
+            textValues = { ...textValues }
+            const url: string = $deepLinkUrl ?? ''
+            await launchPlayer(version, url)
+            await invoke('watch_logs')
+
+            await invoke('create_or_focus_window', {
+                label: 'crushBoostrapChoiceWindow',
+                url: 'mainWin/choiceWin',
+                title: 'Crush',
+                width: 500.0,
+                height: 250.0,
+                minWidth: 500.0,
+                minHeight: 250.0,
+            })
+
+            setTimeout(() => {
+                // wait before killing to prevent crash
+                getCurrentWindow().close()
+            }, 100)
+        } catch (e: any) {
+            error = true
+            errorMessage = e.message || String(e)
+            status = `Error: ${errorMessage}`
+            textValues['StatusText'] = status
+            textValues = { ...textValues }
+            console.error('Bootstrap failed:', e)
+        }
+    }
+
     onMount(async () => {
         await setupWindow()
-
-        let version = await downloadRoblox(handleProgress)
-        done = true
-        status = 'Applying modification'
-        await applyMods(version)
-        status = 'Launching'
-        textValues['StatusText'] = 'Launching'
-        textValues = { ...textValues }
-        const url: string = $deepLinkUrl ?? ''
-        await launchPlayer(version, url)
-        await invoke('watch_logs')
-
-        await invoke('create_or_focus_window', {
-            label: 'crushBoostrapChoiceWindow',
-            url: 'mainWin/choiceWin',
-            title: 'Crush',
-            width: 500.0,
-            height: 250.0,
-            minWidth: 500.0,
-            minHeight: 250.0,
-        })
-
-        setTimeout(() => {
-            // wait before killing to prevent crash
-            getCurrentWindow().close()
-        }, 100)
+        await runBootstrap()
     })
 
     function getPosStyle(h?: string, v?: string) {
@@ -356,7 +379,7 @@
                 <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
                     Crush
                 </h1>
-                <p class="text-stone-400 mt-2">{status}</p>
+                <p class={error ? "text-red-400 mt-2" : "text-stone-400 mt-2"}>{status}</p>
             </div>
             {#if !done}
                 <div class="w-full max-w-sm flex flex-col gap-3">
@@ -407,11 +430,19 @@
                 </div>
             {/if}
         </div>
-        <div class="absolute bottom-6 left-0 w-full flex justify-center p-3">
-            <div class="w-full max-w-sm">
+        <div class="absolute bottom-6 left-0 w-full flex flex-col items-center gap-3 p-3">
+            <div class="w-full max-w-sm flex gap-3">
+                {#if error}
+                    <button
+                        on:click={runBootstrap}
+                        class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
+                    >
+                        Retry
+                    </button>
+                {/if}
                 <button
                     on:click={cancel}
-                    class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
+                    class="{error ? 'flex-1' : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
                     <span class="font-medium">Cancel</span>
                 </button>

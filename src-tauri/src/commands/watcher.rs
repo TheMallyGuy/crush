@@ -104,17 +104,19 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                 state.current_file = Some(path);
                 state.offset = 0;
                 state.activity = Activity::default();
-                
-                let should_rpc = store.get("intergrations").is_some_and(|v| {
-                    v.get("crushRpc")
-                        .and_then(|r| r.as_bool())
-                        .unwrap_or(false)
-                });
+
+                let should_rpc = store
+                    .get("intergrations")
+                    .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
                 if should_rpc {
-                    apply_rpc(&app.state::<RpcState>().client, "Playing Roblox", "Not in game")
-                        .await
-                        .ok();
+                    apply_rpc(
+                        &app.state::<RpcState>().client,
+                        "Playing Roblox",
+                        "Not in game",
+                    )
+                    .await
+                    .ok();
                 }
             }
         }
@@ -238,7 +240,10 @@ async fn handle_udmux_event(
         app.notification()
             .builder()
             .title("Connected to a server!")
-            .body(format!("IP : {} \nLocation : {}, {}", ip, info.city, info.region))
+            .body(format!(
+                "IP : {} \nLocation : {}, {}",
+                ip, info.city, info.region
+            ))
             .show()
             .map_err(|e| e.to_string())?;
     }
@@ -262,11 +267,9 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
-    let should_rpc = store.get("intergrations").is_some_and(|v| {
-        v.get("crushRpc")
-            .and_then(|r| r.as_bool())
-            .unwrap_or(false)
-    });
+    let should_rpc = store
+        .get("intergrations")
+        .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
     if should_rpc {
         let now = Instant::now();
