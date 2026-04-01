@@ -4,7 +4,7 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { type Mod } from './mods/modManagement'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 
-async function revertDisabledMods(
+async function revertDisabledMods( // find a better way to revert using cached roblox resource @pochita
     mods: Mod[],
     modStore: Store,
     roblox_hash: string,
