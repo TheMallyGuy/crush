@@ -42,6 +42,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Debug resumeUrl
+        shell: bash
+        run: |
+          echo "resumeUrl=${{ github.event.inputs.resumeUrl }}"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
         with:
@@ -77,3 +82,16 @@ jobs:
             src-tauri/target/release/bundle/nsis/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify n8n (resume)
+        if: always()
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.resumeUrl }}" ]; then
+            echo "Sending callback to n8n..."
+            curl -X POST "${{ github.event.inputs.resumeUrl }}" \
+              -H "Content-Type: application/json" \
+              -d "{\"status\":\"done\",\"run_id\":\"${{ github.run_id }}\"}"
+          else
+            echo "No resumeUrl provided, skipping callback"
+          fi
