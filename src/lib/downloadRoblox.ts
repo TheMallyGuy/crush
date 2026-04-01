@@ -65,17 +65,13 @@ async function downloadAssetFile(
     if (!fileName.endsWith('.zip')) fileName += '.zip'
     fileName = fileName.toLowerCase()
 
-    try {
-        const res = await fetch(assetUrl)
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const buffer = await res.arrayBuffer()
-        await writeFile(fileName, new Uint8Array(buffer), {
-            baseDir: BaseDirectory.AppCache,
-        })
-        onProgress({ type: 'download', file: fileName, done, total })
-    } catch (err) {
-        info(`Failed (${fileName}): ${err}`)
-    }
+    const res = await fetch(assetUrl)
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const buffer = await res.arrayBuffer()
+    await writeFile(fileName, new Uint8Array(buffer), {
+        baseDir: BaseDirectory.AppCache,
+    })
+    onProgress({ type: 'download', file: fileName, done, total })
 }
 
 async function downloadAssets(
@@ -129,13 +125,8 @@ async function extractAll(version_hash: string, onProgress: ProgressCallback) {
     const total = entries.length
 
     for (const [index, [zipName, dest]] of entries.entries()) {
-        try {
-            await extractIndividualZip(zipName, dest, installRoot, cacheDir)
-        } catch (err) {
-            info(`Failed to extract (${zipName}): ${err}`)
-        } finally {
-            onProgress({ type: 'extract', file: zipName, done: index + 1, total })
-        }
+        await extractIndividualZip(zipName, dest, installRoot, cacheDir)
+        onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
 }
 
