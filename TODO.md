@@ -1,4 +1,5 @@
 # TODO
+Crush is about **45%** done! <!-- @pochita you might need to update this % to correct i might be wrong here -->
 
 ## Functions
 
@@ -12,12 +13,14 @@
         - [ ] Launch Roblox
         - [ ] Change channels
 
-- [ ] Intergrate bloxstrapRPC
-- [ ] Modify Roblox Files (mods, fastflag... etc) [ next 1 ]
+- [x] Use Discord RPC to display whats game the current client in
+    - [x] Games
+    - [ ] __BloxstrapRPC__
+
 - [x] Mods
     - [x] Apply mods on launch
     - [x] Reset roblox before that mod is applied
-    - [ ] Prebuilt mods
+    - [x] Prebuilt mods
 - [x] Fastflag(clientsetting.json)
 
 - [ ] Community mods
@@ -29,18 +32,17 @@
 ## UI
 
 - [ ] Pages
-    - [ ] Integrations
-    - [ ] Installation [ next 4 ]
+    - [x] Integrations
+    - [ ] Installation
     - [x] Mods
     - [x] FastFlag
     - [x] Appearance
     - [ ] Settings
-    - [ ] About
     - [ ] Hello homepage
     - [ ] Game history
 
-- [ ] Support localization
+- [ ] Support localization <--- this next maybe
 - [x] Launch menu
     - [x] Customization
         - [x] Support bloxstrap's custom launch menu (possible)
-        - [ ] HTML/JS/CSS support
+        - [x] HTML/JS/CSS support
