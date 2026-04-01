@@ -181,7 +181,8 @@ async function writeAppSettings(version_hash: string) {
 }
 
 async function performFullInstallation(
-    onProgress: ProgressCallback
+    onProgress: ProgressCallback,
+    version?: string
 ): Promise<string> {
     onProgress({ type: 'status', message: 'Preparing download...' })
     const bestRegion = await resolveBestRegion(onProgress)
@@ -189,6 +190,7 @@ async function performFullInstallation(
     onProgress({ type: 'status', message: 'Fetching asset URLs...' })
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         region: bestRegion,
+        ...(version && { version }),
     })
 
     onProgress({ type: 'status', message: 'Downloading assets...' })
@@ -219,10 +221,26 @@ async function checkInstallationExists(version?: string): Promise<boolean> {
 }
 
 export async function downloadRoblox(
-    onProgress: ProgressCallback
+    onProgress: ProgressCallback,
+    version?: string
 ): Promise<string> {
     const versionStore = await load('versions.json')
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
+
+    if (version) {
+        const isMissing = !(await checkInstallationExists(version))
+        if (isMissing) {
+            await performFullInstallation(onProgress, version)
+        }
+
+        onProgress({ type: 'status', message: 'Saving version info...' })
+        const updatedList = Array.from(new Set([...versionList, version]))
+        await versionStore.set('versions', updatedList)
+        await versionStore.save()
+
+        onProgress({ type: 'status', message: 'Installation complete!' })
+        return version  
+    }
 
     onProgress({ type: 'status', message: 'Checking for updates' })
 
@@ -235,6 +253,7 @@ export async function downloadRoblox(
         onProgress({ type: 'status', message: 'Saving version info...' })
         const updatedList = Array.from(new Set([...versionList, version_hash]))
         await versionStore.set('versions', updatedList)
+        await versionStore.save()
 
         onProgress({ type: 'status', message: 'Installation complete!' })
     }
