@@ -96,7 +96,7 @@
         await win.show()
     }
 
-    async function runBootstrap() {
+    async function runBootstrap() { // @pochita make it so everytime this page/window load its will reload because there is a problem with deeplink launching its just doesnt reload and stuck. also fix when pressing the tray bar its bring this page instead of mainwin/choicewin. thanks!!!
         error = false
         errorMessage = ''
         done = false
