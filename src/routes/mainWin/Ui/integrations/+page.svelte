@@ -1,6 +1,7 @@
 <script lang="ts">
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
+    import { Bell, Plug } from '@lucide/svelte';
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -69,6 +70,7 @@
         <SettingCard
             title="Server Location Notifier"
             description="Get notify when client connect to a server."
+            icon={Bell}
         >
             <Switch
                 slot="action"
@@ -79,6 +81,7 @@
         <SettingCard
             title="Discord RPC (Crush)"
             description="Replace the Roblox Rich Presence with Crush's"
+            icon={Plug}
         >
             <Switch
                 slot="action"

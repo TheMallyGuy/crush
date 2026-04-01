@@ -1,6 +1,7 @@
 <script lang="ts">
     import SettingCard from "$lib/components/molecules/SettingCard.svelte";
     import Dropdown from "$lib/components/molecules/Dropdown.svelte";
+    import { ALargeSmall, MousePointer2 } from "@lucide/svelte";
     import Button from "$lib/components/atoms/Button.svelte";
     import { customCursor, customFont, ensureCursor, getModIdByName } from "$lib/mods/prebuiltMod";
     import { getCurrentInstallation } from "$lib/downloadRoblox";
@@ -62,11 +63,11 @@
 </script>
 
 <div class="flex flex-col gap-3">
-    <SettingCard title="Cursor" description="Change your roblox cursor to the old one.">
+    <SettingCard title="Cursor" description="Change your roblox cursor to the old one." icon={MousePointer2}>
         <Dropdown slot="action" options={cursorOptions} bind:value={cursorValue} on:change={handleCustomCursor} />
     </SettingCard>
 
-    <SettingCard title="Custom Font" description="Change your roblox font to whatever you like.">
+    <SettingCard title="Custom Font" description="Change your roblox font to whatever you like." icon={ALargeSmall}>
         <Button slot="action" variant='secondary' on:click={handleCustomFont}>Change Font</Button>
     </SettingCard>
 </div>
