@@ -274,7 +274,8 @@ export async function restoreFileFromPackage(
     input: string, // relativePath or direct packageName
     versionGuid: string,
     versionDir: string,
-    isPackageInput = false
+    isPackageInput = false,
+    files?: string[]
 ) {
     const { packageName, prefix } = resolvePackageInfo(input, isPackageInput)
 
@@ -292,10 +293,25 @@ export async function restoreFileFromPackage(
 
     const destDir = prefix ? await join(versionDir, prefix) : versionDir
     await ensureDir(destDir)
-    await invoke('extract_zip', { zipPath, dest: destDir })
+
+    if (files && files.length > 0) {
+        const strippedFiles = prefix
+            ? files.map((f) =>
+                  f.startsWith(prefix) ? f.substring(prefix.length) : f
+              )
+            : files
+
+        await invoke('extract_files_from_zip', {
+            zipPath,
+            dest: destDir,
+            files: strippedFiles,
+        })
+    } else {
+        await invoke('extract_zip', { zipPath, dest: destDir })
+    }
 }
 
-function resolvePackageInfo(input: string, isPackageInput: boolean) {
+export function resolvePackageInfo(input: string, isPackageInput: boolean) {
     if (isPackageInput) {
         return {
             packageName: input,

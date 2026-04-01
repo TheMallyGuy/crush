@@ -35,9 +35,8 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen bg-anthracite text-stone-400 border-r border-stone-800/40 p-2 transition-all duration-150 w-16 sm:w-64"
+    class="flex flex-col h-screen bg-anthracite text-stone-400 border-r border-stone-800/40 p-2 pt-8 transition-all duration-150 w-16 sm:w-64"
 >
-    <!--@pochita fix the topbar text overlaping the menu button-->
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
         <button class="hover:text-stone-100 transition-colors">
             <Menu size={20} />

@@ -23,6 +23,44 @@ pub fn extract_zip(zip_path: String, dest: String) -> Result<(), String> {
     Ok(())
 }
 
+#[tauri::command]
+pub fn extract_files_from_zip(
+    zip_path: String,
+    dest: String,
+    files: Vec<String>,
+) -> Result<(), String> {
+    let file =
+        File::open(&zip_path).map_err(|e| format!("Cannot open zip '{}': {}", zip_path, e))?;
+
+    let mut archive =
+        ZipArchive::new(file).map_err(|e| format!("Cannot read zip archive: {}", e))?;
+
+    let dest_path = Path::new(&dest);
+
+    fs::create_dir_all(dest_path)
+        .map_err(|e| format!("Cannot create dest dir '{}': {}", dest_path.display(), e))?;
+
+    let files_set: std::collections::HashSet<String> = files.into_iter().collect();
+
+    for i in 0..archive.len() {
+        let entry_is_match = {
+            let entry = archive
+                .by_index(i)
+                .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
+            entry
+                .enclosed_name()
+                .map(|name| files_set.contains(&name.to_string_lossy().to_string()))
+                .unwrap_or(false)
+        };
+
+        if entry_is_match {
+            extract_entry(&mut archive, i, dest_path)?;
+        }
+    }
+
+    Ok(())
+}
+
 fn extract_entry(
     archive: &mut ZipArchive<File>,
     index: usize,
