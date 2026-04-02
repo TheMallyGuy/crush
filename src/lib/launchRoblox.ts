@@ -4,30 +4,38 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { type Mod } from './mods/modManagement'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 
-async function revertDisabledMods( // find a better way to revert using cached roblox resource @pochita
+async function revertDisabledMods(
     mods: Mod[],
     modStore: Store,
     roblox_hash: string,
     versionDir: string
 ) {
-    const packagesToRestore = new Set<string>()
     const modsToClear: string[] = []
+    const packageFilesMap = new Map<string, string[]>()
 
-    for (const mod of mods.filter((m) => !m.enabled)) {
+    const disabledMods = mods.filter((m) => !m.enabled)
+
+    for (const mod of disabledMods) {
         const files = (await modStore.get<string[]>(mod.name)) ?? []
         if (files.length === 0) continue
 
         for (const file of files) {
             const pkg = getPackageForFile(file)
-            if (pkg) packagesToRestore.add(pkg)
+            if (pkg) {
+                if (!packageFilesMap.has(pkg)) {
+                    packageFilesMap.set(pkg, [])
+                }
+                const normalized = file.replace(/\\/g, '/')
+                packageFilesMap.get(pkg)!.push(normalized)
+            }
         }
         modsToClear.push(mod.name)
     }
 
-    if (packagesToRestore.size > 0) {
+    if (packageFilesMap.size > 0) {
         await Promise.all(
-            Array.from(packagesToRestore).map((pkg) =>
-                restoreFileFromPackage(pkg, roblox_hash, versionDir, true)
+            Array.from(packageFilesMap.entries()).map(([pkg, files]) =>
+                restoreFileFromPackage(pkg, roblox_hash, versionDir, true, files)
             )
         )
         for (const modName of modsToClear) {

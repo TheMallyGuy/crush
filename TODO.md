@@ -1,5 +1,5 @@
 # TODO
-Crush is about **45%** done! <!-- @pochita you might need to update this % to correct i might be wrong here -->
+Crush is about **55%** done! <!-- @pochita you might need to update this % to correct i might be wrong here -->
 
 ## Functions
 

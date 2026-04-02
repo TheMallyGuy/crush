@@ -11,6 +11,7 @@
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { onMount, onDestroy } from 'svelte'
+    import { afterNavigate } from '$app/navigation'
     import { themeStore, resolveAsset } from '$lib/theme/themeStore'
     import type { ThemeState } from '$lib/theme/themeStore'
     import type { BootstrapElement } from '$lib/theme/xmlParser'
@@ -96,7 +97,7 @@
         await win.show()
     }
 
-    async function runBootstrap() { // @pochita make it so everytime this page/window load its will reload because there is a problem with deeplink launching its just doesnt reload and stuck. also fix when pressing the tray bar its bring this page instead of mainwin/choicewin. thanks!!!
+    async function runBootstrap() {
         error = false
         errorMessage = ''
         done = false
@@ -128,10 +129,15 @@
                 minHeight: 250.0,
             })
 
-            setTimeout(() => {
-                // wait before killing to prevent crash
-                getCurrentWindow().close()
-            }, 100)
+            const win = getCurrentWindow()
+            if (win.label === 'crushBoostrapChoiceWindow') {
+                await goto('/mainWin/choiceWin')
+            } else {
+                setTimeout(() => {
+                    // wait before killing to prevent crash
+                    win.close()
+                }, 100)
+            }
         } catch (e: any) {
             error = true
             errorMessage = e.message || String(e)
@@ -144,6 +150,9 @@
 
     onMount(async () => {
         await setupWindow()
+    })
+
+    afterNavigate(async () => {
         await runBootstrap()
     })
 

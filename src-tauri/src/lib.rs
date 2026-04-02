@@ -1,6 +1,6 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
-use commands::archive::extract_zip;
+use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::launch_roblox::launch;
@@ -136,7 +136,11 @@ fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
             } = event
             {
                 let app = tray.app_handle();
-                if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
+                let window = app
+                    .get_webview_window("CrushMainWindow")
+                    .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
+
+                if let Some(window) = window {
                     let _ = window.show();
                     let _ = window.set_focus();
                 }
@@ -205,6 +209,7 @@ pub fn run() {
             get_best_region,
             create_or_focus_window,
             extract_zip,
+            extract_files_from_zip,
             launch,
             get_latest_version_player,
             rename,
