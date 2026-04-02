@@ -1,7 +1,10 @@
 use crate::rd::{best_region, get_download_urls, latest_version};
 
 #[tauri::command]
-pub async fn get_download_deployment_urls(region: Option<&str>, version: Option<&str>) -> Result<Vec<String>, String> {
+pub async fn get_download_deployment_urls(
+    region: Option<&str>,
+    version: Option<&str>,
+) -> Result<Vec<String>, String> {
     let urls = get_download_urls(version, region)
         .await
         .map_err(|e| e.to_string())?;

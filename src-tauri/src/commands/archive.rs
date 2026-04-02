@@ -43,19 +43,21 @@ pub fn extract_files_from_zip(
     let files_set: std::collections::HashSet<String> = files.into_iter().collect();
 
     for i in 0..archive.len() {
-        let entry_is_match = {
+        let is_match = {
             let entry = archive
                 .by_index(i)
                 .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
+
             entry
                 .enclosed_name()
-                .map(|name| files_set.contains(&name.to_string_lossy().to_string()))
-                .unwrap_or(false)
+                .is_some_and(|name| files_set.contains(&name.to_string_lossy().to_string()))
         };
 
-        if entry_is_match {
-            extract_entry(&mut archive, i, dest_path)?;
+        if !is_match {
+            continue;
         }
+
+        extract_entry(&mut archive, i, dest_path)?;
     }
 
     Ok(())
