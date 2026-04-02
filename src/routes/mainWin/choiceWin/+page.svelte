@@ -4,7 +4,7 @@
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
     import { Gamepad2, Wrench, Info } from '@lucide/svelte'
-    import { getCurrentWindow } from '@tauri-apps/api/window'
+    import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
 
     let firstLaunchValue: boolean | undefined
 
@@ -74,6 +74,12 @@
     }
 
     onMount(async () => {
+        const win = getCurrentWindow()
+        if (win.label === 'crushBoostrapChoiceWindow') {
+            await win.setSize(new LogicalSize(500, 250))
+            await win.center()
+        }
+
         await invoke('set_rpc', {
             details: 'A roblox boostrapper written from scratch',
             stateText: 'Loading...',
