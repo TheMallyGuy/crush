@@ -37,4 +37,6 @@ jobs:
                   cargo clippy -- -D warnings
 
             - name: Build
+              env:
+                  TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
               run: pnpm tauri build
