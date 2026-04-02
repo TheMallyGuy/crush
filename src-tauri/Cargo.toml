@@ -23,7 +23,7 @@ walkdir = "2"
 discord-rich-presence = "1.1.0"
 dirs-next = "2.0"
 md5 = "0.8.0"
-zip = "8.4.0"
+zip = "8.5.0"
 log = "0.4.29"
 futures = "0.3"
 tauri = { version = "2", features = ["protocol-asset", "tray-icon"] }
