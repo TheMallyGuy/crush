@@ -9,7 +9,7 @@
     onMount(async () => {
         await loadSavedTheme()
 
-        await listen<string>('deep-link-received', (event) => {
+        await listen<string>('deep-link-received', (event) => { // @pochita there is a chance (or bug) thats when you open deep links and then click on config or any page from choice win will get again rediect to the boostrap win. find a solution to reslove this.
             deepLinkUrl.set(event.payload)
             goto('/boostrapWin')
         })
