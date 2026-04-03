@@ -5,14 +5,7 @@
     import { Balloon, Rocket } from '@lucide/svelte'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-
-    type Installation = {
-        version: string
-    }
-
-    type Config = {
-        installation: Installation
-    }
+    import type { Installation } from '$lib/types';
 
     let version:string
     let config
