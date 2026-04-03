@@ -5,17 +5,7 @@
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-
-    type Intergrations = {
-        crushRpc: boolean
-        serverLocationNotifier: boolean
-    }
-
-    type Config = {
-        FirstLaunch: string
-        bestRegion: string
-        intergrations: Intergrations
-    }
+    import { type Intergrations } from '$lib/types';
 
     let crushRpc = false
     let serverLocationNotifier = false
