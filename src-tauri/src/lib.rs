@@ -6,6 +6,7 @@ use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::rename::rename;
+use commands::crush::crush;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
@@ -216,6 +217,7 @@ pub fn run() {
             get_latest_version_player,
             rename,
             apply_mod,
+            crush,
             watch_logs,
             set_rpc,
             copy_file
