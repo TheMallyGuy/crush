@@ -18,9 +18,11 @@
     import { invoke } from '@tauri-apps/api/core'
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
+    import { type Installation } from '$lib/types'
     import { goto } from '$app/navigation'
     import { get } from 'svelte/store'
     import { page } from '$app/stores'
+    import { load } from '@tauri-apps/plugin-store'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -98,6 +100,11 @@
     }
 
     async function runBootstrap() {
+        const store = await load("config.json");
+        const savedInstallation =
+            await store.get<Installation>('installation')
+
+
         error = false
         errorMessage = ''
         done = false
@@ -106,7 +113,13 @@
         textValues = { ...textValues }
 
         try {
-            let version = await downloadRoblox(handleProgress)
+            const version = await downloadRoblox(
+                handleProgress,
+                savedInstallation?.version === "latest"
+                    ? undefined
+                    : savedInstallation?.version
+            );
+
             done = true
             status = 'Applying modification'
             textValues['StatusText'] = 'Applying modification'
