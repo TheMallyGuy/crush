@@ -8,9 +8,10 @@
     } from '$lib/theme/themeLoader'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
-    import { Brush, Trash2, Plus, Check } from '@lucide/svelte'
-    import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import { Brush, Trash2, Plus, Check, RotateCcw } from '@lucide/svelte'
+    import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
     import { invoke } from '@tauri-apps/api/core'
 
     type State = 'idle' | 'loading' | 'error'
@@ -126,15 +127,32 @@
     </div>
 
     <div class="grid gap-6">
-        <SettingCard
+        <ExpandableSettingCard
             title="Bootstrapper Theme"
             description="Choose between the default Crush theme or a custom XML theme."
+            isOpen={themeType === 'custom'}
         >
             <div slot="icon">
                 <Brush />
             </div>
 
-            <div slot="footer" class="flex flex-col gap-4">
+            <div slot="action">
+                {#if themeType === 'custom'}
+                    <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        class="h-8 w-8 !p-0"
+                        on:click={(e) => {
+                            e.stopPropagation();
+                            themeType = 'default';
+                        }}
+                    >
+                        <RotateCcw size={16} />
+                    </Button>
+                {/if}
+            </div>
+
+            <div class="flex flex-col gap-4">
                 <div class="flex items-center justify-between gap-3">
                     <Dropdown bind:value={themeType} options={typeOptions} />
 
@@ -256,6 +274,6 @@
                     </div>
                 {/if}
             </div>
-        </SettingCard>
+        </ExpandableSettingCard>
     </div>
 </div>
