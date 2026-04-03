@@ -4,12 +4,7 @@ import { join, appDataDir } from '@tauri-apps/api/path'
 import { load } from '@tauri-apps/plugin-store'
 import { openPath } from '@tauri-apps/plugin-opener'
 import { applyMods } from '$lib/launchRoblox'
-
-export type Mod = {
-    id: string
-    name: string
-    enabled: boolean
-}
+import type { Mod } from '$lib/types'
 
 let storePromise = load('mods.json')
 

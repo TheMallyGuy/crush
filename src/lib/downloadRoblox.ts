@@ -38,12 +38,7 @@ const sortedExtractRoots = Object.entries(extractRoots).sort(
     (a, b) => b[1].length - a[1].length
 )
 
-export type ProgressEvent =
-    | { type: 'status'; message: string }
-    | { type: 'download'; file: string; done: number; total: number }
-    | { type: 'extract'; file: string; done: number; total: number }
-
-type ProgressCallback = (event: ProgressEvent) => void
+import type { ProgressEvent, ProgressCallback } from './types'
 
 async function ensureDir(path: string) {
     const existsDir = await exists(path)

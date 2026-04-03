@@ -33,7 +33,7 @@ Crush is about **54%** done! <!-- @pochita you might need to update this % to co
 
 - [ ] Pages
     - [x] Integrations
-    - [ ] Installation
+    - [x] Installation
     - [x] Mods
     - [x] FastFlag
     - [x] Appearance

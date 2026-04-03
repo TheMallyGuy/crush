@@ -6,7 +6,8 @@
 -->
 
 <script lang="ts">
-    import { downloadRoblox, type ProgressEvent } from '$lib/downloadRoblox'
+    import { downloadRoblox } from '$lib/downloadRoblox'
+    import type { ProgressEvent } from '$lib/types'
     import { launchPlayer, applyMods } from '$lib/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'

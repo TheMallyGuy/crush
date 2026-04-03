@@ -20,3 +20,16 @@ export type Config = {
     bestRegion: string
     intergrations: Intergrations
 }
+
+export type Mod = {
+    id: string
+    name: string
+    enabled: boolean
+}
+
+export type ProgressEvent =
+    | { type: 'status'; message: string }
+    | { type: 'download'; file: string; done: number; total: number }
+    | { type: 'extract'; file: string; done: number; total: number }
+
+export type ProgressCallback = (event: ProgressEvent) => void
