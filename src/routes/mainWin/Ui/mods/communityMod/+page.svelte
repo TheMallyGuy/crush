@@ -19,7 +19,7 @@
     </p>
   </div>
 
-  <Button size="lg" class="gap-2" on:click={handleForm}>
+  <Button size="lg" class="gap-2" on:click={handleForm} disabled={true}>
     Submit a mod
   </Button>
 </div>
