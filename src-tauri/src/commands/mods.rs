@@ -23,9 +23,8 @@ pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
                 return Some(rel_str);
             }
 
-            if let Some(parent) = dest.parent() {
-                let _ = fs::create_dir_all(parent);
-            }
+            let parent = dest.parent()?;
+            fs::create_dir_all(parent).ok()?;
 
             fs::copy(src, &dest).ok().map(|_| rel_str)
         })
