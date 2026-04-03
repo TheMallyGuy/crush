@@ -7,7 +7,6 @@ import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
 
 const extractRoots: Record<string, string> = {
     'RobloxApp.zip': '',
-    'redist.zip': '',
     'shaders.zip': 'shaders/',
     'ssl.zip': 'ssl/',
 
@@ -24,7 +23,7 @@ const extractRoots: Record<string, string> = {
 
     'content-platform-fonts.zip': 'PlatformContent/pc/fonts/',
     'content-platform-dictionaries.zip':
-        'PlatformContent/pc/shared_compression_dictionaries/',
+    'PlatformContent/pc/shared_compression_dictionaries/',
     'content-terrain.zip': 'PlatformContent/pc/terrain/',
     'content-textures3.zip': 'PlatformContent/pc/textures/',
 
@@ -66,7 +65,10 @@ async function downloadAssetFile(
     fileName = fileName.toLowerCase()
 
     const res = await fetch(assetUrl)
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    if (!res.ok){
+        info(`error url : ${assetUrl}`)
+        throw new Error(`HTTP ${res.status}`)
+    }
     const buffer = await res.arrayBuffer()
     await writeFile(fileName, new Uint8Array(buffer), {
         baseDir: BaseDirectory.AppCache,

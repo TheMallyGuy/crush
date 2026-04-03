@@ -25,7 +25,6 @@ const URLS: &[&str] = &[
 
 const FILES: &[&str] = &[
     "RobloxApp.zip",
-    "Redist",
     "WebView2RuntimeInstaller.zip",
     "content-avatar.zip",
     "shaders.zip",
