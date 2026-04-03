@@ -42,7 +42,7 @@
         const config = await load("config.json")
         
         if (cursorValue == "default") {
-            await config.set("mod", "default")
+            await config.set("Cursor", "default")
             ensureCursor()
             return
         }
@@ -50,14 +50,14 @@
         const Arrow = await resolveResource(`resources/Mods/Cursors/${cursorValue}/ArrowCursor.png`)
         const Far = await resolveResource(`resources/Mods/Cursors/${cursorValue}/ArrowFarCursor.png`)
         
-        await config.set("mod", cursorValue)
+        await config.set("Cursor", cursorValue)
         customCursor(Arrow, Far)
     }
 
     onMount(async () => {
         config = await load("config.json")
 
-        cursorValue = await config.get('mod') ?? "default"
+        cursorValue = await config.get('Cursor') ?? "default"
     })
 
 </script>
