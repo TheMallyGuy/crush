@@ -5,6 +5,11 @@ export type Intergrations = {
     serverLocationNotifier: boolean
 }
 
+export type BuildInfo = {
+    hash: string,
+    build_date: string,
+}
+
 export type Installation = {
     version: string
 }
