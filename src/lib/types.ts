@@ -5,7 +5,12 @@ export type Intergrations = {
     serverLocationNotifier: boolean
 }
 
+export type Installation = {
+    version: string
+}
+
 export type Config = {
+    installation: Installation
     FirstLaunch: string
     bestRegion: string
     intergrations: Intergrations
