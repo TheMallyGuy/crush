@@ -5,13 +5,20 @@
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { goto } from '$app/navigation'
+    import { getCurrentWindow } from '@tauri-apps/api/window'
 
     onMount(async () => {
+        const win = getCurrentWindow()
         await loadSavedTheme()
 
-        await listen<string>('deep-link-received', (event) => { // @pochita there is a chance (or bug) thats when you open deep links and then click on config or any page from choice win will get again rediect to the boostrap win. find a solution to reslove this.
+        await listen<string>('deep-link-received', (event) => {
             deepLinkUrl.set(event.payload)
-            if (!window.location.pathname.startsWith('/mainWin/')) {
+            // Only the main choice window handles deep link redirects to the bootstrapper.
+            // This prevents secondary windows (like the Config window) from being hijacked and forced to redirect.
+            if (
+                win.label === 'crushBoostrapChoiceWindow' &&
+                !window.location.pathname.includes('/boostrapWin')
+            ) {
                 goto('/boostrapWin')
             }
         })
@@ -22,9 +29,8 @@
             return
         }
 
-        if (window.location.pathname === '/') {
-            goto('/boostrapWin')
-        }
+        // Automatic startup redirect removed in favor of explicit 'url' in tauri.conf.json.
+        // This ensures secondary windows (like Config) open their intended routes without layout interference.
     })
 </script>
 
