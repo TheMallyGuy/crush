@@ -18,8 +18,8 @@
         toggleMod,
         openModFolder,
         saveModsOrder,
-        type Mod,
     } from '$lib/mods/modManagement'
+    import type { Mod } from '$lib/types'
     import { ask } from '@tauri-apps/plugin-dialog'
     import { invoke } from '@tauri-apps/api/core'
 
