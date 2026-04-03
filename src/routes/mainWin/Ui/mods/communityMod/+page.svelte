@@ -4,7 +4,7 @@
     import { openUrl } from "@tauri-apps/plugin-opener";
 
     async function handleForm() {
-        await openUrl("https://n8n-yhiwxdlu.ap-southeast-1.clawcloudrun.com/form/Crush/Mod-submission")
+        await openUrl("https://n8n-xpkqsnsc.ap-southeast-1.clawcloudrun.com/form/Crush/Mod-submission")
     }
 </script>
 
@@ -19,7 +19,7 @@
     </p>
   </div>
 
-  <Button size="lg" class="gap-2" on:click={handleForm} disabled={true}>
+  <Button size="lg" class="gap-2" on:click={handleForm}>
     Submit a mod
   </Button>
 </div>
