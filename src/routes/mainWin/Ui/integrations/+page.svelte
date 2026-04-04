@@ -49,18 +49,18 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                {$_('integrations.integrations')}
+                {$_('pages.integrations.integrations')}
             </h1>
             <p class="text-stone-400 mt-1">
-                {$_('integrations.description')}
+                {$_('pages.integrations.description')}
             </p>
         </div>
     </div>
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title={$_('integrations.serverNotifierCard.title')}
-            description={$_('integrations.serverNotifierCard.description')}
+            title={$_('pages.integrations.serverNotifierCard.title')}
+            description={$_('pages.integrations.serverNotifierCard.description')}
             icon={Bell}
         >
             <Switch
@@ -70,8 +70,8 @@
             />
         </SettingCard>
         <SettingCard
-            title={$_('integrations.rpcCard.title')}
-            description={$_('integrations.rpcCard.description')}
+            title={$_('pages.integrations.rpcCard.title')}
+            description={$_('pages.integrations.rpcCard.description')}
             icon={Plug}
         >
             <Switch

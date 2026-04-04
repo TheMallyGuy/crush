@@ -46,7 +46,7 @@
 <h1 class="text-4xl font-bold text-white">Installation</h1>
 
 <div class="flex flex-col gap-3">
-    <SettingCard title={$_('installations.customVersion.title')} description={$_('installations.customVersion.description')} icon={Rocket}>
+    <SettingCard title={$_('pages.installations.customVersion.title')} description={$_('pages.installations.customVersion.description')} icon={Rocket}>
         <Textbox slot="action" class="w-48 h-8 text-sm" bind:value={version} on:change={handleChanges} />    
     </SettingCard>
 </div>
