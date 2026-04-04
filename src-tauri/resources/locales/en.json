@@ -1,7 +1,20 @@
 {
     "appearance" : {
         "appearance": "Appearance",
-        "description": "Customize the look and feel of the Roblox bootstrapper."
+        "description": "Customize the look and feel of the Roblox bootstrapper.",
+        "boostrapThemeCard" : {
+            "title": "Bootstrapper Theme",
+            "description": "Choose between the default Crush theme or a custom XML theme.",
+            "dropdown" : {
+                "default": "Default (Crush)",
+                "custom": "Custom"
+            },
+            "customDropDownContents" : {
+                "importNew" : "Import New",
+                "noThemes" : "No custom themes imported yet.",
+                "missingAssets" : "Missing Theme Assets"
+            }
+        }
     }
 
 }
