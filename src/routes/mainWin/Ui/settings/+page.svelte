@@ -7,6 +7,7 @@
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
+    import { _} from 'svelte-i18n'
 
     const Arona = '/Arona.png'
     let info: BuildInfo
@@ -29,27 +30,27 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Settings
+                {$_('pages.settings.settings')}
             </h1>
         </div>
     </div>
 
     <ExpandableSettingCard
-        title="About"
-        description="Infomation about this crush build"
+        title={$_('pages.settings.aboutCard.title')}
+        description={$_('pages.settings.aboutCard.description')}
         icon={Info}
     >
         <div>
-            <p class="sm">Built on : {hash}</p>
-            <p class="sm">At : {buildtime}</p>
+            <p class="sm">{$_('pages.settings.aboutCard.builtOn', { values: { date: buildtime } })}</p>
+            <p class="sm">{$_('pages.settings.aboutCard.commitHash', { values: { hash } })}</p>
         </div>
     </ExpandableSettingCard>
 
     <ExpandableSettingCard
-        title="Donate"
-        description="Love crush? Donate to Mally to support his work!"
+        title={$_('pages.settings.donateCard.title')}
+        description={$_('pages.settings.donateCard.description')}
         icon={Arona}
     >
-        <Button variant="secondary" on:click={handleDonate}>Donate</Button>
+        <Button variant="secondary" on:click={handleDonate}>({$_('pages.settings.donateCard.button')})</Button>
     </ExpandableSettingCard>
 </div>

@@ -117,6 +117,25 @@
                 }
 
             }
+        },
+
+        "settings" : {
+            "settings": "Settings",
+            
+            "aboutCard" : {
+                "title": "About",
+                "description": "Information about this crush build",
+
+                "builtOn" : "Built on: {date}",
+                "commitHash" : "Commit hash: {hash}"
+            },
+
+            "donateCard" : {
+                "title": "Donate",
+                "description": "Love crush? Donate to Mally to support his work!",
+
+                "button" : "Donate"
+            }
         }
     }
 }
