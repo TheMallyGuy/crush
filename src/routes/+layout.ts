@@ -3,3 +3,10 @@
 // See: https://svelte.dev/docs/kit/single-page-apps
 // See: https://v2.tauri.app/start/frontend/sveltekit/ for more info
 export const ssr = false
+
+import { setupI18n } from './i18n';
+import type { LayoutLoad } from './$types';
+
+export const load: LayoutLoad = async () => {
+  await setupI18n();
+};
