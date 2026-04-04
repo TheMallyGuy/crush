@@ -120,10 +120,10 @@
 <div class="flex flex-col gap-8 max-w-2xl">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-            {$_('appearance.appearance')}
+            {$_('pages.appearance.appearance')}
         </h1>
         <p class="text-stone-400 mt-1">
-            {$_('appearance.description')}
+            {$_('pages.appearance.description')}
         </p>
     </div>
 
