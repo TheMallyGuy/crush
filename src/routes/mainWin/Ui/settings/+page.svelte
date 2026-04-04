@@ -21,7 +21,7 @@
     })
 
     async function handleDonate() {
-        openUrl('https://github.com/TheMallyGuy')
+        openUrl('https://mally.qzz.io/donate')
     }
 </script>
 
