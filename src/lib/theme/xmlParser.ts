@@ -1,41 +1,12 @@
-export type Theme = 'Dark' | 'Light'
-export type HAlign = 'Left' | 'Center' | 'Right' | 'Stretch'
-export type VAlign = 'Top' | 'Center' | 'Bottom' | 'Stretch'
-export type Visibility = 'Visible' | 'Hidden' | 'Collapsed'
-
-export interface Margin {
-    top: number
-    right: number
-    bottom: number
-    left: number
-}
-
-export interface BaseElement {
-    type: string
-    name?: string
-    hAlign?: HAlign
-    vAlign?: VAlign
-    margin?: Margin
-    opacity?: number
-    zIndex?: number
-    visibility?: Visibility
-    width?: number
-    height?: number
-    props: Record<string, any>
-}
-
-export type BootstrapElement = BaseElement
-
-export interface BootstrapConfig {
-    version: number
-    height: number
-    width: number
-    ignoreTitleBarInset: boolean
-    theme: Theme
-    margin?: Margin
-    windowCornerPreference?: string
-    elements: BootstrapElement[]
-}
+import type {
+    Theme,
+    HAlign,
+    VAlign,
+    Visibility,
+    Margin,
+    BootstrapElement,
+    BootstrapConfig,
+} from '$lib/types'
 
 const attr = (el: Element, name: string): string | undefined =>
     el.getAttribute(name) ?? undefined

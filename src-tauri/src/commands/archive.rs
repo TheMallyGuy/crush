@@ -1,6 +1,7 @@
 use std::fs::{self, File};
 use std::io::copy;
 use std::path::Path;
+use zip::read::ZipFile;
 use zip::ZipArchive;
 
 #[tauri::command]
@@ -17,7 +18,10 @@ pub fn extract_zip(zip_path: String, dest: String) -> Result<(), String> {
         .map_err(|e| format!("Cannot create dest dir '{}': {}", dest_path.display(), e))?;
 
     for i in 0..archive.len() {
-        extract_entry(&mut archive, i, dest_path)?;
+        let mut entry = archive
+            .by_index(i)
+            .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
+        extract_entry(&mut entry, dest_path)?;
     }
 
     Ok(())
@@ -43,35 +47,23 @@ pub fn extract_files_from_zip(
     let files_set: std::collections::HashSet<String> = files.into_iter().collect();
 
     for i in 0..archive.len() {
-        let is_match = {
-            let entry = archive
-                .by_index(i)
-                .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
+        let mut entry = archive
+            .by_index(i)
+            .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
 
-            entry
-                .enclosed_name()
-                .is_some_and(|name| files_set.contains(&name.to_string_lossy().to_string()))
-        };
+        let should_extract = entry
+            .enclosed_name()
+            .is_some_and(|name| files_set.contains(&name.to_string_lossy().to_string()));
 
-        if !is_match {
-            continue;
+        if should_extract {
+            extract_entry(&mut entry, dest_path)?;
         }
-
-        extract_entry(&mut archive, i, dest_path)?;
     }
 
     Ok(())
 }
 
-fn extract_entry(
-    archive: &mut ZipArchive<File>,
-    index: usize,
-    dest_path: &Path,
-) -> Result<(), String> {
-    let mut entry = archive
-        .by_index(index)
-        .map_err(|e| format!("Cannot read entry {}: {}", index, e))?;
-
+fn extract_entry(entry: &mut ZipFile, dest_path: &Path) -> Result<(), String> {
     let entry_name = match entry.enclosed_name() {
         Some(name) => name.to_owned(),
         None => return Ok(()),
@@ -91,7 +83,7 @@ fn extract_entry(
         let mut outfile = File::create(&outpath)
             .map_err(|e| format!("Cannot create file '{}': {}", outpath.display(), e))?;
 
-        copy(&mut entry, &mut outfile)
+        copy(entry, &mut outfile)
             .map_err(|e| format!("Cannot write '{}': {}", outpath.display(), e))?;
     }
 
