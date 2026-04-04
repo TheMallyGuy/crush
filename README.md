@@ -12,10 +12,14 @@ Crush is a Roblox Boostrapper written from scratch, inpsired by many other boost
 
 <img src="./demo.gif" />
 
-Crush is currently working in progess, Keep track of the project [here](/TODO.md)
+Crush is currently in beta testing stage, Keep track of the project [here](/TODO.md)
 Made with Tauri + Svelte.
 
 Lab rat? Download the nightly builds using [nightly.link!](https://nightly.link/TheMallyGuy/crush/workflows/ci-test/master/tauri-windows-build) (bugs incomming alert)
+
+# Crush's speed
+Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
+
 
 [discordBadge]: https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white
 [rustBadge]: https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white
