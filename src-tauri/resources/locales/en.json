@@ -27,6 +27,13 @@
             "title": "Discord RPC (Crush)",
             "description": "Replace the Roblox Rich Presence with Crush's"
         }
+    },
+    "installations" : {
+        "installations": "Installations",
+        "customVersion" : {
+            "title" : "Install a custom Roblox version",
+            "description" : "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+        }
     }
 
 }
