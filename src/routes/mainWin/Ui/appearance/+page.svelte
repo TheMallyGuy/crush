@@ -6,6 +6,7 @@
         loadThemeFromAppData,
         removeTheme,
     } from '$lib/theme/themeLoader'
+    import { _ } from 'svelte-i18n'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
     import { Brush, Trash2, Plus, Check, RotateCcw } from '@lucide/svelte'
@@ -119,10 +120,10 @@
 <div class="flex flex-col gap-8 max-w-2xl">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-            Appearance
+            {$_('appearance.appearance')}
         </h1>
         <p class="text-stone-400 mt-1">
-            Customize the look and feel of the Roblox bootstrapper.
+            {$_('appearance.description')}
         </p>
     </div>
 
