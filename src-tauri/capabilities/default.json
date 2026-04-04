@@ -85,6 +85,9 @@
             "allow": [
                 {
                     "path": "$APPDATA/**"
+                },
+                {
+                    "path": "$RESOURCE/**"
                 }
             ]
         },
