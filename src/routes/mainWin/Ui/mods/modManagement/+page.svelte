@@ -22,6 +22,7 @@
     import type { Mod } from '$lib/types'
     import { ask } from '@tauri-apps/plugin-dialog'
     import { invoke } from '@tauri-apps/api/core'
+    import { _ } from 'svelte-i18n'
 
     let items: Mod[] = []
 
@@ -91,7 +92,7 @@
     <div class="flex items-center justify-between">
         <Button variant="primary" size="md" on:click={handleNewMod}>
             <Plus class="size-4 mr-2" />
-            Add a mod
+            {$_("pages.mod.tab.modManagement.addModButton")}
         </Button>
     </div>
 
@@ -100,11 +101,11 @@
             <div
                 class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
             >
-                <p class="text-stone-500">We found no mods here, Yuppies.</p>
+                <p class="text-stone-500">{$_("pages.mod.tab.modManagement.noModsFound")}</p>
                 <button
                     on:click={handleNewMod}
                     class="text-blue-500 hover:underline text-sm mt-2"
-                    >Create your first mod</button
+                    >{$_("pages.mod.tab.modManagement.noModsFoundCreateButton")}</button
                 >
             </div>
         {:else}
@@ -116,7 +117,7 @@
                             class="p-2 rounded-lg transition-colors {item.enabled
                                 ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
                                 : 'bg-stone-800 text-stone-500 hover:bg-stone-700'}"
-                            title={item.enabled ? 'Disable mod' : 'Enable mod'}
+                            title={item.enabled ? $_("pages.mod.tab.modManagement.modCards.toggleNoteDisable") : $_("pages.mod.tab.modManagement.modCards.toggleNoteEnable")}
                         >
                             {#if item.enabled}
                                 <Power class="size-4" />
@@ -138,7 +139,7 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleRename(item.id, item.name)}
-                            title="Rename"
+                            title={$_("pages.mod.tab.modManagement.modCards.renameNote")}
                         >
                             <SquarePen class="size-4 text-stone-400" />
                         </Button>
@@ -146,7 +147,7 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleOpenFolder(item.name)}
-                            title="Open Folder"
+                            title={$_("pages.mod.tab.modManagement.modCards.openFolderNote")}
                         >
                             <Folder class="size-4 text-stone-400" />
                         </Button>
@@ -154,7 +155,7 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleDelete(item.id, item.name)}
-                            title="Delete"
+                            title={$_("pages.mod.tab.modManagement.modCards.deleteNote")}
                             class="hover:text-red-400 hover:bg-red-400/10"
                         >
                             <Trash2 class="size-4" />
@@ -167,7 +168,7 @@
 
     <div class="pt-4 border-t border-stone-900">
         <p class="text-sm text-stone-500 italic">
-            Mods layout inspired by Frostrap's mods manager
+            {$_("pages.mod.tab.modManagement.modCards.layoutNote")}
         </p>
     </div>
 </div>

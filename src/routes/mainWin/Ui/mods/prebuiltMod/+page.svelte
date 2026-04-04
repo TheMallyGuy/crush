@@ -10,11 +10,12 @@
     import { info } from "@tauri-apps/plugin-log"
     import { load } from "@tauri-apps/plugin-store"
     import { onMount } from "svelte"
+    import { _ } from "svelte-i18n";
 
     let config
 
     let cursorOptions =  [
-        { value: "default", label: "Default" },
+        { value: "default", label: $_("pages.mod.tab.prebuiltMods.cursorCard.dropdown.default") },
         { value: "2006", label: "2006" },
         { value: "2013", label: "2013" }
     ];
@@ -63,11 +64,13 @@
 </script>
 
 <div class="flex flex-col gap-3">
-    <SettingCard title="Cursor" description="Change your roblox cursor to the old one." icon={MousePointer2}>
+    <SettingCard title={$_("pages.mod.tab.prebuiltMods.cursorCard.title")} description={$_("pages.mod.tab.prebuiltMods.cursorCard.description")} icon={MousePointer2}>
         <Dropdown slot="action" options={cursorOptions} bind:value={cursorValue} on:change={handleCustomCursor} />
     </SettingCard>
 
-    <SettingCard title="Custom Font" description="Change your roblox font to whatever you like." icon={ALargeSmall}>
-        <Button slot="action" variant='secondary' on:click={handleCustomFont}>Change Font</Button>
+    <SettingCard title={$_("pages.mod.tab.prebuiltMods.customFontCard.title")} description={$_("pages.mod.tab.prebuiltMods.customFontCard.description")} icon={ALargeSmall}>
+        <Button slot="action" variant='secondary' on:click={handleCustomFont}>
+            {$_("pages.mod.tab.prebuiltMods.customFontCard.button")}
+        </Button>
     </SettingCard>
 </div>
