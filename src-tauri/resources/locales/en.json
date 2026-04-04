@@ -36,6 +36,27 @@
                 "description" : "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
             }
         },
+
+        "fastflag" : {
+            "fastflag": "Fast Flags",
+            "description": "Add/Remove Roblox Fastflags and configurations.",
+
+            "flagTable" : {
+                "texboxFlagName": "Flag name",
+                "texboxFlagValue": "Value",
+                "buttonAdd": "Add",
+                "search": "Search all fflags...",
+                "searchNotFound": "No flags found matching your search.",
+
+                "flagCol" : {
+                    "deleteNote": "Delete Flag",
+
+                    "name" : "flag name",
+                    "type" : "type",
+                    "value" : "value"
+                }
+            }
+        },
         "mod" : {
             "mod": "Mod",
 

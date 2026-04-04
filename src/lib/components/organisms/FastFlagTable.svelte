@@ -7,6 +7,7 @@
         validateValue,
         type FlagType,
     } from '$lib/fastflag/flagTypes'
+    import { _ } from 'svelte-i18n';
 
     export let flags: Record<string, string> = {}
 
@@ -87,7 +88,7 @@
             <input
                 type="text"
                 bind:value={newFlagName}
-                placeholder="Flag name"
+                placeholder={$_('pages.fastflag.flagTable.flagCol.name')}
                 class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
             />
         </div>
@@ -95,7 +96,7 @@
             <input
                 type="text"
                 bind:value={newFlagValue}
-                placeholder="Value"
+                placeholder={$_('pages.fastflag.flagTable.flagCol.value')}
                 class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 pr-16"
             />
             {#if newValueType}
@@ -116,7 +117,7 @@
             disabled={!newFlagName || !newFlagValue}
         >
             <Plus class="h-5 w-5 mr-2" />
-            <span class="font-bold">Add</span>
+            <span class="font-bold">{$_('pages.fastflag.flagTable.buttonAdd')}</span>
         </Button>
     </div>
     {#if addError}
@@ -136,7 +137,7 @@
                 type="text"
                 bind:value={searchQuery}
                 on:input={handleSearch}
-                placeholder="Search all fastflags..."
+                placeholder={$_('pages.fastflag.flagTable.search')}
                 class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 rounded-2xl bg-anthracite text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
             />
         </div>
@@ -147,16 +148,16 @@
             <div
                 class="flex items-center px-6 py-3 text-[11px] font-bold uppercase tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/40"
             >
-                <div class="flex-[2]">Flag Name</div>
-                <div class="w-20">Type</div>
-                <div class="flex-[1]">Value</div>
+                <div class="flex-[2]">{$_('pages.fastflag.flagTable.flagCol.name')}</div>
+                <div class="w-20">{$_('pages.fastflag.flagTable.flagCol.type')}</div>
+                <div class="flex-[1]">{$_('pages.fastflag.flagTable.flagCol.value')}</div>
                 <div class="w-12"></div>
             </div>
 
             <div class="flex flex-col divide-y divide-stone-800/10">
                 {#if filteredFlags.length === 0}
                     <div class="p-12 text-center text-stone-500 text-sm italic">
-                        No flags found matching your search.
+                        {$_('pages.fastflag.flagTable.searchNotFound')}
                     </div>
                 {:else}
                     {#each filteredFlags as [name, value] (name)}
@@ -216,7 +217,7 @@
                                 <button
                                     class="p-2 text-stone-600 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all duration-150 opacity-0 group-hover:opacity-100 focus:opacity-100"
                                     on:click={() => handleDelete(name)}
-                                    title="Delete Flag"
+                                    title={$_('pages.fastflag.flagTable.flagCol.deleteNote')}
                                 >
                                     <Trash2 class="h-4.5 w-4.5" />
                                 </button>

@@ -7,6 +7,7 @@
         saveFastFlags,
     } from '$lib/fastflag/fastflagManagement'
     import { invoke } from '@tauri-apps/api/core'
+    import { _ } from 'svelte-i18n';
 
     let flags: Record<string, string> = {}
     let version = ''
@@ -53,10 +54,10 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                FastFlag
+                {$_('pages.fastflag.fastflag')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Add/Remove Roblox Fastflags and configurations
+                {$_('pages.fastflag.description')}
             </p>
         </div>
     </div>
