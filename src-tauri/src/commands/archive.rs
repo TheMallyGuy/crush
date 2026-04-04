@@ -63,9 +63,9 @@ pub fn extract_files_from_zip(
     Ok(())
 }
 
-fn extract_entry(entry: &mut ZipFile, dest_path: &Path) -> Result<(), String> {
+fn extract_entry(entry: &mut ZipFile<'_, File>, dest_path: &Path) -> Result<(), String> {
     let entry_name = match entry.enclosed_name() {
-        Some(name) => name.to_owned(),
+        Some(name) => name.to_path_buf(),
         None => return Ok(()),
     };
 
