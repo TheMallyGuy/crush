@@ -1,23 +1,18 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
-
     export let value: string = ''
     export let options: { value: string; label: string }[] = []
     export let placeholder: string = 'Select an option'
-
     let isOpen = false
     const dispatch = createEventDispatcher()
-
     function toggle() {
         isOpen = !isOpen
     }
-
     function select(option: { value: string; label: string }) {
         value = option.value
         isOpen = false
         dispatch('change', value)
     }
-
     function handleClickOutside(event: MouseEvent) {
         const target = event.target as HTMLElement
         if (!target.closest('.dropdown-container')) {
@@ -25,10 +20,18 @@
         }
     }
 </script>
-
 <svelte:window on:click={handleClickOutside} />
 
-<div class="dropdown-container relative w-full max-w-[200px]">
+<style>
+    .scrollbar-hide {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+<div class="dropdown-container relative w-full max-w-50">
     <button
         type="button"
         on:click|stopPropagation={toggle}
@@ -54,10 +57,11 @@
             />
         </svg>
     </button>
-
     {#if isOpen}
         <div
-            class="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-lg border border-stone-800/40 bg-stone-900 shadow-2xl transition-all"
+            class="absolute left-0 top-full z-50 mt-2 w-full rounded-lg border border-stone-800/40 bg-stone-900 shadow-2xl transition-all scrollbar-hide {options.length > 3
+                ? 'max-h-40 overflow-y-auto'
+                : 'overflow-hidden'}"
         >
             {#each options as option}
                 <button
