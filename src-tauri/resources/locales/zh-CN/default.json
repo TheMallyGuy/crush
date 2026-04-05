@@ -1,96 +1,96 @@
 {
     "rpc": {
-        "general": "从头写入的 roblox 引导器",
-        "integrations": "在Intergrations Route",
-        "installation": "在安装路由",
-        "fastflag": "在 Fastmark 路由",
-        "mod": "在Mod Route",
-        "appearance": "外观路由",
+        "general": "A roblox bootrapper written from scratch",
+        "integrations": "In Intergrations Route",
+        "installation": "In Installations Route",
+        "fastflag": "In Fastflag Route",
+        "mod": "In Mod Route",
+        "appearance": "In Appearance Route",
         "rust": {
             "watcher": {
-                "general": "正在播放 roblox",
-                "idle": "不在游戏中",
-                "playing": "在 {} 中"
+                "general": "Playing roblox",
+                "idle": "Not in a game",
+                "playing": "In {}"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "正在检查更新",
-            "findingBestRegion": "找到最好的下载区域...",
-            "preparingForDownload": "准备下载",
-            "fetchingUrls": "正在获取素材URL...",
-            "downloadingAssets": "正在下载资产...",
-            "extractingFiles": "正在提取文件...",
-            "xmlWriting": "正在写入 AppSettings.xml...",
-            "versionSaving": "正在保存版本信息...",
-            "installationComplete": "安装完成！",
+            "updateChecking": "Checking for updates",
+            "findingBestRegion": "Finding the best download region...",
+            "preparingForDownload": "Preparing for download",
+            "fetchingUrls": "Fetching asset URLs...",
+            "downloadingAssets": "Downloading assets...",
+            "extractingFiles": "Extracting files...",
+            "xmlWriting": "Writing AppSettings.xml...",
+            "versionSaving": "Saving version info...",
+            "installationComplete": "Installation complete!",
             "packageDownloadFailed": "Failed to download {packageName}: {error}"
         }
     },
     "elements": {
-        "launchBar": "启动"
+        "launchBar": "Launch"
     },
     "pages": {
         "choiceWin": {
-            "title": "粉色",
-            "playRoblox": "播放Roblox",
-            "config": "配置"
+            "title": "Crush",
+            "playRoblox": "Play Roblox",
+            "config": "Config"
         },
         "boostrapWin": {
-            "cancel": "取消",
-            "retry": "重试"
+            "cancel": "Cancel",
+            "retry": "Retry"
         },
         "appearance": {
-            "appearance": "外观",
-            "description": "自定义 Roblox 引导器的外观和感觉。",
+            "appearance": "Appearance",
+            "description": "Customize the look and feel of the Roblox bootstrapper.",
             "boostrapThemeCard": {
-                "title": "Bootstraper 主题",
-                "description": "在默认的 Crush 主题或自定义 XML 主题之间进行选择。",
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "默认 (粉碎)",
-                    "custom": "自定义"
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "导入新的",
-                    "noThemes": "尚未导入自定义主题。",
-                    "missingAssets": "缺少主题资源"
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
         "integrations": {
-            "integrations": "集成",
-            "description": "设定博客以外的配置",
+            "integrations": "Integrations",
+            "description": "Config intergrations outside roblox",
             "serverNotifierCard": {
-                "title": "服务器位置通知器",
-                "description": "当客户端连接到服务器时获取通知。"
+                "title": "Server Location Notifier",
+                "description": "Get notify when client connect to a server."
             },
             "rpcCard": {
-                "title": "Discord RPC (粉碎)",
-                "description": "用废墟替换Rogox Rich Presence公司"
+                "title": "Discord RPC (Crush)",
+                "description": "Replace the Roblox Rich Presence with Crush's"
             }
         },
         "installations": {
-            "installations": "安装",
+            "installations": "Installations",
             "customVersion": {
-                "title": "安装一个自定义的 Roblox 版本",
-                "description": "跳过更新检查并下载版本。默认值是最新的。无效的版本将不会下载，并且会回退到最新版本。"
+                "title": "Install a custom Roblox version",
+                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
             }
         },
         "fastflag": {
             "fastflag": "Fast Flags",
-            "description": "添加/删除 Roblox Fastflags 和配置。",
+            "description": "Add/Remove Roblox Fastflags and configurations.",
             "flagTable": {
-                "texboxFlagName": "标记名称",
-                "texboxFlagValue": "值",
-                "buttonAdd": "添加",
-                "search": "搜索所有fflag...",
-                "searchNotFound": "没有找到匹配您搜索的标记。",
+                "texboxFlagName": "Flag name",
+                "texboxFlagValue": "Value",
+                "buttonAdd": "Add",
+                "search": "Search all fflags...",
+                "searchNotFound": "No flags found matching your search.",
                 "flagCol": {
-                    "deleteNote": "删除标志",
-                    "name": "国旗名称",
-                    "type": "类型",
-                    "value": "值"
+                    "deleteNote": "Delete Flag",
+                    "name": "flag name",
+                    "type": "type",
+                    "value": "value"
                 }
             }
         },
@@ -98,53 +98,53 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod管理",
-                    "description": "管理您的 Mods Roblox 模组。",
+                    "title": "Mod Management",
+                    "description": "Manage your mods Roblox mods.",
                     "addModButton": "Add A Mod",
-                    "noModsFound": "我们在这里没有找到模组，Yuppies。",
-                    "noModsFoundCreateButton": "创建您的第一个模组",
+                    "noModsFound": "We found no mods here, Yuppies.",
+                    "noModsFoundCreateButton": "Create your first mod",
                     "modCards": {
-                        "toggleNoteDisable": "禁用Mod",
-                        "toggleNoteEnable": "启用Mod",
-                        "renameNote": "重命名模组",
-                        "openFolderNote": "打开Mod文件夹",
-                        "deleteNote": "删除模组",
-                        "layoutNote": "模版布局受Fstroap的模组管理器",
-                        "description": "启用模组加载并设置模组文件夹位置。"
+                        "toggleNoteDisable": "Disable Mod",
+                        "toggleNoteEnable": "Enable Mod",
+                        "renameNote": "Rename Mod",
+                        "openFolderNote": "Open Mod Folder",
+                        "deleteNote": "Delete Mod",
+                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
+                        "description": "Enable mod loading and set the mod folder location."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "预建模组",
-                    "description": "安装即时使用的模组。",
+                    "title": "Prebuilt Mods",
+                    "description": "Install ready-to-use mods.",
                     "cursorCard": {
                         "title": "Cursor",
-                        "description": "将您的Roblox光标更改为旧版本。",
+                        "description": "Change your Roblox cursor to older versions.",
                         "dropdown": {
-                            "default": "默认设置"
+                            "default": "Default"
                         }
                     },
                     "customFontCard": {
                         "title": "Custom Font",
-                        "description": "将您的roblox字体更改为您喜欢的字体。",
-                        "button": "更改字体"
+                        "description": "Change your roblox font to whatever you like.",
+                        "button": "Change Font"
                     }
                 },
                 "communityMods": {
-                    "title": "社区模组",
-                    "description": "探索社区创建的模组。",
+                    "title": "Community Mods",
+                    "description": "Explore mods created by the community.",
                     "notice": {
-                        "title": "尚无模组",
-                        "description": "我们还没有任何社区模组。成为第一个贡献者并帮助我们发展收藏！",
-                        "submissionButton": "提交模组 "
+                        "title": "No mod yet",
+                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
+                        "submissionButton": "Submit a mod "
                     }
                 }
             }
         },
         "settings": {
-            "settings": "设置",
+            "settings": "Settings",
             "aboutCard": {
-                "title": "关于",
-                "description": "关于此崩溃构建的信息",
+                "title": "About",
+                "description": "Information about this crush build",
                 "builtOn": "Built on: {date}",
                 "commitHash": "Commit hash: {hash}"
             },
@@ -153,9 +153,9 @@
                 "description": "Select your preferred language for crush."
             },
             "donateCard": {
-                "title": "捐助",
-                "description": "喜欢粉碎吗？捐赠给马利以支持他的工作！",
-                "button": "捐助"
+                "title": "Donate",
+                "description": "Love crush? Donate to Mally to support his work!",
+                "button": "Donate"
             }
         }
     }
