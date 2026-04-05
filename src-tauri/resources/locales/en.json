@@ -6,7 +6,16 @@
         "installation" : "In Installations Route",
         "fastflag" : "In Fastflag Route",
         "mod" : "In Mod Route",
-        "appearance" : "In Appearance Route"
+        "appearance" : "In Appearance Route",
+
+        "rust" : {
+            "watcher" : {
+                "general" : "Playing roblox",
+
+                "idle" : "Not in a game",
+                "playing" : "In {}"
+            }
+        }
     },
 
     "pages" : {
