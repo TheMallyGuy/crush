@@ -1,4 +1,4 @@
-export type FlagType = 'bool' | 'int' | 'string'
+import type { FlagType } from '$lib/types'
 
 export function detectType(value: string): FlagType {
     if (value === 'true' || value === 'false') return 'bool'

@@ -10,9 +10,8 @@ import {
 import { appDataDir, join, dirname, basename } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { parseXml } from '$lib/theme/xmlParser'
-import type { BootstrapConfig } from '$lib/theme/xmlParser'
 import { themeStore, normalizeAssetKey } from '$lib/theme/themeStore'
-import type { ThemeState } from '$lib/theme/themeStore'
+import type { ThemeState, LoadResult, BootstrapConfig } from '$lib/types'
 
 function toErr(e: unknown): string {
     if (typeof e === 'string') return e
@@ -53,13 +52,6 @@ function collectAssets(config: BootstrapConfig): string[] {
 
 function safeName(name: string): string {
     return name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 64)
-}
-
-export interface LoadResult {
-    state: ThemeState
-    themeName: string
-    destDir: string
-    missing: string[]
 }
 
 export async function loadThemeFromDialog(): Promise<LoadResult | null> {
