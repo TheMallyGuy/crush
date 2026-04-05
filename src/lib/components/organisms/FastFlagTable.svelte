@@ -2,12 +2,9 @@
     import { createEventDispatcher } from 'svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import { Search, Plus, Trash2 } from '@lucide/svelte'
-    import {
-        detectType,
-        validateValue,
-        type FlagType,
-    } from '$lib/fastflag/flagTypes'
     import { _ } from 'svelte-i18n';
+    import { detectType, validateValue } from '$lib/fastflag/flagTypes'
+    import type { FlagType } from '$lib/types'
 
     export let flags: Record<string, string> = {}
 

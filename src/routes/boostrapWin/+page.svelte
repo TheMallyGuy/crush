@@ -7,19 +7,21 @@
 
 <script lang="ts">
     import { downloadRoblox } from '$lib/downloadRoblox'
-    import type { ProgressEvent } from '$lib/types'
+    import type {
+        ProgressEvent,
+        ThemeState,
+        BootstrapElement,
+        Installation,
+    } from '$lib/types'
     import { launchPlayer, applyMods } from '$lib/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { onMount, onDestroy } from 'svelte'
     import { afterNavigate } from '$app/navigation'
     import { themeStore, resolveAsset } from '$lib/theme/themeStore'
-    import type { ThemeState } from '$lib/theme/themeStore'
-    import type { BootstrapElement } from '$lib/theme/xmlParser'
     import { invoke } from '@tauri-apps/api/core'
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
-    import { type Installation } from '$lib/types'
     import { goto } from '$app/navigation'
     import { get } from 'svelte/store'
     import { page } from '$app/stores'
@@ -113,10 +115,10 @@
         try {
             const version = await downloadRoblox(
                 handleProgress,
-                savedInstallation?.version === "latest"
+                savedInstallation?.version === 'latest'
                     ? undefined
                     : savedInstallation?.version
-            );
+            )
 
             done = true
             handleProgress({ type: 'status', message: 'Applying modification' })
@@ -229,12 +231,14 @@
         node.innerHTML = content
         const scripts = node.querySelectorAll('script')
         scripts.forEach((oldScript) => {
-            const newScript = document.createElement('script')
+            const documentScript = document.createElement('script')
             Array.from(oldScript.attributes).forEach((attr) =>
-                newScript.setAttribute(attr.name, attr.value)
+                documentScript.setAttribute(attr.name, attr.value)
             )
-            newScript.appendChild(document.createTextNode(oldScript.innerHTML))
-            oldScript.parentNode?.replaceChild(newScript, oldScript)
+            documentScript.appendChild(
+                document.createTextNode(oldScript.innerHTML)
+            )
+            oldScript.parentNode?.replaceChild(documentScript, oldScript)
         })
     }
 
@@ -326,7 +330,8 @@
                             {opStyle(el.opacity)}
                             {marginStyle(el.margin)}
                             z-index:{el.zIndex ?? 2};
-                        ">{el.props.Content || el.props.Label || ''}</button
+                        "
+                        >{el.props.Content || el.props.Label || ''}</button
                     >
                 {:else if el.type === 'ProgressBar'}
                     <div
@@ -393,7 +398,9 @@
                 <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
                     Crush
                 </h1>
-                <p class={error ? "text-red-400 mt-2" : "text-stone-400 mt-2"}>{status}</p>
+                <p class={error ? 'text-red-400 mt-2' : 'text-stone-400 mt-2'}>
+                    {status}
+                </p>
             </div>
             {#if !done}
                 <div class="w-full max-w-sm flex flex-col gap-3">
@@ -444,7 +451,9 @@
                 </div>
             {/if}
         </div>
-        <div class="absolute bottom-6 left-0 w-full flex flex-col items-center gap-3 p-3">
+        <div
+            class="absolute bottom-6 left-0 w-full flex flex-col items-center gap-3 p-3"
+        >
             <div class="w-full max-w-sm flex gap-3">
                 {#if error}
                     <button
@@ -456,7 +465,9 @@
                 {/if}
                 <button
                     on:click={cancel}
-                    class="{error ? 'flex-1' : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
+                    class="{error
+                        ? 'flex-1'
+                        : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
                     <span class="font-medium">{$_("pages.boostrapWin.cancel")}</span>
                 </button>
