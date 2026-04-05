@@ -8,7 +8,7 @@ use walkdir::WalkDir;
 pub async fn apply_mod(mod_dir: String, version_dir: String) -> Vec<String> {
     WalkDir::new(&mod_dir)
         .into_iter()
-        .filter_map(|e| e.ok())
+        .filter_map(Result::ok)
         .filter(|e| e.file_type().is_file())
         .filter_map(|entry| process_mod_entry(entry, &mod_dir, &version_dir))
         .collect()
@@ -22,7 +22,7 @@ fn process_mod_entry(
     let src = entry.path();
     let relative = src.strip_prefix(mod_dir).ok()?;
     let dest = version_dir.as_ref().join(relative);
-    let rel_str = relative.to_string_lossy().to_string();
+    let rel_str = relative.to_string_lossy().into_owned();
 
     if is_file_up_to_date(src, &dest) {
         return Some(rel_str);
@@ -31,7 +31,9 @@ fn process_mod_entry(
     let parent = dest.parent()?;
     fs::create_dir_all(parent).ok()?;
 
-    fs::copy(src, &dest).ok().map(|_| rel_str)
+    fs::copy(src, &dest).ok()?;
+
+    Some(rel_str)
 }
 
 fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {

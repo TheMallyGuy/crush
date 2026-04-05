@@ -52,15 +52,15 @@ async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str,
     log::info!("[BACKEND] testing : {}", url);
     let start = Instant::now();
 
-    let res = client.head(url).send().await;
-    let duration = start.elapsed().as_millis();
+    let Ok(_) = client.head(url).send().await else {
+        log::error!("[BACKEND] {} failed to respond", url);
+        return (url, u128::MAX);
+    };
 
+    let duration = start.elapsed().as_millis();
     log::info!("[BACKEND] {} returned in {}ms", url, duration);
 
-    match res {
-        Ok(_) => (url, duration),
-        Err(_) => (url, u128::MAX),
-    }
+    (url, duration)
 }
 
 pub async fn best_region() -> Option<&'static str> {
@@ -71,6 +71,7 @@ pub async fn best_region() -> Option<&'static str> {
 
     let fastest = results
         .into_iter()
+        .filter(|&(_, time)| time != u128::MAX)
         .min_by_key(|&(_, time)| time)
         .map(|(url, _)| url);
 
@@ -107,11 +108,11 @@ pub async fn get_download_urls(
     );
 
     let base_url = match region_url {
-        Some(url) => url.to_string(),
+        Some(url) => url.to_owned(),
         None => best_region()
             .await
             .unwrap_or("https://setup.rbxcdn.com")
-            .to_string(),
+            .to_owned(),
     };
 
     let urls = FILES

@@ -78,17 +78,19 @@ async function downloadAssets(
     onProgress: ProgressCallback,
     limit = 4
 ) {
-    const queue = Array.from(new Set(assetsUrls))
-    const total = queue.length
+    const uniqueUrls = Array.from(new Set(assetsUrls))
+    const total = uniqueUrls.length
     let done = 0
 
-    const workers = Array.from({ length: limit }, async () => {
-        for (let assetUrl = queue.shift(); assetUrl; assetUrl = queue.shift()) {
-            await downloadAssetFile(assetUrl, onProgress, ++done, total)
-        }
-    })
+    const downloadTask = async (url: string) => {
+        await downloadAssetFile(url, onProgress, ++done, total)
+    }
 
-    await Promise.all(workers)
+    // Process in chunks to respect the limit
+    for (let i = 0; i < uniqueUrls.length; i += limit) {
+        const chunk = uniqueUrls.slice(i, i + limit)
+        await Promise.all(chunk.map(downloadTask))
+    }
 }
 
 async function extractIndividualZip(
@@ -111,19 +113,19 @@ async function extractIndividualZip(
     return true
 }
 
-async function extractAll(version_hash: string, onProgress: ProgressCallback) {
-    const cacheDir = await appCacheDir()
-    const dataDir = await appDataDir()
-    const installRoot = await join(dataDir, 'Player', 'Versions', version_hash)
+async function extractAll(versionHash: string, onProgress: ProgressCallback) {
+    const [cacheDir, dataDir] = await Promise.all([appCacheDir(), appDataDir()])
+    const installRoot = await join(dataDir, 'Player', 'Versions', versionHash)
     await ensureDir(installRoot)
 
-    const entries = Object.entries(extractRoots).map(([k, v]) => [
-        k.toLowerCase(),
-        v,
-    ])
+    const entries = Object.entries(extractRoots).map(([k, v]) => ({
+        zipName: k.toLowerCase(),
+        dest: v,
+    }))
+
     const total = entries.length
 
-    for (const [index, [zipName, dest]] of entries.entries()) {
+    for (const [index, { zipName, dest }] of entries.entries()) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
@@ -183,27 +185,30 @@ async function performFullInstallation(
     onProgress: ProgressCallback,
     version?: string
 ): Promise<string> {
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.preparingForDownload') })
+    const updateStatus = (key: string) =>
+        onProgress({ type: 'status', message: get(_)(key) })
+
+    updateStatus('typescript.downloader.preparingForDownload')
     const bestRegion = await resolveBestRegion(onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.fetchingUrls') })
+    updateStatus('typescript.downloader.fetchingUrls')
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         region: bestRegion,
         ...(version && { version }),
     })
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.downloadingAssets') })
+    updateStatus('typescript.downloader.downloadingAssets')
     await downloadAssets(assetsUrls, onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.extractingFiles') })
-    const version_hash =
+    updateStatus('typescript.downloader.extractingFiles')
+    const versionHash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
-    await extractAll(version_hash, onProgress)
+    await extractAll(versionHash, onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.xmlWriting') })
-    await writeAppSettings(version_hash)
+    updateStatus('typescript.downloader.xmlWriting')
+    await writeAppSettings(versionHash)
 
-    return version_hash
+    return versionHash
 }
 
 async function checkInstallationExists(version?: string): Promise<boolean> {
@@ -219,6 +224,14 @@ async function checkInstallationExists(version?: string): Promise<boolean> {
     return await exists(exePath)
 }
 
+async function saveVersion(versionStore: Store, versionList: string[], version: string, onProgress: ProgressCallback) {
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
+    const updatedList = Array.from(new Set([...versionList, version]))
+    await versionStore.set('versions', updatedList)
+    await versionStore.save()
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
+}
+
 export async function downloadRoblox(
     onProgress: ProgressCallback,
     version?: string
@@ -232,29 +245,19 @@ export async function downloadRoblox(
             await performFullInstallation(onProgress, version)
         }
 
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
-        const updatedList = Array.from(new Set([...versionList, version]))
-        await versionStore.set('versions', updatedList)
-        await versionStore.save()
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
+        await saveVersion(versionStore, versionList, version, onProgress)
         return version  
     }
 
     onProgress({ type: 'status', message: get(_)('typescript.downloader.updateChecking') })
 
     const needsUpdate = await checkForUpdates({ versions: versionList })
-    const isMissing = !(await checkInstallationExists(versionList.at(-1)))
+    const lastInstalled = versionList.at(-1)
+    const isMissing = !(await checkInstallationExists(lastInstalled))
 
     if (needsUpdate || isMissing) {
-        const version_hash = await performFullInstallation(onProgress)
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
-        const updatedList = Array.from(new Set([...versionList, version_hash]))
-        await versionStore.set('versions', updatedList)
-        await versionStore.save()
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
+        const versionHash = await performFullInstallation(onProgress)
+        await saveVersion(versionStore, versionList, versionHash, onProgress)
     }
 
     return await invoke('get_latest_version_player')

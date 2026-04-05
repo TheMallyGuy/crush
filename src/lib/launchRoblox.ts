@@ -23,12 +23,10 @@ async function revertDisabledMods(
             const pkg = getPackageForFile(file)
             if (!pkg) continue
 
-            if (!packageFilesMap.has(pkg)) {
-                packageFilesMap.set(pkg, [])
-            }
-
             const normalized = file.replace(/\\/g, '/')
-            packageFilesMap.get(pkg)!.push(normalized)
+            const packageFiles = packageFilesMap.get(pkg) ?? []
+            packageFiles.push(normalized)
+            packageFilesMap.set(pkg, packageFiles)
         }
         modsToClear.push(mod.name)
     }
@@ -55,16 +53,16 @@ async function applyEnabledMods(
     const enabledMods = mods.filter((m) => m.enabled)
     if (enabledMods.length === 0) return
 
-    await Promise.all(
-        enabledMods.map(async (mod) => {
-            const modDir = await join(appData, 'Mods', mod.name)
-            const copiedFiles: string[] = await invoke('apply_mod', {
-                modDir,
-                versionDir,
-            })
-            await modStore.set(mod.name, copiedFiles)
+    const applyModTask = async (mod: Mod) => {
+        const modDir = await join(appData, 'Mods', mod.name)
+        const copiedFiles: string[] = await invoke('apply_mod', {
+            modDir,
+            versionDir,
         })
-    )
+        await modStore.set(mod.name, copiedFiles)
+    }
+
+    await Promise.all(enabledMods.map(applyModTask))
 }
 
 export async function applyMods(robloxHash: string) {

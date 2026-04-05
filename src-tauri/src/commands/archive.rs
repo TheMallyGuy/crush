@@ -51,11 +51,11 @@ pub fn extract_files_from_zip(
             .by_index(i)
             .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
 
-        let should_extract = entry
+        let is_included = entry
             .enclosed_name()
             .is_some_and(|name| files_set.contains(&name.to_string_lossy().to_string()));
 
-        if should_extract {
+        if is_included {
             extract_entry(&mut entry, dest_path)?;
         }
     }
@@ -64,28 +64,27 @@ pub fn extract_files_from_zip(
 }
 
 fn extract_entry(entry: &mut ZipFile<'_, File>, dest_path: &Path) -> Result<(), String> {
-    let entry_name = match entry.enclosed_name() {
-        Some(name) => name.to_path_buf(),
-        None => return Ok(()),
+    let Some(entry_name) = entry.enclosed_name() else {
+        return Ok(());
     };
 
-    let outpath = dest_path.join(&entry_name);
+    let outpath = dest_path.join(entry_name);
 
     if entry.is_dir() {
         fs::create_dir_all(&outpath)
             .map_err(|e| format!("Cannot create dir '{}': {}", outpath.display(), e))?;
-    } else {
-        if let Some(parent) = outpath.parent() {
-            fs::create_dir_all(parent)
-                .map_err(|e| format!("Cannot create parent '{}': {}", parent.display(), e))?;
-        }
-
-        let mut outfile = File::create(&outpath)
-            .map_err(|e| format!("Cannot create file '{}': {}", outpath.display(), e))?;
-
-        copy(entry, &mut outfile)
-            .map_err(|e| format!("Cannot write '{}': {}", outpath.display(), e))?;
+        return Ok(());
     }
+
+    if let Some(parent) = outpath.parent() {
+        fs::create_dir_all(parent)
+            .map_err(|e| format!("Cannot create parent '{}': {}", parent.display(), e))?;
+    }
+
+    let mut outfile = File::create(&outpath)
+        .map_err(|e| format!("Cannot create file '{}': {}", outpath.display(), e))?;
+
+    copy(entry, &mut outfile).map_err(|e| format!("Cannot write '{}': {}", outpath.display(), e))?;
 
     Ok(())
 }

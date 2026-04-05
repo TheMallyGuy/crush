@@ -130,21 +130,23 @@ fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
             }
         })
         .on_tray_icon_event(|tray, event| {
-            if let TrayIconEvent::Click {
+            let TrayIconEvent::Click {
                 button: MouseButton::Left,
                 button_state: MouseButtonState::Up,
                 ..
             } = event
-            {
-                let app = tray.app_handle();
-                let window = app
-                    .get_webview_window("CrushMainWindow")
-                    .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
+            else {
+                return;
+            };
 
-                if let Some(window) = window {
-                    let _ = window.show();
-                    let _ = window.set_focus();
-                }
+            let app = tray.app_handle();
+            let window = app
+                .get_webview_window("CrushMainWindow")
+                .or_else(|| app.get_webview_window("crushBoostrapChoiceWindow"));
+
+            if let Some(window) = window {
+                let _ = window.show();
+                let _ = window.set_focus();
             }
         })
         .build(app)?;
@@ -182,7 +184,9 @@ pub fn run() {
                 std::process::exit(1);
             }
 
-            let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
+            let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") else {
+                return Err("Failed to get main window".into());
+            };
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
             setup_deep_links(app)?;

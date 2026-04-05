@@ -16,14 +16,11 @@ pub async fn get_download_deployment_urls(
 
 #[tauri::command]
 pub async fn get_best_region() -> String {
-    let url = best_region()
-        .await
-        .unwrap_or("https://setup.rbxcdn.com")
-        .to_string();
+    let url = best_region().await.unwrap_or("https://setup.rbxcdn.com");
 
     log::info!("best download url : {}", url);
 
-    url
+    url.to_owned()
 }
 
 #[tauri::command]
