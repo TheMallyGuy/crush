@@ -51,6 +51,6 @@
         description={$_('pages.settings.donateCard.description')}
         icon={Arona}
     >
-        <Button variant="secondary" on:click={handleDonate}>({$_('pages.settings.donateCard.button')})</Button>
+        <Button variant="secondary" on:click={handleDonate}>{$_('pages.settings.donateCard.button')}</Button>
     </ExpandableSettingCard>
 </div>
