@@ -1,161 +1,161 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "从零开始编写的roblox bootrapper",
+        "integrations": "在集成路线中",
+        "installation": "在安装路线中",
+        "fastflag": "在Fastflag路线中",
+        "mod": "在Mod路线中",
+        "appearance": "外观路线",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "玩roblox",
+                "idle": "不在游戏中",
+                "playing": "In"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "检查更新",
+            "findingBestRegion": "正在查找最佳下载区域...",
+            "preparingForDownload": "正在准备下载",
+            "fetchingUrls": "正在获取资产URL...",
+            "downloadingAssets": "正在下载资产...",
+            "extractingFiles": "正在提取文件",
+            "xmlWriting": "正在写入AppSettings.xml...",
+            "versionSaving": "正在保存版本信息...",
+            "installationComplete": "安装完成！",
+            "packageDownloadFailed": "未能下载"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "启动"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "粉碎",
+            "playRoblox": "玩Roblox",
+            "config": "配置"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "取消",
+            "retry": "重试"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "设备外观",
+            "description": "自定义Roblox引导程序的外观和感觉。",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "引导程序主题",
+                "description": "在默认粉碎主题或自定义XML主题之间进行选择。",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "默认（挤压）",
+                    "custom": "自定义"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "导入新",
+                    "noThemes": "尚未导入自定义主题。",
+                    "missingAssets": "缺少主题资产"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "集成",
+            "description": "在roblox外部配置集成",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "服务器位置通知程序",
+                "description": "客户端连接到服务器时获取通知。"
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "title": "Discord RPC （粉碎）",
+                "description": "将Roblox Rich Presence替换为Crush的"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "装置",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "安装自定义Roblox版本",
+                "description": "跳过更新检查并下载版本。默认值为latest。无效版本将不会被下载，并将回退到最新版本。"
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "快速标记",
+            "description": "添加/删除Roblox Fastflags和配置。",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "旗帜+名称",
+                "texboxFlagValue": "值",
+                "buttonAdd": "新增",
+                "search": "搜索所有fflags...",
+                "searchNotFound": "未找到与您的搜索匹配的标记。",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
+                    "deleteNote": "删除标签...",
+                    "name": "标志和名称",
                     "type": "type",
-                    "value": "value"
+                    "value": "价值"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "温和型",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "改装配件管理",
+                    "description": "管理您的改装配件Roblox改装配件。",
+                    "addModButton": "新增改装配件",
+                    "noModsFound": "我们在这里没有找到改装配件，雅皮士。",
+                    "noModsFoundCreateButton": "创建您的第一个模组",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "禁用改装配件",
+                        "toggleNoteEnable": "启用MOD",
+                        "renameNote": "重命名Mod",
+                        "openFolderNote": "打开Mod文件夹",
+                        "deleteNote": "删除MOD",
+                        "layoutNote": "改装配件布局灵感来自Frostrap的改装配件管理器",
+                        "description": "启用mod加载并设置mod文件夹位置。"
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "预设改装配件",
+                    "description": "安装即用型改装配件。",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "光标",
+                        "description": "将Roblox光标更改为旧版本。",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "默认"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "自定义字体 ",
+                        "description": "将roblox字体更改为您喜欢的任何字体。",
+                        "button": "變更字型"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "社区改装配件",
+                    "description": "探索社区创建的改装配件。",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "尚无模组",
+                        "description": "我们还没有任何社区模组。抢先做出贡献，帮助我们拓展产品系列！",
+                        "submissionButton": "提交改装配件"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "设置",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "软件简介",
+                "description": "有关此CRUSH版本的信息",
+                "builtOn": "由 小昊汉化 建立在",
+                "commitHash": "提交哈希： {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "语言",
+                "description": "选择您喜欢的粉碎语言。"
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "捐献",
+                "description": "爱情迷恋？捐给Mally支持他的工作！",
+                "button": "捐献"
             }
         }
     }

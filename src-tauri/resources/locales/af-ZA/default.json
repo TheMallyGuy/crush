@@ -1,96 +1,96 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "'n Roblox - bootrapper wat van nuuts af geskryf is",
+        "integrations": "In Intergrasies Roete",
+        "installation": "In Installasies Roete",
+        "fastflag": "In Fastflag Roete",
+        "mod": "In die mod-roete",
+        "appearance": "In voorkoms roete",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Speel Roblox",
+                "idle": "Nie in 'n speletjie nie",
+                "playing": "Gebore"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "_Kontroleer vir bywerkings:",
+            "findingBestRegion": "Vind die beste aflaaistelsel...",
+            "preparingForDownload": "Voorbereiding vir aflaai",
+            "fetchingUrls": "Vang bate-URL's...",
+            "downloadingAssets": "Laai tans bates af...",
+            "extractingFiles": " NaamUncompressed size of a file inside an archive",
+            "xmlWriting": "Skryf AppSettings.xml...",
+            "versionSaving": "Stoor weergawe inligting...",
+            "installationComplete": "Installasie voltooi!",
+            "packageDownloadFailed": "Kon nie {packageName} aflaai nie: {error}"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "QShortcut"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "drukgang",
+            "playRoblox": "Speel Roblox",
+            "config": "Konfigureer"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Kanselleer",
+            "retry": "Herprobeer"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Voorkoms",
+            "description": "Pas die voorkoms en gevoel van die Roblox bootstrapper aan.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Bootstrapper Tema",
+                "description": "Kies tussen die standaard Crush tema of 'n persoonlike XML tema.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Verstek (geliefdes)",
+                    "custom": "Pasmaak"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Voer nuwe in",
+                    "noThemes": "Nog geen pasgemaakte temas ingevoer nie.",
+                    "missingAssets": "Ontbrekende Tema Bates"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Integrasie",
+            "description": "Konfigureer intergrasies buite roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Bediener Ligging Kennisgewer",
+                "description": "Kry kennisgewing wanneer die kliënt aan 'n bediener koppel."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Vervang die Roblox Rich Presence met Crush's"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Installasies",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Installeer 'n persoonlike Roblox-weergawe",
+                "description": "Slaan die opdatering na en laai die weergawe af. Die verstek waarde is die jongste. Ongeldige weergawe sal nie afgelaai word nie en sal terugval in die nuutste weergawe."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Vinnige Vlae",
+            "description": "Voeg/verwyder Roblox Fastflags en konfigurasies.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "Vlagnaam",
+                "texboxFlagValue": "Waarde",
+                "buttonAdd": "Voeg by",
+                "search": "Soek alle fflags...",
+                "searchNotFound": "Geen vlaggies gevind wat ooreenstem met jou soektog nie.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Uitvee Vlag",
+                    "name": "vlagnaam",
+                    "type": "tipe",
+                    "value": "Waarde"
                 }
             }
         },
@@ -99,63 +99,63 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "description": "Beheer jou mods Roblox mods.",
+                    "addModButton": "Voeg 'n mod by",
+                    "noModsFound": "No problem here, yuppies.",
+                    "noModsFoundCreateButton": "Skep jou eerste mod",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Deaktiveer mod",
+                        "toggleNoteEnable": "Aktiveer mod",
+                        "renameNote": "Hernoem Mod",
+                        "openFolderNote": "Open Mod Gids",
+                        "deleteNote": "Uitvee Mod",
+                        "layoutNote": "Mods uitleg geïnspireer deur Frostrap se mods bestuurder",
+                        "description": "Aktiveer MOD laai en stel die MOD gids plek."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Voorgeboude modusse",
+                    "description": "Installeer ready-to-use mods.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "Wysers",
+                        "description": "Verander jou Roblox-wyser na ouer weergawes.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "Standaard"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Pasmaak Lettertipe",
+                        "description": "Verander jou Roblox-lettertipe na wat jy wil.",
+                        "button": "Verander Skrif tipe"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Gemeenskapsmodusse",
+                    "description": "Verken modes wat deur die gemeenskap geskep is.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Geen mod nog nie",
+                        "description": "Ons het nog geen gemeenskapsmode nie. Wees die eerste om by te dra en help ons om die versameling te laat groei!",
+                        "submissionButton": "Dien 'n MOD in"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "bevel",
             "aboutCard": {
                 "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "description": "Inligting oor hierdie crush bou",
+                "builtOn": "(gebou op {0})",
+                "commitHash": "Verbintenis hash: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "taal",
+                "description": "Kies jou gunsteling taal vir crush."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Skenk",
+                "description": "Liefde geliefdes? Skenk aan Mally om sy werk te ondersteun!",
+                "button": "Skenk"
             }
         }
     }

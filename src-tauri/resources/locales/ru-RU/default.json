@@ -1,161 +1,161 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
+        "general": "Roblox Bootrapper, написанный с нуля",
         "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
+        "installation": "В маршруте установки",
+        "fastflag": "В Fastflag Route",
         "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "appearance": "По внешнему виду Маршрут",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Играть в roblox",
+                "idle": "Не в",
+                "playing": "ВНУТР."
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "Проверка наличия обновлений",
+            "findingBestRegion": "Поиск лучшего региона для скачивания...",
+            "preparingForDownload": "Подготовка к загрузке",
+            "fetchingUrls": "Получение URL-адресов активов...",
+            "downloadingAssets": "Загрузка ресурсов...",
+            "extractingFiles": "Извлечение файлов...",
+            "xmlWriting": "Запись AppSettings.xml...",
+            "versionSaving": "Сохранение информации о версии...",
+            "installationComplete": "Установка завершена",
+            "packageDownloadFailed": "Не удалось загрузить {packageName}: {error}"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "Ввод в эксплуатацию"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "Ты моя любовь",
+            "playRoblox": "Играть в Roblox",
+            "config": "Конфиг"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Отмена",
+            "retry": "Повторить попытку"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Внешний вид",
+            "description": "Настройте внешний вид бутстреппера Roblox.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Тема Bootstrapper",
+                "description": "Выбор между темой Crush по умолчанию или настраиваемой темой XML.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "По умолчанию (Crush)",
+                    "custom": "Другое"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Импортировать как новое",
+                    "noThemes": "Настраиваемые темы еще не импортированы.",
+                    "missingAssets": "Отсутствуют активы темы"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Интеграции",
+            "description": "Интеграция конфигурации вне roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Уведомление о местоположении сервера",
+                "description": "Получение уведомления при подключении клиента к серверу."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Замените Roblox Rich Presence на Crush's"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Установки",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Установите пользовательскую версию Roblox",
+                "description": "Пропустите проверку обновлений и загрузите версию. Значение по умолчанию - самое позднее. Недействительная версия не будет загружена и вернется к последней версии."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Быстрые флаги",
+            "description": "Добавление/удаление флагов Roblox Fast и конфигураций.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "Обозначение (Flag Name)",
+                "texboxFlagValue": "Оценочная стоимость",
+                "buttonAdd": "Добавить",
+                "search": "Поиск по всем флагам...",
+                "searchNotFound": "Флаги, соответствующие вашему запросу, не найдены.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Удалить флаг",
+                    "name": "Обозначение (Flag Name)",
+                    "type": "насоса",
+                    "value": "значение"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "Мод.",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Управление модами",
+                    "description": "Управляйте своими модами Roblox mods.",
+                    "addModButton": "Добавить мод",
+                    "noModsFound": "Мы не нашли здесь модов, Яппи.",
+                    "noModsFoundCreateButton": "Создайте свой первый мод",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Отключить мод",
+                        "toggleNoteEnable": "Включить мод",
+                        "renameNote": "Переименовать мод",
+                        "openFolderNote": "Открыть папку модов",
+                        "deleteNote": "Удалить мод",
+                        "layoutNote": "Макет модов, вдохновленный менеджером модов Frostrap",
+                        "description": "Включите загрузку модов и установите местоположение папки модов."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Готовые моды",
+                    "description": "Установите готовые моды.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "Курсор",
+                        "description": "Измените курсор Roblox на более старые версии.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "По умолчанию"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Пользовательский шрифт",
+                        "description": "Измените шрифт roblox на любой.",
+                        "button": "Изменить шрифт"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Модификации для сообщества",
+                    "description": "Исследуйте моды, созданные сообществом.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Пока нет модов",
+                        "description": "У нас пока нет комьюнити-модов. Станьте первым, кто внесет свой вклад и поможет нам расширить коллекцию!",
+                        "submissionButton": "Отправить мод"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Настройки",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "Сведения",
+                "description": "Информация об этой сборке Crush",
+                "builtOn": "Дата постройки: {date}",
+                "commitHash": "Зафиксировать хэш: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Язык",
+                "description": "Выберите предпочитаемый язык для влюбленности."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Пожертвовать",
+                "description": "Любишь влюбляться? Пожертвуй Малли, чтобы поддержать его работу!",
+                "button": "Пожертвовать"
             }
         }
     }
