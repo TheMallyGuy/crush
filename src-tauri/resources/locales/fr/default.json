@@ -1,0 +1,162 @@
+{
+    "rpc": {
+        "general": "Un roblox bootrapper écrit à partir de zéro",
+        "integrations": "Dans la route des intergrations",
+        "installation": "Dans la route des installations",
+        "fastflag": "Dans Fastflag Route",
+        "mod": "Dans la route des mods",
+        "appearance": "Route en apparence",
+        "rust": {
+            "watcher": {
+                "general": "Jouer au roblox",
+                "idle": "Pas dans une partie",
+                "playing": "Dans {}"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "Vérification des mises à jour",
+            "findingBestRegion": "Recherche de la meilleure région de téléchargement...",
+            "preparingForDownload": "Préparation du téléchargement",
+            "fetchingUrls": "Récupération des URL de la ressource...",
+            "downloadingAssets": "Téléchargement des ressources...",
+            "extractingFiles": "Extraction des fichiers...",
+            "xmlWriting": "Écriture des paramètres d'applications.xml...",
+            "versionSaving": "Sauvegarde des infos de version...",
+            "installationComplete": "Installation terminée !",
+            "packageDownloadFailed": "Impossible de télécharger {packageName}: {error}"
+        }
+    },
+    "elements": {
+        "launchBar": "Lancer"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "Écraser",
+            "playRoblox": "Jouer à Roblox",
+            "config": "Configuration"
+        },
+        "boostrapWin": {
+            "cancel": "Abandonner",
+            "retry": "Réessayer"
+        },
+        "appearance": {
+            "appearance": "Apparence",
+            "description": "Personnalisez l'apparence du bracelet Roblox.",
+            "boostrapThemeCard": {
+                "title": "Thème Bootstrapper",
+                "description": "Choisissez entre le thème Crush par défaut ou un thème XML personnalisé.",
+                "dropdown": {
+                    "default": "Par défaut (Crush)",
+                    "custom": "Personnalisé"
+                },
+                "customDropDownContents": {
+                    "importNew": "Importer Nouveau",
+                    "noThemes": "Aucun thème personnalisé n'a encore été importé.",
+                    "missingAssets": "Actifs du thème manquant"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "Intégrations",
+            "description": "Intergrations de configuration en dehors du roblox",
+            "serverNotifierCard": {
+                "title": "Notification de localisation du serveur",
+                "description": "Recevez une notification lorsque le client se connecte à un serveur."
+            },
+            "rpcCard": {
+                "title": "RPC Discord (russe)",
+                "description": "Remplacer la présence riche de Roblox par des broyeurs"
+            }
+        },
+        "installations": {
+            "installations": "Installations",
+            "customVersion": {
+                "title": "Installer une version personnalisée de Roblox",
+                "description": "Ignorez la vérification de mise à jour et téléchargez la version. La valeur par défaut est la plus récente. La version non valide ne sera pas téléchargée et utilisera la dernière version."
+            }
+        },
+        "fastflag": {
+            "fastflag": "Fast Flags",
+            "description": "Ajouter/Supprimer Roblox Fastflags et les configurations.",
+            "flagTable": {
+                "texboxFlagName": "Nom du drapeau",
+                "texboxFlagValue": "Valeur",
+                "buttonAdd": "Ajouter",
+                "search": "Rechercher tous les fflags...",
+                "searchNotFound": "Aucun marqueur correspondant à votre recherche.",
+                "flagCol": {
+                    "deleteNote": "Supprimer le drapeau",
+                    "name": "Nom du drapeau",
+                    "type": "Type de type",
+                    "value": "valeur"
+                }
+            }
+        },
+        "mod": {
+            "mod": "Mod",
+            "tab": {
+                "modManagement": {
+                    "title": "Gestion des mods",
+                    "description": "Gérez vos mods Roblox.",
+                    "addModButton": "Add A Mod",
+                    "noModsFound": "Nous n'avons trouvé aucun mod ici, Yuppies.",
+                    "noModsFoundCreateButton": "Créez votre premier mod",
+                    "modCards": {
+                        "toggleNoteDisable": "Désactiver le mod",
+                        "toggleNoteEnable": "Activer le mod",
+                        "renameNote": "Renommer le mod",
+                        "openFolderNote": "Ouvrir le dossier Mod",
+                        "deleteNote": "Supprimer le mod",
+                        "layoutNote": "Mise en page des mods inspirée du gestionnaire de mods de Frostrap",
+                        "description": "Activer le chargement des mods et définir l'emplacement du dossier des mods."
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "Mods préconstruits",
+                    "description": "Installer les mods prêts à l'emploi.",
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Changez votre curseur Roblox en anciennes versions.",
+                        "dropdown": {
+                            "default": "Par défaut"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "Changez votre police roblox pour ce que vous voulez.",
+                        "button": "Changer la police"
+                    }
+                },
+                "communityMods": {
+                    "title": "Mods de la communauté",
+                    "description": "Explorez les mods créés par la communauté.",
+                    "notice": {
+                        "title": "Pas encore de mod",
+                        "description": "Nous n'avons pas encore de mods de communauté. Soyez le premier à contribuer et à nous aider à faire grandir la collection!",
+                        "submissionButton": "Soumettre un mod "
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "Réglages",
+            "aboutCard": {
+                "title": "À propos de",
+                "description": "Informations sur cette version écrasée",
+                "builtOn": "Construit sur: {date}",
+                "commitHash": "Hash de commit : {hash}"
+            },
+            "languageCard": {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+            "donateCard": {
+                "title": "Faire un don",
+                "description": "Vous aimez écraser? Faites un don à Mally pour soutenir son travail!",
+                "button": "Faire un don"
+            }
+        }
+    }
+}

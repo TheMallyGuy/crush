@@ -1,0 +1,162 @@
+{
+    "rpc": {
+        "general": "O tastatură roblox scrisă de la zero",
+        "integrations": "În traseul de intergrații",
+        "installation": "În ruta de instalare",
+        "fastflag": "În ruta Fastflag",
+        "mod": "În ruta Mod",
+        "appearance": "În ruta de afișare",
+        "rust": {
+            "watcher": {
+                "general": "Se redă roblox",
+                "idle": "Nu este într-un joc",
+                "playing": "În {}"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "Se caută actualizări",
+            "findingBestRegion": "Găsirea celei mai bune regiuni de descărcare...",
+            "preparingForDownload": "Pregătire pentru descărcare",
+            "fetchingUrls": "Preluare URL-uri active...",
+            "downloadingAssets": "Se descarcă activele...",
+            "extractingFiles": "Se extrag fișierele...",
+            "xmlWriting": "Scrie AppSettings.xml...",
+            "versionSaving": "Se salvează informațiile despre versiune...",
+            "installationComplete": "Instalare completă!",
+            "packageDownloadFailed": "Nu s-a reușit descărcarea {packageName}: {error}"
+        }
+    },
+    "elements": {
+        "launchBar": "Lansare"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "Zdrobește",
+            "playRoblox": "Joacă Roblox",
+            "config": "Configurare"
+        },
+        "boostrapWin": {
+            "cancel": "Anulează",
+            "retry": "Reîncercați"
+        },
+        "appearance": {
+            "appearance": "Aspectul",
+            "description": "Personalizați aspectul și simțul bootstrapperului Roblox.",
+            "boostrapThemeCard": {
+                "title": "Tema Bootstrapper",
+                "description": "Alegeți între tema implicită Crush sau o temă XML personalizată.",
+                "dropdown": {
+                    "default": "Implicit (Rush)",
+                    "custom": "Personalizat"
+                },
+                "customDropDownContents": {
+                    "importNew": "Import nou",
+                    "noThemes": "Nu există teme personalizate încă importate.",
+                    "missingAssets": "Lipsesc Activele Temei"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "Integrări",
+            "description": "Configurare intergrații în afara roblox",
+            "serverNotifierCard": {
+                "title": "Notificator locație server",
+                "description": "Primește notificări când clientul se conectează la un server."
+            },
+            "rpcCard": {
+                "title": "Discord RPC (Rush)",
+                "description": "Înlocuiește Prezența Roblox Rich cu Crush's"
+            }
+        },
+        "installations": {
+            "installations": "Instalări",
+            "customVersion": {
+                "title": "Instalează o versiune Roblox personalizată",
+                "description": "Omiteți verificarea actualizării și descărcați versiunea. Valoarea implicită este cea mai recentă. Versiunea invalidă nu va fi descărcată și va reveni la cea mai recentă versiune."
+            }
+        },
+        "fastflag": {
+            "fastflag": "Fast Flags",
+            "description": "Adaugă/Elimină steagurile și configurațiile Roblox.",
+            "flagTable": {
+                "texboxFlagName": "Denumire steag",
+                "texboxFlagValue": "Valoare",
+                "buttonAdd": "Adăugare",
+                "search": "Caută toate steagurile...",
+                "searchNotFound": "Nu s-au găsit steaguri care să corespundă căutării dumneavoastră.",
+                "flagCol": {
+                    "deleteNote": "Șterge drapelul",
+                    "name": "Nume steag",
+                    "type": "tip",
+                    "value": "valoare"
+                }
+            }
+        },
+        "mod": {
+            "mod": "Mod",
+            "tab": {
+                "modManagement": {
+                    "title": "Gestionare mod",
+                    "description": "Gestionează-ți modurile Roblox pentru moduri.",
+                    "addModButton": "Add A Mod",
+                    "noModsFound": "Nu am găsit mod-uri aici, Yuppies.",
+                    "noModsFoundCreateButton": "Creează primul mod",
+                    "modCards": {
+                        "toggleNoteDisable": "Dezactivare mod",
+                        "toggleNoteEnable": "Activare mod",
+                        "renameNote": "Redenumire mod",
+                        "openFolderNote": "Deschide folderul Mod",
+                        "deleteNote": "Ștergere mod",
+                        "layoutNote": "Aspect Moduri inspirat de managerul de moduri Frostrap",
+                        "description": "Activați încărcarea în mod și setați locația folderului de mod."
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "Moduri Preconstruite",
+                    "description": "Instalează moduri gata de utilizare.",
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Schimbă cursorul Roblox la versiuni mai vechi.",
+                        "dropdown": {
+                            "default": "Implicit"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "Schimbă-ți fontul roblox în orice dorești.",
+                        "button": "Schimbă fontul"
+                    }
+                },
+                "communityMods": {
+                    "title": "Moduri Comunitate",
+                    "description": "Explorează modile create de comunitate.",
+                    "notice": {
+                        "title": "Nici un mod încă",
+                        "description": "Nu avem încă nici un mod de comunitate . Fii primul care contribuie și ajută-ne să creștem colecția!",
+                        "submissionButton": "Trimite un mod "
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "Setări",
+            "aboutCard": {
+                "title": "Despre",
+                "description": "Informații despre această clădire zdrobită",
+                "builtOn": "Construit pe: {date}",
+                "commitHash": "Hash-ul de angajament: {hash}"
+            },
+            "languageCard": {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+            "donateCard": {
+                "title": "Donează",
+                "description": "Iubești zdrobirea? Donează la Maliu pentru a-i sprijini munca!",
+                "button": "Donează"
+            }
+        }
+    }
+}

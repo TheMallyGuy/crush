@@ -1,0 +1,162 @@
+{
+    "rpc": {
+        "general": "En roblox bootrapper skriven från grunden",
+        "integrations": "I Intergrations Rutt",
+        "installation": "I installationer rutt",
+        "fastflag": "I Fastflag Route",
+        "mod": "I Mod Route",
+        "appearance": "I Utseende Rutt",
+        "rust": {
+            "watcher": {
+                "general": "Spelar roblox",
+                "idle": "Inte i ett spel",
+                "playing": "Om {}"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "Söker efter uppdateringar",
+            "findingBestRegion": "Hitta den bästa nedladdningsregionen...",
+            "preparingForDownload": "Förbereder för nedladdning",
+            "fetchingUrls": "Hämtar tillgångs webbadresser...",
+            "downloadingAssets": "Laddar ner tillgångar...",
+            "extractingFiles": "Extraherar filer...",
+            "xmlWriting": "Skriver AppSettings.xml...",
+            "versionSaving": "Sparar versionsinfo...",
+            "installationComplete": "Installationen slutförd!",
+            "packageDownloadFailed": "Det gick inte att ladda ner {packageName}: {error}"
+        }
+    },
+    "elements": {
+        "launchBar": "Starta"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "Krossa",
+            "playRoblox": "Spela Roblox",
+            "config": "Konfiguration"
+        },
+        "boostrapWin": {
+            "cancel": "Avbryt",
+            "retry": "Försök igen"
+        },
+        "appearance": {
+            "appearance": "Utseende",
+            "description": "Anpassa utseendet och känslan av Roblox bootstrapper.",
+            "boostrapThemeCard": {
+                "title": "Bootstrapper Tema",
+                "description": "Välj mellan standard Crush tema eller en anpassad XML-tema.",
+                "dropdown": {
+                    "default": "Standard (Crush)",
+                    "custom": "Anpassad"
+                },
+                "customDropDownContents": {
+                    "importNew": "Importera ny",
+                    "noThemes": "Inga anpassade teman importerade ännu.",
+                    "missingAssets": "Saknar tematillgångar"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "Integrationer",
+            "description": "Konfigurationsintervall utanför roblox",
+            "serverNotifierCard": {
+                "title": "Notifiering av serverns plats",
+                "description": "Få meddelande när klienten ansluter till en server."
+            },
+            "rpcCard": {
+                "title": "Discord RPC (Crush)",
+                "description": "Ersätt Roblox Rich Presence med Crush's"
+            }
+        },
+        "installations": {
+            "installations": "Installationer",
+            "customVersion": {
+                "title": "Installera en anpassad Roblox version",
+                "description": "Hoppa över uppdateringskontroll och ladda ner versionen. Standardvärdet är senast. Ogiltig version kommer inte att laddas ner och kommer att falla tillbaka till den senaste versionen."
+            }
+        },
+        "fastflag": {
+            "fastflag": "Fast Flags",
+            "description": "Lägg till/ta bort Roblox Fastflaggor och konfigurationer.",
+            "flagTable": {
+                "texboxFlagName": "Flaggans namn",
+                "texboxFlagValue": "Värde",
+                "buttonAdd": "Lägg till",
+                "search": "Sök i alla fflag...",
+                "searchNotFound": "Inga flaggor hittades som matchar din sökning.",
+                "flagCol": {
+                    "deleteNote": "Ta bort flagga",
+                    "name": "Flagga namn",
+                    "type": "typ",
+                    "value": "värde"
+                }
+            }
+        },
+        "mod": {
+            "mod": "Mod",
+            "tab": {
+                "modManagement": {
+                    "title": "Mod Hantering",
+                    "description": "Hantera dina moddar Roblox mods.",
+                    "addModButton": "Add A Mod",
+                    "noModsFound": "Vi hittade inga moddar här, Juppies.",
+                    "noModsFoundCreateButton": "Skapa din första mod",
+                    "modCards": {
+                        "toggleNoteDisable": "Inaktivera mod",
+                        "toggleNoteEnable": "Aktivera Mod",
+                        "renameNote": "Döp om Mod",
+                        "openFolderNote": "Öppna Mod-mapp",
+                        "deleteNote": "Ta bort mod",
+                        "layoutNote": "Mods layout inspirerad av Frostraps mods manager",
+                        "description": "Aktivera mod inläsning och ställ in mod mappens plats."
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "Förbyggda Mods",
+                    "description": "Installera färdiga att använda mods.",
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Ändra din Roblox markör till äldre versioner.",
+                        "dropdown": {
+                            "default": "Standard"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "Ändra ditt roblox-typsnitt till vad du vill.",
+                        "button": "Ändra typsnitt"
+                    }
+                },
+                "communityMods": {
+                    "title": "Gemenskapens Mods",
+                    "description": "Utforska moddar skapade av gemenskapen.",
+                    "notice": {
+                        "title": "Ingen mod ännu",
+                        "description": "Vi har inga community-moddar än. Bli först med att bidra och hjälpa oss att växa samlingen!",
+                        "submissionButton": "Skicka in en mod "
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "Inställningar",
+            "aboutCard": {
+                "title": "Om",
+                "description": "Information om denna crush build",
+                "builtOn": "Byggd på: {date}",
+                "commitHash": "Commit hash: {hash}"
+            },
+            "languageCard": {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+            "donateCard": {
+                "title": "Donera",
+                "description": "Älskar du krossa? Donera till Mally för att stödja hans arbete!",
+                "button": "Donera"
+            }
+        }
+    }
+}

@@ -1,0 +1,162 @@
+{
+    "rpc": {
+        "general": "一から書かれたロブロックスブートラッパー",
+        "integrations": "インターグレート・ルート内",
+        "installation": "インストールルート内",
+        "fastflag": "Fastflag Route",
+        "mod": "Modルート内",
+        "appearance": "外観のルート",
+        "rust": {
+            "watcher": {
+                "general": "robloxを再生中",
+                "idle": "ゲームではありません",
+                "playing": "{}"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "アップデートを確認中",
+            "findingBestRegion": "最高のダウンロード地域を見つけています...",
+            "preparingForDownload": "ダウンロードの準備",
+            "fetchingUrls": "アセットURLを取得しています...",
+            "downloadingAssets": "アセットをダウンロードしています...",
+            "extractingFiles": "ファイルを解凍しています...",
+            "xmlWriting": "AppSettings.xmlを書き込んでいます...",
+            "versionSaving": "バージョン情報を保存しています...",
+            "installationComplete": "インストール完了！",
+            "packageDownloadFailed": "{packageName}のダウンロードに失敗しました : {error}"
+        }
+    },
+    "elements": {
+        "launchBar": "起動"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "押しつぶし",
+            "playRoblox": "Robloxをプレイ",
+            "config": "設定"
+        },
+        "boostrapWin": {
+            "cancel": "キャンセル",
+            "retry": "再試行する"
+        },
+        "appearance": {
+            "appearance": "外観",
+            "description": "Robloxのブートストラッパーのルックアンドフィールをカスタマイズします。",
+            "boostrapThemeCard": {
+                "title": "ブートストラッパーのテーマ",
+                "description": "デフォルトのクラッシュテーマまたはカスタムXMLテーマのいずれかを選択します。",
+                "dropdown": {
+                    "default": "デフォルト (クラッシュ)",
+                    "custom": "カスタム"
+                },
+                "customDropDownContents": {
+                    "importNew": "新規インポート",
+                    "noThemes": "カスタムテーマはまだインポートされていません。",
+                    "missingAssets": "テーマアセットがありません"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "統合",
+            "description": "ロブロックス外の構成インターグレーション",
+            "serverNotifierCard": {
+                "title": "サーバーの場所の通知",
+                "description": "クライアントがサーバーに接続したときに通知を受け取ります。"
+            },
+            "rpcCard": {
+                "title": "Discord RPC（クラッシュ）",
+                "description": "Roblox Rich PresenceをCrushのものに交換する"
+            }
+        },
+        "installations": {
+            "installations": "インストール",
+            "customVersion": {
+                "title": "カスタム Roblox バージョンをインストール",
+                "description": "更新チェックをスキップしてバージョンをダウンロードします。デフォルト値は最新です。無効なバージョンはダウンロードされず、最新バージョンにフォールバックします。"
+            }
+        },
+        "fastflag": {
+            "fastflag": "Fast Flags",
+            "description": "Roblox Fastflags と設定を追加/削除します。",
+            "flagTable": {
+                "texboxFlagName": "フラグ名",
+                "texboxFlagValue": "値",
+                "buttonAdd": "追加",
+                "search": "すべてのfflagを検索...",
+                "searchNotFound": "検索に一致するフラグが見つかりません。",
+                "flagCol": {
+                    "deleteNote": "フラグを削除",
+                    "name": "フラグ名",
+                    "type": "タイプ",
+                    "value": "値"
+                }
+            }
+        },
+        "mod": {
+            "mod": "Mod",
+            "tab": {
+                "modManagement": {
+                    "title": "Mod 管理",
+                    "description": "あなたのMODを管理する RobloxのMod。",
+                    "addModButton": "Add A Mod",
+                    "noModsFound": "我々はここに改造品が見つかりませんでした, ユッピー.",
+                    "noModsFoundCreateButton": "最初のMODを作成",
+                    "modCards": {
+                        "toggleNoteDisable": "Modを無効にする",
+                        "toggleNoteEnable": "Modを有効にする",
+                        "renameNote": "Modの名前を変更",
+                        "openFolderNote": "Modフォルダを開く",
+                        "deleteNote": "Modを削除",
+                        "layoutNote": "FrostrapのModマネージャーに触発されたModレイアウト",
+                        "description": "Modの読み込みを有効にし、Modフォルダの場所を設定します。"
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "ビルド済みのMod",
+                    "description": "すぐに使用できる Mod をインストールします。",
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Robloxカーソルを古いバージョンに変更します。",
+                        "dropdown": {
+                            "default": "デフォルト"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "robloxのフォントを好きなものに変更します。",
+                        "button": "フォントを変更"
+                    }
+                },
+                "communityMods": {
+                    "title": "コミュニティモッド",
+                    "description": "コミュニティによって作成された Mod を探索してください。",
+                    "notice": {
+                        "title": "Modはまだありません",
+                        "description": "コミュニティモッドはまだありません。最初に貢献してコレクションを成長させてください！",
+                        "submissionButton": "MODを送信 "
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "設定",
+            "aboutCard": {
+                "title": "About",
+                "description": "このクラッシュビルドに関する情報",
+                "builtOn": "ビルド日時： {date}",
+                "commitHash": "コミットハッシュ: {hash}"
+            },
+            "languageCard": {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+            "donateCard": {
+                "title": "寄付",
+                "description": "愛が砕ける？彼の仕事をサポートするために、マリーに寄付してください！",
+                "button": "寄付"
+            }
+        }
+    }
+}

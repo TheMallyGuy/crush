@@ -1,0 +1,162 @@
+{
+    "rpc": {
+        "general": "En kost bootrapper skrevet fra grunnen",
+        "integrations": "I avdragsrute",
+        "installation": "I Rute på installasjoner",
+        "fastflag": "I Fastflagg rute",
+        "mod": "I Mod rute",
+        "appearance": "I Utseende rute",
+        "rust": {
+            "watcher": {
+                "general": "Leker roblox",
+                "idle": "Ikke i et spill",
+                "playing": "I {}"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "Ser etter oppdateringer",
+            "findingBestRegion": "Finner den beste nedlastingsregionen...",
+            "preparingForDownload": "Forbereder nedlasting",
+            "fetchingUrls": "Henter nettadresser char@@0",
+            "downloadingAssets": "Laster ned eiendeler...",
+            "extractingFiles": "Pakker ut filer...",
+            "xmlWriting": "Skriver AppSettings.xml...",
+            "versionSaving": "Lagrer versjonsinfo...",
+            "installationComplete": "Installasjonen er ferdig!",
+            "packageDownloadFailed": "Kan ikke laste ned {packageName}: {error}"
+        }
+    },
+    "elements": {
+        "launchBar": "Start"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "Knus",
+            "playRoblox": "Spill Roblox",
+            "config": "Konfigurasjon"
+        },
+        "boostrapWin": {
+            "cancel": "Avbryt",
+            "retry": "Prøv igjen"
+        },
+        "appearance": {
+            "appearance": "Utseende",
+            "description": "Tilpass utseendet og følelsen til Roblox bootstrapper.",
+            "boostrapThemeCard": {
+                "title": "Bootstrapper tema",
+                "description": "Velg mellom standard Crush tema eller et tilpasset XML-tema.",
+                "dropdown": {
+                    "default": "Standard (Crush)",
+                    "custom": "Egendefinert"
+                },
+                "customDropDownContents": {
+                    "importNew": "Importer ny",
+                    "noThemes": "Ingen egendefinerte temaer importert ennå.",
+                    "missingAssets": "Manglende tema eiendeler"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "Integrasjoner",
+            "description": "Konfigurasjonsinndelingen utenfor roblox",
+            "serverNotifierCard": {
+                "title": "Server posisjons notifikator",
+                "description": "Få beskjed når klienten kobler til en server."
+            },
+            "rpcCard": {
+                "title": "Discord RPC (ush)",
+                "description": "Erstatt Roblox Rich Presence med Crush's"
+            }
+        },
+        "installations": {
+            "installations": "Installasjoner",
+            "customVersion": {
+                "title": "Installer en egendefinert Roblox versjon",
+                "description": "Hopp over oppdateringskontroll og nedlasting av versjonen. Standardverdien er sist. Ugyldig versjon vil ikke bli lastet ned og vil gå tilbake til nyeste versjon."
+            }
+        },
+        "fastflag": {
+            "fastflag": "Fast Flags",
+            "description": "Legg til/fjern Roblox Fastflags og konfigurasjoner.",
+            "flagTable": {
+                "texboxFlagName": "Flagg navn",
+                "texboxFlagValue": "Verdi",
+                "buttonAdd": "Legg til",
+                "search": "Søk etter alle fflager...",
+                "searchNotFound": "Ingen flagg funnet som samsvarer med søket ditt.",
+                "flagCol": {
+                    "deleteNote": "Slett flagg",
+                    "name": "Flagg navn",
+                    "type": "type",
+                    "value": "verdi"
+                }
+            }
+        },
+        "mod": {
+            "mod": "Mod",
+            "tab": {
+                "modManagement": {
+                    "title": "Mod Administrasjon",
+                    "description": "Behandle mods Roblox mods.",
+                    "addModButton": "Add A Mod",
+                    "noModsFound": "Vi fant ingen modifikasjoner her, Yuppies.",
+                    "noModsFoundCreateButton": "Opprett din første mod",
+                    "modCards": {
+                        "toggleNoteDisable": "Deaktiver Modifikasjon",
+                        "toggleNoteEnable": "Aktiver Modifikasjon",
+                        "renameNote": "Gi nytt navn mod",
+                        "openFolderNote": "Åpne Modifikasjon Mappe",
+                        "deleteNote": "Slett Modifikasjon",
+                        "layoutNote": "ods oppsett inspirert av Frostraps mods manager",
+                        "description": "Aktiver innlasting av mod og angi plassering for mod mappe."
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "Forhåndsbygde Modifikasjoner",
+                    "description": "Installer ferdig-til-bruk mods.",
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Endre din Roblox markør til eldre versjoner.",
+                        "dropdown": {
+                            "default": "Standard"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "Endre din roblox skrift til det du vil.",
+                        "button": "Endre skrifttype"
+                    }
+                },
+                "communityMods": {
+                    "title": "Samfunn Modifikasjoner",
+                    "description": "Utforsk mods laget av samfunnet.",
+                    "notice": {
+                        "title": "Ingen mod ennå",
+                        "description": "Vi har ikke noen samfunn mods enda. Vær den første til å bidra og hjelpe oss med å vokse samlingen!",
+                        "submissionButton": "Send inn en mod "
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "Innstillinger",
+            "aboutCard": {
+                "title": "Om",
+                "description": "Informasjon om denne knusningsbygningen",
+                "builtOn": "Bygget på: {date}",
+                "commitHash": "Send hash: {hash}"
+            },
+            "languageCard": {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+            "donateCard": {
+                "title": "Doner",
+                "description": "Elsker du knus? Doner til Mally for å støtte arbeidet sitt!",
+                "button": "Doner"
+            }
+        }
+    }
+}
