@@ -183,6 +183,11 @@
                 "commitHash" : "Commit hash: {hash}"
             },
 
+            "languageCard" : {
+                "title": "Language",
+                "description": "Select your preferred language for crush."
+            },
+
             "donateCard" : {
                 "title": "Donate",
                 "description": "Love crush? Donate to Mally to support his work!",
