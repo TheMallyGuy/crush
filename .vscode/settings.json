@@ -2,5 +2,6 @@
     "svelte.enable-ts-plugin": true,
     "i18n-ally.localesPaths": [
         "src-tauri/resources/locales"
-    ]
+    ],
+    "i18n-ally.keystyle": "nested"
 }
