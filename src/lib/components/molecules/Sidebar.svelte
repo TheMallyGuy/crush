@@ -10,27 +10,28 @@
         Menu,
     } from '@lucide/svelte'
     import { page } from '$app/stores'
+    import { _ } from 'svelte-i18n';
 
     let baseUiUrl: string = '/mainWin/Ui'
 
     const mainNav = [
         {
-            name: 'Integrations',
+            name: $_('pages.integrations.integrations'),
             icon: Puzzle,
             href: `${baseUiUrl}/integrations`,
         },
         {
-            name: 'Installation',
+            name: $_('pages.appearance.appearance'),
             icon: HardDrive,
             href: `${baseUiUrl}/installation`,
         },
-        { name: 'Mods', icon: Hammer, href: `${baseUiUrl}/mods/modManagement`, activePrefix: `${baseUiUrl}/mods` },
-        { name: 'FastFlag', icon: Flag, href: `${baseUiUrl}/fastflags` },
-        { name: 'Appearance', icon: Palette, href: `${baseUiUrl}/appearance` },
+        { name: $_('pages.mod.mod'), icon: Hammer, href: `${baseUiUrl}/mods/modManagement`, activePrefix: `${baseUiUrl}/mods` },
+        { name: $_('pages.fastflag.fastflag'), icon: Flag, href: `${baseUiUrl}/fastflags` },
+        { name: $_('pages.appearance.appearance'), icon: Palette, href: `${baseUiUrl}/appearance` },
     ]
 
     const footerNav = [
-        { name: 'Settings', icon: Settings, href: `${baseUiUrl}/settings` },
+        { name: $_('pages.settings.settings'), icon: Settings, href: `${baseUiUrl}/settings` },
     ]
 </script>
 
