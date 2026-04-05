@@ -6,7 +6,7 @@
 
 "files": [
   {
-    "source": "./src-tauri/resources/locales/default.json",
-    "translation": "./src-tauri/resources/locales/%locale%/default.json"
+    "source": "/src-tauri/resources/locales/default.json",
+    "translation": "/src-tauri/resources/locales/%locale%/default.json"
   }
 ]
