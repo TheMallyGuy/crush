@@ -6,6 +6,7 @@
         loadThemeFromAppData,
         removeTheme,
     } from '$lib/theme/themeLoader'
+    import { _ } from 'svelte-i18n'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
     import { Brush, Trash2, Plus, Check, RotateCcw } from '@lucide/svelte'
@@ -24,8 +25,8 @@
 
     let themeType = 'default'
     const typeOptions = [
-        { value: 'default', label: 'Default' },
-        { value: 'custom', label: 'Custom' },
+        { value: 'default', label: $_('pages.appearance.boostrapThemeCard.dropdown.default') },
+        { value: 'custom', label: $_('pages.appearance.boostrapThemeCard.dropdown.custom') },
     ]
 
     let isInitialized = false
@@ -97,8 +98,8 @@
 
     onMount(() => {
         invoke('set_rpc', {
-            details: 'A roblox boostrapper written from scratch',
-            stateText: 'In Appearance Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.appearance'),
         })
 
         refreshThemes()
@@ -119,17 +120,17 @@
 <div class="flex flex-col gap-8 max-w-2xl">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-            Appearance
+            {$_('pages.appearance.appearance')}
         </h1>
         <p class="text-stone-400 mt-1">
-            Customize the look and feel of the Roblox bootstrapper.
+            {$_('pages.appearance.description')}
         </p>
     </div>
 
     <div class="grid gap-6">
         <ExpandableSettingCard
-            title="Bootstrapper Theme"
-            description="Choose between the default Crush theme or a custom XML theme."
+            title={$_('pages.appearance.boostrapThemeCard.title')}
+            description={$_('pages.appearance.boostrapThemeCard.description')}
             isOpen={themeType === 'custom'}
         >
             <div slot="icon">
@@ -162,7 +163,7 @@
                             class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />
-                            Import New
+                            {$_('pages.appearance.boostrapThemeCard.customDropDownContents.importNew')}
                         </button>
                     {/if}
                 </div>
@@ -171,7 +172,7 @@
                     <div class="flex flex-col gap-2">
                         {#if themes.length === 0}
                             <p class="text-xs text-stone-500 italic py-2">
-                                No custom themes imported yet.
+                                {$_('pages.appearance.boostrapThemeCard.customDropDownContents.noThemes')}
                             </p>
                         {:else}
                             <div class="grid gap-2">
@@ -241,7 +242,7 @@
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 14c-.77 1.333.192 3 1.732 3z"
                                 />
                             </svg>
-                            <p class="font-semibold">Missing Theme Assets</p>
+                            <p class="font-semibold">{$_('pages.appearance.boostrapThemeCard.customDropDownContents.missingAssets')}</p>
                         </div>
                         <ul
                             class="list-disc list-inside text-xs opacity-80 space-y-0.5 ml-1"

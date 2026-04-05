@@ -1,0 +1,194 @@
+{
+    "rpc" : {
+        "general" : "A roblox bootrapper written from scratch",
+
+        "integrations" : "In Intergrations Route",
+        "installation" : "In Installations Route",
+        "fastflag" : "In Fastflag Route",
+        "mod" : "In Mod Route",
+        "appearance" : "In Appearance Route",
+
+        "rust" : {
+            "watcher" : {
+                "general" : "Playing roblox",
+
+                "idle" : "Not in a game",
+                "playing" : "In {}"
+            }
+        }
+    },
+
+    "typescript" : {
+        "downloader" : {
+            "updateChecking" : "Checking for updates",
+            "findingBestRegion" : "Finding the best download region...",
+            
+            "preparingForDownload" : "Preparing for download",
+            "fetchingUrls" : "Fetching asset URLs...",
+            "downloadingAssets" : "Downloading assets...",
+            "extractingFiles" : "Extracting files...",
+            "xmlWriting" : "Writing AppSettings.xml...",
+
+            "versionSaving" : "Saving version info...",
+            "installationComplete" : "Installation complete!",
+
+            "packageDownloadFailed" : "Failed to download {packageName}: {error}"
+        }
+    },
+
+    "elements" : {
+        "launchBar" : "Launch"
+    },
+
+    "pages" : {
+        "choiceWin" : {
+            "title" : "Crush",
+
+            "playRoblox" : "Play Roblox",
+            "config" : "Config"
+        },
+
+        "boostrapWin" : {
+            "cancel" : "Cancel",
+            "retry" : "Retry"
+        },
+
+        "appearance" : {
+            "appearance": "Appearance",
+            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "boostrapThemeCard" : {
+                "title": "Bootstrapper Theme",
+                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "dropdown" : {
+                    "default": "Default (Crush)",
+                    "custom": "Custom"
+                },
+                "customDropDownContents" : {
+                    "importNew" : "Import New",
+                    "noThemes" : "No custom themes imported yet.",
+                    "missingAssets" : "Missing Theme Assets"
+                }
+            }
+        },
+        "integrations" : {
+            "integrations": "Integrations",
+            "description": "Config intergrations outside roblox",
+            "serverNotifierCard" : {
+                "title": "Server Location Notifier",
+                "description": "Get notify when client connect to a server."
+            },
+            "rpcCard" : {
+                "title": "Discord RPC (Crush)",
+                "description": "Replace the Roblox Rich Presence with Crush's"
+            }
+        },
+        "installations" : {
+            "installations": "Installations",
+            "customVersion" : {
+                "title" : "Install a custom Roblox version",
+                "description" : "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+            }
+        },
+
+        "fastflag" : {
+            "fastflag": "Fast Flags",
+            "description": "Add/Remove Roblox Fastflags and configurations.",
+
+            "flagTable" : {
+                "texboxFlagName": "Flag name",
+                "texboxFlagValue": "Value",
+                "buttonAdd": "Add",
+                "search": "Search all fflags...",
+                "searchNotFound": "No flags found matching your search.",
+
+                "flagCol" : {
+                    "deleteNote": "Delete Flag",
+
+                    "name" : "flag name",
+                    "type" : "type",
+                    "value" : "value"
+                }
+            }
+        },
+        "mod" : {
+            "mod": "Mod",
+
+            "tab": {
+
+                "modManagement" : {
+                    "title": "Mod Management",
+                    "description": "Manage your mods Roblox mods.",
+
+                    "addModButton": "Add A Mod",
+                    "noModsFound" : "We found no mods here, Yuppies.",
+                    "noModsFoundCreateButton" : "Create your first mod",
+
+                    "modCards" : {
+                        "toggleNoteDisable": "Disable Mod",
+                        "toggleNoteEnable": "Enable Mod",
+                        "renameNote": "Rename Mod",
+                        "openFolderNote": "Open Mod Folder",
+                        "deleteNote": "Delete Mod",
+                        "layoutNote" : "Mods layout inspired by Frostrap's mods manager",
+
+
+                        "description": "Enable mod loading and set the mod folder location."
+                    }
+                },
+
+                "prebuiltMods" : {
+                    "title": "Prebuilt Mods",
+                    "description": "Install ready-to-use mods.",
+
+                    "cursorCard": {
+                        "title": "Cursor",
+                        "description": "Change your Roblox cursor to older versions.",
+
+                        "dropdown" : {
+                            "default" : "Default"
+                        }
+                    },
+
+                    "customFontCard": {
+                        "title": "Custom Font",
+                        "description": "Change your roblox font to whatever you like.",
+
+                        "button" : "Change Font"
+                    }
+
+                },
+
+                "communityMods" : {
+                    "title": "Community Mods",
+                    "description": "Explore mods created by the community.",
+
+                    "notice" : {
+                        "title": "No mod yet",
+                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
+                        "submissionButton" : "Submit a mod "
+                    }
+                }
+
+            }
+        },
+
+        "settings" : {
+            "settings": "Settings",
+            
+            "aboutCard" : {
+                "title": "About",
+                "description": "Information about this crush build",
+
+                "builtOn" : "Built on: {date}",
+                "commitHash" : "Commit hash: {hash}"
+            },
+
+            "donateCard" : {
+                "title": "Donate",
+                "description": "Love crush? Donate to Mally to support his work!",
+
+                "button" : "Donate"
+            }
+        }
+    }
+}

@@ -210,7 +210,7 @@ async fn handle_log_line(
         log::info!("left game");
         state.activity = Activity::default();
         let rpc_state = app.state::<RpcState>();
-        let _ = apply_rpc(&rpc_state.client, "Idle", "Not in game").await;
+        let _ = apply_rpc(&rpc_state.client, "Playing Roblox", "Not in game").await;
     }
 
     Ok(())

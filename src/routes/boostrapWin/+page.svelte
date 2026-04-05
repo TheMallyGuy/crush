@@ -26,6 +26,7 @@
     import { get } from 'svelte/store'
     import { page } from '$app/stores'
     import { load } from '@tauri-apps/plugin-store'
+    import { _ } from 'svelte-i18n'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -103,15 +104,13 @@
     }
 
     async function runBootstrap() {
-        const store = await load('config.json')
+        const store = await load("config.json");
         const savedInstallation = await store.get<Installation>('installation')
 
         error = false
         errorMessage = ''
         done = false
-        status = 'Preparing...'
-        textValues['StatusText'] = 'Preparing...'
-        textValues = { ...textValues }
+        handleProgress({ type: 'status', message: 'Preparing...' })
 
         try {
             const version = await downloadRoblox(
@@ -122,13 +121,10 @@
             )
 
             done = true
-            status = 'Applying modification'
-            textValues['StatusText'] = 'Applying modification'
-            textValues = { ...textValues }
+            handleProgress({ type: 'status', message: 'Applying modification' })
             await applyMods(version)
-            status = 'Launching'
-            textValues['StatusText'] = 'Launching'
-            textValues = { ...textValues }
+
+            handleProgress({ type: 'status', message: 'Launching' })
             const url: string = $deepLinkUrl ?? ''
             await launchPlayer(version, url)
             await invoke('watch_logs')
@@ -148,16 +144,13 @@
                 await goto('/mainWin/choiceWin')
             } else {
                 setTimeout(() => {
-                    // wait before killing to prevent crash
                     win.close()
                 }, 100)
             }
         } catch (e: any) {
             error = true
             errorMessage = e.message || String(e)
-            status = `Error: ${errorMessage}`
-            textValues['StatusText'] = status
-            textValues = { ...textValues }
+            handleProgress({ type: 'status', message: `Error: ${errorMessage}` })
             console.error('Bootstrap failed:', e)
         }
     }
@@ -467,7 +460,7 @@
                         on:click={runBootstrap}
                         class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
                     >
-                        Retry
+                        {$_("pages.boostrapWin.retry")}
                     </button>
                 {/if}
                 <button
@@ -476,7 +469,7 @@
                         ? 'flex-1'
                         : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
-                    <span class="font-medium">Cancel</span>
+                    <span class="font-medium">{$_("pages.boostrapWin.cancel")}</span>
                 </button>
             </div>
         </div>

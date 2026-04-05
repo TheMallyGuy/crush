@@ -6,6 +6,7 @@
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
     import { type Intergrations } from '$lib/types';
+    import { _ } from 'svelte-i18n';
 
     let crushRpc = false
     let serverLocationNotifier = false
@@ -25,8 +26,8 @@
         await loadConfig()
 
         await invoke('set_rpc', {
-            details: 'A roblox bootrapper written from scratch',
-            stateText: 'In Intergrations Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.integrations'),
         })
     })
 
@@ -48,18 +49,18 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Intergrations
+                {$_('pages.integrations.integrations')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Config intergrations outside roblox
+                {$_('pages.integrations.description')}
             </p>
         </div>
     </div>
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title="Server Location Notifier"
-            description="Get notify when client connect to a server."
+            title={$_('pages.integrations.serverNotifierCard.title')}
+            description={$_('pages.integrations.serverNotifierCard.description')}
             icon={Bell}
         >
             <Switch
@@ -69,8 +70,8 @@
             />
         </SettingCard>
         <SettingCard
-            title="Discord RPC (Crush)"
-            description="Replace the Roblox Rich Presence with Crush's"
+            title={$_('pages.integrations.rpcCard.title')}
+            description={$_('pages.integrations.rpcCard.description')}
             icon={Plug}
         >
             <Switch

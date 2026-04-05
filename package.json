@@ -33,6 +33,7 @@
         "@tauri-apps/plugin-updater": "~2",
         "@xmldom/xmldom": "^0.9.9",
         "concurrently": "^9.2.1",
+        "svelte-i18n": "^4.0.1",
         "tailwindcss": "^4.2.1",
         "tauri-plugin-fs-pro-api": "^2.4.0"
     },
