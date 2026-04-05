@@ -1,7 +1,9 @@
 {
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "boostrap",
-    "windows": ["CrushBoostrap"],
+    "windows": [
+        "CrushBoostrap"
+    ],
     "permissions": [
         "core:default",
         "opener:default",
@@ -13,27 +15,52 @@
         "core:window:allow-show",
         {
             "identifier": "fs:allow-create",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
         },
         {
             "identifier": "fs:allow-mkdir",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
         },
         {
             "identifier": "fs:allow-write-file",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
         },
         {
             "identifier": "fs:allow-read-file",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
         },
         {
             "identifier": "fs:allow-exists",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
         },
         {
             "identifier": "fs:allow-read-dir",
-            "allow": ["$APPCACHE/**", "$APPDATA/**"]
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
+        },
+        {
+            "identifier": "fs:allow-read-text-file",
+            "allow": [
+                "$RESOURCE/**",
+                "$APPDATA/**"
+            ]
         },
         "fs:default",
         {
