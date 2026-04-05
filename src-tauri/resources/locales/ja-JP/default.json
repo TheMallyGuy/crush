@@ -1,96 +1,96 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "ゼロから書かれたrobloxブートラッパー",
+        "integrations": "統合ルート内",
+        "installation": "インストールルート内",
+        "fastflag": "Fastflagルート内",
+        "mod": "モッドルート中",
+        "appearance": "外観ルート",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Robloxをプレイする",
+                "idle": "はない、",
+                "playing": "イン"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "アップデートの確認中...",
+            "findingBestRegion": "最適なダウンロード地域を探しています...",
+            "preparingForDownload": "ダウンロードするクリップを準備中...",
+            "fetchingUrls": "アセットのURLを取得しています...",
+            "downloadingAssets": "アセットをダウンロード中...",
+            "extractingFiles": "すべてのファイルを展開",
+            "xmlWriting": "AppSettings.xmlを書き込んでいます...",
+            "versionSaving": "バージョン情報を保存しています...",
+            "installationComplete": "インストール完了",
+            "packageDownloadFailed": "ダウンロードできませんでした"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "立ち上げ"
     },
     "pages": {
         "choiceWin": {
             "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "playRoblox": "Robloxをプレイ",
+            "config": "構成"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "取り消す",
+            "retry": "再試行"
         },
         "appearance": {
             "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "description": "Robloxブートストラッパーの外観をカスタマイズします。",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "ブートストラッパーのテーマ",
+                "description": "デフォルトのクラッシュテーマまたはカスタムXMLテーマのいずれかを選択します。",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "デフォルト（クラッシュ）",
+                    "custom": "カスタム"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "新規インポート",
+                    "noThemes": "カスタムテーマはまだインポートされていません。",
+                    "missingAssets": "不足しているテーマアセット"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "統合",
+            "description": "Robloxの外部で統合を構成する",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "サーバー位置通知",
+                "description": "クライアントがサーバーに接続したときに通知を取得します。"
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "title": "Discord RPC （クラッシュ）",
+                "description": "Roblox Rich PresenceをCrushの"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "インストール",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "カスタムRobloxバージョンをインストールする",
+                "description": "更新チェックをスキップして、バージョンをダウンロードします。デフォルト値はlatestです。無効なバージョンはダウンロードされず、最新バージョンにフォールバックされます。"
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "高速フラグ",
+            "description": "Roblox Fastflagsと設定を追加/削除します。",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "フラグ名",
+                "texboxFlagValue": "値",
+                "buttonAdd": "追加",
+                "search": "すべてのフラグを検索...",
+                "searchNotFound": "検索に一致するフラグは見つかりませんでした。",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "フラグを削除します:",
+                    "name": "フラグ名",
+                    "type": "種別",
+                    "value": "値"
                 }
             }
         },
@@ -98,64 +98,64 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "モッド管理",
+                    "description": "モッドRobloxモッドを管理します。",
+                    "addModButton": "モッドを追加",
+                    "noModsFound": "ここにモッドは見つかりませんでした、ヤッピー。",
+                    "noModsFoundCreateButton": "最初のモッドを作成する",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "モッドを無効にする",
+                        "toggleNoteEnable": "MODを有効にする",
+                        "renameNote": "モッドの名前を変更",
+                        "openFolderNote": "Modフォルダーを開く",
+                        "deleteNote": "MODを削除",
+                        "layoutNote": "フロストラップのモッドマネージャーにインスパイアされたモッドレイアウト",
+                        "description": "MODの読み込みを有効にし、MODフォルダーの場所を設定します。"
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "あらかじめ構築されたモッド",
+                    "description": "すぐに使えるMODをインストールします。",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "カーソル",
+                        "description": "Robloxカーソルを古いバージョンに変更します。",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "デフォルト"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "カスタム フォント",
+                        "description": "Robloxフォントを好きなように変更します。",
+                        "button": "フォントを変更"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "コミュニティモッド",
+                    "description": "コミュニティが作成したモッドをご覧ください。",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "まだモッドがありません",
+                        "description": "コミュニティモッドはまだありません。最初に貢献して、私たちがコレクションを成長させるのを手伝ってください！",
+                        "submissionButton": "MODを送信する"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "設定",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "情報",
+                "description": "このクラッシュビルドに関する情報",
+                "builtOn": "ビルド基盤： {date}",
+                "commitHash": "コミットハッシュ： {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "言語",
+                "description": "押しつぶしたい言語を選択します。"
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "寄付",
+                "description": "クラッシュが大好きですか？マリーの作品を応援するために寄付しましょう！",
+                "button": "寄付"
             }
         }
     }

@@ -1,161 +1,161 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "처음부터 작성된 로블록스 부트래퍼",
+        "integrations": "Intergrations Route에서",
+        "installation": "설치 경로 내",
+        "fastflag": "패스트플래그 경로에서",
+        "mod": "모드 경로 내",
+        "appearance": "외관 경로에서",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "로블록스 플레이",
+                "idle": "게임에 없음",
+                "playing": "안"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "갱신 확인...",
+            "findingBestRegion": "최고의 다운로드 지역을 찾는 중...",
+            "preparingForDownload": "다운로드 준비 중",
+            "fetchingUrls": "자산 URL을 가져오는 중...",
+            "downloadingAssets": "애셋 다운로드 중...",
+            "extractingFiles": "파일 추출 중…",
+            "xmlWriting": "AppSettings.xml 쓰는 중...",
+            "versionSaving": "버전 정보 저장 중...",
+            "installationComplete": "설치가 완료되었습니다!",
+            "packageDownloadFailed": "다운로드하지 못했습니다"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "실행"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "\n\t\t\t\t크러시\t\t\t",
+            "playRoblox": "Roblox 플레이",
+            "config": "구성"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "취소",
+            "retry": "다시 시도"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "외형",
+            "description": "Roblox 부트스트래퍼의 모양과 느낌을 커스터마이징합니다.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Bootstrapper 테마",
+                "description": "기본 Crush 테마 또는 사용자 정의 XML 테마 중에서 선택합니다.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "기본값 (Crush)",
+                    "custom": "커스텀"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "새로 가져오기",
+                    "noThemes": "아직 가져온 사용자 정의 테마가 없습니다.",
+                    "missingAssets": "테마 자산 누락"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "인터그레이션",
+            "description": "Roblox 외부의 구성 통합",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "서버 위치 알림",
+                "description": "클라이언트가 서버에 연결되면 알림을 받습니다."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "로블록스 리치 프레즌스를 크러쉬로 교체"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "설치",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "맞춤형 Roblox 버전 설치",
+                "description": "업데이트 확인을 건너뛰고 버전을 다운로드하세요. 기본값은 최신입니다. 유효하지 않은 버전은 다운로드되지 않으며 최신 버전으로 대체됩니다."
             }
         },
         "fastflag": {
             "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "description": "Roblox Fastflag 및 구성을 추가/제거합니다.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "표식 이름",
+                "texboxFlagValue": "값",
+                "buttonAdd": "추가",
+                "search": "모든 fflag 검색...",
+                "searchNotFound": "검색 조건에 일치하는 플래그를 찾을 수 없습니다.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "표식 삭제",
+                    "name": "표식 이름",
+                    "type": "유형",
+                    "value": "값"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "모드",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "모드 관리",
+                    "description": "개조 부품 Roblox 개조 부품을 관리합니다.",
+                    "addModButton": "모드 추가",
+                    "noModsFound": "여기서 개조 부품을 찾지 못했습니다, Yuppies.",
+                    "noModsFoundCreateButton": "첫 번째 모드 만들기",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "MOD 사용중지",
+                        "toggleNoteEnable": "모드 활성화",
+                        "renameNote": "모드 이름 바꾸기",
+                        "openFolderNote": "모드 폴더 열기",
+                        "deleteNote": "모드 삭제",
+                        "layoutNote": "Frostrap의 모드 관리자에서 영감을 얻은 모드 레이아웃",
+                        "description": "MOD 로딩을 활성화하고 MOD 폴더 위치를 설정합니다."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "사전 제작 개조 부품",
+                    "description": "즉시 사용 가능한 모드를 설치하세요.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "커서",
+                        "description": "Roblox 커서를 이전 버전으로 변경하십시오.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "기본"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "맞춤 글꼴",
+                        "description": "원하는 대로 roblox 글꼴을 변경하세요.",
+                        "button": "글꼴 수정"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "커뮤니티 개조 부품",
+                    "description": "커뮤니티에서 만든 모드를 살펴보세요.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "아직 모드 없음",
+                        "description": "아직 커뮤니티 개조 부품이 없습니다. 가장 먼저 기여하고 컬렉션을 성장시킬 수 있도록 도와주세요!",
+                        "submissionButton": "모드 제출"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "설정",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "소개",
+                "description": "이 호감 구축에 대한 정보",
+                "builtOn": "빌트 일：",
+                "commitHash": "커밋 해시: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "언어",
+                "description": "선호하는 언어를 선택하세요."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "기부",
+                "description": "사랑에 빠지셨나요? 그의 작품을 지원하기 위해 Mally에 기부하세요!",
+                "button": "기부"
             }
         }
     }

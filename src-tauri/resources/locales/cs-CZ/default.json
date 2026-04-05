@@ -1,161 +1,161 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
+        "general": "Roblox bootrapper psaný od nuly",
+        "integrations": "V intergrační trase",
+        "installation": "V instalační trase",
+        "fastflag": "V trase Fastflag",
         "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "appearance": "Trasa ve vzhledu",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Hraní robloxu",
+                "idle": "Není součástí",
+                "playing": "In"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "Kontrola aktualizací...",
+            "findingBestRegion": "Hledá se nejlepší oblast stahování...",
+            "preparingForDownload": "Příprava ke stažení",
+            "fetchingUrls": "Načítání adres URL aktiva...",
+            "downloadingAssets": "Stahují se aktiva...",
+            "extractingFiles": "Rozbalují se všechny soubory",
+            "xmlWriting": "Zapisuje se AppSettings.xml...",
+            "versionSaving": "Ukládání informací o verzi...",
+            "installationComplete": "Instalace dokončena!",
+            "packageDownloadFailed": "Stažení se nepodařilo"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "Zahájit"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "mačkat",
+            "playRoblox": "Zahrajte si Roblox",
+            "config": "Nastavení"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Zrušit",
+            "retry": "Zkusit znovu"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Vzhled",
+            "description": "Přizpůsobte si vzhled a dojem z bootstrapperu Roblox.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Téma Bootstrapperu",
+                "description": "Vyberte si mezi výchozím motivem Crush nebo vlastním motivem XML.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Výchozí (rozdrcení)",
+                    "custom": "Vlastní"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Import nového souboru",
+                    "noThemes": "Zatím nebyly importovány žádné vlastní motivy.",
+                    "missingAssets": "Chybějící aktiva šablony"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Integrace",
+            "description": "Konfigurace interakcí mimo roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Oznámení o umístění serveru",
+                "description": "Získejte upozornění, když se klient připojí k serveru."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "title": "Discord RPC (rozdrtit)",
+                "description": "Vyměňte Roblox Rich Presence za Crush's"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Instalace",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Nainstalujte si vlastní verzi Robloxu",
+                "description": "Přeskočit kontrolu aktualizace a stáhnout verzi. Výchozí hodnota je nejnovější. Neplatná verze se nestáhne a přejde na nejnovější verzi."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Rychlé vlajky",
+            "description": "Přidat/odebrat Roblox Fastflags a konfigurace.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "Název příznaku",
+                "texboxFlagValue": "Hodnota",
+                "buttonAdd": "Přidat",
+                "search": "Prohledat všechny fflagy...",
+                "searchNotFound": "Nebyly nalezeny žádné příznaky odpovídající vašemu vyhledávání.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Smazat příznak",
+                    "name": "Název příznaku",
+                    "type": "typ",
+                    "value": "hodnota"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "Mod.",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Správa modů",
+                    "description": "Spravujte své mody Roblox mods.",
+                    "addModButton": "Přidat mod",
+                    "noModsFound": "Nenašli jsme zde žádné mody, Yuppies.",
+                    "noModsFoundCreateButton": "Vytvořte si svůj první mod",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Zakázat mod",
+                        "toggleNoteEnable": "Povolit mod",
+                        "renameNote": "Přejmenovat mod",
+                        "openFolderNote": "Otevřít složku Mod",
+                        "deleteNote": "Smazat mod",
+                        "layoutNote": "Rozvržení modů inspirované manažerem modů Frostrap",
+                        "description": "Povolte načítání modů a nastavte umístění složky modů."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Předpřipravené módy",
+                    "description": "Nainstalujte modifikace připravené k použití.",
                     "cursorCard": {
                         "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "description": "Změňte kurzor Roblox na starší verze.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "Původní nastavení"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Vlastní písmo",
+                        "description": "Změňte si písmo roblox na libovolné.",
+                        "button": "Změnit písmo"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Komunitní módy",
+                    "description": "Prozkoumejte modifikace vytvořené komunitou.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Zatím žádný mod",
+                        "description": "Zatím nemáme žádné komunitní módy. Buďte první, kdo přispěje a pomůže nám rozšiřovat kolekci!",
+                        "submissionButton": "Odeslat mod"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Nastavení",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "O nás",
+                "description": "Informace o této sestavě rozdrcení",
+                "builtOn": "Postaveno na: {date}",
+                "commitHash": "Potvrdit hash: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Jazyk",
+                "description": "Vyberte preferovaný jazyk pro zamilovanost."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Přispět",
+                "description": "Láska zamilovanost? Darujte Mally na podporu jeho práce!",
+                "button": "Přispět"
             }
         }
     }

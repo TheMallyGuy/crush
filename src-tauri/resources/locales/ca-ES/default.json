@@ -1,31 +1,31 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "Un roblox bootrapper escrit des de zero",
+        "integrations": "Ruta In Intergrations",
+        "installation": "A la ruta d'instal·lacions",
+        "fastflag": "A Fastflag Route",
+        "mod": "A Mod Route",
+        "appearance": "En la ruta de l'aparença",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Jugar a roblox",
+                "idle": "No en un joc",
+                "playing": "Dins "
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "S&apos; estan comprovant les actualitzacions...",
+            "findingBestRegion": "S'està cercant la millor regió de descàrrega...",
+            "preparingForDownload": "Preparant la descàrrega",
+            "fetchingUrls": "S'estan obtenint els URL dels actius...",
+            "downloadingAssets": "S'estan descarregant actius...",
+            "extractingFiles": "S&apos; estan extraient tots els fitxers",
+            "xmlWriting": "S'està escrivint AppSettings.xml...",
+            "versionSaving": "S'està desant la informació de la versió...",
+            "installationComplete": "S'ha completat la instal·lació!",
+            "packageDownloadFailed": "Ha fallat en baixa una aparença@ info"
         }
     },
     "elements": {
@@ -33,64 +33,64 @@
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
+            "title": "Penjat",
+            "playRoblox": "Juga a Roblox",
             "config": "Config"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Cancel·lar",
+            "retry": "Tornar a intentar"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Aparença",
+            "description": "Personalitza l'aspecte i la sensació del Roblox bootstrapper.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Tema Bootstrapper",
+                "description": "Tria entre el tema Crush per defecte o un tema XML personalitzat.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Per defecte (Crush)",
+                    "custom": "Personalitzat"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Importar nou",
+                    "noThemes": "Encara no s'ha importat cap tema personalitzat.",
+                    "missingAssets": "Falten actius del tema"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Integracions",
+            "description": "Configurar integracions fora de roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Notificador d'ubicació del servidor",
+                "description": "Rep una notificació quan el client es connecti a un servidor."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Substitueix Roblox Rich Presence per Crush's"
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Instalaciones",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Instal·la una versió personalitzada de Roblox",
+                "description": "Omet la comprovació d'actualització i descarrega la versió. El valor per defecte és l'últim. La versió no vàlida no es descarregarà i tornarà a la versió més recent."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Marques ràpides",
+            "description": "Afegeix/elimina Fastflags i configuracions de Roblox.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "Nom de la bandera",
+                "texboxFlagValue": "Valor",
+                "buttonAdd": "Afegeix",
+                "search": "Cerca totes les fflags...",
+                "searchNotFound": "No s'han trobat banderes que coincideixin amb la cerca.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Suprimeix la marca",
+                    "name": "nom de la bandera",
+                    "type": "tipus",
+                    "value": "valor"
                 }
             }
         },
@@ -98,64 +98,64 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Gestió de mods",
+                    "description": "Gestiona les teves modificacions Mods de Roblox.",
+                    "addModButton": "Afegeix un mod",
+                    "noModsFound": "No hem trobat mods aquí, Yuppies.",
+                    "noModsFoundCreateButton": "Crea el teu primer mod",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Desactiva el mod",
+                        "toggleNoteEnable": "Habilita el mod",
+                        "renameNote": "Canvia el nom de Mod",
+                        "openFolderNote": "Obre la carpeta Mod",
+                        "deleteNote": "Suprimeix la modificació",
+                        "layoutNote": "Disseny de mods inspirat en el gestor de mods de Frostrap",
+                        "description": "Habilita la càrrega de mods i estableix la ubicació de la carpeta mod."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Mods preconstruïts",
+                    "description": "Instal·leu mods llestos per utilitzar.",
                     "cursorCard": {
                         "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "description": "Canvia el cursor de Roblox a versions anteriors.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "Per defecte"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Tipus de lletra personalitzat",
+                        "description": "Canvia el tipus de lletra roblox pel que vulguis.",
+                        "button": "Canvia el tipus de lletra"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Mods de la comunitat",
+                    "description": "Descobreix els mods creats per la comunitat.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Encara no hi ha cap mod",
+                        "description": "Encara no tenim cap modificació de la comunitat. Sigues el primer a contribuir i ajuda'ns a fer créixer la col·lecció!",
+                        "submissionButton": "Envia un mod"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Configuració",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "Quant a",
+                "description": "Informació sobre aquesta construcció de trituració",
+                "builtOn": "Construïda a partir de: {date}",
+                "commitHash": "Hash de comissió: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Llengua",
+                "description": "Selecciona l'idioma que prefereixis per fer crush."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Donar",
+                "description": "Love crush? Fes una donació a la Mally per donar suport a la seva feina!",
+                "button": "Donar"
             }
         }
     }
