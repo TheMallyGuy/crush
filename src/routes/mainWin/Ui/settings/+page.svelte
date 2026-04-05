@@ -4,37 +4,66 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import type { BuildInfo } from '$lib/types'
-    import { Heart } from '@lucide/svelte'
-    import { Info } from '@lucide/svelte'
+    import { Heart, Info, Languages } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
-    import {Languages} from '@lucide/svelte'
-    import { locale, locales } from 'svelte-i18n';
-    import { get } from 'svelte/store'
-    import { _ } from 'svelte-i18n'
+    import { locale, locales, _, waitLocale } from 'svelte-i18n'
+    import { derived } from 'svelte/store'
+    import { load } from '@tauri-apps/plugin-store'
 
     const Arona = '/Arona.png'
     let info: BuildInfo
     let hash: string
     let buildtime: string
 
-    const localeList = get(locales);
+    const LOCALE_NAMES: Record<string, string> = {
+        af: 'Afrikaans',
+        ar: 'العربية',
+        ca: 'Català',
+        cs: 'Čeština',
+        da: 'Dansk',
+        de: 'Deutsch',
+        el: 'Ελληνικά',
+        en: 'English',
+        'es-ES': 'Español',
+        fi: 'Suomi',
+        fr: 'Français',
+        he: 'עברית',
+        hu: 'Magyar',
+        it: 'Italiano',
+        ja: '日本語',
+        ko: '한국어',
+        nl: 'Nederlands',
+        no: 'Norsk',
+        pl: 'Polski',
+        'pt-BR': 'Português (Brasil)',
+        vi: 'Tiếng Việt',
+    }
 
-    const dropdownOptions = localeList.map((loc) => ({
-        label: loc,
-        value: loc
-    }));
+    const dropdownOptions = derived(locales, ($locales) =>
+        $locales.map((loc) => ({
+            label: LOCALE_NAMES[loc] ?? loc,
+            value: loc,
+        }))
+    )
 
-    let currentLocale
+    let currentLocale: string
 
     onMount(async () => {
         info = await invoke('crush')
-        currentLocale = get(locale)
-
+        currentLocale = $locale ?? 'en'
         hash = info.hash
         buildtime = info.build_date
     })
+
+    async function handleLanguage() {
+        let config = await load('config.json')
+        locale.set(currentLocale)
+        config.set('language', currentLocale)
+        config.save()
+        await waitLocale()
+    }
 
     async function handleDonate() {
         openUrl('https://mally.qzz.io/donate')
@@ -55,10 +84,11 @@
         description={$_('pages.settings.languageCard.description')}
         icon={Languages}
     >
-        <Dropdown slot="action"
+        <Dropdown
+            slot="action"
             bind:value={currentLocale}
-            options={dropdownOptions}
-            on:select={(e) => locale.set(e.detail)}
+            options={$dropdownOptions}
+            on:change={handleLanguage}
         />
     </SettingCard>
 
@@ -68,8 +98,16 @@
         icon={Info}
     >
         <div>
-            <p class="sm">{$_('pages.settings.aboutCard.builtOn', { values: { date: buildtime } })}</p>
-            <p class="sm">{$_('pages.settings.aboutCard.commitHash', { values: { hash } })}</p>
+            <p class="sm">
+                {$_('pages.settings.aboutCard.builtOn', {
+                    values: { date: buildtime },
+                })}
+            </p>
+            <p class="sm">
+                {$_('pages.settings.aboutCard.commitHash', {
+                    values: { hash },
+                })}
+            </p>
         </div>
     </ExpandableSettingCard>
 
@@ -78,6 +116,8 @@
         description={$_('pages.settings.donateCard.description')}
         icon={Arona}
     >
-        <Button variant="secondary" on:click={handleDonate}>{$_('pages.settings.donateCard.button')}</Button>
+        <Button variant="secondary" on:click={handleDonate}
+            >{$_('pages.settings.donateCard.button')}</Button
+        >
     </ExpandableSettingCard>
 </div>

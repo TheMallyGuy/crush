@@ -42,7 +42,7 @@
         ],
         "resources": [
             "./resources/**/*.png",
-            "./resources/locales/*.json",
+            "./resources/locales/**/*.json",
 
             "./resources/tortellini.jpg"
         ]
