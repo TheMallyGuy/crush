@@ -36,7 +36,18 @@
         }
     },
 
+    "elements" : {
+        "launchBar" : "Launch"
+    },
+
     "pages" : {
+        "choiceWin" : {
+            "title" : "Crush",
+
+            "playRoblox" : "Play Roblox",
+            "config" : "Config"
+        },
+
         "appearance" : {
             "appearance": "Appearance",
             "description": "Customize the look and feel of the Roblox bootstrapper.",

@@ -3,6 +3,7 @@
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
+    import { _ } from 'svelte-i18n';
 
     async function launchBoostrap() {
         await invoke('create_or_focus_window', {
@@ -32,6 +33,6 @@
         on:click={launchBoostrap}
     >
         <Rocket class="size-4 mr-2" />
-        Launch
+        {$_('elements.launchBar')}
     </Button>
 </div>

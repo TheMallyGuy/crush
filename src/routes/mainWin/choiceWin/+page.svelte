@@ -5,6 +5,7 @@
     import { load } from '@tauri-apps/plugin-store'
     import { Gamepad2, Wrench, Info } from '@lucide/svelte'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
+    import { _ } from 'svelte-i18n'
 
     let firstLaunchValue: boolean | undefined
 
@@ -103,7 +104,7 @@
             class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
         >
             <Gamepad2 class="size-5" />
-            <span class="font-medium">Play Roblox</span>
+            <span class="font-medium">{$_('pages.choiceWin.playRoblox')}</span>
         </button>
 
         <div class="flex flex-row gap-2 w-full">
@@ -112,7 +113,7 @@
                 class="w-1/2 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
             >
                 <Wrench class="size-5" />
-                Config
+                {$_('pages.choiceWin.config')}
             </button>
 
             <button
