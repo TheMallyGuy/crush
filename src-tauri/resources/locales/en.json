@@ -18,6 +18,24 @@
         }
     },
 
+    "typescript" : {
+        "downloader" : {
+            "updateChecking" : "Checking for updates",
+            "findingBestRegion" : "Finding the best download region...",
+            
+            "preparingForDownload" : "Preparing for download",
+            "fetchingUrls" : "Fetching asset URLs...",
+            "downloadingAssets" : "Downloading assets...",
+            "extractingFiles" : "Extracting files...",
+            "xmlWriting" : "Writing AppSettings.xml...",
+
+            "versionSaving" : "Saving version info...",
+            "installationComplete" : "Installation complete!",
+
+            "packageDownloadFailed" : "Failed to download {packageName}: {error}"
+        }
+    },
+
     "pages" : {
         "appearance" : {
             "appearance": "Appearance",

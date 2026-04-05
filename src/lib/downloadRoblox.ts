@@ -4,6 +4,8 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
 import { exists, BaseDirectory, writeFile, mkdir } from '@tauri-apps/plugin-fs'
 import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
+import { get } from 'svelte/store'
+import { _ } from 'svelte-i18n'
 
 const extractRoots: Record<string, string> = {
     'RobloxApp.zip': '',
@@ -152,7 +154,7 @@ async function resolveBestRegion(
     let bestRegion = await conf.get<string>('bestRegion')
 
     if (!bestRegion) {
-        onProgress({ type: 'status', message: 'Finding best region...' })
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.findingBestRegion') })
         bestRegion = await invoke<string>('get_best_region')
         await conf.set('bestRegion', bestRegion)
         await conf.save()
@@ -181,24 +183,24 @@ async function performFullInstallation(
     onProgress: ProgressCallback,
     version?: string
 ): Promise<string> {
-    onProgress({ type: 'status', message: 'Preparing download...' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.preparingForDownload') })
     const bestRegion = await resolveBestRegion(onProgress)
 
-    onProgress({ type: 'status', message: 'Fetching asset URLs...' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.fetchingUrls') })
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         region: bestRegion,
         ...(version && { version }),
     })
 
-    onProgress({ type: 'status', message: 'Downloading assets...' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.downloadingAssets') })
     await downloadAssets(assetsUrls, onProgress)
 
-    onProgress({ type: 'status', message: 'Extracting files...' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.extractingFiles') })
     const version_hash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
     await extractAll(version_hash, onProgress)
 
-    onProgress({ type: 'status', message: 'Writing AppSettings.xml...' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.xmlWriting') })
     await writeAppSettings(version_hash)
 
     return version_hash
@@ -230,16 +232,16 @@ export async function downloadRoblox(
             await performFullInstallation(onProgress, version)
         }
 
-        onProgress({ type: 'status', message: 'Saving version info...' })
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
         const updatedList = Array.from(new Set([...versionList, version]))
         await versionStore.set('versions', updatedList)
         await versionStore.save()
 
-        onProgress({ type: 'status', message: 'Installation complete!' })
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
         return version  
     }
 
-    onProgress({ type: 'status', message: 'Checking for updates' })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.updateChecking') })
 
     const needsUpdate = await checkForUpdates({ versions: versionList })
     const isMissing = !(await checkInstallationExists(versionList.at(-1)))
@@ -247,12 +249,12 @@ export async function downloadRoblox(
     if (needsUpdate || isMissing) {
         const version_hash = await performFullInstallation(onProgress)
 
-        onProgress({ type: 'status', message: 'Saving version info...' })
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
         const updatedList = Array.from(new Set([...versionList, version_hash]))
         await versionStore.set('versions', updatedList)
         await versionStore.save()
 
-        onProgress({ type: 'status', message: 'Installation complete!' })
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
     }
 
     return await invoke('get_latest_version_player')
@@ -337,7 +339,7 @@ async function downloadMissingPackage(
     const url = `https://setup.rbxcdn.com/${versionGuid}-${packageName}`
     const res = await fetch(url)
     if (!res.ok) {
-        throw new Error(`Failed to download ${packageName}: ${res.status}`)
+        throw new Error(get(_)('typescript.downloader.packageDownloadFailed', { values : { packageName, error: res.statusText } }))
     }
 
     const buffer = await res.arrayBuffer()
