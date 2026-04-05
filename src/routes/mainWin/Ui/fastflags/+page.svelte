@@ -14,8 +14,8 @@
 
     onMount(async () => {
         await invoke('set_rpc', {
-            details: 'A roblox boostrapper written from scratch',
-            stateText: 'In Fastflag Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.fastflag'),
         })
         version = await getLatestVersion()
         flags = await getFastFlags(version)

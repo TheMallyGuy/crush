@@ -1,4 +1,14 @@
 {
+    "rpc" : {
+        "general" : "A roblox bootrapper written from scratch",
+
+        "integrations" : "In Intergrations Route",
+        "installation" : "In Installations Route",
+        "fastflag" : "In Fastflag Route",
+        "mod" : "In Mod Route",
+        "appearance" : "In Appearance Route"
+    },
+
     "pages" : {
         "appearance" : {
             "appearance": "Appearance",

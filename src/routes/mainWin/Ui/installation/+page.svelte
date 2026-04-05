@@ -23,8 +23,8 @@
 
     onMount(async () => {
         await invoke('set_rpc', {
-            details: 'A roblox boostrapper written from scratch',
-            stateText: 'In Installation Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.installation'),
         })
 
         await loadConfig()

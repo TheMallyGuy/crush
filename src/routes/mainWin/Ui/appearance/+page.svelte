@@ -98,8 +98,8 @@
 
     onMount(() => {
         invoke('set_rpc', {
-            details: 'A roblox boostrapper written from scratch',
-            stateText: 'In Appearance Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.appearance'),
         })
 
         refreshThemes()

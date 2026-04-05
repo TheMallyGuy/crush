@@ -3,6 +3,9 @@
     import { Archive, Hammer, HouseHeart } from "@lucide/svelte";
     import { goto } from '$app/navigation';
     import { _ } from "svelte-i18n";
+    import { onMount } from "svelte"
+    import { invoke } from '@tauri-apps/api/core'
+
 
     function handleModManagementClick() {
         goto('/mainWin/Ui/mods/modManagement');
@@ -13,6 +16,14 @@
     function handleCommunityModsClick() {
         goto('/mainWin/Ui/mods/communityMod');
     }
+
+    onMount(() => {
+        invoke('set_rpc', {
+            details: $_('rpc.general'),
+            stateText: $_('rpc.mod'),
+        })
+    })
+
 </script>
 
 <div class="flex flex-col gap-4">

@@ -26,8 +26,8 @@
         await loadConfig()
 
         await invoke('set_rpc', {
-            details: 'A roblox bootrapper written from scratch',
-            stateText: 'In Intergrations Route',
+            details: $_('rpc.general'),
+            stateText: $_('rpc.integrations'),
         })
     })
 
