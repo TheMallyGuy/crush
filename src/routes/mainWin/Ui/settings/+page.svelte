@@ -73,6 +73,7 @@
         config.set('language', currentLocale)
         config.save()
         await waitLocale()
+        location.reload()
     }
 
     async function handleDonate() {
