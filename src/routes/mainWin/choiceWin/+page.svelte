@@ -82,7 +82,7 @@
         }
 
         await invoke('set_rpc', {
-            details: 'A roblox boostrapper written from scratch',
+            details: $_('rpc.general'),
             stateText: 'Loading...',
         })
         firstLaunchValue = await checkLaunch()
