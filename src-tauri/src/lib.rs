@@ -1,12 +1,12 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::archive::{extract_files_from_zip, extract_zip};
+use commands::crush::crush;
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::rename::rename;
-use commands::crush::crush;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
@@ -103,7 +103,7 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
         let state = app_handle.state::<RpcState>();
 
         if let Err(e) = crate::rpc::start_rpc(&state, "1484521125550620813").await {
-           log::error!("RPC error: {}", e);
+            log::error!("RPC error: {}", e);
         };
     });
 }
