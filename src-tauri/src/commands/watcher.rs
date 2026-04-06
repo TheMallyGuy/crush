@@ -13,6 +13,7 @@ use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
+use serde_json::{json, Value};
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -27,6 +28,7 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
+    instance_id: Option<String>,
     in_game: bool,
 }
 
@@ -141,7 +143,7 @@ struct WatcherRegexes {
 impl WatcherRegexes {
     fn new() -> Self {
         Self {
-            join: Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+)").unwrap(),
+            join: Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap(),
             joined: Regex::new(r"serverId: ([0-9\.]+)\|").unwrap(),
             leave: Regex::new(r"Time to disconnect replication data").unwrap(),
             udmux: Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap(),
@@ -192,10 +194,13 @@ async fn handle_log_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     if let Some(caps) = regexes.join.captures(line) {
+        let instance_id = caps[1].to_string();
         let place_id: u64 = caps[2].parse().unwrap_or(0);
+        
         state.activity.place_id = Some(place_id);
+        state.activity.instance_id = Some(instance_id);
         state.activity.in_game = false;
-        log::info!("joining place {}", place_id);
+        log::info!("joining place {} instance {}", place_id, &state.activity.instance_id.as_deref().unwrap_or("?"));
     }
 
     if let Some(caps) = regexes.udmux.captures(line) {
@@ -270,6 +275,24 @@ async fn handle_joined_event(
     let should_rpc = store
         .get("intergrations")
         .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
+
+    // @pochita maybe try add error hanlding here idk
+    let mut history: Vec<Value> = store
+        .get("gameHistory")
+        .and_then(|v| v.as_array().cloned())
+        .unwrap_or_default();
+
+    let new_entry = json!({
+        "place_id": place_id,
+        "instance_id": state.activity.instance_id.clone().unwrap_or_default(),
+        "timestamp": chrono::Utc::now().to_rfc3339()
+    });
+
+    history.push(new_entry);
+
+    store.set("gameHistory", serde_json::Value::Array(history));
+
+    store.save().map_err(|e| e.to_string())?;
 
     if should_rpc {
         let now = Instant::now();
