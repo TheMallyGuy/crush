@@ -1,6 +1,8 @@
 use filthy_rich::{Activity, DiscordIPC};
 use tokio::sync::Mutex;
 
+// @pochita please add a new function that reconnect rpc and one for adding a custom button (if no button is added, its will not show buttons) 
+
 pub struct RpcState {
     pub client: Mutex<Option<DiscordIPC>>,
 }
