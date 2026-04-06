@@ -12,7 +12,6 @@ use commands::roblox_deployment::{
 };
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
-use filthy_rich::DiscordIPC;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
@@ -103,16 +102,9 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
     tauri::async_runtime::spawn(async move {
         let state = app_handle.state::<RpcState>();
 
-        let mut client = DiscordIPC::new("1484521125550620813")
-            .on_ready(|data| log::info!("Connected to user: {}", data.user.username));
-
-        if let Err(e) = client.run(true).await {
-            log::error!("RPC error: {:?}", e);
-            return;
-        }
-
-        let mut lock = state.client.lock().await;
-        *lock = Some(client);
+        if let Err(e) = crate::rpc::start_rpc(&state, "1484521125550620813").await {
+           log::error!("RPC error: {}", e);
+        };
     });
 }
 

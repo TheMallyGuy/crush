@@ -96,7 +96,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         if was_running && !running {
             state.activity = Activity::default();
             let rpc_state = app.state::<RpcState>();
-            let _ = kill_rpc(&rpc_state.client).await;
+            let _ = kill_rpc(&rpc_state).await;
         }
         was_running = running;
 
@@ -113,7 +113,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
 
                 if should_rpc {
                     apply_rpc(
-                        &app.state::<RpcState>().client,
+                        &app.state::<RpcState>(),
                         "Playing Roblox",
                         "Not in game",
                     )
@@ -214,8 +214,7 @@ async fn handle_log_line(
     if regexes.leave.is_match(line) && state.activity.in_game {
         log::info!("left game");
         state.activity = Activity::default();
-        let rpc_state = app.state::<RpcState>();
-        let _ = apply_rpc(&rpc_state.client, "Playing Roblox", "Not in game").await;
+        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
     }
 
     Ok(())
@@ -302,8 +301,7 @@ async fn handle_joined_event(
 
         if debounce_ok {
             if let Some(name) = fetch_place_name(place_id).await? {
-                let rpc_state = app.state::<RpcState>();
-                if let Err(e) = apply_rpc(&rpc_state.client, "Playing Roblox", &name).await {
+                if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
                     log::error!("RPC failed: {}", e);
                 }
                 state.last_rpc = Some(now);
