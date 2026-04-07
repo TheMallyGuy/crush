@@ -1,5 +1,6 @@
 <script lang="ts">
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import Button from '$lib/components/atoms/Button.svelte';
     import Switch from '$lib/components/atoms/Switch.svelte'
     import { Bell, Plug } from '@lucide/svelte';
     import { invoke } from '@tauri-apps/api/core'
@@ -7,6 +8,7 @@
     import { load } from '@tauri-apps/plugin-store'
     import { type Intergrations } from '$lib/types';
     import { _ } from 'svelte-i18n';
+    import { goto } from '$app/navigation'
 
     let crushRpc = false
     let serverLocationNotifier = false
@@ -79,6 +81,21 @@
                 bind:checked={crushRpc}
                 on:change={handleChanges}
             />
+        </SettingCard>
+
+        <SettingCard
+            title={$_('pages.integrations.gameHistoryCard.title')}
+            description={$_('pages.integrations.gameHistoryCard.description')}
+        >
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto('integrations/gameHistory')
+                }}
+            >
+                {$_('pages.integrations.gameHistoryCard.button')}
+            </Button>
         </SettingCard>
     </div>
 </div>
