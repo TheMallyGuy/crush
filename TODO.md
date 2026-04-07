@@ -37,9 +37,9 @@ Crush is about **55%** done! <!-- @pochita 18/33 tasks completed -->
     - [x] Mods
     - [x] FastFlag
     - [x] Appearance
-    - [ ] Settings
+    - [x] Settings
     - [ ] Hello homepage
-    - [ ] Game history
+    - [x] Game history
 
 - [ ] Support localization <--- this next maybe
 - [x] Launch menu
