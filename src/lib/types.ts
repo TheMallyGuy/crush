@@ -1,4 +1,4 @@
-export type Intergrations = {
+export type Integrations = {
     crushRpc: boolean
     serverLocationNotifier: boolean
 }
@@ -16,7 +16,7 @@ export type Config = {
     installation: Installation
     FirstLaunch: string
     bestRegion: string
-    intergrations: Intergrations
+    integrations: Integrations
 }
 
 export type Mod = {

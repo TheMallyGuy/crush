@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "Un bootrapper roblox écrit à partir de zéro",
-        "integrations": "In Intergrations Route",
+        "integrations": "In Integrations Route",
         "installation": "Dans le chemin des installations",
         "fastflag": "Dans l'itinéraire Fastflag",
         "mod": "In Mod Route",
@@ -60,7 +60,7 @@
         },
         "integrations": {
             "integrations": "Intégrations",
-            "description": "Config intergrations hors roblox",
+            "description": "Config integrations hors roblox",
             "serverNotifierCard": {
                 "title": "Notifier l'emplacement du serveur",
                 "description": "Recevez une notification lorsque le client se connecte à un serveur."

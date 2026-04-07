@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "처음부터 작성된 로블록스 부트래퍼",
-        "integrations": "Intergrations Route에서",
+        "integrations": "Integrations Route에서",
         "installation": "설치 경로 내",
         "fastflag": "패스트플래그 경로에서",
         "mod": "모드 경로 내",

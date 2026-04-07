@@ -99,12 +99,15 @@ pub async fn get_download_urls(
     version_hash: Option<&str>,
     region_url: Option<&str>,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-    let latest = latest_version().await?;
-    let raw_hash = version_hash.unwrap_or(&latest.client_version_upload);
+    let raw_hash = if let Some(hash) = version_hash {
+        hash.to_string()
+    } else {
+        latest_version().await?.client_version_upload
+    };
 
     let base_version = format!(
         "version-{}",
-        raw_hash.strip_prefix("version-").unwrap_or(raw_hash)
+        raw_hash.strip_prefix("version-").unwrap_or(&raw_hash)
     );
 
     let base_url = match region_url {

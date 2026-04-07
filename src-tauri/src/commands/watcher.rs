@@ -107,8 +107,11 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                 state.offset = 0;
                 state.activity = Activity::default();
 
-                let should_rpc = store
-                    .get("intergrations")
+                let integrations = store
+                    .get("integrations")
+                    .or_else(|| store.get("intergrations"));
+
+                let should_rpc = integrations
                     .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
                 if should_rpc {
@@ -239,7 +242,11 @@ async fn handle_udmux_event(
         .map_err(|e| e.to_string())?;
     let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
 
-    let should_notify = store.get("intergrations").is_some_and(|v| {
+    let integrations = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"));
+
+    let should_notify = integrations.is_some_and(|v| {
         v.get("serverLocationNotifier")
             .and_then(|n| n.as_bool())
             .unwrap_or(false)
@@ -276,9 +283,12 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
-    let should_rpc = store
-        .get("intergrations")
-        .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
+    let integrations = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"));
+
+    let should_rpc =
+        integrations.is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
     let mut history: Vec<Value> = match store.get("gameHistory") {
         Some(v) if v.is_array() => v.as_array().cloned().unwrap_or_default(),
