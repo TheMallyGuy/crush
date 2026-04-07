@@ -41,7 +41,7 @@ Crush is about **55%** done! <!-- @pochita 18/33 tasks completed -->
     - [ ] Hello homepage
     - [x] Game history
 
-- [ ] Support localization <--- this next maybe
+- [x] Support localization
 - [x] Launch menu
     - [x] Customization
         - [x] Support bloxstrap's custom launch menu (possible)
