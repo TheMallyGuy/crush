@@ -7,6 +7,7 @@
     import { onMount } from "svelte";
     import { fetch } from "@tauri-apps/plugin-http";
     import { page } from "$app/state"
+    import { goto } from "$app/navigation"
  
     let isLoading = true;
     let gameHistory: {
@@ -111,9 +112,8 @@
                 const universeData = await getUniverse(entry.place_id, store);
                 const details = universeData
                     ? await getGameDetails(entry.place_id, universeData.universeId, store)
-                    : { name: "Unknown Game", imageUrl: null };
+                    : { name: $_('pages.integrations.gameHistory.gameHistoryCard.titleUnknown'), imageUrl: null };
  
-                console.log(`Resolved game: ${details.name} (Place ID: ${entry.place_id}, imageurl : ${details.imageUrl})`);
                 return {
                     placeId: entry.place_id,
                     instanceId: entry.instance_id,
@@ -141,17 +141,22 @@
                 {$_('pages.integrations.gameHistory.description')}
             </p>
         </div>
-        <Button variant="secondary" onclick={handleClearHistory}>
-            Clear history
-        </Button>
+        <div class="flex items-center gap-2">
+            <Button variant="danger" onclick={handleClearHistory}>
+                {$_('pages.integrations.gameHistory.clearHistory')}
+            </Button>
+            <Button variant="secondary" onclick={() => goto('../integrations')}>
+                {$_('pages.integrations.gameHistory.backToIntegrations')}
+            </Button>
+        </div>
     </div>
     {#if isLoading}
-        <p>Loading, please wait a moment...</p>
+        <p>{$_('pages.integrations.gameHistory.gameHistoryLoading')}</p>
     {:else}
         {#each gameHistory as game}
             <ImageCard
                 title={game.title}
-                description="Last played: {game.timestamp.toLocaleDateString()}"
+                description={$_('pages.integrations.gameHistory.gameHistoryCard.lastPlayed', { values : { time: game.timestamp.toLocaleString() }})}
                 image={game.imageUrl ?? undefined}
             >
                 <Button variant="primary">
