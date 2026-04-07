@@ -2,7 +2,10 @@
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "default",
     "description": "Capability for the main window",
-    "windows": ["crushBoostrapChoiceWindow", "CrushMainWindow"],
+    "windows": [
+        "crushBoostrapChoiceWindow",
+        "CrushMainWindow"
+    ],
     "permissions": [
         "core:default",
         "fs-pro:default",
@@ -29,7 +32,25 @@
         "core:window:allow-set-size",
         "core:window:allow-center",
         "core:window:allow-show",
-        "http:default",
+        {
+            "identifier": "http:default",
+            "allow": [
+                {
+                    "url": "https://games.roblox.com/"
+                },
+                {
+                    "url": "https://thumbnails.roblox.com/"
+                },
+                {
+                    "url": "https://apis.roblox.com/"
+                }
+            ],
+            "deny": [
+                {
+                    "url": "https://placeholder.com"
+                }
+            ]
+        },
         "log:default",
         "fs:default",
         "opener:allow-open-path",
