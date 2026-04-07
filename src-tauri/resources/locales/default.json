@@ -80,6 +80,19 @@
             "rpcCard" : {
                 "title": "Discord RPC (Crush)",
                 "description": "Replace the Roblox Rich Presence with Crush's"
+            },
+
+            "gameHistory" : {
+                "title" : "Your game history",
+                "description" : "View & play your recently played games.",
+
+                "gameHistoryEmpty" : "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
+
+                "gameHistoryCard" : {
+                    "play" : "Play",
+                    "deeplink" : "Copy DeepLink"
+                }
+
             }
         },
         "installations" : {
