@@ -1,5 +1,5 @@
 use crate::rpc::{apply_rpc, RpcState};
-use tauri::{Manager};
+use tauri::Manager;
 
 #[tauri::command]
 pub async fn set_rpc(

@@ -36,11 +36,7 @@ pub async fn start_rpc(state: &RpcState, client_id: &str) -> Result<(), String> 
     Ok(())
 }
 
-pub async fn apply_rpc(
-    state: &RpcState,
-    details: &str,
-    state_text: &str,
-) -> Result<(), String> {
+pub async fn apply_rpc(state: &RpcState, details: &str, state_text: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
         let activity = Activity::new().details(details).state(state_text).build();

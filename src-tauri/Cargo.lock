@@ -1004,7 +1004,7 @@ dependencies = [
  "vergen",
  "walkdir",
  "window-vibrancy 0.7.1",
- "zip 8.5.0",
+ "zip 8.5.1",
 ]
 
 [[package]]
@@ -1639,9 +1639,9 @@ dependencies = [
 
 [[package]]
 name = "filthy-rich"
-version = "0.8.1"
+version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7e6b129a945f485325788db400ca29627c9a0d740d3a084f043bba44b43897c"
+checksum = "7cc02f46a433dfeb038e047ed6d03f268efce4f2eac7660d514868405b1ab2fc"
 dependencies = [
  "anyhow",
  "serde",
@@ -5946,9 +5946,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-deep-link"
-version = "2.4.7"
+version = "2.4.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94deb2e2e4641514ac496db2cddcfc850d6fc9d51ea17b82292a0490bd20ba5b"
+checksum = "3db49816aee496a9b200d55b55ab6ae73fd50847c79f2fabc7ee20871fa75c95"
 dependencies = [
  "dunce",
  "plist",
@@ -8212,9 +8212,9 @@ dependencies = [
 
 [[package]]
 name = "zip"
-version = "8.5.0"
+version = "8.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2726508a48f38dceb22b35ecbbd2430efe34ff05c62bd3285f965d7911b33464"
+checksum = "dcab981e19633ebcf0b001ddd37dd802996098bc1864f90b7c5d970ce76c1d59"
 dependencies = [
  "aes",
  "bzip2",
