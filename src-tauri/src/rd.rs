@@ -71,6 +71,7 @@ pub async fn best_region() -> Option<&'static str> {
 
     let fastest = results
         .into_iter()
+        .filter(|&(_, time)| time != u128::MAX)
         .min_by_key(|&(_, time)| time)
         .map(|(url, _)| url);
 

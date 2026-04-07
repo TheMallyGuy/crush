@@ -3,6 +3,8 @@ use crate::rpc::{apply_rpc, kill_rpc, RpcState};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::Deserialize;
+use serde_json::{json, Value};
+use std::sync::OnceLock;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
@@ -13,7 +15,6 @@ use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
-use serde_json::{json, Value};
 
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
@@ -56,14 +57,15 @@ struct GamesResponse {
 }
 
 fn is_roblox_running(system: &mut System) -> bool {
+    static ROBLOX_REGEX: OnceLock<Regex> = OnceLock::new();
+    let regex = ROBLOX_REGEX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+
     system.refresh_processes(ProcessesToUpdate::All, true);
 
-    system.processes().values().any(|p| {
-        p.name()
-            .to_string_lossy()
-            .to_lowercase()
-            .contains("robloxplayerbeta")
-    })
+    system
+        .processes()
+        .values()
+        .any(|p| regex.is_match(&p.name().to_string_lossy()))
 }
 
 fn get_latest_log() -> Option<PathBuf> {
@@ -72,19 +74,17 @@ fn get_latest_log() -> Option<PathBuf> {
     std::fs::read_dir(dir)
         .ok()?
         .flatten()
-        .filter(|e| e.path().extension().map(|x| x == "log").unwrap_or(false))
+        .filter(|e| e.file_name().to_string_lossy().ends_with(".log"))
         .filter(|e| {
             e.metadata()
                 .and_then(|m| m.created())
-                .map(|t| t.elapsed().unwrap_or_default().as_secs() < 20)
-                .unwrap_or(false)
+                .is_ok_and(|t| t.elapsed().is_ok_and(|d| d.as_secs() < 20))
         })
         .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
         .map(|e| e.path())
 }
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
-    let regexes = WatcherRegexes::new();
     let mut state = WatcherState::default();
     let mut system = System::new();
     let mut was_running = false;
@@ -112,19 +112,15 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                     .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
                 if should_rpc {
-                    apply_rpc(
-                        &app.state::<RpcState>(),
-                        "Playing Roblox",
-                        "Not in game",
-                    )
-                    .await
-                    .ok();
+                    apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game")
+                        .await
+                        .ok();
                 }
             }
         }
 
         if let Some(path) = state.current_file.clone() {
-            if let Err(e) = process_log_file(&app, &path, &regexes, &mut state, &store).await {
+            if let Err(e) = process_log_file(&app, &path, &mut state, &store).await {
                 log::error!("Error processing log file: {}", e);
             }
         }
@@ -133,21 +129,28 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
     }
 }
 
-struct WatcherRegexes {
-    join: Regex,
-    joined: Regex,
-    leave: Regex,
-    udmux: Regex,
-}
+struct WatcherRegexes;
 
 impl WatcherRegexes {
-    fn new() -> Self {
-        Self {
-            join: Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap(),
-            joined: Regex::new(r"serverId: ([0-9\.]+)\|").unwrap(),
-            leave: Regex::new(r"Time to disconnect replication data").unwrap(),
-            udmux: Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap(),
-        }
+    fn join() -> &'static Regex {
+        static REGEX: OnceLock<Regex> = OnceLock::new();
+        REGEX.get_or_init(|| {
+            Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap()
+        })
+    }
+    fn joined() -> &'static Regex {
+        static REGEX: OnceLock<Regex> = OnceLock::new();
+        REGEX.get_or_init(|| Regex::new(r"serverId: ([0-9\.]+)\|").unwrap())
+    }
+    fn leave() -> &'static Regex {
+        static REGEX: OnceLock<Regex> = OnceLock::new();
+        REGEX.get_or_init(|| Regex::new(r"Time to disconnect replication data").unwrap())
+    }
+    fn udmux() -> &'static Regex {
+        static REGEX: OnceLock<Regex> = OnceLock::new();
+        REGEX.get_or_init(|| {
+            Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap()
+        })
     }
 }
 
@@ -162,7 +165,6 @@ struct WatcherState {
 async fn process_log_file(
     app: &AppHandle,
     path: &PathBuf,
-    regexes: &WatcherRegexes,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
@@ -178,7 +180,7 @@ async fn process_log_file(
     let mut line = String::new();
 
     while reader.read_line(&mut line).unwrap_or(0) > 0 {
-        handle_log_line(app, &line, regexes, state, store).await?;
+        handle_log_line(app, &line, state, store).await?;
         line.clear();
     }
 
@@ -189,29 +191,32 @@ async fn process_log_file(
 async fn handle_log_line(
     app: &AppHandle,
     line: &str,
-    regexes: &WatcherRegexes,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    if let Some(caps) = regexes.join.captures(line) {
+    if let Some(caps) = WatcherRegexes::join().captures(line) {
         let instance_id = caps[1].to_string();
         let place_id: u64 = caps[2].parse().unwrap_or(0);
-        
+
         state.activity.place_id = Some(place_id);
         state.activity.instance_id = Some(instance_id);
         state.activity.in_game = false;
-        log::info!("joining place {} instance {}", place_id, &state.activity.instance_id.as_deref().unwrap_or("?"));
+        log::info!(
+            "joining place {} instance {}",
+            place_id,
+            state.activity.instance_id.as_deref().unwrap_or("?")
+        );
     }
 
-    if let Some(caps) = regexes.udmux.captures(line) {
+    if let Some(caps) = WatcherRegexes::udmux().captures(line) {
         handle_udmux_event(app, caps.get(1).unwrap().as_str(), store).await?;
     }
 
-    if regexes.joined.is_match(line) {
+    if WatcherRegexes::joined().is_match(line) {
         handle_joined_event(app, state, store).await?;
     }
 
-    if regexes.leave.is_match(line) && state.activity.in_game {
+    if WatcherRegexes::leave().is_match(line) && state.activity.in_game {
         log::info!("left game");
         state.activity = Activity::default();
         let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
@@ -275,37 +280,39 @@ async fn handle_joined_event(
         .get("intergrations")
         .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
-    // @pochita maybe try add error hanlding here idk
-    let mut history: Vec<Value> = store
-        .get("gameHistory")
-        .and_then(|v| v.as_array().cloned())
-        .unwrap_or_default();
+    let mut history: Vec<Value> = match store.get("gameHistory") {
+        Some(v) if v.is_array() => v.as_array().cloned().unwrap_or_default(),
+        Some(_) => {
+            log::warn!("gameHistory is not an array, resetting");
+            Vec::new()
+        }
+        None => Vec::new(),
+    };
 
-    let new_entry = json!({
+    history.push(json!({
         "place_id": place_id,
-        "instance_id": state.activity.instance_id.clone().unwrap_or_default(),
+        "instance_id": state.activity.instance_id.as_deref().unwrap_or_default(),
         "timestamp": chrono::Utc::now().to_rfc3339()
-    });
+    }));
 
-    history.push(new_entry);
-
-    store.set("gameHistory", serde_json::Value::Array(history));
-
+    store.set("gameHistory", Value::Array(history));
     store.save().map_err(|e| e.to_string())?;
 
-    if should_rpc {
-        let now = Instant::now();
-        let debounce_ok = state
-            .last_rpc
-            .is_none_or(|last| now.duration_since(last).as_secs() > 2);
+    if !should_rpc {
+        return Ok(());
+    }
 
-        if debounce_ok {
-            if let Some(name) = fetch_place_name(place_id).await? {
-                if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
-                    log::error!("RPC failed: {}", e);
-                }
-                state.last_rpc = Some(now);
+    let now = Instant::now();
+    let debounce_ok = state
+        .last_rpc
+        .is_none_or(|last| now.duration_since(last).as_secs() > 2);
+
+    if debounce_ok {
+        if let Some(name) = fetch_place_name(place_id).await? {
+            if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
+                log::error!("RPC failed: {}", e);
             }
+            state.last_rpc = Some(now);
         }
     }
 
