@@ -2,7 +2,7 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte';
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug } from '@lucide/svelte';
+    import { Bell, Plug, History } from '@lucide/svelte';
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -86,6 +86,7 @@
         <SettingCard
             title={$_('pages.integrations.gameHistoryCard.title')}
             description={$_('pages.integrations.gameHistoryCard.description')}
+            icon={History}
         >
             <Button
                 slot="action"
