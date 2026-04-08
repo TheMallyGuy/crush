@@ -1,10 +1,3 @@
-<!--
-    NOTICE DO NOT REMOVE!!!
-    This page is in fact, genarated by Gemini & Claude AI. Although I'm good at making things, but using these tools to make this easier.
-    You can call this "AI slop" or whatever, but its a developer tools & I'd to use it.
-    Any opinion on this?  
--->
-
 <script lang="ts">
     import { downloadRoblox } from '$lib/downloadRoblox'
     import type {
