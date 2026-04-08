@@ -6,7 +6,7 @@
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-    import { type Intergrations } from '$lib/types';
+    import { type Integrations } from '$lib/types';
     import { _ } from 'svelte-i18n';
     import { goto } from '$app/navigation'
 
@@ -15,12 +15,15 @@
 
     async function loadConfig() {
         const store = await load('config.json')
-        const savedIntergrations =
-            await store.get<Intergrations>('intergrations')
+        let savedIntegrations = await store.get<Integrations>('integrations')
 
-        if (savedIntergrations) {
-            crushRpc = savedIntergrations.crushRpc
-            serverLocationNotifier = savedIntergrations.serverLocationNotifier
+        if (!savedIntegrations) {
+            savedIntegrations = await store.get<Integrations>('intergrations')
+        }
+
+        if (savedIntegrations) {
+            crushRpc = savedIntegrations.crushRpc
+            serverLocationNotifier = savedIntegrations.serverLocationNotifier
         }
     }
 
@@ -36,12 +39,12 @@
     async function handleChanges() {
         const store = await load('config.json')
 
-        const newIntergrations: Intergrations = {
+        const newIntegrations: Integrations = {
             crushRpc,
             serverLocationNotifier,
         }
 
-        await store.set('intergrations', newIntergrations)
+        await store.set('integrations', newIntegrations)
 
         await store.save()
     }

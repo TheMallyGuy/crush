@@ -20,7 +20,7 @@
 
     const variants = {
         primary:
-            'bg-sapphire text-white hover:brightness-110 active:scale-[0.98] shadow-glow-sapphire',
+            'bg-sapphire text-white hover:brightness-110 active:scale-[0.98]',
         secondary:
             'bg-stone-800 text-stone-200 hover:bg-stone-700 active:scale-[0.98]',
         outline:

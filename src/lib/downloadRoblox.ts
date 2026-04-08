@@ -78,12 +78,17 @@ async function downloadAssets(
     onProgress: ProgressCallback,
     limit = 4
 ) {
-    const queue = Array.from(new Set(assetsUrls))
-    const total = queue.length
+    const uniqueUrls = Array.from(new Set(assetsUrls))
+    const total = uniqueUrls.length
     let done = 0
+    let currentIndex = 0
 
     const workers = Array.from({ length: limit }, async () => {
-        for (let assetUrl = queue.shift(); assetUrl; assetUrl = queue.shift()) {
+        while (currentIndex < total) {
+            const index = currentIndex++
+            const assetUrl = uniqueUrls[index]
+            if (!assetUrl) break
+
             await downloadAssetFile(assetUrl, onProgress, ++done, total)
         }
     })
