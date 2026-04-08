@@ -27,6 +27,7 @@
     import { page } from '$app/stores'
     import { load } from '@tauri-apps/plugin-store'
     import { _ } from 'svelte-i18n'
+    import { info } from '@tauri-apps/plugin-log'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -126,6 +127,7 @@
 
             handleProgress({ type: 'status', message: 'Launching' })
             const url: string = $deepLinkUrl ?? ''
+            info(`Launching with url: ${url}`)
             await launchPlayer(version, url)
             await invoke('watch_logs')
 

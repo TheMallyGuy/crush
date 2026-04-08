@@ -6,10 +6,14 @@
     import { Gamepad2, Wrench, Info } from '@lucide/svelte'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { _ } from 'svelte-i18n'
+    import { deepLinkUrl } from '$lib/stores/deeplink'
 
     let firstLaunchValue: boolean | undefined
 
     async function launchBoostrap() {
+        deepLinkUrl.set(null)
+        localStorage.removeItem('deepLinkUrl') // deep clean
+
         await invoke('create_or_focus_window', {
             label: 'CrushBoostrap',
             url: 'boostrapWin',

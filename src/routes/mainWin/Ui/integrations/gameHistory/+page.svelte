@@ -9,6 +9,7 @@
     import { page } from "$app/state"
     import { goto } from "$app/navigation"
     import { deepLinkUrl } from "$lib/stores/deeplink"
+    import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
 
     let isLoading = true;
@@ -100,17 +101,24 @@
     async function playGame(placeId: number, instanceId?: string) {
         const win = getCurrentWindow()
 
-        const deeplink = `roblox://placeId=${placeId}&gameInstanceId=${instanceId ?? ""}`
+        const deeplink: string = `roblox://placeId=${placeId}&gameInstanceId=${instanceId ?? ""}`
 
-        deepLinkUrl.set(deeplink)
+        await deepLinkUrl.set(deeplink)
+    
+        await invoke('create_or_focus_window', {
+            label: 'CrushBoostrap',
+            url: 'boostrapWin',
+            title: 'Crush',
+            width: 500.0,
+            height: 350.0,
+            minWidth: 500,
+            minHeight: 350.0,
+        })
 
-        // @pochita please fix the problem idk its the boostrap deeplink bug (already fixed in /+layout.svelte)
-        if (
-            win.label === 'crushBoostrapChoiceWindow' &&
-            !window.location.pathname.includes('/boostrapWin')
-        ) {
-            goto('/boostrapWin')
-        }
+        setTimeout(() => {
+            // wait before killing to prevent crash
+            getCurrentWindow().close()
+        }, 100)
     }
 
     onMount(async () => {
