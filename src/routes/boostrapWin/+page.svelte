@@ -1,10 +1,3 @@
-<!--
-    NOTICE DO NOT REMOVE!!!
-    This page is in fact, genarated by Gemini & Claude AI. Although I'm good at making things, but using these tools to make this easier.
-    You can call this "AI slop" or whatever, but its a developer tools & I'd to use it.
-    Any opinion on this?  
--->
-
 <script lang="ts">
     import { downloadRoblox } from '$lib/downloadRoblox'
     import type {
@@ -69,65 +62,74 @@
     }
 
     async function setupWindow() {
-        const win = getCurrentWindow()
+        const win = getCurrentWindow();
+
         if (!state) {
-            await win.setSize(new LogicalSize(630, 363))
-            await win.center()
-            await win.show()
-            return
+            await win.setSize(new LogicalSize(630, 363));
+            await win.center();
+            await win.show();
+            return;
         }
 
         if (state.isHtmlTheme) {
-            await win.setSize(new LogicalSize(600, 400))
-            await win.center()
-        } else if (state.config) {
-            for (const el of state.config.elements) {
-                if (el.name) {
-                    textValues[el.name] =
-                        el.name === 'StatusText' ? 'Preparing...' : ''
-                }
-            }
-            textValues = { ...textValues }
+            await win.setSize(new LogicalSize(600, 400));
+            await win.center();
+            await win.show();
+            return;
+        }
 
-            const { config } = state
-            await win.setSize(new LogicalSize(config.width, config.height))
-            await win.center()
+        const config = state.config;
+        if (!config) {
+            await win.show();
+            return;
+        }
 
-            const titleBar = state.config.elements.find(
-                (e) => e.type === 'TitleBar'
-            )
-            if (titleBar?.props?.Title) {
-                await win.setTitle(titleBar.props.Title)
+        for (const el of config.elements) {
+            if (el.name) {
+                textValues[el.name] = el.name === 'StatusText' ? 'Preparing...' : '';
             }
         }
-        await win.show()
+        textValues = { ...textValues };
+
+        await win.setSize(new LogicalSize(config.width, config.height));
+        await win.center();
+
+        const titleBar = config.elements.find((e) => e.type === 'TitleBar');
+        if (titleBar?.props?.Title) {
+            await win.setTitle(titleBar.props.Title);
+        }
+
+        await win.show();
     }
 
     async function runBootstrap() {
         const store = await load("config.json");
-        const savedInstallation = await store.get<Installation>('installation')
+        const savedInstallation = await store.get<Installation>('installation');
 
-        error = false
-        errorMessage = ''
-        done = false
-        handleProgress({ type: 'status', message: 'Preparing...' })
+        error = false;
+        errorMessage = '';
+        done = false;
+        handleProgress({ type: 'status', message: 'Preparing...' });
+
+        let version: string;
+        try {
+            version = await downloadRoblox(
+                handleProgress,
+                savedInstallation?.version === 'latest' ? undefined : savedInstallation?.version
+            );
+        } catch (e: any) {
+            return handleError(e);
+        }
+
+        done = true;
+        handleProgress({ type: 'status', message: 'Applying modification' });
 
         try {
-            const version = await downloadRoblox(
-                handleProgress,
-                savedInstallation?.version === 'latest'
-                    ? undefined
-                    : savedInstallation?.version
-            )
-
-            done = true
-            handleProgress({ type: 'status', message: 'Applying modification' })
-            await applyMods(version)
-
-            handleProgress({ type: 'status', message: 'Launching' })
-            const url: string = $deepLinkUrl ?? ''
-            await launchPlayer(version, url)
-            await invoke('watch_logs')
+            await applyMods(version);
+            handleProgress({ type: 'status', message: 'Launching' });
+            const url: string = $deepLinkUrl ?? '';
+            await launchPlayer(version, url);
+            await invoke('watch_logs');
 
             await invoke('create_or_focus_window', {
                 label: 'crushBoostrapChoiceWindow',
@@ -137,22 +139,27 @@
                 height: 250.0,
                 minWidth: 500.0,
                 minHeight: 250.0,
-            })
+            });
 
-            const win = getCurrentWindow()
+            const win = getCurrentWindow();
             if (win.label === 'crushBoostrapChoiceWindow') {
-                await goto('/mainWin/choiceWin')
-            } else {
-                setTimeout(() => {
-                    win.close()
-                }, 100)
+                await goto('/mainWin/choiceWin');
+                return;
             }
+
+            setTimeout(() => {
+                win.close();
+            }, 100);
         } catch (e: any) {
-            error = true
-            errorMessage = e.message || String(e)
-            handleProgress({ type: 'status', message: `Error: ${errorMessage}` })
-            console.error('Bootstrap failed:', e)
+            handleError(e);
         }
+    }
+
+    function handleError(e: any) {
+        error = true;
+        errorMessage = e.message || String(e);
+        handleProgress({ type: 'status', message: `Error: ${errorMessage}` });
+        console.error('Bootstrap failed:', e);
     }
 
     onMount(async () => {
@@ -164,32 +171,38 @@
     })
 
     function getPosStyle(h?: string, v?: string) {
-        const styles = []
-        const transforms = []
+        const styles = [];
+        const transforms = [];
 
-        if (h === 'Right') {
-            styles.push('right:0')
-        } else if (h === 'Center') {
-            styles.push('left:50%')
-            transforms.push('translateX(-50%)')
-        } else {
-            styles.push('left:0')
+        switch (h) {
+            case 'Right':
+                styles.push('right:0');
+                break;
+            case 'Center':
+                styles.push('left:50%');
+                transforms.push('translateX(-50%)');
+                break;
+            default:
+                styles.push('left:0');
         }
 
-        if (v === 'Bottom') {
-            styles.push('bottom:0')
-        } else if (v === 'Center') {
-            styles.push('top:50%')
-            transforms.push('translateY(-50%)')
-        } else {
-            styles.push('top:0')
+        switch (v) {
+            case 'Bottom':
+                styles.push('bottom:0');
+                break;
+            case 'Center':
+                styles.push('top:50%');
+                transforms.push('translateY(-50%)');
+                break;
+            default:
+                styles.push('top:0');
         }
 
         if (transforms.length > 0) {
-            styles.push(`transform:${transforms.join(' ')}`)
+            styles.push(`transform:${transforms.join(' ')}`);
         }
 
-        return styles.map((s) => `${s};`).join('')
+        return styles.map((s) => `${s};`).join('');
     }
 
     function opStyle(op?: number) {

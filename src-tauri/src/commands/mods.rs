@@ -20,18 +20,29 @@ fn process_mod_entry(
     version_dir: impl AsRef<Path>,
 ) -> Option<String> {
     let src = entry.path();
-    let relative = src.strip_prefix(mod_dir).ok()?;
+    let Ok(relative) = src.strip_prefix(mod_dir) else {
+        return None;
+    };
     let dest = version_dir.as_ref().join(relative);
-    let rel_str = relative.to_string_lossy().to_string();
+    let rel_str = relative.to_string_lossy().into_owned();
 
     if is_file_up_to_date(src, &dest) {
         return Some(rel_str);
     }
 
-    let parent = dest.parent()?;
-    fs::create_dir_all(parent).ok()?;
+    let Some(parent) = dest.parent() else {
+        return None;
+    };
 
-    fs::copy(src, &dest).ok().map(|_| rel_str)
+    let Ok(_) = fs::create_dir_all(parent) else {
+        return None;
+    };
+
+    let Ok(_) = fs::copy(src, &dest) else {
+        return None;
+    };
+
+    Some(rel_str)
 }
 
 fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
@@ -43,12 +54,17 @@ fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
 
 /// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
 fn md5_file(path: &Path) -> Option<md5::Digest> {
-    let mut file = fs::File::open(path).ok()?;
+    let Ok(mut file) = fs::File::open(path) else {
+        return None;
+    };
     let mut context = md5::Context::new();
     let mut buffer = [0u8; 8192];
 
     loop {
-        let n = file.read(&mut buffer).ok()?;
+        let Ok(n) = file.read(&mut buffer) else {
+            return None;
+        };
+
         if n == 0 {
             break;
         }

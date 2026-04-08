@@ -6,7 +6,6 @@
     import { load } from "@tauri-apps/plugin-store";
     import { onMount } from "svelte";
     import { fetch } from "@tauri-apps/plugin-http";
-    import { page } from "$app/state"
     import { goto } from "$app/navigation"
     import { deepLinkUrl } from "$lib/stores/deeplink"
     import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -98,40 +97,41 @@
     }
     
     async function playGame(placeId: number, instanceId?: string) {
-        const win = getCurrentWindow()
+        const deeplink = `roblox://placeId=${placeId}&gameInstanceId=${instanceId ?? ""}`;
 
-        const deeplink = `roblox://placeId=${placeId}&gameInstanceId=${instanceId ?? ""}`
-
-        deepLinkUrl.set(deeplink)
-
-        // @pochita please fix the problem idk its the boostrap deeplink bug (already fixed in /+layout.svelte)
-        if (
-            win.label === 'crushBoostrapChoiceWindow' &&
-            !window.location.pathname.includes('/boostrapWin')
-        ) {
-            goto('/boostrapWin')
-        }
+        deepLinkUrl.set(deeplink);
+        goto('/boostrapWin');
     }
 
     onMount(async () => {
         const store = await load("config.json");
-        const rawData = await store.get<RawEntry[]>("gameHistory");
- 
-        const seen = new Map<number, RawEntry>();
-        for (const entry of rawData ?? []) {
-            const existing = seen.get(entry.place_id);
-            if (!existing || entry.timestamp > existing.timestamp) {
-                seen.set(entry.place_id, entry);
-            }
-        }
- 
+        const rawData = (await store.get<RawEntry[]>("gameHistory")) ?? [];
+
+        const latestEntries = Array.from(
+            rawData
+                .reduce((acc, entry) => {
+                    const existing = acc.get(entry.place_id);
+                    const currentTimestamp = new Date(entry.timestamp).getTime();
+                    const existingTimestamp = existing ? new Date(existing.timestamp).getTime() : 0;
+
+                    if (!existing || currentTimestamp > existingTimestamp) {
+                        acc.set(entry.place_id, entry);
+                    }
+                    return acc;
+                }, new Map<number, RawEntry>())
+                .values()
+        );
+
         const resolved = await Promise.all(
-            [...seen.values()].map(async (entry) => {
+            latestEntries.map(async (entry) => {
                 const universeData = await getUniverse(entry.place_id, store);
                 const details = universeData
                     ? await getGameDetails(entry.place_id, universeData.universeId, store)
-                    : { name: $_('pages.integrations.gameHistory.gameHistoryCard.titleUnknown'), imageUrl: null };
- 
+                    : {
+                          name: $_('pages.integrations.gameHistory.gameHistoryCard.titleUnknown'),
+                          imageUrl: null,
+                      };
+
                 return {
                     placeId: entry.place_id,
                     instanceId: entry.instance_id,
