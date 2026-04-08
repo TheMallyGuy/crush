@@ -82,6 +82,13 @@
                 "description": "Replace the Roblox Rich Presence with Crush's"
             },
 
+            "gameHistoryCard": {
+                "title" : "Your game history",
+                "description" : "View & play your recently played games.",
+                
+                "button" : "View"
+            },
+
             "gameHistory" : {
                 "title" : "Your game history",
                 "description" : "View & play your recently played games.",
