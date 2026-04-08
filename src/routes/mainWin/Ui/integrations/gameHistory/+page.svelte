@@ -8,7 +8,9 @@
     import { fetch } from "@tauri-apps/plugin-http";
     import { page } from "$app/state"
     import { goto } from "$app/navigation"
- 
+    import { deepLinkUrl } from "$lib/stores/deeplink"
+    import { getCurrentWindow } from '@tauri-apps/api/window'
+
     let isLoading = true;
     let gameHistory: {
         placeId: number;
@@ -94,7 +96,23 @@
 
         location.reload()
     }
- 
+    
+    async function playGame(placeId: number, instanceId?: string) {
+        const win = getCurrentWindow()
+
+        const deeplink = `roblox://placeId=${placeId}&gameInstanceId=${instanceId ?? ""}`
+
+        deepLinkUrl.set(deeplink)
+
+        // @pochita please fix the problem idk its the boostrap deeplink bug (already fixed in /+layout.svelte)
+        if (
+            win.label === 'crushBoostrapChoiceWindow' &&
+            !window.location.pathname.includes('/boostrapWin')
+        ) {
+            goto('/boostrapWin')
+        }
+    }
+
     onMount(async () => {
         const store = await load("config.json");
         const rawData = await store.get<RawEntry[]>("gameHistory");
@@ -159,11 +177,11 @@
                 description={$_('pages.integrations.gameHistory.gameHistoryCard.lastPlayed', { values : { time: game.timestamp.toLocaleString() }})}
                 image={game.imageUrl ?? undefined}
             >
-                <Button variant="primary">
+                <Button variant="primary" on:click={() => playGame(game.placeId, game.instanceId)}>
                     <Play class="mr-2" size={16} />
                     {$_('pages.integrations.gameHistory.gameHistoryCard.play')}
                 </Button>
-                <Button variant="secondary" onclick={() => navigator.clipboard.writeText(game.deeplink)}>
+                <Button variant="secondary" on:click={() => navigator.clipboard.writeText(game.deeplink)}>
                     <Link class="mr-2" size={16} />
                     {$_('pages.integrations.gameHistory.gameHistoryCard.deeplink')}
                 </Button>
