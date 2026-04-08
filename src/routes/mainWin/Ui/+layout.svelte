@@ -10,13 +10,13 @@
 
     <div class="flex-1 flex flex-col min-w-0">
         <main
-            class="flex-1 flex flex-col items-stretch min-w-0 overflow-y-auto p-10 gap-6"
+            class="flex-1 relative min-w-0 overflow-y-auto"
         >
             {#key $page.url.pathname}
                 <div
                     in:fly={{ x: 20, duration: 200, delay: 200 }}
                     out:fly={{ x: -20, duration: 200 }}
-                    class="flex flex-col gap-6"
+                    class="absolute inset-0 p-10 flex flex-col items-stretch gap-6"
                 >
                     <slot />
                 </div>
