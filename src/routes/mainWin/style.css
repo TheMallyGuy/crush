@@ -33,3 +33,25 @@ main {
     background-color: var(--color-obsidian);
     overflow: hidden;
 }
+
+@keyframes slide-in {
+    from { transform: translateX(30px); opacity: 0; }
+}
+@keyframes slide-out {
+    to { transform: translateX(-30px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(page-content) {
+        animation: 250ms ease both slide-out;
+    }
+    ::view-transition-new(page-content) {
+        animation: 250ms ease both slide-in;
+    }
+
+    /* keep the root (sidebar, footer) instant — no fade */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+}
