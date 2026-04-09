@@ -1,119 +1,119 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
+        "general": "Roblox Bootrapper, написаний з нуля",
         "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
+        "installation": "На шляху встановлення",
+        "fastflag": "У маршруті Fastflag",
         "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "appearance": "Зовнішній вигляд Маршрут",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Гра в roblox",
+                "idle": "Не в",
+                "playing": "Більше"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "Перевірка наявності оновлень...",
+            "findingBestRegion": "Пошук найкращого регіону для завантаження...",
+            "preparingForDownload": "Підготовка до завантаження",
+            "fetchingUrls": "Отримання URL-адрес активів...",
+            "downloadingAssets": "Завантаження ресурсів...",
+            "extractingFiles": "Розпаковування всіх файлів",
+            "xmlWriting": "Запис AppSettings.xml...",
+            "versionSaving": "Збереження інформації про версію...",
+            "installationComplete": "Встановлення завершено!",
+            "packageDownloadFailed": "Не вдалося звантажити оболонку@ info"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "Початок"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "Закоханість",
+            "playRoblox": "Відтворити Roblox",
+            "config": "Конфігурація"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Скасувати",
+            "retry": "Повторити спробу"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Зовнішній вигляд",
+            "description": "Налаштуйте зовнішній вигляд завантажувача Roblox.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Тема завантажувача",
+                "description": "Виберіть тему Crush за замовчуванням або користувацьку тему XML.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "За замовчуванням (Тиснява)",
+                    "custom": "Налаштування користувача"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Імпорт нової форми",
+                    "noThemes": "Користувацькі теми ще не імпортовані.",
+                    "missingAssets": "Відсутні ресурси теми"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Інтеграції",
+            "description": "Інтеграція конфігурації поза Roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Повідомлення про розташування сервера",
+                "description": "Отримувати сповіщення, коли клієнт підключається до сервера."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "title": "Discord RPC (Тиснява)",
+                "description": "Замініть Roblox Rich Presence на Crush's"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "Історія вашої гри",
+                "description": "Переглядайте та грайте в нещодавно зіграні ігри.",
+                "button": "Вид"
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
-                "backToIntegrations": "Back",
+                "title": "Історія вашої гри",
+                "description": "Переглядайте та грайте в нещодавно зіграні ігри.",
+                "gameHistoryEmpty": "Історія вашої гри порожня. Пограйте в ігри, щоб побачити їх тут! (Зверніть увагу, що не кожен сервер можна приєднати повторно)",
+                "gameHistoryLoading": "Завантаження, будь ласка, зачекайте хвилину...",
+                "clearHistory": "Очистити історію",
+                "backToIntegrations": "Назад",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "Невідома гра",
+                    "lastPlayed": "Останнє відтворення: When this track was last played",
+                    "play": "Грати",
+                    "deeplink": "Копіювати DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Інсталяції",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Встановіть спеціальну версію Roblox",
+                "description": "Пропустити перевірку оновлення та завантажити версію. Значення за замовчуванням є найпізнішим. Недійсна версія не буде завантажена і повернеться до останньої версії."
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "Примусово перевстановити Roblox",
+                "description": "Перевстановлюйте roblox щоразу, коли ви його запускаєте."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Швидкі прапорці",
+            "description": "Додавання/видалення прапорців Roblox Fast Flag та конфігурацій.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "Назва прапора",
+                "texboxFlagValue": "Значення",
+                "buttonAdd": "Додати",
+                "search": "Шукати всі f-флаги...",
+                "searchNotFound": "Не знайдено прапорців, що відповідають вашому пошуковому запиту.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Видалити прапор",
+                    "name": "ім 'я прапора",
+                    "type": "тип",
+                    "value": "вартість"
                 }
             }
         },
@@ -121,64 +121,64 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Управління модифікаціями",
+                    "description": "Керуйте своїми модами Roblox mods.",
+                    "addModButton": "Додати модифікацію",
+                    "noModsFound": "Ми не знайшли тут ніяких модів, Яппі.",
+                    "noModsFoundCreateButton": "Створіть свій перший мод",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Вимкнути модифікацію",
+                        "toggleNoteEnable": "Увімкнути модифікацію",
+                        "renameNote": "Перейменувати мод",
+                        "openFolderNote": "Відкрити папку модифікації",
+                        "deleteNote": "Видалити модифікацію",
+                        "layoutNote": "Макет модів натхненний менеджером модів Frostrap",
+                        "description": "Увімкнути завантаження модифікації та встановити розташування папки модифікації."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Готові моди",
+                    "description": "Встановіть готові до використання моди.",
                     "cursorCard": {
                         "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "description": "Змініть курсор Roblox на старіші версії.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "За замовчуванням"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Користувацький шрифт",
+                        "description": "Змініть шрифт roblox на будь-який інший.",
+                        "button": "Змінити шрифт"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Моди спільноти",
+                    "description": "Перегляньте моди, створені спільнотою.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Ще немає модифікації",
+                        "description": "У нас ще немає модів спільноти. Будьте першими, хто зробить свій внесок і допоможе нам збільшити колекцію!",
+                        "submissionButton": "Надіслати модифікацію"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Налаштування",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "Про застосунок",
+                "description": "Інформація про цю розчавлену збірку",
+                "builtOn": "Дата випуску",
+                "commitHash": "Зафіксувати хеш: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Мова",
+                "description": "Виберіть потрібну мову для розчарування."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Пожертвувати",
+                "description": "Любіть розчарування? Пожертвуйте Маллі, щоб підтримати його роботу!",
+                "button": "Пожертвувати"
             }
         }
     }

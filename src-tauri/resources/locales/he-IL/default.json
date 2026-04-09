@@ -1,184 +1,184 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "רובלוקס Bootrapper שנכתב מאפס",
+        "integrations": "במסלול Intergrations",
+        "installation": "במסלול ההתקנות",
+        "fastflag": "במסלול Fastflag",
+        "mod": "במסלול Mod",
+        "appearance": "במסלול המראה",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "משחק רובלוקס",
+                "idle": "לא במשחק",
+                "playing": "בתוך "
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "בודק אם יש עדכונים",
+            "findingBestRegion": "מחפש את אזור ההורדה הטוב ביותר...",
+            "preparingForDownload": "מתכונן להורדה",
+            "fetchingUrls": "משיג כתובות URL של המשאב...",
+            "downloadingAssets": "מוריד נכסים...",
+            "extractingFiles": "פורס את כל הקבצים",
+            "xmlWriting": "כותב AppSettings.xml...",
+            "versionSaving": "שומר פרטי גרסה...",
+            "installationComplete": "ההתקנה הושלמה",
+            "packageDownloadFailed": "ההורדה נכשלה"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "הפעלה"
     },
     "pages": {
         "choiceWin": {
             "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "playRoblox": "שחק רובלוקס",
+            "config": "הגדרות"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "בטל",
+            "retry": "נסה שוב"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "עיצוב",
+            "description": "התאם אישית את המראה והתחושה של bootstrapper של Roblox.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "ערכת עיצוב Bootstrapper",
+                "description": "בחר בין ערכת נושא ברירת המחדל של Crush או ערכת נושא XML מותאמת אישית.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "ברירת מחדל (קראש)",
+                    "custom": "התאמה אישית"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "ייבוא חדש",
+                    "noThemes": "עדיין לא יובאו ערכות עיצוב מותאמות אישית.",
+                    "missingAssets": "חסרים נכסי ערכת נושא"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "אינטגרציות",
+            "description": "קביעת תצורה של אינטגרציות מחוץ לרובלוקס",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "הודעה על מיקום השרת",
+                "description": "קבל הודעה כאשר לקוח מתחבר לשרת."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "החלף את הנוכחות העשירה של Roblox ב - Crush"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "היסטוריית המשחקים שלכם",
+                "description": "הצג ושחק במשחקים ששיחקת לאחרונה.",
+                "button": "להציג"
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
-                "backToIntegrations": "Back",
+                "title": "היסטוריית המשחקים שלכם",
+                "description": "הצג ושחק במשחקים ששיחקת לאחרונה.",
+                "gameHistoryEmpty": "היסטוריית המשחקים שלך ריקה. שחקו כמה משחקים כדי לראות אותם כאן! (שים לב שלא כל שרת ניתן להצטרפות מחדש)",
+                "gameHistoryLoading": "בטעינה, אנא המתן רגע...",
+                "clearHistory": "ניקוי היסטוריה",
+                "backToIntegrations": "חזור",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "משחק לא ידוע",
+                    "lastPlayed": "הושמע לאחרונה: When this track was last played",
+                    "play": "נגן",
+                    "deeplink": "העתקת DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "התקנות",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "התקנת גרסת Roblox מותאמת אישית",
+                "description": "דלג על בדיקת העדכון והורד את הגרסה. ערך ברירת המחדל הוא העדכני ביותר. גרסה לא חוקית לא תרד ותחזור לגרסה העדכנית ביותר."
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "כפה התקנה מחדש של Roblox",
+                "description": "התקן מחדש את roblox בכל פעם שאתה מפעיל אותו."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "דגלים מהירים",
+            "description": "הוסף/הסר דגלים מהירים וקונפיגורציות של Roblox.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "texboxFlagName": "שם הסימון",
+                "texboxFlagValue": "ערך",
+                "buttonAdd": "הוספה",
+                "search": "חפש את כל דגמי ה - fflags",
+                "searchNotFound": "לא נמצאו דגלים שתואמים לחיפוש שלכם.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "מחיקת סימון",
+                    "name": "שם הדגל",
+                    "type": "סוג",
+                    "value": "ערך"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "מוד",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "ניהול מוד",
+                    "description": "נהל את מצבי ה - Roblox שלך.",
+                    "addModButton": "הוסף מוד",
+                    "noModsFound": "לא מצאנו כאן אופנות, יאפים.",
+                    "noModsFoundCreateButton": "צור את המוד הראשון שלך",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "השבת מוד",
+                        "toggleNoteEnable": "אפשר MOD",
+                        "renameNote": "שנה את שם המוד",
+                        "openFolderNote": "פתח תיקיית Mod",
+                        "deleteNote": "מחק מוד",
+                        "layoutNote": "פריסת מצבים בהשראת מנהל המצבים של Frostrap",
+                        "description": "אפשר טעינת MOD והגדר את מיקום תיקיית MOD."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "אופנות שנבנו מראש",
+                    "description": "התקן אופנות מוכנות לשימוש.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "סמן",
+                        "description": "שנה את סמן ה - Roblox שלך לגרסאות ישנות יותר.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "ברירת המחדל"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "גופן מותאם אישית",
+                        "description": "שנה את גופן ה - Roblox שלך לכל מה שתרצה.",
+                        "button": "שינוי עיצוב"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "מצבים קהילתיים",
+                    "description": "לגלות מצבים שנוצרו על ידי הקהילה.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "עדיין אין מצב",
+                        "description": "עדיין אין לנו מצבי קהילה. היו הראשונים לתרום ועזרו לנו להגדיל את הקולקציה!",
+                        "submissionButton": "שלח מוד"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "הגדרות",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "אודות",
+                "description": "מידע על בניית ריסוק זו",
+                "builtOn": "בנוי על: {date}",
+                "commitHash": "בצע גיבוב: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "שפה",
+                "description": "בחר את השפה המועדפת עליך למחוץ."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "תרום",
+                "description": "אהבתם? תרמו ל - Mally כדי לתמוך בעבודתו!",
+                "button": "תרום"
             }
         }
     }

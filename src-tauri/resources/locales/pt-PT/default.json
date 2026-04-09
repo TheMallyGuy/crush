@@ -1,184 +1,184 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "Um bootrapper roblox escrito do zero",
+        "integrations": "Na Rota das Integrações",
+        "installation": "Em Rota de Instalações",
+        "fastflag": "Na Rota Fastflag",
+        "mod": "Na Rota Mod",
+        "appearance": "Na Rota de Aparência",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Jogar roblox",
+                "idle": "Não num jogo",
+                "playing": "Pol."
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "A verificar atualizações",
+            "findingBestRegion": "Encontrar a melhor região de download...",
+            "preparingForDownload": "A preparar para transferir...",
+            "fetchingUrls": "A obter URLs de ativos...",
+            "downloadingAssets": "Descarregar elementos",
+            "extractingFiles": "A extrair todos os ficheiros",
+            "xmlWriting": "A escrever AppSettings.xml...",
+            "versionSaving": "A guardar informações da versão...",
+            "installationComplete": "Instalação concluída!",
+            "packageDownloadFailed": "Falhou o download"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "Lançar"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "Esmagamento",
+            "playRoblox": "Jogar Roblox",
+            "config": "Configuração"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Cancelar",
+            "retry": "Tentar novamente"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Aparência,",
+            "description": "Personalize a aparência do bootstrapper Roblox.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Tema Bootstrapper",
+                "description": "Escolha entre o tema padrão do Crush ou um tema XML personalizado.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Padrão (Esmagamento)",
+                    "custom": "Personalizado"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Importar novos",
+                    "noThemes": "Nenhum tema personalizado importado ainda.",
+                    "missingAssets": "Ativos de tema ausentes"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Integrações",
+            "description": "Configurar integrações fora do roblox",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Notificador de localização do servidor",
+                "description": "Receber notificação quando o cliente se conectar a um servidor."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Substitua a Roblox Rich Presence por Crush's"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "histórico de jogo",
+                "description": "Veja e jogue os seus jogos jogados recentemente.",
+                "button": "Ver"
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
-                "backToIntegrations": "Back",
+                "title": "histórico de jogo",
+                "description": "Veja e jogue os seus jogos jogados recentemente.",
+                "gameHistoryEmpty": "O seu histórico de jogo está vazio. Jogue alguns jogos para vê-los aqui! (Observe que nem todos os servidores podem ser reingressados)",
+                "gameHistoryLoading": "A carregar, aguarde um momento...",
+                "clearHistory": "Limpar histórico",
+                "backToIntegrations": "Traseira",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "Jogo desconhecido",
+                    "lastPlayed": "Últimos jogados",
+                    "play": "Jogue",
+                    "deeplink": "Copiar DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Instalações",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Instale uma versão personalizada do Roblox",
+                "description": "Ignore a verificação de actualização e transfira a versão. O valor padrão é o mais recente. A versão inválida não será baixada e voltará para a versão mais recente."
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "Forçar reinstalação do Roblox",
+                "description": "Reinstale o roblox sempre que o iniciar."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
+            "fastflag": "Bandeiras rápidas",
+            "description": "Adicionar/Remover Roblox Fastflags e configurações.",
             "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
+                "texboxFlagName": "Nome da bandeira",
+                "texboxFlagValue": "Valor",
                 "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
+                "search": "Pesquisar todos os fflags...",
+                "searchNotFound": "Não foram encontradas bandeiras que correspondam à sua pesquisa.",
                 "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+                    "deleteNote": "Excluir marcador UC",
+                    "name": "nome da bandeira",
+                    "type": "Tipo",
+                    "value": "referência"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "Mod.",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Gestão de Mod",
+                    "description": "Gerir os seus mods Roblox mods.",
+                    "addModButton": "Adicionar um Mod",
+                    "noModsFound": "Não encontramos mods aqui, Yuppies.",
+                    "noModsFoundCreateButton": "Crie o seu primeiro mod",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Desativar Mod",
+                        "toggleNoteEnable": "Ativar Mod",
+                        "renameNote": "Mudar o nome do mod",
+                        "openFolderNote": "Abrir pasta Mod",
+                        "deleteNote": "Eliminar Mod",
+                        "layoutNote": "Layout de mods inspirado no gerente de mods da Frostrap",
+                        "description": "Ative o carregamento do mod e defina a localização da pasta mod."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Mods pré-construídos",
+                    "description": "Instale mods prontos para uso.",
                     "cursorCard": {
                         "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "description": "Altere o cursor do Roblox para versões mais antigas.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "Padrão"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Fonte personalizada",
+                        "description": "Mude a sua fonte roblox para o que quiser.",
+                        "button": "Alterar fonte"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Mods da comunidade",
+                    "description": "Explore os mods criados pela comunidade.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Nenhum mod ainda",
+                        "description": "Ainda não temos mods da comunidade. Seja o primeiro a contribuir e ajude-nos a aumentar a coleção!",
+                        "submissionButton": "Enviar um mod"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Definições",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "Sobre",
+                "description": "Informações sobre esta construção de crush",
+                "builtOn": "Construído em: {date}",
+                "commitHash": "Hash do commit: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Língua",
+                "description": "Selecione o seu idioma preferido para o crush."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Doar",
+                "description": "Love crush? Doe para o Mally para apoiar o trabalho dele!",
+                "button": "Doar"
             }
         }
     }
