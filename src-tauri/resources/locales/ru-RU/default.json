@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "Roblox Bootrapper, написанный с нуля",
-        "integrations": "In Integrations Route",
+        "integrations": "In Intergrations Route",
         "installation": "В маршруте установки",
         "fastflag": "В Fastflag Route",
         "mod": "In Mod Route",
@@ -25,7 +25,7 @@
             "xmlWriting": "Запись AppSettings.xml...",
             "versionSaving": "Сохранение информации о версии...",
             "installationComplete": "Установка завершена",
-            "packageDownloadFailed": "Не удалось загрузить {packageName}: {error}"
+            "packageDownloadFailed": "Ошибка загрузки"
         }
     },
     "elements": {
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Замените Roblox Rich Presence на Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "История вашей игры",
+                "description": "Просматривайте и играйте в недавно сыгранные игры.",
+                "button": "Просмотр"
+            },
+            "gameHistory": {
+                "title": "История вашей игры",
+                "description": "Просматривайте и играйте в недавно сыгранные игры.",
+                "gameHistoryEmpty": "История вашей игры пуста. Сыграйте в несколько игр, чтобы увидеть их здесь! (Обратите внимание, что не каждый сервер можно повторно подключить)",
+                "gameHistoryLoading": "Идет загрузка, пожалуйста, подождите...",
+                "clearHistory": "Очистить историю",
+                "backToIntegrations": "Назад",
+                "gameHistoryCard": {
+                    "titleUnknown": "Неизвестная игра",
+                    "lastPlayed": "Последнее воспроизведение: When this track was last played",
+                    "play": "Воспроизвести",
+                    "deeplink": "Копировать DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Установите пользовательскую версию Roblox",
                 "description": "Пропустите проверку обновлений и загрузите версию. Значение по умолчанию - самое позднее. Недействительная версия не будет загружена и вернется к последней версии."
+            },
+            "forceReinstallCard": {
+                "title": "Принудительная переустановка Roblox",
+                "description": "Переустанавливайте roblox каждый раз при запуске."
             }
         },
         "fastflag": {
@@ -145,8 +168,8 @@
             "aboutCard": {
                 "title": "Сведения",
                 "description": "Информация об этой сборке Crush",
-                "builtOn": "Дата постройки: {date}",
-                "commitHash": "Зафиксировать хэш: {hash}"
+                "builtOn": "Дата версии",
+                "commitHash": "Совершить хэш: {hash}"
             },
             "languageCard": {
                 "title": "Язык",

@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "Un bootrapper roblox escrito desde cero",
-        "integrations": "Ruta In Integrations",
+        "integrations": "Ruta In Intergrations",
         "installation": "En Ruta de Instalaciones",
         "fastflag": "En la ruta Fastflag",
         "mod": "En Ruta Mod",
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Reemplace la presencia rica de Roblox con la de Crush"
+            },
+            "gameHistoryCard": {
+                "title": "HISTORIAL DE PARTIDAS",
+                "description": "Ver y jugar a los juegos que has jugado recientemente.",
+                "button": "Visualización"
+            },
+            "gameHistory": {
+                "title": "HISTORIAL DE PARTIDAS",
+                "description": "Ver y jugar a los juegos que has jugado recientemente.",
+                "gameHistoryEmpty": "Tu historial de juego está vacío. ¡Juega algunos juegos para verlos aquí! (Tenga en cuenta que no todos los servidores se pueden volver a unir)",
+                "gameHistoryLoading": "Cargando, por favor espere un momento...",
+                "clearHistory": "Borrar historial",
+                "backToIntegrations": "Atrás",
+                "gameHistoryCard": {
+                    "titleUnknown": "Juego desconocido",
+                    "lastPlayed": "Última vez reproducido",
+                    "play": "Play",
+                    "deeplink": "Copiar DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Instalar una versión personalizada de Roblox",
                 "description": "Omita la comprobación de actualización y descargue la versión. El valor predeterminado es el último. La versión no válida no se descargará y volverá a la última versión."
+            },
+            "forceReinstallCard": {
+                "title": "Forzar la reinstalación de Roblox",
+                "description": "Vuelva a instalar roblox cada vez que lo inicie."
             }
         },
         "fastflag": {
@@ -141,9 +164,9 @@
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Ajustes",
             "aboutCard": {
-                "title": "Sobre nosotros",
+                "title": "Acerca de",
                 "description": "Información sobre esta compilación de aplastamiento",
                 "builtOn": "Creado el",
                 "commitHash": "Comprometer hash: {hash}"

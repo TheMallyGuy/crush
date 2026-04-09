@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "Un bootrapper roblox écrit à partir de zéro",
-        "integrations": "In Integrations Route",
+        "integrations": "In Intergrations Route",
         "installation": "Dans le chemin des installations",
         "fastflag": "Dans l'itinéraire Fastflag",
         "mod": "In Mod Route",
@@ -25,7 +25,7 @@
             "xmlWriting": "Écriture AppSettings.xml...",
             "versionSaving": "Enregistrement de la version ...",
             "installationComplete": "Installation terminée !",
-            "packageDownloadFailed": "Échec du téléchargement de {packageName} : {error}"
+            "packageDownloadFailed": "Échec du téléchargement"
         }
     },
     "elements": {
@@ -60,7 +60,7 @@
         },
         "integrations": {
             "integrations": "Intégrations",
-            "description": "Config integrations hors roblox",
+            "description": "Config intergrations hors roblox",
             "serverNotifierCard": {
                 "title": "Notifier l'emplacement du serveur",
                 "description": "Recevez une notification lorsque le client se connecte à un serveur."
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Remplacez le Roblox Rich Presence par Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Votre historique des jeux",
+                "description": "Affichez et jouez à vos jeux récemment joués.",
+                "button": "Afficher"
+            },
+            "gameHistory": {
+                "title": "Votre historique des jeux",
+                "description": "Affichez et jouez à vos jeux récemment joués.",
+                "gameHistoryEmpty": "Votre historique de jeu est vide. Jouez à des jeux pour les voir ici ! (Notez que tous les serveurs ne sont pas réunissables)",
+                "gameHistoryLoading": "Chargement en cours, veuillez patienter un moment...",
+                "clearHistory": "Effacer l'historique",
+                "backToIntegrations": "Retour",
+                "gameHistoryCard": {
+                    "titleUnknown": "Jeu inconnu",
+                    "lastPlayed": "Dernière lecture :",
+                    "play": "Jouer",
+                    "deeplink": "Copier DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Installer une version Roblox personnalisée",
                 "description": "Ignorez la vérification de la mise à jour et téléchargez la version. La valeur par défaut est la plus récente. La version non valide ne sera pas téléchargée et se repliera dans la dernière version."
+            },
+            "forceReinstallCard": {
+                "title": "Forcer la réinstallation de Roblox",
+                "description": "Réinstallez roblox à chaque lancement."
             }
         },
         "fastflag": {
@@ -145,7 +168,7 @@
             "aboutCard": {
                 "title": "À propos",
                 "description": "Informations sur cette version de Crush",
-                "builtOn": "Construit le : {date}",
+                "builtOn": "Date de création",
                 "commitHash": "Valider le hachage : {hash}"
             },
             "languageCard": {

@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (rozdrtit)",
                 "description": "Vyměňte Roblox Rich Presence za Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "HERNÍ HISTORIE",
+                "description": "Prohlédněte si a hrajte své nedávno hrané hry.",
+                "button": "Zobrazit"
+            },
+            "gameHistory": {
+                "title": "HERNÍ HISTORIE",
+                "description": "Prohlédněte si a hrajte své nedávno hrané hry.",
+                "gameHistoryEmpty": "Vaše herní historie je prázdná. Zahrajte si nějaké hry a podívejte se na ně zde! (Všimněte si, že ne každý server je znovu připojitelný)",
+                "gameHistoryLoading": "Načítání, počkejte prosím...",
+                "clearHistory": "Vymazat historii",
+                "backToIntegrations": "Zpět",
+                "gameHistoryCard": {
+                    "titleUnknown": "Neznámá hra",
+                    "lastPlayed": "Naposledy přehráno: When this track was last played",
+                    "play": "Zahrajte si",
+                    "deeplink": "Kopírovat DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Nainstalujte si vlastní verzi Robloxu",
                 "description": "Přeskočit kontrolu aktualizace a stáhnout verzi. Výchozí hodnota je nejnovější. Neplatná verze se nestáhne a přejde na nejnovější verzi."
+            },
+            "forceReinstallCard": {
+                "title": "Vynutit přeinstalaci Robloxu",
+                "description": "Roblox znovu nainstalujte pokaždé, když jej spustíte."
             }
         },
         "fastflag": {
