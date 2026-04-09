@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Ersetzen Sie die Roblox Rich Presence durch Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Spielverlauf",
+                "description": "Sieh dir deine zuletzt gespielten Spiele an und spiele sie.",
+                "button": "Ansehen"
+            },
+            "gameHistory": {
+                "title": "Spielverlauf",
+                "description": "Sieh dir deine zuletzt gespielten Spiele an und spiele sie.",
+                "gameHistoryEmpty": "Ihr Spielverlauf ist leer. Spiele ein paar Spiele, um sie hier zu sehen! (Beachten Sie, dass nicht jeder einzelne Server wiederverbindbar ist)",
+                "gameHistoryLoading": "Wird geladen, bitte warten Sie einen Moment...",
+                "clearHistory": "Verlauf löschen",
+                "backToIntegrations": "Zurück",
+                "gameHistoryCard": {
+                    "titleUnknown": "Unbekanntes Spiel",
+                    "lastPlayed": "Zuletzt gespielt:",
+                    "play": "Spielen",
+                    "deeplink": "DeepLink kopieren"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Installieren Sie eine benutzerdefinierte Roblox-Version",
                 "description": "Überspringen Sie die Update-Überprüfung und laden Sie die Version herunter. Der Standardwert ist der späteste. Ungültige Version wird nicht heruntergeladen und fällt auf die neueste Version zurück."
+            },
+            "forceReinstallCard": {
+                "title": "Roblox neu installieren",
+                "description": "Installieren Sie roblox jedes Mal neu, wenn Sie es starten."
             }
         },
         "fastflag": {

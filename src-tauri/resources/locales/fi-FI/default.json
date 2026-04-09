@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (murskaus)",
                 "description": "Korvaa Roblox Rich Presence Crushin"
+            },
+            "gameHistoryCard": {
+                "title": "Pelihistoriasi",
+                "description": "Tarkastele ja pelaa äskettäin pelaamiasi pelejä.",
+                "button": "Näytä"
+            },
+            "gameHistory": {
+                "title": "Pelihistoriasi",
+                "description": "Tarkastele ja pelaa äskettäin pelaamiasi pelejä.",
+                "gameHistoryEmpty": "Pelihistoriasi on tyhjä. Pelaa pelejä nähdäksesi ne täällä! (Huomaa, että kaikki palvelimet eivät ole yhdistettävissä uudelleen)",
+                "gameHistoryLoading": "Ladataan, odota hetki...",
+                "clearHistory": "Tyhjennä historia",
+                "backToIntegrations": "Takaisin",
+                "gameHistoryCard": {
+                    "titleUnknown": "Tuntematon peli",
+                    "lastPlayed": "Viimeksi pelattu",
+                    "play": "Toista",
+                    "deeplink": "Kopioi DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Asenna mukautettu Roblox-versio",
                 "description": "Ohita päivitystarkistus ja lataa versio. Oletusarvo on uusin. Virheellistä versiota ei ladata ja se siirtyy uusimpaan versioon."
+            },
+            "forceReinstallCard": {
+                "title": "Pakota Robloxin uudelleenasennus",
+                "description": "Asenna roblox uudelleen aina, kun käynnistät sen."
             }
         },
         "fastflag": {

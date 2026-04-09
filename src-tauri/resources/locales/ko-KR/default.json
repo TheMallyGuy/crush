@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "처음부터 작성된 로블록스 부트래퍼",
-        "integrations": "Integrations Route에서",
+        "integrations": "Intergrations Route에서",
         "installation": "설치 경로 내",
         "fastflag": "패스트플래그 경로에서",
         "mod": "모드 경로 내",
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "로블록스 리치 프레즌스를 크러쉬로 교체"
+            },
+            "gameHistoryCard": {
+                "title": "게임 기록",
+                "description": "최근에 플레이한 게임을 보고 플레이하세요.",
+                "button": "보기"
+            },
+            "gameHistory": {
+                "title": "게임 기록",
+                "description": "최근에 플레이한 게임을 보고 플레이하세요.",
+                "gameHistoryEmpty": "게임 기록이 비어 있습니다. 게임을 플레이하여 여기에서 확인하세요! (모든 단일 서버가 재가입 가능한 것은 아님)",
+                "gameHistoryLoading": "로딩 중입니다. 잠시만 기다려주세요...",
+                "clearHistory": "사용기록 삭제하기",
+                "backToIntegrations": "뒤로",
+                "gameHistoryCard": {
+                    "titleUnknown": "알 수 없는 게임",
+                    "lastPlayed": "마지막 플레이",
+                    "play": "재생",
+                    "deeplink": "딥링크 복사"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "맞춤형 Roblox 버전 설치",
                 "description": "업데이트 확인을 건너뛰고 버전을 다운로드하세요. 기본값은 최신입니다. 유효하지 않은 버전은 다운로드되지 않으며 최신 버전으로 대체됩니다."
+            },
+            "forceReinstallCard": {
+                "title": "Roblox 강제 재설치",
+                "description": "실행할 때마다 roblox를 다시 설치합니다."
             }
         },
         "fastflag": {

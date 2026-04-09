@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
                 "description": "將Roblox Rich Presence替換為Crush的"
+            },
+            "gameHistoryCard": {
+                "title": "你的遊戲紀錄",
+                "description": "查看和玩您最近玩過的遊戲。",
+                "button": "查看"
+            },
+            "gameHistory": {
+                "title": "你的遊戲紀錄",
+                "description": "查看和玩您最近玩過的遊戲。",
+                "gameHistoryEmpty": "您的遊戲歷史是空的。遊玩一些遊戲，在這裡看到它們！ （請注意，並非每個伺服器都可以重新加入）",
+                "gameHistoryLoading": "載入中，請稍候...",
+                "clearHistory": "清除歷程",
+                "backToIntegrations": "返回",
+                "gameHistoryCard": {
+                    "titleUnknown": "未知遊戲",
+                    "lastPlayed": "上次播放： {time}",
+                    "play": "開始",
+                    "deeplink": "複製DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "安裝自訂Roblox版本",
                 "description": "跳過更新檢查並下載版本。預設值為最新。無效版本將不會被下載，並將回退到最新版本。"
+            },
+            "forceReinstallCard": {
+                "title": "強制重新安裝Roblox",
+                "description": "每次啟動時重新安裝roblox。"
             }
         },
         "fastflag": {

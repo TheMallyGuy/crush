@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC （クラッシュ）",
                 "description": "Roblox Rich PresenceをCrushの"
+            },
+            "gameHistoryCard": {
+                "title": "ゲーム履歴",
+                "description": "最近プレイしたゲームを表示してプレイしましょう。",
+                "button": "表示"
+            },
+            "gameHistory": {
+                "title": "ゲーム履歴",
+                "description": "最近プレイしたゲームを表示してプレイしましょう。",
+                "gameHistoryEmpty": "ゲーム履歴が空です。いくつかのゲームをプレイして、ここで見てみましょう！ （すべてのサーバーが再結合可能ではないことに注意してください）",
+                "gameHistoryLoading": "読み込み中です。しばらくお待ちください...",
+                "clearHistory": "履歴消去",
+                "backToIntegrations": "戻る",
+                "gameHistoryCard": {
+                    "titleUnknown": "不明なゲーム",
+                    "lastPlayed": "前回再生:When this track was last played",
+                    "play": "再生",
+                    "deeplink": "DeepLinkをコピー"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "カスタムRobloxバージョンをインストールする",
                 "description": "更新チェックをスキップして、バージョンをダウンロードします。デフォルト値はlatestです。無効なバージョンはダウンロードされず、最新バージョンにフォールバックされます。"
+            },
+            "forceReinstallCard": {
+                "title": "Robloxを強制的に再インストールする",
+                "description": "Robloxを起動するたびに再インストールしてください。"
             }
         },
         "fastflag": {

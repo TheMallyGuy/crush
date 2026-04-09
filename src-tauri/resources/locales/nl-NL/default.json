@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Vervang de Roblox Rich Presence door Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "button": "View"
+            },
+            "gameHistory": {
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
+                "gameHistoryLoading": "Loading, please wait a moment...",
+                "clearHistory": "Clear history",
+                "backToIntegrations": "Back",
+                "gameHistoryCard": {
+                    "titleUnknown": "Unknown game",
+                    "lastPlayed": "Last played: {time}",
+                    "play": "Play",
+                    "deeplink": "Copy DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Een aangepaste Roblox-versie installeren",
                 "description": "Sla de updatecontrole over en download de versie. De standaardwaarde is de laatste. Ongeldige versie wordt niet gedownload en zal terugvallen op de nieuwste versie."
+            },
+            "forceReinstallCard": {
+                "title": "Force Reinstall Roblox",
+                "description": "Reinstall roblox everytime you launch it."
             }
         },
         "fastflag": {

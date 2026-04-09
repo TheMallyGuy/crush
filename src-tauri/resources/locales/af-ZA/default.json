@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Vervang die Roblox Rich Presence met Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Persoonlike spelgeskiedenis",
+                "description": "Sien en speel jou speletjies wat onlangs gespeel is.",
+                "button": "Besigtig"
+            },
+            "gameHistory": {
+                "title": "Jou spelgeskiedenis",
+                "description": "Sien en speel jou speletjies wat onlangs gespeel is.",
+                "gameHistoryEmpty": "Jou spelgeskiedenis is leeg. Speel 'n paar speletjies om hulle hier te sien! (Let daarop dat nie elke bediener heraansluitbaar is nie)",
+                "gameHistoryLoading": "Loading, Wag 'n Bietjie",
+                "clearHistory": "Webblaaier",
+                "backToIntegrations": "Terug",
+                "gameHistoryCard": {
+                    "titleUnknown": "Onbekende speletjie",
+                    "lastPlayed": " Laas gespeel: When this track was last played",
+                    "play": "Speel ",
+                    "deeplink": "Kopieer DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Installeer 'n persoonlike Roblox-weergawe",
                 "description": "Slaan die opdatering na en laai die weergawe af. Die verstek waarde is die jongste. Ongeldige weergawe sal nie afgelaai word nie en sal terugval in die nuutste weergawe."
+            },
+            "forceReinstallCard": {
+                "title": "Krag Herinstalleer Roblox",
+                "description": "Herinstalleer Roblox elke keer as jy dit begin."
             }
         },
         "fastflag": {

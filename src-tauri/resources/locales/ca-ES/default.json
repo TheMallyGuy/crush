@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "Un roblox bootrapper escrit des de zero",
-        "integrations": "Ruta In Integrations",
+        "integrations": "Ruta In Intergrations",
         "installation": "A la ruta d'instal·lacions",
         "fastflag": "A Fastflag Route",
         "mod": "A Mod Route",
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Substitueix Roblox Rich Presence per Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "El teu historial de joc",
+                "description": "Visualitza i juga als jocs que has jugat recentment.",
+                "button": "Visualització"
+            },
+            "gameHistory": {
+                "title": "El teu historial de joc",
+                "description": "Visualitza i juga als jocs que has jugat recentment.",
+                "gameHistoryEmpty": "L'historial del joc està buit. Juga alguns jocs per veure'ls aquí! (Tingues en compte que no es poden tornar a unir tots els servidors)",
+                "gameHistoryLoading": "S'està carregant, espereu un moment...",
+                "clearHistory": "Esborra l'historial",
+                "backToIntegrations": "Enrere",
+                "gameHistoryCard": {
+                    "titleUnknown": "Joc desconegut",
+                    "lastPlayed": "DARRER JUGAT:",
+                    "play": "Reproduir",
+                    "deeplink": "Copia DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Instal·la una versió personalitzada de Roblox",
                 "description": "Omet la comprovació d'actualització i descarrega la versió. El valor per defecte és l'últim. La versió no vàlida no es descarregarà i tornarà a la versió més recent."
+            },
+            "forceReinstallCard": {
+                "title": "Força la reinstal·lació de Roblox",
+                "description": "Torna a instal·lar roblox cada vegada que l'iniciïs."
             }
         },
         "fastflag": {

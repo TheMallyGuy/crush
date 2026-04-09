@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "Discord RPC (Nghiền nát)",
                 "description": "Thay thế Roblox Rich Presence bằng Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Lịch sử Trò chơi",
+                "description": "Xem và chơi các trò chơi đã chơi gần đây của bạn.",
+                "button": "Xem"
+            },
+            "gameHistory": {
+                "title": "Lịch sử Trò chơi",
+                "description": "Xem và chơi các trò chơi đã chơi gần đây của bạn.",
+                "gameHistoryEmpty": "Lịch sử trò chơi của bạn trống. Chơi một số trò chơi để xem chúng ở đây! (Lưu ý rằng không phải mọi máy chủ đều có thể kết nối lại)",
+                "gameHistoryLoading": "Đang tải, vui lòng chờ trong giây lát...",
+                "clearHistory": "Xóa lịch sử",
+                "backToIntegrations": "Quay lại",
+                "gameHistoryCard": {
+                    "titleUnknown": "Trò chơi không xác định",
+                    "lastPlayed": "Chơi gần đây nhất",
+                    "play": "Chơi",
+                    "deeplink": "Sao chép DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "Cài đặt phiên bản ROBLOX tùy chỉnh",
                 "description": "Bỏ qua kiểm tra cập nhật và tải xuống phiên bản. Giá trị mặc định là mới nhất. Phiên bản không hợp lệ sẽ không được tải xuống và sẽ chuyển sang phiên bản mới nhất."
+            },
+            "forceReinstallCard": {
+                "title": "Bắt buộc cài đặt lại Roblox",
+                "description": "Cài đặt lại roblox mỗi khi bạn khởi chạy nó."
             }
         },
         "fastflag": {

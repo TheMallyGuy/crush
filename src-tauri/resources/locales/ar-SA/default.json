@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "روبلكس بوترابر مكتوب من الصفر",
-        "integrations": "في طريق التداخلات",
+        "integrations": "In Integrations Route",
         "installation": "في مسار التركيبات",
         "fastflag": "في طريق Fastflag",
         "mod": "في طريق وزارة الدفاع",
@@ -60,7 +60,7 @@
         },
         "integrations": {
             "integrations": "التكامل",
-            "description": "تكوين التداخلات خارج roblox",
+            "description": "Config integrations outside roblox",
             "serverNotifierCard": {
                 "title": "مخطر موقع الخادم",
                 "description": "احصل على إشعار عند اتصال العميل بخادم."
@@ -68,6 +68,25 @@
             "rpcCard": {
                 "title": "ديسكورد آر بي سي (كراش)",
                 "description": "استبدل حضور Roblox الغني بحضور Crush's"
+            },
+            "gameHistoryCard": {
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "button": "View"
+            },
+            "gameHistory": {
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
+                "gameHistoryLoading": "Loading, please wait a moment...",
+                "clearHistory": "Clear history",
+                "backToIntegrations": "Back",
+                "gameHistoryCard": {
+                    "titleUnknown": "Unknown game",
+                    "lastPlayed": "Last played: {time}",
+                    "play": "Play",
+                    "deeplink": "Copy DeepLink"
+                }
             }
         },
         "installations": {
@@ -75,6 +94,10 @@
             "customVersion": {
                 "title": "تثبيت إصدار Roblox مخصص",
                 "description": "تخطي التحقق من التحديث وقم بتنزيل الإصدار. القيمة الافتراضية هي الأحدث. لن يتم تنزيل الإصدار غير الصالح وسيعود إلى أحدث إصدار."
+            },
+            "forceReinstallCard": {
+                "title": "Force Reinstall Roblox",
+                "description": "Reinstall roblox everytime you launch it."
             }
         },
         "fastflag": {
