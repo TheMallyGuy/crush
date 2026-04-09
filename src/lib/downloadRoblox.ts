@@ -40,6 +40,11 @@ const sortedExtractRoots = Object.entries(extractRoots).sort(
     (a, b) => b[1].length - a[1].length
 )
 
+const lowercaseExtractRoots = Object.entries(extractRoots).map(([k, v]) => [
+    k.toLowerCase(),
+    v,
+])
+
 import type { ProgressEvent, ProgressCallback } from './types'
 
 async function ensureDir(path: string) {
@@ -122,13 +127,9 @@ async function extractAll(version_hash: string, onProgress: ProgressCallback) {
     const installRoot = await join(dataDir, 'Player', 'Versions', version_hash)
     await ensureDir(installRoot)
 
-    const entries = Object.entries(extractRoots).map(([k, v]) => [
-        k.toLowerCase(),
-        v,
-    ])
-    const total = entries.length
+    const total = lowercaseExtractRoots.length
 
-    for (const [index, [zipName, dest]] of entries.entries()) {
+    for (const [index, [zipName, dest]] of lowercaseExtractRoots.entries()) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }

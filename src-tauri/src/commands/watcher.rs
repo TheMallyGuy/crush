@@ -8,7 +8,7 @@ use std::sync::OnceLock;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
-    path::PathBuf,
+    path::{Path, PathBuf},
     time::{Duration, Instant},
 };
 use sysinfo::{ProcessesToUpdate, System};
@@ -74,7 +74,11 @@ fn get_latest_log() -> Option<PathBuf> {
     std::fs::read_dir(dir)
         .ok()?
         .flatten()
-        .filter(|e| e.file_name().to_string_lossy().ends_with(".log"))
+        .filter(|e| {
+            Path::new(&e.file_name())
+                .extension()
+                .is_some_and(|ext| ext == "log")
+        })
         .filter(|e| {
             e.metadata()
                 .and_then(|m| m.created())
@@ -82,6 +86,10 @@ fn get_latest_log() -> Option<PathBuf> {
         })
         .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
         .map(|e| e.path())
+}
+
+fn get_integrations(store: &tauri_plugin_store::Store<tauri::Wry>) -> Option<Value> {
+    store.get("integrations").or_else(|| store.get("intergrations"))
 }
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
@@ -107,11 +115,10 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                 state.offset = 0;
                 state.activity = Activity::default();
 
-                let integrations = store
-                    .get("integrations")
-                    .or_else(|| store.get("intergrations"));
+                let integrations = get_integrations(&store);
 
                 let should_rpc = integrations
+                    .as_ref()
                     .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
                 if should_rpc {
@@ -209,14 +216,17 @@ async fn handle_log_line(
             place_id,
             state.activity.instance_id.as_deref().unwrap_or("?")
         );
+        return Ok(());
     }
 
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
         handle_udmux_event(app, caps.get(1).unwrap().as_str(), store).await?;
+        return Ok(());
     }
 
     if WatcherRegexes::joined().is_match(line) {
         handle_joined_event(app, state, store).await?;
+        return Ok(());
     }
 
     if WatcherRegexes::leave().is_match(line) && state.activity.in_game {
@@ -242,11 +252,9 @@ async fn handle_udmux_event(
         .map_err(|e| e.to_string())?;
     let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
 
-    let integrations = store
-        .get("integrations")
-        .or_else(|| store.get("intergrations"));
+    let integrations = get_integrations(store);
 
-    let should_notify = integrations.is_some_and(|v| {
+    let should_notify = integrations.as_ref().is_some_and(|v| {
         v.get("serverLocationNotifier")
             .and_then(|n| n.as_bool())
             .unwrap_or(false)
@@ -283,12 +291,10 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
-    let integrations = store
-        .get("integrations")
-        .or_else(|| store.get("intergrations"));
+    let integrations = get_integrations(store);
 
     let should_rpc =
-        integrations.is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
+        integrations.as_ref().is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
 
     let mut history: Vec<Value> = match store.get("gameHistory") {
         Some(v) if v.is_array() => v.as_array().cloned().unwrap_or_default(),
