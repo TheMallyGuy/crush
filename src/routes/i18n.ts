@@ -35,6 +35,7 @@ const locales = [
   'vls-BE',
   'zh-CN',
   'zh-TW',
+  'ni-ha'
 ];
 
 async function loadLocale(locale: string) {

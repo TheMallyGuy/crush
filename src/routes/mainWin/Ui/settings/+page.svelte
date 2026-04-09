@@ -49,6 +49,7 @@
         'vls-BE': 'Vlaams',
         'zh-CN': '中文 (简体)',
         'zh-TW': '中文 (繁體)',
+        "ni-ha" : "NIHAHAHA!"
     }
 
     const dropdownOptions = derived(locales, ($locales) =>
