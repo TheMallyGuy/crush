@@ -53,7 +53,7 @@ pub fn extract_files_from_zip(
 
         let should_extract = entry
             .enclosed_name()
-            .is_some_and(|name| files_set.contains(&name.to_string_lossy().to_string()));
+            .is_some_and(|name| files_set.contains(name.to_string_lossy().as_ref()));
 
         if should_extract {
             extract_entry(&mut entry, dest_path)?;
