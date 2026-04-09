@@ -2,7 +2,7 @@
     "rpc" : {
         "general" : "A roblox bootrapper written from scratch",
 
-        "integrations" : "In Integrations Route",
+        "integrations" : "In Intergrations Route",
         "installation" : "In Installations Route",
         "fastflag" : "In Fastflag Route",
         "mod" : "In Mod Route",
@@ -72,7 +72,7 @@
         },
         "integrations" : {
             "integrations": "Integrations",
-            "description": "Config integrations outside roblox",
+            "description": "Config intergrations outside roblox",
             "serverNotifierCard" : {
                 "title": "Server Location Notifier",
                 "description": "Get notify when client connect to a server."
@@ -94,8 +94,14 @@
                 "description" : "View & play your recently played games.",
 
                 "gameHistoryEmpty" : "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
+                "gameHistoryLoading" : "Loading, please wait a moment...",
+                "clearHistory" : "Clear history",
+                "backToIntegrations" : "Back",
 
                 "gameHistoryCard" : {
+                    "titleUnknown" : "Unknown game",
+                    "lastPlayed" : "Last played: {time}",
+
                     "play" : "Play",
                     "deeplink" : "Copy DeepLink"
                 }
@@ -104,9 +110,15 @@
         },
         "installations" : {
             "installations": "Installations",
+
             "customVersion" : {
                 "title" : "Install a custom Roblox version",
                 "description" : "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+            },
+            
+            "forceReinstallCard" : {
+                "title" : "Force Reinstall Roblox",
+                "description" : "Reinstall roblox everytime you launch it."
             }
         },
 
