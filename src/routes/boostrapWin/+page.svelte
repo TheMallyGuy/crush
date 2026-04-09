@@ -1,10 +1,3 @@
-<!--
-    NOTICE DO NOT REMOVE!!!
-    This page is in fact, genarated by Gemini & Claude AI. Although I'm good at making things, but using these tools to make this easier.
-    You can call this "AI slop" or whatever, but its a developer tools & I'd to use it.
-    Any opinion on this?  
--->
-
 <script lang="ts">
     import { downloadRoblox } from '$lib/downloadRoblox'
     import type {
@@ -104,15 +97,16 @@
     }
 
     async function runBootstrap() {
-        const store = await load('config.json')
-        const savedInstallation = await store.get<Installation>('installation')
-
         error = false
         errorMessage = ''
         done = false
         handleProgress({ type: 'status', message: 'Preparing...' })
 
         try {
+            const store = await load('config.json')
+            const savedInstallation =
+                await store.get<Installation>('installation')
+
             const version = await downloadRoblox(
                 handleProgress,
                 savedInstallation?.version === 'latest'
@@ -130,33 +124,42 @@
             await launchPlayer(version, url)
             await invoke('watch_logs')
 
-            await invoke('create_or_focus_window', {
-                label: 'crushBoostrapChoiceWindow',
-                url: 'mainWin/choiceWin',
-                title: 'Crush',
-                width: 500.0,
-                height: 250.0,
-                minWidth: 500.0,
-                minHeight: 250.0,
-            })
-
-            const win = getCurrentWindow()
-            if (win.label === 'crushBoostrapChoiceWindow') {
-                await goto('/mainWin/choiceWin')
-            } else {
-                setTimeout(() => {
-                    win.close()
-                }, 100)
-            }
+            await finalizeBootstrap()
         } catch (e: any) {
-            error = true
-            errorMessage = e.message || String(e)
-            handleProgress({
-                type: 'status',
-                message: `Error: ${errorMessage}`,
-            })
-            console.error('Bootstrap failed:', e)
+            handleBootstrapError(e)
         }
+    }
+
+    async function finalizeBootstrap() {
+        await invoke('create_or_focus_window', {
+            label: 'crushBoostrapChoiceWindow',
+            url: 'mainWin/choiceWin',
+            title: 'Crush',
+            width: 500.0,
+            height: 250.0,
+            minWidth: 500.0,
+            minHeight: 250.0,
+        })
+
+        const win = getCurrentWindow()
+        if (win.label === 'crushBoostrapChoiceWindow') {
+            await goto('/mainWin/choiceWin')
+            return
+        }
+
+        setTimeout(() => {
+            win.close()
+        }, 100)
+    }
+
+    function handleBootstrapError(e: any) {
+        error = true
+        errorMessage = e.message || String(e)
+        handleProgress({
+            type: 'status',
+            message: `Error: ${errorMessage}`,
+        })
+        console.error('Bootstrap failed:', e)
     }
 
     onMount(async () => {

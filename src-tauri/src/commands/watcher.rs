@@ -65,7 +65,7 @@ fn is_roblox_running(system: &mut System) -> bool {
     system
         .processes()
         .values()
-        .any(|p| regex.is_match(&p.name().to_string_lossy()))
+        .any(|p| regex.is_match(p.name().to_string_lossy().as_ref()))
 }
 
 fn get_latest_log() -> Option<PathBuf> {
@@ -103,30 +103,12 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         let running = is_roblox_running(&mut system);
         if was_running && !running {
             state.activity = Activity::default();
-            let rpc_state = app.state::<RpcState>();
-            let _ = kill_rpc(&rpc_state).await;
+            let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
         was_running = running;
 
         if let Some(path) = get_latest_log() {
-            if state.current_file.as_ref() != Some(&path) {
-                log::info!("New log file: {:?}", path);
-                state.current_file = Some(path);
-                state.offset = 0;
-                state.activity = Activity::default();
-
-                let integrations = get_integrations(&store);
-
-                let should_rpc = integrations
-                    .as_ref()
-                    .is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
-
-                if should_rpc {
-                    apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game")
-                        .await
-                        .ok();
-                }
-            }
+            update_watcher_file(&app, &mut state, path, &store).await;
         }
 
         if let Some(path) = state.current_file.clone() {
@@ -136,6 +118,33 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         }
 
         tokio::time::sleep(Duration::from_millis(500)).await;
+    }
+}
+
+async fn update_watcher_file(
+    app: &AppHandle,
+    state: &mut WatcherState,
+    path: PathBuf,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) {
+    if state.current_file.as_ref() == Some(&path) {
+        return;
+    }
+
+    log::info!("New log file: {:?}", path);
+    state.current_file = Some(path);
+    state.offset = 0;
+    state.activity = Activity::default();
+
+    let integrations = get_integrations(store);
+    let should_rpc = integrations.as_ref().is_some_and(|v| {
+        v.get("crushRpc")
+            .and_then(|r| r.as_bool())
+            .unwrap_or(false)
+    });
+
+    if should_rpc {
+        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
     }
 }
 
@@ -291,11 +300,27 @@ async fn handle_joined_event(
     state.activity.in_game = true;
     log::info!("joined game {}", place_id);
 
+    save_game_history(state, store, place_id)?;
+
     let integrations = get_integrations(store);
+    let should_rpc = integrations.as_ref().is_some_and(|v| {
+        v.get("crushRpc")
+            .and_then(|r| r.as_bool())
+            .unwrap_or(false)
+    });
 
-    let should_rpc =
-        integrations.as_ref().is_some_and(|v| v.get("crushRpc").and_then(|r| r.as_bool()).unwrap_or(false));
+    if !should_rpc {
+        return Ok(());
+    }
 
+    update_rpc_if_needed(app, state, place_id).await
+}
+
+fn save_game_history(
+    state: &WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+    place_id: u64,
+) -> Result<(), String> {
     let mut history: Vec<Value> = match store.get("gameHistory") {
         Some(v) if v.is_array() => v.as_array().cloned().unwrap_or_default(),
         Some(_) => {
@@ -312,25 +337,31 @@ async fn handle_joined_event(
     }));
 
     store.set("gameHistory", Value::Array(history));
-    store.save().map_err(|e| e.to_string())?;
+    store.save().map_err(|e| e.to_string())
+}
 
-    if !should_rpc {
-        return Ok(());
-    }
-
+async fn update_rpc_if_needed(
+    app: &AppHandle,
+    state: &mut WatcherState,
+    place_id: u64,
+) -> Result<(), String> {
     let now = Instant::now();
     let debounce_ok = state
         .last_rpc
         .is_none_or(|last| now.duration_since(last).as_secs() > 2);
 
-    if debounce_ok {
-        if let Some(name) = fetch_place_name(place_id).await? {
-            if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
-                log::error!("RPC failed: {}", e);
-            }
-            state.last_rpc = Some(now);
-        }
+    if !debounce_ok {
+        return Ok(());
     }
+
+    let Some(name) = fetch_place_name(place_id).await? else {
+        return Ok(());
+    };
+
+    if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
+        log::error!("RPC failed: {}", e);
+    }
+    state.last_rpc = Some(now);
 
     Ok(())
 }

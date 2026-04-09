@@ -121,10 +121,10 @@ async function extractIndividualZip(
     return true
 }
 
-async function extractAll(version_hash: string, onProgress: ProgressCallback) {
+async function extractAll(versionHash: string, onProgress: ProgressCallback) {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
-    const installRoot = await join(dataDir, 'Player', 'Versions', version_hash)
+    const installRoot = await join(dataDir, 'Player', 'Versions', versionHash)
     await ensureDir(installRoot)
 
     const total = lowercaseExtractRoots.length
@@ -168,13 +168,13 @@ async function resolveBestRegion(
     return bestRegion
 }
 
-async function writeAppSettings(version_hash: string) {
+async function writeAppSettings(versionHash: string) {
     const dataDir = await appDataDir()
     const xmlPath = await join(
         dataDir,
         'Player',
         'Versions',
-        version_hash,
+        versionHash,
         'AppSettings.xml'
     )
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -189,27 +189,42 @@ async function performFullInstallation(
     onProgress: ProgressCallback,
     version?: string
 ): Promise<string> {
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.preparingForDownload') })
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.preparingForDownload'),
+    })
     const bestRegion = await resolveBestRegion(onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.fetchingUrls') })
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.fetchingUrls'),
+    })
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         region: bestRegion,
         ...(version && { version }),
     })
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.downloadingAssets') })
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.downloadingAssets'),
+    })
     await downloadAssets(assetsUrls, onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.extractingFiles') })
-    const version_hash =
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.extractingFiles'),
+    })
+    const versionHash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
-    await extractAll(version_hash, onProgress)
+    await extractAll(versionHash, onProgress)
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.xmlWriting') })
-    await writeAppSettings(version_hash)
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.xmlWriting'),
+    })
+    await writeAppSettings(versionHash)
 
-    return version_hash
+    return versionHash
 }
 
 async function checkInstallationExists(version?: string): Promise<boolean> {
@@ -233,37 +248,67 @@ export async function downloadRoblox(
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
 
     if (version) {
-        const isMissing = !(await checkInstallationExists(version))
-        if (isMissing) {
-            await performFullInstallation(onProgress, version)
-        }
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
-        const updatedList = Array.from(new Set([...versionList, version]))
-        await versionStore.set('versions', updatedList)
-        await versionStore.save()
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
-        return version  
+        return handleExplicitVersion(onProgress, version, versionList, versionStore)
     }
 
-    onProgress({ type: 'status', message: get(_)('typescript.downloader.updateChecking') })
+    return handleLatestVersion(onProgress, versionList, versionStore)
+}
+
+async function handleExplicitVersion(
+    onProgress: ProgressCallback,
+    version: string,
+    versionList: string[],
+    versionStore: Store
+): Promise<string> {
+    const isMissing = !(await checkInstallationExists(version))
+    if (isMissing) {
+        await performFullInstallation(onProgress, version)
+    }
+
+    await saveVersion(onProgress, version, versionList, versionStore)
+    return version
+}
+
+async function handleLatestVersion(
+    onProgress: ProgressCallback,
+    versionList: string[],
+    versionStore: Store
+): Promise<string> {
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.updateChecking'),
+    })
 
     const needsUpdate = await checkForUpdates({ versions: versionList })
     const isMissing = !(await checkInstallationExists(versionList.at(-1)))
 
     if (needsUpdate || isMissing) {
-        const version_hash = await performFullInstallation(onProgress)
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
-        const updatedList = Array.from(new Set([...versionList, version_hash]))
-        await versionStore.set('versions', updatedList)
-        await versionStore.save()
-
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
+        const versionHash = await performFullInstallation(onProgress)
+        await saveVersion(onProgress, versionHash, versionList, versionStore)
     }
 
     return await invoke('get_latest_version_player')
+}
+
+async function saveVersion(
+    onProgress: ProgressCallback,
+    version: string,
+    versionList: string[],
+    versionStore: Store
+) {
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.versionSaving'),
+    })
+
+    const updatedList = Array.from(new Set([...versionList, version]))
+    await versionStore.set('versions', updatedList)
+    await versionStore.save()
+
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.installationComplete'),
+    })
 }
 
 export function getPackageForFile(relativePath: string): string | null {
