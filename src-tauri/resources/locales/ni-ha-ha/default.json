@@ -1,0 +1,185 @@
+{
+    "rpc": {
+        "general": "nihahahaha nihahahahaha nihahahaha nihahahahahahaha nihahahahahaha nihahaha",
+        "integrations": "nihahahahahahaha nihaha nihaha",
+        "installation": "nihahahahahahaha nihahahahahaha nihahahaha",
+        "fastflag": "nihahahahahahaha nihahahahahaha nihahahaha",
+        "mod": "nihahahahahaha nihahahahaha nihahahaha",
+        "appearance": "nihahahahahaha nihahahahahahaha nihahaha",
+        "rust": {
+            "watcher": {
+                "general": "nihahahahahaha nihahaha",
+                "idle": "nihahahahahaha nihahahahahaha nihahahahaha nihahaha",
+                "playing": "nihahahahahahaha nihahahahahaha"
+            }
+        }
+    },
+    "typescript": {
+        "downloader": {
+            "updateChecking": "nihahahahaha nihahahahaha nihaha",
+            "findingBestRegion": "nihahahaha nihahahahaha nihaha nihaha nihahaha",
+            "preparingForDownload": "nihahahahahaha nihahahaha nihahahahahaha",
+            "fetchingUrls": "nihahahaha nihaha nihahahahahaha",
+            "downloadingAssets": "nihahahahaha nihahahahaha",
+            "extractingFiles": "nihahahahaha nihahaha",
+            "xmlWriting": "nihaha nihahahahahahaha",
+            "versionSaving": "nihahahahahaha nihahahaha nihaha",
+            "installationComplete": "nihahaha nihahahahaha",
+            "packageDownloadFailed": "nihahahahaha nihahahahahahaha nihahahaha nihahahaha nihahahahahahaha"
+        }
+    },
+    "elements": {
+        "launchBar": "nihahahaha"
+    },
+    "pages": {
+        "choiceWin": {
+            "title": "nihahahahahahaha",
+            "playRoblox": "nihahahahaha nihahahahaha",
+            "config": "nihaha"
+        },
+        "boostrapWin": {
+            "cancel": "nihahahahahaha",
+            "retry": "nihahaha"
+        },
+        "appearance": {
+            "appearance": "nihahahahahahaha",
+            "description": "nihahahahahaha nihahaha nihahaha nihahahahaha nihahahaha nihahaha nihahahaha nihahaha nihahahahaha",
+            "boostrapThemeCard": {
+                "title": "nihahahahahaha nihahahahahahaha",
+                "description": "nihaha nihaha nihaha nihahahahahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahahahaha nihahahaha nihahahahahaha nihaha",
+                "dropdown": {
+                    "default": "nihahaha nihahaha",
+                    "custom": "nihahahaha"
+                },
+                "customDropDownContents": {
+                    "importNew": "nihaha nihahahahahahaha",
+                    "noThemes": "nihahaha nihaha nihaha nihahahahahahaha nihahahahahahaha",
+                    "missingAssets": "nihahahahahaha nihahahaha nihahaha"
+                }
+            }
+        },
+        "integrations": {
+            "integrations": "nihaha",
+            "description": "nihahahaha nihahahaha nihahahahaha nihahahahahahaha",
+            "serverNotifierCard": {
+                "title": "nihahahahahaha nihahahahaha nihahahaha",
+                "description": "nihahahahaha nihahahahaha nihahahahahahaha nihahahahahaha nihahahahahahaha nihahaha nihahahahahahaha nihahahahahaha"
+            },
+            "rpcCard": {
+                "title": "nihahahaha nihahaha nihahaha",
+                "description": "nihahaha nihaha nihahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahahahaha"
+            },
+            "gameHistoryCard": {
+                "title": "nihahahahahahaha nihahahahahaha nihahahahahahaha",
+                "description": "nihahaha nihahahahahaha nihahaha nihahahahahaha nihahahahahaha nihaha nihahahaha",
+                "button": "nihahaha"
+            },
+            "gameHistory": {
+                "title": "nihahahaha nihaha nihahaha",
+                "description": "nihahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahaha nihahahahahahaha nihahahahahahaha",
+                "gameHistoryEmpty": "nihahahahahaha nihahaha nihahahahahaha nihahahahahahaha nihaha nihahaha nihahaha nihahaha nihahahahahahaha nihahahaha nihahahaha nihahahahahaha nihaha nihahahaha nihahahahahaha nihahahahahahaha nihahahahahaha nihaha nihaha nihahahahaha",
+                "gameHistoryLoading": "nihahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihahahaha",
+                "clearHistory": "nihahahahahaha nihahahahahahaha",
+                "backToIntegrations": "nihahahaha",
+                "gameHistoryCard": {
+                    "titleUnknown": "nihahahahahahaha nihahaha",
+                    "lastPlayed": "nihahahahaha nihahahahaha nihahahaha",
+                    "play": "nihahaha",
+                    "deeplink": "nihahahaha nihahahahaha"
+                }
+            }
+        },
+        "installations": {
+            "installations": "nihahaha",
+            "customVersion": {
+                "title": "nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha",
+                "description": "nihaha nihaha nihahahahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahahahaha nihahahaha nihahahahahahaha nihahahaha nihahahahahahaha nihahahaha nihahahaha nihaha nihaha nihahahahaha nihahahahaha nihahahaha nihaha nihahaha nihahahaha"
+            },
+            "forceReinstallCard": {
+                "title": "nihahahahahahaha nihahahahahaha nihahahahahaha",
+                "description": "nihahahahahahaha nihahahahaha nihahahahaha nihahahahaha nihahahaha nihaha"
+            }
+        },
+        "fastflag": {
+            "fastflag": "nihahahaha nihahahaha",
+            "description": "nihahaha nihahahahaha nihahahaha nihaha nihahaha",
+            "flagTable": {
+                "texboxFlagName": "nihahahahaha nihahahahahaha",
+                "texboxFlagValue": "nihahahaha",
+                "buttonAdd": "nihahahahahaha",
+                "search": "nihahahahaha nihahahahahahaha nihahahahahahaha",
+                "searchNotFound": "nihahaha nihahahahahahaha nihaha nihahahaha nihahaha nihahaha",
+                "flagCol": {
+                    "deleteNote": "nihaha nihahahaha",
+                    "name": "nihahahaha nihaha",
+                    "type": "nihahaha",
+                    "value": "nihahaha"
+                }
+            }
+        },
+        "mod": {
+            "mod": "nihahahahaha",
+            "tab": {
+                "modManagement": {
+                    "title": "nihahaha nihahaha",
+                    "description": "nihahahahahaha nihaha nihahahahaha nihaha nihahaha",
+                    "addModButton": "nihahahahahaha nihahahahahaha nihahahaha",
+                    "noModsFound": "nihahahahahaha nihahahahahaha nihaha nihahahahahaha nihahahahahahaha nihahahahahaha",
+                    "noModsFoundCreateButton": "nihahaha nihahahahaha nihahahahahahaha nihahahahaha",
+                    "modCards": {
+                        "toggleNoteDisable": "nihahahaha nihahahahahahaha",
+                        "toggleNoteEnable": "nihahahahaha nihahahahahahaha",
+                        "renameNote": "nihahahahahahaha nihahahahaha",
+                        "openFolderNote": "nihahaha nihahaha nihaha",
+                        "deleteNote": "nihaha nihaha",
+                        "layoutNote": "nihahahaha nihahahahaha nihahaha nihaha nihahahaha nihahahahahahaha nihahahahahahaha",
+                        "description": "nihahahahahahaha nihahahaha nihahahahaha nihaha nihaha nihaha nihahahaha nihahaha nihaha"
+                    }
+                },
+                "prebuiltMods": {
+                    "title": "nihahaha nihaha",
+                    "description": "nihahahaha nihahahahahahaha nihahaha",
+                    "cursorCard": {
+                        "title": "nihahahahahaha",
+                        "description": "nihahaha nihaha nihahahaha nihahahahaha nihahahahahahaha nihahaha nihahahahahaha",
+                        "dropdown": {
+                            "default": "nihahahahahaha"
+                        }
+                    },
+                    "customFontCard": {
+                        "title": "nihahaha nihaha",
+                        "description": "nihahaha nihaha nihahahahahaha nihahahaha nihaha nihahahahahaha nihaha nihahahahahaha",
+                        "button": "nihaha nihahahahaha"
+                    }
+                },
+                "communityMods": {
+                    "title": "nihahahahaha nihahaha",
+                    "description": "nihahahahaha nihaha nihahahahahaha nihahahahahaha nihahahaha nihahahahaha",
+                    "notice": {
+                        "title": "nihahahahaha nihaha nihaha",
+                        "description": "nihahahaha nihahahaha nihahahahahaha nihahahahaha nihahahaha nihahahahaha nihaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahaha nihahahahaha nihahaha nihahahaha nihahahahaha nihahahaha nihaha nihahahahahahaha",
+                        "submissionButton": "nihahahahaha nihahahahaha nihaha"
+                    }
+                }
+            }
+        },
+        "settings": {
+            "settings": "nihahaha",
+            "aboutCard": {
+                "title": "nihahahahaha",
+                "description": "nihahahahahahaha nihahahahaha nihaha nihahahahaha nihahahahahaha",
+                "builtOn": "nihaha nihahahahaha nihahahaha",
+                "commitHash": "nihahaha nihahahahahahaha nihahahaha"
+            },
+            "languageCard": {
+                "title": "nihahahahahaha",
+                "description": "nihahahahahaha nihaha nihahahahahaha nihaha nihahahaha nihahahahaha"
+            },
+            "donateCard": {
+                "title": "nihahahahaha",
+                "description": "nihahahahahahaha nihahahahahahaha nihahahaha nihahahaha nihaha nihaha nihahahahaha nihaha nihaha",
+                "button": "nihahahahahahaha"
+            }
+        }
+    }
+}
