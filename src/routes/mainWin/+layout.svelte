@@ -1,5 +1,6 @@
 <script context="module">
   import { waitLocale } from 'svelte-i18n';
+  import "./style.css"
   export const load = async () => {
     await waitLocale();
   };
