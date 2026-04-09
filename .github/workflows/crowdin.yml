@@ -1,10 +1,9 @@
 name: Crowdin Action
-
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  
+
 permissions:
   contents: write
   pull-requests: write
@@ -12,12 +11,11 @@ permissions:
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: crowdin action
+      - name: Crowdin Action
         uses: crowdin/github-action@v2
         with:
           upload_sources: true
@@ -30,9 +28,5 @@ jobs:
           pull_request_base_branch_name: 'main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-          # A numeric ID, found at https://crowdin.com/project/<projectName>/tools/api
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-
-          # Visit https://crowdin.com/settings#api-key to create this token
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
