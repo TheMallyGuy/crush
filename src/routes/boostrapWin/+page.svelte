@@ -78,10 +78,13 @@
             return
         }
 
-        if (state.isHtmlTheme) {
-            await win.setSize(new LogicalSize(600, 400))
+        if (state.config) {
+            const width = state.config.width || 600
+            const height = state.config.height || 400
+
+            await win.setSize(new LogicalSize(width, height))
             await win.center()
-        } else if (state.config) {
+
             for (const el of state.config.elements) {
                 if (el.name) {
                     textValues[el.name] =
@@ -89,10 +92,6 @@
                 }
             }
             textValues = { ...textValues }
-
-            const { config } = state
-            await win.setSize(new LogicalSize(config.width, config.height))
-            await win.center()
 
             const titleBar = state.config.elements.find(
                 (e) => e.type === 'TitleBar'
@@ -105,7 +104,7 @@
     }
 
     async function runBootstrap() {
-        const store = await load("config.json");
+        const store = await load('config.json')
         const savedInstallation = await store.get<Installation>('installation')
 
         error = false
@@ -152,7 +151,10 @@
         } catch (e: any) {
             error = true
             errorMessage = e.message || String(e)
-            handleProgress({ type: 'status', message: `Error: ${errorMessage}` })
+            handleProgress({
+                type: 'status',
+                message: `Error: ${errorMessage}`,
+            })
             console.error('Bootstrap failed:', e)
         }
     }
@@ -274,7 +276,23 @@
             "
         >
             {#each elements as el}
-                {#if el.type === 'Image' || el.props.source}
+                {#if el.type === 'Rectangle'}
+                    <div
+                        class="absolute"
+                        style="
+                            {getPosStyle(el.hAlign, el.vAlign)}
+                            width:{el.width}px;
+                            height:{el.height}px;
+                            background:{el.props.Fill || '#000'};
+                            {el.props.RadiusX
+                            ? `border-radius:${el.props.RadiusX}px;`
+                            : ''}
+                            {opStyle(el.opacity)}
+                            {marginStyle(el.margin)}
+                            z-index:{el.zIndex ?? 0};
+                        "
+                    ></div>
+                {:else if el.type === 'Image' || el.props.source}
                     <img
                         src={asset(
                             el.props.source ||
@@ -332,8 +350,7 @@
                             {opStyle(el.opacity)}
                             {marginStyle(el.margin)}
                             z-index:{el.zIndex ?? 2};
-                        "
-                        >{el.props.Content || el.props.Label || ''}</button
+                        ">{el.props.Content || el.props.Label || ''}</button
                     >
                 {:else if el.type === 'ProgressBar'}
                     <div
@@ -462,7 +479,7 @@
                         on:click={runBootstrap}
                         class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
                     >
-                        {$_("pages.boostrapWin.retry")}
+                        {$_('pages.boostrapWin.retry')}
                     </button>
                 {/if}
                 <button
@@ -471,7 +488,9 @@
                         ? 'flex-1'
                         : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
-                    <span class="font-medium">{$_("pages.boostrapWin.cancel")}</span>
+                    <span class="font-medium"
+                        >{$_('pages.boostrapWin.cancel')}</span
+                    >
                 </button>
             </div>
         </div>
