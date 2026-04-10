@@ -47,7 +47,7 @@
     }
 </script>
 
-<h1 class="text-4xl font-bold text-white">Installation</h1>
+<h1 class="text-4xl font-bold text-white">{$_('pages.installations.installations')}</h1>
 
 <div class="flex flex-col gap-3">
     <SettingCard title={$_('pages.installations.customVersion.title')} description={$_('pages.installations.customVersion.description')} icon={Rocket}>

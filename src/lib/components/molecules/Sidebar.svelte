@@ -21,7 +21,7 @@
             href: `${baseUiUrl}/integrations`,
         },
         {
-            name: $_('pages.appearance.appearance'),
+            name: $_('pages.installations.installations'),
             icon: HardDrive,
             href: `${baseUiUrl}/installation`,
         },
