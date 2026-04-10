@@ -45,7 +45,7 @@ const lowercaseExtractRoots = Object.entries(extractRoots).map(([k, v]) => [
     v,
 ])
 
-import type { ProgressEvent, ProgressCallback } from './types'
+import type { ProgressEvent, ProgressCallback, Installation } from './types'
 
 async function ensureDir(path: string) {
     const existsDir = await exists(path)
@@ -244,6 +244,7 @@ export async function downloadRoblox(
     onProgress: ProgressCallback,
     version?: string
 ): Promise<string> {
+    const config = await load("config.json")
     const versionStore = await load('versions.json')
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
 
@@ -251,7 +252,7 @@ export async function downloadRoblox(
         return handleExplicitVersion(onProgress, version, versionList, versionStore)
     }
 
-    return handleLatestVersion(onProgress, versionList, versionStore)
+    return handleLatestVersion(onProgress, versionList, versionStore, config)
 }
 
 async function handleExplicitVersion(
@@ -272,7 +273,8 @@ async function handleExplicitVersion(
 async function handleLatestVersion(
     onProgress: ProgressCallback,
     versionList: string[],
-    versionStore: Store
+    versionStore: Store,
+    store: Store
 ): Promise<string> {
     onProgress({
         type: 'status',
@@ -281,8 +283,10 @@ async function handleLatestVersion(
 
     const needsUpdate = await checkForUpdates({ versions: versionList })
     const isMissing = !(await checkInstallationExists(versionList.at(-1)))
+    const installationCfg = await store.get<Installation>("installation")
+    const shouldForceInstall = await installationCfg?.forceReinstall
 
-    if (needsUpdate || isMissing) {
+    if (needsUpdate || isMissing || shouldForceInstall) {
         const versionHash = await performFullInstallation(onProgress)
         await saveVersion(onProgress, versionHash, versionList, versionStore)
     }
