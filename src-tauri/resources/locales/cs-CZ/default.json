@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Rychlé vlajky",
             "description": "Přidat/odebrat Roblox Fastflags a konfigurace.",
-            "flagTable": {
-                "texboxFlagName": "Název příznaku",
-                "texboxFlagValue": "Hodnota",
-                "buttonAdd": "Přidat",
-                "search": "Prohledat všechny fflagy...",
-                "searchNotFound": "Nebyly nalezeny žádné příznaky odpovídající vašemu vyhledávání.",
-                "flagCol": {
-                    "deleteNote": "Smazat příznak",
-                    "name": "Název příznaku",
-                    "type": "typ",
-                    "value": "hodnota"
+            "generalBack": "Zpět na fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Název příznaku",
+                    "texboxFlagValue": "Hodnota",
+                    "buttonAdd": "Přidat",
+                    "search": "Prohledat všechny fflagy...",
+                    "searchNotFound": "Nebyly nalezeny žádné příznaky odpovídající vašemu vyhledávání.",
+                    "flagCol": {
+                        "deleteNote": "Smazat příznak",
+                        "name": "Název příznaku",
+                        "type": "typ",
+                        "value": "hodnota"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Přednastavení",
+                "description": "Použijte naši vestavěnou předvolbu rychlé vlajky",
+                "msaaCard": {
+                    "title": "Anti-Aliasing Quality (MSAA)",
+                    "description": "Vyhlazuje zubaté okraje. Vyšší hodnoty vypadají lépe, ale mohou snížit výkon."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pozastavit Voxelier",
+                    "description": "Zastavuje voxelizaci pro zlepšení výkonu"
+                },
+                "grassAnimationCard": {
+                    "title": "Animace mávání trávy",
+                    "description": "Upravuje intenzitu pohybu trávy. (0 je žádné snížení, 999 nebo vyšší číslo zmrazí trávu, 0 a 1 mírně snížený pohyb a hodnota větší než 1 je silně snížený pohyb, blížící se klid)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Přepsat úroveň kvality textury",
+                    "description": "Vynucuje vlastní úroveň kvality textury.",
+                    "dropdownDefault": "Původní nastavení"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Povolit sítě nízké kvality",
+                    "description": "Může zlepšit výkonnost."
                 }
             }
         },

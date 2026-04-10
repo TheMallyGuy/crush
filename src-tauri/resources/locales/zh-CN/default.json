@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Snelle vlaggen",
             "description": "Roblox Fastflags en configuraties toevoegen/verwijderen.",
-            "flagTable": {
-                "texboxFlagName": "Vlagnaam",
-                "texboxFlagValue": "Waarde",
-                "buttonAdd": "Toevoegen",
-                "search": "Alle fflags doorzoeken...",
-                "searchNotFound": "Geen vlaggen gevonden die overeenkomen met uw zoekopdracht.",
-                "flagCol": {
-                    "deleteNote": "Vlag verwijderen.",
-                    "name": "vlagnaam",
-                    "type": "種類",
-                    "value": "Waarde"
+            "generalBack": "返回fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "旗帜+名称",
+                    "texboxFlagValue": "值",
+                    "buttonAdd": "新增",
+                    "search": "搜索所有fflags...",
+                    "searchNotFound": "未找到与您的搜索匹配的标记。",
+                    "flagCol": {
+                        "deleteNote": "删除标签...",
+                        "name": "标志和名称",
+                        "type": "type",
+                        "value": "价值"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "预案",
+                "description": "使用我们的内置快速标记预设",
+                "msaaCard": {
+                    "title": "抗锯齿质量",
+                    "description": "平滑锯齿状边缘。较高的值看起来更好，但可能会降低性能。"
+                },
+                "pauseVoxelizerCard": {
+                    "title": "暂停Voxelier",
+                    "description": "停止体素化以提高性能"
+                },
+                "grassAnimationCard": {
+                    "title": "草地挥舞动画",
+                    "description": "调整草运动的强度。（ 0表示不减少， 999或任何更高的数字将冻结草， 0和1稍微减少运动，大于1的值是强烈减少运动，接近静止）"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "覆盖纹理质量级别",
+                    "description": "强制自定义纹理质量级别。",
+                    "dropdownDefault": "默认"
+                },
+                "lowMeshQualityCard": {
+                    "title": "启用低质量网格",
+                    "description": "可能会提高性能。"
                 }
             }
         },

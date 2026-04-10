@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Fast Flags",
             "description": "Add/Remove Roblox Fastflags and configurations.",
-            "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
-                "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+            "generalBack": "Back to fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Flag name",
+                    "texboxFlagValue": "Value",
+                    "buttonAdd": "Add",
+                    "search": "Search all fflags...",
+                    "searchNotFound": "No flags found matching your search.",
+                    "flagCol": {
+                        "deleteNote": "Delete Flag",
+                        "name": "flag name",
+                        "type": "type",
+                        "value": "value"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Presets",
+                "description": "Use our built-in fast-flag preset",
+                "msaaCard": {
+                    "title": "Anti-Aliasing Quality (MSAA)",
+                    "description": "Smooths jagged edges. Higher values look better but may reduce performance."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pause Voxelier",
+                    "description": "Stops voxelization to improve performance"
+                },
+                "grassAnimationCard": {
+                    "title": "Grass waving animation",
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Overwrite texture quality level",
+                    "description": "Forces a custom texture quality level.",
+                    "dropdownDefault": "Default"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Enable Low Quality Meshes",
+                    "description": "May improves performance."
                 }
             }
         },

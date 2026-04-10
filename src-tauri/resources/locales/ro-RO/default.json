@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Semnalizări rapide",
             "description": "Adăugați/eliminați steaguri rapide și configurații Roblox.",
-            "flagTable": {
-                "texboxFlagName": "Denumire indicator de validitate",
-                "texboxFlagValue": "Valoare",
-                "buttonAdd": "Adăugare",
-                "search": "Caută toate steagurile...",
-                "searchNotFound": "Nu s-au găsit steaguri care să se potrivească căutării tale.",
-                "flagCol": {
-                    "deleteNote": "Ștergeți marcajul",
-                    "name": "numele steagului",
-                    "type": "filtru",
-                    "value": "valoare"
+            "generalBack": "Înapoi la steagul rapid",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Denumire indicator de validitate",
+                    "texboxFlagValue": "Valoare",
+                    "buttonAdd": "Adăugare",
+                    "search": "Caută toate steagurile...",
+                    "searchNotFound": "Nu s-au găsit steaguri care să se potrivească căutării tale.",
+                    "flagCol": {
+                        "deleteNote": "Ștergeți marcajul",
+                        "name": "numele steagului",
+                        "type": "filtru",
+                        "value": "valoare"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Presetări ",
+                "description": "Utilizați presetarea noastră încorporată cu steag rapid",
+                "msaaCard": {
+                    "title": "Calitate anti-aliasing (MSAA)",
+                    "description": "Netezește marginile zimțate. Valorile mai mari arată mai bine, dar pot reduce performanța."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Întrerupeți Voxelier",
+                    "description": "Oprește voxelizarea pentru a îmbunătăți performanța"
+                },
+                "grassAnimationCard": {
+                    "title": "Animație cu fluturarea ierbii",
+                    "description": "Ajustează intensitatea mișcării ierbii. (0 nu este o reducere, 999 sau orice număr mai mare va îngheța iarba, 0 și 1 mișcare ușor redusă și o valoare mai mare de 1 este o mișcare puternic redusă, care se apropie de nemișcare)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Nivel calitate textură suprascriere",
+                    "description": "Forțează un nivel de calitate a texturii personalizat.",
+                    "dropdownDefault": "Implicit"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Activați ochiurile de calitate scăzută",
+                    "description": "Poate îmbunătăți performanța."
                 }
             }
         },

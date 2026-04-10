@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Indicateurs rapides",
             "description": "Ajouter/Supprimer des Fastflags et des configurations Roblox.",
-            "flagTable": {
-                "texboxFlagName": "Nom du marqueur",
-                "texboxFlagValue": "Valeur",
-                "buttonAdd": "Ajouter",
-                "search": "Rechercher tous les fflags...",
-                "searchNotFound": "Aucun indicateur correspondant à votre recherche n'a été trouvé.",
-                "flagCol": {
-                    "deleteNote": "Supprimer l’indicateur.",
-                    "name": "Nom du marqueur",
-                    "type": "type",
-                    "value": "valeur"
+            "generalBack": "Retour à fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Nom du marqueur",
+                    "texboxFlagValue": "Valeur",
+                    "buttonAdd": "Ajouter",
+                    "search": "Rechercher tous les fflags...",
+                    "searchNotFound": "Aucun indicateur correspondant à votre recherche n'a été trouvé.",
+                    "flagCol": {
+                        "deleteNote": "Supprimer l’indicateur.",
+                        "name": "Nom du marqueur",
+                        "type": "type",
+                        "value": "valeur"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Préréglages",
+                "description": "Utilisez notre préréglage de drapeau rapide intégré",
+                "msaaCard": {
+                    "title": "Qualité anti-aliasing (MSAA)",
+                    "description": "Lisse les bords dentelés. Les valeurs plus élevées sont plus belles, mais peuvent réduire les performances."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pause Voxelier",
+                    "description": "Arrête la voxélisation pour améliorer les performances"
+                },
+                "grassAnimationCard": {
+                    "title": "Animation ondulant de l'herbe",
+                    "description": "Ajuste l'intensité du mouvement de l'herbe. (0 n'est pas une réduction, 999 ou un nombre supérieur gèlera l'herbe, 0 & 1 un mouvement légèrement réduit et une valeur supérieure à 1 est un mouvement fortement réduit, approchant le calme)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Écraser le niveau de qualité de la texture",
+                    "description": "Force un niveau de qualité de texture personnalisé.",
+                    "dropdownDefault": "Par défaut"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Activer les maillages de faible qualité",
+                    "description": "Cela améliore les performances"
                 }
             }
         },

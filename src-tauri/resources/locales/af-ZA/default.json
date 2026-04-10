@@ -70,7 +70,7 @@
                 "description": "Vervang die Roblox Rich Presence met Crush's"
             },
             "gameHistoryCard": {
-                "title": "Persoonlike spelgeskiedenis",
+                "title": "Jou spelgeskiedenis",
                 "description": "Sien en speel jou speletjies wat onlangs gespeel is.",
                 "button": "Besigtig"
             },
@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Vinnige Vlae",
             "description": "Voeg/verwyder Roblox Fastflags en konfigurasies.",
-            "flagTable": {
-                "texboxFlagName": "Vlagnaam",
-                "texboxFlagValue": "Waarde",
-                "buttonAdd": "Voeg by",
-                "search": "Soek alle fflags...",
-                "searchNotFound": "Geen vlaggies gevind wat ooreenstem met jou soektog nie.",
-                "flagCol": {
-                    "deleteNote": "Uitvee Vlag",
-                    "name": "vlagnaam",
-                    "type": "tipe",
-                    "value": "Waarde"
+            "generalBack": "Terug na FastFlag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Vlagnaam",
+                    "texboxFlagValue": "Waarde",
+                    "buttonAdd": "Voeg by",
+                    "search": "Soek alle fflags...",
+                    "searchNotFound": "Geen vlaggies gevind wat ooreenstem met jou soektog nie.",
+                    "flagCol": {
+                        "deleteNote": "Uitvee Vlag",
+                        "name": "vlagnaam",
+                        "type": "tipe",
+                        "value": "Waarde"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Voorafinstellings",
+                "description": "Gebruik ons ingeboude vinnige vlag preset",
+                "msaaCard": {
+                    "title": "Anti-Aliasing Kwaliteit (MSAA)",
+                    "description": "Gladde kronkelrande. Hoër waardes lyk beter, maar kan prestasie verminder."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pouseer Voxelier",
+                    "description": "Stop voxelization om prestasie te verbeter"
+                },
+                "grassAnimationCard": {
+                    "title": "Gras waai animasie",
+                    "description": "Pas die intensiteit van die gras beweging. (0 is geen vermindering, 999 of enige hoër getal sal die gras vries, 0 & 1 effens verminder beweging en waarde wat groter as 1 is sterk verminder beweging, nader stilte)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Oorskryf tekstuur kwaliteit vlak",
+                    "description": "Krag 'n persoonlike tekstuur kwaliteit vlak.",
+                    "dropdownDefault": "Standaard"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Aktiveer lae kwaliteit maas",
+                    "description": "Kan prestasie verbeter."
                 }
             }
         },

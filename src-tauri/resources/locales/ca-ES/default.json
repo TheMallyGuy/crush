@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Marques ràpides",
             "description": "Afegeix/elimina Fastflags i configuracions de Roblox.",
-            "flagTable": {
-                "texboxFlagName": "Nom de la bandera",
-                "texboxFlagValue": "Valor",
-                "buttonAdd": "Afegeix",
-                "search": "Cerca totes les fflags...",
-                "searchNotFound": "No s'han trobat banderes que coincideixin amb la cerca.",
-                "flagCol": {
-                    "deleteNote": "Suprimeix la marca",
-                    "name": "nom de la bandera",
-                    "type": "tipus",
-                    "value": "valor"
+            "generalBack": "Torna a la bandera ràpida",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Nom de la bandera",
+                    "texboxFlagValue": "Valor",
+                    "buttonAdd": "Afegeix",
+                    "search": "Cerca totes les fflags...",
+                    "searchNotFound": "No s'han trobat banderes que coincideixin amb la cerca.",
+                    "flagCol": {
+                        "deleteNote": "Suprimeix la marca",
+                        "name": "nom de la bandera",
+                        "type": "tipus",
+                        "value": "valor"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Ajustaments preestablerts",
+                "description": "Utilitza el nostre preajust de bandera ràpida incorporat",
+                "msaaCard": {
+                    "title": "Qualitat Anti-Aliasing (MSAA)",
+                    "description": "Suavitza les vores dentades. Els valors més alts es veuen millor, però poden reduir el rendiment."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pausa Voxelier",
+                    "description": "Atura la voxelització per millorar el rendiment"
+                },
+                "grassAnimationCard": {
+                    "title": "Animació ondulant la gespa",
+                    "description": "Ajusta la intensitat del moviment de l'herba. (0 és cap reducció, 999 o qualsevol nombre superior congela l'herba, 0 & 1 és un moviment lleugerament reduït i el valor superior a 1 és un moviment força reduït, aproximant-se a la quietud)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Sobreescriu el nivell de qualitat de la textura",
+                    "description": "Força un nivell de qualitat de textura personalitzat.",
+                    "dropdownDefault": "Per defecte"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Habilita les malles de baixa qualitat",
+                    "description": "Pot millorar el rendiment."
                 }
             }
         },

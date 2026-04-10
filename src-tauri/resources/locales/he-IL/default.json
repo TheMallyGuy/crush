@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "דגלים מהירים",
             "description": "הוסף/הסר דגלים מהירים וקונפיגורציות של Roblox.",
-            "flagTable": {
-                "texboxFlagName": "שם הסימון",
-                "texboxFlagValue": "ערך",
-                "buttonAdd": "הוספה",
-                "search": "חפש את כל דגמי ה - fflags",
-                "searchNotFound": "לא נמצאו דגלים שתואמים לחיפוש שלכם.",
-                "flagCol": {
-                    "deleteNote": "מחיקת סימון",
-                    "name": "שם הדגל",
-                    "type": "סוג",
-                    "value": "ערך"
+            "generalBack": "חזרה ל - fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "שם הסימון",
+                    "texboxFlagValue": "ערך",
+                    "buttonAdd": "הוספה",
+                    "search": "חפש את כל דגמי ה - fflags",
+                    "searchNotFound": "לא נמצאו דגלים שתואמים לחיפוש שלכם.",
+                    "flagCol": {
+                        "deleteNote": "מחיקת סימון",
+                        "name": "שם הדגל",
+                        "type": "סוג",
+                        "value": "ערך"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "מוגדר מראש",
+                "description": "השתמשו בהגדרה הקבועה מראש המובנית שלנו לדגל מהיר",
+                "msaaCard": {
+                    "title": "איכות נוגדת עליות (MSAA)",
+                    "description": "מחליק קצוות משוננים. ערכים גבוהים יותר נראים טוב יותר אך עשויים להפחית את הביצועים."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "השהיית Voxelier",
+                    "description": "עוצר את voxelization כדי לשפר את הביצועים"
+                },
+                "grassAnimationCard": {
+                    "title": "הנפשת נפנוף דשא",
+                    "description": "מתאים את עוצמת תנועת הדשא. (0 אינו הפחתה, 999 או כל מספר גבוה יותר יקפיא את הדשא, 0 & 1 תנועה מופחתת מעט וערך שגדול מ -1 מופחת בחוזקה בתנועה, מתקרב לשקט)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "החלף את רמת איכות המרקם",
+                    "description": "מאלץ רמת איכות מרקם מותאמת אישית.",
+                    "dropdownDefault": "ברירת המחדל"
+                },
+                "lowMeshQualityCard": {
+                    "title": "הפעלת מסרים באיכות נמוכה",
+                    "description": "עשוי לשפר את הביצועים."
                 }
             }
         },

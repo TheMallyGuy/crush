@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "快速標記",
             "description": "新增/移除Roblox Fastflags和配置。",
-            "flagTable": {
-                "texboxFlagName": "標記名稱",
-                "texboxFlagValue": "數值",
-                "buttonAdd": "新增",
-                "search": "搜尋所有旗幟...",
-                "searchNotFound": "找不到符合搜尋條件的旗標。",
-                "flagCol": {
-                    "deleteNote": "刪除標記",
-                    "name": "標記名稱",
-                    "type": "種類",
-                    "value": "數值"
+            "generalBack": "返回fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "標記名稱",
+                    "texboxFlagValue": "數值",
+                    "buttonAdd": "新增",
+                    "search": "搜尋所有旗幟...",
+                    "searchNotFound": "找不到符合搜尋條件的旗標。",
+                    "flagCol": {
+                        "deleteNote": "刪除標記",
+                        "name": "標記名稱",
+                        "type": "種類",
+                        "value": "數值"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "預置",
+                "description": "使用我們的內建快速旗幟預設值",
+                "msaaCard": {
+                    "title": "抗鋸齒品質(MSAA)",
+                    "description": "平滑鋸齒邊緣。較高的值看起來更好，但可能會降低性能。"
+                },
+                "pauseVoxelizerCard": {
+                    "title": "暫停Voxelier",
+                    "description": "停止體素化以提高性能"
+                },
+                "grassAnimationCard": {
+                    "title": "草地揮舞動畫",
+                    "description": "調整草叢移動的強度。（ 0表示無減少， 999或任何更高的數字將使草叢凍結， 0和1略微減少運動，大於1的值是強烈減少運動，接近靜止）"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "覆蓋紋理質量級別",
+                    "description": "強制自訂紋理質量級別。",
+                    "dropdownDefault": "預設值"
+                },
+                "lowMeshQualityCard": {
+                    "title": "啟用低品質網格",
+                    "description": "可能會提高性能。"
                 }
             }
         },

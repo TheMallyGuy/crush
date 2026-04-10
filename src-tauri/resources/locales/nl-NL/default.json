@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox spelen",
                 "idle": "Niet in een spel",
-                "playing": "In"
+                "playing": "Over"
             }
         }
     },
@@ -70,22 +70,22 @@
                 "description": "Vervang de Roblox Rich Presence door Crush's"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "Spelgeschiedenis",
+                "description": "Bekijk en speel je recent gespeelde games.",
+                "button": "Weergave"
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
-                "backToIntegrations": "Back",
+                "title": "Spelgeschiedenis",
+                "description": "Bekijk en speel je recent gespeelde games.",
+                "gameHistoryEmpty": "Je spelgeschiedenis is leeg. Speel wat spelletjes om ze hier te zien! (Houd er rekening mee dat niet elke server opnieuw kan worden aangesloten)",
+                "gameHistoryLoading": "Bezig met laden, een ogenblik geduld...",
+                "clearHistory": "Geschiedenis wissen",
+                "backToIntegrations": "Terug",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "Onbekend spel",
+                    "lastPlayed": "Laatst afgespeeld:",
+                    "play": "Spelen",
+                    "deeplink": "DeepLink kopiëren"
                 }
             }
         },
@@ -96,24 +96,52 @@
                 "description": "Sla de updatecontrole over en download de versie. De standaardwaarde is de laatste. Ongeldige versie wordt niet gedownload en zal terugvallen op de nieuwste versie."
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "Roblox geforceerd opnieuw installeren",
+                "description": "Installeer roblox elke keer dat je het start opnieuw."
             }
         },
         "fastflag": {
             "fastflag": "Snelle vlaggen",
             "description": "Roblox Fastflags en configuraties toevoegen/verwijderen.",
-            "flagTable": {
-                "texboxFlagName": "Vlagnaam",
-                "texboxFlagValue": "Waarde",
-                "buttonAdd": "Toevoegen",
-                "search": "Alle fflags doorzoeken...",
-                "searchNotFound": "Geen vlaggen gevonden die overeenkomen met uw zoekopdracht.",
-                "flagCol": {
-                    "deleteNote": "Vlag verwijderen.",
-                    "name": "vlagnaam",
-                    "type": "type",
-                    "value": "waarde"
+            "generalBack": "Terug naar fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Vlagnaam",
+                    "texboxFlagValue": "Waarde",
+                    "buttonAdd": "Toevoegen",
+                    "search": "Alle fflags doorzoeken...",
+                    "searchNotFound": "Geen vlaggen gevonden die overeenkomen met uw zoekopdracht.",
+                    "flagCol": {
+                        "deleteNote": "Vlag verwijderen.",
+                        "name": "vlagnaam",
+                        "type": "type",
+                        "value": "waarde"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Voorinstellingen",
+                "description": "Gebruik onze ingebouwde voorinstelling voor snelle vlaggen",
+                "msaaCard": {
+                    "title": "Anti-aliasingkwaliteit (MSAA)",
+                    "description": "Maakt gekartelde randen glad. Hogere waarden zien er beter uit, maar kunnen de prestaties verminderen."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pauzeer Voxelier",
+                    "description": "Stopt voxelisatie om de prestaties te verbeteren"
+                },
+                "grassAnimationCard": {
+                    "title": "Graszwaaiende animatie",
+                    "description": "Past de intensiteit van de beweging van het gras aan. (0 is geen reductie, 999 of een hoger getal bevriest het gras, 0 & 1 enigszins verminderde beweging en waarde dat groter dan 1 sterk verminderde beweging is, nadert stilte)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Kwaliteitsniveau van textuur overschrijven",
+                    "description": "Dwingt een aangepast textuurkwaliteitsniveau af.",
+                    "dropdownDefault": "Standaard"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Schakel mazen van lage kwaliteit in",
+                    "description": "Kan de prestaties verbeteren."
                 }
             }
         },

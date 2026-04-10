@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Nopeat liput",
             "description": "Lisää/poista Roblox Fastflags -merkintöjä ja -kokoonpanoja.",
-            "flagTable": {
-                "texboxFlagName": "Lipun nimi",
-                "texboxFlagValue": "Arvo:",
-                "buttonAdd": "Lisää",
-                "search": "Hae kaikista hipaisulipuista...",
-                "searchNotFound": "Hakuasi vastaavia merkintöjä ei löytynyt.",
-                "flagCol": {
-                    "deleteNote": "Poista merkintä",
-                    "name": "lipun nimi",
-                    "type": "tyyppi",
-                    "value": "Arvo"
+            "generalBack": "Takaisin fastflagiin",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Lipun nimi",
+                    "texboxFlagValue": "Arvo:",
+                    "buttonAdd": "Lisää",
+                    "search": "Hae kaikista hipaisulipuista...",
+                    "searchNotFound": "Hakuasi vastaavia merkintöjä ei löytynyt.",
+                    "flagCol": {
+                        "deleteNote": "Poista merkintä",
+                        "name": "lipun nimi",
+                        "type": "tyyppi",
+                        "value": "Arvo"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Esiasetukset",
+                "description": "Käytä sisäänrakennettua nopean lipun esiasetustamme",
+                "msaaCard": {
+                    "title": "Liukenemista estävä laatu (MSAA)",
+                    "description": "Pehmentää rosoiset reunat. Suuremmat arvot näyttävät paremmilta, mutta voivat heikentää suorituskykyä."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pysäytä vokseli",
+                    "description": "Pysäyttää vokselisaation suorituskyvyn parantamiseksi"
+                },
+                "grassAnimationCard": {
+                    "title": "Ruohoa heiluttava animaatio",
+                    "description": "Säätää ruohon liikkeen voimakkuutta. (0 ei ole vähennys, 999 tai suurempi luku jäädyttää ruohon, 0 & 1 hieman vähentynyt liike ja arvo, joka on suurempi kuin 1, on voimakkaasti vähentynyt liike, lähestyy hiljaisuutta)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Korvaa tekstuurin laatutaso",
+                    "description": "Pakottaa mukautetun tekstuurin laatutason.",
+                    "dropdownDefault": "Oletusarvoinen"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Ota käyttöön heikkolaatuiset verkot",
+                    "description": "Saattaa parantaa suorituskykyä."
                 }
             }
         },

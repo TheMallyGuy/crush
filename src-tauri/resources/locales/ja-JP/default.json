@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Robloxをプレイする",
                 "idle": "はない、",
-                "playing": "イン"
+                "playing": "コレクション内にある"
             }
         }
     },
@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "高速フラグ",
             "description": "Roblox Fastflagsと設定を追加/削除します。",
-            "flagTable": {
-                "texboxFlagName": "フラグ名",
-                "texboxFlagValue": "値",
-                "buttonAdd": "追加",
-                "search": "すべてのフラグを検索...",
-                "searchNotFound": "検索に一致するフラグは見つかりませんでした。",
-                "flagCol": {
-                    "deleteNote": "フラグを削除します:",
-                    "name": "フラグ名",
-                    "type": "種別",
-                    "value": "値"
+            "generalBack": "Fastflagに戻る",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "フラグ名",
+                    "texboxFlagValue": "値",
+                    "buttonAdd": "追加",
+                    "search": "すべてのフラグを検索...",
+                    "searchNotFound": "検索に一致するフラグは見つかりませんでした。",
+                    "flagCol": {
+                        "deleteNote": "フラグを削除します:",
+                        "name": "フラグ名",
+                        "type": "種別",
+                        "value": "値"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "プリセット",
+                "description": "組み込みの高速フラグプリセットを使用する",
+                "msaaCard": {
+                    "title": "アンチエイリアシングの品質",
+                    "description": "ギザギザのエッジを滑らかにします。値が高いほど見栄えは良くなりますが、パフォーマンスが低下する可能性があります。"
+                },
+                "pauseVoxelizerCard": {
+                    "title": "ボクセリエを一時停止",
+                    "description": "パフォーマンスを向上させるためにボクセリゼーションを停止します"
+                },
+                "grassAnimationCard": {
+                    "title": "草振りアニメーション",
+                    "description": "草の動きの強さを調整します。（ 0は減少なし、999以上の数字は草を凍らせ、0と1はわずかに減少し、1より大きい値は静止に近づいて強く減少した動きです）"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "テクスチャ品質レベルを上書きする",
+                    "description": "カスタムテクスチャ品質レベルを強制します。",
+                    "dropdownDefault": "デフォルト"
+                },
+                "lowMeshQualityCard": {
+                    "title": "低品質のメッシュを有効にする",
+                    "description": "パフォーマンスを向上させる可能性がある。"
                 }
             }
         },

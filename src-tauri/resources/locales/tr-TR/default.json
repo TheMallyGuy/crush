@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Hızlı Bayraklar",
             "description": "Roblox Fastflags ve yapılandırmaları ekleyin/kaldırın.",
-            "flagTable": {
-                "texboxFlagName": "Bayrak ve İsim",
-                "texboxFlagValue": "Değer",
-                "buttonAdd": "Ekle",
-                "search": "Tüm bayrakları ara...",
-                "searchNotFound": "Aramanızla eşleşen bayrak bulunamadı.",
-                "flagCol": {
-                    "deleteNote": "İşareti Sil",
-                    "name": "Bayrak ve İsim",
-                    "type": "türü",
-                    "value": "değer"
+            "generalBack": "Fastflag'a geri dön",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Bayrak ve İsim",
+                    "texboxFlagValue": "Değer",
+                    "buttonAdd": "Ekle",
+                    "search": "Tüm bayrakları ara...",
+                    "searchNotFound": "Aramanızla eşleşen bayrak bulunamadı.",
+                    "flagCol": {
+                        "deleteNote": "İşareti Sil",
+                        "name": "Bayrak ve İsim",
+                        "type": "türü",
+                        "value": "değer"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Ön ayarlar",
+                "description": "Yerleşik hızlı bayrak ön ayarımızı kullanın",
+                "msaaCard": {
+                    "title": "Yumuşatma Kalitesi (MSAA)",
+                    "description": "Pürüzlü kenarları pürüzsüzleştirir. Daha yüksek değerler daha iyi görünür ancak performansı düşürebilir."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Voxelier'i duraklat",
+                    "description": "Performansı artırmak için vokselleştirmeyi durdurur"
+                },
+                "grassAnimationCard": {
+                    "title": "Çim sallama animasyonu",
+                    "description": "Çim hareketinin yoğunluğunu ayarlar. (0 azalma yoktur, 999 veya daha yüksek bir sayı çimi dondurur, 0 & 1 hafifçe azaltılmış hareket ve 1 'den büyük bir değer güçlü bir şekilde azaltılmış harekettir, durgunluğa yaklaşır)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Doku kalite seviyesinin üzerine yaz",
+                    "description": "Özel bir doku kalite seviyesini zorlar.",
+                    "dropdownDefault": "Sistem"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Düşük Kaliteli Ağları Etkinleştir",
+                    "description": "Performansı artırabilir."
                 }
             }
         },
@@ -143,7 +171,7 @@
                         "title": "İmleç",
                         "description": "Roblox imlecinizi eski sürümlerle değiştirin.",
                         "dropdown": {
-                            "default": "Sistem"
+                            "default": "Varsayılan"
                         }
                     },
                     "customFontCard": {
