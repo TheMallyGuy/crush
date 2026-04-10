@@ -29,7 +29,7 @@
     <Button
         variant="primary"
         size="md"
-        class="rounded-full px-10 shadow-lg shadow-blue-600/20"
+        class="rounded-full px-10 shadow-lg "
         on:click={launchBoostrap}
     >
         <Rocket class="size-4 mr-2" />
