@@ -1,119 +1,147 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
+        "general": "Roblox skidač čizama napisan ispočetka",
         "integrations": "In Intergrations Route",
         "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "fastflag": "Na ruti Fastflag",
+        "mod": "U mod. ruti",
+        "appearance": "Putanja u izgledu",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "Igranje robloksa",
+                "idle": "Nije u igri",
+                "playing": "U"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "Provera ažuriranja",
+            "findingBestRegion": "Pronalaženje najboljeg regiona za preuzimanje...",
+            "preparingForDownload": "Priprema korisnika za prenošenje u sumulaciju.",
+            "fetchingUrls": "Preuzimanje URL-ova materijala...",
+            "downloadingAssets": "Preuzimanje resursa...",
+            "extractingFiles": "Распакујем све фајлове",
+            "xmlWriting": "Pisanje AppSettings.xml...",
+            "versionSaving": "Čuvanje informacija o verziji...",
+            "installationComplete": "Instalacija je završena",
+            "packageDownloadFailed": "Preuzimanje nije uspelo"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "Покрени"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "Zaljubljenost.",
+            "playRoblox": "Reprodukuj Roblox",
+            "config": "Konfiguracija"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "Otkaži",
+            "retry": "Ponovi"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Izgled",
+            "description": "Prilagodite izgled i osećaj Roblox bootstrappera.",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Tema bootstrappera",
+                "description": "Izaberite podrazumevanu Crush temu ili prilagođenu XML temu.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Podrazumevano (simpatija)",
+                    "custom": "Prilagođena"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Uvezi novo",
+                    "noThemes": "Još nema uvezenih prilagođenih tema.",
+                    "missingAssets": "Nedostajuća sredstva teme"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "Integracije",
+            "description": "Konfigurišite intergracije izvan robloxa",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "Obaveštavač o lokaciji servera",
+                "description": "Primajte obaveštenja kada se klijent poveže sa serverom."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Zamenite Roblox Rich Presence sa Crush's"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "Istorija vaše igre",
+                "description": "Pogledajte i igrajte igre koje ste nedavno igrali.",
+                "button": "Pogledaj"
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
+                "title": "Istorija vaše igre",
+                "description": "Pogledajte i igrajte igre koje ste nedavno igrali.",
+                "gameHistoryEmpty": "Istorija igara je prazna. Igraj neke igre da ih vidiš ovde! (Imajte na umu da se nije moguće ponovo pridružiti svakom pojedinačnom serveru)",
+                "gameHistoryLoading": "Učitava se, sačekajte trenutak...",
+                "clearHistory": "Brisanje istorije",
                 "backToIntegrations": "Back",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "Nepoznata igra",
+                    "lastPlayed": "Последње пуштање: When this track was last played",
+                    "play": "Igraj",
+                    "deeplink": "Kopiraj DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "Instalacije",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Instalirajte prilagođenu Roblox verziju",
+                "description": "Preskočite proveru ažuriranja i preuzmite verziju. Podrazumevana vrednost je najnovija. Nevažeća verzija se neće preuzeti i biće vraćena u najnoviju verziju."
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "Prinudno ponovo instalirajte Roblox",
+                "description": "Ponovo instalirajte roblox svaki put kada ga pokrenete."
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
-            "flagTable": {
-                "texboxFlagName": "Flag name",
-                "texboxFlagValue": "Value",
-                "buttonAdd": "Add",
-                "search": "Search all fflags...",
-                "searchNotFound": "No flags found matching your search.",
-                "flagCol": {
-                    "deleteNote": "Delete Flag",
-                    "name": "flag name",
-                    "type": "type",
-                    "value": "value"
+            "fastflag": "Brze zastavice",
+            "description": "Dodajte/uklonite Roblox Fastflags i konfiguracije.",
+            "generalBack": "Nazad na brzu zastavicu",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Назив заставе",
+                    "texboxFlagValue": "Vrednost",
+                    "buttonAdd": "Dodaj",
+                    "search": "Pretraži sve zastavice...",
+                    "searchNotFound": "Nije pronađena nijedna zastavica koja odgovara vašoj pretrazi.",
+                    "flagCol": {
+                        "deleteNote": "Izbriši zastavicu",
+                        "name": "Назив заставе",
+                        "type": "vrsta",
+                        "value": "vrednost"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Predefinisana podešavanja",
+                "description": "Koristite naše ugrađeno unapred podešavanje brze zastavice",
+                "msaaCard": {
+                    "title": "Kvalitet protiv lizinga (MSAA)",
+                    "description": "Izglađuje nazubljene ivice. Više vrednosti izgledaju bolje, ali mogu smanjiti performanse."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pauziraj Voxelier",
+                    "description": "Zaustavlja vokelizaciju radi poboljšanja performansi"
+                },
+                "grassAnimationCard": {
+                    "title": "Animacija mahanja travom",
+                    "description": "Podešava intenzitet kretanja trave. (0 nije smanjenje, 999 ili bilo koji veći broj će zamrznuti travu, 0 & 1 neznatno smanjeno kretanje i vrednost koja je veća od 1 je snažno smanjeno kretanje, približavanje miru)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Prepisati nivo kvaliteta teksture",
+                    "description": "Forsira prilagođeni nivo kvaliteta teksture.",
+                    "dropdownDefault": "Zadano"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Omogućite mrežice niskog kvaliteta",
+                    "description": "Može poboljšati performanse."
                 }
             }
         },
@@ -121,64 +149,64 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "Menadžment moda",
+                    "description": "Upravljajte svojim modovima Roblox mods.",
+                    "addModButton": "Dodajte mod",
+                    "noModsFound": "Ovde nismo našli modove, Yuppies.",
+                    "noModsFoundCreateButton": "Kreirajte svoj prvi mod",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "Onemogućite mod",
+                        "toggleNoteEnable": "Omogući mod",
+                        "renameNote": "Preimenuj mod",
+                        "openFolderNote": "Otvori fasciklu mod",
+                        "deleteNote": "Izbriši mod",
+                        "layoutNote": "Raspored modova inspirisan Frostrapovim menadžerom modova",
+                        "description": "Omogućite učitavanje moda i podesite lokaciju fascikle moda."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "Unapred izrađeni modovi",
+                    "description": "Instalirajte modove spremne za upotrebu.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "Курсор",
+                        "description": "Promenite kursor Roblox na starije verzije.",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "Zadano"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "Прилагођен Фонт",
+                        "description": "Promenite svoj roblox font u šta god želite.",
+                        "button": "Promenite font"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "Modovi zajednice",
+                    "description": "Istražite modove koje je kreirala zajednica.",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "Još uvek nema moda",
+                        "description": "Još uvek nemamo nijednu izmenu za zajednicu. Budite prvi koji će doprineti i pomoći nam da povećamo kolekciju!",
+                        "submissionButton": "Pošaljite mod"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "Podešavanja",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "O studiji",
+                "description": "Informacije o ovoj drobljenoj konstrukciji",
+                "builtOn": "Izgrađeno: {date}",
+                "commitHash": "Obavežite heš: {hash}"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "Jezik",
+                "description": "Izaberite željeni jezik za simpatije."
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "Донирајте",
+                "description": "Zaljubljeni ste? Donirajte Meliju da biste podržali njegov rad!",
+                "button": "Донирајте"
             }
         }
     }

@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Raske flagg",
             "description": "Legg til/fjern Roblox Fastflags og konfigurasjoner.",
-            "flagTable": {
-                "texboxFlagName": "Flaggnavn",
-                "texboxFlagValue": "Verdi",
-                "buttonAdd": "Legg inn",
-                "search": "Søk i alle fflags...",
-                "searchNotFound": "Ingen flagg funnet som samsvarer med søket ditt.",
-                "flagCol": {
-                    "deleteNote": "Slett flagg",
-                    "name": "flaggnavn",
-                    "type": "type",
-                    "value": "value"
+            "generalBack": "Tilbake til fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Flaggnavn",
+                    "texboxFlagValue": "Verdi",
+                    "buttonAdd": "Legg inn",
+                    "search": "Søk i alle fflags...",
+                    "searchNotFound": "Ingen flagg funnet som samsvarer med søket ditt.",
+                    "flagCol": {
+                        "deleteNote": "Slett flagg",
+                        "name": "flaggnavn",
+                        "type": "type",
+                        "value": "value"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Forhåndsinnstillinger",
+                "description": "Bruk vår innebygde forhåndsinnstilling for hurtigflagg",
+                "msaaCard": {
+                    "title": "Antialiasingkvalitet (MSAA)",
+                    "description": "Glatter ut hakkete kanter. Høyere verdier ser bedre ut, men kan redusere ytelsen."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pause Voxelier",
+                    "description": "Stopper vokselisering for å forbedre ytelsen"
+                },
+                "grassAnimationCard": {
+                    "title": "Animasjon av gress som vifter",
+                    "description": "Justerer intensiteten på gressbevegelsen. (0 er ingen reduksjon, 999 eller et høyere tall vil fryse gresset, 0 og 1 er litt redusert bevegelse, og verdier større enn 1 er sterkt redusert bevegelse, nærmer seg stillhet)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Overskriv teksturkvalitetsnivå",
+                    "description": "Tvinger frem et tilpasset teksturkvalitetsnivå.",
+                    "dropdownDefault": "Standard"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Aktiver lavkvalitetsnett",
+                    "description": "Mai forbedrer ytelsen."
                 }
             }
         },

@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Bandeiras rápidas",
             "description": "Adicionar/Remover Roblox Fastflags e configurações.",
-            "flagTable": {
-                "texboxFlagName": "Nome da bandeira",
-                "texboxFlagValue": "Valor",
-                "buttonAdd": "Add",
-                "search": "Pesquisar todos os fflags...",
-                "searchNotFound": "Não foram encontradas bandeiras que correspondam à sua pesquisa.",
-                "flagCol": {
-                    "deleteNote": "Excluir marcador UC",
-                    "name": "nome da bandeira",
-                    "type": "Tipo",
-                    "value": "referência"
+            "generalBack": "Voltar ao fastflag",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Nome da bandeira",
+                    "texboxFlagValue": "Valor",
+                    "buttonAdd": "Add",
+                    "search": "Pesquisar todos os fflags...",
+                    "searchNotFound": "Não foram encontradas bandeiras que correspondam à sua pesquisa.",
+                    "flagCol": {
+                        "deleteNote": "Excluir marcador UC",
+                        "name": "nome da bandeira",
+                        "type": "Tipo",
+                        "value": "referência"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Predefinições",
+                "description": "Use a nossa predefinição de bandeira rápida integrada",
+                "msaaCard": {
+                    "title": "Qualidade do Anti-Aliasing",
+                    "description": "Suaviza bordas irregulares. Valores mais altos parecem melhores, mas podem reduzir o desempenho."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Pausar Voxelier",
+                    "description": "Interrompe a voxelização para melhorar o desempenho"
+                },
+                "grassAnimationCard": {
+                    "title": "Animação de aceno de relva",
+                    "description": "Ajusta a intensidade do movimento da grama. (0 não é redução, 999 ou qualquer número mais alto congela a grama, 0 e 1 reduz ligeiramente o movimento e valor que maior que 1 é o movimento fortemente reduzido, aproximando-se da quietude)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Substituir o nível de qualidade da textura",
+                    "description": "Força um nível de qualidade de textura personalizado.",
+                    "dropdownDefault": "Padrão"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Ativar Malhas de Baixa Qualidade",
+                    "description": "Melhora o rendimento."
                 }
             }
         },

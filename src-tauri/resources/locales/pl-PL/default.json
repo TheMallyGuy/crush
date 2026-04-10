@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Szybkie flagi",
             "description": "Dodaj/usuń flagi Roblox Fastflags i konfiguracje.",
-            "flagTable": {
-                "texboxFlagName": "Nazwa flagi",
-                "texboxFlagValue": "Wartość",
-                "buttonAdd": "Dodaj",
-                "search": "Wyszukaj wszystkie flagi...",
-                "searchNotFound": "Nie znaleziono flag pasujących do Twojego wyszukiwania.",
-                "flagCol": {
-                    "deleteNote": "Usuń flagę",
-                    "name": "nazwa flagi",
-                    "type": "type",
-                    "value": "wartość"
+            "generalBack": "Powrót do szybkiej flagi",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Nazwa flagi",
+                    "texboxFlagValue": "Wartość",
+                    "buttonAdd": "Dodaj",
+                    "search": "Wyszukaj wszystkie flagi...",
+                    "searchNotFound": "Nie znaleziono flag pasujących do Twojego wyszukiwania.",
+                    "flagCol": {
+                        "deleteNote": "Usuń flagę",
+                        "name": "nazwa flagi",
+                        "type": "type",
+                        "value": "wartość"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "– ustawienia wstępne",
+                "description": "Skorzystaj z naszego wbudowanego ustawienia wstępnej szybkiej flagi",
+                "msaaCard": {
+                    "title": "Jakość antyaliasingu (MSAA)",
+                    "description": "Wygładza postrzępione krawędzie. Wyższe wartości wyglądają lepiej, ale mogą zmniejszyć wydajność."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Wstrzymaj wokseliera",
+                    "description": "Zatrzymuje wokselizację, aby poprawić wydajność"
+                },
+                "grassAnimationCard": {
+                    "title": "Animacja falowania trawy",
+                    "description": "Dostosowuje intensywność ruchu trawy. (0 oznacza brak redukcji, 999 lub dowolna wyższa liczba spowoduje zamrożenie trawy, 0 i 1 nieznacznie zmniejszony ruch, a wartość większa niż 1 oznacza silnie zmniejszony ruch, zbliżający się do bezruchu)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Zastąp poziom jakości tekstury",
+                    "description": "Wymusza niestandardowy poziom jakości tekstury.",
+                    "dropdownDefault": "Domyślna"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Włącz siatki niskiej jakości",
+                    "description": "May poprawia wydajność."
                 }
             }
         },

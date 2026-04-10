@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Cờ nhanh",
             "description": "Thêm/Xóa Roblox Fastflags và cấu hình.",
-            "flagTable": {
-                "texboxFlagName": "Tên cờ",
-                "texboxFlagValue": "Giá trị",
-                "buttonAdd": "Thêm",
-                "search": "Tìm kiếm tất cả các fflags...",
-                "searchNotFound": "Không tìm thấy cờ nào phù hợp với tìm kiếm của bạn.",
-                "flagCol": {
-                    "deleteNote": "Xóa cờ",
-                    "name": "tên cờ",
-                    "type": "kiểu",
-                    "value": "tối đa"
+            "generalBack": "Quay lại cờ nhanh",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Tên cờ",
+                    "texboxFlagValue": "Giá trị",
+                    "buttonAdd": "Thêm",
+                    "search": "Tìm kiếm tất cả các fflags...",
+                    "searchNotFound": "Không tìm thấy cờ nào phù hợp với tìm kiếm của bạn.",
+                    "flagCol": {
+                        "deleteNote": "Xóa cờ",
+                        "name": "tên cờ",
+                        "type": "kiểu",
+                        "value": "tối đa"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Sắp Đặt Sẵn",
+                "description": "Sử dụng cài đặt sẵn gắn cờ nhanh tích hợp của chúng tôi",
+                "msaaCard": {
+                    "title": "Chất lượng chống răng cưa (MSAA)",
+                    "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Tạm dừng Voxelier",
+                    "description": "Ngừng voxelization để cải thiện hiệu suất"
+                },
+                "grassAnimationCard": {
+                    "title": "Hoạt ảnh vẫy cỏ",
+                    "description": "Điều chỉnh cường độ chuyển động của cỏ. (0 là không giảm, 999 hoặc bất kỳ số cao hơn sẽ đóng băng cỏ, 0 & 1 giảm nhẹ chuyển động và giá trị lớn hơn 1 là chuyển động giảm mạnh, tiếp cận tĩnh lặng)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Ghi đè mức chất lượng kết cấu",
+                    "description": "Ép buộc một mức chất lượng kết cấu tùy chỉnh.",
+                    "dropdownDefault": "Mặc định"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Bật mắt lưới chất lượng thấp",
+                    "description": "Có thể cải thiện hiệu suất."
                 }
             }
         },

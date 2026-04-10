@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox spielen",
                 "idle": "Nicht in einem",
-                "playing": "In "
+                "playing": "In Aus-"
             }
         }
     },
@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Schnellflaggen",
             "description": "Hinzufügen/Entfernen von Roblox Fastflags und Konfigurationen.",
-            "flagTable": {
-                "texboxFlagName": "Flaggenname",
-                "texboxFlagValue": "Wert",
-                "buttonAdd": "Hinzufügen",
-                "search": "Alle Flaggen durchsuchen...",
-                "searchNotFound": "Es wurden keine Flaggen gefunden, die Ihrer Suche entsprechen.",
-                "flagCol": {
-                    "deleteNote": "Kennzeichen löschen",
-                    "name": "flaggenname",
-                    "type": "Typ",
-                    "value": "entsprechen"
+            "generalBack": "Zurück zur Fastflagge",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "Flaggenname",
+                    "texboxFlagValue": "Wert",
+                    "buttonAdd": "Hinzufügen",
+                    "search": "Alle Flaggen durchsuchen...",
+                    "searchNotFound": "Es wurden keine Flaggen gefunden, die Ihrer Suche entsprechen.",
+                    "flagCol": {
+                        "deleteNote": "Kennzeichen löschen",
+                        "name": "flaggenname",
+                        "type": "Typ",
+                        "value": "wert"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "Voreinstellungen",
+                "description": "Verwenden Sie unsere integrierte Fast-Flag-Voreinstellung",
+                "msaaCard": {
+                    "title": "Anti-Aliasing-Qualität",
+                    "description": "Glättet gezackte Kanten. Höhere Werte sehen besser aus, können aber die Leistung beeinträchtigen."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Voxelier pausieren",
+                    "description": "Stoppt die Voxelisierung, um die Leistung zu verbessern"
+                },
+                "grassAnimationCard": {
+                    "title": "Gras winkende Animation",
+                    "description": "Passt die Intensität der Grasbewegung an. (0 ist keine Reduzierung, 999 oder eine höhere Zahl friert das Gras ein, 0 & 1 leicht reduzierte Bewegung und der Wert, dass größer als 1 stark reduzierte Bewegung ist, nähert sich der Stille)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "Texturqualitätsstufe überschreiben",
+                    "description": "Erzwingt eine benutzerdefinierte Texturqualitätsstufe.",
+                    "dropdownDefault": "Standard"
+                },
+                "lowMeshQualityCard": {
+                    "title": "Aktivieren Sie Netze mit niedriger Qualität",
+                    "description": "Es steigert die Leistungsfähigkeit."
                 }
             }
         },

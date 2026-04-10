@@ -103,17 +103,45 @@
         "fastflag": {
             "fastflag": "Fast Flags",
             "description": "Roblox Fastflag 및 구성을 추가/제거합니다.",
-            "flagTable": {
-                "texboxFlagName": "표식 이름",
-                "texboxFlagValue": "값",
-                "buttonAdd": "추가",
-                "search": "모든 fflag 검색...",
-                "searchNotFound": "검색 조건에 일치하는 플래그를 찾을 수 없습니다.",
-                "flagCol": {
-                    "deleteNote": "표식 삭제",
-                    "name": "표식 이름",
-                    "type": "유형",
-                    "value": "값"
+            "generalBack": "패스트플래그로 돌아가기",
+            "editor": {
+                "flagTable": {
+                    "texboxFlagName": "표식 이름",
+                    "texboxFlagValue": "값",
+                    "buttonAdd": "추가",
+                    "search": "모든 fflag 검색...",
+                    "searchNotFound": "검색 조건에 일치하는 플래그를 찾을 수 없습니다.",
+                    "flagCol": {
+                        "deleteNote": "표식 삭제",
+                        "name": "표식 이름",
+                        "type": "유형",
+                        "value": "값"
+                    }
+                }
+            },
+            "preset": {
+                "preset": "사전 설정",
+                "description": "내장된 패스트 플래그 프리셋 사용",
+                "msaaCard": {
+                    "title": "안티앨리어싱 품질 (MSAA)",
+                    "description": "들쭉날쭉한 가장자리를 부드럽게 합니다. 높은 값이 더 좋아 보이지만 성능이 저하될 수 있습니다."
+                },
+                "pauseVoxelizerCard": {
+                    "title": "Voxelier 일시 중지",
+                    "description": "성능 향상을 위해 복셀화를 중지합니다"
+                },
+                "grassAnimationCard": {
+                    "title": "잔디 흔들기 애니메이션",
+                    "description": "잔디 움직임의 강도를 조정합니다. (0은 감소 없음, 999 또는 그 이상의 숫자는 잔디를 얼리고, 0 & 1은 약간 감소하고 1보다 큰 값은 강하게 감소하여 정적에 접근합니다)"
+                },
+                "overwriteTextureQualityCard": {
+                    "title": "텍스처 품질 수준 덮어쓰기",
+                    "description": "사용자 지정 텍스처 품질 수준을 강제 적용합니다.",
+                    "dropdownDefault": "기본"
+                },
+                "lowMeshQualityCard": {
+                    "title": "저품질 메시 활성화",
+                    "description": "성능을 향상시킬 수 있음."
                 }
             }
         },
