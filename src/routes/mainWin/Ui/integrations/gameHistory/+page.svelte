@@ -11,6 +11,7 @@
     import { deepLinkUrl } from "$lib/stores/deeplink"
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
+    import type { Integrations, GameCache } from "$lib/types"
 
     let isLoading = true;
     let gameHistory: {
@@ -27,44 +28,50 @@
         instance_id?: string;
         timestamp: string;
     };
- 
-    type GameCache = {
-        universeId: number | null;
-        name: string;
-        imageUrl: string | null;
-        cachedAt: string;
-    };
+
  
     const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
- 
+    
+    async function getGameCache(store: Awaited<ReturnType<typeof load>>): Promise<Record<string, GameCache>> {
+        const integrations = await store.get<Integrations>("integrations") ?? {};
+        return integrations.gameCache ?? {};
+    }
+
+    async function setGameCache(store: Awaited<ReturnType<typeof load>>, cache: Record<string, GameCache>) {
+        const integrations = await store.get<Integrations>("integrations") ?? {};
+        integrations.gameCache = cache;
+        await store.set("integrations", integrations);
+        await store.save();
+    }
+
     async function getUniverse(
         placeId: number,
         store: Awaited<ReturnType<typeof load>>,
     ): Promise<{ universeId: number } | null> {
-        const cacheKey = `gameCache:${placeId}`;
-        const cached = await store.get<GameCache>(cacheKey);
- 
+        const cache = await getGameCache(store);
+        const cached = cache[String(placeId)];
+
         if (cached && Date.now() - new Date(cached.cachedAt).getTime() < CACHE_TTL_MS) {
             return cached.universeId !== null ? { universeId: cached.universeId } : null;
         }
- 
+
         return await fetch(`https://apis.roblox.com/universes/v1/places/${placeId}/universe`)
             .then(r => r.json())
             .catch(() => null);
     }
- 
+
     async function getGameDetails(
         placeId: number,
         universeId: number,
         store: Awaited<ReturnType<typeof load>>,
     ): Promise<{ name: string; imageUrl: string | null }> {
-        const cacheKey = `gameCache:${placeId}`;
-        const cached = await store.get<GameCache>(cacheKey);
- 
+        const cache = await getGameCache(store);
+        const cached = cache[String(placeId)];
+
         if (cached && Date.now() - new Date(cached.cachedAt).getTime() < CACHE_TTL_MS) {
             return { name: cached.name, imageUrl: cached.imageUrl };
         }
- 
+
         const [nameRes, iconRes] = await Promise.all([
             fetch(`https://games.roblox.com/v1/games?universeIds=${universeId}`)
                 .then(r => r.json())
@@ -73,20 +80,21 @@
                 .then(r => r.json())
                 .catch(() => null),
         ]);
- 
+
         const details = {
             name: nameRes?.data?.[0]?.name ?? "Unknown Game",
             imageUrl: iconRes?.data?.[0]?.imageUrl ?? null,
         };
- 
-        await store.set(cacheKey, {
+
+        const latestCache = await getGameCache(store);
+        latestCache[String(placeId)] = {
             universeId,
             name: details.name,
             imageUrl: details.imageUrl,
             cachedAt: new Date().toISOString(),
-        } satisfies GameCache);
-        await store.save();
- 
+        };
+        await setGameCache(store, latestCache);
+
         return details;
     }
 
