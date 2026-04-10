@@ -11,7 +11,7 @@
     import { deepLinkUrl } from "$lib/stores/deeplink"
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import type { Integrations, GameCache } from "$lib/types"
+    import type { Integrations, GameCache, RawEntry } from "$lib/types"
 
     let isLoading = true;
     let gameHistory: {
@@ -22,14 +22,7 @@
         deeplink: string;
         timestamp: Date;
     }[] = [];
- 
-    type RawEntry = {
-        place_id: number;
-        instance_id?: string;
-        timestamp: string;
-    };
 
- 
     const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
     
     async function getGameCache(store: Awaited<ReturnType<typeof load>>): Promise<Record<string, GameCache>> {
