@@ -9,7 +9,8 @@ export type BuildInfo = {
 }
 
 export type Installation = {
-    version: string
+    version: string,
+    forceReinstall: boolean
 }
 
 export type Config = {

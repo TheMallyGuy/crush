@@ -2,13 +2,15 @@
     import { invoke } from '@tauri-apps/api/core'
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte';
-    import { Balloon, Rocket } from '@lucide/svelte'
+    import { Balloon, HardDriveDownload, Rocket } from '@lucide/svelte'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
     import type { Installation } from '$lib/types';
     import { _ } from 'svelte-i18n';
+    import Switch from '$lib/components/atoms/Switch.svelte'
 
     let version:string
+    let forceReinstall: boolean
     let config
 
     async function loadConfig() {
@@ -18,6 +20,7 @@
 
         if (savedInstallation) {
             version = savedInstallation.version ?? 'latest'
+            forceReinstall = savedInstallation.forceReinstall ?? false
         }
     }
 
@@ -35,6 +38,7 @@
 
         const newInstallation: Installation = {
             version,
+            forceReinstall
         }
 
         await store.set('installation', newInstallation)
@@ -48,5 +52,9 @@
 <div class="flex flex-col gap-3">
     <SettingCard title={$_('pages.installations.customVersion.title')} description={$_('pages.installations.customVersion.description')} icon={Rocket}>
         <Textbox slot="action" class="w-48 h-8 text-sm" bind:value={version} on:change={handleChanges} />    
+    </SettingCard>
+
+    <SettingCard title={$_('pages.installations.forceReinstallCard.title')} description={$_('pages.installations.forceReinstallCard.description')} icon={HardDriveDownload}>
+        <Switch slot="action" bind:checked={forceReinstall} on:change={handleChanges}/>
     </SettingCard>
 </div>
