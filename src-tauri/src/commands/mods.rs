@@ -35,7 +35,8 @@ fn process_mod_entry(
     let parent = dest.parent()?;
     fs::create_dir_all(parent).ok()?;
 
-    fs::copy(src, &dest).ok().map(|_| rel_str)
+    fs::copy(src, &dest).ok()?;
+    Some(rel_str)
 }
 
 fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
