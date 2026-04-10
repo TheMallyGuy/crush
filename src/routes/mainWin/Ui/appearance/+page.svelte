@@ -117,7 +117,7 @@
     })
 </script>
 
-<div class="flex flex-col gap-8 max-w-2xl">
+<div class="flex flex-col gap-8">
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-stone-100">
             {$_('pages.appearance.appearance')}

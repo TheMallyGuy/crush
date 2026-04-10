@@ -50,7 +50,7 @@
     }
 </script>
 
-<div class="flex flex-col gap-8 max-w-2xl">
+<div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">

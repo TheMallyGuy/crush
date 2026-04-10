@@ -28,7 +28,7 @@
 
 <div class="flex flex-col gap-4">
     <div
-        class="flex gap-2 "
+        class="flex gap-2"
     >
         <ClickableCard icon={Archive} title={$_("pages.mod.tab.modManagement.title")} description={$_("pages.mod.tab.modManagement.description")} size="sm" on:click={handleModManagementClick}></ClickableCard>
         <ClickableCard icon={Hammer} title={$_("pages.mod.tab.prebuiltMods.title")} description={$_("pages.mod.tab.prebuiltMods.description")} size="sm" on:click={handlePrebuiltModsClick}></ClickableCard>

@@ -83,7 +83,7 @@
     }
 </script>
 
-<div class="flex flex-col gap-8 max-w-2xl">
+<div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <Button variant="primary" size="md" on:click={handleNewMod}>
             <Plus class="size-4 mr-2" />
