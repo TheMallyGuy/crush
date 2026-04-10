@@ -64,7 +64,7 @@
         </div>
         <div class="flex items-center gap-2">
             <Button variant="secondary" onclick={() => goto('../fastflags')}>
-                {$_('pages.integrations.gameHistory.backToIntegrations')}
+                {$_('pages.fastflag.generalBack')}
             </Button>
         </div>
     </div>

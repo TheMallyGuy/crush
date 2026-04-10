@@ -27,7 +27,7 @@
     let msaaDropdownDefault: string = '0'
 
     let textureQualityItems = [
-        { value: '-1', label: 'default' },
+        { value: '-1', label: $_("pages.fastflag.preset.overwriteTextureQualityCard.dropdownDefault") },
         { value: '0', label: '0' },
         { value: '1', label: '1' },
         { value: '2', label: '2' },
@@ -65,23 +65,23 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Presets
+                {$_("pages.fastflag.preset.preset")}
             </h1>
             <p class="text-stone-400 mt-1">
-                Use our built-in fast-flag preset
+                {$_("pages.fastflag.preset.description")}
             </p>
         </div>
         <div class="flex items-center gap-2">
             <Button variant="secondary" onclick={() => goto('../fastflags')}>
-                {$_('pages.integrations.gameHistory.backToIntegrations')}
+                {$_('pages.fastflag.generalBack')}
             </Button>
         </div>
     </div>
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title="Anti-Aliasing Quality (MSAA)"
-            description="Smooths jagged edges. Higher values look better but may reduce performance."
+            title={$_("pages.fastflag.preset.msaaCard.title")}
+            description={$_("pages.fastflag.preset.msaaCard.description")}
         >
             <Dropdown
                 slot="action"
@@ -91,15 +91,15 @@
         </SettingCard>
 
         <SettingCard
-            title="Pause Voxelier"
-            description="Stops voxelization to improve performance"
+            title={$_("pages.fastflag.preset.pauseVoxelizerCard.title")}
+            description={$_("pages.fastflag.preset.pauseVoxelizerCard.description")}
         >
             <Switch slot="action" />
         </SettingCard>
 
         <SettingCard
-            title="Grass waving animation"
-            description="Adjusts the intensity of grass movement.  (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
+            title={$_("pages.fastflag.preset.grassAnimationCard.title")}
+            description={$_("pages.fastflag.preset.grassAnimationCard.description")}
         >
             <div slot="action" class="w-50">
                 <Textbox />
@@ -107,8 +107,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Overwrite texture quality level"
-            description="Forces a custom texture quality level."
+            title={$_("pages.fastflag.preset.overwriteTextureQualityCard.title")}
+            description={$_("pages.fastflag.preset.overwriteTextureQualityCard.description")}
         >
             <Dropdown
                 slot="action"
@@ -118,8 +118,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Enable Low Quality Meshes"
-            description="May improves performance."
+            title={$_("pages.fastflag.preset.lowMeshQualityCard.title")}
+            description={$_("pages.fastflag.preset.lowMeshQualityCard.description")}
         >
             <Switch slot="action" />
         </SettingCard>
