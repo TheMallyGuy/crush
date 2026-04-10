@@ -8,9 +8,23 @@ export type BuildInfo = {
     build_date: string,
 }
 
+export type RawEntry = {
+    place_id: number;
+    instance_id?: string;
+    timestamp: string;
+};
+
+export type GameCache = {
+    universeId: number | null;
+    name: string;
+    imageUrl: string | null;
+    cachedAt: string;
+};
+
 export type Installation = {
     version: string,
     forceReinstall: boolean
+    gameCache?: Record<string, GameCache>;
 }
 
 export type Config = {
