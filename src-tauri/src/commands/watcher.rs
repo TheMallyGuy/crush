@@ -82,13 +82,6 @@ fn get_latest_log() -> Option<PathBuf> {
             }
 
             let metadata = entry.metadata().ok()?;
-            let created = metadata.created().ok()?;
-            let elapsed = created.elapsed().ok()?;
-
-            if elapsed.as_secs() >= 20 {
-                return None;
-            }
-
             Some((path, metadata))
         })
         .max_by_key(|(_, metadata)| metadata.modified().ok())
@@ -186,6 +179,7 @@ struct WatcherState {
     offset: u64,
     activity: Activity,
     last_rpc: Option<Instant>,
+    udmux_handled: bool,
 }
 
 async fn process_log_file(
@@ -194,23 +188,20 @@ async fn process_log_file(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    let Ok(mut file) = File::open(path) else {
-        return Ok(());
-    };
+    let mut file = File::open(path).map_err(|e| e.to_string())?;
 
-    if file.seek(SeekFrom::Start(state.offset)).is_err() {
-        return Ok(());
-    }
+    file.seek(SeekFrom::Start(state.offset))
+        .map_err(|e| e.to_string())?;
 
     let mut reader = BufReader::new(&mut file);
     let mut line = String::new();
 
-    while reader.read_line(&mut line).unwrap_or(0) > 0 {
+    while reader.read_line(&mut line).map_err(|e| e.to_string())? > 0 {
         handle_log_line(app, &line, state, store).await?;
         line.clear();
     }
 
-    state.offset = reader.stream_position().unwrap_or(state.offset);
+    state.offset = reader.stream_position().map_err(|e| e.to_string())?;
     Ok(())
 }
 
@@ -221,12 +212,19 @@ async fn handle_log_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     if let Some(caps) = WatcherRegexes::join().captures(line) {
-        let instance_id = caps[1].to_string();
-        let place_id: u64 = caps[2].parse().unwrap_or(0);
+        let instance_id = caps
+            .get(1)
+            .map(|m| m.as_str().to_string())
+            .unwrap_or_default();
+        let place_id: u64 = caps
+            .get(2)
+            .and_then(|m| m.as_str().parse().ok())
+            .unwrap_or(0);
 
         state.activity.place_id = Some(place_id);
         state.activity.instance_id = Some(instance_id);
         state.activity.in_game = false;
+        state.udmux_handled = false;
         log::info!(
             "joining place {} instance {}",
             place_id,
@@ -236,8 +234,11 @@ async fn handle_log_line(
     }
 
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
-        if let Some(ip) = caps.get(1) {
-            handle_udmux_event(app, ip.as_str(), store).await?;
+        if !state.udmux_handled {
+            if let Some(ip) = caps.get(1) {
+                handle_udmux_event(app, ip.as_str(), store).await?;
+                state.udmux_handled = true;
+            }
         }
         return Ok(());
     }

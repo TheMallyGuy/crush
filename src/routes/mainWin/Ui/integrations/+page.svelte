@@ -41,10 +41,13 @@
 
     async function handleChanges() {
         const store = await load('config.json')
+        const current = await store.get<Integrations>('integrations')
 
         const newIntegrations: Integrations = {
+            ...current,
             crushRpc,
             serverLocationNotifier,
+            roValra: current?.roValra ?? { joinServerForYouValue: false }
         }
 
         await store.set('integrations', newIntegrations)

@@ -23,6 +23,7 @@
     import { _ } from 'svelte-i18n'
     import { info } from '@tauri-apps/plugin-log'
     import { getBestServers } from '$lib/rovalraHelper/rovalra'
+    import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -104,105 +105,6 @@
         console.log(test)
     }
 
-    type RobloxLaunchData = {
-        raw: Record<string, string>;
-
-        launchmode?: string;
-        gameinfo?: string;
-        launchtime?: number;
-
-        placelauncherurl?: string;
-        request?: string;
-
-        placeId?: number | null;
-        userId?: number | null;
-        joinAttemptId?: string | null;
-    };
-
-    export function parseRobloxDeepLink(url: string): RobloxLaunchData {
-        const cleaned = url.replace(/^roblox-player:\d+\+?/, "");
-
-        const raw: Record<string, string> = {};
-
-        for (const part of cleaned.split("+")) {
-            const [key, ...rest] = part.split(":");
-            if (!key || rest.length === 0) continue;
-
-            const value = rest.join(":");
-            raw[key] = decodeURIComponent(value);
-        }
-
-        // base result
-        const result: RobloxLaunchData = {
-            raw,
-            launchmode: raw.launchmode,
-            gameinfo: raw.gameinfo,
-            launchtime: raw.launchtime ? Number(raw.launchtime) : undefined,
-            placelauncherurl: raw.placelauncherurl
-        };
-
-        if (raw.placelauncherurl) {
-            try {
-                const urlObj = new URL(raw.placelauncherurl);
-
-                result.request = urlObj.searchParams.get("request") ?? undefined;
-
-                const placeId = urlObj.searchParams.get("placeId");
-                const userId = urlObj.searchParams.get("userId");
-
-                result.placeId = placeId ? Number(placeId) : null;
-                result.userId = userId ? Number(userId) : null;
-                result.joinAttemptId =
-                    urlObj.searchParams.get("joinAttemptId") ?? null;
-            } catch {
-                // ignore invalid URL
-            }
-        }
-
-        return result;
-    }
-
-    function rebuildDeeplink(
-        parsed: RobloxLaunchData,
-        placeId: number,
-        jobId: string
-    ): string {
-        const url = new URL(parsed.placelauncherurl!);
-
-        url.searchParams.delete("userId");
-
-        url.searchParams.set("request", "RequestGameJob");
-        url.searchParams.set("placeId", String(placeId));
-        url.searchParams.set("gameId", jobId);
-
-        return [
-            "roblox-player:1",
-            `launchmode:${parsed.launchmode ?? "play"}`,
-            `gameinfo:${parsed.gameinfo ?? ""}`,
-            `launchtime:${Date.now()}`,
-            `placelauncherurl:${encodeURIComponent(url.toString())}`,
-
-            // keep original extras
-            parsed.raw.browsertrackerid
-                ? `browsertrackerid:${parsed.raw.browsertrackerid}`
-                : null,
-            parsed.raw.robloxLocale
-                ? `robloxLocale:${parsed.raw.robloxLocale}`
-                : null,
-            parsed.raw.gameLocale
-                ? `gameLocale:${parsed.raw.gameLocale}`
-                : null,
-            parsed.raw.channel
-                ? `channel:${parsed.raw.channel}`
-                : null,
-            parsed.raw.LaunchExp
-                ? `LaunchExp:${parsed.raw.LaunchExp}`
-                : null
-        ]
-            .filter(Boolean)
-            .join("+");
-    }
-
     async function runBootstrap() {
         error = false
         errorMessage = ''
@@ -211,14 +113,13 @@
 
         try {
             const store = await load('config.json')
-            const savedInstallation =
-                await store.get<Installation>('installation')
+            const installation = await store.get<Installation>('installation')
 
             const version = await downloadRoblox(
                 handleProgress,
-                savedInstallation?.version === 'latest'
+                installation?.version === 'latest'
                     ? undefined
-                    : savedInstallation?.version
+                    : installation?.version
             )
 
             done = true
@@ -228,42 +129,48 @@
             handleProgress({ type: 'status', message: 'Launching' })
 
             const integrations = await store.get<Integrations>('integrations')
-            const joinServerForYouValue =
-                integrations?.roValra?.joinServerForYouValue ?? false
-            const url: string = $deepLinkUrl ?? ''
-            const parsedDeeplink = parseRobloxDeepLink(url) ?? undefined
-
-            if (parsedDeeplink && parsedDeeplink.placelauncherurl) {
-                const launchUrl = new URL(parsedDeeplink.placelauncherurl)
-                const request = launchUrl.searchParams.get('request')
-
-                if (request === 'RequestFollowUser') {
-                    info(`Launching with url: ${url}`)
-                    await launchPlayer(version, url)
-                } else {
-                    if (!joinServerForYouValue) {
-                        info(`Launching with url: ${url}`)
-                        await launchPlayer(version, url)
-                    } else {
-                        if (parsedDeeplink.placeId != null) {
-                            const servers = await getBestServers(parsedDeeplink.placeId)
-                            const best = servers.servers[0]
-                            const bestInstanceId = servers.servers[0].server_id
-                            const finalDeepLink = rebuildDeeplink(parsedDeeplink, parsedDeeplink.placeId, bestInstanceId)
-
-                            await launchPlayer(version, finalDeepLink)
-                        }
-                    }
-                }
-            } else {
-                await launchPlayer(version, url)
-            }
+            const url = $deepLinkUrl ?? ''
+            await performLaunch(version, url, integrations)
 
             await invoke('watch_logs')
             await finalizeBootstrap()
-
         } catch (e: any) {
             handleBootstrapError(e)
+        }
+    }
+
+    async function performLaunch(
+        version: string,
+        url: string,
+        integrations: Integrations | null | undefined
+    ) {
+        const parsed = parseRobloxDeepLink(url)
+
+        if (!parsed.placelauncherurl) {
+            return launchPlayer(version, url)
+        }
+
+        const launchUrl = new URL(parsed.placelauncherurl)
+        const request = launchUrl.searchParams.get('request')
+        const joinServerForYou =
+            integrations?.roValra?.joinServerForYouValue ?? false
+
+        if (request === 'RequestFollowUser' || !joinServerForYou) {
+            info(`Launching with url: ${url}`)
+            return launchPlayer(version, url)
+        }
+
+        if (parsed.placeId != null) {
+            const result = await getBestServers(parsed.placeId)
+            const best = result.servers[0]
+            if (best) {
+                const finalUrl = rebuildDeeplink(
+                    parsed,
+                    parsed.placeId,
+                    best.server_id
+                )
+                return launchPlayer(version, finalUrl)
+            }
         }
     }
 
