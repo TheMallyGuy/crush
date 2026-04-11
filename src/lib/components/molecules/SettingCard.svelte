@@ -1,13 +1,14 @@
 <script lang="ts">
     import type { Component } from 'svelte'
-
     export let title = ''
     export let description = ''
-    export let icon: Component | null = null
+    export let icon: Component | string | null = null
+    export let iconHover: string | null = null
     export let clickable = false
-
     let className = ''
     export { className as class }
+
+    let hovered = false
 </script>
 
 <div
@@ -16,6 +17,8 @@
         ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
         : ''}
     {className}"
+    on:mouseenter={() => (hovered = true)}
+    on:mouseleave={() => (hovered = false)}
 >
     <div class="flex items-center justify-between gap-5">
         <div class="flex items-center gap-5">
@@ -24,11 +27,18 @@
                     class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 group-hover:text-sapphire transition-colors duration-150"
                 >
                     <slot name="icon">
-                        <svelte:component this={icon} size={24} />
+                        {#if typeof icon === 'string'}
+                            <img
+                                src={iconHover && hovered ? iconHover : icon}
+                                alt=""
+                                class="w-10 h-10 object-contain transition-opacity duration-150"
+                            />
+                        {:else if icon}
+                            <svelte:component this={icon} size={24} />
+                        {/if}
                     </slot>
                 </div>
             {/if}
-
             <div class="flex flex-col gap-0.5">
                 {#if title || $$slots.title}
                     <h3
@@ -37,7 +47,6 @@
                         <slot name="title">{title}</slot>
                     </h3>
                 {/if}
-
                 {#if description || $$slots.description}
                     <p class="text-sm font-medium text-stone-500">
                         <slot name="description">{description}</slot>
@@ -45,10 +54,8 @@
                 {/if}
             </div>
         </div>
-
         <slot name="action" />
     </div>
-
     {#if $$slots.footer}
         <div class="mt-5 flex flex-col gap-4">
             <slot name="footer" />

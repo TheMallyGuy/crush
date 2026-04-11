@@ -1,11 +1,14 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
+    import { deepLinkUrl } from '$lib/stores/deeplink'
     import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { _ } from 'svelte-i18n';
 
     async function launchBoostrap() {
+        deepLinkUrl.set(null)
+        localStorage.removeItem('deepLinkUrl')
         await invoke('create_or_focus_window', {
             label: 'CrushBoostrap',
             url: 'boostrapWin',
