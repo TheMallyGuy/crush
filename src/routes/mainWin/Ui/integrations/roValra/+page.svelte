@@ -75,9 +75,5 @@
     >
         <Switch bind:checked={joinServerForYouValue} slot="action" on:change={handleChanges}/>
 
-        <div class="flex gap-6">
-            Always join small server <Switch disabled={isDisabled}/>
-        </div>
-
     </ExpandableSettingCard>
 </div>
