@@ -25,11 +25,11 @@
 </script>
 
 <div class="flex flex-col gap-5 justify-center items-center h-full w-full">
-    <h1 class="text-3xl font-semibold">Please choose an action.</h1>
+    <h1 class="text-3xl font-semibold">{$_("pages.fastflag.selectScreeen.title")}</h1>
     <div class="flex flex-col gap-2 items-center">
         <div class="flex flex-col gap-2">
-            <ClickableCard icon={SquarePen} title="Editor" description="Edit Feature Flags." size="sm" on:click={handleEditorClick}></ClickableCard>
-            <ClickableCard icon={Settings2} title="Preset" description="Use Feature Flag Preset built in in crush." size="sm" on:click={handlePresetClick}></ClickableCard>
+            <ClickableCard icon={SquarePen} title={$_("pages.fastflag.selectScreeen.editCard.title")} description={$_("pages.fastflag.selectScreeen.editCard.description")} size="sm" on:click={handleEditorClick}></ClickableCard>
+            <ClickableCard icon={Settings2} title={$_("pages.fastflag.selectScreeen.presetCard.title")} description={$_("pages.fastflag.selectScreeen.presetCard.description")} size="sm" on:click={handlePresetClick}></ClickableCard>
         </div>
     </div>
 </div>
