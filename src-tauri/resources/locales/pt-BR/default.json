@@ -66,7 +66,7 @@
                 "description": "[ERROR] Get notify when client connect to a server."
             },
             "rpcCard": {
-                "title": "[ERROR] Discord RPC (Crush)",
+                "title": "Discord RPC (Crush)",
                 "description": "[ERROR] Replace the Roblox Rich Presence with Crush's"
             },
             "gameHistoryCard": {
@@ -126,7 +126,7 @@
                         "deleteNote": "[ERROR] Delete Flag",
                         "name": "[ERROR] flag name",
                         "type": "[ERROR] type",
-                        "value": "[ERROR] value"
+                        "value": "value"
                     }
                 }
             },
