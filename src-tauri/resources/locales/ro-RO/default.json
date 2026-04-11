@@ -104,6 +104,17 @@
             "fastflag": "Semnalizări rapide",
             "description": "Adăugați/eliminați steaguri rapide și configurații Roblox.",
             "generalBack": "Înapoi la steagul rapid",
+            "selectScreeen": {
+                "title": "Alegeți o acțiune.",
+                "editCard": {
+                    "title": "Editare",
+                    "description": "Semnalizări de caracteristici"
+                },
+                "presetCard": {
+                    "title": "Presetare",
+                    "description": "Utilizați presetarea de semnalizare a caracteristicilor încorporată în Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Denumire indicator de validitate",

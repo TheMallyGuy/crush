@@ -104,6 +104,17 @@
             "fastflag": "快速標記",
             "description": "新增/移除Roblox Fastflags和配置。",
             "generalBack": "返回fastflag",
+            "selectScreeen": {
+                "title": "請選擇一個動作。",
+                "editCard": {
+                    "title": "編輯",
+                    "description": "編輯圖徵標記"
+                },
+                "presetCard": {
+                    "title": "預置",
+                    "description": "使用內建CRUSH的圖徵旗標預設值。"
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "標記名稱",

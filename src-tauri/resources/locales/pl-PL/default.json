@@ -104,6 +104,17 @@
             "fastflag": "Szybkie flagi",
             "description": "Dodaj/usuń flagi Roblox Fastflags i konfiguracje.",
             "generalBack": "Powrót do szybkiej flagi",
+            "selectScreeen": {
+                "title": "Wybierz akcję.",
+                "editCard": {
+                    "title": "Edytuj",
+                    "description": "Edytuj flagi funkcji"
+                },
+                "presetCard": {
+                    "title": "Ustawienie wstępne",
+                    "description": "Użyj predefiniowanego ustawienia flagi funkcji wbudowanego w Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nazwa flagi",

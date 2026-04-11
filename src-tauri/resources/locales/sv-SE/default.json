@@ -104,6 +104,17 @@
             "fastflag": "Snabba flaggor",
             "description": "Lägg till/ta bort Roblox Fastflags och konfigurationer.",
             "generalBack": "Tillbaka till fastflagga",
+            "selectScreeen": {
+                "title": "Välj en åtgärd!",
+                "editCard": {
+                    "title": "Redigera",
+                    "description": "Redigera funktionsflaggor"
+                },
+                "presetCard": {
+                    "title": "Förinställningar",
+                    "description": "Använd funktionsflaggans förinställning inbyggd i CRUSH."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Flaggnamn",

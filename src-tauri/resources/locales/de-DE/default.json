@@ -104,6 +104,17 @@
             "fastflag": "Schnellflaggen",
             "description": "Hinzufügen/Entfernen von Roblox Fastflags und Konfigurationen.",
             "generalBack": "Zurück zur Fastflagge",
+            "selectScreeen": {
+                "title": "Bitte wählen Sie eine Aktion aus.",
+                "editCard": {
+                    "title": "Bearbeiten",
+                    "description": "Funktion Flags"
+                },
+                "presetCard": {
+                    "title": "Voreinstellung",
+                    "description": "Verwende die voreingestellte Feature-Flagge, die in Crush eingebaut ist."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Flaggenname",

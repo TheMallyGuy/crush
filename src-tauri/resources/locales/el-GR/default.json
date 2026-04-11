@@ -104,6 +104,17 @@
             "fastflag": "Γρήγορες επισημάνσεις",
             "description": "Προσθήκη/Αφαίρεση Roblox Fastflags και διαμορφώσεων.",
             "generalBack": "Επιστροφή στο fastflag",
+            "selectScreeen": {
+                "title": "Επιλέξτε μια ενέργεια!",
+                "editCard": {
+                    "title": "Επεξεργασία",
+                    "description": "Επεξεργασία επισημάνσεων λειτουργιών"
+                },
+                "presetCard": {
+                    "title": "Προεπιλογή",
+                    "description": "Χρησιμοποιήστε την Προεπιλογή Σημαίας Λειτουργίας που είναι ενσωματωμένη στο Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Όνομα σημαίας",

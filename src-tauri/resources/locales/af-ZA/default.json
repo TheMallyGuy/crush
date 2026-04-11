@@ -104,6 +104,17 @@
             "fastflag": "Vinnige Vlae",
             "description": "Voeg/verwyder Roblox Fastflags en konfigurasies.",
             "generalBack": "Terug na FastFlag",
+            "selectScreeen": {
+                "title": "Kies asseblief 'n aksie.",
+                "editCard": {
+                    "title": "Wysig",
+                    "description": "Redigeer funksievlae"
+                },
+                "presetCard": {
+                    "title": "Laag Eienskappe...",
+                    "description": "Gebruik funksie Vlag Preset gebou in crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Vlagnaam",
