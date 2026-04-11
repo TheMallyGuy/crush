@@ -74,6 +74,18 @@
                 "description": "הצג ושחק במשחקים ששיחקת לאחרונה.",
                 "button": "להציג"
             },
+            "roValraCard": {
+                "title": "הגדר את RoValra",
+                "description": "לקראש יש אינטגרציה מובנית של RoValra. מדיניות הפרטיות של RoValra חלה.",
+                "button": "פתיחה"
+            },
+            "roValra": {
+                "description": "הגדר את RoValra",
+                "joinServerForYouCard": {
+                    "title": "בואו ל - Crush להצטרף לשרת בשבילכם",
+                    "description": "במקום ליצור התאמות ב - Roblox, נשתמש ב - Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "היסטוריית המשחקים שלכם",
                 "description": "הצג ושחק במשחקים ששיחקת לאחרונה.",

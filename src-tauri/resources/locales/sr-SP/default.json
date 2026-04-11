@@ -74,6 +74,18 @@
                 "description": "Pogledajte i igrajte igre koje ste nedavno igrali.",
                 "button": "Pogledaj"
             },
+            "roValraCard": {
+                "title": "Konfigurišite RoValra",
+                "description": "Crush ima ugrađenu RoValra integraciju. Primenjuju se Pravila privatnosti kompanije RoValra.",
+                "button": "Otvorena"
+            },
+            "roValra": {
+                "description": "Konfigurišite RoValra",
+                "joinServerForYouCard": {
+                    "title": "Neka se Crush pridruži serveru umesto vas",
+                    "description": "Umesto Roblox podudaranja, koristićemo Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Istorija vaše igre",
                 "description": "Pogledajte i igrajte igre koje ste nedavno igrali.",

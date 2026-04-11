@@ -74,6 +74,18 @@
                 "description": "Bekijk en speel je recent gespeelde games.",
                 "button": "Weergave"
             },
+            "roValraCard": {
+                "title": "RoValra configureren",
+                "description": "Crush heeft een ingebouwde RoValra-integratie. Het privacybeleid van RoValra is van toepassing.",
+                "button": "Openen"
+            },
+            "roValra": {
+                "description": "RoValra configureren",
+                "joinServerForYouCard": {
+                    "title": "Laat Crush lid worden van de server voor u",
+                    "description": "In plaats van Roblox matchmaking gebruiken we Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Spelgeschiedenis",
                 "description": "Bekijk en speel je recent gespeelde games.",

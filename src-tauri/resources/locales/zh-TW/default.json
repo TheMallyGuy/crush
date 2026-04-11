@@ -74,6 +74,18 @@
                 "description": "查看和玩您最近玩過的遊戲。",
                 "button": "查看"
             },
+            "roValraCard": {
+                "title": "配置RoValra",
+                "description": "粉碎有一個內置的RoValra整合。RoValra的隱私政策適用。",
+                "button": "開啟"
+            },
+            "roValra": {
+                "description": "配置RoValra",
+                "joinServerForYouCard": {
+                    "title": "讓Crush為你加入伺服器",
+                    "description": "我們將使用Rovalra API ，而不是Roblox配對。"
+                }
+            },
             "gameHistory": {
                 "title": "你的遊戲紀錄",
                 "description": "查看和玩您最近玩過的遊戲。",

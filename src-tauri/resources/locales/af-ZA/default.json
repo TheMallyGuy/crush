@@ -74,6 +74,18 @@
                 "description": "Sien en speel jou speletjies wat onlangs gespeel is.",
                 "button": "Besigtig"
             },
+            "roValraCard": {
+                "title": "Stel RoValra op",
+                "description": "Crush het 'n ingeboude RoValra-intergrasie. RoValra se privaatheidsbeleid is van toepassing.",
+                "button": "Oop"
+            },
+            "roValra": {
+                "description": "Stel RoValra op",
+                "joinServerForYouCard": {
+                    "title": "Laat Crush aansluit bediener vir jou",
+                    "description": "In plaas van Roblox-wedstryd maak, sal ons Rovalra API gebruik."
+                }
+            },
             "gameHistory": {
                 "title": "Jou spelgeskiedenis",
                 "description": "Sien en speel jou speletjies wat onlangs gespeel is.",

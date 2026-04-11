@@ -74,6 +74,18 @@
                 "description": "Prohlédněte si a hrajte své nedávno hrané hry.",
                 "button": "Zobrazit"
             },
+            "roValraCard": {
+                "title": "Konfigurovat RoValra",
+                "description": "Crush má vestavěnou intergraci RoValra. Platí zásady ochrany osobních údajů společnosti RoValra.",
+                "button": "Otevřít"
+            },
+            "roValra": {
+                "description": "Konfigurovat RoValra",
+                "joinServerForYouCard": {
+                    "title": "Nechte Crush připojit se k serveru za vás",
+                    "description": "Namísto vytváření shody Roblox budeme používat rozhraní Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "HERNÍ HISTORIE",
                 "description": "Prohlédněte si a hrajte své nedávno hrané hry.",

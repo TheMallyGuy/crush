@@ -74,6 +74,18 @@
                 "description": "Se og spill de nylig spilte spillene dine.",
                 "button": "Visa"
             },
+            "roValraCard": {
+                "title": "Konfigurer RoValra",
+                "description": "Crush har en innebygd RoValra-integrasjon. RoValras personvernerklæring gjelder.",
+                "button": "Åpne"
+            },
+            "roValra": {
+                "description": "Konfigurer RoValra",
+                "joinServerForYouCard": {
+                    "title": "La Crush bli med på serveren for deg",
+                    "description": "I stedet for Roblox-matchmaking, bruker vi Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Spillhistorikken din",
                 "description": "Se og spill de nylig spilte spillene dine.",

@@ -74,6 +74,18 @@
                 "description": "最近プレイしたゲームを表示してプレイしましょう。",
                 "button": "表示"
             },
+            "roValraCard": {
+                "title": "RoValraの設定",
+                "description": "CrushにはRoValraインテグレーションが組み込まれています。RoValraのプライバシーポリシーが適用されます。",
+                "button": "開く"
+            },
+            "roValra": {
+                "description": "RoValraの設定",
+                "joinServerForYouCard": {
+                    "title": "Crushをサーバーに参加させましょう",
+                    "description": "Robloxのマッチングの代わりに、Rovalra APIを使用します。"
+                }
+            },
             "gameHistory": {
                 "title": "ゲーム履歴",
                 "description": "最近プレイしたゲームを表示してプレイしましょう。",

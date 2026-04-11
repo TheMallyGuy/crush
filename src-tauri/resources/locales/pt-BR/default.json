@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "[ERROR] Playing roblox",
                 "idle": "[ERROR] Not in a game",
-                "playing": "[ERROR] In {}"
+                "playing": "Em"
             }
         }
     },
@@ -73,6 +73,18 @@
                 "title": "[ERROR] Your game history",
                 "description": "[ERROR] View & play your recently played games.",
                 "button": "[ERROR] View"
+            },
+            "roValraCard": {
+                "title": "Configurar RoValra",
+                "description": "O Crush tem uma integração RoValra integrada. Aplica-se a Política de Privacidade da RoValra.",
+                "button": "Abrir"
+            },
+            "roValra": {
+                "description": "Configurar RoValra",
+                "joinServerForYouCard": {
+                    "title": "Deixe o Crush entrar no servidor para você",
+                    "description": "Em vez de fazer correspondências com o Roblox, usaremos a API Rovalra."
+                }
             },
             "gameHistory": {
                 "title": "[ERROR] Your game history",

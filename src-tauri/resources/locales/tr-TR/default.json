@@ -74,6 +74,18 @@
                 "description": "Son oynanan oyunlarınızı görüntüleyin ve oynayın.",
                 "button": "Görüntüle"
             },
+            "roValraCard": {
+                "title": "RoValra'yı Yapılandır",
+                "description": "Crush, yerleşik bir RoValra entegrasyonuna sahiptir. RoValra'nın Gizlilik Politikası geçerlidir.",
+                "button": "Açık"
+            },
+            "roValra": {
+                "description": "RoValra'yı Yapılandır",
+                "joinServerForYouCard": {
+                    "title": "Crush'ın sizin için sunucuya katılmasına izin verin",
+                    "description": "Roblox eşleştirme yapmak yerine Rovalra API'sini kullanacağız."
+                }
+            },
             "gameHistory": {
                 "title": "Oyun geçmişiniz",
                 "description": "Son oynanan oyunlarınızı görüntüleyin ve oynayın.",
