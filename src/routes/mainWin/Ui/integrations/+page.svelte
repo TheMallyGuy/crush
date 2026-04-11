@@ -106,14 +106,14 @@
         </SettingCard>
         
         <SettingCard
-            title="Configure RoValra"
-            description="Crush have a built-in RoValra intergration. RoValra's Privacy Policy applies."
+            title={$_("pages.integrations.roValraCard.title")}
+            description={$_("pages.integrations.roValraCard.description")}
 
             icon={roValaraLogo}
             iconHover={roValaraLogoColored}
         >
         <Button slot="action" variant="secondary" on:click={() => {goto("integrations/roValra")}}> 
-            Open
+            {$_("pages.integrations.roValraCard.button")}
         </Button>
         </SettingCard>
     </div>

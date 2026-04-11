@@ -57,7 +57,7 @@
         <div>
             <img src={rovalraTitle} class="w-70 h-auto" />
             <p class="text-stone-400 mt-1">
-                Configure Rovalra.
+                {$_("pages.integrations.roValra.description")}
             </p>
         </div>
                 <div class="flex items-center gap-2">
@@ -68,8 +68,8 @@
     </div>
 
     <SettingCard
-        title="Let Crush join server for you"
-        description="Instead of Roblox match making, we'll use Rovalra API."
+        title={$_("pages.integrations.roValra.joinServerForYouCard.title")}
+        description={$_("pages.integrations.roValra.joinServerForYouCard.description")}
     >
         <Switch bind:checked={joinServerForYouValue} slot="action" on:change={handleChanges}/>
 
