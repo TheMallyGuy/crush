@@ -109,7 +109,7 @@
         <Button
             variant="primary"
             size="md"
-            class="rounded-xl h-11 px-6 shadow-glow-sapphire transition-all duration-150"
+            class="rounded-xl h-11 px-6 transition-all duration-150"
             on:click={handleAdd}
             disabled={!newFlagName || !newFlagValue}
         >

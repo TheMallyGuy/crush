@@ -4,7 +4,6 @@
     import { goto } from "$app/navigation";
     import SettingCard from "$lib/components/molecules/SettingCard.svelte"
     import Switch from "$lib/components/atoms/Switch.svelte"
-    import ExpandableSettingCard from "$lib/components/molecules/ExpandableSettingCard.svelte"
     import { load, Store } from "@tauri-apps/plugin-store";
     import { onMount } from "svelte"
     import type { Integrations, RoValra } from "$lib/types";
@@ -68,12 +67,11 @@
         </div>
     </div>
 
-    <ExpandableSettingCard
+    <SettingCard
         title="Let Crush join server for you"
         description="Instead of Roblox match making, we'll use Rovalra API."
-        isOpen={!isDisabled}
     >
         <Switch bind:checked={joinServerForYouValue} slot="action" on:change={handleChanges}/>
 
-    </ExpandableSettingCard>
+    </SettingCard>
 </div>
