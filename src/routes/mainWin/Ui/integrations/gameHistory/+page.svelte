@@ -11,7 +11,7 @@
     import { deepLinkUrl } from "$lib/stores/deeplink"
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import type { Integrations, GameCache, RawEntry, Installation } from "$lib/types"
+    import type { Integrations, GameCache, RawEntry } from "$lib/types"
 
     let isLoading = true;
     let gameHistory: {
@@ -26,15 +26,15 @@
     const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
     
     async function getGameCache(store: Awaited<ReturnType<typeof load>>): Promise<Record<string, GameCache>> {
-        const installation = await store.get<Installation>("installation");
-        return installation?.gameCache ?? {};
+        const integrations = await store.get<Integrations>("integrations");
+        return integrations?.gameCache ?? {};
     }
 
     async function setGameCache(store: Awaited<ReturnType<typeof load>>, cache: Record<string, GameCache>) {
-        const installation = await store.get<Installation>("installation");
-        if (installation) {
-            installation.gameCache = cache;
-            await store.set("installation", installation);
+        const integrations = await store.get<Integrations>("integrations");
+        if (integrations) {
+            integrations.gameCache = cache;
+            await store.set("integrations", integrations);
             await store.save();
         }
     }

@@ -1,6 +1,24 @@
+export type Server = {
+  server_id: string;
+  playing: number;
+  max_players: number;
+}
+
+export type Result = {
+  success: boolean;
+  regionTried: string[];
+  servers: Server[];
+}
+
+export type RoValra = {
+    joinServerForYouValue: boolean
+}
+
 export type Integrations = {
     crushRpc: boolean
     serverLocationNotifier: boolean
+    roValra : RoValra
+    gameCache?: Record<string, GameCache>;
 }
 
 export type BuildInfo = {
@@ -24,7 +42,6 @@ export type GameCache = {
 export type Installation = {
     version: string,
     forceReinstall: boolean
-    gameCache?: Record<string, GameCache>;
 }
 
 export type Config = {

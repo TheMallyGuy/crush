@@ -12,6 +12,9 @@
 
     let crushRpc = false
     let serverLocationNotifier = false
+    const roValaraLogoColored = "/RovalraColored.svg"
+    const roValaraLogo = "/Rovalra.svg"
+
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -100,6 +103,18 @@
             >
                 {$_('pages.integrations.gameHistoryCard.button')}
             </Button>
+        </SettingCard>
+        
+        <SettingCard
+            title="Configure RoValra"
+            description="Crush have a built-in RoValra intergration. RoValra's Privacy Policy applies."
+
+            icon={roValaraLogo}
+            iconHover={roValaraLogoColored}
+        >
+        <Button slot="action" variant="secondary" on:click={() => {goto("integrations/roValra")}}> 
+            Open
+        </Button>
         </SettingCard>
     </div>
 </div>
