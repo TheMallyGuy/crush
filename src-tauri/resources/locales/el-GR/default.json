@@ -74,6 +74,18 @@
                 "description": "Δείτε και παίξτε τα παιχνίδια που παίξατε πρόσφατα.",
                 "button": "Εμφάνιση μηνυμάτων"
             },
+            "roValraCard": {
+                "title": "Διαμόρφωση RoValra",
+                "description": "Το Crush έχει ενσωματωμένη ενσωμάτωση RoValra. Ισχύει η Πολιτική Απορρήτου της RoValra.",
+                "button": "Άνοιγμα"
+            },
+            "roValra": {
+                "description": "Διαμόρφωση RoValra",
+                "joinServerForYouCard": {
+                    "title": "Αφήστε το Crush να συμμετάσχει στον διακομιστή για εσάς",
+                    "description": "Αντί για αντιστοίχιση Roblox, θα χρησιμοποιήσουμε το Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Το ιστορικό του παιχνιδιού σας",
                 "description": "Δείτε και παίξτε τα παιχνίδια που παίξατε πρόσφατα.",

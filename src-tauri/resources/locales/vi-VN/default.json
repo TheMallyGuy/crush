@@ -74,6 +74,18 @@
                 "description": "Xem và chơi các trò chơi đã chơi gần đây của bạn.",
                 "button": "Xem"
             },
+            "roValraCard": {
+                "title": "Định cấu hình RoValra",
+                "description": "Crush có tích hợp RoValra tích hợp. Áp dụng Chính sách quyền riêng tư của RoValra.",
+                "button": "Mở"
+            },
+            "roValra": {
+                "description": "Định cấu hình RoValra",
+                "joinServerForYouCard": {
+                    "title": "Hãy để Crush tham gia máy chủ cho bạn",
+                    "description": "Thay vì tạo đối sánh Roblox, chúng tôi sẽ sử dụng API Rovalra."
+                }
+            },
             "gameHistory": {
                 "title": "Lịch sử Trò chơi",
                 "description": "Xem và chơi các trò chơi đã chơi gần đây của bạn.",

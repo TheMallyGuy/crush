@@ -74,6 +74,18 @@
                 "description": "Просматривайте и играйте в недавно сыгранные игры.",
                 "button": "Просмотр"
             },
+            "roValraCard": {
+                "title": "Настройка RoValra",
+                "description": "Crush имеет встроенную интеграцию с RoValra. Действует Политика конфиденциальности RoValra.",
+                "button": "Открыть"
+            },
+            "roValra": {
+                "description": "Настройка RoValra",
+                "joinServerForYouCard": {
+                    "title": "Позвольте Crush присоединиться к серверу для вас",
+                    "description": "Вместо того, чтобы делать спички в Roblox, мы будем использовать Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "История вашей игры",
                 "description": "[ERROR] View & play your recently played games.",

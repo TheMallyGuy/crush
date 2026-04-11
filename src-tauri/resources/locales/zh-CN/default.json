@@ -74,6 +74,18 @@
                 "description": "Bekijk en speel je recent gespeelde games.",
                 "button": "Weergeven"
             },
+            "roValraCard": {
+                "title": "配置RoValra",
+                "description": "Crush具有内置的RoValra集成。RoValra的隐私政策适用。",
+                "button": "开放性"
+            },
+            "roValra": {
+                "description": "配置RoValra",
+                "joinServerForYouCard": {
+                    "title": "让Crush为您加入服务器",
+                    "description": "我们将使用Rovalra API而不是Roblox匹配。"
+                }
+            },
             "gameHistory": {
                 "title": "Je spelgeschiedenis",
                 "description": "Bekijk en speel je recent gespeelde games.",

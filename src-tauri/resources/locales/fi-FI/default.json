@@ -74,6 +74,18 @@
                 "description": "Tarkastele ja pelaa äskettäin pelaamiasi pelejä.",
                 "button": "Näytä"
             },
+            "roValraCard": {
+                "title": "Määritä RoValra",
+                "description": "Crushissa on sisäänrakennettu RoValra-intergraatio. RoValran tietosuojakäytäntöä sovelletaan.",
+                "button": "Avaa"
+            },
+            "roValra": {
+                "description": "Määritä RoValra",
+                "joinServerForYouCard": {
+                    "title": "Anna Crushin liittyä palvelimeen puolestasi",
+                    "description": "Robloxin tulitikkujen tekemisen sijaan käytämme Rovalra API: a."
+                }
+            },
             "gameHistory": {
                 "title": "Pelihistoriasi",
                 "description": "Tarkastele ja pelaa äskettäin pelaamiasi pelejä.",

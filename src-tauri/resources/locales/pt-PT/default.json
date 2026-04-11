@@ -74,6 +74,18 @@
                 "description": "Veja e jogue os seus jogos jogados recentemente.",
                 "button": "Ver"
             },
+            "roValraCard": {
+                "title": "Configurar RoValra",
+                "description": "O Crush tem uma integração RoValra integrada. Aplica-se a Política de Privacidade da RoValra.",
+                "button": "Transparente"
+            },
+            "roValra": {
+                "description": "Configurar RoValra",
+                "joinServerForYouCard": {
+                    "title": "Deixe o Crush juntar-se ao servidor para você",
+                    "description": "Em vez de fazer correspondências com o Roblox, usaremos a API Rovalra."
+                }
+            },
             "gameHistory": {
                 "title": "histórico de jogo",
                 "description": "Veja e jogue os seus jogos jogados recentemente.",

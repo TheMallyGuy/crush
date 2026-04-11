@@ -74,6 +74,18 @@
                 "description": "Przeglądaj i graj w swoje ostatnio grane gry.",
                 "button": "Wyświetl"
             },
+            "roValraCard": {
+                "title": "Skonfiguruj RoValra",
+                "description": "Crush ma wbudowaną integrację RoValry. Obowiązuje Polityka prywatności RoValra.",
+                "button": "Otwarte"
+            },
+            "roValra": {
+                "description": "Skonfiguruj RoValra",
+                "joinServerForYouCard": {
+                    "title": "Pozwól, aby Crush dołączył do serwera za Ciebie",
+                    "description": "Zamiast dopasowywania Roblox, użyjemy interfejsu API Rovalra."
+                }
+            },
             "gameHistory": {
                 "title": "Twoja historia gier",
                 "description": "Przeglądaj i graj w swoje ostatnio grane gry.",

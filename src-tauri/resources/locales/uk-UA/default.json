@@ -74,6 +74,18 @@
                 "description": "Переглядайте та грайте в нещодавно зіграні ігри.",
                 "button": "Вид"
             },
+            "roValraCard": {
+                "title": "Налаштувати RoValra",
+                "description": "Crush має вбудовану інтеграцію RoValra. Застосовується Політика конфіденційності RoValra.",
+                "button": "Відкрити"
+            },
+            "roValra": {
+                "description": "Налаштувати RoValra",
+                "joinServerForYouCard": {
+                    "title": "Дозвольте Crush приєднатися до сервера для вас",
+                    "description": "Замість створення відповідності Roblox ми будемо використовувати Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Історія вашої гри",
                 "description": "Переглядайте та грайте в нещодавно зіграні ігри.",

@@ -74,6 +74,18 @@
                 "description": "최근에 플레이한 게임을 보고 플레이하세요.",
                 "button": "보기"
             },
+            "roValraCard": {
+                "title": "RoValra 구성",
+                "description": "Crush에는 RoValra 인터그레이션이 내장되어 있습니다. RoValra의 개인정보 보호정책이 적용됩니다.",
+                "button": "열기"
+            },
+            "roValra": {
+                "description": "RoValra 구성",
+                "joinServerForYouCard": {
+                    "title": "Crush가 당신을 위해 서버에 합류하게하십시오",
+                    "description": "Roblox 매치 메이킹 대신 Rovalra API를 사용합니다."
+                }
+            },
             "gameHistory": {
                 "title": "게임 기록",
                 "description": "최근에 플레이한 게임을 보고 플레이하세요.",

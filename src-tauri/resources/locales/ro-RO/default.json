@@ -74,6 +74,18 @@
                 "description": "Vizualizați și jucați jocurile dvs. jucate recent.",
                 "button": "Vedere"
             },
+            "roValraCard": {
+                "title": "Configurați RoValra",
+                "description": "Crush are o integrare RoValra încorporată. Se aplică Politica de confidențialitate RoValra.",
+                "button": "Deschis"
+            },
+            "roValra": {
+                "description": "Configurați RoValra",
+                "joinServerForYouCard": {
+                    "title": "Permiteți Crush să se alăture serverului pentru dvs.",
+                    "description": "În loc de potrivire Roblox, vom folosi Rovalra API."
+                }
+            },
             "gameHistory": {
                 "title": "Istoricul jocului dvs.",
                 "description": "Vizualizați și jucați jocurile dvs. jucate recent.",

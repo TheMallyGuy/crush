@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox spielen",
                 "idle": "Nicht in einem",
-                "playing": "In Aus-"
+                "playing": "Ei"
             }
         }
     },
@@ -73,6 +73,18 @@
                 "title": "Spielverlauf",
                 "description": "Sieh dir deine zuletzt gespielten Spiele an und spiele sie.",
                 "button": "Ansehen"
+            },
+            "roValraCard": {
+                "title": "RoValra konfigurieren",
+                "description": "Crush haben eine integrierte RoValra-Integration. Es gelten die Datenschutzbestimmungen von RoValra.",
+                "button": "Öffnen"
+            },
+            "roValra": {
+                "description": "RoValra konfigurieren",
+                "joinServerForYouCard": {
+                    "title": "Lassen Sie Crush Server für Sie beitreten",
+                    "description": "Anstelle von Roblox-Matching verwenden wir die Rovalra-API."
+                }
             },
             "gameHistory": {
                 "title": "Spielverlauf",
