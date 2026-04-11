@@ -104,6 +104,17 @@
             "fastflag": "Bandeiras rápidas",
             "description": "Adicionar/Remover Roblox Fastflags e configurações.",
             "generalBack": "Voltar ao fastflag",
+            "selectScreeen": {
+                "title": "Escolha uma ação",
+                "editCard": {
+                    "title": "Editar",
+                    "description": "Sinalizadores de funcionalidade"
+                },
+                "presetCard": {
+                    "title": "Predefinição",
+                    "description": "Use o Feature Flag Preset embutido no crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nome da bandeira",
@@ -150,63 +161,63 @@
             "tab": {
                 "modManagement": {
                     "title": "Gestão de Mod",
-                    "description": "Gerir os seus mods Roblox mods.",
-                    "addModButton": "Adicionar um Mod",
-                    "noModsFound": "Não encontramos mods aqui, Yuppies.",
-                    "noModsFoundCreateButton": "Crie o seu primeiro mod",
+                    "description": "[ERROR] Manage your mods Roblox mods.",
+                    "addModButton": "[ERROR] Add A Mod",
+                    "noModsFound": "[ERROR] We found no mods here, Yuppies.",
+                    "noModsFoundCreateButton": "[ERROR] Create your first mod",
                     "modCards": {
-                        "toggleNoteDisable": "Desativar Mod",
-                        "toggleNoteEnable": "Ativar Mod",
-                        "renameNote": "Mudar o nome do mod",
-                        "openFolderNote": "Abrir pasta Mod",
-                        "deleteNote": "Eliminar Mod",
-                        "layoutNote": "Layout de mods inspirado no gerente de mods da Frostrap",
-                        "description": "Ative o carregamento do mod e defina a localização da pasta mod."
+                        "toggleNoteDisable": "[ERROR] Disable Mod",
+                        "toggleNoteEnable": "[ERROR] Enable Mod",
+                        "renameNote": "[ERROR] Rename Mod",
+                        "openFolderNote": "[ERROR] Open Mod Folder",
+                        "deleteNote": "[ERROR] Delete Mod",
+                        "layoutNote": "[ERROR] Mods layout inspired by Frostrap's mods manager",
+                        "description": "[ERROR] Enable mod loading and set the mod folder location."
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Mods pré-construídos",
-                    "description": "Instale mods prontos para uso.",
+                    "title": "[ERROR] Prebuilt Mods",
+                    "description": "[ERROR] Install ready-to-use mods.",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Altere o cursor do Roblox para versões mais antigas.",
+                        "title": "[ERROR] Cursor",
+                        "description": "[ERROR] Change your Roblox cursor to older versions.",
                         "dropdown": {
-                            "default": "Padrão"
+                            "default": "[ERROR] Default"
                         }
                     },
                     "customFontCard": {
-                        "title": "Fonte personalizada",
-                        "description": "Mude a sua fonte roblox para o que quiser.",
-                        "button": "Alterar fonte"
+                        "title": "[ERROR] Custom Font",
+                        "description": "[ERROR] Change your roblox font to whatever you like.",
+                        "button": "[ERROR] Change Font"
                     }
                 },
                 "communityMods": {
-                    "title": "Mods da comunidade",
-                    "description": "Explore os mods criados pela comunidade.",
+                    "title": "[ERROR] Community Mods",
+                    "description": "[ERROR] Explore mods created by the community.",
                     "notice": {
-                        "title": "Nenhum mod ainda",
-                        "description": "Ainda não temos mods da comunidade. Seja o primeiro a contribuir e ajude-nos a aumentar a coleção!",
-                        "submissionButton": "Enviar um mod"
+                        "title": "[ERROR] No mod yet",
+                        "description": "[ERROR] We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
+                        "submissionButton": "[ERROR] Submit a mod "
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Definições",
+            "settings": "[ERROR] Settings",
             "aboutCard": {
-                "title": "Sobre",
-                "description": "Informações sobre esta construção de crush",
-                "builtOn": "Construído em: {date}",
-                "commitHash": "Hash do commit: {hash}"
+                "title": "[ERROR] About",
+                "description": "[ERROR] Information about this crush build",
+                "builtOn": "[ERROR] Built on: {date}",
+                "commitHash": "[ERROR] Commit hash: {hash}"
             },
             "languageCard": {
-                "title": "Língua",
-                "description": "Selecione o seu idioma preferido para o crush."
+                "title": "[ERROR] Language",
+                "description": "[ERROR] Select your preferred language for crush."
             },
             "donateCard": {
-                "title": "Doar",
-                "description": "Love crush? Doe para o Mally para apoiar o trabalho dele!",
-                "button": "Doar"
+                "title": "[ERROR] Donate",
+                "description": "[ERROR] Love crush? Donate to Mally to support his work!",
+                "button": "[ERROR] Donate"
             }
         }
     }

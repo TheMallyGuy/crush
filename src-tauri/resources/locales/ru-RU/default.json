@@ -1,73 +1,73 @@
 {
     "rpc": {
-        "general": "Roblox Bootrapper, написанный с нуля",
-        "integrations": "In Intergrations Route",
-        "installation": "В маршруте установки",
-        "fastflag": "В Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "По внешнему виду Маршрут",
+        "general": "[ERROR] A roblox bootrapper written from scratch",
+        "integrations": "[ERROR] In Intergrations Route",
+        "installation": "[ERROR] In Installations Route",
+        "fastflag": "[ERROR] In Fastflag Route",
+        "mod": "[ERROR] In Mod Route",
+        "appearance": "[ERROR] In Appearance Route",
         "rust": {
             "watcher": {
-                "general": "Играть в roblox",
-                "idle": "Не в",
-                "playing": "ВНУТР."
+                "general": "[ERROR] Playing roblox",
+                "idle": "[ERROR] Not in a game",
+                "playing": "[ERROR] In {}"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Проверка наличия обновлений",
-            "findingBestRegion": "Поиск лучшего региона для скачивания...",
-            "preparingForDownload": "Подготовка к загрузке",
-            "fetchingUrls": "Получение URL-адресов активов...",
-            "downloadingAssets": "Загрузка ресурсов...",
-            "extractingFiles": "Извлечение файлов...",
-            "xmlWriting": "Запись AppSettings.xml...",
-            "versionSaving": "Сохранение информации о версии...",
-            "installationComplete": "Установка завершена",
-            "packageDownloadFailed": "Ошибка загрузки"
+            "updateChecking": "[ERROR] Checking for updates",
+            "findingBestRegion": "[ERROR] Finding the best download region...",
+            "preparingForDownload": "[ERROR] Preparing for download",
+            "fetchingUrls": "[ERROR] Fetching asset URLs...",
+            "downloadingAssets": "[ERROR] Downloading assets...",
+            "extractingFiles": "[ERROR] Extracting files...",
+            "xmlWriting": "[ERROR] Writing AppSettings.xml...",
+            "versionSaving": "[ERROR] Saving version info...",
+            "installationComplete": "[ERROR] Installation complete!",
+            "packageDownloadFailed": "[ERROR] Failed to download {packageName}: {error}"
         }
     },
     "elements": {
-        "launchBar": "Ввод в эксплуатацию"
+        "launchBar": "[ERROR] Launch"
     },
     "pages": {
         "choiceWin": {
-            "title": "Ты моя любовь",
-            "playRoblox": "Играть в Roblox",
-            "config": "Конфиг"
+            "title": "[ERROR] Crush",
+            "playRoblox": "[ERROR] Play Roblox",
+            "config": "[ERROR] Config"
         },
         "boostrapWin": {
-            "cancel": "Отмена",
-            "retry": "Повторить попытку"
+            "cancel": "[ERROR] Cancel",
+            "retry": "[ERROR] Retry"
         },
         "appearance": {
-            "appearance": "Внешний вид",
-            "description": "Настройте внешний вид бутстреппера Roblox.",
+            "appearance": "[ERROR] Appearance",
+            "description": "[ERROR] Customize the look and feel of the Roblox bootstrapper.",
             "boostrapThemeCard": {
-                "title": "Тема Bootstrapper",
-                "description": "Выбор между темой Crush по умолчанию или настраиваемой темой XML.",
+                "title": "[ERROR] Bootstrapper Theme",
+                "description": "[ERROR] Choose between the default Crush theme or a custom XML theme.",
                 "dropdown": {
-                    "default": "По умолчанию (Crush)",
-                    "custom": "Другое"
+                    "default": "[ERROR] Default (Crush)",
+                    "custom": "[ERROR] Custom"
                 },
                 "customDropDownContents": {
-                    "importNew": "Импортировать как новое",
-                    "noThemes": "Настраиваемые темы еще не импортированы.",
-                    "missingAssets": "Отсутствуют активы темы"
+                    "importNew": "[ERROR] Import New",
+                    "noThemes": "[ERROR] No custom themes imported yet.",
+                    "missingAssets": "[ERROR] Missing Theme Assets"
                 }
             }
         },
         "integrations": {
-            "integrations": "Интеграции",
-            "description": "Интеграция конфигурации вне roblox",
+            "integrations": "[ERROR] Integrations",
+            "description": "[ERROR] Config intergrations outside roblox",
             "serverNotifierCard": {
-                "title": "Уведомление о местоположении сервера",
-                "description": "Получение уведомления при подключении клиента к серверу."
+                "title": "[ERROR] Server Location Notifier",
+                "description": "[ERROR] Get notify when client connect to a server."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Замените Roblox Rich Presence на Crush's"
+                "title": "[ERROR] Discord RPC (Crush)",
+                "description": "[ERROR] Replace the Roblox Rich Presence with Crush's"
             },
             "gameHistoryCard": {
                 "title": "История вашей игры",
@@ -76,11 +76,11 @@
             },
             "gameHistory": {
                 "title": "История вашей игры",
-                "description": "Просматривайте и играйте в недавно сыгранные игры.",
+                "description": "[ERROR] View & play your recently played games.",
                 "gameHistoryEmpty": "История вашей игры пуста. Сыграйте в несколько игр, чтобы увидеть их здесь! (Обратите внимание, что не каждый сервер можно повторно подключить)",
                 "gameHistoryLoading": "Идет загрузка, пожалуйста, подождите...",
                 "clearHistory": "Очистить историю",
-                "backToIntegrations": "Назад",
+                "backToIntegrations": "[ERROR] Back",
                 "gameHistoryCard": {
                     "titleUnknown": "Неизвестная игра",
                     "lastPlayed": "Последнее воспроизведение: When this track was last played",
@@ -93,7 +93,7 @@
             "installations": "Установки",
             "customVersion": {
                 "title": "Установите пользовательскую версию Roblox",
-                "description": "Пропустите проверку обновлений и загрузите версию. Значение по умолчанию - самое позднее. Недействительная версия не будет загружена и вернется к последней версии."
+                "description": "[ERROR] Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
             },
             "forceReinstallCard": {
                 "title": "Принудительная переустановка Roblox",
@@ -104,6 +104,17 @@
             "fastflag": "Быстрые флаги",
             "description": "Добавление/удаление флагов Roblox Fast и конфигураций.",
             "generalBack": "Назад к fastflag",
+            "selectScreeen": {
+                "title": "Пожалуйста, выберите действие!",
+                "editCard": {
+                    "title": "Правка",
+                    "description": "Редактировать флаги функций"
+                },
+                "presetCard": {
+                    "title": "Предустановка",
+                    "description": "Используйте предустановку флага функции, встроенную в Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Обозначение (Flag Name)",

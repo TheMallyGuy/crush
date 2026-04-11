@@ -104,6 +104,17 @@
             "fastflag": "أعلام سريعة",
             "description": "إضافة/إزالة Roblox Fastflags والتكوينات.",
             "generalBack": "Back to fastflag",
+            "selectScreeen": {
+                "title": "Please choose an action.",
+                "editCard": {
+                    "title": "Edit",
+                    "description": "Edit Feature Flags"
+                },
+                "presetCard": {
+                    "title": "Preset",
+                    "description": "Use Feature Flag Preset built in in crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Flag name",

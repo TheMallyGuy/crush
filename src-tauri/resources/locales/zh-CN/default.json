@@ -104,10 +104,21 @@
             "fastflag": "Snelle vlaggen",
             "description": "Roblox Fastflags en configuraties toevoegen/verwijderen.",
             "generalBack": "返回fastflag",
+            "selectScreeen": {
+                "title": "请选择操作",
+                "editCard": {
+                    "title": "修改",
+                    "description": "功能标志"
+                },
+                "presetCard": {
+                    "title": "预置",
+                    "description": "使用CRUSH内置的功能标志预设。"
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "旗帜+名称",
-                    "texboxFlagValue": "值",
+                    "texboxFlagValue": "数值",
                     "buttonAdd": "新增",
                     "search": "搜索所有fflags...",
                     "searchNotFound": "未找到与您的搜索匹配的标记。",

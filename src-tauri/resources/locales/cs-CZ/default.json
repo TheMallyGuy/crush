@@ -104,6 +104,17 @@
             "fastflag": "Rychlé vlajky",
             "description": "Přidat/odebrat Roblox Fastflags a konfigurace.",
             "generalBack": "Zpět na fastflag",
+            "selectScreeen": {
+                "title": "Vyberte akci:",
+                "editCard": {
+                    "title": "Upravit",
+                    "description": "Upravit příznaky prvku"
+                },
+                "presetCard": {
+                    "title": "Předvolby",
+                    "description": "Použijte předvolbu příznaku funkce vestavěnou v crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Název příznaku",

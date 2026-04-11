@@ -104,6 +104,17 @@
             "fastflag": "Fast Flags",
             "description": "Aggiungi/Rimuovi Fastflag e configurazioni Roblox.",
             "generalBack": "Torna a fastflag",
+            "selectScreeen": {
+                "title": "Scegli un'azione.",
+                "editCard": {
+                    "title": "Modificare",
+                    "description": "Modifica flag funzione"
+                },
+                "presetCard": {
+                    "title": "Preimpostazione",
+                    "description": "Usa Feature Flag Preset integrato in CRUSH."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nome bandiera",

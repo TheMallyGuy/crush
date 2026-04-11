@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox oynamak",
                 "idle": "Oyunda değil",
-                "playing": "Bu "
+                "playing": "Çoğu zaman"
             }
         }
     },
@@ -104,6 +104,17 @@
             "fastflag": "Hızlı Bayraklar",
             "description": "Roblox Fastflags ve yapılandırmaları ekleyin/kaldırın.",
             "generalBack": "Fastflag'a geri dön",
+            "selectScreeen": {
+                "title": "Lütfen bir eylem seçin.",
+                "editCard": {
+                    "title": "Düzenle",
+                    "description": "Özellik Bayraklarını Düzenle"
+                },
+                "presetCard": {
+                    "title": "Ön Ayar",
+                    "description": "Crush içinde yerleşik Özellik Bayrağı Ön Ayarını kullanın."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Bayrak ve İsim",
@@ -137,7 +148,7 @@
                 "overwriteTextureQualityCard": {
                     "title": "Doku kalite seviyesinin üzerine yaz",
                     "description": "Özel bir doku kalite seviyesini zorlar.",
-                    "dropdownDefault": "Sistem"
+                    "dropdownDefault": "Varsayılan"
                 },
                 "lowMeshQualityCard": {
                     "title": "Düşük Kaliteli Ağları Etkinleştir",

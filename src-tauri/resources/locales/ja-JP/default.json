@@ -104,6 +104,17 @@
             "fastflag": "高速フラグ",
             "description": "Roblox Fastflagsと設定を追加/削除します。",
             "generalBack": "Fastflagに戻る",
+            "selectScreeen": {
+                "title": "アクションを選択してください",
+                "editCard": {
+                    "title": "編集",
+                    "description": "機能フラグ"
+                },
+                "presetCard": {
+                    "title": "プリセット",
+                    "description": "クラッシュに組み込まれた機能フラグプリセットを使用します。"
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "フラグ名",

@@ -104,6 +104,17 @@
             "fastflag": "Nopeat liput",
             "description": "Lisää/poista Roblox Fastflags -merkintöjä ja -kokoonpanoja.",
             "generalBack": "Takaisin fastflagiin",
+            "selectScreeen": {
+                "title": "Valitse toiminto.",
+                "editCard": {
+                    "title": "Muokkaa",
+                    "description": "Muokkaa ominaisuusmerkintöjä"
+                },
+                "presetCard": {
+                    "title": "Esiasetus",
+                    "description": "Käytä sisäänrakennettua Feature Flag Preset -asetusta."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Lipun nimi",

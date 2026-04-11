@@ -104,6 +104,17 @@
             "fastflag": "Raske flagg",
             "description": "Legg til/fjern Roblox Fastflags og konfigurasjoner.",
             "generalBack": "Tilbake til fastflag",
+            "selectScreeen": {
+                "title": "Velg en handling",
+                "editCard": {
+                    "title": "Rediger",
+                    "description": "Funksjonsflagg"
+                },
+                "presetCard": {
+                    "title": "Forhåndsinnstilling",
+                    "description": "Bruk forhåndsinnstillingen for funksjonsflagg som er innebygd i crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Flaggnavn",

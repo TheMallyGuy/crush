@@ -104,6 +104,17 @@
             "fastflag": "Snelle vlaggen",
             "description": "Roblox Fastflags en configuraties toevoegen/verwijderen.",
             "generalBack": "Terug naar fastflag",
+            "selectScreeen": {
+                "title": "Kies een actie",
+                "editCard": {
+                    "title": "Bewerken",
+                    "description": "Functievlaggen bewerken"
+                },
+                "presetCard": {
+                    "title": "Vooraf ingesteld",
+                    "description": "Gebruik Feature Flag Preset ingebouwd in Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Vlagnaam",

@@ -104,6 +104,17 @@
             "fastflag": "Brze zastavice",
             "description": "Dodajte/uklonite Roblox Fastflags i konfiguracije.",
             "generalBack": "Nazad na brzu zastavicu",
+            "selectScreeen": {
+                "title": "Izaberite radnju.",
+                "editCard": {
+                    "title": "Izmeni",
+                    "description": "Izmenite zastavice funkcija"
+                },
+                "presetCard": {
+                    "title": "Unapred određeno",
+                    "description": "Koristite unapred podešenu oznaku funkcije ugrađenu u simpatiju."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Назив заставе",

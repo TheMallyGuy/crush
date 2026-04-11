@@ -104,6 +104,17 @@
             "fastflag": "Marques ràpides",
             "description": "Afegeix/elimina Fastflags i configuracions de Roblox.",
             "generalBack": "Torna a la bandera ràpida",
+            "selectScreeen": {
+                "title": "Tria una acció.",
+                "editCard": {
+                    "title": "Edita",
+                    "description": "Modifica els indicadors de les funcions"
+                },
+                "presetCard": {
+                    "title": "Configuració",
+                    "description": "Utilitza la bandera de funció preestablerta incorporada a la trituració."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nom de la bandera",

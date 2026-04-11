@@ -104,6 +104,17 @@
             "fastflag": "דגלים מהירים",
             "description": "הוסף/הסר דגלים מהירים וקונפיגורציות של Roblox.",
             "generalBack": "חזרה ל - fastflag",
+            "selectScreeen": {
+                "title": "יש לבחור פעולה.",
+                "editCard": {
+                    "title": "ערוך",
+                    "description": "ערוך דגלי תכונות"
+                },
+                "presetCard": {
+                    "title": "Preset",
+                    "description": "השתמש ב - Feature Flag Preset מובנה במחיצה."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "שם הסימון",

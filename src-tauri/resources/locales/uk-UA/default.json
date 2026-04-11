@@ -104,6 +104,17 @@
             "fastflag": "Швидкі прапорці",
             "description": "Додавання/видалення прапорців Roblox Fast Flag та конфігурацій.",
             "generalBack": "Назад до fastflag",
+            "selectScreeen": {
+                "title": "Виберіть дію.",
+                "editCard": {
+                    "title": "Редагувати",
+                    "description": "Редагувати прапорці функцій"
+                },
+                "presetCard": {
+                    "title": "Пресет",
+                    "description": "Використовуйте попередню установку прапорця функції, вбудовану при розчавленні."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Назва прапора",

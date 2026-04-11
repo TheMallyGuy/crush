@@ -104,6 +104,17 @@
             "fastflag": "Indicateurs rapides",
             "description": "Ajouter/Supprimer des Fastflags et des configurations Roblox.",
             "generalBack": "Retour à fastflag",
+            "selectScreeen": {
+                "title": "Choisissez une action svp",
+                "editCard": {
+                    "title": "editer",
+                    "description": "Modifier les indicateurs de fonctionnalité"
+                },
+                "presetCard": {
+                    "title": "Préréglage",
+                    "description": "Utilisez le préréglage d'indicateur de fonctionnalité intégré dans Crush."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nom du marqueur",
@@ -200,7 +211,7 @@
                 "commitHash": "Valider le hachage : {hash}"
             },
             "languageCard": {
-                "title": "Votre langue",
+                "title": "Langue",
                 "description": "Sélectionnez votre langue préférée pour Crush."
             },
             "donateCard": {

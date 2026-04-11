@@ -104,6 +104,17 @@
             "fastflag": "Fast Flags",
             "description": "Roblox Fastflag 및 구성을 추가/제거합니다.",
             "generalBack": "패스트플래그로 돌아가기",
+            "selectScreeen": {
+                "title": "동작을 선택하십시오.",
+                "editCard": {
+                    "title": "편집",
+                    "description": "기능 플래그 편집"
+                },
+                "presetCard": {
+                    "title": "기본값 설정",
+                    "description": "FEATURE FLAG PRESET BUILT IN CRUSH를 사용합니다."
+                }
+            },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "표식 이름",
