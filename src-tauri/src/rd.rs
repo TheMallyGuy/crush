@@ -30,7 +30,6 @@ const FILES: &[&str] = &[
     "shaders.zip",
     "ssl.zip",
     "WebView2.zip",
-    "content-avatar.zip",
     "content-configs.zip",
     "content-fonts.zip",
     "content-sky.zip",

@@ -8,7 +8,7 @@ use std::sync::OnceLock;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
-    path::{Path, PathBuf},
+    path::PathBuf,
     time::{Duration, Instant},
 };
 use sysinfo::{ProcessesToUpdate, System};
@@ -73,19 +73,26 @@ fn get_latest_log() -> Option<PathBuf> {
 
     std::fs::read_dir(dir)
         .ok()?
-        .flatten()
-        .filter(|e| {
-            Path::new(&e.file_name())
-                .extension()
-                .is_some_and(|ext| ext == "log")
+        .filter_map(|res| {
+            let entry = res.ok()?;
+            let path = entry.path();
+
+            if path.extension().is_none_or(|ext| ext != "log") {
+                return None;
+            }
+
+            let metadata = entry.metadata().ok()?;
+            let created = metadata.created().ok()?;
+            let elapsed = created.elapsed().ok()?;
+
+            if elapsed.as_secs() >= 20 {
+                return None;
+            }
+
+            Some((path, metadata))
         })
-        .filter(|e| {
-            e.metadata()
-                .and_then(|m| m.created())
-                .is_ok_and(|t| t.elapsed().is_ok_and(|d| d.as_secs() < 20))
-        })
-        .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
-        .map(|e| e.path())
+        .max_by_key(|(_, metadata)| metadata.modified().ok())
+        .map(|(path, _)| path)
 }
 
 fn get_integrations(store: &tauri_plugin_store::Store<tauri::Wry>) -> Option<Value> {
@@ -229,7 +236,9 @@ async fn handle_log_line(
     }
 
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
-        handle_udmux_event(app, caps.get(1).unwrap().as_str(), store).await?;
+        if let Some(ip) = caps.get(1) {
+            handle_udmux_event(app, ip.as_str(), store).await?;
+        }
         return Ok(());
     }
 

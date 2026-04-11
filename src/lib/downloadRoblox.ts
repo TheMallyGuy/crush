@@ -62,7 +62,7 @@ async function downloadAssetFile(
     total: number
 ) {
     const match = assetUrl.match(/version-[^-]+-(.+)$/)
-    let fileName = match?.[1] ?? `file-${Date.now()}`
+    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file-${Date.now()}`
     if (!fileName.endsWith('.zip')) fileName += '.zip'
     fileName = fileName.toLowerCase()
 
@@ -203,6 +203,10 @@ async function performFullInstallation(
         region: bestRegion,
         ...(version && { version }),
     })
+
+    if (!assetsUrls || assetsUrls.length === 0) {
+        throw new Error("No download URLs found for the specified version/region.")
+    }
 
     onProgress({
         type: 'status',
@@ -348,21 +352,22 @@ export async function restoreFileFromPackage(
     const destDir = prefix ? await join(versionDir, prefix) : versionDir
     await ensureDir(destDir)
 
-    if (files && files.length > 0) {
-        const strippedFiles = prefix
-            ? files.map((f) =>
-                  f.startsWith(prefix) ? f.substring(prefix.length) : f
-              )
-            : files
-
-        await invoke('extract_files_from_zip', {
-            zipPath,
-            dest: destDir,
-            files: strippedFiles,
-        })
-    } else {
+    if (!files || files.length === 0) {
         await invoke('extract_zip', { zipPath, dest: destDir })
+        return
     }
+
+    const strippedFiles = prefix
+        ? files.map((f) =>
+              f.startsWith(prefix) ? f.substring(prefix.length) : f
+          )
+        : files
+
+    await invoke('extract_files_from_zip', {
+        zipPath,
+        dest: destDir,
+        files: strippedFiles,
+    })
 }
 
 export function resolvePackageInfo(input: string, isPackageInput: boolean) {
