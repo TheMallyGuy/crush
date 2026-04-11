@@ -43,6 +43,12 @@
                 },
                 {
                     "url": "https://apis.roblox.com/"
+                },
+                {
+                    "url": "http://ip-api.com/json"
+                },
+                {
+                    "url": "https://apis.rovalra.com/"
                 }
             ],
             "deny": [
