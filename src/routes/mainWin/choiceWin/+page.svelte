@@ -7,6 +7,7 @@
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { _ } from 'svelte-i18n'
     import { deepLinkUrl } from '$lib/stores/deeplink'
+    import { info } from '@tauri-apps/plugin-log'
 
     let firstLaunchValue: boolean | undefined
 
@@ -45,13 +46,13 @@
     }
 
     async function openmainwin() {
-        if (firstLaunchValue) {
-            // await invoke("open_main_window", { url : "mainWin/crushHello"});  // TODO : migrate to the new tauri command
+        info("first launch!")
+        if (!firstLaunchValue) {
             await invoke('create_or_focus_window', {
                 // temp
-                label: 'CrushMainWindow',
-                url: 'mainWin/Ui/installation',
-                title: 'Crush',
+                label: 'CrushHello',
+                url: 'mainWin/crushHello/welcome',
+                title: 'Welcome',
                 width: 1000,
                 height: 600,
                 minWidth: 1000,
@@ -60,7 +61,7 @@
         } else {
             await invoke('create_or_focus_window', {
                 label: 'CrushMainWindow',
-                url: 'mainWin/Ui/installation',
+                url: 'mainWin/Ui/intergrations',
                 title: 'Crush',
                 width: 1000,
                 height: 600,
