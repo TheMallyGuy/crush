@@ -43,6 +43,7 @@ struct UniverseResponse {
 struct GameData {
     name: String,
 }
+
 #[derive(Deserialize)]
 struct IpInfo {
     #[serde(rename = "ip")]
@@ -103,6 +104,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         let running = is_roblox_running(&mut system);
         if was_running && !running {
             state.activity = Activity::default();
+            state.pending_server_ip = None;
+            state.pending_server_location = None;
             let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
         was_running = running;
@@ -135,6 +138,9 @@ async fn update_watcher_file(
     state.current_file = Some(path);
     state.offset = 0;
     state.activity = Activity::default();
+    state.udmux_handled = false;
+    state.pending_server_ip = None;
+    state.pending_server_location = None;
 
     let integrations = get_integrations(store);
     let should_rpc = integrations.as_ref().is_some_and(|v| {
@@ -180,6 +186,8 @@ struct WatcherState {
     activity: Activity,
     last_rpc: Option<Instant>,
     udmux_handled: bool,
+    pending_server_ip: Option<String>,
+    pending_server_location: Option<String>,
 }
 
 async fn process_log_file(
@@ -225,6 +233,9 @@ async fn handle_log_line(
         state.activity.instance_id = Some(instance_id);
         state.activity.in_game = false;
         state.udmux_handled = false;
+        state.pending_server_ip = None;
+        state.pending_server_location = None;
+
         log::info!(
             "joining place {} instance {}",
             place_id,
@@ -236,7 +247,7 @@ async fn handle_log_line(
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
         if !state.udmux_handled {
             if let Some(ip) = caps.get(1) {
-                handle_udmux_event(app, ip.as_str(), store).await?;
+                handle_udmux_event(ip.as_str(), state).await?;
                 state.udmux_handled = true;
             }
         }
@@ -251,6 +262,8 @@ async fn handle_log_line(
     if WatcherRegexes::leave().is_match(line) && state.activity.in_game {
         log::info!("left game");
         state.activity = Activity::default();
+        state.pending_server_ip = None;
+        state.pending_server_location = None;
         let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
     }
 
@@ -258,10 +271,14 @@ async fn handle_log_line(
 }
 
 async fn handle_udmux_event(
-    app: &AppHandle,
     ip: &str,
-    store: &tauri_plugin_store::Store<tauri::Wry>,
+    state: &mut WatcherState,
 ) -> Result<(), String> {
+    if state.activity.place_id.is_none() {
+        log::info!("UDMUX fired but no place_id — skipping");
+        return Ok(());
+    }
+
     log::info!("UDMUX IP: {}", ip);
 
     let res = get_client()
@@ -271,25 +288,8 @@ async fn handle_udmux_event(
         .map_err(|e| e.to_string())?;
     let info: IpInfo = res.json().await.map_err(|e| e.to_string())?;
 
-    let integrations = get_integrations(store);
-
-    let should_notify = integrations.as_ref().is_some_and(|v| {
-        v.get("serverLocationNotifier")
-            .and_then(|n| n.as_bool())
-            .unwrap_or(false)
-    });
-
-    if should_notify {
-        app.notification()
-            .builder()
-            .title("Connected to a server!")
-            .body(format!(
-                "IP : {} \nLocation : {}, {}",
-                ip, info.city, info.region
-            ))
-            .show()
-            .map_err(|e| e.to_string())?;
-    }
+    state.pending_server_ip = Some(ip.to_string());
+    state.pending_server_location = Some(format!("{}, {}", info.city, info.region));
 
     Ok(())
 }
@@ -313,6 +313,30 @@ async fn handle_joined_event(
     save_game_history(state, store, place_id)?;
 
     let integrations = get_integrations(store);
+
+    let should_notify = integrations.as_ref().is_some_and(|v| {
+        v.get("serverLocationNotifier")
+            .and_then(|n| n.as_bool())
+            .unwrap_or(false)
+    });
+
+    if should_notify {
+        if let (Some(ip), Some(location)) = (
+            state.pending_server_ip.take(),
+            state.pending_server_location.take(),
+        ) {
+            app.notification()
+                .builder()
+                .title("Connected to a server!")
+                .body(format!("IP : {}\nLocation : {}", ip, location))
+                .show()
+                .map_err(|e| e.to_string())?;
+        }
+    } else {
+        state.pending_server_ip = None;
+        state.pending_server_location = None;
+    }
+
     let should_rpc = integrations.as_ref().is_some_and(|v| {
         v.get("crushRpc")
             .and_then(|r| r.as_bool())
