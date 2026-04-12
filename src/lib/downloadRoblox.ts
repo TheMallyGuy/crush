@@ -62,12 +62,14 @@ async function downloadAssetFile(
     total: number
 ) {
     const match = assetUrl.match(/version-[^-]+-(.+)$/)
-    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file-${Date.now()}`
+    const fileNameFromUrl = assetUrl.split('/').pop()?.split('?')[0]
+    let fileName = match?.[1] ?? fileNameFromUrl ?? `file-${done}.zip`
+
     if (!fileName.endsWith('.zip')) fileName += '.zip'
     fileName = fileName.toLowerCase()
 
     const res = await fetch(assetUrl)
-    if (!res.ok){
+    if (!res.ok) {
         info(`error url : ${assetUrl}`)
         throw new Error(`HTTP ${res.status}`)
     }
@@ -287,15 +289,17 @@ async function handleLatestVersion(
 
     const needsUpdate = await checkForUpdates({ versions: versionList })
     const isMissing = !(await checkInstallationExists(versionList.at(-1)))
-    const installationCfg = await store.get<Installation>("installation")
-    const shouldForceInstall = await installationCfg?.forceReinstall
+    const installationCfg = await store.get<Installation>('installation')
+    const shouldForceInstall = installationCfg?.forceReinstall ?? false
 
-    if (needsUpdate || isMissing || shouldForceInstall) {
-        const versionHash = await performFullInstallation(onProgress)
-        await saveVersion(onProgress, versionHash, versionList, versionStore)
+    if (!needsUpdate && !isMissing && !shouldForceInstall) {
+        return await invoke('get_latest_version_player')
     }
 
-    return await invoke('get_latest_version_player')
+    const versionHash = await performFullInstallation(onProgress)
+    await saveVersion(onProgress, versionHash, versionList, versionStore)
+
+    return versionHash
 }
 
 async function saveVersion(
