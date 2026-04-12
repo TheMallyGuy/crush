@@ -34,10 +34,10 @@
     async function checkLaunch() {
         const store = await load('config.json')
 
-        let firstLaunch = await store.get<boolean>('FirstLaunch')
+        let firstLaunch = await store.get<boolean>('firstLaunch')
 
         if (firstLaunch === undefined) {
-            await store.set('FirstLaunch', true)
+            await store.set('firstLaunch', true)
             await store.save()
             return true
         }
@@ -46,7 +46,6 @@
     }
 
     async function openmainwin() {
-        info("first launch!")
         if (!firstLaunchValue) {
             await invoke('create_or_focus_window', {
                 // temp

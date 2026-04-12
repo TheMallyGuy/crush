@@ -5,6 +5,7 @@
     import { steps, currentStep, isFirst, isLast, next, back } from '$lib/stores/wizard'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
+    import { load } from '@tauri-apps/plugin-store';
 
 
     $: {
@@ -13,6 +14,10 @@
     }
 
     async function imBadAtNamingHandlerFunctions() {
+        const config = await load("config.json")
+
+        await config.set("firstLaunch", false)
+
         await invoke('create_or_focus_window', {
             label: 'CrushMainWindow',
             url: 'mainWin/Ui/intergrations',
