@@ -132,6 +132,7 @@
             const url = $deepLinkUrl ?? ''
             await performLaunch(version, url, integrations)
 
+            await sleep(1000)
             await invoke('watch_logs')
             await finalizeBootstrap()
         } catch (e: any) {
@@ -213,6 +214,10 @@
     afterNavigate(async () => {
         await runBootstrap()
     })
+
+    function sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     function getPosStyle(h?: string, v?: string) {
         const styles = []
