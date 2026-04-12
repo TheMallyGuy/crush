@@ -1,44 +1,54 @@
 import { fetch } from "@tauri-apps/plugin-http";
 import type { Server, Result } from "$lib/types";
 
+const regionMap: Record<string, string[]> = {
+  VN: ["SG", "JP"],
+  TH: ["SG", "JP"],
+  MY: ["SG", "JP"],
+  ID: ["SG", "JP"],
+  PH: ["SG", "JP"],
+  JP: ["JP", "SG"],
+  KR: ["JP", "SG"],
+  DE: ["GR", "NL"],
+  FR: ["NL", "GR"],
+  GB: ["NL", "GR"],
+  IT: ["NL", "GR"],
+  ES: ["NL", "GR"],
+  NL: ["NL", "GR"],
+  US: ["US"],
+  CA: ["US"],
+  MX: ["US"],
+  BR: ["US"],
+  DEFAULT: ["US"]
+};
+
+let cachedCountry: string | null = null;
+
 async function measureLatency(ip: string): Promise<number> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 1500);
+
   const start = performance.now();
   try {
     await fetch(`http://${ip}`, {
       method: "HEAD",
-      // short timeout so bad servers don't block
+      signal: controller.signal,
     });
   } catch {
     // connection refused / error still gives us a timing
+  } finally {
+    clearTimeout(timeoutId);
   }
   return performance.now() - start;
 }
 
 export async function getBestServers(placeId: number): Promise<Result> {
-  const geoRes = await fetch("http://ip-api.com/json");
-  const geo = await geoRes.json();
-  const country: string = geo.countryCode || "US";
-
-  const regionMap: Record<string, string[]> = {
-    VN: ["SG", "JP"],
-    TH: ["SG", "JP"],
-    MY: ["SG", "JP"],
-    ID: ["SG", "JP"],
-    PH: ["SG", "JP"],
-    JP: ["JP", "SG"],
-    KR: ["JP", "SG"],
-    DE: ["GR", "NL"],
-    FR: ["NL", "GR"],
-    GB: ["NL", "GR"],
-    IT: ["NL", "GR"],
-    ES: ["NL", "GR"],
-    NL: ["NL", "GR"],
-    US: ["US"],
-    CA: ["US"],
-    MX: ["US"],
-    BR: ["US"],
-    DEFAULT: ["US"]
-  };
+  if (!cachedCountry) {
+    const geoRes = await fetch("http://ip-api.com/json");
+    const geo = await geoRes.json();
+    cachedCountry = geo.countryCode || "US";
+  }
+  const country = cachedCountry!;
 
   const regions = regionMap[country] || regionMap.DEFAULT;
   let collected: Server[] = [];

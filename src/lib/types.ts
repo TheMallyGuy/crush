@@ -1,5 +1,6 @@
 export type Server = {
   server_id: string;
+  ip_address: string;
   playing: number;
   max_players: number;
 }
