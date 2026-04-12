@@ -155,7 +155,7 @@
         const joinServerForYou =
             integrations?.roValra?.joinServerForYouValue ?? false
 
-        if (request === 'RequestFollowUser' || !joinServerForYou) {
+        if (request === 'RequestFollowUser' || request === 'RequestPrivateGame' || !joinServerForYou) {
             info(`Launching with url: ${url}`)
             return launchPlayer(version, url)
         }
