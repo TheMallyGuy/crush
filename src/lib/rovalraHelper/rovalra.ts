@@ -24,22 +24,34 @@ const regionMap: Record<string, string[]> = {
 
 let cachedCountry: string | null = null;
 
-async function measureLatency(ip: string): Promise<number> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 1500);
-
+async function measureJoinLatency(placeId: number, serverId: string) {
   const start = performance.now();
+
   try {
-    await fetch(`http://${ip}`, {
-      method: "HEAD",
-      signal: controller.signal,
-    });
+    const res = await fetch(
+      "https://gamejoin.roblox.com/v1/join-game-instance",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          placeId,
+          gameId: serverId,
+          gameJoinAttemptId: crypto.randomUUID()
+        })
+      }
+    );
+
+    if (!res.ok) return Infinity;
+
+    const data = await res.json();
+    if (!data.joinScript) return Infinity;
+
+    return performance.now() - start;
   } catch {
-    // connection refused / error still gives us a timing
-  } finally {
-    clearTimeout(timeoutId);
+    return Infinity;
   }
-  return performance.now() - start;
 }
 
 export async function getBestServers(placeId: number): Promise<Result> {
@@ -48,9 +60,10 @@ export async function getBestServers(placeId: number): Promise<Result> {
     const geo = await geoRes.json();
     cachedCountry = geo.countryCode || "US";
   }
-  const country = cachedCountry!;
 
+  const country = cachedCountry!;
   const regions = regionMap[country] || regionMap.DEFAULT;
+
   let collected: Server[] = [];
 
   for (const region of regions) {
@@ -59,7 +72,9 @@ export async function getBestServers(placeId: number): Promise<Result> {
         `https://apis.rovalra.com/v1/servers/region?place_id=${placeId}&country=${region}&cursor=0`
       );
       if (!res.ok) continue;
+
       const data = await res.json();
+
       if (data.servers && data.servers.length > 0) {
         collected.push(...data.servers);
         if (collected.length >= 10) break;
@@ -69,21 +84,21 @@ export async function getBestServers(placeId: number): Promise<Result> {
     }
   }
 
-  collected = collected.slice(0, 10);
+  collected.sort((a, b) => a.playing - b.playing);
 
-  // Ping all collected servers in parallel
+  const candidates = collected.slice(0, 3);
+
   const pinged = await Promise.all(
-    collected.map(async (server) => ({
+    candidates.map(async (server) => ({
       server,
-      latency: await measureLatency(server.ip_address),
+      latency: await measureJoinLatency(placeId, server.server_id),
     }))
   );
 
-  // Sort by lowest latency
   pinged.sort((a, b) => a.latency - b.latency);
 
   return {
-    success: collected.length > 0,
+    success: pinged.length > 0,
     regionTried: regions,
     servers: pinged.map((p) => p.server),
   };
