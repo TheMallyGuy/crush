@@ -36,7 +36,7 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen bg-anthracite text-stone-400 border-r border-stone-800/40 p-2 pt-8 transition-all duration-150 w-16 sm:w-64"
+    class="flex flex-col h-screen bg-anthracite text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64"
 >
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
         <button class="hover:text-stone-100 transition-colors">
@@ -70,7 +70,7 @@
     <div class="flex-grow"></div>
 
     <nav
-        class="flex flex-col gap-1 border-t border-stone-800/40 pt-4 overflow-hidden"
+        class="flex flex-col gap-1 pt-4 overflow-hidden"
     >
         {#each footerNav as item}
             {@const isActive = $page.url.pathname === item.href}
