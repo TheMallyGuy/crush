@@ -75,7 +75,7 @@ fn is_roblox_running(system: &mut System) -> bool {
     system.refresh_processes_specifics(
         ProcessesToUpdate::All,
         true,
-        ProcessRefreshKind::nothing(),
+        ProcessRefreshKind::nothing().with_exe(sysinfo::UpdateKind::Always),
     );
 
     system
@@ -228,27 +228,31 @@ async fn process_log_file(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     let mut reader = state.reader.take();
-    let (res, new_offset) = if let Some(ref mut r) = reader {
-        let mut line = String::new();
-        let mut result = Ok(());
-        while r.read_line(&mut line).map_err(|e| e.to_string())? > 0 {
-            if let Err(e) = handle_log_line(app, &line, state, store).await {
-                result = Err(e);
-                break;
-            }
-            line.clear();
-        }
-        let pos = r.stream_position().map_err(|e| e.to_string())?;
-        (result, Some(pos))
+    let res = if let Some(ref mut r) = reader {
+        process_lines(app, r, state, store).await
     } else {
-        (Ok(()), None)
+        Ok(())
     };
-
-    if let Some(pos) = new_offset {
-        state.offset = pos;
-    }
     state.reader = reader;
     res
+}
+
+async fn process_lines(
+    app: &AppHandle,
+    reader: &mut BufReader<File>,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    let mut line = String::new();
+    while reader.read_line(&mut line).map_err(|e| e.to_string())? > 0 {
+        if let Err(e) = handle_log_line(app, &line, state, store).await {
+            state.offset = reader.stream_position().map_err(|e| e.to_string())?;
+            return Err(e);
+        }
+        line.clear();
+    }
+    state.offset = reader.stream_position().map_err(|e| e.to_string())?;
+    Ok(())
 }
 
 async fn handle_log_line(
@@ -455,7 +459,7 @@ async fn update_rpc_if_needed(
     place_id: u64,
 ) -> Result<(), String> {
     let now = Instant::now();
-    if !state.last_rpc.is_none_or(|l| now.duration_since(l).as_secs() > 2) {
+    if state.last_rpc.is_some_and(|l| now.duration_since(l).as_secs() <= 2) {
         return Ok(());
     }
 
