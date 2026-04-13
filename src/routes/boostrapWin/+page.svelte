@@ -129,7 +129,7 @@
             handleProgress({ type: 'status', message: 'Launching' })
 
             const integrations = await store.get<Integrations>('integrations')
-            const url = get(deepLinkUrl) ?? ''
+            const url = $deepLinkUrl ?? ''
             await performLaunch(version, url, integrations)
 
             await sleep(1000)
