@@ -46,7 +46,7 @@
     }
 
     async function openmainwin() {
-        if (!firstLaunchValue) {
+        if (firstLaunchValue) {
             await invoke('create_or_focus_window', {
                 // temp
                 label: 'CrushHello',
@@ -60,7 +60,7 @@
         } else {
             await invoke('create_or_focus_window', {
                 label: 'CrushMainWindow',
-                url: 'mainWin/Ui/intergrations',
+                url: 'mainWin/Ui/integrations',
                 title: 'Crush',
                 width: 1000,
                 height: 600,

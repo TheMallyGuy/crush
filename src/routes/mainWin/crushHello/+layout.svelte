@@ -18,6 +18,8 @@
 
         await config.set("firstLaunch", false)
 
+        await config.save()
+
         await invoke('create_or_focus_window', {
             label: 'CrushMainWindow',
             url: 'mainWin/Ui/integrations',
