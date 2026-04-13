@@ -17,21 +17,31 @@ use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 
+use std::sync::atomic::{AtomicBool, Ordering};
+
+static WATCHER_RUNNING: AtomicBool = AtomicBool::new(false);
+
 #[tauri::command]
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
+    if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
+        log::warn!("ignoring duplicate watch logs");
+        return Ok(());
+    }
+
     tauri::async_runtime::spawn(async move {
         if let Err(e) = run_watcher(app).await {
             log::error!("watcher error: {}", e);
+            WATCHER_RUNNING.store(false, Ordering::SeqCst);
         }
     });
     Ok(())
 }
-
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
     instance_id: Option<String>,
     in_game: bool,
+    notified: bool, 
 }
 
 #[derive(Deserialize)]
@@ -256,6 +266,7 @@ async fn handle_log_line(
     }
 
     if WatcherRegexes::joined().is_match(line) {
+        log::info!("joined regex matched: {}", line.trim()); // temporary
         handle_joined_event(app, state, store).await?;
         return Ok(());
     }
@@ -304,11 +315,12 @@ async fn handle_joined_event(
         return Ok(());
     };
 
-    if state.activity.in_game {
+    if state.activity.in_game || state.activity.notified {
         return Ok(());
     }
 
     state.activity.in_game = true;
+    state.activity.notified = true;
     log::info!("joined game {}", place_id);
 
     save_game_history(state, store, place_id)?;
