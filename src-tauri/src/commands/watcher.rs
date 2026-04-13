@@ -255,16 +255,18 @@ async fn handle_log_line(
     }
 
     if WatcherRegexes::joined().is_match(line) {
-        handle_joined_event(app, state, store).await?;
-        return Ok(());
+        return handle_joined_event(app, state, store).await;
     }
 
-    if WatcherRegexes::leave().is_match(line) && state.activity.in_game {
-        log::info!("left game");
-        state.activity = Activity::default();
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+    if WatcherRegexes::leave().is_match(line) {
+        if state.activity.in_game {
+            log::info!("left game");
+            state.activity = Activity::default();
+            state.pending_server_ip = None;
+            state.pending_server_location = None;
+            let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+        }
+        return Ok(());
     }
 
     Ok(())
@@ -320,21 +322,19 @@ async fn handle_joined_event(
             .unwrap_or(false)
     });
 
-    if should_notify {
-        if let (Some(ip), Some(location)) = (
-            state.pending_server_ip.take(),
-            state.pending_server_location.take(),
-        ) {
-            app.notification()
-                .builder()
-                .title("Connected to a server!")
-                .body(format!("IP : {}\nLocation : {}", ip, location))
-                .show()
-                .map_err(|e| e.to_string())?;
-        }
-    } else {
+    if !should_notify {
         state.pending_server_ip = None;
         state.pending_server_location = None;
+    } else if let (Some(ip), Some(location)) = (
+        state.pending_server_ip.take(),
+        state.pending_server_location.take(),
+    ) {
+        app.notification()
+            .builder()
+            .title("Connected to a server!")
+            .body(format!("IP : {}\nLocation : {}", ip, location))
+            .show()
+            .map_err(|e| e.to_string())?;
     }
 
     let should_rpc = integrations.as_ref().is_some_and(|v| {
@@ -343,11 +343,11 @@ async fn handle_joined_event(
             .unwrap_or(false)
     });
 
-    if !should_rpc {
-        return Ok(());
+    if should_rpc {
+        update_rpc_if_needed(app, state, place_id).await?;
     }
 
-    update_rpc_if_needed(app, state, place_id).await
+    Ok(())
 }
 
 fn save_game_history(
@@ -369,6 +369,9 @@ fn save_game_history(
         "instance_id": state.activity.instance_id.as_deref().unwrap_or_default(),
         "timestamp": chrono::Utc::now().to_rfc3339()
     }));
+
+    // Deduplicate or limit history if needed? The task doesn't specify, but let's keep it simple.
+    // Memory mentions "filter latest game history entries by ID or timestamp" for Svelte side.
 
     store.set("gameHistory", Value::Array(history));
     store.save().map_err(|e| e.to_string())
