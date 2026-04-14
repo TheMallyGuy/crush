@@ -1,78 +1,78 @@
 {
     "rpc": {
-        "general": "[ERROR] A roblox bootrapper written from scratch",
-        "integrations": "[ERROR] In Intergrations Route",
-        "installation": "[ERROR] In Installations Route",
-        "fastflag": "[ERROR] In Fastflag Route",
-        "mod": "[ERROR] In Mod Route",
-        "appearance": "[ERROR] In Appearance Route",
+        "general": "Um bootrapper roblox escrito do zero",
+        "integrations": "Na Rota das Integrações",
+        "installation": "Na Rota de Instalações",
+        "fastflag": "Na Rota Fastflag",
+        "mod": "Na Rota Mod",
+        "appearance": "Na Rota de Aparência",
         "rust": {
             "watcher": {
-                "general": "[ERROR] Playing roblox",
-                "idle": "[ERROR] Not in a game",
+                "general": "Jogando roblox",
+                "idle": "Nenhuma",
                 "playing": "Em"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "[ERROR] Checking for updates",
-            "findingBestRegion": "[ERROR] Finding the best download region...",
-            "preparingForDownload": "[ERROR] Preparing for download",
-            "fetchingUrls": "[ERROR] Fetching asset URLs...",
-            "downloadingAssets": "[ERROR] Downloading assets...",
-            "extractingFiles": "[ERROR] Extracting files...",
-            "xmlWriting": "[ERROR] Writing AppSettings.xml...",
-            "versionSaving": "[ERROR] Saving version info...",
-            "installationComplete": "[ERROR] Installation complete!",
-            "packageDownloadFailed": "[ERROR] Failed to download {packageName}: {error}"
+            "updateChecking": "A verificar se existem atualizações",
+            "findingBestRegion": "Encontrando a melhor região de download...",
+            "preparingForDownload": "Preparando os logs para download.",
+            "fetchingUrls": "A obter URLs de ativos...",
+            "downloadingAssets": "Baixando recursos...",
+            "extractingFiles": "Extraindo arquivos...",
+            "xmlWriting": "A escrever AppSettings.xml...",
+            "versionSaving": "A guardar informações da versão...",
+            "installationComplete": "Instalação concluida",
+            "packageDownloadFailed": "Falhou o download"
         }
     },
     "elements": {
-        "launchBar": "[ERROR] Launch"
+        "launchBar": "Lançar"
     },
     "pages": {
         "choiceWin": {
-            "title": "[ERROR] Crush",
-            "playRoblox": "[ERROR] Play Roblox",
-            "config": "[ERROR] Config"
+            "title": "A paixão súbita",
+            "playRoblox": "Jogar Roblox",
+            "config": "Configurações"
         },
         "boostrapWin": {
-            "cancel": "[ERROR] Cancel",
-            "retry": "[ERROR] Retry"
+            "cancel": "Cancelar",
+            "retry": "Tentar novamente"
         },
         "appearance": {
-            "appearance": "[ERROR] Appearance",
-            "description": "[ERROR] Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Aparência",
+            "description": "Personalize a aparência do bootstrapper Roblox.",
             "boostrapThemeCard": {
-                "title": "[ERROR] Bootstrapper Theme",
-                "description": "[ERROR] Choose between the default Crush theme or a custom XML theme.",
+                "title": "Tema Bootstrapper",
+                "description": "Escolha entre o tema padrão do Crush ou um tema XML personalizado.",
                 "dropdown": {
-                    "default": "[ERROR] Default (Crush)",
-                    "custom": "[ERROR] Custom"
+                    "default": "Padrão (Esmagamento)",
+                    "custom": "Personalizado"
                 },
                 "customDropDownContents": {
-                    "importNew": "[ERROR] Import New",
-                    "noThemes": "[ERROR] No custom themes imported yet.",
-                    "missingAssets": "[ERROR] Missing Theme Assets"
+                    "importNew": "Importar novos",
+                    "noThemes": "Nenhum tema personalizado importado ainda.",
+                    "missingAssets": "Ativos de tema ausentes"
                 }
             }
         },
         "integrations": {
-            "integrations": "[ERROR] Integrations",
-            "description": "[ERROR] Config intergrations outside roblox",
+            "integrations": "Integrações",
+            "description": "Configurar intergrações fora do roblox",
             "serverNotifierCard": {
-                "title": "[ERROR] Server Location Notifier",
-                "description": "[ERROR] Get notify when client connect to a server."
+                "title": "Notificador de localização do servidor",
+                "description": "Receba notificações quando o cliente se conectar a um servidor."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "[ERROR] Replace the Roblox Rich Presence with Crush's"
+                "description": "Substitua a Roblox Rich Presence por Crush's"
             },
             "gameHistoryCard": {
-                "title": "[ERROR] Your game history",
-                "description": "[ERROR] View & play your recently played games.",
-                "button": "[ERROR] View"
+                "title": "O seu histórico de jogo",
+                "description": "Visualize e jogue seus jogos jogados recentemente.",
+                "button": "Exibir"
             },
             "roValraCard": {
                 "title": "Configurar RoValra",
@@ -87,35 +87,35 @@
                 }
             },
             "gameHistory": {
-                "title": "[ERROR] Your game history",
-                "description": "[ERROR] View & play your recently played games.",
-                "gameHistoryEmpty": "[ERROR] Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "[ERROR] Loading, please wait a moment...",
-                "clearHistory": "[ERROR] Clear history",
-                "backToIntegrations": "[ERROR] Back",
+                "title": "O seu histórico de jogo",
+                "description": "Visualize e jogue seus jogos jogados recentemente.",
+                "gameHistoryEmpty": "O seu histórico de jogo está vazio. Jogue alguns jogos para vê-los aqui! (Observe que nem todos os servidores podem ser reingressados)",
+                "gameHistoryLoading": "Carregando, aguarde um momento...",
+                "clearHistory": "Limpar histórico",
+                "backToIntegrations": "Voltar",
                 "gameHistoryCard": {
-                    "titleUnknown": "[ERROR] Unknown game",
-                    "lastPlayed": "[ERROR] Last played: {time}",
-                    "play": "[ERROR] Play",
-                    "deeplink": "[ERROR] Copy DeepLink"
+                    "titleUnknown": "Jogo desconhecido",
+                    "lastPlayed": "Último jogo",
+                    "play": "Jogar",
+                    "deeplink": "Copiar DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "[ERROR] Installations",
+            "installations": "Instalações",
             "customVersion": {
-                "title": "[ERROR] Install a custom Roblox version",
-                "description": "[ERROR] Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "Instale uma versão personalizada do Roblox",
+                "description": "Ignore a verificação de atualização e baixe a versão. O valor padrão é o mais recente. A versão inválida não será baixada e voltará para a versão mais recente."
             },
             "forceReinstallCard": {
-                "title": "[ERROR] Force Reinstall Roblox",
-                "description": "[ERROR] Reinstall roblox everytime you launch it."
+                "title": "Forçar reinstalação do Roblox",
+                "description": "Reinstale o roblox sempre que o iniciar."
             }
         },
         "fastflag": {
-            "fastflag": "[ERROR] Fast Flags",
-            "description": "[ERROR] Add/Remove Roblox Fastflags and configurations.",
-            "generalBack": "[ERROR] Back to fastflag",
+            "fastflag": "Bandeiras rápidas",
+            "description": "Adicionar/Remover Roblox Fastflags e configurações.",
+            "generalBack": "Voltar ao fastflag",
             "selectScreeen": {
                 "title": "Por favor, escolha uma ação",
                 "editCard": {
@@ -129,28 +129,28 @@
             },
             "editor": {
                 "flagTable": {
-                    "texboxFlagName": "[ERROR] Flag name",
-                    "texboxFlagValue": "[ERROR] Value",
-                    "buttonAdd": "[ERROR] Add",
-                    "search": "[ERROR] Search all fflags...",
-                    "searchNotFound": "[ERROR] No flags found matching your search.",
+                    "texboxFlagName": "Nome da bandeira",
+                    "texboxFlagValue": "Valor",
+                    "buttonAdd": "Adicionar",
+                    "search": "Pesquisar todos os fflags...",
+                    "searchNotFound": "Não foram encontradas bandeiras que correspondam à sua pesquisa.",
                     "flagCol": {
-                        "deleteNote": "[ERROR] Delete Flag",
-                        "name": "[ERROR] flag name",
-                        "type": "[ERROR] type",
+                        "deleteNote": "Excluir Sinalizador",
+                        "name": "nome da bandeira",
+                        "type": "tipo",
                         "value": "value"
                     }
                 }
             },
             "preset": {
-                "preset": "[ERROR] Presets",
-                "description": "[ERROR] Use our built-in fast-flag preset",
+                "preset": "Pré-definições",
+                "description": "Use nossa predefinição de bandeira rápida integrada",
                 "msaaCard": {
-                    "title": "[ERROR] Anti-Aliasing Quality (MSAA)",
-                    "description": "[ERROR] Smooths jagged edges. Higher values look better but may reduce performance."
+                    "title": "Qualidade Anti-Aliasing",
+                    "description": "Suaviza bordas irregulares. Valores mais altos parecem melhores, mas podem reduzir o desempenho."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "[ERROR] Pause Voxelier",
+                    "title": "Pausar Voxelier",
                     "description": "Interrompe a voxelização para melhorar o desempenho"
                 },
                 "grassAnimationCard": {

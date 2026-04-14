@@ -1,73 +1,73 @@
 {
     "rpc": {
-        "general": "[ERROR] A roblox bootrapper written from scratch",
-        "integrations": "[ERROR] In Intergrations Route",
-        "installation": "[ERROR] In Installations Route",
-        "fastflag": "[ERROR] In Fastflag Route",
-        "mod": "[ERROR] In Mod Route",
-        "appearance": "[ERROR] In Appearance Route",
+        "general": "Roblox Bootrapper, написанный с нуля",
+        "integrations": "In Intergrations Route",
+        "installation": "В маршруте установки",
+        "fastflag": "В Fastflag Route",
+        "mod": "In Mod Route",
+        "appearance": "По внешнему виду Маршрут",
         "rust": {
             "watcher": {
-                "general": "[ERROR] Playing roblox",
-                "idle": "[ERROR] Not in a game",
-                "playing": "[ERROR] In {}"
+                "general": "Играть в roblox",
+                "idle": "Не в",
+                "playing": "ВНУТР."
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "[ERROR] Checking for updates",
-            "findingBestRegion": "[ERROR] Finding the best download region...",
-            "preparingForDownload": "[ERROR] Preparing for download",
-            "fetchingUrls": "[ERROR] Fetching asset URLs...",
-            "downloadingAssets": "[ERROR] Downloading assets...",
-            "extractingFiles": "[ERROR] Extracting files...",
-            "xmlWriting": "[ERROR] Writing AppSettings.xml...",
-            "versionSaving": "[ERROR] Saving version info...",
-            "installationComplete": "[ERROR] Installation complete!",
-            "packageDownloadFailed": "[ERROR] Failed to download {packageName}: {error}"
+            "updateChecking": "Проверка наличия обновлений",
+            "findingBestRegion": "Поиск лучшего региона для скачивания...",
+            "preparingForDownload": "Подготовка к загрузке",
+            "fetchingUrls": "Получение URL-адресов активов...",
+            "downloadingAssets": "Загрузка ресурсов...",
+            "extractingFiles": "Извлечение файлов...",
+            "xmlWriting": "Запись AppSettings.xml...",
+            "versionSaving": "Сохранение информации о версии...",
+            "installationComplete": "Установка завершена",
+            "packageDownloadFailed": "Ошибка загрузки"
         }
     },
     "elements": {
-        "launchBar": "[ERROR] Launch"
+        "launchBar": "Ввод в эксплуатацию"
     },
     "pages": {
         "choiceWin": {
-            "title": "[ERROR] Crush",
-            "playRoblox": "[ERROR] Play Roblox",
-            "config": "[ERROR] Config"
+            "title": "Ты моя любовь",
+            "playRoblox": "Играть в Roblox",
+            "config": "Конфиг"
         },
         "boostrapWin": {
-            "cancel": "[ERROR] Cancel",
-            "retry": "[ERROR] Retry"
+            "cancel": "Отмена",
+            "retry": "Повторить попытку"
         },
         "appearance": {
-            "appearance": "[ERROR] Appearance",
-            "description": "[ERROR] Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "Внешний вид",
+            "description": "Настройте внешний вид бутстреппера Roblox.",
             "boostrapThemeCard": {
-                "title": "[ERROR] Bootstrapper Theme",
-                "description": "[ERROR] Choose between the default Crush theme or a custom XML theme.",
+                "title": "Тема Bootstrapper",
+                "description": "Выбор между темой Crush по умолчанию или настраиваемой темой XML.",
                 "dropdown": {
-                    "default": "[ERROR] Default (Crush)",
-                    "custom": "[ERROR] Custom"
+                    "default": "По умолчанию (Crush)",
+                    "custom": "Другое"
                 },
                 "customDropDownContents": {
-                    "importNew": "[ERROR] Import New",
-                    "noThemes": "[ERROR] No custom themes imported yet.",
-                    "missingAssets": "[ERROR] Missing Theme Assets"
+                    "importNew": "Импортировать как новое",
+                    "noThemes": "Настраиваемые темы еще не импортированы.",
+                    "missingAssets": "Отсутствуют активы темы"
                 }
             }
         },
         "integrations": {
-            "integrations": "[ERROR] Integrations",
-            "description": "[ERROR] Config intergrations outside roblox",
+            "integrations": "Интеграции",
+            "description": "Интеграция конфигурации вне roblox",
             "serverNotifierCard": {
-                "title": "[ERROR] Server Location Notifier",
-                "description": "[ERROR] Get notify when client connect to a server."
+                "title": "Уведомление о местоположении сервера",
+                "description": "Получение уведомления при подключении клиента к серверу."
             },
             "rpcCard": {
-                "title": "[ERROR] Discord RPC (Crush)",
-                "description": "[ERROR] Replace the Roblox Rich Presence with Crush's"
+                "title": "Discord RPC (Crush)",
+                "description": "Замените Roblox Rich Presence на Crush's"
             },
             "gameHistoryCard": {
                 "title": "История вашей игры",
@@ -88,11 +88,11 @@
             },
             "gameHistory": {
                 "title": "История вашей игры",
-                "description": "[ERROR] View & play your recently played games.",
+                "description": "Просматривайте и играйте в недавно сыгранные игры.",
                 "gameHistoryEmpty": "История вашей игры пуста. Сыграйте в несколько игр, чтобы увидеть их здесь! (Обратите внимание, что не каждый сервер можно повторно подключить)",
                 "gameHistoryLoading": "Идет загрузка, пожалуйста, подождите...",
                 "clearHistory": "Очистить историю",
-                "backToIntegrations": "[ERROR] Back",
+                "backToIntegrations": "Назад",
                 "gameHistoryCard": {
                     "titleUnknown": "Неизвестная игра",
                     "lastPlayed": "Последнее воспроизведение: When this track was last played",
@@ -105,7 +105,7 @@
             "installations": "Установки",
             "customVersion": {
                 "title": "Установите пользовательскую версию Roblox",
-                "description": "[ERROR] Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "description": "Пропустите проверку обновлений и загрузите версию. Значение по умолчанию - самое позднее. Недействительная версия не будет загружена и вернется к последней версии."
             },
             "forceReinstallCard": {
                 "title": "Принудительная переустановка Roblox",

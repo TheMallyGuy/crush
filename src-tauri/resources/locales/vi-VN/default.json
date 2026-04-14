@@ -208,28 +208,28 @@
                     "description": "Khám phá các bản mod do cộng đồng tạo ra.",
                     "notice": {
                         "title": "Chưa có mod nào",
-                        "description": "[ERROR] We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "[ERROR] Submit a mod "
+                        "description": "Chúng tôi chưa có bất kỳ mod cộng đồng nào. Hãy là người đầu tiên đóng góp và giúp chúng tôi phát triển bộ sưu tập!",
+                        "submissionButton": "Gửi bản sửa đổi"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "[ERROR] Settings",
+            "settings": "Cài đặt",
             "aboutCard": {
-                "title": "[ERROR] About",
-                "description": "[ERROR] Information about this crush build",
-                "builtOn": "[ERROR] Built on: {date}",
-                "commitHash": "[ERROR] Commit hash: {hash}"
+                "title": "Giới thiệu",
+                "description": "Thông tin về bản crush build này",
+                "builtOn": "Được xây dựng trên: {date}",
+                "commitHash": "Hàm băm cam kết: {hash}"
             },
             "languageCard": {
-                "title": "[ERROR] Language",
-                "description": "[ERROR] Select your preferred language for crush."
+                "title": "Ngôn ngữ:",
+                "description": "Chọn ngôn ngữ ưa thích của bạn cho crush."
             },
             "donateCard": {
-                "title": "[ERROR] Donate",
-                "description": "[ERROR] Love crush? Donate to Mally to support his work!",
-                "button": "[ERROR] Donate"
+                "title": "Ủng hộ",
+                "description": "Bạn thích crush? Hãy quyên góp cho Mally để hỗ trợ công việc của anh ấy!",
+                "button": "Ủng hộ"
             }
         }
     }

@@ -1,7 +1,7 @@
 {
     "rpc": {
         "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "integrations": "In Intergrations Route",
         "installation": "In Installations Route",
         "fastflag": "In Fastflag Route",
         "mod": "In Mod Route",
@@ -60,7 +60,7 @@
         },
         "integrations": {
             "integrations": "Integrations",
-            "description": "Config integrations outside roblox",
+            "description": "Config intergrations outside roblox",
             "serverNotifierCard": {
                 "title": "Server Location Notifier",
                 "description": "Get notify when client connect to a server."
