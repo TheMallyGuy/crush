@@ -36,8 +36,8 @@
 
         let firstLaunch = await store.get<boolean>('firstLaunch')
 
-        if (firstLaunch === undefined) {
-            await store.set('firstLaunch', true)
+        if (firstLaunch === undefined || firstLaunch === true) {
+            await store.set('firstLaunch', false)
             await store.save()
             return true
         }
@@ -47,6 +47,7 @@
 
     async function openmainwin() {
         if (firstLaunchValue) {
+            info("it is first launch")
             await invoke('create_or_focus_window', {
                 // temp
                 label: 'CrushHello',
@@ -58,6 +59,7 @@
                 minHeight: 600,
             })
         } else {
+            info("it is not first launch")
             await invoke('create_or_focus_window', {
                 label: 'CrushMainWindow',
                 url: 'mainWin/Ui/integrations',
