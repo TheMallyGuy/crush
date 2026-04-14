@@ -54,9 +54,9 @@
                 url: 'mainWin/crushHello/welcome',
                 title: 'Welcome',
                 width: 1000,
-                height: 600,
+                height: 700,
                 minWidth: 1000,
-                minHeight: 600,
+                minHeight: 700,
             })
         } else {
             info("it is not first launch")
