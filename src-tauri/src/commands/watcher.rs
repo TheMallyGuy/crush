@@ -1,4 +1,3 @@
-// @pochita for the love of god, please dont modify this file
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, kill_rpc, RpcState};
 use dirs_next::data_local_dir;
