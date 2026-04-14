@@ -35,8 +35,8 @@
         }
     }
 </script>
+
 <div class="flex flex-col h-full">
-    <!-- Scrollable content area -->
     <div class="flex flex-col gap-2 flex-1 overflow-y-auto min-h-0">
         <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap)</p>
         <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
