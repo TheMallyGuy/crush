@@ -12,6 +12,7 @@ use commands::roblox_deployment::{
 };
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
+use commands::boostrapperimporter::export_boostrapconfig;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
@@ -212,7 +213,8 @@ pub fn run() {
             crush,
             watch_logs,
             set_rpc,
-            copy_file
+            copy_file,
+            export_boostrapconfig
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
