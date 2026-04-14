@@ -35,13 +35,18 @@
         }
     }
 </script>
-
-<div class="flex flex-col gap-2">
-    <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap)</p>
-
-    <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
-
-    <Button on:click={() => importConfigs(userBasePath)}>
-        Export
-    </Button>
+<div class="flex flex-col h-full">
+    <!-- Scrollable content area -->
+    <div class="flex flex-col gap-2 flex-1 overflow-y-auto min-h-0">
+        <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap)</p>
+        <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
+        <Button on:click={() => importConfigs(userBasePath)}>
+            Export
+        </Button>
+        <div class="rounded-xl overflow-hidden border border-stone-800 max-h-[40vh]">
+            <video class="w-full h-full object-cover" autoplay muted loop>
+                <source src="/export.webm" type="video/webm"/>
+            </video>
+        </div>
+    </div>
 </div>
