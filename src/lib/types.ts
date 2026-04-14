@@ -124,3 +124,11 @@ export interface LoadResult {
     destDir: string
     missing: string[]
 }
+
+
+export type BloxstrapConfig = {
+    CheckForUpdates: boolean,
+    BackgroundUpdatesEnabled: boolean,
+    UseDiscordRichPresence: boolean,
+    ShowServerDetails: boolean,
+}

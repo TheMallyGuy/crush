@@ -91,7 +91,6 @@
         })
         firstLaunchValue = await checkLaunch()
 
-        invoke("export_boostrapconfig", {boostrapConfigPath : "E:/apps/bloxstrap"})
     })
 </script>
 
