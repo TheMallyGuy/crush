@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox oynamak",
                 "idle": "Oyunda değil",
-                "playing": "Çoğu zaman"
+                "playing": "Bu "
             }
         }
     },
@@ -194,7 +194,7 @@
                         "title": "İmleç",
                         "description": "Roblox imlecinizi eski sürümlerle değiştirin.",
                         "dropdown": {
-                            "default": "Varsayılan"
+                            "default": "Sistem"
                         }
                     },
                     "customFontCard": {

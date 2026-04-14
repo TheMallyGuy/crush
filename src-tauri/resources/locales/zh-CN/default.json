@@ -1,78 +1,78 @@
 {
     "rpc": {
-        "general": "Een roblox bootrapper vanaf nul geschreven",
-        "integrations": "In Intergraties Route",
-        "installation": "In Installatieroute",
-        "fastflag": "在Fastflag路線中",
-        "mod": "改裝配件路線中",
-        "appearance": "外觀路線",
+        "general": "从零开始编写的roblox bootrapper",
+        "integrations": "在集成路线中",
+        "installation": "在安装路线中",
+        "fastflag": "在Fastflag路线中",
+        "mod": "在Mod路线中",
+        "appearance": "外观路线",
         "rust": {
             "watcher": {
-                "general": "Roblox spelen",
-                "idle": "不屬於",
-                "playing": "在"
+                "general": "玩roblox",
+                "idle": "不在游戏中",
+                "playing": "In"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "檢測新版本",
-            "findingBestRegion": "正在尋找最佳下載區域...",
-            "preparingForDownload": "準備下載",
-            "fetchingUrls": "正在擷取資產網址...",
-            "downloadingAssets": "正在下載內容...",
-            "extractingFiles": "正在解開檔案",
-            "xmlWriting": "正在寫入AppSettings.xml...",
-            "versionSaving": "正在儲存版本資訊...",
-            "installationComplete": "安裝完成",
-            "packageDownloadFailed": "下載失敗"
+            "updateChecking": "检查更新",
+            "findingBestRegion": "正在查找最佳下载区域...",
+            "preparingForDownload": "正在准备下载",
+            "fetchingUrls": "正在获取资产URL...",
+            "downloadingAssets": "正在下载资产...",
+            "extractingFiles": "正在提取文件",
+            "xmlWriting": "正在写入AppSettings.xml...",
+            "versionSaving": "正在保存版本信息...",
+            "installationComplete": "安装完成！",
+            "packageDownloadFailed": "未能下载"
         }
     },
     "elements": {
-        "launchBar": "開始、發行、啟動"
+        "launchBar": "启动"
     },
     "pages": {
         "choiceWin": {
             "title": "粉碎",
-            "playRoblox": "Speel Roblox",
-            "config": "内容"
+            "playRoblox": "玩Roblox",
+            "config": "配置"
         },
         "boostrapWin": {
-            "cancel": "Annuleren",
-            "retry": "重試(&R)"
+            "cancel": "取消",
+            "retry": "重试"
         },
         "appearance": {
-            "appearance": "外觀",
-            "description": "自訂Roblox bootstrapper的外觀和感覺。",
+            "appearance": "设备外观",
+            "description": "自定义Roblox引导程序的外观和感觉。",
             "boostrapThemeCard": {
-                "title": "Bootstrapper主題",
-                "description": "在預設粉碎主題或自訂XML主題之間進行選擇。",
+                "title": "引导程序主题",
+                "description": "在默认粉碎主题或自定义XML主题之间进行选择。",
                 "dropdown": {
-                    "default": "預設（粉碎）",
-                    "custom": "自訂"
+                    "default": "默认（挤压）",
+                    "custom": "自定义"
                 },
                 "customDropDownContents": {
-                    "importNew": "匯入新檔",
-                    "noThemes": "尚未匯入自訂佈景主題。",
-                    "missingAssets": "缺少主題資產"
+                    "importNew": "导入新",
+                    "noThemes": "尚未导入自定义主题。",
+                    "missingAssets": "缺少主题资产"
                 }
             }
         },
         "integrations": {
-            "integrations": "串接",
-            "description": "Configureer intergraties buiten roblox",
+            "integrations": "集成",
+            "description": "在roblox外部配置集成",
             "serverNotifierCard": {
-                "title": "Serverlocatiemelding",
-                "description": "Ontvang een melding wanneer de client verbinding maakt met een server."
+                "title": "服务器位置通知程序",
+                "description": "客户端连接到服务器时获取通知。"
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
-                "description": "Vervang de Roblox Rich Presence door Crush's"
+                "description": "将Roblox Rich Presence替换为Crush的"
             },
             "gameHistoryCard": {
-                "title": "Je spelgeschiedenis",
-                "description": "Bekijk en speel je recent gespeelde games.",
-                "button": "Weergeven"
+                "title": "您的游戏历史记录",
+                "description": "查看和玩您最近玩过的游戏。",
+                "button": "查看"
             },
             "roValraCard": {
                 "title": "配置RoValra",
@@ -87,34 +87,34 @@
                 }
             },
             "gameHistory": {
-                "title": "Je spelgeschiedenis",
-                "description": "Bekijk en speel je recent gespeelde games.",
-                "gameHistoryEmpty": "Je spelgeschiedenis is leeg. Speel wat spelletjes om ze hier te zien! (Houd er rekening mee dat niet elke server opnieuw kan worden aangesloten)",
-                "gameHistoryLoading": "Bezig met laden, een ogenblik geduld...",
-                "clearHistory": "Geschiedenis wissen",
-                "backToIntegrations": "Terug",
+                "title": "您的游戏历史记录",
+                "description": "查看和玩您最近玩过的游戏。",
+                "gameHistoryEmpty": "您的游戏历史记录为空。玩一些游戏，在这里看到它们！ （请注意，并非每个服务器都可以重新加入）",
+                "gameHistoryLoading": "请稍候...",
+                "clearHistory": "清除历史记录",
+                "backToIntegrations": "回到",
                 "gameHistoryCard": {
-                    "titleUnknown": "Onbekend spel",
-                    "lastPlayed": "Laatst afgespeeld:",
-                    "play": "Speel",
-                    "deeplink": "DeepLink kopiëren"
+                    "titleUnknown": "未知游戏",
+                    "lastPlayed": "上次播放的日期和时间",
+                    "play": "玩耍",
+                    "deeplink": "复制DeepLink"
                 }
             }
         },
         "installations": {
-            "installations": "Installaties",
+            "installations": "装置",
             "customVersion": {
-                "title": "Een aangepaste Roblox-versie installeren",
-                "description": "Sla de updatecontrole over en download de versie. De standaardwaarde is de laatste. Ongeldige versie wordt niet gedownload en zal terugvallen op de nieuwste versie."
+                "title": "安装自定义Roblox版本",
+                "description": "跳过更新检查并下载版本。默认值为latest。无效版本将不会被下载，并将回退到最新版本。"
             },
             "forceReinstallCard": {
-                "title": "Roblox geforceerd opnieuw installeren",
-                "description": "Installeer roblox elke keer dat je het start opnieuw."
+                "title": "强制重新安装Roblox",
+                "description": "每次启动时重新安装roblox。"
             }
         },
         "fastflag": {
-            "fastflag": "Snelle vlaggen",
-            "description": "Roblox Fastflags en configuraties toevoegen/verwijderen.",
+            "fastflag": "快速标记",
+            "description": "添加/删除Roblox Fastflags和配置。",
             "generalBack": "返回fastflag",
             "selectScreeen": {
                 "title": "请选择操作",
@@ -172,64 +172,64 @@
             "mod": "温和型",
             "tab": {
                 "modManagement": {
-                    "title": "改裝配件管理",
-                    "description": "Beheer uw mods Roblox mods.",
-                    "addModButton": "Voeg een mod toe",
-                    "noModsFound": "We hebben hier geen mods gevonden, Yuppies.",
-                    "noModsFoundCreateButton": "Maak je eerste mod",
+                    "title": "改装配件管理",
+                    "description": "管理您的改装配件Roblox改装配件。",
+                    "addModButton": "新增改装配件",
+                    "noModsFound": "我们在这里没有找到改装配件，雅皮士。",
+                    "noModsFoundCreateButton": "创建您的第一个模组",
                     "modCards": {
-                        "toggleNoteDisable": "Mod uitschakelen",
-                        "toggleNoteEnable": "Mod inschakelen",
-                        "renameNote": "Mod hernoemen",
-                        "openFolderNote": "Mod-map openen",
-                        "deleteNote": "Mod verwijderen",
-                        "layoutNote": "Mods lay-out geïnspireerd door Frostrap's mods manager",
-                        "description": "Schakel mod laden in en stel de locatie van de MOD-map in."
+                        "toggleNoteDisable": "禁用改装配件",
+                        "toggleNoteEnable": "启用MOD",
+                        "renameNote": "重命名Mod",
+                        "openFolderNote": "打开Mod文件夹",
+                        "deleteNote": "删除MOD",
+                        "layoutNote": "改装配件布局灵感来自Frostrap的改装配件管理器",
+                        "description": "启用mod加载并设置mod文件夹位置。"
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Vooraf gebouwde mods",
-                    "description": "Installeer kant-en-klare mods.",
+                    "title": "预设改装配件",
+                    "description": "安装即用型改装配件。",
                     "cursorCard": {
-                        "title": "游標",
-                        "description": "Wijzig uw Roblox-cursor naar oudere versies.",
+                        "title": "光标",
+                        "description": "将Roblox光标更改为旧版本。",
                         "dropdown": {
-                            "default": "Standaard"
+                            "default": "默认"
                         }
                     },
                     "customFontCard": {
-                        "title": "Aangepast lettertype",
-                        "description": "Wijzig je roblox-lettertype naar wat je maar wilt.",
-                        "button": "Lettertype wijzigen"
+                        "title": "自定义字体 ",
+                        "description": "将roblox字体更改为您喜欢的任何字体。",
+                        "button": "變更字型"
                     }
                 },
                 "communityMods": {
-                    "title": "Community-mods",
-                    "description": "Ontdek mods die door de community zijn gemaakt.",
+                    "title": "社区改装配件",
+                    "description": "探索社区创建的改装配件。",
                     "notice": {
-                        "title": "Nog geen mod",
-                        "description": "We hebben nog geen community-mods. Draag als eerste bij en help ons de collectie te laten groeien!",
-                        "submissionButton": "Dien een mod in"
+                        "title": "尚无模组",
+                        "description": "我们还没有任何社区模组。抢先做出贡献，帮助我们拓展产品系列！",
+                        "submissionButton": "提交改装配件"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Instellingen",
+            "settings": "设置",
             "aboutCard": {
-                "title": "Over",
-                "description": "Informatie over deze crush-build",
-                "builtOn": "(gemaakt op {0})",
-                "commitHash": "Commit-hash: {hash}"
+                "title": "软件简介",
+                "description": "有关此CRUSH版本的信息",
+                "builtOn": "由 小昊汉化 建立在",
+                "commitHash": "提交哈希： {hash}"
             },
             "languageCard": {
-                "title": "Taal",
-                "description": "Selecteer je voorkeurstaal voor CRUSH."
+                "title": "语言",
+                "description": "选择您喜欢的粉碎语言。"
             },
             "donateCard": {
-                "title": "Geef",
-                "description": "Love CRUSH? Doneer aan Mally om zijn werk te ondersteunen!",
-                "button": "Geef"
+                "title": "捐献",
+                "description": "爱情迷恋？捐给Mally支持他的工作！",
+                "button": "捐献"
             }
         }
     }
