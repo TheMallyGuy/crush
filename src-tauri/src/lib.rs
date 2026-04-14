@@ -12,7 +12,7 @@ use commands::roblox_deployment::{
 };
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
-use commands::boostrapperimporter::export_boostrapconfig;
+use commands::boostrapper_importer::export_boostrapconfig;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
