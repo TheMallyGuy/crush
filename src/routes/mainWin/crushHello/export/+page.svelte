@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
-    import type { BloxstrapConfig, Installation, Integrations, RoValra } from '$lib/types'
+    import type { BoostrapConfigs, Installation, Integrations, RoValra } from '$lib/types'
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
 
@@ -9,7 +9,7 @@
 
     async function importConfigs(basePath: string) {
         try {
-            const boostraperConfig: BloxstrapConfig = await invoke("export_boostrapconfig", {
+            const boostraperConfig: BoostrapConfigs = await invoke("export_boostrapconfig", {
                 boostrapConfigPath: basePath
             })
 
@@ -17,7 +17,7 @@
             const integrations = await config.get<Integrations>('integrations')
             
             const roValra: RoValra = {
-                joinServerForYouValue: false
+                joinServerForYouValue: boostraperConfig.EnableBetterMatchmaking ?? false
             }
             
             const newIntegrations: Integrations = {
@@ -37,7 +37,7 @@
 </script>
 
 <div class="flex flex-col gap-2">
-    <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap)</p>
+    <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap, Frostrap)</p>
 
     <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
 

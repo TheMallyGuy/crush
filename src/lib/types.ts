@@ -126,9 +126,13 @@ export interface LoadResult {
 }
 
 
-export type BloxstrapConfig = {
+export type BoostrapConfigs = { // bloxstrap, froststrap
+    // general forks (from bloxstrap)
     CheckForUpdates: boolean,
     BackgroundUpdatesEnabled: boolean,
     UseDiscordRichPresence: boolean,
     ShowServerDetails: boolean,
+
+    // frostrap only
+    EnableBetterMatchmaking: boolean
 }
