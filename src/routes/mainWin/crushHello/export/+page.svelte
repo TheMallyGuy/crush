@@ -1,7 +1,11 @@
 <script lang="ts">
+    import Button from '$lib/components/atoms/Button.svelte'
+    import Textbox from '$lib/components/atoms/Textbox.svelte'
     import type { BloxstrapConfig, Installation, Integrations, RoValra } from '$lib/types'
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
+
+    let userBasePath: string
 
     async function importConfigs(basePath: string) {
         try {
@@ -33,5 +37,11 @@
 </script>
 
 <div class="flex flex-col gap-2">
-    <p class="text-stone-300 text-base">Still working on this one. Comeback later when crush drop bangers!</p>
+    <p class="text-stone-300 text-base">Export other boostraper configs that based on Bloxstrap to crush. (Tested : Bloxstrap)</p>
+
+    <Textbox placeholder="C:\Users\Mally\AppData\Local\Bloxstrap" bind:value={userBasePath}/>
+
+    <Button on:click={() => importConfigs(userBasePath)}>
+        Export
+    </Button>
 </div>
