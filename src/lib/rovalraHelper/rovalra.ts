@@ -26,6 +26,8 @@ let cachedCountry: string | null = null;
 
 async function measureJoinLatency(placeId: number, serverId: string) {
   const start = performance.now();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 1500);
 
   try {
     const res = await fetch(
@@ -39,9 +41,12 @@ async function measureJoinLatency(placeId: number, serverId: string) {
           placeId,
           gameId: serverId,
           gameJoinAttemptId: crypto.randomUUID()
-        })
+        }),
+        signal: controller.signal
       }
     );
+
+    clearTimeout(timeoutId);
 
     if (!res.ok) return Infinity;
 

@@ -99,12 +99,6 @@
         await win.show()
     }
 
-    async function handleTest() {
-        const test = await getBestServers(9391468976)
-
-        console.log(test)
-    }
-
     async function runBootstrap() {
         error = false
         errorMessage = ''

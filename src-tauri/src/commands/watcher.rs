@@ -11,7 +11,7 @@ use std::{
     path::PathBuf,
     time::{Duration, Instant},
 };
-use sysinfo::{ProcessesToUpdate, System};
+use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
@@ -71,7 +71,11 @@ fn is_roblox_running(system: &mut System) -> bool {
     static ROBLOX_REGEX: OnceLock<Regex> = OnceLock::new();
     let regex = ROBLOX_REGEX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
 
-    system.refresh_processes(ProcessesToUpdate::All, true);
+    system.refresh_processes_specifics(
+        ProcessesToUpdate::All,
+        true,
+        ProcessRefreshKind::nothing(),
+    );
 
     system
         .processes()
@@ -116,6 +120,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             state.activity = Activity::default();
             state.pending_server_ip = None;
             state.pending_server_location = None;
+            state.current_file = None;
+            state.reader = None;
             let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
         was_running = running;
@@ -124,8 +130,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             update_watcher_file(&app, &mut state, path, &store).await;
         }
 
-        if let Some(path) = state.current_file.clone() {
-            if let Err(e) = process_log_file(&app, &path, &mut state, &store).await {
+        if state.current_file.is_some() {
+            if let Err(e) = process_log_file(&app, &mut state, &store).await {
                 log::error!("Error processing log file: {}", e);
             }
         }
@@ -146,6 +152,7 @@ async fn update_watcher_file(
 
     log::info!("New log file: {:?}", path);
     state.current_file = Some(path);
+    state.reader = None;
     state.offset = 0;
     state.activity = Activity::default();
     state.udmux_handled = false;
@@ -192,6 +199,7 @@ impl WatcherRegexes {
 #[derive(Default)]
 struct WatcherState {
     current_file: Option<PathBuf>,
+    reader: Option<BufReader<File>>,
     offset: u64,
     activity: Activity,
     last_rpc: Option<Instant>,
@@ -202,24 +210,27 @@ struct WatcherState {
 
 async fn process_log_file(
     app: &AppHandle,
-    path: &PathBuf,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    let mut file = File::open(path).map_err(|e| e.to_string())?;
+    let mut reader = if let Some(r) = state.reader.take() {
+        r
+    } else {
+        let path = state.current_file.as_ref().ok_or("No current file")?;
+        let mut file = File::open(path).map_err(|e| e.to_string())?;
+        file.seek(SeekFrom::Start(state.offset))
+            .map_err(|e| e.to_string())?;
+        BufReader::new(file)
+    };
 
-    file.seek(SeekFrom::Start(state.offset))
-        .map_err(|e| e.to_string())?;
-
-    let mut reader = BufReader::new(&mut file);
     let mut line = String::new();
-
     while reader.read_line(&mut line).map_err(|e| e.to_string())? > 0 {
         handle_log_line(app, &line, state, store).await?;
         line.clear();
     }
 
     state.offset = reader.stream_position().map_err(|e| e.to_string())?;
+    state.reader = Some(reader);
     Ok(())
 }
 
@@ -255,22 +266,23 @@ async fn handle_log_line(
     }
 
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
-        if !state.udmux_handled {
-            if let Some(ip) = caps.get(1) {
-                handle_udmux_event(ip.as_str(), state).await?;
-                state.udmux_handled = true;
-            }
+        let Some(ip) = caps.get(1) else { return Ok(()) };
+        if state.udmux_handled {
+            return Ok(());
         }
+
+        handle_udmux_event(ip.as_str(), state).await?;
+        state.udmux_handled = true;
         return Ok(());
     }
 
     if WatcherRegexes::joined().is_match(line) {
-        log::info!("joined regex matched: {}", line.trim()); // temporary
+        log::info!("joined regex matched: {}", line.trim());
         handle_joined_event(app, state, store).await?;
         return Ok(());
     }
 
-    if WatcherRegexes::leave().is_match(line) && state.activity.in_game {
+    if state.activity.in_game && WatcherRegexes::leave().is_match(line) {
         log::info!("left game");
         state.activity = Activity::default();
         state.pending_server_ip = None;

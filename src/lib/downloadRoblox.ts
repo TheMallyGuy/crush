@@ -62,7 +62,7 @@ async function downloadAssetFile(
     total: number
 ) {
     const match = assetUrl.match(/version-[^-]+-(.+)$/)
-    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file-${Date.now()}`
+    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file-${done}.zip`
     if (!fileName.endsWith('.zip')) fileName += '.zip'
     fileName = fileName.toLowerCase()
 
