@@ -4,7 +4,8 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import type { BuildInfo } from '$lib/types'
-    import { Heart, Info, Languages } from '@lucide/svelte'
+    import { relaunch } from '@tauri-apps/plugin-process'
+    import { Heart, Info, Languages, BookHeart } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
@@ -77,6 +78,13 @@
         location.reload()
     }
 
+    async function handleResetCrushOnboarding() { // its called crush hello dumbfuck
+        const store = await load("config.json");
+
+        await store.set("firstLaunch", true)
+        await relaunch()
+    }
+
     async function handleDonate() {
         openUrl('https://mally.qzz.io/donate')
     }
@@ -102,6 +110,20 @@
             options={$dropdownOptions}
             on:change={handleLanguage}
         />
+    </SettingCard>
+
+    <SettingCard
+        title="Crush Hello"
+        description="Force you to onboard again."
+        icon={BookHeart}
+    >
+        <Button
+            on:click={handleResetCrushOnboarding}
+            slot="action"
+            variant="danger"
+        >
+            Reset
+        </Button>
     </SettingCard>
 
     <ExpandableSettingCard
