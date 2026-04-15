@@ -221,8 +221,13 @@
                 "description": "이 호감 구축에 대한 정보",
                 "note": "기억하세요! CRUSH는 무료로 사용할 수 있습니다. 리스킨 및 판매를 시도하는 사람은 Discord 서버에서 알려주세요!",
                 "builtOn": "빌트 일：",
-                "commitHash": "커밋 해시: {hash}",
+                "commitHash": "커밋 해시: # # #",
                 "version": "버전: "
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "언어",

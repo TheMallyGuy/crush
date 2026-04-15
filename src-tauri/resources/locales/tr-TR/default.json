@@ -221,8 +221,13 @@
                 "description": "Bu ezilme yapısı hakkında bilgi",
                 "note": "Unutmayın! crush'ı kullanmak ücretsizdir, yeniden ciltlemeye ve satmaya çalışan herkes lütfen Discord sunucumuzda bize bildirin!",
                 "builtOn": "Üzerine inşa",
-                "commitHash": "İşlem karma değeri: {hash}",
+                "commitHash": "İşlem karması:  {hash}",
                 "version": "Sürüm:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Dil",

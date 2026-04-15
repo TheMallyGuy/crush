@@ -220,9 +220,14 @@
                 "title": "Tietoa",
                 "description": "Tietoja tästä murskauskokoonpanosta",
                 "note": "Muista, että murskaus on ilmaista. Kaikki, jotka yrittävät ihailla uudelleen ja myydä sitä, kertokaa meille Discord-palvelimellamme!",
-                "builtOn": "Rakennettu: {date}",
-                "commitHash": "Toimita hash-tunniste: {hash}",
+                "builtOn": "Rakennettu:  {date}",
+                "commitHash": "Tee hash-tunniste:  {hash}",
                 "version": "Versio:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Kieli",

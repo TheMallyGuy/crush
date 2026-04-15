@@ -25,7 +25,7 @@
             "xmlWriting": "Se scrie AppSettings.xml...",
             "versionSaving": "Se salvează informațiile despre versiune...",
             "installationComplete": "Instalare finalizată!",
-            "packageDownloadFailed": "Eșec la descărcarea fațetei@ info"
+            "packageDownloadFailed": "Descărcarea  # # ## nu a reușit:  {packageName}"
         }
     },
     "elements": {
@@ -220,9 +220,14 @@
                 "title": "Despre",
                 "description": "Informații despre această compilație Crush",
                 "note": "Amintiți-vă! Crush este liber de utilizat, oricine încearcă să-l revândă și să-l vândă, vă rugăm să ne spuneți pe serverul nostru Discord!",
-                "builtOn": "Construit pe: {date}",
-                "commitHash": "Comandă hash: {hash}",
+                "builtOn": "Construit pe:  {date}",
+                "commitHash": "Comutare hash:  {hash}",
                 "version": "Versiune:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Limba",

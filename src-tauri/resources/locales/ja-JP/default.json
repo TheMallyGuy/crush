@@ -220,9 +220,14 @@
                 "title": "情報",
                 "description": "このクラッシュビルドに関する情報",
                 "note": "覚えておいてください！ CRUSHは無料で使用できます。再スキンして販売しようとしている人は、Discordサーバーでお知らせください。",
-                "builtOn": "ビルド基盤： {date}",
-                "commitHash": "コミットハッシュ： {hash}",
+                "builtOn": "以下に基づいています。{date}",
+                "commitHash": "コミットハッシュ: {hash}",
                 "version": "バージョン："
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "言語",

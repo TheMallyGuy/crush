@@ -221,8 +221,13 @@
                 "description": "Informations sur cette version de Crush",
                 "note": "N'oubliez pas ! Crush est gratuit à utiliser, toute personne essayant de le reskin & vendre s'il vous plaît dites-nous dans notre serveur Discord !",
                 "builtOn": "Date de création",
-                "commitHash": "Valider le hachage : {hash}",
-                "version": "Version&#xA0;:"
+                "commitHash": "Hachage d'engagement :  {hash}",
+                "version": "Version :"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Votre langue",

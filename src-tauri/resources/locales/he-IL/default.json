@@ -220,9 +220,14 @@
                 "title": "אודות",
                 "description": "מידע על בניית ריסוק זו",
                 "note": "זכור! למחוץ הוא בחינם, כל מי שמנסה לחדש את עורו ולמכור אותו, אנא ספר לנו בשרת הדיסקורד שלנו!",
-                "builtOn": "בנוי על: {date}",
-                "commitHash": "בצע גיבוב: {hash}",
+                "builtOn": "בנוי על:  {date}",
+                "commitHash": "בצע גיבוב:  {hash}",
                 "version": "גרסה:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "שפה",

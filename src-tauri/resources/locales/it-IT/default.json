@@ -25,7 +25,7 @@
             "xmlWriting": "Scrittura di AppSettings.xml in corso...",
             "versionSaving": "Salvataggio della versione...",
             "installationComplete": "Installazione completata!",
-            "packageDownloadFailed": "Scaricamento non riuscito"
+            "packageDownloadFailed": "Scaricamento fallito:"
         }
     },
     "elements": {
@@ -221,8 +221,13 @@
                 "description": "Informazioni su questa build di CRUSH",
                 "note": "Ricorda! CRUSH è gratuito, chiunque cerchi di rivenderlo e venderlo ce lo dica nel nostro server Discord!",
                 "builtOn": "rilasciata il",
-                "commitHash": "Hash commit: {hash}",
+                "commitHash": "Hash di commit:  {hash}",
                 "version": "Versione:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Lingua",

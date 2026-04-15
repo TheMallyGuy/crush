@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Παίζοντας roblox",
                 "idle": "Όχι σε παιχνίδι",
-                "playing": "Σ"
+                "playing": "Στα"
             }
         }
     },
@@ -221,8 +221,13 @@
                 "description": "Πληροφορίες σχετικά με αυτήν την κατασκευή σύνθλιψης",
                 "note": "Θυμηθείτε! το crush είναι δωρεάν για χρήση, όποιος προσπαθεί να το μεταπωλήσει και να το πουλήσει, παρακαλούμε να μας το πείτε στον διακομιστή μας Discord!",
                 "builtOn": "(κατασκευασμένο στο )",
-                "commitHash": "Κατακερματισμός δέσμευσης: {hash}",
+                "commitHash": "Υποβολή κατακερματισμού:  {hash}",
                 "version": "Έκδοση: "
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Language",

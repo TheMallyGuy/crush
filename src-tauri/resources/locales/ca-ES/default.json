@@ -25,7 +25,7 @@
             "xmlWriting": "S'està escrivint AppSettings.xml...",
             "versionSaving": "S'està desant la informació de la versió...",
             "installationComplete": "S'ha completat la instal·lació!",
-            "packageDownloadFailed": "Ha fallat en baixa una aparença@ info"
+            "packageDownloadFailed": "No s'ha pogut descarregar  ## # :  {packageName}"
         }
     },
     "elements": {
@@ -220,9 +220,14 @@
                 "title": "Quant a",
                 "description": "Informació sobre aquesta construcció de trituració",
                 "note": "Recordeu que! crush és d'ús gratuït, qualsevol persona que intenti canviar-lo i vendre'l, si us plau, digueu-nos-ho al nostre servidor de Discord!",
-                "builtOn": "Construïda a partir de: {date}",
-                "commitHash": "Hash de comissió: {hash}",
+                "builtOn": "Construït a partir de:  {date}",
+                "commitHash": "Hash de comissió:  {hash}",
                 "version": "Versió:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Llengua",
