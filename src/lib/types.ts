@@ -25,6 +25,7 @@ export type Integrations = {
 export type BuildInfo = {
     hash: string,
     build_date: string,
+    version: Number
 }
 
 export type RawEntry = {

@@ -20,7 +20,7 @@
     {disabled}
     class="group relative flex w-full items-start rounded-xl bg-anthracite transition-all duration-150 border border-stone-800/20 text-left outline-none focus-visible:ring-2 focus-visible:ring-sapphire/50 disabled:opacity-50 disabled:cursor-not-allowed
     {size === 'sm' ? 'gap-3 p-3' : 'gap-4 p-6'}
-    {!disabled ? 'cursor-pointer hover:bg-stone-900/50 hover:border-stone-700/40 active:scale-[0.995] hover:shadow-glow-sapphire/5' : ''}
+    {!disabled ? 'cursor-pointer hover:bg-stone-900/50 hover:border-stone-700/40 active:scale-[0.995]' : ''}
     {className}"
     on:click={handleClick}
     {...$$restProps}

@@ -17,6 +17,7 @@
     let info: BuildInfo
     let hash: string
     let buildtime: string
+    let version: Number
 
     const LOCALE_NAMES: Record<string, string> = {
         'af-ZA': 'Afrikaans',
@@ -67,6 +68,7 @@
         currentLocale = $locale ?? 'en'
         hash = info.hash
         buildtime = info.build_date
+        version = info.version
     })
 
     async function handleLanguage() {
@@ -141,6 +143,13 @@
                 {$_('pages.settings.aboutCard.commitHash', {
                     values: { hash },
                 })}
+            </p>
+            <p class="sm">
+                Version : {version}
+            </p>
+
+            <p class="sm text-gray-600">
+                Remember! crush is free to use, anyone trying to reskin & sell it please report to our Discord server! 
             </p>
         </div>
     </ExpandableSettingCard>
