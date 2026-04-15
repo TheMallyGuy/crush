@@ -17,7 +17,7 @@
     let info: BuildInfo
     let hash: string
     let buildtime: string
-    let version: Number
+    let version: string
 
     const LOCALE_NAMES: Record<string, string> = {
         'af-ZA': 'Afrikaans',
@@ -145,7 +145,9 @@
                 })}
             </p>
             <p class="sm">
-                Version : {version}
+                {$_('pages.settings.aboutCard.version', {
+                    values: { version },
+                })}
             </p>
 
             <p class="sm text-gray-600">
