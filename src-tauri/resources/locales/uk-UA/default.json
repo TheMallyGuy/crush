@@ -221,8 +221,13 @@
                 "description": "Інформація про цю розчавлену збірку",
                 "note": "Пам 'ятайте! Crush можна використовувати безкоштовно, будь-хто, хто намагається переробити та продати його, будь ласка, повідомте нам про це на нашому сервері Discord!",
                 "builtOn": "Дата випуску",
-                "commitHash": "Зафіксувати хеш: {hash}",
+                "commitHash": "Зафіксувати хеш:  {hash}",
                 "version": "Версія:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Мова",

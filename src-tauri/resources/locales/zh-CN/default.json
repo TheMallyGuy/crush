@@ -221,8 +221,13 @@
                 "description": "有关此CRUSH版本的信息",
                 "note": "请记住！ CRUSH是免费使用的，任何尝试重组和销售它的人都可以在我们的Discord服务器上告诉我们！",
                 "builtOn": "由 小昊汉化 建立在",
-                "commitHash": "提交哈希： {hash}",
+                "commitHash": "提交哈希： # # #",
                 "version": "版  本："
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "语言",

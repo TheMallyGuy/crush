@@ -221,8 +221,13 @@
                 "description": "Information om denna CRUSH-byggnad",
                 "note": "Kom ihåg! CRUSH är gratis att använda, alla som försöker reskin & sälja det, vänligen berätta för oss i vår Discord-server!",
                 "builtOn": "Byggt på",
-                "commitHash": "Arkivera hash: {hash}",
+                "commitHash": "Arkivera hash:  {hash}",
                 "version": "Version:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Språk",

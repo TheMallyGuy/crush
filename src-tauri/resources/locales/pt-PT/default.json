@@ -220,9 +220,14 @@
                 "title": "Sobre",
                 "description": "Informações sobre esta construção de crush",
                 "note": "Lembre-se! O Crush é gratuito para usar, qualquer pessoa que tente fazer reskin e vendê-lo, informe-nos no nosso servidor do Discord!",
-                "builtOn": "Construído em: {date}",
-                "commitHash": "Hash do commit: {hash}",
+                "builtOn": "Baseado em:  {date}",
+                "commitHash": "Hash do commit:  {hash}",
                 "version": "Versão:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Línguas",

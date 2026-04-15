@@ -221,8 +221,13 @@
                 "description": "Informacje o tej kompilacji",
                 "note": "Pamiętaj! miażdżenie jest bezpłatne, każdy, kto próbuje je zmienić i sprzedać, poinformuj nas o tym na naszym serwerze na Discordzie!",
                 "builtOn": "Zbudowana na",
-                "commitHash": "Zatwierdź hash: {hash}",
+                "commitHash": "Zatwierdź hash:  {hash}",
                 "version": "Wersja:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Język",

@@ -224,6 +224,11 @@
                 "commitHash": "Bekreft hash: {hash}",
                 "version": "Versjon:"
             },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
+            },
             "languageCard": {
                 "title": "Språk",
                 "description": "Velg ditt foretrukne språk for Crush."

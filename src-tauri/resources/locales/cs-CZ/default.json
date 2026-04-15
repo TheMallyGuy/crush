@@ -220,9 +220,14 @@
                 "title": "O nás",
                 "description": "Informace o této sestavě rozdrcení",
                 "note": "Pamatujte! Crush je zdarma k použití, každý, kdo se snaží reskin a prodat to, prosím, řekněte nám na našem serveru Discord!",
-                "builtOn": "Postaveno na: {date}",
-                "commitHash": "Potvrdit hash: {hash}",
+                "builtOn": "Postaveno na:  {date}",
+                "commitHash": "Odevzdat hash:  {hash}",
                 "version": "Verze:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Jazyk",

@@ -95,7 +95,7 @@
                 "backToIntegrations": "返回",
                 "gameHistoryCard": {
                     "titleUnknown": "未知遊戲",
-                    "lastPlayed": "上次播放： {time}",
+                    "lastPlayed": "上次播放： # # #",
                     "play": "開始",
                     "deeplink": "複製DeepLink"
                 }
@@ -221,8 +221,13 @@
                 "description": "關於此粉碎版本的資訊",
                 "note": "請記住！ CRUSH是免費使用的，任何試圖重新包裝和銷售的人都可以在我們的Discord伺服器中告訴我們！",
                 "builtOn": "建置時間",
-                "commitHash": "提交哈希： {hash}",
+                "commitHash": "提交哈希： # # #",
                 "version": "版本："
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "語言",

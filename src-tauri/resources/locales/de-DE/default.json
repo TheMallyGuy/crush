@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox spielen",
                 "idle": "Nicht in einem",
-                "playing": "In "
+                "playing": "In"
             }
         }
     },
@@ -25,7 +25,7 @@
             "xmlWriting": "AppSettings.xml wird geschrieben...",
             "versionSaving": "Versionsinfo wird gespeichert...",
             "installationComplete": "Installation abgeschlossen!",
-            "packageDownloadFailed": "Download fehlgeschlagen"
+            "packageDownloadFailed": "Download fehlgeschlagen:"
         }
     },
     "elements": {
@@ -223,6 +223,11 @@
                 "builtOn": "Aber nach dem High-Level-Meeting in...",
                 "commitHash": "Commit-Hash",
                 "version": "Version:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Sprache",

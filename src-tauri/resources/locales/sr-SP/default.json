@@ -220,9 +220,14 @@
                 "title": "O studiji",
                 "description": "Informacije o ovoj drobljenoj konstrukciji",
                 "note": "Zapamtite! simpatija je besplatna za korišćenje, svako ko pokušava da je reskinuje i proda recite nam na našem Discord serveru!",
-                "builtOn": "Izgrađeno: {date}",
-                "commitHash": "Obavežite heš: {hash}",
+                "builtOn": "Izgrađeno na:  {date}",
+                "commitHash": "Izvrši heš:  {hash}",
                 "version": "Verzija:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Jezik",

@@ -224,6 +224,11 @@
                 "commitHash": "Commit hash: {hash}",
                 "version": "Version: {version}"
             },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
+            },
             "languageCard": {
                 "title": "Language",
                 "description": "Select your preferred language for crush."

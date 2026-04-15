@@ -221,8 +221,13 @@
                 "description": "Informatie over deze crush-build",
                 "note": "Onthoud! CRUSH is gratis te gebruiken, iedereen die het probeert te herschillen en te verkopen, laat het ons weten in onze Discord-server!",
                 "builtOn": "(gemaakt op {0})",
-                "commitHash": "Commit-hash: {hash}",
+                "commitHash": "Commit-hash:  {hash}",
                 "version": "Versie:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "Taal",

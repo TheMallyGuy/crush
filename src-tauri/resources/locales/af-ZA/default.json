@@ -25,7 +25,7 @@
             "xmlWriting": "Skryf AppSettings.xml...",
             "versionSaving": "Stoor weergawe inligting...",
             "installationComplete": "Installasie voltooi!",
-            "packageDownloadFailed": "Kon nie {packageName} aflaai nie: {error}"
+            "packageDownloadFailed": "Misluk om af te laai  {packageName} #  # {error}"
         }
     },
     "elements": {
@@ -221,8 +221,13 @@
                 "description": "Inligting oor hierdie crush bou",
                 "note": "Onthou! CRUSH is gratis om te gebruik, enigiemand wat probeer om te reskin & verkoop dit vertel ons asseblief in ons Discord bediener!",
                 "builtOn": "(gebou op {0})",
-                "commitHash": "Verbintenis hash: {hash}",
+                "commitHash": "Verbintenis hash:  # {hash}",
                 "version": "Version:"
+            },
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
             "languageCard": {
                 "title": "taal",
