@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Joc roblox",
                 "idle": "Nu într-un joc",
-                "playing": "Ing"
+                "playing": "În"
             }
         }
     },
@@ -75,15 +75,15 @@
                 "button": "Vedere"
             },
             "roValraCard": {
-                "title": "Configurați RoValra",
-                "description": "Crush are o integrare RoValra încorporată. Se aplică Politica de confidențialitate RoValra.",
+                "title": "O mai bună potrivire cu RoValra",
+                "description": "Crush are o integrare încorporată a potrivirii. Se aplică Politica de confidențialitate RoValra.",
                 "button": "Deschis"
             },
             "roValra": {
-                "description": "Configurați RoValra",
+                "description": "Configurare",
                 "joinServerForYouCard": {
                     "title": "Permiteți Crush să se alăture serverului pentru dvs.",
-                    "description": "În loc de potrivire Roblox, vom folosi Rovalra API."
+                    "description": "În loc de potrivire Roblox, vom folosi Rovalra API și vom găsi cel mai bun server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Despre",
                 "description": "Informații despre această compilație Crush",
+                "note": "Amintiți-vă! Crush este liber de utilizat, oricine încearcă să-l revândă și să-l vândă, vă rugăm să ne spuneți pe serverul nostru Discord!",
                 "builtOn": "Construit pe: {date}",
-                "commitHash": "Comandă hash: {hash}"
+                "commitHash": "Comandă hash: {hash}",
+                "version": "Versiune:"
             },
             "languageCard": {
                 "title": "Limba",

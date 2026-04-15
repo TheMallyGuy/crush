@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Chơi roblox",
                 "idle": "Không có trong trò chơi",
-                "playing": "Trong"
+                "playing": "Trong {}"
             }
         }
     },
@@ -25,15 +25,15 @@
             "xmlWriting": "Đang viết AppSettings.xml...",
             "versionSaving": "Đang lưu thông tin phiên bản...",
             "installationComplete": "Cài đặt hoàn thành",
-            "packageDownloadFailed": "Không thể tải về"
+            "packageDownloadFailed": "Không thể tải về {packageName}: {error}"
         }
     },
     "elements": {
-        "launchBar": "Phát hành"
+        "launchBar": "Khởi chạy"
     },
     "pages": {
         "choiceWin": {
-            "title": "Đè nát",
+            "title": "Crush",
             "playRoblox": "Chơi Roblox",
             "config": "Cấu hình"
         },
@@ -48,7 +48,7 @@
                 "title": "Chủ đề Bootstrapper",
                 "description": "Chọn giữa chủ đề Crush mặc định hoặc chủ đề XML tùy chỉnh.",
                 "dropdown": {
-                    "default": "Mặc định (Đè bẹp)",
+                    "default": "Mặc định (Crush)",
                     "custom": "Tùy chỉnh"
                 },
                 "customDropDownContents": {
@@ -66,7 +66,7 @@
                 "description": "Nhận thông báo khi máy khách kết nối với máy chủ."
             },
             "rpcCard": {
-                "title": "Discord RPC (Nghiền nát)",
+                "title": "Discord RPC (Crush)",
                 "description": "Thay thế Roblox Rich Presence bằng Crush's"
             },
             "gameHistoryCard": {
@@ -75,15 +75,15 @@
                 "button": "Xem"
             },
             "roValraCard": {
-                "title": "Định cấu hình RoValra",
-                "description": "Crush có tích hợp RoValra tích hợp. Áp dụng Chính sách quyền riêng tư của RoValra.",
+                "title": "Kết nối tốt hơn với RoValra",
+                "description": "Crush có tính năng tích hợp ghép đôi tích hợp. Áp dụng Chính sách quyền riêng tư của RoValra.",
                 "button": "Mở"
             },
             "roValra": {
-                "description": "Định cấu hình RoValra",
+                "description": "Cấu hình",
                 "joinServerForYouCard": {
                     "title": "Hãy để Crush tham gia máy chủ cho bạn",
-                    "description": "Thay vì tạo đối sánh Roblox, chúng tôi sẽ sử dụng API Rovalra."
+                    "description": "Thay vì tạo đối sánh Roblox, chúng tôi sẽ sử dụng API Rovalra và tìm máy chủ tốt nhất."
                 }
             },
             "gameHistory": {
@@ -102,9 +102,9 @@
             }
         },
         "installations": {
-            "installations": "Lắp đặt",
+            "installations": "Cài đặt",
             "customVersion": {
-                "title": "Cài đặt phiên bản ROBLOX tùy chỉnh",
+                "title": "Cài đặt phiên bản Roblox tùy chỉnh",
                 "description": "Bỏ qua kiểm tra cập nhật và tải xuống phiên bản. Giá trị mặc định là mới nhất. Phiên bản không hợp lệ sẽ không được tải xuống và sẽ chuyển sang phiên bản mới nhất."
             },
             "forceReinstallCard": {
@@ -138,12 +138,12 @@
                         "deleteNote": "Xóa cờ",
                         "name": "tên cờ",
                         "type": "kiểu",
-                        "value": "tối đa"
+                        "value": "giá trị"
                     }
                 }
             },
             "preset": {
-                "preset": "Sắp Đặt Sẵn",
+                "preset": "Có sẵn",
                 "description": "Sử dụng cài đặt sẵn gắn cờ nhanh tích hợp của chúng tôi",
                 "msaaCard": {
                     "title": "Chất lượng chống răng cưa (MSAA)",
@@ -173,13 +173,13 @@
             "tab": {
                 "modManagement": {
                     "title": "Quản lý Mod",
-                    "description": "Quản lý mods Roblox mods của bạn.",
-                    "addModButton": "Thêm A Mod",
+                    "description": "Quản lý mod Roblox của bạn.",
+                    "addModButton": "Thêm Mod",
                     "noModsFound": "Chúng tôi không tìm thấy mod nào ở đây, Yuppies.",
                     "noModsFoundCreateButton": "Tạo mod đầu tiên của bạn",
                     "modCards": {
                         "toggleNoteDisable": "Vô hiệu hóa Mod",
-                        "toggleNoteEnable": "Bật chế độ",
+                        "toggleNoteEnable": "Bật Mod",
                         "renameNote": "Đổi tên Mod",
                         "openFolderNote": "Mở thư mục Mod",
                         "deleteNote": "Xóa Mod",
@@ -209,7 +209,7 @@
                     "notice": {
                         "title": "Chưa có mod nào",
                         "description": "Chúng tôi chưa có bất kỳ mod cộng đồng nào. Hãy là người đầu tiên đóng góp và giúp chúng tôi phát triển bộ sưu tập!",
-                        "submissionButton": "Gửi bản sửa đổi"
+                        "submissionButton": "Gửi mod"
                     }
                 }
             }
@@ -218,9 +218,11 @@
             "settings": "Cài đặt",
             "aboutCard": {
                 "title": "Giới thiệu",
-                "description": "Thông tin về bản crush build này",
+                "description": "Thông tin về bản build crush này",
+                "note": "Hãy nhớ rằng! crush là miễn phí để sử dụng, bất cứ ai cố gắng để reskin & bán nó xin vui lòng cho chúng tôi biết trong máy chủ Discord của chúng tôi!",
                 "builtOn": "Được xây dựng trên: {date}",
-                "commitHash": "Hàm băm cam kết: {hash}"
+                "commitHash": "Mã băm cam kết: {hash}",
+                "version": "Phiên bản:"
             },
             "languageCard": {
                 "title": "Ngôn ngữ:",

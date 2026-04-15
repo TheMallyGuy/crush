@@ -75,15 +75,15 @@
                 "button": "Visualització"
             },
             "roValraCard": {
-                "title": "Configura RoValra",
-                "description": "Crush compta amb una integració RoValra incorporada. S'aplica la política de privacitat de RoValra.",
+                "title": "Millor emparellament amb RoValra",
+                "description": "Crush té una integració integrada que fa coincidir. S'aplica la política de privacitat de RoValra.",
                 "button": "Obre"
             },
             "roValra": {
-                "description": "Configura RoValra",
+                "description": "Configuració",
                 "joinServerForYouCard": {
                     "title": "Deixa que Crush s'uneixi al servidor per a tu",
-                    "description": "En lloc de fer coincidències amb Roblox, utilitzarem l'API de Rovalra."
+                    "description": "En lloc de fer coincidències amb Roblox, utilitzarem l'API de Rovalra i trobarem el millor servidor."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Quant a",
                 "description": "Informació sobre aquesta construcció de trituració",
+                "note": "Recordeu que! crush és d'ús gratuït, qualsevol persona que intenti canviar-lo i vendre'l, si us plau, digueu-nos-ho al nostre servidor de Discord!",
                 "builtOn": "Construïda a partir de: {date}",
-                "commitHash": "Hash de comissió: {hash}"
+                "commitHash": "Hash de comissió: {hash}",
+                "version": "Versió:"
             },
             "languageCard": {
                 "title": "Llengua",

@@ -75,15 +75,15 @@
                 "button": "Visa"
             },
             "roValraCard": {
-                "title": "Konfigurera RoValra",
-                "description": "Crush har en inbyggd RoValra-integration. RoValras integritetspolicy gäller.",
+                "title": "Bättre matchning med RoValra",
+                "description": "Crush har en inbyggd matchning som gör integration. RoValras integritetspolicy gäller.",
                 "button": "Öppen"
             },
             "roValra": {
-                "description": "Konfigurera RoValra",
+                "description": "Konfiguration",
                 "joinServerForYouCard": {
                     "title": "Låt Crush gå med i servern åt dig",
-                    "description": "Istället för Roblox matchning använder vi Rovalra API."
+                    "description": "Istället för Roblox-matchning använder vi Rovalra API och hittar den bästa servern."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Om",
                 "description": "Information om denna CRUSH-byggnad",
+                "note": "Kom ihåg! CRUSH är gratis att använda, alla som försöker reskin & sälja det, vänligen berätta för oss i vår Discord-server!",
                 "builtOn": "Byggt på",
-                "commitHash": "Arkivera hash: {hash}"
+                "commitHash": "Arkivera hash: {hash}",
+                "version": "Version:"
             },
             "languageCard": {
                 "title": "Språk",

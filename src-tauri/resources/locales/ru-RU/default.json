@@ -75,15 +75,15 @@
                 "button": "Просмотр"
             },
             "roValraCard": {
-                "title": "Настройка RoValra",
-                "description": "Crush имеет встроенную интеграцию с RoValra. Действует Политика конфиденциальности RoValra.",
+                "title": "Лучшее сочетание с RoValra",
+                "description": "Crush имеют встроенную интеграцию создания матчей. Действует Политика конфиденциальности RoValra.",
                 "button": "Открыть"
             },
             "roValra": {
-                "description": "Настройка RoValra",
+                "description": "Конфигурация",
                 "joinServerForYouCard": {
                     "title": "Позвольте Crush присоединиться к серверу для вас",
-                    "description": "Вместо того, чтобы делать спички в Roblox, мы будем использовать Rovalra API."
+                    "description": "Вместо того, чтобы делать матчи Roblox, мы будем использовать Rovalra API и найдем лучший сервер."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Сведения",
                 "description": "Информация об этой сборке Crush",
+                "note": "Помните! Crush можно использовать бесплатно, любой, кто пытается переделать и продать его, пожалуйста, сообщите нам об этом на нашем сервере Discord!",
                 "builtOn": "Дата версии",
-                "commitHash": "Совершить хэш: {hash}"
+                "commitHash": "Совершить хэш: {hash}",
+                "version": "Редакция:"
             },
             "languageCard": {
                 "title": "Язык",

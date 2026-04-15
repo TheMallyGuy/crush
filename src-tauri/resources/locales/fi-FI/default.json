@@ -75,15 +75,15 @@
                 "button": "Näytä"
             },
             "roValraCard": {
-                "title": "Määritä RoValra",
-                "description": "Crushissa on sisäänrakennettu RoValra-intergraatio. RoValran tietosuojakäytäntöä sovelletaan.",
+                "title": "Parempi yhteensopivuus RoValran kanssa",
+                "description": "Crushilla on sisäänrakennettu yhteensopivuus, joka tekee intergraation. RoValran tietosuojakäytäntöä sovelletaan.",
                 "button": "Avaa"
             },
             "roValra": {
-                "description": "Määritä RoValra",
+                "description": "Määritys",
                 "joinServerForYouCard": {
                     "title": "Anna Crushin liittyä palvelimeen puolestasi",
-                    "description": "Robloxin tulitikkujen tekemisen sijaan käytämme Rovalra API: a."
+                    "description": "Robloxin tulitikkujen tekemisen sijaan käytämme Rovalra API: a ja löydämme parhaan palvelimen."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Tietoa",
                 "description": "Tietoja tästä murskauskokoonpanosta",
+                "note": "Muista, että murskaus on ilmaista. Kaikki, jotka yrittävät ihailla uudelleen ja myydä sitä, kertokaa meille Discord-palvelimellamme!",
                 "builtOn": "Rakennettu: {date}",
-                "commitHash": "Toimita hash-tunniste: {hash}"
+                "commitHash": "Toimita hash-tunniste: {hash}",
+                "version": "Versio:"
             },
             "languageCard": {
                 "title": "Kieli",

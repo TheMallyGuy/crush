@@ -75,15 +75,15 @@
                 "button": "Afficher"
             },
             "roValraCard": {
-                "title": "Configurer RoValra",
-                "description": "Crush a une intégration RoValra intégrée. La politique de confidentialité de RoValra s'applique.",
+                "title": "Meilleure correspondance avec RoValra",
+                "description": "Crush a une intégration intégrée de fabrication d'allumettes. La politique de confidentialité de RoValra s'applique.",
                 "button": "Ouvert"
             },
             "roValra": {
-                "description": "Configurer RoValra",
+                "description": "Configuration",
                 "joinServerForYouCard": {
                     "title": "Laissez Crush rejoindre le serveur pour vous",
-                    "description": "Au lieu de créer des correspondances Roblox, nous utiliserons l'API Rovalra."
+                    "description": "Au lieu de créer des correspondances Roblox, nous utiliserons l'API Rovalra et trouverons le meilleur serveur."
                 }
             },
             "gameHistory": {
@@ -219,11 +219,13 @@
             "aboutCard": {
                 "title": "À propos",
                 "description": "Informations sur cette version de Crush",
+                "note": "N'oubliez pas ! Crush est gratuit à utiliser, toute personne essayant de le reskin & vendre s'il vous plaît dites-nous dans notre serveur Discord !",
                 "builtOn": "Date de création",
-                "commitHash": "Valider le hachage : {hash}"
+                "commitHash": "Valider le hachage : {hash}",
+                "version": "Version&#xA0;:"
             },
             "languageCard": {
-                "title": "Langue",
+                "title": "Votre langue",
                 "description": "Sélectionnez votre langue préférée pour Crush."
             },
             "donateCard": {

@@ -75,15 +75,15 @@
                 "button": "查看"
             },
             "roValraCard": {
-                "title": "配置RoValra",
-                "description": "粉碎有一個內置的RoValra整合。RoValra的隱私政策適用。",
+                "title": "與RoValra更好地搭配",
+                "description": "粉碎有一個內置的匹配，使整合。RoValra的隱私政策適用。",
                 "button": "開啟"
             },
             "roValra": {
-                "description": "配置RoValra",
+                "description": "設定",
                 "joinServerForYouCard": {
                     "title": "讓Crush為你加入伺服器",
-                    "description": "我們將使用Rovalra API ，而不是Roblox配對。"
+                    "description": "我們不會使用Roblox配對，而是使用Rovalra API並尋找最佳伺服器。"
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "關於",
                 "description": "關於此粉碎版本的資訊",
+                "note": "請記住！ CRUSH是免費使用的，任何試圖重新包裝和銷售的人都可以在我們的Discord伺服器中告訴我們！",
                 "builtOn": "建置時間",
-                "commitHash": "提交哈希： {hash}"
+                "commitHash": "提交哈希： {hash}",
+                "version": "版本："
             },
             "languageCard": {
                 "title": "語言",

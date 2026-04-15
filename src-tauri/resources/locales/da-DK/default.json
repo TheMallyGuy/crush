@@ -75,15 +75,15 @@
                 "button": "View"
             },
             "roValraCard": {
-                "title": "Configure RoValra",
-                "description": "Crush have a built-in RoValra intergration. RoValra's Privacy Policy applies.",
+                "title": "Better match making with RoValra",
+                "description": "Crush have a built-in match making intergration. RoValra's Privacy Policy applies.",
                 "button": "Open"
             },
             "roValra": {
-                "description": "Configure RoValra",
+                "description": "Configuration",
                 "joinServerForYouCard": {
                     "title": "Let Crush join server for you",
-                    "description": "Instead of Roblox match making, we'll use Rovalra API."
+                    "description": "Instead of Roblox match making, we'll use Rovalra API & find the best server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "About",
                 "description": "Information about this crush build",
+                "note": "Remember! crush is free to use, anyone trying to reskin & sell it please tell us in our Discord server!",
                 "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "commitHash": "Commit hash: {hash}",
+                "version": "Version: {version}"
             },
             "languageCard": {
                 "title": "Language",

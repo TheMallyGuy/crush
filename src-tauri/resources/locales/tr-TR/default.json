@@ -10,7 +10,7 @@
             "watcher": {
                 "general": "Roblox oynamak",
                 "idle": "Oyunda değil",
-                "playing": "Bu "
+                "playing": "Çoğu zaman"
             }
         }
     },
@@ -75,15 +75,15 @@
                 "button": "Görüntüle"
             },
             "roValraCard": {
-                "title": "RoValra'yı Yapılandır",
-                "description": "Crush, yerleşik bir RoValra entegrasyonuna sahiptir. RoValra'nın Gizlilik Politikası geçerlidir.",
+                "title": "RoValra ile daha iyi eşleştirme",
+                "description": "Crush, entegre bir eşleştirme özelliğine sahiptir. RoValra'nın Gizlilik Politikası geçerlidir.",
                 "button": "Açık"
             },
             "roValra": {
-                "description": "RoValra'yı Yapılandır",
+                "description": "Yapılandırma",
                 "joinServerForYouCard": {
                     "title": "Crush'ın sizin için sunucuya katılmasına izin verin",
-                    "description": "Roblox eşleştirme yapmak yerine Rovalra API'sini kullanacağız."
+                    "description": "Roblox eşleştirme yapmak yerine Rovalra API'sini kullanacağız ve en iyi sunucuyu bulacağız."
                 }
             },
             "gameHistory": {
@@ -160,7 +160,7 @@
                 "overwriteTextureQualityCard": {
                     "title": "Doku kalite seviyesinin üzerine yaz",
                     "description": "Özel bir doku kalite seviyesini zorlar.",
-                    "dropdownDefault": "Varsayılan"
+                    "dropdownDefault": "Sistem"
                 },
                 "lowMeshQualityCard": {
                     "title": "Düşük Kaliteli Ağları Etkinleştir",
@@ -194,7 +194,7 @@
                         "title": "İmleç",
                         "description": "Roblox imlecinizi eski sürümlerle değiştirin.",
                         "dropdown": {
-                            "default": "Sistem"
+                            "default": "Varsayılan"
                         }
                     },
                     "customFontCard": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Hakkında",
                 "description": "Bu ezilme yapısı hakkında bilgi",
+                "note": "Unutmayın! crush'ı kullanmak ücretsizdir, yeniden ciltlemeye ve satmaya çalışan herkes lütfen Discord sunucumuzda bize bildirin!",
                 "builtOn": "Üzerine inşa",
-                "commitHash": "İşlem karma değeri: {hash}"
+                "commitHash": "İşlem karma değeri: {hash}",
+                "version": "Sürüm:"
             },
             "languageCard": {
                 "title": "Dil",
