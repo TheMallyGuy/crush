@@ -115,8 +115,8 @@
     </SettingCard>
 
     <SettingCard
-        title="Crush Hello"
-        description="Force you to onboard again."
+        title={$_("pages.settings.onBoardCard.title")}
+        description={$_("pages.settings.onBoardCard.description")}
         icon={BookHeart}
     >
         <Button
@@ -151,7 +151,7 @@
             </p>
 
             <p class="sm text-gray-600">
-                Remember! crush is free to use, anyone trying to reskin & sell it please report to our Discord server! 
+                {$_("pages.settings.aboutCard.note")}
             </p>
         </div>
     </ExpandableSettingCard>
