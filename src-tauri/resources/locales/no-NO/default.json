@@ -75,15 +75,15 @@
                 "button": "Visa"
             },
             "roValraCard": {
-                "title": "Konfigurer RoValra",
-                "description": "Crush har en innebygd RoValra-integrasjon. RoValras personvernerklæring gjelder.",
+                "title": "Bedre matchmaking med RoValra",
+                "description": "Crush har en innebygd matchmaking-integrasjon. RoValras personvernerklæring gjelder.",
                 "button": "Åpne"
             },
             "roValra": {
-                "description": "Konfigurer RoValra",
+                "description": "Konfigurasjon",
                 "joinServerForYouCard": {
                     "title": "La Crush bli med på serveren for deg",
-                    "description": "I stedet for Roblox-matchmaking, bruker vi Rovalra API."
+                    "description": "I stedet for Roblox-matchmaking, bruker vi Rovalra API og finner den beste serveren."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Om",
                 "description": "Informasjon om denne crush-byggen",
+                "note": "Husk! Crush er gratis å bruke. Alle som prøver å reskine og selge det, vennligst gi oss beskjed på Discord-serveren vår!",
                 "builtOn": "Bygget på: {date}",
-                "commitHash": "Bekreft hash: {hash}"
+                "commitHash": "Bekreft hash: {hash}",
+                "version": "Versjon:"
             },
             "languageCard": {
                 "title": "Språk",

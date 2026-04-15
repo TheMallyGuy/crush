@@ -75,15 +75,15 @@
                 "button": "Besigtig"
             },
             "roValraCard": {
-                "title": "Stel RoValra op",
-                "description": "Crush het 'n ingeboude RoValra-intergrasie. RoValra se privaatheidsbeleid is van toepassing.",
+                "title": "Beter wedstryd maak met RoValra",
+                "description": "Crush het 'n ingeboude wedstryd wat intergrasie maak. RoValra se privaatheidsbeleid is van toepassing.",
                 "button": "Oop"
             },
             "roValra": {
-                "description": "Stel RoValra op",
+                "description": "Opstelling",
                 "joinServerForYouCard": {
                     "title": "Laat Crush aansluit bediener vir jou",
-                    "description": "In plaas van Roblox-wedstryd maak, sal ons Rovalra API gebruik."
+                    "description": "In plaas van Roblox-wedstryd maak, sal ons Rovalra API gebruik en die beste bediener vind."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "About",
                 "description": "Inligting oor hierdie crush bou",
+                "note": "Onthou! CRUSH is gratis om te gebruik, enigiemand wat probeer om te reskin & verkoop dit vertel ons asseblief in ons Discord bediener!",
                 "builtOn": "(gebou op {0})",
-                "commitHash": "Verbintenis hash: {hash}"
+                "commitHash": "Verbintenis hash: {hash}",
+                "version": "Version:"
             },
             "languageCard": {
                 "title": "taal",

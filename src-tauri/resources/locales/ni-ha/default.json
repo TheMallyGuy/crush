@@ -1,235 +1,237 @@
 {
     "rpc": {
-        "general": "A roblox bootrapper written from scratch",
-        "integrations": "In Intergrations Route",
-        "installation": "In Installations Route",
-        "fastflag": "In Fastflag Route",
-        "mod": "In Mod Route",
-        "appearance": "In Appearance Route",
+        "general": "nihahahahahahaha nihahaha nihahaha nihahahaha nihahahaha nihahaha",
+        "integrations": "nihaha nihahahahahaha nihahahahaha",
+        "installation": "nihahahahahahaha nihahahahaha nihahaha",
+        "fastflag": "nihaha nihahahaha nihahahahahahaha",
+        "mod": "nihahaha nihahaha nihaha",
+        "appearance": "nihahaha nihahaha nihaha",
         "rust": {
             "watcher": {
-                "general": "Playing roblox",
-                "idle": "Not in a game",
-                "playing": "In {}"
+                "general": "nihahahaha nihahahahahaha",
+                "idle": "nihahahahaha nihahahaha nihahahahahahaha nihahahahahaha",
+                "playing": "nihahaha nihahahahahaha"
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "Checking for updates",
-            "findingBestRegion": "Finding the best download region...",
-            "preparingForDownload": "Preparing for download",
-            "fetchingUrls": "Fetching asset URLs...",
-            "downloadingAssets": "Downloading assets...",
-            "extractingFiles": "Extracting files...",
-            "xmlWriting": "Writing AppSettings.xml...",
-            "versionSaving": "Saving version info...",
-            "installationComplete": "Installation complete!",
-            "packageDownloadFailed": "Failed to download {packageName}: {error}"
+            "updateChecking": "nihahaha nihahaha nihahahaha",
+            "findingBestRegion": "nihahahaha nihahahahaha nihahahahaha nihahahaha nihahahahahaha",
+            "preparingForDownload": "nihahahahaha nihahaha nihahahahahahaha",
+            "fetchingUrls": "nihaha nihahahahahahaha nihaha",
+            "downloadingAssets": "nihahahaha nihahahahaha",
+            "extractingFiles": "nihahahaha nihahahaha",
+            "xmlWriting": "nihahaha nihahaha",
+            "versionSaving": "nihahahahaha nihahahahahahaha nihahahahaha",
+            "installationComplete": "nihahahahaha nihahahahahahaha",
+            "packageDownloadFailed": "nihahaha nihahahahaha nihaha nihaha nihahahahaha"
         }
     },
     "elements": {
-        "launchBar": "Launch"
+        "launchBar": "nihahahaha"
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
-            "playRoblox": "Play Roblox",
-            "config": "Config"
+            "title": "nihahahahahahaha",
+            "playRoblox": "nihahahahahahaha nihahahahahahaha",
+            "config": "nihahahahaha"
         },
         "boostrapWin": {
-            "cancel": "Cancel",
-            "retry": "Retry"
+            "cancel": "nihahahaha",
+            "retry": "nihahahahahahaha"
         },
         "appearance": {
-            "appearance": "Appearance",
-            "description": "Customize the look and feel of the Roblox bootstrapper.",
+            "appearance": "nihahahahahaha",
+            "description": "nihahahahahaha nihahahahahahaha nihahahahahaha nihaha nihahahahahaha nihaha nihahahahaha nihaha nihahahaha",
             "boostrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "nihaha nihahahahaha",
+                "description": "nihahahahaha nihahaha nihaha nihahahahaha nihahahaha nihaha nihaha nihaha nihahaha nihahaha nihahahahahahaha",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "nihahahahahaha nihahahaha",
+                    "custom": "nihahahaha"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "nihahahahahahaha nihahahahaha",
+                    "noThemes": "nihahahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahaha",
+                    "missingAssets": "nihahahahahaha nihahaha nihahahahahaha"
                 }
             }
         },
         "integrations": {
-            "integrations": "Integrations",
-            "description": "Config intergrations outside roblox",
+            "integrations": "nihahahahahaha",
+            "description": "nihaha nihahaha nihahahahahahaha nihahahahahaha",
             "serverNotifierCard": {
-                "title": "Server Location Notifier",
-                "description": "Get notify when client connect to a server."
+                "title": "nihahahahahahaha nihahahahahahaha nihahaha",
+                "description": "nihahahaha nihahahahahahaha nihahaha nihahahahaha nihaha nihahaha nihahahahaha nihahaha"
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "title": "nihahahahahaha nihahahahahaha nihahaha",
+                "description": "nihahahahahaha nihahaha nihahahaha nihahahahahahaha nihaha nihahahaha nihahahahahahaha"
             },
             "gameHistoryCard": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "button": "View"
+                "title": "nihaha nihahahahahahaha nihahahahahahaha",
+                "description": "nihahahahaha nihahahahaha nihahahahahaha nihahahahahahaha nihahahahaha nihahaha nihahahahahaha",
+                "button": "nihahaha"
             },
             "roValraCard": {
-                "title": "Configure RoValra",
-                "description": "Crush have a built-in RoValra intergration. RoValra's Privacy Policy applies.",
-                "button": "Open"
+                "title": "nihahaha nihahahaha nihahahaha nihahahaha nihahahahahahaha",
+                "description": "nihahahaha nihahahahahahaha nihahaha nihahahahahaha nihahahaha nihahahahahaha nihaha nihaha nihaha nihaha nihahahahahaha",
+                "button": "nihahaha"
             },
             "roValra": {
-                "description": "Configure RoValra",
+                "description": "nihahahahaha",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join server for you",
-                    "description": "Instead of Roblox match making, we'll use Rovalra API."
+                    "title": "nihahaha nihahahahahaha nihahahahahaha nihaha nihahahaha nihahaha",
+                    "description": "nihahahahaha nihahahahahaha nihahahaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahaha nihahahahahaha"
                 }
             },
             "gameHistory": {
-                "title": "Your game history",
-                "description": "View & play your recently played games.",
-                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading": "Loading, please wait a moment...",
-                "clearHistory": "Clear history",
-                "backToIntegrations": "Back",
+                "title": "nihahahahahahaha nihahahahahaha nihahaha",
+                "description": "nihahahahahahaha nihahahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahahaha nihahahahahaha",
+                "gameHistoryEmpty": "nihaha nihahahahaha nihahahahaha nihahahaha nihaha nihahahahaha nihaha nihaha nihaha nihahahaha nihahahahahaha nihaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahahahaha nihaha nihahahahahahaha nihahahahahahaha nihahahahahaha",
+                "gameHistoryLoading": "nihahahahaha nihahahahahahaha nihahahaha nihaha nihahahaha",
+                "clearHistory": "nihahahahaha nihahahahahahaha",
+                "backToIntegrations": "nihahahahaha",
                 "gameHistoryCard": {
-                    "titleUnknown": "Unknown game",
-                    "lastPlayed": "Last played: {time}",
-                    "play": "Play",
-                    "deeplink": "Copy DeepLink"
+                    "titleUnknown": "nihahaha nihahaha",
+                    "lastPlayed": "nihahahahahahaha nihahahahahaha nihahahaha",
+                    "play": "nihahahahaha",
+                    "deeplink": "nihahahahaha nihahahahaha"
                 }
             }
         },
         "installations": {
-            "installations": "Installations",
+            "installations": "nihahahahahaha",
             "customVersion": {
-                "title": "Install a custom Roblox version",
-                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+                "title": "nihahahahahahaha nihahaha nihahahaha nihahahahahahaha nihaha",
+                "description": "nihahaha nihahahahaha nihahahaha nihahahaha nihahahahahahaha nihaha nihahahaha nihahahaha nihahahaha nihahahahaha nihahahahaha nihahahahaha nihahaha nihahahahahaha nihahahahaha nihahahahahaha nihahahahahaha nihahahahahaha nihahahaha nihahahahaha nihahaha nihahahahahaha nihahahahahaha nihahahaha nihahahahahahaha"
             },
             "forceReinstallCard": {
-                "title": "Force Reinstall Roblox",
-                "description": "Reinstall roblox everytime you launch it."
+                "title": "nihahaha nihahaha nihahahahaha",
+                "description": "nihahahahaha nihahahaha nihahahahaha nihaha nihahahaha nihaha"
             }
         },
         "fastflag": {
-            "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fastflags and configurations.",
-            "generalBack": "Back to fastflag",
+            "fastflag": "nihahaha nihahahaha",
+            "description": "nihahahahahaha nihahahaha nihaha nihahaha nihahahahahahaha",
+            "generalBack": "nihaha nihahahahaha nihahahahaha",
             "selectScreeen": {
-                "title": "Please choose an action.",
+                "title": "nihahahaha nihahaha nihahahahaha nihahahaha",
                 "editCard": {
-                    "title": "Edit",
-                    "description": "Edit Feature Flags"
+                    "title": "nihahahahahaha",
+                    "description": "nihahahahaha nihahahahahaha nihahahaha"
                 },
                 "presetCard": {
-                    "title": "Preset",
-                    "description": "Use Feature Flag Preset built in in crush."
+                    "title": "nihahahaha",
+                    "description": "nihahahahahahaha nihaha nihahahaha nihahahaha nihaha nihahahahahaha nihahahahahahaha nihahaha"
                 }
             },
             "editor": {
                 "flagTable": {
-                    "texboxFlagName": "Flag name",
-                    "texboxFlagValue": "Value",
-                    "buttonAdd": "Add",
-                    "search": "Search all fflags...",
-                    "searchNotFound": "No flags found matching your search.",
+                    "texboxFlagName": "nihahahahahaha nihaha",
+                    "texboxFlagValue": "nihahahahahahaha",
+                    "buttonAdd": "nihahahahaha",
+                    "search": "nihahahahahaha nihahahahahaha nihahaha",
+                    "searchNotFound": "nihahahaha nihahaha nihahaha nihahaha nihaha nihahahahahaha",
                     "flagCol": {
-                        "deleteNote": "Delete Flag",
-                        "name": "flag name",
-                        "type": "type",
-                        "value": "value"
+                        "deleteNote": "nihahahaha nihahaha",
+                        "name": "nihahahahahaha nihahahahaha",
+                        "type": "nihahahahahaha",
+                        "value": "nihahahahahaha"
                     }
                 }
             },
             "preset": {
-                "preset": "Presets",
-                "description": "Use our built-in fast-flag preset",
+                "preset": "nihaha",
+                "description": "nihahaha nihahahahaha nihahahahahahaha nihaha nihaha",
                 "msaaCard": {
-                    "title": "Anti-Aliasing Quality (MSAA)",
-                    "description": "Smooths jagged edges. Higher values look better but may reduce performance."
+                    "title": "nihahahahaha nihahahaha nihahahahahaha",
+                    "description": "nihahahahaha nihaha nihahaha nihahahahaha nihahahahahaha nihahahaha nihahaha nihahahaha nihaha nihahahahahahaha nihahahaha"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelier",
-                    "description": "Stops voxelization to improve performance"
+                    "title": "nihahahahahahaha nihaha",
+                    "description": "nihaha nihahahahaha nihaha nihaha nihahahahaha"
                 },
                 "grassAnimationCard": {
-                    "title": "Grass waving animation",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
+                    "title": "nihahahahaha nihaha nihahahahahaha",
+                    "description": "nihahahahaha nihahaha nihaha nihahahaha nihahaha nihahahahahahaha nihahahahahaha nihahaha nihahahahahahaha nihahahahahaha nihaha nihaha nihaha nihahahahahahaha nihahahahaha nihahahahahaha nihahahahahahaha nihahahaha nihahaha nihahaha nihahaha nihahahahahahaha nihahaha nihahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahaha nihahahahahahaha nihahaha nihahaha nihahahahahahaha nihahahaha nihahahahaha nihahahahahaha nihahahahahaha"
                 },
                 "overwriteTextureQualityCard": {
-                    "title": "Overwrite texture quality level",
-                    "description": "Forces a custom texture quality level.",
-                    "dropdownDefault": "Default"
+                    "title": "nihahahaha nihahahahahahaha nihahaha nihahahahaha",
+                    "description": "nihahahaha nihahaha nihahahaha nihaha nihaha nihahahaha",
+                    "dropdownDefault": "nihahaha"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes",
-                    "description": "May improves performance."
+                    "title": "nihahahahahaha nihahahahahaha nihahaha nihaha",
+                    "description": "nihahahahaha nihahahaha nihahahaha"
                 }
             }
         },
         "mod": {
-            "mod": "Mod",
+            "mod": "nihahaha",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your mods Roblox mods.",
-                    "addModButton": "Add A Mod",
-                    "noModsFound": "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton": "Create your first mod",
+                    "title": "nihahahahahahaha nihahahaha",
+                    "description": "nihaha nihahaha nihaha nihahahahahahaha nihahaha",
+                    "addModButton": "nihahahaha nihahahahahahaha nihahaha",
+                    "noModsFound": "nihahahaha nihaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahaha",
+                    "noModsFoundCreateButton": "nihaha nihahahahaha nihahaha nihahahahaha",
                     "modCards": {
-                        "toggleNoteDisable": "Disable Mod",
-                        "toggleNoteEnable": "Enable Mod",
-                        "renameNote": "Rename Mod",
-                        "openFolderNote": "Open Mod Folder",
-                        "deleteNote": "Delete Mod",
-                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
-                        "description": "Enable mod loading and set the mod folder location."
+                        "toggleNoteDisable": "nihahahahahahaha nihahahaha",
+                        "toggleNoteEnable": "nihaha nihaha",
+                        "renameNote": "nihahahahaha nihahahahahaha",
+                        "openFolderNote": "nihaha nihahaha nihahahahahahaha",
+                        "deleteNote": "nihahahahaha nihahahahahaha",
+                        "layoutNote": "nihahahahaha nihahahahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahahahaha",
+                        "description": "nihaha nihahaha nihahahahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahahaha nihahaha"
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Prebuilt Mods",
-                    "description": "Install ready-to-use mods.",
+                    "title": "nihahahahahaha nihahahahahaha",
+                    "description": "nihahaha nihahahahahaha nihahahahahaha",
                     "cursorCard": {
-                        "title": "Cursor",
-                        "description": "Change your Roblox cursor to older versions.",
+                        "title": "nihahahahahahaha",
+                        "description": "nihahahahaha nihahaha nihaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahaha",
                         "dropdown": {
-                            "default": "Default"
+                            "default": "nihahahaha"
                         }
                     },
                     "customFontCard": {
-                        "title": "Custom Font",
-                        "description": "Change your roblox font to whatever you like.",
-                        "button": "Change Font"
+                        "title": "nihahahahahaha nihahahahahaha",
+                        "description": "nihahahahaha nihaha nihahahaha nihahahaha nihahaha nihahaha nihaha nihahahahahaha",
+                        "button": "nihahaha nihahahahahaha"
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
-                    "description": "Explore mods created by the community.",
+                    "title": "nihahahahahaha nihahaha",
+                    "description": "nihaha nihaha nihahaha nihahahahahaha nihahahahahahaha nihahaha",
                     "notice": {
-                        "title": "No mod yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                        "title": "nihahaha nihahahahahaha nihahahahahaha",
+                        "description": "nihahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahahahaha nihaha nihahahaha nihahahahahaha nihahahahahaha nihahahaha nihahahaha nihaha nihahaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahahahahaha nihaha",
+                        "submissionButton": "nihahahaha nihahahaha nihahahahahaha"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "Settings",
+            "settings": "nihahaha",
             "aboutCard": {
-                "title": "About",
-                "description": "Information about this crush build",
-                "builtOn": "Built on: {date}",
-                "commitHash": "Commit hash: {hash}"
+                "title": "nihahahahaha",
+                "description": "nihahaha nihahahahahaha nihahahahahaha nihahahahahaha nihahaha",
+                "note": "nihahahahahahaha nihahahahahaha nihahahaha nihahaha nihahaha nihahahaha nihahahaha nihaha nihahaha nihaha nihahaha nihahahahahahaha nihahahaha nihahahahaha nihahahahahaha nihahahahahahaha nihahahaha nihahahahahaha nihahahaha nihahahaha",
+                "builtOn": "nihahahahahaha nihaha nihaha",
+                "commitHash": "nihahahahahahaha nihahahahahaha nihahahahaha",
+                "version": "nihahahahahaha nihahaha"
             },
             "languageCard": {
-                "title": "Language",
-                "description": "Select your preferred language for crush."
+                "title": "nihahahahahaha",
+                "description": "nihahahaha nihahahaha nihahahaha nihahahahahaha nihahahahahahaha nihahahahahaha"
             },
             "donateCard": {
-                "title": "Donate",
-                "description": "Love crush? Donate to Mally to support his work!",
-                "button": "Donate"
+                "title": "nihahahahahahaha",
+                "description": "nihahahahahahaha nihaha nihahahahahahaha nihahahahaha nihaha nihahahahaha nihahahahahaha nihaha nihahahaha",
+                "button": "nihahahaha"
             }
         }
     }

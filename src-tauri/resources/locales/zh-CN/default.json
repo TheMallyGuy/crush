@@ -75,15 +75,15 @@
                 "button": "查看"
             },
             "roValraCard": {
-                "title": "配置RoValra",
-                "description": "Crush具有内置的RoValra集成。RoValra的隐私政策适用。",
+                "title": "与RoValra更好地搭配",
+                "description": "Crush具有内置的匹配功能，可实现集成。RoValra的隐私政策适用。",
                 "button": "开放性"
             },
             "roValra": {
-                "description": "配置RoValra",
+                "description": "Configuration",
                 "joinServerForYouCard": {
                     "title": "让Crush为您加入服务器",
-                    "description": "我们将使用Rovalra API而不是Roblox匹配。"
+                    "description": "我们将使用Rovalra API ，而不是Roblox匹配，并找到最好的服务器。"
                 }
             },
             "gameHistory": {
@@ -130,7 +130,7 @@
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "旗帜+名称",
-                    "texboxFlagValue": "数值",
+                    "texboxFlagValue": "值",
                     "buttonAdd": "新增",
                     "search": "搜索所有fflags...",
                     "searchNotFound": "未找到与您的搜索匹配的标记。",
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "软件简介",
                 "description": "有关此CRUSH版本的信息",
+                "note": "请记住！ CRUSH是免费使用的，任何尝试重组和销售它的人都可以在我们的Discord服务器上告诉我们！",
                 "builtOn": "由 小昊汉化 建立在",
-                "commitHash": "提交哈希： {hash}"
+                "commitHash": "提交哈希： {hash}",
+                "version": "版  本："
             },
             "languageCard": {
                 "title": "语言",

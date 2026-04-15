@@ -75,15 +75,15 @@
                 "button": "Weergave"
             },
             "roValraCard": {
-                "title": "RoValra configureren",
-                "description": "Crush heeft een ingebouwde RoValra-integratie. Het privacybeleid van RoValra is van toepassing.",
+                "title": "Beter matchen met RoValra",
+                "description": "Crush heeft een ingebouwde match making integratie. Het privacybeleid van RoValra is van toepassing.",
                 "button": "Openen"
             },
             "roValra": {
-                "description": "RoValra configureren",
+                "description": "Configuratie",
                 "joinServerForYouCard": {
                     "title": "Laat Crush lid worden van de server voor u",
-                    "description": "In plaats van Roblox matchmaking gebruiken we Rovalra API."
+                    "description": "In plaats van Roblox-matchmaking, gebruiken we Rovalra API en vinden we de beste server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Over",
                 "description": "Informatie over deze crush-build",
+                "note": "Onthoud! CRUSH is gratis te gebruiken, iedereen die het probeert te herschillen en te verkopen, laat het ons weten in onze Discord-server!",
                 "builtOn": "(gemaakt op {0})",
-                "commitHash": "Commit-hash: {hash}"
+                "commitHash": "Commit-hash: {hash}",
+                "version": "Versie:"
             },
             "languageCard": {
                 "title": "Taal",

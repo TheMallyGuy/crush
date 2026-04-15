@@ -75,15 +75,15 @@
                 "button": "Pogledaj"
             },
             "roValraCard": {
-                "title": "Konfigurišite RoValra",
-                "description": "Crush ima ugrađenu RoValra integraciju. Primenjuju se Pravila privatnosti kompanije RoValra.",
+                "title": "Bolje povezivanje sa kompanijom RoValra",
+                "description": "Crush ima ugrađenu integraciju podudaranja. Primenjuju se Pravila privatnosti kompanije RoValra.",
                 "button": "Otvorena"
             },
             "roValra": {
-                "description": "Konfigurišite RoValra",
+                "description": "Konfiguracija",
                 "joinServerForYouCard": {
                     "title": "Neka se Crush pridruži serveru umesto vas",
-                    "description": "Umesto Roblox podudaranja, koristićemo Rovalra API."
+                    "description": "Umesto Roblox podudaranja, koristićemo Rovalra API i pronaći najbolji server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "O studiji",
                 "description": "Informacije o ovoj drobljenoj konstrukciji",
+                "note": "Zapamtite! simpatija je besplatna za korišćenje, svako ko pokušava da je reskinuje i proda recite nam na našem Discord serveru!",
                 "builtOn": "Izgrađeno: {date}",
-                "commitHash": "Obavežite heš: {hash}"
+                "commitHash": "Obavežite heš: {hash}",
+                "version": "Verzija:"
             },
             "languageCard": {
                 "title": "Jezik",

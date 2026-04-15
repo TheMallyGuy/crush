@@ -75,15 +75,15 @@
                 "button": "Exibir"
             },
             "roValraCard": {
-                "title": "Configurar RoValra",
-                "description": "O Crush tem uma integração RoValra integrada. Aplica-se a Política de Privacidade da RoValra.",
+                "title": "Melhor match making com RoValra",
+                "description": "O Crush tem uma combinação integrada que faz a integração. Aplica-se a Política de Privacidade da RoValra.",
                 "button": "Abrir"
             },
             "roValra": {
-                "description": "Configurar RoValra",
+                "description": "Configuração",
                 "joinServerForYouCard": {
                     "title": "Deixe o Crush entrar no servidor para você",
-                    "description": "Em vez de fazer correspondências com o Roblox, usaremos a API Rovalra."
+                    "description": "Em vez de fazer correspondências com o Roblox, usaremos a API Rovalra e encontraremos o melhor servidor."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Sobre",
                 "description": "Informações sobre esta construção de crush",
+                "note": "Lembre-se! O CRUSH é gratuito para usar, qualquer pessoa que tente fazer reskin e vendê-lo, informe-nos em nosso servidor do Discord!",
                 "builtOn": "Construído em: {date}",
-                "commitHash": "hash do commit"
+                "commitHash": "hash do commit",
+                "version": "Versão:"
             },
             "languageCard": {
                 "title": "Idioma",

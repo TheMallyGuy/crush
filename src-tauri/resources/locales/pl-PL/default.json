@@ -75,15 +75,15 @@
                 "button": "Wyświetl"
             },
             "roValraCard": {
-                "title": "Skonfiguruj RoValra",
-                "description": "Crush ma wbudowaną integrację RoValry. Obowiązuje Polityka prywatności RoValra.",
+                "title": "Lepsze dopasowanie z RoValrą",
+                "description": "Crush ma wbudowaną integrację dopasowującą. Obowiązuje Polityka prywatności RoValra.",
                 "button": "Otwarte"
             },
             "roValra": {
-                "description": "Skonfiguruj RoValra",
+                "description": "Ustawienia",
                 "joinServerForYouCard": {
                     "title": "Pozwól, aby Crush dołączył do serwera za Ciebie",
-                    "description": "Zamiast dopasowywania Roblox, użyjemy interfejsu API Rovalra."
+                    "description": "Zamiast dopasowywania Roblox, użyjemy interfejsu Rovalra API i znajdziemy najlepszy serwer."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "ok",
                 "description": "Informacje o tej kompilacji",
+                "note": "Pamiętaj! miażdżenie jest bezpłatne, każdy, kto próbuje je zmienić i sprzedać, poinformuj nas o tym na naszym serwerze na Discordzie!",
                 "builtOn": "Zbudowana na",
-                "commitHash": "Zatwierdź hash: {hash}"
+                "commitHash": "Zatwierdź hash: {hash}",
+                "version": "Wersja:"
             },
             "languageCard": {
                 "title": "Język",

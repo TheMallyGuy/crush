@@ -75,15 +75,15 @@
                 "button": "להציג"
             },
             "roValraCard": {
-                "title": "הגדר את RoValra",
-                "description": "לקראש יש אינטגרציה מובנית של RoValra. מדיניות הפרטיות של RoValra חלה.",
+                "title": "התאמה טובה יותר עם RoValra",
+                "description": "לקראש יש התאמה מובנית שעושה intergration. מדיניות הפרטיות של RoValra חלה.",
                 "button": "פתיחה"
             },
             "roValra": {
-                "description": "הגדר את RoValra",
+                "description": "הגדרות",
                 "joinServerForYouCard": {
                     "title": "בואו ל - Crush להצטרף לשרת בשבילכם",
-                    "description": "במקום ליצור התאמות ב - Roblox, נשתמש ב - Rovalra API."
+                    "description": "במקום לבצע התאמות ב - Roblox, נשתמש ב - API של Rovalra ונמצא את השרת הטוב ביותר."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "אודות",
                 "description": "מידע על בניית ריסוק זו",
+                "note": "זכור! למחוץ הוא בחינם, כל מי שמנסה לחדש את עורו ולמכור אותו, אנא ספר לנו בשרת הדיסקורד שלנו!",
                 "builtOn": "בנוי על: {date}",
-                "commitHash": "בצע גיבוב: {hash}"
+                "commitHash": "בצע גיבוב: {hash}",
+                "version": "גרסה:"
             },
             "languageCard": {
                 "title": "שפה",

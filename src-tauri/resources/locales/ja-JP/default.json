@@ -75,15 +75,15 @@
                 "button": "表示"
             },
             "roValraCard": {
-                "title": "RoValraの設定",
-                "description": "CrushにはRoValraインテグレーションが組み込まれています。RoValraのプライバシーポリシーが適用されます。",
+                "title": "RoValraでマッチング体験",
+                "description": "Crushにはマッチングが組み込まれており、統合が可能です。RoValraのプライバシーポリシーが適用されます。",
                 "button": "開く"
             },
             "roValra": {
-                "description": "RoValraの設定",
+                "description": "構成",
                 "joinServerForYouCard": {
                     "title": "Crushをサーバーに参加させましょう",
-                    "description": "Robloxのマッチングの代わりに、Rovalra APIを使用します。"
+                    "description": "Robloxのマッチングの代わりに、Rovalra APIを使用して最適なサーバーを見つけます。"
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "情報",
                 "description": "このクラッシュビルドに関する情報",
+                "note": "覚えておいてください！ CRUSHは無料で使用できます。再スキンして販売しようとしている人は、Discordサーバーでお知らせください。",
                 "builtOn": "ビルド基盤： {date}",
-                "commitHash": "コミットハッシュ： {hash}"
+                "commitHash": "コミットハッシュ： {hash}",
+                "version": "バージョン："
             },
             "languageCard": {
                 "title": "言語",

@@ -75,15 +75,15 @@
                 "button": "Visualizza"
             },
             "roValraCard": {
-                "title": "Configura RoValra",
-                "description": "Crush ha un'integrazione RoValra integrata. Si applica l'Informativa sulla privacy di RoValra.",
+                "title": "Migliore abbinamento con RoValra",
+                "description": "CRUSH ha un'integrazione integrata per la creazione di fiammiferi. Si applica l'Informativa sulla privacy di RoValra.",
                 "button": "Apri"
             },
             "roValra": {
-                "description": "Configura RoValra",
+                "description": "Configurazione",
                 "joinServerForYouCard": {
                     "title": "Lascia che Crush si unisca al server per te",
-                    "description": "Invece di fare corrispondenze con Roblox, useremo l'API Rovalra."
+                    "description": "Invece di fare corrispondenze con Roblox, useremo l'API Rovalra e troveremo il miglior server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "Informazioni",
                 "description": "Informazioni su questa build di CRUSH",
+                "note": "Ricorda! CRUSH è gratuito, chiunque cerchi di rivenderlo e venderlo ce lo dica nel nostro server Discord!",
                 "builtOn": "rilasciata il",
-                "commitHash": "Hash commit: {hash}"
+                "commitHash": "Hash commit: {hash}",
+                "version": "Versione:"
             },
             "languageCard": {
                 "title": "Lingua",

@@ -75,15 +75,15 @@
                 "button": "보기"
             },
             "roValraCard": {
-                "title": "RoValra 구성",
-                "description": "Crush에는 RoValra 인터그레이션이 내장되어 있습니다. RoValra의 개인정보 보호정책이 적용됩니다.",
+                "title": "로발라와 함께 더 나은 매치 만들기",
+                "description": "Crush에는 매치가 내장되어 있어 인터그레이션이 가능합니다. RoValra의 개인정보 보호정책이 적용됩니다.",
                 "button": "열기"
             },
             "roValra": {
-                "description": "RoValra 구성",
+                "description": "구성",
                 "joinServerForYouCard": {
                     "title": "Crush가 당신을 위해 서버에 합류하게하십시오",
-                    "description": "Roblox 매치 메이킹 대신 Rovalra API를 사용합니다."
+                    "description": "Roblox 매치 메이킹 대신 Rovalra API를 사용하여 최고의 서버를 찾을 것입니다."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "소개",
                 "description": "이 호감 구축에 대한 정보",
+                "note": "기억하세요! CRUSH는 무료로 사용할 수 있습니다. 리스킨 및 판매를 시도하는 사람은 Discord 서버에서 알려주세요!",
                 "builtOn": "빌트 일：",
-                "commitHash": "커밋 해시: {hash}"
+                "commitHash": "커밋 해시: {hash}",
+                "version": "버전: "
             },
             "languageCard": {
                 "title": "언어",

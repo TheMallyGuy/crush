@@ -75,15 +75,15 @@
                 "button": "Zobrazit"
             },
             "roValraCard": {
-                "title": "Konfigurovat RoValra",
-                "description": "Crush má vestavěnou intergraci RoValra. Platí zásady ochrany osobních údajů společnosti RoValra.",
+                "title": "Lepší párování s RoValrou",
+                "description": "Rozdrcení má vestavěnou intergraci tvorby zápasu. Platí zásady ochrany osobních údajů společnosti RoValra.",
                 "button": "Otevřít"
             },
             "roValra": {
-                "description": "Konfigurovat RoValra",
+                "description": "Konfigurace",
                 "joinServerForYouCard": {
                     "title": "Nechte Crush připojit se k serveru za vás",
-                    "description": "Namísto vytváření shody Roblox budeme používat rozhraní Rovalra API."
+                    "description": "Namísto vytváření shody Roblox použijeme rozhraní Rovalra API a najdeme nejlepší server."
                 }
             },
             "gameHistory": {
@@ -219,8 +219,10 @@
             "aboutCard": {
                 "title": "O nás",
                 "description": "Informace o této sestavě rozdrcení",
+                "note": "Pamatujte! Crush je zdarma k použití, každý, kdo se snaží reskin a prodat to, prosím, řekněte nám na našem serveru Discord!",
                 "builtOn": "Postaveno na: {date}",
-                "commitHash": "Potvrdit hash: {hash}"
+                "commitHash": "Potvrdit hash: {hash}",
+                "version": "Verze:"
             },
             "languageCard": {
                 "title": "Jazyk",
