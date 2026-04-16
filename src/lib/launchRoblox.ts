@@ -4,100 +4,115 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { type Mod } from '$lib/types'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 
-async function revertDisabledMods( // @pochita please fix mod reverting
-    mods: Mod[],
-    modStore: Store,
+async function revertAppliedMods(
+    manifestStore: Store,
     robloxHash: string,
     versionDir: string
 ) {
-    const modsToClear: string[] = []
-    const packageFilesMap = new Map<string, string[]>()
+    const storedModNames = await manifestStore.keys()
+    if (storedModNames.length === 0) return
 
-    const disabledMods = mods.filter((m) => !m.enabled)
+    const filesByPackage = new Map<string, string[]>()
 
-    for (const mod of disabledMods) {
-        const files = (await modStore.get<string[]>(mod.name)) ?? []
+    for (const modName of storedModNames) {
+        const files = (await manifestStore.get<string[]>(modName)) ?? []
         if (files.length === 0) continue
 
         for (const file of files) {
             const pkg = getPackageForFile(file)
             if (!pkg) continue
 
-            if (!packageFilesMap.has(pkg)) {
-                packageFilesMap.set(pkg, [])
+            if (!filesByPackage.has(pkg)) {
+                filesByPackage.set(pkg, [])
             }
 
             const normalized = file.replace(/\\/g, '/')
-            packageFilesMap.get(pkg)!.push(normalized)
+            filesByPackage.get(pkg)!.push(normalized)
         }
-        modsToClear.push(mod.name)
     }
 
-    if (packageFilesMap.size === 0) return
-
-    await Promise.all(
-        Array.from(packageFilesMap.entries()).map(([pkg, files]) =>
-            restoreFileFromPackage(pkg, robloxHash, versionDir, true, files)
+    if (filesByPackage.size > 0) {
+        await Promise.all(
+            Array.from(filesByPackage.entries()).map(([pkg, files]) =>
+                restoreFileFromPackage(pkg, robloxHash, versionDir, true, files)
+            )
         )
-    )
+    }
 
-    for (const modName of modsToClear) {
-        await modStore.delete(modName)
+    for (const modName of storedModNames) {
+        await manifestStore.delete(modName)
     }
 }
 
 async function applyEnabledMods(
     mods: Mod[],
-    modStore: Store,
+    manifestStore: Store,
     versionDir: string,
     appData: string
 ) {
     const enabledMods = mods.filter((m) => m.enabled)
     if (enabledMods.length === 0) return
 
-    await Promise.all(
-        enabledMods.map(async (mod) => {
-            const modDir = await join(appData, 'Mods', mod.name)
-            const copiedFiles: string[] = await invoke('apply_mod', {
-                modDir,
-                versionDir,
-            })
-            await modStore.set(mod.name, copiedFiles)
+    for (const mod of enabledMods) {
+        const modDir = await join(appData, 'Mods', mod.name)
+        const copiedFiles: string[] = await invoke('apply_mod', {
+            modDir,
+            versionDir,
         })
-    )
+        await manifestStore.set(mod.name, copiedFiles)
+    }
 }
 
 export async function applyMods(robloxHash: string) {
-    const store = await load('mods.json')
-    const modStore = await load('mod_manifests.json')
-    const mods = (await store.get<Mod[]>('mods')) ?? []
+    const modsConfig = await load('mods.json')
+    const manifestStore = await load('mod_manifests.json')
+    const mods = (await modsConfig.get<Mod[]>('mods')) ?? []
     const appData = await appDataDir()
     const versionDir = await join(appData, 'Player', 'Versions', robloxHash)
 
-    await revertDisabledMods(mods, modStore, robloxHash, versionDir)
-    await applyEnabledMods(mods, modStore, versionDir, appData)
+    await revertAppliedMods(manifestStore, robloxHash, versionDir)
+    await applyEnabledMods(mods, manifestStore, versionDir, appData)
 
-    await modStore.save()
+    await manifestStore.save()
 }
 
 export async function removeMod(mod: Mod, robloxHash: string) {
-    const modStore = await load('mod_manifests.json')
+    const manifestStore = await load('mod_manifests.json')
     const appData = await appDataDir()
     const versionDir = await join(appData, 'Player', 'Versions', robloxHash)
 
-    const files = (await modStore.get<string[]>(mod.name)) ?? []
-
-    for (const relativePath of files) {
-        await restoreFileFromPackage(relativePath, robloxHash, versionDir)
+    const files = (await manifestStore.get<string[]>(mod.name)) ?? []
+    if (files.length === 0) {
+        await manifestStore.delete(mod.name)
+        await manifestStore.save()
+        return
     }
 
-    await modStore.delete(mod.name)
-    await modStore.save()
+    const filesByPackage = new Map<string, string[]>()
+    for (const file of files) {
+        const pkg = getPackageForFile(file)
+        if (!pkg) continue
+
+        if (!filesByPackage.has(pkg)) {
+            filesByPackage.set(pkg, [])
+        }
+        filesByPackage.get(pkg)!.push(file.replace(/\\/g, '/'))
+    }
+
+    await Promise.all(
+        Array.from(filesByPackage.entries()).map(([pkg, pkgFiles]) =>
+            restoreFileFromPackage(pkg, robloxHash, versionDir, true, pkgFiles)
+        )
+    )
+
+    await manifestStore.delete(mod.name)
+    await manifestStore.save()
 }
 
 export async function launchPlayer(hash: string, deeplink: string | null) {
+    const appData = await appDataDir()
     const playerLocation = await join(
-        await appDataDir(),
+        appData,
         'Player',
         'Versions',
         hash,
