@@ -42,6 +42,20 @@
             ]
         },
         {
+            "identifier": "http:allow-fetch",
+            "allow": [
+                {
+                    "url": "https://setup-ak.rbxcdn.com"
+                },
+                {
+                    "url": "https://setup-cfly.rbxcdn.com"
+                },
+                {
+                    "url": "https://setup-aws.rbxcdn.com"
+                }
+            ]
+        },
+        {
             "identifier": "fs:allow-exists",
             "allow": [
                 "$APPCACHE/**",

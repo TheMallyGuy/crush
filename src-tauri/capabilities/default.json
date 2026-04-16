@@ -37,6 +37,15 @@
             "identifier": "http:default",
             "allow": [
                 {
+                    "url": "https://setup-ak.rbxcdn.com"
+                },
+                {
+                    "url": "https://setup-cfly.rbxcdn.com"
+                },
+                {
+                    "url": "https://setup-aws.rbxcdn.com"
+                },
+                {
                     "url": "https://games.roblox.com/"
                 },
                 {
