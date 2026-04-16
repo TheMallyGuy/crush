@@ -221,8 +221,8 @@ async fn process_log_file(
     let mut line = String::new();
     let mut process_result = Ok(());
 
-    while let result = reader.read_line(&mut line) {
-        match result {
+    loop {
+        match reader.read_line(&mut line) {
             Ok(0) => break,
             Ok(_) => {
                 if let Err(e) = handle_log_line(app, &line, state, store).await {
