@@ -62,7 +62,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install frontend deps
-        run: pnpm install --frozen-lockfile --ignore-scripts=false
+        run: pnpm install --ignore-scripts=false
 
       - name: Build Tauri
         env: 
