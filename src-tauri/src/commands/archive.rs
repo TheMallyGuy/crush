@@ -44,16 +44,17 @@ pub fn extract_files_from_zip(
     fs::create_dir_all(dest_path)
         .map_err(|e| format!("Cannot create dest dir '{}': {}", dest_path.display(), e))?;
 
-    let files_set: std::collections::HashSet<String> = files.into_iter().collect();
+    let files_set: std::collections::HashSet<String> =
+        files.into_iter().map(|f| f.to_lowercase()).collect();
 
     for i in 0..archive.len() {
         let mut entry = archive
             .by_index(i)
             .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
 
-        let should_extract = entry
-            .enclosed_name()
-            .is_some_and(|name| files_set.contains(name.to_string_lossy().as_ref()));
+        let should_extract = entry.enclosed_name().is_some_and(|name| {
+            files_set.contains(name.to_string_lossy().to_lowercase().as_str())
+        });
 
         if should_extract {
             extract_entry(&mut entry, dest_path)?;

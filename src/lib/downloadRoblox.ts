@@ -320,10 +320,10 @@ async function saveVersion(
 }
 
 export function getPackageForFile(relativePath: string): string | null {
-    const normalized = relativePath.replace(/\\/g, '/')
+    const normalized = relativePath.replace(/\\/g, '/').toLowerCase()
     const [packageName] =
         sortedExtractRoots.find(
-            ([, prefix]) => prefix === '' || normalized.startsWith(prefix)
+            ([, prefix]) => prefix === '' || normalized.startsWith(prefix.toLowerCase())
         ) ?? []
     return packageName ?? null
 }
@@ -358,9 +358,11 @@ export async function restoreFileFromPackage(
     }
 
     const strippedFiles = prefix
-        ? files.map((f) =>
-              f.startsWith(prefix) ? f.substring(prefix.length) : f
-          )
+        ? files.map((f) => {
+              const lowerF = f.toLowerCase()
+              const lowerP = prefix.toLowerCase()
+              return lowerF.startsWith(lowerP) ? f.substring(prefix.length) : f
+          })
         : files
 
     await invoke('extract_files_from_zip', {

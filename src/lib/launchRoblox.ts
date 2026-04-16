@@ -4,23 +4,17 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { type Mod } from '$lib/types'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 
-async function revertUnusedMods(
-    mods: Mod[],
+async function revertAppliedMods(
     manifestStore: Store,
     robloxHash: string,
     versionDir: string
 ) {
-    const activeModNames = new Set(
-        mods.filter((m) => m.enabled).map((m) => m.name)
-    )
     const storedModNames = await manifestStore.keys()
-    const modsToRevert = storedModNames.filter((name) => !activeModNames.has(name))
-
-    if (modsToRevert.length === 0) return
+    if (storedModNames.length === 0) return
 
     const filesByPackage = new Map<string, string[]>()
 
-    for (const modName of modsToRevert) {
+    for (const modName of storedModNames) {
         const files = (await manifestStore.get<string[]>(modName)) ?? []
         if (files.length === 0) continue
 
@@ -37,20 +31,15 @@ async function revertUnusedMods(
         }
     }
 
-    if (filesByPackage.size === 0) {
-        for (const modName of modsToRevert) {
-            await manifestStore.delete(modName)
-        }
-        return
+    if (filesByPackage.size > 0) {
+        await Promise.all(
+            Array.from(filesByPackage.entries()).map(([pkg, files]) =>
+                restoreFileFromPackage(pkg, robloxHash, versionDir, true, files)
+            )
+        )
     }
 
-    await Promise.all(
-        Array.from(filesByPackage.entries()).map(([pkg, files]) =>
-            restoreFileFromPackage(pkg, robloxHash, versionDir, true, files)
-        )
-    )
-
-    for (const modName of modsToRevert) {
+    for (const modName of storedModNames) {
         await manifestStore.delete(modName)
     }
 }
@@ -81,7 +70,7 @@ export async function applyMods(robloxHash: string) {
     const appData = await appDataDir()
     const versionDir = await join(appData, 'Player', 'Versions', robloxHash)
 
-    await revertUnusedMods(mods, manifestStore, robloxHash, versionDir)
+    await revertAppliedMods(manifestStore, robloxHash, versionDir)
     await applyEnabledMods(mods, manifestStore, versionDir, appData)
 
     await manifestStore.save()
