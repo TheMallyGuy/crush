@@ -177,21 +177,21 @@ impl WatcherRegexes {
     fn join() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
         REGEX.get_or_init(|| {
-            Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").unwrap()
+            Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").expect("Failed to compile JOIN regex")
         })
     }
     fn joined() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
-        REGEX.get_or_init(|| Regex::new(r"serverId: ([0-9\.]+)\|").unwrap())
+        REGEX.get_or_init(|| Regex::new(r"serverId: ([0-9\.]+)\|").expect("Failed to compile JOINED regex"))
     }
     fn leave() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
-        REGEX.get_or_init(|| Regex::new(r"Time to disconnect replication data").unwrap())
+        REGEX.get_or_init(|| Regex::new(r"Time to disconnect replication data").expect("Failed to compile LEAVE regex"))
     }
     fn udmux() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
         REGEX.get_or_init(|| {
-            Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap()
+            Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").expect("Failed to compile UDMUX regex")
         })
     }
 }
@@ -213,25 +213,50 @@ async fn process_log_file(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    let mut reader = if let Some(r) = state.reader.take() {
-        r
-    } else {
-        let path = state.current_file.as_ref().ok_or("No current file")?;
-        let mut file = File::open(path).map_err(|e| e.to_string())?;
-        file.seek(SeekFrom::Start(state.offset))
-            .map_err(|e| e.to_string())?;
-        BufReader::new(file)
+    let mut reader = match get_reader(state) {
+        Ok(r) => r,
+        Err(e) => return Err(e),
     };
 
     let mut line = String::new();
-    while reader.read_line(&mut line).map_err(|e| e.to_string())? > 0 {
-        handle_log_line(app, &line, state, store).await?;
-        line.clear();
+    let mut process_result = Ok(());
+
+    while let result = reader.read_line(&mut line) {
+        match result {
+            Ok(0) => break,
+            Ok(_) => {
+                if let Err(e) = handle_log_line(app, &line, state, store).await {
+                    log::error!("Error handling log line: {}", e);
+                    process_result = Err(e);
+                    break;
+                }
+                line.clear();
+            }
+            Err(e) => {
+                let err_msg = e.to_string();
+                log::error!("Error reading log line: {}", err_msg);
+                process_result = Err(err_msg);
+                break;
+            }
+        }
     }
 
-    state.offset = reader.stream_position().map_err(|e| e.to_string())?;
+    state.offset = reader.stream_position().unwrap_or(state.offset);
     state.reader = Some(reader);
-    Ok(())
+
+    process_result
+}
+
+fn get_reader(state: &mut WatcherState) -> Result<BufReader<File>, String> {
+    if let Some(r) = state.reader.take() {
+        return Ok(r);
+    }
+
+    let path = state.current_file.as_ref().ok_or("No current file")?;
+    let mut file = File::open(path).map_err(|e| e.to_string())?;
+    file.seek(SeekFrom::Start(state.offset))
+        .map_err(|e| e.to_string())?;
+    Ok(BufReader::new(file))
 }
 
 async fn handle_log_line(

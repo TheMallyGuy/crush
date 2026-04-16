@@ -1,5 +1,5 @@
 # TODO
-Crush is about **64%** done! <!-- @pochita 21/33 tasks completed -->
+Crush is about **67%** done! <!-- @pochita 22/33 tasks completed -->
 
 ## Functions
 

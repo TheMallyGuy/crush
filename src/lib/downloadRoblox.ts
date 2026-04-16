@@ -45,7 +45,7 @@ const lowercaseExtractRoots = Object.entries(extractRoots).map(([k, v]) => [
     v,
 ])
 
-import type { ProgressEvent, ProgressCallback, Installation } from './types'
+import type { ProgressEvent, ProgressCallback, Installation, Versions } from './types'
 
 async function ensureDir(path: string) {
     const existsDir = await exists(path)
@@ -130,10 +130,6 @@ async function extractAll(versionHash: string, onProgress: ProgressCallback) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
-}
-
-type Versions = {
-    versions: string[]
 }
 
 async function checkForUpdates(CurrentVersions: Versions): Promise<boolean> {
