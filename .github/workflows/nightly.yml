@@ -70,7 +70,7 @@ jobs:
         run: pnpm tauri build
 
       - name: Create/Update Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.event.inputs.tag || format('nightly-{0}', github.run_id) }}
           name: ${{ github.event.inputs.name || format('Nightly Build {0}', github.run_id) }}
