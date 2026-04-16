@@ -44,8 +44,10 @@ pub fn extract_files_from_zip(
     fs::create_dir_all(dest_path)
         .map_err(|e| format!("Cannot create dest dir '{}': {}", dest_path.display(), e))?;
 
-    let files_set: std::collections::HashSet<String> =
-        files.into_iter().map(|f| f.to_lowercase()).collect();
+    let files_set: std::collections::HashSet<String> = files
+        .into_iter()
+        .map(|f| f.replace('\\', "/").to_lowercase())
+        .collect();
 
     for i in 0..archive.len() {
         let mut entry = archive
@@ -53,7 +55,8 @@ pub fn extract_files_from_zip(
             .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
 
         let should_extract = entry.enclosed_name().is_some_and(|name| {
-            files_set.contains(name.to_string_lossy().to_lowercase().as_str())
+            let normalized = name.to_string_lossy().replace('\\', "/").to_lowercase();
+            files_set.contains(&normalized)
         });
 
         if should_extract {

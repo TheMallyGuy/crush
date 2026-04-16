@@ -110,10 +110,7 @@ async function extractIndividualZip(
     const zipPath = await join(cacheDir, zipName)
     const destPath = dest ? await join(installRoot, dest) : installRoot
 
-    const zipExists = await exists(zipName, {
-        baseDir: BaseDirectory.AppCache,
-    })
-
+    const zipExists = await exists(zipPath)
     if (!zipExists) return false
 
     await ensureDir(destPath)
@@ -329,7 +326,7 @@ export function getPackageForFile(relativePath: string): string | null {
 }
 
 export async function restoreFileFromPackage(
-    input: string, // relativePath or direct packageName
+    input: string,
     versionGuid: string,
     versionDir: string,
     isPackageInput = false,
@@ -343,9 +340,14 @@ export async function restoreFileFromPackage(
     }
 
     const cacheDir = await appCacheDir()
-    const zipPath = await join(cacheDir, packageName.toLowerCase())
+    const zipFileName = packageName.toLowerCase()
+    const zipPath = await join(cacheDir, zipFileName)
 
-    if (!(await exists(zipPath))) {
+    info(`Checking zip exists at: ${zipPath}`)
+    const zipExists = await exists(zipPath)
+    info(`Zip exists: ${zipExists}`)
+
+    if (!zipExists) {
         await downloadMissingPackage(packageName, versionGuid, zipPath)
     }
 
@@ -357,13 +359,19 @@ export async function restoreFileFromPackage(
         return
     }
 
-    const strippedFiles = prefix
-        ? files.map((f) => {
-              const lowerF = f.toLowerCase()
-              const lowerP = prefix.toLowerCase()
-              return lowerF.startsWith(lowerP) ? f.substring(prefix.length) : f
-          })
-        : files
+    const prefixLower = prefix.toLowerCase()
+    const strippedFiles = files.map((f) => {
+        const normalized = f.replace(/\\/g, '/')
+        const normalizedLower = normalized.toLowerCase()
+        if (prefixLower && normalizedLower.startsWith(prefixLower)) {
+            return normalized.substring(prefix.length)
+        }
+        return normalized
+    })
+
+    info(`stripping prefix "${prefix}" from ${files.length} files`)
+    info(`sample stripped: ${strippedFiles[0]}`)
+    info(`extracting files: ${JSON.stringify(strippedFiles)} from ${zipPath} to ${destDir}`)
 
     await invoke('extract_files_from_zip', {
         zipPath,
@@ -380,10 +388,10 @@ export function resolvePackageInfo(input: string, isPackageInput: boolean) {
         }
     }
 
-    const normalized = input.replace(/\\/g, '/')
+    const normalized = input.replace(/\\/g, '/').toLowerCase()
     const [packageName, prefix] =
         sortedExtractRoots.find(
-            ([, p]) => p === '' || normalized.startsWith(p)
+            ([, p]) => p === '' || normalized.startsWith(p.toLowerCase())
         ) ?? []
 
     return {

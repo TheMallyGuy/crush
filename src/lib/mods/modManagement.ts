@@ -82,7 +82,6 @@ export async function toggleMod(id: string) {
     await store.set('mods', updated)
     await store.save()
 
-    // Run in background to avoid UI lag
     load('versions.json').then(async (versionStore) => {
         const versionList = (await versionStore.get<string[]>('versions')) ?? []
         const latestVersion = versionList.at(-1)
@@ -91,7 +90,6 @@ export async function toggleMod(id: string) {
         }
     })
 }
-
 export async function saveModsOrder(mods: Mod[]) {
     const store = await getStore()
     await store.set('mods', mods)
