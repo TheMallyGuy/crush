@@ -49,5 +49,9 @@
         "svelte-dnd-action": "^0.9.69",
         "typescript": "~6.0.2",
         "vite": "^6.0.3"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": ["esbuild"],
+        "ignoredBuiltDependencies": ["es5-ext"]
     }
 }
