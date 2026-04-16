@@ -43,16 +43,15 @@ jobs:
         shell: bash
         run: |
           echo "resumeUrl=${{ github.event.inputs.resumeUrl }}"
-
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@v5
         with:
           version: 9
 
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 20
           cache: 'pnpm'
 
       - name: Setup Rust
@@ -62,7 +61,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install frontend deps
-        run: pnpm install --ignore-scripts=false
+        run: pnpm install --frozen-lockfile
 
       - name: Build Tauri
         env: 
@@ -70,7 +69,7 @@ jobs:
         run: pnpm tauri build
 
       - name: Create/Update Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.tag || format('nightly-{0}', github.run_id) }}
           name: ${{ github.event.inputs.name || format('Nightly Build {0}', github.run_id) }}
