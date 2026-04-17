@@ -34,6 +34,11 @@
             ?? await store.get<Integrations>('intergrations')
 
         const newIntegrations: Integrations = {
+            discordRpc: savedIntegrations?.discordRpc ?? {
+                enable: false,
+                displayAccount: false,
+                letJoin: false
+            },
             crushRpc: savedIntegrations?.crushRpc ?? false,
             serverLocationNotifier: savedIntegrations?.serverLocationNotifier ?? false,
             roValra: {

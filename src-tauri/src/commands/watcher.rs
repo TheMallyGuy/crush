@@ -69,7 +69,9 @@ struct GamesResponse {
 
 fn is_roblox_running(system: &mut System) -> bool {
     static ROBLOX_REGEX: OnceLock<Regex> = OnceLock::new();
-    let regex = ROBLOX_REGEX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+    let regex = ROBLOX_REGEX.get_or_init(|| {
+        Regex::new(r"(?i)robloxplayerbeta").expect("Failed to compile ROBLOX_REGEX")
+    });
 
     system.refresh_processes_specifics(
         ProcessesToUpdate::All,
@@ -130,10 +132,13 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             update_watcher_file(&app, &mut state, path, &store).await;
         }
 
-        if state.current_file.is_some() {
-            if let Err(e) = process_log_file(&app, &mut state, &store).await {
-                log::error!("Error processing log file: {}", e);
-            }
+        let Some(_) = state.current_file else {
+            tokio::time::sleep(Duration::from_millis(500)).await;
+            continue;
+        };
+
+        if let Err(e) = process_log_file(&app, &mut state, &store).await {
+            log::error!("Error processing log file: {}", e);
         }
 
         tokio::time::sleep(Duration::from_millis(500)).await;
@@ -266,67 +271,106 @@ async fn handle_log_line(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    if let Some(caps) = WatcherRegexes::join().captures(line) {
-        let instance_id = caps
-            .get(1)
-            .map(|m| m.as_str().to_string())
-            .unwrap_or_default();
-        let place_id: u64 = caps
-            .get(2)
-            .and_then(|m| m.as_str().parse().ok())
-            .unwrap_or(0);
-
-        state.activity.place_id = Some(place_id);
-        state.activity.instance_id = Some(instance_id);
-        state.activity.in_game = false;
-        state.udmux_handled = false;
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-
-        log::info!(
-            "joining place {} instance {}",
-            place_id,
-            state.activity.instance_id.as_deref().unwrap_or("?")
-        );
+    if handle_join_game(line, state) {
         return Ok(());
     }
 
-    if let Some(caps) = WatcherRegexes::udmux().captures(line) {
-        let Some(ip) = caps.get(1) else { return Ok(()) };
-        if state.udmux_handled {
-            return Ok(());
-        }
-
-        handle_udmux_event(ip.as_str(), state).await?;
-        state.udmux_handled = true;
+    if handle_udmux_address(line, state).await? {
         return Ok(());
     }
 
-    if WatcherRegexes::joined().is_match(line) {
-        log::info!("joined regex matched: {}", line.trim());
-        handle_joined_event(app, state, store).await?;
+    if handle_game_joined(app, line, state, store).await? {
         return Ok(());
     }
 
-    if state.activity.in_game && WatcherRegexes::leave().is_match(line) {
-        log::info!("left game");
-        state.activity = Activity::default();
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
-    }
+    handle_game_leave(app, line, state).await?;
 
     Ok(())
 }
 
-async fn handle_udmux_event(
-    ip: &str,
+fn handle_join_game(line: &str, state: &mut WatcherState) -> bool {
+    let Some(caps) = WatcherRegexes::join().captures(line) else {
+        return false;
+    };
+
+    let instance_id = caps
+        .get(1)
+        .map(|m| m.as_str().to_string())
+        .unwrap_or_default();
+    let place_id: u64 = caps
+        .get(2)
+        .and_then(|m| m.as_str().parse().ok())
+        .unwrap_or(0);
+
+    state.activity.place_id = Some(place_id);
+    state.activity.instance_id = Some(instance_id);
+    state.activity.in_game = false;
+    state.udmux_handled = false;
+    state.pending_server_ip = None;
+    state.pending_server_location = None;
+
+    log::info!(
+        "joining place {} instance {}",
+        place_id,
+        state.activity.instance_id.as_deref().unwrap_or("?")
+    );
+    true
+}
+
+async fn handle_udmux_address(line: &str, state: &mut WatcherState) -> Result<bool, String> {
+    let Some(caps) = WatcherRegexes::udmux().captures(line) else {
+        return Ok(false);
+    };
+
+    let Some(ip) = caps.get(1) else {
+        return Ok(true);
+    };
+    if state.udmux_handled {
+        return Ok(true);
+    }
+
+    handle_udmux_event(ip.as_str(), state).await?;
+    state.udmux_handled = true;
+    Ok(true)
+}
+
+async fn handle_game_joined(
+    app: &AppHandle,
+    line: &str,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<bool, String> {
+    if !WatcherRegexes::joined().is_match(line) {
+        return Ok(false);
+    }
+
+    log::info!("joined regex matched: {}", line.trim());
+    handle_joined_event(app, state, store).await?;
+    Ok(true)
+}
+
+async fn handle_game_leave(
+    app: &AppHandle,
+    line: &str,
     state: &mut WatcherState,
 ) -> Result<(), String> {
-    if state.activity.place_id.is_none() {
-        log::info!("UDMUX fired but no place_id — skipping");
+    if !state.activity.in_game || !WatcherRegexes::leave().is_match(line) {
         return Ok(());
     }
+
+    log::info!("left game");
+    state.activity = Activity::default();
+    state.pending_server_ip = None;
+    state.pending_server_location = None;
+    let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+    Ok(())
+}
+
+async fn handle_udmux_event(ip: &str, state: &mut WatcherState) -> Result<(), String> {
+    let Some(_) = state.activity.place_id else {
+        log::info!("UDMUX fired but no place_id — skipping");
+        return Ok(());
+    };
 
     log::info!("UDMUX IP: {}", ip);
 
@@ -364,28 +408,7 @@ async fn handle_joined_event(
 
     let integrations = get_integrations(store);
 
-    let should_notify = integrations.as_ref().is_some_and(|v| {
-        v.get("serverLocationNotifier")
-            .and_then(|n| n.as_bool())
-            .unwrap_or(false)
-    });
-
-    if should_notify {
-        if let (Some(ip), Some(location)) = (
-            state.pending_server_ip.take(),
-            state.pending_server_location.take(),
-        ) {
-            app.notification()
-                .builder()
-                .title("Connected to a server!")
-                .body(format!("IP : {}\nLocation : {}", ip, location))
-                .show()
-                .map_err(|e| e.to_string())?;
-        }
-    } else {
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-    }
+    handle_joined_notifications(app, state, integrations.as_ref())?;
 
     let should_rpc = integrations.as_ref().is_some_and(|v| {
         v.get("discordRpc")
@@ -399,6 +422,38 @@ async fn handle_joined_event(
     }
 
     update_rpc_if_needed(app, state, place_id).await
+}
+
+fn handle_joined_notifications(
+    app: &AppHandle,
+    state: &mut WatcherState,
+    integrations: Option<&Value>,
+) -> Result<(), String> {
+    let should_notify = integrations.is_some_and(|v| {
+        v.get("serverLocationNotifier")
+            .and_then(|n| n.as_bool())
+            .unwrap_or(false)
+    });
+
+    if !should_notify {
+        state.pending_server_ip = None;
+        state.pending_server_location = None;
+        return Ok(());
+    }
+
+    let (Some(ip), Some(location)) = (
+        state.pending_server_ip.take(),
+        state.pending_server_location.take(),
+    ) else {
+        return Ok(());
+    };
+
+    app.notification()
+        .builder()
+        .title("Connected to a server!")
+        .body(format!("IP : {}\nLocation : {}", ip, location))
+        .show()
+        .map_err(|e| e.to_string())
 }
 
 fn save_game_history(

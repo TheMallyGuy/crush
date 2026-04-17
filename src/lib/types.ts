@@ -26,6 +26,7 @@ export type Integrations = {
     serverLocationNotifier: boolean
     roValra : RoValra
     gameCache?: Record<string, GameCache>;
+    crushRpc?: boolean;
 }
 
 export type BuildInfo = {

@@ -178,29 +178,28 @@ async function writeAppSettings(versionHash: string) {
     await writeFile(xmlPath, new TextEncoder().encode(xml))
 }
 
-async function performFullInstallation(
-    onProgress: ProgressCallback,
+async function getInstallationUrls(
+    bestRegion: string,
     version?: string
-): Promise<string> {
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.preparingForDownload'),
-    })
-    const bestRegion = await resolveBestRegion(onProgress)
-
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.fetchingUrls'),
-    })
+): Promise<string[]> {
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         region: bestRegion,
         ...(version && { version }),
     })
 
     if (!assetsUrls || assetsUrls.length === 0) {
-        throw new Error("No download URLs found for the specified version/region.")
+        throw new Error(
+            'No download URLs found for the specified version/region.'
+        )
     }
 
+    return assetsUrls
+}
+
+async function processAssets(
+    assetsUrls: string[],
+    onProgress: ProgressCallback
+) {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.downloadingAssets'),
@@ -215,11 +214,39 @@ async function performFullInstallation(
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
     await extractAll(versionHash, onProgress)
 
+    return versionHash
+}
+
+async function completeInstallation(
+    versionHash: string,
+    onProgress: ProgressCallback
+) {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.xmlWriting'),
     })
     await writeAppSettings(versionHash)
+}
+
+async function performFullInstallation(
+    onProgress: ProgressCallback,
+    version?: string
+): Promise<string> {
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.preparingForDownload'),
+    })
+    const bestRegion = await resolveBestRegion(onProgress)
+
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.fetchingUrls'),
+    })
+    const assetsUrls = await getInstallationUrls(bestRegion, version)
+
+    const versionHash = await processAssets(assetsUrls, onProgress)
+
+    await completeInstallation(versionHash, onProgress)
 
     return versionHash
 }
@@ -336,14 +363,9 @@ export async function restoreFileFromPackage(
     }
 
     const cacheDir = await appCacheDir()
-    const zipFileName = packageName.toLowerCase()
-    const zipPath = await join(cacheDir, zipFileName)
+    const zipPath = await join(cacheDir, packageName.toLowerCase())
 
-    info(`Checking zip exists at: ${zipPath}`)
-    const zipExists = await exists(zipPath)
-    info(`Zip exists: ${zipExists}`)
-
-    if (!zipExists) {
+    if (!(await exists(zipPath))) {
         await downloadMissingPackage(packageName, versionGuid, zipPath)
     }
 
@@ -355,24 +377,22 @@ export async function restoreFileFromPackage(
         return
     }
 
-    const prefixLower = prefix.toLowerCase()
-    const strippedFiles = files.map((f) => {
-        const normalized = f.replace(/\\/g, '/')
-        const normalizedLower = normalized.toLowerCase()
-        if (prefixLower && normalizedLower.startsWith(prefixLower)) {
-            return normalized.substring(prefix.length)
-        }
-        return normalized
-    })
-
-    info(`stripping prefix "${prefix}" from ${files.length} files`)
-    info(`sample stripped: ${strippedFiles[0]}`)
-    info(`extracting files: ${JSON.stringify(strippedFiles)} from ${zipPath} to ${destDir}`)
-
+    const strippedFiles = stripPrefixFromFiles(files, prefix)
     await invoke('extract_files_from_zip', {
         zipPath,
         dest: destDir,
         files: strippedFiles,
+    })
+}
+
+function stripPrefixFromFiles(files: string[], prefix: string): string[] {
+    const prefixLower = prefix.toLowerCase()
+    return files.map((f) => {
+        const normalized = f.replace(/\\/g, '/')
+        if (prefixLower && normalized.toLowerCase().startsWith(prefixLower)) {
+            return normalized.substring(prefix.length)
+        }
+        return normalized
     })
 }
 
