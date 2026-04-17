@@ -1,5 +1,0 @@
-ignoredBuiltDependencies:
-  - es5-ext
-
-onlyBuiltDependencies:
-  - esbuild

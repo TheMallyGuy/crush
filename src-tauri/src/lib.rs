@@ -175,7 +175,9 @@ pub fn run() {
                 std::process::exit(1);
             }
 
-            let window = app.get_webview_window("crushBoostrapChoiceWindow").unwrap();
+            let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") else {
+                return Err("Failed to find main bootstrap choice window".into());
+            };
             let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
             setup_deep_links(app)?;

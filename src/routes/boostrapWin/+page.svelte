@@ -147,26 +147,23 @@
 
         const launchUrl = new URL(parsed.placelauncherurl)
         const request = launchUrl.searchParams.get('request')
-        const joinServerForYou =
-            integrations?.roValra?.joinServerForYouValue ?? false
+        const joinServerForYou = integrations?.roValra?.joinServerForYouValue ?? false
 
-        if (request === 'RequestFollowUser' || request === 'RequestPrivateGame' || !joinServerForYou) {
+        const isSpecialRequest = request === 'RequestFollowUser' || request === 'RequestPrivateGame'
+        if (isSpecialRequest || !joinServerForYou || parsed.placeId == null) {
             info(`Launching with url: ${url}`)
             return launchPlayer(version, url)
         }
 
-        if (parsed.placeId != null) {
-            const result = await getBestServers(parsed.placeId)
-            const best = result.servers[0]
-            if (best) {
-                const finalUrl = rebuildDeeplink(
-                    parsed,
-                    parsed.placeId,
-                    best.server_id
-                )
-                return launchPlayer(version, finalUrl)
-            }
+        const result = await getBestServers(parsed.placeId)
+        const bestServer = result.servers[0]
+
+        if (!bestServer) {
+            return launchPlayer(version, url)
         }
+
+        const finalUrl = rebuildDeeplink(parsed, parsed.placeId, bestServer.server_id)
+        return launchPlayer(version, finalUrl)
     }
 
     async function finalizeBootstrap() {

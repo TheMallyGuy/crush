@@ -72,6 +72,25 @@ export type ProgressEvent =
 
 export type ProgressCallback = (event: ProgressEvent) => void
 
+export type Versions = {
+    versions: string[]
+}
+
+export type RobloxLaunchData = {
+    raw: Record<string, string>;
+
+    launchmode?: string;
+    gameinfo?: string;
+    launchtime?: number;
+
+    placelauncherurl?: string;
+    request?: string;
+
+    placeId?: number | null;
+    userId?: number | null;
+    joinAttemptId?: string | null;
+};
+
 // FastFlag Types
 export type FlagType = 'bool' | 'int' | 'string'
 

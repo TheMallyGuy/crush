@@ -1,17 +1,4 @@
-export type RobloxLaunchData = {
-    raw: Record<string, string>;
-
-    launchmode?: string;
-    gameinfo?: string;
-    launchtime?: number;
-
-    placelauncherurl?: string;
-    request?: string;
-
-    placeId?: number | null;
-    userId?: number | null;
-    joinAttemptId?: string | null;
-};
+import type { RobloxLaunchData } from "./types";
 
 export function parseRobloxDeepLink(url: string): RobloxLaunchData {
     const cleaned = url.replace(/^roblox-player:\d+\+?/, "");
