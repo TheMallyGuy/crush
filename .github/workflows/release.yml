@@ -1,11 +1,8 @@
 name: Tauri CI Build & Release
 on:
     push:
-        branches:
-            - master
         tags:
             - 'v*'
-    pull_request:
     workflow_dispatch:
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
