@@ -55,11 +55,11 @@
         },
         "updater": {
             "endpoints": [
-                "https://github.com/TheMallyGuy/crush/releases/latest/download/latest.json"
+                "https://github.com/TheMallyGuy/crush/releases/latest/download/updater.json"
             ],
             "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDgyN0YwRjJCNjJCM0FEQzcKUldUSHJiTmlLdzkvZ2dCMlY2Y3RUNmdyaHhXUzQ1VTNaOERPOUZzNkY1R0JFN3ZTL0tIM1doNWYK",
             "windows": {
-                "installMode": "basicUi"
+                "installMode": "passive"
             }
         }
     }
