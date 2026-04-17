@@ -161,8 +161,9 @@ async fn update_watcher_file(
 
     let integrations = get_integrations(store);
     let should_rpc = integrations.as_ref().is_some_and(|v| {
-        v.get("crushRpc")
-            .and_then(|r| r.as_bool())
+        v.get("discordRpc")
+            .and_then(|r| r.get("enable"))
+            .and_then(|e| e.as_bool())
             .unwrap_or(false)
     });
 
@@ -362,8 +363,9 @@ async fn handle_joined_event(
     }
 
     let should_rpc = integrations.as_ref().is_some_and(|v| {
-        v.get("crushRpc")
-            .and_then(|r| r.as_bool())
+        v.get("discordRpc")
+            .and_then(|r| r.get("enable"))
+            .and_then(|e| e.as_bool())
             .unwrap_or(false)
     });
 

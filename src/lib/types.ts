@@ -15,8 +15,14 @@ export type RoValra = {
     joinServerForYouValue: boolean
 }
 
+export type DiscordRpc = {
+    enable : boolean,
+    displayAccount: boolean,
+    letJoin: boolean
+}
+
 export type Integrations = {
-    crushRpc: boolean
+    discordRpc: DiscordRpc
     serverLocationNotifier: boolean
     roValra : RoValra
     gameCache?: Record<string, GameCache>;

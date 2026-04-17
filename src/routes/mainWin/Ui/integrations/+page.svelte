@@ -6,11 +6,14 @@
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-    import { type Integrations } from '$lib/types';
+    import type { Integrations, DiscordRpc } from '$lib/types';
     import { _ } from 'svelte-i18n';
     import { goto } from '$app/navigation'
+    import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
 
-    let crushRpc = false
+    let discordRpc = false
+    let letJoin = false
+    let displayAccount = false
     let serverLocationNotifier = false
     const roValaraLogoColored = "/RovalraColored.svg"
     const roValaraLogo = "/Rovalra.svg"
@@ -19,13 +22,18 @@
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
+        let savedRpc = <DiscordRpc>savedIntegrations?.discordRpc
 
         if (!savedIntegrations) {
             savedIntegrations = await store.get<Integrations>('intergrations')
         }
 
         if (savedIntegrations) {
-            crushRpc = savedIntegrations.crushRpc
+            if (savedRpc) {
+                discordRpc = savedRpc.enable
+                letJoin = savedRpc.letJoin
+                displayAccount = savedRpc.displayAccount
+            }
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
         }
     }
@@ -45,7 +53,7 @@
 
         const newIntegrations: Integrations = {
             ...current,
-            crushRpc,
+            discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
             roValra: current?.roValra ?? { joinServerForYouValue: false }
         }
@@ -80,17 +88,32 @@
                 on:change={handleChanges}
             />
         </SettingCard>
-        <SettingCard
+        <ExpandableSettingCard
             title={$_('pages.integrations.rpcCard.title')}
             description={$_('pages.integrations.rpcCard.description')}
             icon={Plug}
         >
             <Switch
                 slot="action"
-                bind:checked={crushRpc}
+                bind:checked={discordRpc}
                 on:change={handleChanges}
             />
-        </SettingCard>
+
+            <div class="flex gap-3"> <!-- option 1 -->
+                <p>
+                    Let people join your game 
+                </p>
+                <Switch bind:checked={letJoin} on:change={handleChanges}/>
+            </div>
+
+            <div class="flex gap-3"> <!-- option 2 -->
+                <p>
+                    Display Your Account when play roblox
+                </p>
+                <Switch bind:checked={displayAccount} on:change={handleChanges}/>
+            </div>
+
+        </ExpandableSettingCard>
 
         <SettingCard
             title={$_('pages.integrations.gameHistoryCard.title')}
