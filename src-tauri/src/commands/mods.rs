@@ -24,10 +24,7 @@ fn process_mod_entry(
     version_dir: impl AsRef<Path>,
 ) -> Option<String> {
     let src = entry.path();
-    let Ok(relative) = src.strip_prefix(mod_dir) else {
-        return None;
-    };
-
+    let relative = src.strip_prefix(mod_dir).ok()?;
     let dest = version_dir.as_ref().join(relative);
     let rel_str = relative.to_string_lossy().into_owned();
 
@@ -35,9 +32,7 @@ fn process_mod_entry(
         return Some(rel_str);
     }
 
-    let Some(parent) = dest.parent() else {
-        return None;
-    };
+    let parent = dest.parent()?;
 
     fs::create_dir_all(parent).ok()?;
     fs::copy(src, &dest).ok()?;
