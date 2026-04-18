@@ -211,26 +211,18 @@
     }
 
     function getPosStyle(h?: string, v?: string) {
-        const styles = []
-        const transforms = []
+        const styles: string[] = []
+        const transforms: string[] = []
 
-        if (h === 'Right') {
-            styles.push('right:0')
-        } else if (h === 'Center') {
-            styles.push('left:50%')
-            transforms.push('translateX(-50%)')
-        } else {
-            styles.push('left:0')
-        }
+        const hPos =
+            h === 'Right' ? 'right:0' : h === 'Center' ? 'left:50%' : 'left:0'
+        styles.push(hPos)
+        if (h === 'Center') transforms.push('translateX(-50%)')
 
-        if (v === 'Bottom') {
-            styles.push('bottom:0')
-        } else if (v === 'Center') {
-            styles.push('top:50%')
-            transforms.push('translateY(-50%)')
-        } else {
-            styles.push('top:0')
-        }
+        const vPos =
+            v === 'Bottom' ? 'bottom:0' : v === 'Center' ? 'top:50%' : 'top:0'
+        styles.push(vPos)
+        if (v === 'Center') transforms.push('translateY(-50%)')
 
         if (transforms.length > 0) {
             styles.push(`transform:${transforms.join(' ')}`)
@@ -250,17 +242,8 @@
         left: number
     }) {
         if (!m) return ''
-        const sides = {
-            top: 'top',
-            right: 'right',
-            bottom: 'bottom',
-            left: 'left',
-        }
-        return Object.entries(sides)
-            .map(([key, label]) => {
-                const val = m[key as keyof typeof m]
-                return val ? `margin-${label}:${val}px;` : ''
-            })
+        return Object.entries(m)
+            .map(([side, val]) => (val ? `margin-${side}:${val}px;` : ''))
             .join('')
     }
     function asset(src?: string) {

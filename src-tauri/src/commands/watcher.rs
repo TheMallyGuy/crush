@@ -71,7 +71,9 @@ struct GamesResponse {
 
 fn is_roblox_running(system: &mut System) -> bool {
     static ROBLOX_REGEX: OnceLock<Regex> = OnceLock::new();
-    let regex = ROBLOX_REGEX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+    let regex = ROBLOX_REGEX.get_or_init(|| {
+        Regex::new(r"(?i)robloxplayerbeta").expect("Failed to compile ROBLOX regex")
+    });
 
     system.refresh_processes_specifics(
         ProcessesToUpdate::All,
@@ -483,8 +485,8 @@ async fn update_rpc_if_needed(
     app: &AppHandle,
     state: &mut WatcherState,
     place_id: u64,
-    should_display_account: bool,
-    should_let_join: bool,
+    _should_display_account: bool,
+    _should_let_join: bool,
 ) -> Result<(), String> {
     let now = Instant::now();
     let debounce_ok = state
@@ -495,7 +497,7 @@ async fn update_rpc_if_needed(
         return Ok(());
     }
 
-    let Some((name, image_url)) = fetch_place_info(place_id).await? else {
+    let Some((name, _image_url)) = fetch_place_info(place_id).await? else {
         return Ok(());
     };
 
