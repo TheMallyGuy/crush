@@ -1,4 +1,40 @@
-use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
+use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder, WebviewWindow};
+use window_vibrancy::{apply_blur, apply_mica, apply_acrylic};
+use tauri_plugin_store::StoreExt;
+use serde_json::Value;
+
+pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
+    #[cfg(target_os = "windows")]
+    {
+        match effect {
+            "acrylic" => {
+                let _ = apply_acrylic(window, Some((20, 20, 20, 10)));
+            }
+            "mica" => {
+                let _ = apply_mica(window, None);
+            }
+            "blur" => {
+                let _ = apply_blur(window, Some((18, 18, 18, 125)));
+            }
+            _ => {
+                // Default fallback logic
+                if let Err(_) = apply_acrylic(window, Some((20, 20, 20, 10))) {
+                    if let Err(_) = apply_mica(window, None) {
+                        let _ = apply_blur(window, Some((18, 18, 18, 125)));
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[command]
+pub async fn set_window_vibrancy(app: AppHandle, effect: String) -> Result<(), String> {
+    for window in app.webview_windows().values() {
+        apply_vibrancy_to_window(window, &effect);
+    }
+    Ok(())
+}
 
 #[allow(clippy::too_many_arguments)]
 #[command]
@@ -25,13 +61,21 @@ pub async fn create_or_focus_window(
         .closable(true)
         .inner_size(width, height)
         .center()
-        .decorations(false);
+        .decorations(false)
+        .transparent(true);
 
     if let (Some(w), Some(h)) = (min_width, min_height) {
         builder = builder.min_inner_size(w, h);
     }
 
-    builder.build().map_err(|e| e.to_string())?;
+    let window = builder.build().map_err(|e| e.to_string())?;
+
+    let effect = app.get_store("config.json")
+        .and_then(|store| store.get("vibrancy"))
+        .and_then(|v| v.as_str().map(|s| s.to_string()))
+        .unwrap_or_else(|| "auto".to_string());
+
+    apply_vibrancy_to_window(&window, &effect);
 
     Ok(())
 }

@@ -14,6 +14,7 @@
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import { invoke } from '@tauri-apps/api/core'
+    import { load } from '@tauri-apps/plugin-store'
 
     type State = 'idle' | 'loading' | 'error'
 
@@ -22,6 +23,21 @@
     let missing: string[] = []
     let activeName = ''
     let themes: string[] = []
+
+    let vibrancyEffect = 'auto'
+    const vibrancyOptions = [
+        { value: 'auto', label: 'Auto' },
+        { value: 'acrylic', label: 'Acrylic' },
+        { value: 'mica', label: 'Mica' },
+        { value: 'blur', label: 'Blur' },
+    ]
+
+    async function updateVibrancy() {
+        const store = await load('config.json')
+        await store.set('vibrancy', vibrancyEffect)
+        await store.save()
+        await invoke('set_window_vibrancy', { effect: vibrancyEffect })
+    }
 
     let themeType = 'default'
     const typeOptions = [
@@ -96,11 +112,14 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: $_('rpc.appearance'),
         })
+
+        const store = await load('config.json')
+        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
 
         refreshThemes()
         const unsub = themeStore.subscribe((v) => {
