@@ -6,7 +6,7 @@
     preparePageTransition()
 </script>
 
-<div class="flex h-screen w-screen overflow-hidden bg-black text-white">
+<div class="flex h-screen w-screen overflow-hidden bg-transparent text-white">
     <Sidebar />
     <div class="flex-1 flex flex-col min-w-0">
         <main class="flex-1 relative min-w-0 overflow-hidden">

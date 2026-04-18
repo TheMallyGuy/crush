@@ -35,12 +35,14 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     });
     Ok(())
 }
+
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
     instance_id: Option<String>,
     in_game: bool,
-    notified: bool, 
+    notified: bool,
+    join_initiated: bool,
 }
 
 #[derive(Deserialize)]
@@ -127,10 +129,11 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
         was_running = running;
+        if running {
 
-        if let Some(path) = get_latest_log() {
-            update_watcher_file(&app, &mut state, path, &store).await;
-        }
+            if let Some(path) = get_latest_log() {
+                update_watcher_file(&app, &mut state, path, &store).await;
+            }
 
         let Some(_) = state.current_file else {
             tokio::time::sleep(Duration::from_millis(500)).await;
@@ -395,6 +398,11 @@ async fn handle_joined_event(
     let Some(place_id) = state.activity.place_id else {
         return Ok(());
     };
+
+    if !state.activity.join_initiated {
+        log::warn!("serverId line seen but no join was initiated what skipping (stale log?)");
+        return Ok(());
+    }
 
     if state.activity.in_game || state.activity.notified {
         return Ok(());
