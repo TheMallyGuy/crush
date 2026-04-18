@@ -21,7 +21,6 @@ use tauri::{
 use tauri::{Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
-use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
 
@@ -115,10 +114,14 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
 fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
     let menu = Menu::with_items(app, &[&quit_i])?;
-    let state: tauri::State<'_, RpcState> = app.state::<RpcState>();
 
-    let _tray = TrayIconBuilder::new()
-        .icon(app.default_window_icon().unwrap().clone())
+    let mut tray_builder = TrayIconBuilder::new();
+
+    if let Some(icon) = app.default_window_icon() {
+        tray_builder = tray_builder.icon(icon.clone());
+    }
+
+    let _tray = tray_builder
         .menu(&menu)
         .show_menu_on_left_click(false)
         .on_menu_event(|app, event| {
@@ -168,7 +171,6 @@ pub fn run() {
         .setup(|app| {
             print_debug_info();
 
-            let app_handle = app.handle().clone();
             let platform = tauri_plugin_os::platform();
 
             if platform != "windows" {

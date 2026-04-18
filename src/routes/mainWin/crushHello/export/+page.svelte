@@ -21,11 +21,21 @@
             }
             
             const newIntegrations: Integrations = {
-                serverLocationNotifier: boostraperConfig.ShowServerDetails ?? false,
+                discordRpc: integrations?.discordRpc ?? {
+                    enable: false,
+                    displayAccount: false,
+                    letJoin: false,
+                },
+                serverLocationNotifier:
+                    boostraperConfig.ShowServerDetails ??
+                    integrations?.serverLocationNotifier ??
+                    false,
                 roValra: roValra,
-                gameCache: {}, // none
-                ...integrations,
-                crushRpc: boostraperConfig.UseDiscordRichPresence ?? false
+                gameCache: integrations?.gameCache ?? {},
+                crushRpc:
+                    boostraperConfig.UseDiscordRichPresence ??
+                    integrations?.crushRpc ??
+                    false,
             }
 
             await config.set('integrations', newIntegrations)
