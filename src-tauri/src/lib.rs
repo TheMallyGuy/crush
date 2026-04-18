@@ -25,6 +25,8 @@ use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
 
+use crate::rpc::kill_rpc;
+
 pub mod rd;
 pub mod rpc;
 
@@ -102,7 +104,7 @@ fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Erro
 
 fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
     tauri::async_runtime::spawn(async move {
-        let state = app_handle.state::<RpcState>();
+        let state: tauri::State<'_, RpcState> = app_handle.state::<RpcState>();
 
         if let Err(e) = crate::rpc::start_rpc(&state, "1484521125550620813").await {
             log::error!("RPC error: {}", e);
@@ -113,6 +115,7 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
 fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
     let menu = Menu::with_items(app, &[&quit_i])?;
+    let state: tauri::State<'_, RpcState> = app.state::<RpcState>();
 
     let _tray = TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
@@ -165,6 +168,7 @@ pub fn run() {
         .setup(|app| {
             print_debug_info();
 
+            let app_handle = app.handle().clone();
             let platform = tauri_plugin_os::platform();
 
             if platform != "windows" {
@@ -194,18 +198,20 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
-            let tauri::WindowEvent::CloseRequested { api, .. } = event else {
-                return;
-            };
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                if window.label() == "CrushBoostrap" || window.label() == "crushBoostrap" {
+                    return;
+                }
 
-            // Secondary windows like "CrushBoostrap" should close and be destroyed normally.
-            // The main Choice window (the tray entry point) and the config window should stay in the tray.
-            if window.label() == "CrushBoostrap" || window.label() == "crushBoostrap" {
-                return;
+                api.prevent_close();
+                let _ = window.hide();
+
+                let app_handle = window.app_handle().clone();
+                tauri::async_runtime::spawn(async move {
+                    let state = app_handle.state::<RpcState>();
+                    let _ = kill_rpc(&state).await;
+                });
             }
-
-            let _ = window.hide();
-            api.prevent_close();
         })
         .invoke_handler(tauri::generate_handler![
             greet,
