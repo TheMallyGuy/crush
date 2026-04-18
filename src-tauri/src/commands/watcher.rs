@@ -35,14 +35,12 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     });
     Ok(())
 }
-
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
     instance_id: Option<String>,
     in_game: bool,
     notified: bool,
-    join_initiated: bool,
 }
 
 #[derive(Deserialize)]
@@ -75,11 +73,7 @@ fn is_roblox_running(system: &mut System) -> bool {
         Regex::new(r"(?i)robloxplayerbeta").expect("Failed to compile ROBLOX_REGEX")
     });
 
-    system.refresh_processes_specifics(
-        ProcessesToUpdate::All,
-        true,
-        ProcessRefreshKind::nothing(),
-    );
+    system.refresh_processes_specifics(ProcessesToUpdate::All, true, ProcessRefreshKind::nothing());
 
     system
         .processes()
@@ -108,7 +102,9 @@ fn get_latest_log() -> Option<PathBuf> {
 }
 
 fn get_integrations(store: &tauri_plugin_store::Store<tauri::Wry>) -> Option<Value> {
-    store.get("integrations").or_else(|| store.get("intergrations"))
+    store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"))
 }
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
@@ -129,11 +125,10 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
         was_running = running;
-        if running {
 
-            if let Some(path) = get_latest_log() {
-                update_watcher_file(&app, &mut state, path, &store).await;
-            }
+        if let Some(path) = get_latest_log() {
+            update_watcher_file(&app, &mut state, path, &store).await;
+        }
 
         let Some(_) = state.current_file else {
             tokio::time::sleep(Duration::from_millis(500)).await;
@@ -186,16 +181,22 @@ impl WatcherRegexes {
     fn join() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
         REGEX.get_or_init(|| {
-            Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)").expect("Failed to compile JOIN regex")
+            Regex::new(r"! Joining game '([0-9a-f\-]+)' place (\d+) at ([0-9\.]+)")
+                .expect("Failed to compile JOIN regex")
         })
     }
     fn joined() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
-        REGEX.get_or_init(|| Regex::new(r"serverId: ([0-9\.]+)\|").expect("Failed to compile JOINED regex"))
+        REGEX.get_or_init(|| {
+            Regex::new(r"serverId: ([0-9\.]+)\|").expect("Failed to compile JOINED regex")
+        })
     }
     fn leave() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
-        REGEX.get_or_init(|| Regex::new(r"Time to disconnect replication data").expect("Failed to compile LEAVE regex"))
+        REGEX.get_or_init(|| {
+            Regex::new(r"Time to disconnect replication data")
+                .expect("Failed to compile LEAVE regex")
+        })
     }
     fn udmux() -> &'static Regex {
         static REGEX: OnceLock<Regex> = OnceLock::new();
@@ -398,11 +399,6 @@ async fn handle_joined_event(
     let Some(place_id) = state.activity.place_id else {
         return Ok(());
     };
-
-    if !state.activity.join_initiated {
-        log::warn!("serverId line seen but no join was initiated what skipping (stale log?)");
-        return Ok(());
-    }
 
     if state.activity.in_game || state.activity.notified {
         return Ok(());

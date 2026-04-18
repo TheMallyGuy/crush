@@ -20,13 +20,13 @@
 
     const variants = {
         primary:
-            'bg-sapphire/80 text-white hover:bg-sapphire active:scale-[0.98] backdrop-blur-sm',
+            'bg-sapphire text-white hover:brightness-110 active:scale-[0.98]',
         secondary:
-            'bg-stone-800/40 text-stone-200 hover:bg-stone-700/60 active:scale-[0.98] backdrop-blur-sm border border-stone-700/30',
+            'bg-stone-800 text-stone-200 hover:bg-stone-700 active:scale-[0.98]',
         outline:
-            'border border-stone-700/50 text-stone-300 hover:bg-stone-800/40 hover:border-stone-600 active:scale-[0.98] backdrop-blur-sm',
-        danger: 'bg-red-600/60 text-white hover:bg-red-500 active:scale-[0.98] backdrop-blur-sm',
-        ghost: 'text-stone-400 hover:bg-stone-800/40 hover:text-stone-200 active:scale-[0.98]',
+            'border border-stone-700 text-stone-300 hover:bg-stone-800 hover:border-stone-600 active:scale-[0.98]',
+        danger: 'bg-red-600 text-white hover:bg-red-700 active:scale-[0.98]',
+        ghost: 'text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 active:scale-[0.98]',
     }
 
     const sizes = {

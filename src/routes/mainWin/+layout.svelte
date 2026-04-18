@@ -12,8 +12,8 @@
   import './font.css';
 </script>
 
-<div class="flex flex-col h-screen bg-transparent text-stone-200">
-  <div class="flex flex-1 overflow-hidden bg-transparent">
+<div class="flex flex-col h-screen bg-stone-950 text-stone-200">
+  <div class="flex flex-1 overflow-hidden">
     <Topbar />
     <slot />
   </div>

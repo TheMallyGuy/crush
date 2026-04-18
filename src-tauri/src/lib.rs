@@ -1,6 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 use commands::archive::{extract_files_from_zip, extract_zip};
+use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::crush;
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
@@ -11,9 +12,7 @@ use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
 };
 use commands::watcher::watch_logs;
-use commands::window::{create_or_focus_window, kill_window, set_window_vibrancy, apply_vibrancy_to_window};
-use tauri_plugin_store::StoreExt;
-use commands::boostrapper_importer::export_boostrapconfig;
+use commands::window::{create_or_focus_window, kill_window};
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
@@ -179,13 +178,7 @@ pub fn run() {
             let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") else {
                 return Err("Failed to find main bootstrap choice window".into());
             };
-
-            let effect = app.get_store("config.json")
-                .and_then(|store| store.get("vibrancy"))
-                .and_then(|v| v.as_str().map(|s| s.to_string()))
-                .unwrap_or_else(|| "auto".to_string());
-
-            apply_vibrancy_to_window(&window, &effect);
+            let _ = apply_blur(&window, Some((18, 18, 18, 125)));
 
             setup_deep_links(app)?;
             spawn_discord_rpc(app.handle().clone());
@@ -223,8 +216,7 @@ pub fn run() {
             watch_logs,
             set_rpc,
             copy_file,
-            export_boostrapconfig,
-            set_window_vibrancy
+            export_boostrapconfig
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

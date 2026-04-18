@@ -1,7 +1,6 @@
 use filthy_rich::{
     types::{Activity, ActivityType, StatusDisplayType},
-    PresenceClient,
-    PresenceRunner,
+    PresenceClient, PresenceRunner,
 };
 use tokio::sync::Mutex;
 
@@ -27,10 +26,7 @@ impl Default for RpcState {
 
 pub async fn start_rpc(state: &RpcState, client_id: &str) -> Result<(), String> {
     let mut runner = PresenceRunner::new(client_id);
-    runner
-        .run(true)
-        .await
-        .map_err(|e| e.to_string())?;
+    runner.run(true).await.map_err(|e| e.to_string())?;
     let client = runner.clone_handle();
     *state.client.lock().await = Some(client);
     *state.runner.lock().await = Some(runner);
@@ -40,10 +36,7 @@ pub async fn start_rpc(state: &RpcState, client_id: &str) -> Result<(), String> 
 pub async fn apply_rpc(state: &RpcState, details: &str, state_text: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new()
-            .details(details)
-            .state(state_text)
-            .build();
+        let activity = Activity::new().details(details).state(state_text).build();
         client
             .set_activity(activity)
             .await
@@ -108,17 +101,26 @@ pub async fn set_name(state: &RpcState, name: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
         let activity = Activity::new().name(name).build();
-        client.set_activity(activity).await.map_err(|e| e.to_string())
+        client
+            .set_activity(activity)
+            .await
+            .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }
 }
 
-pub async fn set_activity_type(state: &RpcState, activity_type: ActivityType) -> Result<(), String> {
+pub async fn set_activity_type(
+    state: &RpcState,
+    activity_type: ActivityType,
+) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
         let activity = Activity::new().activity_type(activity_type).build();
-        client.set_activity(activity).await.map_err(|e| e.to_string())
+        client
+            .set_activity(activity)
+            .await
+            .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }
@@ -131,7 +133,10 @@ pub async fn set_status_display_type(
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
         let activity = Activity::new().status_display_type(display_type).build();
-        client.set_activity(activity).await.map_err(|e| e.to_string())
+        client
+            .set_activity(activity)
+            .await
+            .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }

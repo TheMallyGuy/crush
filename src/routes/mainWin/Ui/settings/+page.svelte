@@ -5,7 +5,7 @@
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import type { BuildInfo } from '$lib/types'
     import { relaunch } from '@tauri-apps/plugin-process'
-    import { Heart, Info, Languages, BookHeart, AppWindow } from '@lucide/svelte'
+    import { Heart, Info, Languages, BookHeart } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
@@ -63,30 +63,13 @@
 
     let currentLocale: string
 
-    let vibrancyEffect = 'auto'
-    const vibrancyOptions = [
-        { value: 'auto', label: 'Auto' },
-        { value: 'acrylic', label: 'Acrylic' },
-        { value: 'mica', label: 'Mica' },
-    ]
-
     onMount(async () => {
         info = await invoke('crush')
         currentLocale = $locale ?? 'en'
         hash = info.hash
         buildtime = info.build_date
         version = info.version
-
-        const store = await load('config.json')
-        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
     })
-
-    async function updateVibrancy() {
-        const store = await load('config.json')
-        await store.set('vibrancy', vibrancyEffect)
-        await store.save()
-        await invoke('set_window_vibrancy', { effect: vibrancyEffect })
-    }
 
     async function handleLanguage() {
         let config = await load('config.json')
@@ -128,19 +111,6 @@
             bind:value={currentLocale}
             options={$dropdownOptions}
             on:change={handleLanguage}
-        />
-    </SettingCard>
-
-    <SettingCard
-        title="Window Vibrancy"
-        description="Choose the background blur effect for the application windows."
-        icon={AppWindow}
-    >
-        <Dropdown
-            slot="action"
-            bind:value={vibrancyEffect}
-            options={vibrancyOptions}
-            on:change={updateVibrancy}
         />
     </SettingCard>
 

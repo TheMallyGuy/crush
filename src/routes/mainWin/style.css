@@ -13,7 +13,7 @@
 
 html,
 body {
-    background: transparent !important;
+    background: transparent;
     overflow: hidden;
 }
 
@@ -39,26 +39,8 @@ main {
 :global(body) {
     margin: 0;
     padding: 0;
-    background: transparent !important;
+    background-color: var(--color-obsidian);
     overflow: hidden;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="password"],
-input[type="email"],
-textarea,
-select {
-    background-color: rgba(20, 20, 20, 0.4) !important;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    background-color: rgba(30, 30, 30, 0.6) !important;
-    border-color: var(--color-sapphire) !important;
 }
 
 @keyframes slide-in {
