@@ -12,7 +12,7 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
+    class="group relative flex w-full flex-col rounded-xl bg-anthracite p-5 transition-all duration-150 border border-stone-800/20
     {clickable
         ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
         : ''}

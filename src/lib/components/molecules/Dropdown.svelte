@@ -35,7 +35,7 @@
     <button
         type="button"
         on:click|stopPropagation={toggle}
-        class="flex w-full items-center justify-between rounded-lg border border-stone-800/40 bg-stone-900/40 backdrop-blur-sm px-4 py-2 text-sm text-stone-200 transition-all duration-150 hover:border-stone-700/60 focus:outline-none focus:ring-2 focus:ring-sapphire/20"
+        class="flex w-full items-center justify-between rounded-lg border border-stone-800/40 bg-stone-900/50 px-4 py-2 text-sm text-stone-200 transition-all duration-150 hover:border-stone-700/60 focus:outline-none focus:ring-2 focus:ring-sapphire/20"
     >
         <span class="font-medium"
             >{options.find((o) => o.value === value)?.label ||
@@ -59,7 +59,7 @@
     </button>
     {#if isOpen}
         <div
-            class="absolute left-0 top-full z-50 mt-2 w-full rounded-lg border border-stone-800/40 bg-stone-900/60 backdrop-blur-md shadow-2xl transition-all scrollbar-hide {options.length > 3
+            class="absolute left-0 top-full z-50 mt-2 w-full rounded-lg border border-stone-800/40 bg-stone-900 shadow-2xl transition-all scrollbar-hide {options.length > 3
                 ? 'max-h-40 overflow-y-auto'
                 : 'overflow-hidden'}"
         >

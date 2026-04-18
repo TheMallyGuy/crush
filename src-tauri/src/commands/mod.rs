@@ -1,4 +1,5 @@
 pub mod archive;
+pub mod boostrapper_importer;
 pub mod crush;
 pub mod discord_rpc;
 pub mod fs;
@@ -8,4 +9,3 @@ pub mod rename;
 pub mod roblox_deployment;
 pub mod watcher;
 pub mod window;
-pub mod boostrapper_importer;

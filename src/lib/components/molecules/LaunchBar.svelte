@@ -27,7 +27,7 @@
 </script>
 
 <div
-    class=" p-4 px-8 rounded-tl-3xl flex items-center"
+    class="bg-[#1a1c20] border-t border-l border-[#2a2d32] p-4 px-8 rounded-tl-3xl shadow-2xl flex items-center"
 >
     <Button
         variant="primary"

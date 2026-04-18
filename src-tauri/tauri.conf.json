@@ -18,8 +18,7 @@
                 "height": 250,
                 "url": "/mainWin/choiceWin",
                 "decorations": false,
-                "center": true,
-                "transparent": true
+                "center": true
             }
         ],
         "security": {

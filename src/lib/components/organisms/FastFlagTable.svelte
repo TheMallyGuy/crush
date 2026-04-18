@@ -79,7 +79,7 @@
 <div class="flex flex-col gap-6 w-full">
     <!-- Add row -->
     <div
-        class="flex items-center gap-3 p-4 bg-anthracite/40 rounded-2xl border border-stone-800/20 shadow-sm backdrop-blur-sm"
+        class="flex items-center gap-3 p-4 bg-anthracite rounded-2xl border border-stone-800/20 shadow-sm"
     >
         <div class="flex-[2]">
             <input
@@ -135,15 +135,15 @@
                 bind:value={searchQuery}
                 on:input={handleSearch}
                 placeholder={$_('pages.fastflag.editor.flagTable.search')}
-                class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 rounded-2xl bg-anthracite/40 backdrop-blur-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
+                class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 rounded-2xl bg-anthracite text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
             />
         </div>
 
         <div
-            class="flex flex-col rounded-2xl border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm overflow-hidden"
+            class="flex flex-col rounded-2xl border border-stone-800/20 bg-anthracite overflow-hidden"
         >
             <div
-                class="flex items-center px-6 py-3 text-[11px] font-bold uppercase tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/60"
+                class="flex items-center px-6 py-3 text-[11px] font-bold uppercase tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/40"
             >
                 <div class="flex-[2]">{$_('pages.fastflag.editor.flagTable.flagCol.name')}</div>
                 <div class="w-20">{$_('pages.fastflag.editor.flagTable.flagCol.type')}</div>
@@ -160,7 +160,7 @@
                     {#each filteredFlags as [name, value] (name)}
                         {@const type = detectType(value)}
                         <div
-                            class="group flex items-center px-6 py-2.5 hover:bg-stone-800/40 transition-colors duration-150"
+                            class="group flex items-center px-6 py-2.5 hover:bg-stone-800/30 transition-colors duration-150"
                         >
                             <div
                                 class="flex-[2] font-mono text-[13px] text-stone-300 truncate pr-6 select-all"

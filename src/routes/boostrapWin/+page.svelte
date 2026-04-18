@@ -306,14 +306,14 @@
 {#if state}
     {#if state.isHtmlTheme}
         <div
-            class="relative overflow-hidden h-screen w-screen bg-transparent"
+            class="relative overflow-hidden h-screen w-screen bg-black"
             use:mountHtml={state.customHtml || ''}
         ></div>
     {:else if cfg}
         <div
             class="relative overflow-hidden h-screen w-screen"
             style="
-                background:{isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)'};
+                background:{isDark ? '#000' : '#fff'};
                 color:{isDark ? '#fff' : '#000'};
                 border-radius:{noRound ? '0' : '8px'};
             "
@@ -451,7 +451,7 @@
     {/if}
 {:else}
     <div
-        class="relative h-screen bg-transparent text-white selection:bg-stone-800"
+        class="relative h-screen bg-stone-950 text-white selection:bg-stone-800"
     >
         <div
             class="absolute inset-0 flex flex-col items-center justify-center text-center p-3 pb-24 gap-6"

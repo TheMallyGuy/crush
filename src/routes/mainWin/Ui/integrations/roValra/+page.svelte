@@ -4,18 +4,23 @@
     import { goto } from "$app/navigation";
     import SettingCard from "$lib/components/molecules/SettingCard.svelte"
     import Switch from "$lib/components/atoms/Switch.svelte"
-    import { load } from "@tauri-apps/plugin-store";
+    import { load, Store } from "@tauri-apps/plugin-store";
     import { onMount } from "svelte"
-    import type { Integrations, DiscordRpc } from "$lib/types";
+    import type { Integrations, RoValra } from "$lib/types";
+    import { getBestServers } from "$lib/rovalraHelper/rovalra"
 
     const rovalraTitle = "/RovalraTitle.svg"
-    let joinServerForYouValue: boolean = false
-    let isDisabled: boolean = true
+    let joinServerForYouValue: boolean
+
+    let isDisabled: boolean =  true
 
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
-            ?? await store.get<Integrations>('intergrations')
+
+        if (!savedIntegrations) {
+            savedIntegrations = await store.get<Integrations>('intergrations')
+        }
 
         if (savedIntegrations) {
             joinServerForYouValue = savedIntegrations.roValra.joinServerForYouValue ?? false
@@ -25,30 +30,25 @@
     async function handleChanges() {
         const store = await load('config.json')
 
-        const savedIntegrations = await store.get<Integrations>('integrations')
+        let savedIntegrations = await store.get<Integrations>('integrations')
             ?? await store.get<Integrations>('intergrations')
 
-        const savedRpc: DiscordRpc = savedIntegrations?.discordRpc ?? {
-            enable: false,
-            displayAccount: false,
-            letJoin: false,
-        }
-
         const newIntegrations: Integrations = {
-            discordRpc: {
-                enable: savedRpc.enable,
-                displayAccount: savedRpc.displayAccount,
-                letJoin: savedRpc.letJoin,
+            discordRpc: savedIntegrations?.discordRpc ?? {
+                enable: false,
+                displayAccount: false,
+                letJoin: false
             },
+            crushRpc: savedIntegrations?.crushRpc ?? false,
             serverLocationNotifier: savedIntegrations?.serverLocationNotifier ?? false,
             roValra: {
                 joinServerForYouValue,
             }
         }
-
         await store.set('integrations', newIntegrations)
         await store.save()
     }
+
 
     onMount(async () => {
         await loadConfig()

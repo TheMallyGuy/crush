@@ -97,7 +97,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-center h-screen flex-1 p-3 gap-5 0 text-white selection:bg-stone-800"
+    class="flex flex-col items-center justify-center h-screen flex-1 p-3 gap-5 bg-stone-950 text-white selection:bg-stone-800"
 >
     <div>
         <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
@@ -108,7 +108,7 @@
     <div class="flex flex-col gap-2 w-full max-w-sm">
         <button
             on:click={launchBoostrap}
-            class="w-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
+            class="w-full bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
         >
             <Gamepad2 class="size-5" />
             <span class="font-medium">{$_('pages.choiceWin.playRoblox')}</span>
@@ -117,7 +117,7 @@
         <div class="flex flex-row gap-2 w-full">
             <button
                 on:click={openmainwin}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
+                class="w-1/2 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
             >
                 <Wrench class="size-5" />
                 {$_('pages.choiceWin.config')}
@@ -125,7 +125,7 @@
 
             <button
                 on:click={openDiscordServer}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center"
+                class="w-1/2 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center"
             >
                 <Info class="size-5" />
                 Discord

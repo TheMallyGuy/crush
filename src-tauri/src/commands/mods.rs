@@ -33,9 +33,10 @@ fn process_mod_entry(
     }
 
     let parent = dest.parent()?;
-    fs::create_dir_all(parent).ok()?;
 
+    fs::create_dir_all(parent).ok()?;
     fs::copy(src, &dest).ok()?;
+
     Some(rel_str)
 }
 
