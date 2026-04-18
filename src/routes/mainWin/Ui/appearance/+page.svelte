@@ -112,27 +112,37 @@
         }
     }
 
-    onMount(async () => {
+    onMount(() => {
         invoke('set_rpc', {
             details: $_('rpc.general'),
             stateText: $_('rpc.appearance'),
         })
 
-        const store = await load('config.json')
-        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
+        let unsub: (() => void) | undefined
+        let isMounted = true
 
-        refreshThemes()
-        const unsub = themeStore.subscribe((v) => {
-            activeName = v?.themeName || ''
-            const newType = v ? 'custom' : 'default'
-            if (!isInitialized) {
-                themeType = newType
-                isInitialized = true
-            } else {
-                if (themeType !== newType) themeType = newType
-            }
+        load('config.json').then(async (store) => {
+            if (!isMounted) return
+
+            vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
+            refreshThemes()
+
+            unsub = themeStore.subscribe((v) => {
+                activeName = v?.themeName || ''
+                const newType = v ? 'custom' : 'default'
+                if (!isInitialized) {
+                    themeType = newType
+                    isInitialized = true
+                } else if (themeType !== newType) {
+                    themeType = newType
+                }
+            })
         })
-        return unsub
+
+        return () => {
+            isMounted = false
+            if (unsub) unsub()
+        }
     })
 </script>
 

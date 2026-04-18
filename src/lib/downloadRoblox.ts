@@ -178,10 +178,10 @@ async function writeAppSettings(versionHash: string) {
     await writeFile(xmlPath, new TextEncoder().encode(xml))
 }
 
-async function performFullInstallation(
+async function getInstallationUrls(
     onProgress: ProgressCallback,
     version?: string
-): Promise<string> {
+): Promise<string[]> {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.preparingForDownload'),
@@ -198,21 +198,22 @@ async function performFullInstallation(
     })
 
     if (!assetsUrls || assetsUrls.length === 0) {
-        throw new Error("No download URLs found for the specified version/region.")
+        throw new Error(
+            'No download URLs found for the specified version/region.'
+        )
     }
 
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.downloadingAssets'),
-    })
-    await downloadAssets(assetsUrls, onProgress)
+    return assetsUrls
+}
 
+async function completeInstallation(
+    onProgress: ProgressCallback,
+    versionHash: string
+): Promise<void> {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.extractingFiles'),
     })
-    const versionHash =
-        assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
     await extractAll(versionHash, onProgress)
 
     onProgress({
@@ -220,6 +221,24 @@ async function performFullInstallation(
         message: get(_)('typescript.downloader.xmlWriting'),
     })
     await writeAppSettings(versionHash)
+}
+
+async function performFullInstallation(
+    onProgress: ProgressCallback,
+    version?: string
+): Promise<string> {
+    const assetsUrls = await getInstallationUrls(onProgress, version)
+
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.downloadingAssets'),
+    })
+    await downloadAssets(assetsUrls, onProgress)
+
+    const versionHash =
+        assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
+
+    await completeInstallation(onProgress, versionHash)
 
     return versionHash
 }

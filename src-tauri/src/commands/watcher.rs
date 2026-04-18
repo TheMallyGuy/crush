@@ -71,7 +71,9 @@ struct GamesResponse {
 
 fn is_roblox_running(system: &mut System) -> bool {
     static ROBLOX_REGEX: OnceLock<Regex> = OnceLock::new();
-    let regex = ROBLOX_REGEX.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+    let regex = ROBLOX_REGEX.get_or_init(|| {
+        Regex::new(r"(?i)robloxplayerbeta").expect("Failed to compile ROBLOX regex")
+    });
 
     system.refresh_processes_specifics(
         ProcessesToUpdate::All,

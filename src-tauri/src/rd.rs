@@ -95,11 +95,12 @@ pub async fn get_download_urls(
     region_url: Option<&str>,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     let raw_hash_owned;
-    let raw_hash = if let Some(hash) = version_hash {
-        hash
-    } else {
-        raw_hash_owned = latest_version().await?.client_version_upload;
-        &raw_hash_owned
+    let raw_hash = match version_hash {
+        Some(hash) => hash,
+        None => {
+            raw_hash_owned = latest_version().await?.client_version_upload;
+            &raw_hash_owned
+        }
     };
 
     let base_version = format!(
@@ -107,13 +108,12 @@ pub async fn get_download_urls(
         raw_hash.strip_prefix("version-").unwrap_or(raw_hash)
     );
 
-    let base_url = if let Some(url) = region_url {
-        url.to_owned()
-    } else {
-        best_region()
+    let base_url = match region_url {
+        Some(url) => url.to_owned(),
+        None => best_region()
             .await
             .unwrap_or("https://setup.rbxcdn.com")
-            .to_owned()
+            .to_owned(),
     };
 
     let urls = FILES
