@@ -17,10 +17,10 @@ pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
             }
             _ => {
                 // Default fallback logic
-                if apply_acrylic(window, Some((20, 20, 20, 10))).is_err() {
-                    if apply_mica(window, None).is_err() {
-                        let _ = apply_blur(window, Some((18, 18, 18, 125)));
-                    }
+                if apply_acrylic(window, Some((20, 20, 20, 10))).is_err()
+                    && apply_mica(window, None).is_err()
+                {
+                    let _ = apply_blur(window, Some((18, 18, 18, 125)));
                 }
             }
         }
