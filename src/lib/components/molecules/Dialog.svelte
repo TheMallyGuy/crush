@@ -33,7 +33,7 @@
     >
         <!-- Modal Container -->
         <div
-            class="w-full max-w-md bg-anthracite border border-stone-800/40 rounded-2xl p-6 shadow-2xl relative overflow-hidden flex flex-col {className}"
+            class="w-full max-w-md bg-anthracite/60 backdrop-blur-xl border border-stone-800/40 rounded-2xl p-6 shadow-2xl relative overflow-hidden flex flex-col {className}"
             transition:fly={{ y: 20, duration: 250, opacity: 0 }}
         >
             <!-- Decorative Glow -->

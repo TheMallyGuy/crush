@@ -21,11 +21,6 @@
             }
             
             const newIntegrations: Integrations = {
-                discordRpc: integrations?.discordRpc ?? {
-                    enable: false,
-                    displayAccount: false,
-                    letJoin: false
-                },
                 serverLocationNotifier: boostraperConfig.ShowServerDetails ?? false,
                 roValra: roValra,
                 gameCache: {}, // none
