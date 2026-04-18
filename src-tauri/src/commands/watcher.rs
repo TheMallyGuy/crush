@@ -485,8 +485,8 @@ async fn update_rpc_if_needed(
     app: &AppHandle,
     state: &mut WatcherState,
     place_id: u64,
-    should_display_account: bool,
-    should_let_join: bool,
+    _should_display_account: bool,
+    _should_let_join: bool,
 ) -> Result<(), String> {
     let now = Instant::now();
     let debounce_ok = state
@@ -497,7 +497,7 @@ async fn update_rpc_if_needed(
         return Ok(());
     }
 
-    let Some((name, image_url)) = fetch_place_info(place_id).await? else {
+    let Some((name, _image_url)) = fetch_place_info(place_id).await? else {
         return Ok(());
     };
 

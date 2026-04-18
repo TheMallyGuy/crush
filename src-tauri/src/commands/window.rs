@@ -1,7 +1,6 @@
 use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder, WebviewWindow};
 use window_vibrancy::{apply_blur, apply_mica, apply_acrylic};
 use tauri_plugin_store::StoreExt;
-use serde_json::Value;
 
 pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
     #[cfg(target_os = "windows")]
@@ -18,8 +17,8 @@ pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
             }
             _ => {
                 // Default fallback logic
-                if let Err(_) = apply_acrylic(window, Some((20, 20, 20, 10))) {
-                    if let Err(_) = apply_mica(window, None) {
+                if apply_acrylic(window, Some((20, 20, 20, 10))).is_err() {
+                    if apply_mica(window, None).is_err() {
                         let _ = apply_blur(window, Some((18, 18, 18, 125)));
                     }
                 }
@@ -54,7 +53,7 @@ pub async fn create_or_focus_window(
         return Ok(());
     }
 
-    let webview_url = WebviewUrl::App(url.parse().unwrap());
+    let webview_url = WebviewUrl::App(url.parse().expect("Failed to parse window URL"));
 
     let mut builder = WebviewWindowBuilder::new(&app, label, webview_url)
         .title(&title)

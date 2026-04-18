@@ -21,7 +21,6 @@ use tauri::{
 use tauri::{Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
-use window_vibrancy::*;
 mod commands;
 use rpc::RpcState;
 
@@ -172,7 +171,6 @@ pub fn run() {
         .setup(|app| {
             print_debug_info();
 
-            let app_handle = app.handle().clone();
             let platform = tauri_plugin_os::platform();
 
             if platform != "windows" {
