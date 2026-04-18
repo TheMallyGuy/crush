@@ -173,7 +173,7 @@ pub fn run() {
 
             if platform != "windows" {
                 app.dialog()
-                    .message(format!("This app can't work on {}", platform))
+                    .message(format!("This app can't work on {}. However, we will have plans for {}.", platform, platform))
                     .kind(tauri_plugin_dialog::MessageDialogKind::Error)
                     .title("Error")
                     .blocking_show();
