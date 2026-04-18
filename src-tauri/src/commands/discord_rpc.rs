@@ -1,4 +1,4 @@
-use crate::rpc::{apply_rpc_full, RpcState};
+use crate::rpc::{apply_rpc_full, start_rpc,RpcState};
 use tauri::Manager;
 
 #[tauri::command]
@@ -8,6 +8,7 @@ pub async fn set_rpc(
     state_text: String,
 ) -> Result<(), String> {
     let rpc_state = app.state::<RpcState>();
+    let _ = start_rpc(&rpc_state, "1484521125550620813").await;
     apply_rpc_full(
         &rpc_state,
         None,

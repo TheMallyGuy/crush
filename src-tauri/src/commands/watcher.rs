@@ -1,5 +1,5 @@
 use crate::rd::get_client;
-use crate::rpc::{apply_rpc, kill_rpc, RpcState};
+use crate::rpc::{RpcState, apply_rpc, apply_rpc_full, kill_rpc};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::Deserialize;
@@ -155,13 +155,20 @@ async fn update_watcher_file(
     }
 
     log::info!("New log file: {:?}", path);
+    let initial_offset = std::fs::metadata(&path)
+        .map(|m| m.len())
+        .unwrap_or(0);
+
+    log::info!("Skipping {} bytes of existing log content", initial_offset);
+
     state.current_file = Some(path);
     state.reader = None;
-    state.offset = 0;
+    state.offset = initial_offset;
     state.activity = Activity::default();
     state.udmux_handled = false;
     state.pending_server_ip = None;
     state.pending_server_location = None;
+    state.location_notified = false;
 
     let integrations = get_integrations(store);
     let should_rpc = integrations.as_ref().is_some_and(|v| {
@@ -211,6 +218,7 @@ struct WatcherState {
     udmux_handled: bool,
     pending_server_ip: Option<String>,
     pending_server_location: Option<String>,
+    location_notified: bool,
 }
 
 async fn process_log_file(
@@ -287,6 +295,7 @@ async fn handle_log_line(
         state.udmux_handled = false;
         state.pending_server_ip = None;
         state.pending_server_location = None;
+        state.location_notified = false;
 
         log::info!(
             "joining place {} instance {}",
@@ -304,8 +313,14 @@ async fn handle_log_line(
 
         handle_udmux_event(ip.as_str(), state).await?;
         state.udmux_handled = true;
+
+        if state.activity.in_game && !state.location_notified {
+            try_send_location_notification(app, state, store).await?;
+        }
+
         return Ok(());
     }
+
 
     if WatcherRegexes::joined().is_match(line) {
         log::info!("joined regex matched: {}", line.trim());
@@ -318,7 +333,42 @@ async fn handle_log_line(
         state.activity = Activity::default();
         state.pending_server_ip = None;
         state.pending_server_location = None;
+        state.location_notified = false;
         let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+    }
+
+    Ok(())
+}
+
+async fn try_send_location_notification(
+    app: &AppHandle,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    let integrations = get_integrations(store);
+    let should_notify = integrations.as_ref().is_some_and(|v| {
+        v.get("serverLocationNotifier")
+            .and_then(|n| n.as_bool())
+            .unwrap_or(false)
+    });
+
+    if !should_notify {
+        state.pending_server_ip = None;
+        state.pending_server_location = None;
+        return Ok(());
+    }
+
+    if let (Some(ip), Some(location)) = (
+        state.pending_server_ip.take(),
+        state.pending_server_location.take(),
+    ) {
+        state.location_notified = true;
+        app.notification()
+            .builder()
+            .title("Connected to a server!")
+            .body(format!("IP : {}\nLocation : {}", ip, location))
+            .show()
+            .map_err(|e| e.to_string())?;
     }
 
     Ok(())
@@ -372,30 +422,9 @@ async fn handle_joined_event(
 
     save_game_history(state, store, place_id)?;
 
+    try_send_location_notification(app, state, store).await?;
+
     let integrations = get_integrations(store);
-
-    let should_notify = integrations.as_ref().is_some_and(|v| {
-        v.get("serverLocationNotifier")
-            .and_then(|n| n.as_bool())
-            .unwrap_or(false)
-    });
-
-    if should_notify {
-        if let (Some(ip), Some(location)) = (
-            state.pending_server_ip.take(),
-            state.pending_server_location.take(),
-        ) {
-            app.notification()
-                .builder()
-                .title("Connected to a server!")
-                .body(format!("IP : {}\nLocation : {}", ip, location))
-                .show()
-                .map_err(|e| e.to_string())?;
-        }
-    } else {
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-    }
 
     let should_rpc = integrations.as_ref().is_some_and(|v| {
         v.get("discordRpc")
@@ -408,7 +437,21 @@ async fn handle_joined_event(
         return Ok(());
     }
 
-    update_rpc_if_needed(app, state, place_id).await
+    let should_display_account = integrations.as_ref().is_some_and(|v| {
+        v.get("discordRpc")
+            .and_then(|r| r.get("displayAccount"))
+            .and_then(|e| e.as_bool())
+            .unwrap_or(false)
+    });
+
+    let should_let_join = integrations.as_ref().is_some_and(|v| {
+        v.get("discordRpc")
+            .and_then(|r| r.get("letJoin"))
+            .and_then(|e| e.as_bool())
+            .unwrap_or(false)
+    });
+
+    update_rpc_if_needed(app, state, place_id, should_display_account, should_let_join).await
 }
 
 fn save_game_history(
@@ -435,10 +478,13 @@ fn save_game_history(
     store.save().map_err(|e| e.to_string())
 }
 
+
 async fn update_rpc_if_needed(
     app: &AppHandle,
     state: &mut WatcherState,
     place_id: u64,
+    should_display_account: bool,
+    should_let_join: bool,
 ) -> Result<(), String> {
     let now = Instant::now();
     let debounce_ok = state
@@ -449,20 +495,51 @@ async fn update_rpc_if_needed(
         return Ok(());
     }
 
-    let Some(name) = fetch_place_name(place_id).await? else {
+    let Some((name, image_url)) = fetch_place_info(place_id).await? else {
         return Ok(());
     };
 
-    if let Err(e) = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", &name).await {
+    let instance_id = state
+        .activity
+        .instance_id
+        .as_deref()
+        .unwrap_or("");
+
+    let deeplink = format!(
+        "https://deeplink.multicrew.dev?placeId={}&jobId={}",
+        place_id, instance_id
+    );
+
+    let mut buttons: Vec<(String, String)> = vec![
+        ("Join Server".to_string(), deeplink),
+    ];
+
+    buttons.push((
+        "View Game".to_string(),
+        format!("https://www.roblox.com/games/{}", place_id),
+    ));
+
+    if let Err(e) = apply_rpc_full(
+        &app.state::<RpcState>(),
+        Some("Crush"),
+        Some("Playing Roblox"),
+        Some(&name),
+        None, // activity_type
+        None, // status_display_type
+        Some(buttons),
+    )
+    .await
+    {
         log::error!("RPC failed: {}", e);
     }
-    state.last_rpc = Some(now);
 
+    state.last_rpc = Some(now);
     Ok(())
 }
 
-async fn fetch_place_name(place_id: u64) -> Result<Option<String>, String> {
+async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, String> {
     let client = get_client();
+
     let res = client
         .get(format!(
             "https://apis.roblox.com/universes/v1/places/{}/universe",
@@ -473,17 +550,49 @@ async fn fetch_place_name(place_id: u64) -> Result<Option<String>, String> {
         .map_err(|e| e.to_string())?;
 
     let universe: UniverseResponse = res.json().await.map_err(|e| e.to_string())?;
+    let uid = universe.universe_id;
 
-    let res2 = client
-        .get(format!(
-            "https://games.roblox.com/v1/games?universeIds={}",
-            universe.universe_id
-        ))
-        .send()
+    let (games_res, icon_res) = tokio::join!(
+        client
+            .get(format!(
+                "https://games.roblox.com/v1/games?universeIds={}",
+                uid
+            ))
+            .send(),
+        client
+            .get(format!(
+                "https://thumbnails.roblox.com/v1/games/icons?universeIds={}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+                uid
+            ))
+            .send(),
+    );
+
+    let name = games_res
+        .map_err(|e| e.to_string())?
+        .json::<GamesResponse>()
         .await
-        .map_err(|e| e.to_string())?;
+        .map_err(|e| e.to_string())?
+        .data
+        .into_iter()
+        .next()
+        .map(|g| g.name)
+        .unwrap_or_else(|| "Unknown Game".to_string());
 
-    let games: GamesResponse = res2.json().await.map_err(|e| e.to_string())?;
+    #[derive(Deserialize)]
+    struct IconEntry { #[serde(rename = "imageUrl")] image_url: String }
+    #[derive(Deserialize)]
+    struct IconResponse { data: Vec<IconEntry> }
 
-    Ok(games.data.first().map(|g| g.name.clone()))
+    let image_url = icon_res
+        .map_err(|e| e.to_string())?
+        .json::<IconResponse>()
+        .await
+        .map_err(|e| e.to_string())?
+        .data
+        .into_iter()
+        .next()
+        .map(|i| i.image_url)
+        .unwrap_or_default();
+
+    Ok(Some((name, image_url)))
 }
