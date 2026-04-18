@@ -10,23 +10,17 @@ async function revertAppliedMods(
     versionDir: string
 ) {
     const storedModNames = await manifestStore.keys()
-    if (storedModNames.length === 0) {
-        return
-    }
+    if (storedModNames.length === 0) return
 
     const filesByPackage = new Map<string, string[]>()
 
     for (const modName of storedModNames) {
         const files = (await manifestStore.get<string[]>(modName)) ?? []
-        if (files.length === 0) {
-            continue
-        }
+        if (files.length === 0) continue
 
         for (const file of files) {
             const pkg = getPackageForFile(file)
-            if (!pkg) {
-                continue
-            }
+            if (!pkg) continue
 
             if (!filesByPackage.has(pkg)) {
                 filesByPackage.set(pkg, [])
@@ -97,9 +91,7 @@ export async function removeMod(mod: Mod, robloxHash: string) {
     const filesByPackage = new Map<string, string[]>()
     for (const file of files) {
         const pkg = getPackageForFile(file)
-        if (!pkg) {
-            continue
-        }
+        if (!pkg) continue
 
         if (!filesByPackage.has(pkg)) {
             filesByPackage.set(pkg, [])

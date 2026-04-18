@@ -36,7 +36,7 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen bg-anthracite text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64"
+    class="flex flex-col h-screen  backdrop-blur-2xl text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
 >
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
         <button class="hover:text-stone-100 transition-colors">
@@ -50,8 +50,8 @@
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all hover:bg-stone-800/50 hover:text-stone-100 group
-                {isActive ? 'bg-stone-800/80 text-sapphire' : ''}"
+                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all  group
+                {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div
@@ -78,7 +78,7 @@
             <a
                 href={item.href}
                 class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all hover:bg-stone-800/50 hover:text-stone-100 group
-                {isActive ? 'bg-stone-800/80 text-sapphire' : ''}"
+                {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div

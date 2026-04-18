@@ -178,56 +178,6 @@ async function writeAppSettings(versionHash: string) {
     await writeFile(xmlPath, new TextEncoder().encode(xml))
 }
 
-async function getInstallationUrls(
-    bestRegion: string,
-    version?: string
-): Promise<string[]> {
-    const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
-        region: bestRegion,
-        ...(version && { version }),
-    })
-
-    if (!assetsUrls || assetsUrls.length === 0) {
-        throw new Error(
-            'No download URLs found for the specified version/region.'
-        )
-    }
-
-    return assetsUrls
-}
-
-async function processAssets(
-    assetsUrls: string[],
-    onProgress: ProgressCallback
-) {
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.downloadingAssets'),
-    })
-    await downloadAssets(assetsUrls, onProgress)
-
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.extractingFiles'),
-    })
-    const versionHash =
-        assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
-    await extractAll(versionHash, onProgress)
-
-    return versionHash
-}
-
-async function completeInstallation(
-    versionHash: string,
-    onProgress: ProgressCallback
-) {
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.xmlWriting'),
-    })
-    await writeAppSettings(versionHash)
-}
-
 async function performFullInstallation(
     onProgress: ProgressCallback,
     version?: string
@@ -242,11 +192,34 @@ async function performFullInstallation(
         type: 'status',
         message: get(_)('typescript.downloader.fetchingUrls'),
     })
-    const assetsUrls = await getInstallationUrls(bestRegion, version)
+    const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        region: bestRegion,
+        ...(version && { version }),
+    })
 
-    const versionHash = await processAssets(assetsUrls, onProgress)
+    if (!assetsUrls || assetsUrls.length === 0) {
+        throw new Error("No download URLs found for the specified version/region.")
+    }
 
-    await completeInstallation(versionHash, onProgress)
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.downloadingAssets'),
+    })
+    await downloadAssets(assetsUrls, onProgress)
+
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.extractingFiles'),
+    })
+    const versionHash =
+        assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
+    await extractAll(versionHash, onProgress)
+
+    onProgress({
+        type: 'status',
+        message: get(_)('typescript.downloader.xmlWriting'),
+    })
+    await writeAppSettings(versionHash)
 
     return versionHash
 }
@@ -363,9 +336,14 @@ export async function restoreFileFromPackage(
     }
 
     const cacheDir = await appCacheDir()
-    const zipPath = await join(cacheDir, packageName.toLowerCase())
+    const zipFileName = packageName.toLowerCase()
+    const zipPath = await join(cacheDir, zipFileName)
 
-    if (!(await exists(zipPath))) {
+    info(`Checking zip exists at: ${zipPath}`)
+    const zipExists = await exists(zipPath)
+    info(`Zip exists: ${zipExists}`)
+
+    if (!zipExists) {
         await downloadMissingPackage(packageName, versionGuid, zipPath)
     }
 
@@ -377,22 +355,24 @@ export async function restoreFileFromPackage(
         return
     }
 
-    const strippedFiles = stripPrefixFromFiles(files, prefix)
+    const prefixLower = prefix.toLowerCase()
+    const strippedFiles = files.map((f) => {
+        const normalized = f.replace(/\\/g, '/')
+        const normalizedLower = normalized.toLowerCase()
+        if (prefixLower && normalizedLower.startsWith(prefixLower)) {
+            return normalized.substring(prefix.length)
+        }
+        return normalized
+    })
+
+    info(`stripping prefix "${prefix}" from ${files.length} files`)
+    info(`sample stripped: ${strippedFiles[0]}`)
+    info(`extracting files: ${JSON.stringify(strippedFiles)} from ${zipPath} to ${destDir}`)
+
     await invoke('extract_files_from_zip', {
         zipPath,
         dest: destDir,
         files: strippedFiles,
-    })
-}
-
-function stripPrefixFromFiles(files: string[], prefix: string): string[] {
-    const prefixLower = prefix.toLowerCase()
-    return files.map((f) => {
-        const normalized = f.replace(/\\/g, '/')
-        if (prefixLower && normalized.toLowerCase().startsWith(prefixLower)) {
-            return normalized.substring(prefix.length)
-        }
-        return normalized
     })
 }
 

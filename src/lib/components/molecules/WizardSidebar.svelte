@@ -18,7 +18,7 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen bg-anthracite text-stone-400 px-7 pb-7 pt-14 transition-all duration-150 w-64 "
+    class="flex flex-col h-screen bg-anthracite/60 backdrop-blur-md text-stone-400 px-7 pb-7 pt-14 transition-all duration-150 w-64 "
 >
     <div class="flex flex-col items-center sm:items-start mb-10 gap-2 mt-1">
         <img

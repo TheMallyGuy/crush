@@ -15,10 +15,8 @@ pub async fn set_rpc(
         Some(&state_text),
         None,
         None,
-        Some(vec![(
-            "View repo".to_string(),
-            "https://github.com/TheMallyGuy/crush".to_string(),
-        )]),
-    )
-    .await
+        Some(vec![
+            ("View repo".to_string(), "https://github.com/TheMallyGuy/crush".to_string())
+        ]),
+    ).await
 }
