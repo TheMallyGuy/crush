@@ -24,6 +24,7 @@
     import { info } from '@tauri-apps/plugin-log'
     import { getBestServers } from '$lib/rovalraHelper/rovalra'
     import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
+    import { Window } from '@tauri-apps/api/window';
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -182,6 +183,10 @@
             await goto('/mainWin/choiceWin')
             return
         }
+
+
+        const choiceWin = await Window.getByLabel('crushBoostrapChoiceWindow');
+        await choiceWin?.close();
 
         setTimeout(() => {
             win.close()
