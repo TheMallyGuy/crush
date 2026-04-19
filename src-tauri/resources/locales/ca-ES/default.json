@@ -38,7 +38,7 @@
             "config": "Config"
         },
         "boostrapWin": {
-            "cancel": "Cancel·lar",
+            "cancel": "Cancel·la",
             "retry": "Tornar a intentar"
         },
         "appearance": {
@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Substitueix Roblox Rich Presence per Crush's"
+                "description": "Substitueix Roblox Rich Presence per Crush's",
+                "option1": "Deixa que la gent s'uneixi al teu joc",
+                "option2": "Mostra el teu compte quan juguis a roblox"
             },
             "gameHistoryCard": {
                 "title": "El teu historial de joc",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Força la reinstal·lació de Roblox",
                 "description": "Torna a instal·lar roblox cada vegada que l'iniciïs."
+            },
+            "dontUpdateCard": {
+                "title": "No actualitzis Roblox",
+                "description": "Omet l'actualització de Roblox i llança'l immediatament"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Obliga't a tornar a pujar a bord.",
+                "button": "Reinicia"
             },
             "languageCard": {
                 "title": "Llengua",

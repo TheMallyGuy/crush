@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (murskaus)",
-                "description": "Korvaa Roblox Rich Presence Crushin"
+                "description": "Korvaa Roblox Rich Presence Crushin",
+                "option1": "Anna ihmisten liittyä peliisi",
+                "option2": "Näytä tilisi, kun pelaat robloxia"
             },
             "gameHistoryCard": {
                 "title": "Pelihistoriasi",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Pakota Robloxin uudelleenasennus",
                 "description": "Asenna roblox uudelleen aina, kun käynnistät sen."
+            },
+            "dontUpdateCard": {
+                "title": "Älä päivitä Robloxia",
+                "description": "Ohita Robloxin päivitys ja käynnistä välittömästi"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Pakottaa sinut liittymään uudelleen.",
+                "button": "Nollaa"
             },
             "languageCard": {
                 "title": "Kieli",

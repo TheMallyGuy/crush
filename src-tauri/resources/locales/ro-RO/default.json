@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Înlocuiți Roblox Rich Presence cu Crush's"
+                "description": "Înlocuiți Roblox Rich Presence cu Crush's",
+                "option1": "Permite-le oamenilor să se alăture jocului tău",
+                "option2": "Afișați contul dvs. atunci când jucați roblox"
             },
             "gameHistoryCard": {
                 "title": "Istoricul jocului dvs.",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Forțați reinstalarea Roblox",
                 "description": "Reinstalați roblox de fiecare dată când îl lansați."
+            },
+            "dontUpdateCard": {
+                "title": "Nu actualizați Roblox",
+                "description": "Omiteți actualizarea și lansarea Roblox instantaneu"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Te forțează să te îmbarci din nou.",
+                "button": "Resetați"
             },
             "languageCard": {
                 "title": "Limba",

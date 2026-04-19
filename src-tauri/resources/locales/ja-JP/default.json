@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC （クラッシュ）",
-                "description": "Roblox Rich PresenceをCrushの"
+                "description": "Roblox Rich PresenceをCrushの",
+                "option1": "他の人にあなたのゲームに参加してもらう",
+                "option2": "Robloxをプレイするときにアカウントを表示する"
             },
             "gameHistoryCard": {
                 "title": "ゲーム履歴",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Robloxを強制的に再インストールする",
                 "description": "Robloxを起動するたびに再インストールしてください。"
+            },
+            "dontUpdateCard": {
+                "title": "Robloxを更新しない",
+                "description": "Robloxの更新をスキップしてすぐに起動"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "バージョン："
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "クラッシュ・ハロー",
+                "description": "再度乗車するよう強制します。",
+                "button": "リセット"
             },
             "languageCard": {
                 "title": "言語",

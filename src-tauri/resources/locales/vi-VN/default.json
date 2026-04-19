@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Thay thế Roblox Rich Presence bằng Crush's"
+                "description": "Thay thế Roblox Rich Presence bằng Crush's",
+                "option1": "Cho phép mọi người tham gia trò chơi của bạn",
+                "option2": "Hiển thị tài khoản của bạn khi chơi roblox"
             },
             "gameHistoryCard": {
                 "title": "Lịch sử Trò chơi",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Bắt buộc cài đặt lại Roblox",
                 "description": "Cài đặt lại roblox mỗi khi bạn khởi chạy nó."
+            },
+            "dontUpdateCard": {
+                "title": "Không cập nhật Roblox",
+                "description": "Bỏ qua cập nhật Roblox và khởi chạy ngay lập tức"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Buộc bạn phải tham gia một lần nữa.",
+                "button": "Cài đặt lại"
             },
             "languageCard": {
                 "title": "Ngôn ngữ:",

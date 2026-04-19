@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Σύνθλιψη)",
-                "description": "Αντικαταστήστε το Roblox Rich Presence με το Crush's"
+                "description": "Αντικαταστήστε το Roblox Rich Presence με το Crush's",
+                "option1": "Επιτρέψτε σε άλλους να συμμετάσχουν στο παιχνίδι σας",
+                "option2": "Εμφάνιση του λογαριασμού σας όταν παίζετε roblox"
             },
             "gameHistoryCard": {
                 "title": "Το ιστορικό του παιχνιδιού σας",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Αναγκαστική επανεγκατάσταση του Roblox",
                 "description": "Επανεγκαταστήστε το roblox κάθε φορά που το εκκινείτε."
+            },
+            "dontUpdateCard": {
+                "title": "Μην ενημερώνετε το Roblox",
+                "description": "Παράλειψη ενημέρωσης Roblox και άμεση εκκίνηση"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "Έκδοση: "
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "Crush Γεια σας",
+                "description": "Σας αναγκάζουμε να επιβιβαστείτε ξανά.",
+                "button": "Επαναφορά"
             },
             "languageCard": {
                 "title": "Language",

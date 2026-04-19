@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Zamenite Roblox Rich Presence sa Crush's"
+                "description": "Zamenite Roblox Rich Presence sa Crush's",
+                "option1": "Omogućite ljudima da se pridruže vašoj igri",
+                "option2": "Prikažite svoj nalog kada igrate roblox"
             },
             "gameHistoryCard": {
                 "title": "Istorija vaše igre",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Prinudno ponovo instalirajte Roblox",
                 "description": "Ponovo instalirajte roblox svaki put kada ga pokrenete."
+            },
+            "dontUpdateCard": {
+                "title": "Nemojte ažurirati Roblox",
+                "description": "Preskoči Roblox ažuriranje i pokreni odmah"
             }
         },
         "fastflag": {
@@ -226,7 +232,7 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
+                "description": "Prisiliti vas da se ponovo uključite.",
                 "button": "Reset"
             },
             "languageCard": {

@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "로블록스 리치 프레즌스를 크러쉬로 교체"
+                "description": "로블록스 리치 프레즌스를 크러쉬로 교체",
+                "option1": "사람들이 내 게임에 참여하도록 하세요",
+                "option2": "Roblox를 플레이할 때 계정 표시"
             },
             "gameHistoryCard": {
                 "title": "게임 기록",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Roblox 강제 재설치",
                 "description": "실행할 때마다 roblox를 다시 설치합니다."
+            },
+            "dontUpdateCard": {
+                "title": "Roblox 업데이트 안 함",
+                "description": "Roblox 업데이트를 건너뛰고 즉시 실행"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "버전: "
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "크러쉬 헬로",
+                "description": "강제로 다시 온보딩하세요.",
+                "button": "초기화"
             },
             "languageCard": {
                 "title": "언어",

@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "החלף את הנוכחות העשירה של Roblox ב - Crush"
+                "description": "החלף את הנוכחות העשירה של Roblox ב - Crush",
+                "option1": "אפשר לאנשים להצטרף למשחק שלך",
+                "option2": "הצג את החשבון שלך בעת הפעלת Roblox"
             },
             "gameHistoryCard": {
                 "title": "היסטוריית המשחקים שלכם",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "כפה התקנה מחדש של Roblox",
                 "description": "התקן מחדש את roblox בכל פעם שאתה מפעיל אותו."
+            },
+            "dontUpdateCard": {
+                "title": "אל תעדכן את Roblox",
+                "description": "דלג על עדכון והשיקה של Roblox באופן מיידי"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "להכריח אותך להצטרף שוב.",
+                "button": "אפס"
             },
             "languageCard": {
                 "title": "שפה",
