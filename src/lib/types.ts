@@ -50,7 +50,8 @@ export type GameCache = {
 
 export type Installation = {
     version: string,
-    forceReinstall: boolean
+    forceReinstall: boolean,
+    dontUpdate: boolean
 }
 
 export type Config = {

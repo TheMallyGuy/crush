@@ -263,6 +263,12 @@ export async function downloadRoblox(
     const config = await load("config.json")
     const versionStore = await load('versions.json')
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
+    const savedInstallation = await config.get<Installation>('installation')
+
+    if (savedInstallation?.dontUpdate) {
+        const existing = versionList.at(-1) ?? ''
+        return existing
+    }
 
     if (version) {
         return handleExplicitVersion(onProgress, version, versionList, versionStore)
