@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Byt ut Roblox Rich Presence mot Crush's"
+                "description": "Byt ut Roblox Rich Presence mot Crush's",
+                "option1": "Låt folk gå med i ditt spel",
+                "option2": "Visa ditt konto när du spelar roblox"
             },
             "gameHistoryCard": {
                 "title": "Din spelhistorik",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Tvinga ominstallera Roblox",
                 "description": "Installera om roblox varje gång du startar den."
+            },
+            "dontUpdateCard": {
+                "title": "Uppdatera inte Roblox",
+                "description": "Hoppa över Roblox-uppdatering och starta omedelbart"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "Version:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "Krossa Hej",
+                "description": "Tvinga dig att gå ombord igen.",
+                "button": "Återställ"
             },
             "languageCard": {
                 "title": "Språk",

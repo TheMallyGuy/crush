@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (rozdrtit)",
-                "description": "Vyměňte Roblox Rich Presence za Crush's"
+                "description": "Vyměňte Roblox Rich Presence za Crush's",
+                "option1": "Umožněte lidem připojit se k vaší hře",
+                "option2": "Při hraní robloxu zobrazte svůj účet"
             },
             "gameHistoryCard": {
                 "title": "HERNÍ HISTORIE",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Vynutit přeinstalaci Robloxu",
                 "description": "Roblox znovu nainstalujte pokaždé, když jej spustíte."
+            },
+            "dontUpdateCard": {
+                "title": "Neaktualizovat Roblox",
+                "description": "Přeskočit aktualizaci Robloxu a okamžitě spustit"
             }
         },
         "fastflag": {
@@ -226,8 +232,8 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Přinuť se znovu zapojit.",
+                "button": "Obnovit"
             },
             "languageCard": {
                 "title": "Jazyk",

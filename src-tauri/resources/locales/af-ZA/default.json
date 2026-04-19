@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Vervang die Roblox Rich Presence met Crush's"
+                "description": "Vervang die Roblox Rich Presence met Crush's",
+                "option1": "Laat mense by jou spel aansluit",
+                "option2": "Vertoon jou rekening wanneer jy roblox speel"
             },
             "gameHistoryCard": {
                 "title": "Jou spelgeskiedenis",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Krag Herinstalleer Roblox",
                 "description": "Herinstalleer Roblox elke keer as jy dit begin."
+            },
+            "dontUpdateCard": {
+                "title": "Moenie Roblox opdateer nie",
+                "description": "Slaan Roblox opdatering en lanseer onmiddellik"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "Version:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "Crush Hallo",
+                "description": "Dwing jou om weer aan boord te gaan.",
+                "button": "Herstel"
             },
             "languageCard": {
                 "title": "taal",

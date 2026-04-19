@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Тиснява)",
-                "description": "Замініть Roblox Rich Presence на Crush's"
+                "description": "Замініть Roblox Rich Presence на Crush's",
+                "option1": "Дозвольте людям приєднатися до вашої гри",
+                "option2": "Відображати свій обліковий запис під час гри в roblox"
             },
             "gameHistoryCard": {
                 "title": "Історія вашої гри",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Примусово перевстановити Roblox",
                 "description": "Перевстановлюйте roblox щоразу, коли ви його запускаєте."
+            },
+            "dontUpdateCard": {
+                "title": "Не оновлювати Roblox",
+                "description": "Пропустити оновлення та миттєвий запуск Roblox"
             }
         },
         "fastflag": {
@@ -217,7 +223,7 @@
         "settings": {
             "settings": "Налаштування",
             "aboutCard": {
-                "title": "Про застосунок",
+                "title": "Про плагін",
                 "description": "Інформація про цю розчавлену збірку",
                 "note": "Пам 'ятайте! Crush можна використовувати безкоштовно, будь-хто, хто намагається переробити та продати його, будь ласка, повідомте нам про це на нашому сервері Discord!",
                 "builtOn": "Дата випуску",
@@ -225,9 +231,9 @@
                 "version": "Версія:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "Тиснява Привіт",
+                "description": "Примусьте вас знову піднятися на борт.",
+                "button": "Reset (Скид)"
             },
             "languageCard": {
                 "title": "Мова",

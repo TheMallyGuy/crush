@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Ezme)",
-                "description": "Roblox Rich Varlığını Crush'ınkiyle değiştir"
+                "description": "Roblox Rich Varlığını Crush'ınkiyle değiştir",
+                "option1": "İnsanların oyununuza katılmasına izin verin",
+                "option2": "Roblox oynarken Hesabınızı Görüntüleyin"
             },
             "gameHistoryCard": {
                 "title": "Oyun geçmişiniz",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "Roblox'u Yeniden Yüklemeye Zorla",
                 "description": "Roblox'u her başlattığınızda yeniden yükleyin."
+            },
+            "dontUpdateCard": {
+                "title": "Roblox'u güncelleme",
+                "description": "Roblox güncellemesini atlayın ve anında başlatın"
             }
         },
         "fastflag": {
@@ -222,12 +228,12 @@
                 "note": "Unutmayın! crush'ı kullanmak ücretsizdir, yeniden ciltlemeye ve satmaya çalışan herkes lütfen Discord sunucumuzda bize bildirin!",
                 "builtOn": "Üzerine inşa",
                 "commitHash": "İşlem karması:  {hash}",
-                "version": "Sürüm:"
+                "version": "Versiyon:"
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "description": "Sizi tekrar katılmaya zorlayın.",
+                "button": "Sıfırla"
             },
             "languageCard": {
                 "title": "Dil",

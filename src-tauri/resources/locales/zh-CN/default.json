@@ -67,7 +67,9 @@
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
-                "description": "将Roblox Rich Presence替换为Crush的"
+                "description": "将Roblox Rich Presence替换为Crush的",
+                "option1": "让人们加入您的游戏",
+                "option2": "播放roblox时显示您的帐户"
             },
             "gameHistoryCard": {
                 "title": "您的游戏历史记录",
@@ -110,6 +112,10 @@
             "forceReinstallCard": {
                 "title": "强制重新安装Roblox",
                 "description": "每次启动时重新安装roblox。"
+            },
+            "dontUpdateCard": {
+                "title": "不要更新Roblox",
+                "description": "跳过Roblox更新并立即启动"
             }
         },
         "fastflag": {
@@ -225,9 +231,9 @@
                 "version": "版  本："
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force you to onboard again.",
-                "button": "Reset"
+                "title": "粉碎你好",
+                "description": "迫使您再次加入。",
+                "button": "重置"
             },
             "languageCard": {
                 "title": "语言",
