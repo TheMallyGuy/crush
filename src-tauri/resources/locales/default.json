@@ -79,7 +79,10 @@
             },
             "rpcCard" : {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's"
+                "description": "Replace the Roblox Rich Presence with Crush's",
+
+                "option1" : "Let people join your game",
+                "option2" : "Display Your Account when playing roblox"
             },
 
             "gameHistoryCard": {
@@ -135,6 +138,11 @@
             "forceReinstallCard" : {
                 "title" : "Force Reinstall Roblox",
                 "description" : "Reinstall roblox everytime you launch it."
+            },
+
+            "dontUpdateCard" : {
+                "title" : "Don't update Roblox",
+                "description" : "Skip Roblox updating and launch instantly"
             }
         },
 

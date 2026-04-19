@@ -101,14 +101,14 @@
 
             <div class="flex gap-3"> <!-- option 1 -->
                 <p>
-                    Let people join your game 
+                    {$_('pages.integrations.rpcCard.option1')}
                 </p>
                 <Switch bind:checked={letJoin} on:change={handleChanges}/>
             </div>
 
             <div class="flex gap-3"> <!-- option 2 -->
                 <p>
-                    Display Your Account when play roblox
+                    {$_('pages.integrations.rpcCard.option2')}
                 </p>
                 <Switch bind:checked={displayAccount} on:change={handleChanges}/>
             </div>

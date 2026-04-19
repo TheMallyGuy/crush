@@ -80,8 +80,8 @@
     </SettingCard>
 
     <SettingCard
-        title="Don't Update Roblox"
-        description="Skip Roblox updating and launch instantly"
+        title={$_("pages.installations.dontUpdateCard.title")}
+        description={$_("pages.installations.dontUpdateCard.description")}
         icon={CircleFadingArrowUp}
     >
         <Switch
