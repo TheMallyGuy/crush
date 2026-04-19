@@ -1,5 +1,5 @@
 use crate::rd::get_client;
-use crate::rpc::{RpcState, apply_rpc, apply_rpc_full, kill_rpc};
+use crate::rpc::{RpcState, apply_rpc, apply_rpc_full, kill_rpc, start_rpc};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::Deserialize;
@@ -483,16 +483,15 @@ fn save_game_history(
 
 async fn update_rpc_if_needed(
     app: &AppHandle,
-    state: &mut WatcherState,
+    __state__: &mut WatcherState,
     place_id: u64,
     _should_display_account: bool,
     _should_let_join: bool,
 ) -> Result<(), String> {
     let now = Instant::now();
-    let debounce_ok = state
+    let debounce_ok = __state__
         .last_rpc
         .is_none_or(|last| now.duration_since(last).as_secs() > 2);
-
     if !debounce_ok {
         return Ok(());
     }
@@ -501,41 +500,67 @@ async fn update_rpc_if_needed(
         return Ok(());
     };
 
-    let instance_id = state
-        .activity
-        .instance_id
-        .as_deref()
-        .unwrap_or("");
-
+    let instance_id = __state__.activity.instance_id.as_deref().unwrap_or("");
     let deeplink = format!(
         "https://deeplink.multicrew.dev?placeId={}&jobId={}",
         place_id, instance_id
     );
-
-    let mut buttons: Vec<(String, String)> = vec![
+    let buttons: Vec<(String, String)> = vec![
         ("Join Server".to_string(), deeplink),
+        (
+            "View Game".to_string(),
+            format!("https://www.roblox.com/games/{}", place_id),
+        ),
     ];
 
-    buttons.push((
-        "View Game".to_string(),
-        format!("https://www.roblox.com/games/{}", place_id),
-    ));
+    let rpc_state = app.state::<RpcState>();
+    const CLIENT_ID: &str = "1484521125550620813";
+
+    if rpc_state.client.lock().await.is_none() {
+        log::info!("RPC not initialized, starting...");
+        if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
+            log::error!("RPC start failed: {}", e);
+            return Ok(());
+        }
+    }
 
     if let Err(e) = apply_rpc_full(
-        &app.state::<RpcState>(),
+        &rpc_state,
         Some("Crush"),
         Some("Playing Roblox"),
         Some(&name),
-        None, // activity_type
-        None, // status_display_type
-        Some(buttons),
+        None,
+        None,
+        Some(buttons.clone()),
     )
     .await
     {
-        log::error!("RPC failed: {}", e);
+        log::warn!("RPC failed ({}), reconnecting...", e);
+
+        *rpc_state.client.lock().await = None;
+        *rpc_state.runner.lock().await = None;
+
+        if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
+            log::error!("RPC reconnect failed: {}", e);
+            return Ok(());
+        }
+
+        if let Err(e) = apply_rpc_full(
+            &rpc_state,
+            Some("Crush"),
+            Some("Playing Roblox"),
+            Some(&name),
+            None,
+            None,
+            Some(buttons),
+        )
+        .await
+        {
+            log::error!("RPC retry failed: {}", e);
+        }
     }
 
-    state.last_rpc = Some(now);
+    __state__.last_rpc = Some(now);
     Ok(())
 }
 

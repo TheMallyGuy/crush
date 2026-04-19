@@ -7,6 +7,7 @@
     import { goto } from '$app/navigation'
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { invoke } from '@tauri-apps/api/core'
+    import { sendNotification } from '@tauri-apps/plugin-notification'
 
     onMount(async () => {
         const win = getCurrentWindow()
@@ -26,6 +27,7 @@
 
         const update = await check()
         if (update) {
+            sendNotification("New update detected. Downloading it for you!")
             await update.downloadAndInstall()
             return
         }
