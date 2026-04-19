@@ -103,10 +103,8 @@ pub async fn get_download_urls(
         }
     };
 
-    let base_version = format!(
-        "version-{}",
-        raw_hash.strip_prefix("version-").unwrap_or(raw_hash)
-    );
+    let stripped_hash = raw_hash.strip_prefix("version-").unwrap_or(raw_hash);
+    let base_version = format!("version-{stripped_hash}");
 
     let base_url = match region_url {
         Some(url) => url.to_owned(),

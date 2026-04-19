@@ -281,64 +281,88 @@ async fn handle_log_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     if let Some(caps) = WatcherRegexes::join().captures(line) {
-        let instance_id = caps
-            .get(1)
-            .map(|m| m.as_str().to_string())
-            .unwrap_or_default();
-        let place_id: u64 = caps
-            .get(2)
-            .and_then(|m| m.as_str().parse().ok())
-            .unwrap_or(0);
-
-        state.activity.join_initiated = true;
-        state.activity.place_id = Some(place_id);
-        state.activity.instance_id = Some(instance_id);
-        state.activity.in_game = false;
-        state.udmux_handled = false;
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-        state.location_notified = false;
-
-        log::info!(
-            "joining place {} instance {}",
-            place_id,
-            state.activity.instance_id.as_deref().unwrap_or("?")
-        );
-        return Ok(());
+        return handle_join_match(caps, state);
     }
 
     if let Some(caps) = WatcherRegexes::udmux().captures(line) {
-        let Some(ip) = caps.get(1) else { return Ok(()) };
-        if state.udmux_handled {
-            return Ok(());
-        }
-
-        handle_udmux_event(ip.as_str(), state).await?;
-        state.udmux_handled = true;
-
-        if state.activity.in_game && !state.location_notified {
-            try_send_location_notification(app, state, store).await?;
-        }
-
-        return Ok(());
+        return handle_udmux_match(app, caps, state, store).await;
     }
-
 
     if WatcherRegexes::joined().is_match(line) {
         log::info!("joined regex matched: {}", line.trim());
-        handle_joined_event(app, state, store).await?;
-        return Ok(());
+        return handle_joined_event(app, state, store).await;
     }
 
     if state.activity.in_game && WatcherRegexes::leave().is_match(line) {
-        log::info!("left game");
-        state.activity = Activity::default();
-        state.pending_server_ip = None;
-        state.pending_server_location = None;
-        state.location_notified = false;
-        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+        return handle_leave_match(app, state).await;
     }
 
+    Ok(())
+}
+
+fn handle_join_match(
+    caps: regex::Captures<'_>,
+    state: &mut WatcherState,
+) -> Result<(), String> {
+    let instance_id = caps
+        .get(1)
+        .map(|m| m.as_str().to_string())
+        .unwrap_or_default();
+    let place_id: u64 = caps
+        .get(2)
+        .and_then(|m| m.as_str().parse().ok())
+        .unwrap_or(0);
+
+    state.activity.join_initiated = true;
+    state.activity.place_id = Some(place_id);
+    state.activity.instance_id = Some(instance_id);
+    state.activity.in_game = false;
+    state.udmux_handled = false;
+    state.pending_server_ip = None;
+    state.pending_server_location = None;
+    state.location_notified = false;
+
+    log::info!(
+        "joining place {} instance {}",
+        place_id,
+        state.activity.instance_id.as_deref().unwrap_or("?")
+    );
+    Ok(())
+}
+
+async fn handle_udmux_match(
+    app: &AppHandle,
+    caps: regex::Captures<'_>,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    let Some(ip) = caps.get(1) else {
+        return Ok(());
+    };
+    if state.udmux_handled {
+        return Ok(());
+    }
+
+    handle_udmux_event(ip.as_str(), state).await?;
+    state.udmux_handled = true;
+
+    if state.activity.in_game && !state.location_notified {
+        try_send_location_notification(app, state, store).await?;
+    }
+
+    Ok(())
+}
+
+async fn handle_leave_match(
+    app: &AppHandle,
+    state: &mut WatcherState,
+) -> Result<(), String> {
+    log::info!("left game");
+    state.activity = Activity::default();
+    state.pending_server_ip = None;
+    state.pending_server_location = None;
+    state.location_notified = false;
+    let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
     Ok(())
 }
 

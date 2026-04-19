@@ -6,6 +6,7 @@
         BootstrapElement,
         Installation,
         Integrations,
+        RobloxLaunchData,
     } from '$lib/types'
     import { launchPlayer, applyMods } from '$lib/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
@@ -141,29 +142,36 @@
         integrations: Integrations | null | undefined
     ) {
         const parsed = parseRobloxDeepLink(url)
-
         if (!parsed.placelauncherurl) {
             return launchPlayer(version, url)
         }
 
-        const launchUrl = new URL(parsed.placelauncherurl)
-        const request = launchUrl.searchParams.get('request')
         const joinServerForYou = integrations?.roValra?.joinServerForYouValue ?? false
-
-        const isSpecialRequest = request === 'RequestFollowUser' || request === 'RequestPrivateGame'
-        if (isSpecialRequest || !joinServerForYou || parsed.placeId == null) {
+        if (shouldSkipRoValra(parsed, joinServerForYou)) {
             info(`Launching with url: ${url}`)
             return launchPlayer(version, url)
         }
 
-        const result = await getBestServers(parsed.placeId)
+        return launchWithBestServer(version, url, parsed)
+    }
+
+    function shouldSkipRoValra(parsed: RobloxLaunchData, joinServerForYou: boolean): boolean {
+        if (!joinServerForYou || parsed.placeId == null) return true
+
+        const launchUrl = new URL(parsed.placelauncherurl!)
+        const request = launchUrl.searchParams.get('request')
+        return request === 'RequestFollowUser' || request === 'RequestPrivateGame'
+    }
+
+    async function launchWithBestServer(version: string, originalUrl: string, parsed: RobloxLaunchData) {
+        const result = await getBestServers(parsed.placeId!)
         const bestServer = result.servers[0]
 
         if (!bestServer) {
-            return launchPlayer(version, url)
+            return launchPlayer(version, originalUrl)
         }
 
-        const finalUrl = rebuildDeeplink(parsed, parsed.placeId, bestServer.server_id)
+        const finalUrl = rebuildDeeplink(parsed, parsed.placeId!, bestServer.server_id)
         return launchPlayer(version, finalUrl)
     }
 
