@@ -160,7 +160,15 @@ export type BoostrapConfigs = { // bloxstrap, froststrap
     BackgroundUpdatesEnabled: boolean,
     UseDiscordRichPresence: boolean,
     ShowServerDetails: boolean,
+    ShowAccountOnRichPresence: boolean, // show account
+    HideRPCButtons: boolean, // allow joining server
 
     // frostrap only
-    EnableBetterMatchmaking: boolean
+    EnableBetterMatchmaking: boolean,
+    ShowUsingFroststrapRPC: boolean,
+
+    UpdateRoblox : boolean, // frost & void???
+
+    // voidstrap only
+    VoidRPC: boolean,
 }

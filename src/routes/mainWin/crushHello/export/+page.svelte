@@ -22,9 +22,9 @@
             
             const newIntegrations: Integrations = {
                 discordRpc: integrations?.discordRpc ?? {
-                    enable: false,
-                    displayAccount: false,
-                    letJoin: false,
+                    enable: boostraperConfig.UseDiscordRichPresence ?? false,
+                    displayAccount: boostraperConfig.ShowAccountOnRichPresence ?? false,
+                    letJoin: !(boostraperConfig.HideRPCButtons ?? false),
                 },
                 serverLocationNotifier:
                     boostraperConfig.ShowServerDetails ??
@@ -37,8 +37,17 @@
                     integrations?.crushRpc ??
                     false,
             }
+            
+            const newInstallation: Installation = {
+                version: "latest",
+                forceReinstall: false,
+                dontUpdate: boostraperConfig.UpdateRoblox ?? false
+            }
+
+            config.set('discordRpcEnabled', boostraperConfig.ShowUsingFroststrapRPC ?? boostraperConfig.VoidRPC ?? true)
 
             await config.set('integrations', newIntegrations)
+            await config.set('installation', newInstallation)
             await config.save()
         } catch (e) {
             console.error("Failed to import configs:", e)
