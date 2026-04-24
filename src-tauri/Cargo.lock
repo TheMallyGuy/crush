@@ -1639,9 +1639,9 @@ dependencies = [
 
 [[package]]
 name = "filthy-rich"
-version = "0.8.4"
+version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "79da5ad086bcecca84842d37764390dbc62aadb7e5f8e4d70bc5c408015bef23"
+checksum = "677e07a293a787abae8af40254d851118ece29dcc87f3ccc2da1f77f99d5cb7e"
 dependencies = [
  "anyhow",
  "serde",
