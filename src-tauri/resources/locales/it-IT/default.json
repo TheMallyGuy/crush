@@ -239,6 +239,14 @@
                 "title": "Lingua",
                 "description": "Seleziona la tua lingua preferita per CRUSH."
             },
+            "windowVibrancyCard": {
+                "title": "Window Vibrancy",
+                "description": "Scegliere l'effetto di sfocatura dello sfondo per le finestre dell'applicazione."
+            },
+            "enableCrushRpcCard": {
+                "title": "Schiaccia Discord RPC",
+                "description": "Attiva o disattiva la visualizzazione di ciò che stai facendo utilizzando Discord RPC. Si consiglia il riavvio."
+            },
             "donateCard": {
                 "title": "Dona",
                 "description": "Love CRUSH? Fai una donazione a Mally per sostenere il suo lavoro!",

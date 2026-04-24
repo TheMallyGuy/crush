@@ -110,7 +110,7 @@
                 "description": "Ignoră verificarea actualizării și descarcă versiunea. Valoarea implicită este cea mai recentă. Versiunea nevalidă nu va fi descărcată și va reveni la cea mai recentă versiune."
             },
             "forceReinstallCard": {
-                "title": "Forțați reinstalarea Roblox",
+                "title": "Reinstalare forțată Roblox",
                 "description": "Reinstalați roblox de fiecare dată când îl lansați."
             },
             "dontUpdateCard": {
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Limba",
                 "description": "Selectați limba preferată pentru zdrobire."
+            },
+            "windowVibrancyCard": {
+                "title": "Vibrația ferestrei",
+                "description": "Alegeți efectul de estompare a fundalului pentru ferestrele aplicației."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Comutați dacă doriți să afișați ceea ce faceți utilizând Discord RPC. Se recomandă repornirea."
             },
             "donateCard": {
                 "title": "Donați",

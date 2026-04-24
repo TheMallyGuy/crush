@@ -237,7 +237,15 @@
             },
             "languageCard": {
                 "title": "Línguas",
-                "description": "Selecione o seu idioma preferido para o crush."
+                "description": "Selecione o seu idioma preferido para esmagamento."
+            },
+            "windowVibrancyCard": {
+                "title": "Vibração da janela",
+                "description": "Escolha o efeito de desfoque de fundo para as janelas da aplicação."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Alterne se deseja mostrar o que está a fazer usando o RPC do Discord. Recomenda-se reiniciar."
             },
             "donateCard": {
                 "title": "Doar",

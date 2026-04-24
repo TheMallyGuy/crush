@@ -161,7 +161,7 @@
                 },
                 "grassAnimationCard": {
                     "title": "草地揮舞動畫",
-                    "description": "調整草叢移動的強度。（ 0表示無減少， 999或任何更高的數字將使草叢凍結， 0和1略微減少運動，大於1的值是強烈減少運動，接近靜止）"
+                    "description": "調整草叢移動的強度。（ 0表示沒有減少， 999或任何更高的數字將凍結草叢， 0和1略微減少運動，大於1的值是強烈減少運動，接近靜止）"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "覆蓋紋理質量級別",
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "語言",
                 "description": "選擇粉碎的首選語言。"
+            },
+            "windowVibrancyCard": {
+                "title": "窗戶活力",
+                "description": "選擇應用程式視窗的背景模糊效果。"
+            },
+            "enableCrushRpcCard": {
+                "title": "粉碎Discord RPC",
+                "description": "切換是否顯示你正在使用Discord RPC進行的操作。建議重新啟動。"
             },
             "donateCard": {
                 "title": "捐贈",

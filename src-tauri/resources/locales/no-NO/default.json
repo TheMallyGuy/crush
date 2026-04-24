@@ -239,6 +239,14 @@
                 "title": "Språk",
                 "description": "Velg ditt foretrukne språk for Crush."
             },
+            "windowVibrancyCard": {
+                "title": "Vinduslivlighet",
+                "description": "Velg bakgrunnsuskarphetseffekten for programvinduene."
+            },
+            "enableCrushRpcCard": {
+                "title": "Knus Discord RPC",
+                "description": "Veksle om du vil vise hva du gjør med Discord RPC. Det anbefales å starte på nytt."
+            },
             "donateCard": {
                 "title": "Doner",
                 "description": "Forelskelse? Doner til Mally for å støtte arbeidet hans!",

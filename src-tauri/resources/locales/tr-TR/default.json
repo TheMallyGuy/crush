@@ -48,7 +48,7 @@
                 "title": "Önyükleyici Teması",
                 "description": "Varsayılan Crush teması veya özel bir XML teması arasından seçim yapın.",
                 "dropdown": {
-                    "default": "Varsayılan (Ezme)",
+                    "default": "Varsayılan (Ezilme)",
                     "custom": "Özel"
                 },
                 "customDropDownContents": {
@@ -214,7 +214,7 @@
                     "description": "Topluluk tarafından oluşturulan modları keşfedin.",
                     "notice": {
                         "title": "Henüz mod yok",
-                        "description": "Henüz topluluk modumuz yok. Katkıda bulunan ve koleksiyonu büyütmemize yardımcı olan ilk kişi siz olun!",
+                        "description": "Henüz herhangi bir topluluk modumuz yok. Katkıda bulunan ve koleksiyonu büyütmemize yardımcı olan ilk kişi siz olun!",
                         "submissionButton": "Mod gönder"
                     }
                 }
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Dil",
                 "description": "Ezmek için tercih ettiğiniz dili seçin."
+            },
+            "windowVibrancyCard": {
+                "title": "Pencere Canlılığı",
+                "description": "Uygulama pencereleri için arka plan bulanıklık efektini seçin."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Discord RPC kullanarak ne yaptığınızı gösterip göstermeyeceğinizi değiştirin. Yeniden başlatmanız önerilir."
             },
             "donateCard": {
                 "title": "Bağış yap",

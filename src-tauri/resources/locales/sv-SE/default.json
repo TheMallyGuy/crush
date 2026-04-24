@@ -239,6 +239,14 @@
                 "title": "Språk",
                 "description": "Välj ditt föredragna språk för CRUSH."
             },
+            "windowVibrancyCard": {
+                "title": "Fönster Vibrancy",
+                "description": "Välj bakgrundssuddighetseffekten för applikationsfönstren."
+            },
+            "enableCrushRpcCard": {
+                "title": "Krossa Discord RPC",
+                "description": "Växla om du vill visa vad du gör med Discord RPC. Omstart rekommenderas."
+            },
             "donateCard": {
                 "title": "Donera",
                 "description": "Kärleksförälskelse? Donera till Mally för att stödja hans arbete!",

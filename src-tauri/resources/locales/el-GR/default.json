@@ -3,7 +3,7 @@
         "general": "Ένα roblox bootrapper γραμμένο από την αρχή",
         "integrations": "Σε Διαδρομή Ενσωματώσεων",
         "installation": "Διαδρομή σε εγκαταστάσεις",
-        "fastflag": "Στη διαδρομή Fastflag",
+        "fastflag": "Σε διαδρομή Fastflag",
         "mod": "Στη διαδρομή Mod",
         "appearance": "Διαδρομή εμφάνισης",
         "rust": {
@@ -68,7 +68,7 @@
             "rpcCard": {
                 "title": "Discord RPC (Σύνθλιψη)",
                 "description": "Αντικαταστήστε το Roblox Rich Presence με το Crush's",
-                "option1": "Επιτρέψτε σε άλλους να συμμετάσχουν στο παιχνίδι σας",
+                "option1": "Επιτρέψτε στους ανθρώπους να συμμετάσχουν στο παιχνίδι σας",
                 "option2": "Εμφάνιση του λογαριασμού σας όταν παίζετε roblox"
             },
             "gameHistoryCard": {
@@ -157,7 +157,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Παύση Voxelier",
-                    "description": "Διακοπή του voxelization για βελτίωση της απόδοσης"
+                    "description": "Διακοπή της voxelization για βελτίωση της απόδοσης"
                 },
                 "grassAnimationCard": {
                     "title": "Κινούμενα σχέδια κυματισμού γρασιδιού",
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Language",
                 "description": "Επιλέξτε τη γλώσσα που προτιμάτε για συντριβή."
+            },
+            "windowVibrancyCard": {
+                "title": "Δόνηση παραθύρου",
+                "description": "Επιλέξτε το εφέ θόλωσης φόντου για τα παράθυρα της εφαρμογής."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Επιλέξτε αν θα εμφανίζεται αυτό που κάνετε χρησιμοποιώντας το Discord RPC. Συνιστάται επανεκκίνηση."
             },
             "donateCard": {
                 "title": "Δωρεά",

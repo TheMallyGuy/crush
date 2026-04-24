@@ -19,7 +19,7 @@
             "updateChecking": "בודק אם יש עדכונים",
             "findingBestRegion": "מחפש את אזור ההורדה הטוב ביותר...",
             "preparingForDownload": "מתכונן להורדה",
-            "fetchingUrls": "משיג כתובות URL של המשאב...",
+            "fetchingUrls": "מביא כתובות URL של נכסים...",
             "downloadingAssets": "מוריד נכסים...",
             "extractingFiles": "פורס את כל הקבצים",
             "xmlWriting": "כותב AppSettings.xml...",
@@ -43,7 +43,7 @@
         },
         "appearance": {
             "appearance": "עיצוב",
-            "description": "התאם אישית את המראה והתחושה של bootstrapper של Roblox.",
+            "description": "התאם אישית את המראה והתחושה של ה - bootstrapper של Roblox.",
             "boostrapThemeCard": {
                 "title": "ערכת עיצוב Bootstrapper",
                 "description": "בחר בין ערכת נושא ברירת המחדל של Crush או ערכת נושא XML מותאמת אישית.",
@@ -67,7 +67,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "החלף את הנוכחות העשירה של Roblox ב - Crush",
+                "description": "החלף את הנוכחות העשירה של Roblox עם זו של Crush",
                 "option1": "אפשר לאנשים להצטרף למשחק שלך",
                 "option2": "הצג את החשבון שלך בעת הפעלת Roblox"
             },
@@ -164,7 +164,7 @@
                     "description": "מתאים את עוצמת תנועת הדשא. (0 אינו הפחתה, 999 או כל מספר גבוה יותר יקפיא את הדשא, 0 & 1 תנועה מופחתת מעט וערך שגדול מ -1 מופחת בחוזקה בתנועה, מתקרב לשקט)"
                 },
                 "overwriteTextureQualityCard": {
-                    "title": "החלף את רמת איכות המרקם",
+                    "title": "החלף רמת איכות מרקם",
                     "description": "מאלץ רמת איכות מרקם מותאמת אישית.",
                     "dropdownDefault": "ברירת המחדל"
                 },
@@ -186,7 +186,7 @@
                     "modCards": {
                         "toggleNoteDisable": "השבת מוד",
                         "toggleNoteEnable": "אפשר MOD",
-                        "renameNote": "שנה את שם המוד",
+                        "renameNote": "שנה שם של מצב",
                         "openFolderNote": "פתח תיקיית Mod",
                         "deleteNote": "מחק מוד",
                         "layoutNote": "פריסת מצבים בהשראת מנהל המצבים של Frostrap",
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "שפה",
                 "description": "בחר את השפה המועדפת עליך למחוץ."
+            },
+            "windowVibrancyCard": {
+                "title": "רטט חלון",
+                "description": "בחר את אפקט טשטוש הרקע עבור חלונות היישום."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "החלף מצב כדי להראות מה אתה עושה באמצעות Discord RPC. מומלץ להפעיל מחדש."
             },
             "donateCard": {
                 "title": "תרום",

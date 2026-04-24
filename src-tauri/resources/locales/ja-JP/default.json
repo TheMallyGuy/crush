@@ -160,7 +160,7 @@
                     "description": "パフォーマンスを向上させるためにボクセリゼーションを停止します"
                 },
                 "grassAnimationCard": {
-                    "title": "草振りアニメーション",
+                    "title": "草を振るアニメーション",
                     "description": "草の動きの強さを調整します。（ 0は減少なし、999以上の数字は草を凍らせ、0と1はわずかに減少し、1より大きい値は静止に近づいて強く減少した動きです）"
                 },
                 "overwriteTextureQualityCard": {
@@ -188,7 +188,7 @@
                         "toggleNoteEnable": "MODを有効にする",
                         "renameNote": "モッドの名前を変更",
                         "openFolderNote": "Modフォルダーを開く",
-                        "deleteNote": "MODを削除",
+                        "deleteNote": "モッドを削除",
                         "layoutNote": "フロストラップのモッドマネージャーにインスパイアされたモッドレイアウト",
                         "description": "MODの読み込みを有効にし、MODフォルダーの場所を設定します。"
                     }
@@ -232,12 +232,20 @@
             },
             "onBoardCard": {
                 "title": "クラッシュ・ハロー",
-                "description": "再度乗車するよう強制します。",
+                "description": "強制的に再度乗船させてください。",
                 "button": "リセット"
             },
             "languageCard": {
                 "title": "言語",
                 "description": "押しつぶしたい言語を選択します。"
+            },
+            "windowVibrancyCard": {
+                "title": "窓の鮮やかさ",
+                "description": "アプリケーションウィンドウの背景のぼかし効果を選択します。"
+            },
+            "enableCrushRpcCard": {
+                "title": "Discord RPCをクラッシュ",
+                "description": "Discord RPCを使用して何をしているかを表示するかどうかを切り替えます。再起動をお勧めします。"
             },
             "donateCard": {
                 "title": "寄付",

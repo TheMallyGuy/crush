@@ -8,7 +8,7 @@
         "appearance": "Зовнішній вигляд Маршрут",
         "rust": {
             "watcher": {
-                "general": "Гра в roblox",
+                "general": "Гра Roblox",
                 "idle": "Не в",
                 "playing": "Більше"
             }
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Мова",
                 "description": "Виберіть потрібну мову для розчарування."
+            },
+            "windowVibrancyCard": {
+                "title": "Яскравість вікна",
+                "description": "Виберіть ефект розмиття фону для вікон програми."
+            },
+            "enableCrushRpcCard": {
+                "title": "Розім 'яти Discord RPC",
+                "description": "Увімкніть або вимкніть показ того, що ви робите за допомогою Discord RPC. Рекомендується перезапустити."
             },
             "donateCard": {
                 "title": "Пожертвувати",

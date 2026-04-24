@@ -19,7 +19,7 @@
             "updateChecking": "Kontrola aktualizací...",
             "findingBestRegion": "Hledá se nejlepší oblast stahování...",
             "preparingForDownload": "Příprava ke stažení",
-            "fetchingUrls": "Načítání adres URL aktiva...",
+            "fetchingUrls": "Načítání adres URL aktiv...",
             "downloadingAssets": "Stahují se aktiva...",
             "extractingFiles": "Rozbalují se všechny soubory",
             "xmlWriting": "Zapisuje se AppSettings.xml...",
@@ -45,7 +45,7 @@
             "appearance": "Vzhled",
             "description": "Přizpůsobte si vzhled a dojem z bootstrapperu Roblox.",
             "boostrapThemeCard": {
-                "title": "Téma Bootstrapperu",
+                "title": "Téma Bootstrapper",
                 "description": "Vyberte si mezi výchozím motivem Crush nebo vlastním motivem XML.",
                 "dropdown": {
                     "default": "Výchozí (rozdrcení)",
@@ -232,12 +232,20 @@
             },
             "onBoardCard": {
                 "title": "Crush Hello",
-                "description": "Přinuť se znovu zapojit.",
+                "description": "Přinuť se k opětovnému nastoupení.",
                 "button": "Obnovit"
             },
             "languageCard": {
                 "title": "Jazyk",
                 "description": "Vyberte preferovaný jazyk pro zamilovanost."
+            },
+            "windowVibrancyCard": {
+                "title": "Živost okna",
+                "description": "Zvolte efekt rozostření pozadí pro okna aplikace."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Přepněte, zda chcete zobrazit, co děláte pomocí Discord RPC. Doporučuje se restartovat."
             },
             "donateCard": {
                 "title": "Přispět",
