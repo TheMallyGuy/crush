@@ -5,15 +5,19 @@
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import type { BuildInfo } from '$lib/types'
     import { relaunch } from '@tauri-apps/plugin-process'
-    import { Heart, Info, Languages, BookHeart, AppWindow } from '@lucide/svelte'
+    import { Heart, Info, Languages, BookHeart, AppWindow, AudioWaveform } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
     import { locale, locales, _, waitLocale } from 'svelte-i18n'
     import { derived } from 'svelte/store'
     import { load } from '@tauri-apps/plugin-store'
+    import Switch from '$lib/components/atoms/Switch.svelte'
 
     const Arona = '/Arona.png'
+
+    let discordRpcEnabled = true
+
     let info: BuildInfo
     let hash: string
     let buildtime: string
@@ -70,16 +74,6 @@
         { value: 'mica', label: 'Mica' },
     ]
 
-    onMount(async () => {
-        info = await invoke('crush')
-        currentLocale = $locale ?? 'en'
-        hash = info.hash
-        buildtime = info.build_date
-        version = info.version
-
-        const store = await load('config.json')
-        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
-    })
 
     async function updateVibrancy() {
         const store = await load('config.json')
@@ -97,6 +91,12 @@
         location.reload()
     }
 
+    async function handleRpc() {
+        const store = await load('config.json')
+        await store.set('discordRpcEnabled', discordRpcEnabled)
+        await store.save()
+    }
+
     async function handleResetCrushOnboarding() { // its called crush hello dumbfuck
         const store = await load("config.json");
 
@@ -107,6 +107,18 @@
     async function handleDonate() {
         openUrl('https://mally.qzz.io/donate')
     }
+
+    onMount(async () => {
+        info = await invoke('crush')
+        currentLocale = $locale ?? 'en'
+        hash = info.hash
+        buildtime = info.build_date
+        version = info.version
+
+        const store = await load('config.json')
+        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
+        discordRpcEnabled = await store.get<boolean>('discordRpcEnabled') ?? true
+    })
 </script>
 
 <div class="flex flex-col gap-4">
@@ -156,6 +168,18 @@
         >
             Reset
         </Button>
+    </SettingCard>
+
+    <SettingCard
+        title="Enable Crush Discord RPC"
+        description="Toggle whether to show what you are doing using Discord RPC. Restart is recommended."
+        icon={AudioWaveform}
+    >
+        <Switch
+            slot="action"
+            bind:checked={discordRpcEnabled}
+            on:change={handleRpc}
+        />
     </SettingCard>
 
     <ExpandableSettingCard
