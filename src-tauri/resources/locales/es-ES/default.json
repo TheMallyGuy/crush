@@ -239,6 +239,14 @@
                 "title": "Language",
                 "description": "Select your preferred language for crush."
             },
+            "windowVibrancyCard": {
+                "title": "Window Vibrancy",
+                "description": "Choose the background blur effect for the application windows."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Toggle whether to show what you are doing using Discord RPC. Restart is recommended."
+            },
             "donateCard": {
                 "title": "Donate",
                 "description": "Love crush? Donate to Mally to support his work!",

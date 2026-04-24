@@ -225,7 +225,7 @@
             "aboutCard": {
                 "title": "Tietoa",
                 "description": "Tietoja tästä murskauskokoonpanosta",
-                "note": "Muista, että murskaus on ilmaista. Kaikki, jotka yrittävät ihailla uudelleen ja myydä sitä, kertokaa meille Discord-palvelimellamme!",
+                "note": "Muista! Crush on ilmainen käyttää. Jos joku yrittää ihailla sitä uudelleen ja myydä sitä, kerro siitä meille Discord-palvelimellamme!",
                 "builtOn": "Rakennettu:  {date}",
                 "commitHash": "Tee hash-tunniste:  {hash}",
                 "version": "Versio:"
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Kieli",
                 "description": "Valitse haluamasi ihastuskieli."
+            },
+            "windowVibrancyCard": {
+                "title": "Ikkunoiden eloisuus",
+                "description": "Valitse taustan epäterävyysvaikutus sovellusikkunoille."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Valitse, haluatko näyttää, mitä teet Discord RPC: llä. Uudelleenkäynnistys on suositeltavaa."
             },
             "donateCard": {
                 "title": "Lahjoita",

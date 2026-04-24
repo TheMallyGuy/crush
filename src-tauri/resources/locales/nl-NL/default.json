@@ -239,6 +239,14 @@
                 "title": "Taal",
                 "description": "Selecteer je voorkeurstaal voor CRUSH."
             },
+            "windowVibrancyCard": {
+                "title": "Levendigheid van het raam",
+                "description": "Kies het achtergrondvervagingseffect voor de toepassingsvensters."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Schakel in of u wilt laten zien wat u doet met Discord RPC. Herstarten wordt aanbevolen."
+            },
             "donateCard": {
                 "title": "Schenken",
                 "description": "Love CRUSH? Doneer aan Mally om zijn werk te ondersteunen!",

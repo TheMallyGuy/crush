@@ -239,6 +239,14 @@
                 "title": "Język",
                 "description": "Wybierz preferowany język do zauroczenia."
             },
+            "windowVibrancyCard": {
+                "title": "Ożywienie okien",
+                "description": "Wybierz efekt rozmycia tła dla okien aplikacji."
+            },
+            "enableCrushRpcCard": {
+                "title": "Zmiażdż Discorda RPC",
+                "description": "Przełącz, czy chcesz pokazać, co robisz za pomocą Discord RPC. Zaleca się ponowne uruchomienie."
+            },
             "donateCard": {
                 "title": "Przekaż darowiznę",
                 "description": "Kochasz zauroczenie? Przekaż darowiznę Mally 'emu, aby wesprzeć jego pracę!",

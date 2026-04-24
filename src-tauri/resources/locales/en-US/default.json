@@ -1,322 +1,256 @@
 {
-    "rpc" : {
-        "general" : "A roblox bootrapper written from scratch",
-
-        "integrations" : "In Intergrations Route",
-        "installation" : "In Installations Route",
-        "fastflag" : "In Fastflag Route",
-        "mod" : "In Mod Route",
-        "appearance" : "In Appearance Route",
-
-        "rust" : {
-            "watcher" : {
-                "general" : "Playing roblox",
-
-                "idle" : "Not in a game",
-                "playing" : "In {}"
+    "rpc": {
+        "general": "A roblox bootrapper written from scratch",
+        "integrations": "In Intergrations Route",
+        "installation": "In Installations Route",
+        "fastflag": "In Fastflag Route",
+        "mod": "In Mod Route",
+        "appearance": "In Appearance Route",
+        "rust": {
+            "watcher": {
+                "general": "Playing roblox",
+                "idle": "Not in a game",
+                "playing": "In {}"
             }
         }
     },
-
-    "typescript" : {
-        "downloader" : {
-            "updateChecking" : "Checking for updates",
-            "findingBestRegion" : "Finding the best download region...",
-            
-            "preparingForDownload" : "Preparing for download",
-            "fetchingUrls" : "Fetching asset URLs...",
-            "downloadingAssets" : "Downloading assets...",
-            "extractingFiles" : "Extracting files...",
-            "xmlWriting" : "Writing AppSettings.xml...",
-
-            "versionSaving" : "Saving version info...",
-            "installationComplete" : "Installation complete!",
-
-            "packageDownloadFailed" : "Failed to download {packageName}: {error}"
+    "typescript": {
+        "downloader": {
+            "updateChecking": "Checking for updates",
+            "findingBestRegion": "Finding the best download region...",
+            "preparingForDownload": "Preparing for download",
+            "fetchingUrls": "Fetching asset URLs...",
+            "downloadingAssets": "Downloading assets...",
+            "extractingFiles": "Extracting files...",
+            "xmlWriting": "Writing AppSettings.xml...",
+            "versionSaving": "Saving version info...",
+            "installationComplete": "Installation complete!",
+            "packageDownloadFailed": "Failed to download {packageName}: {error}"
         }
     },
-
-    "elements" : {
-        "launchBar" : "Launch"
+    "elements": {
+        "launchBar": "Launch"
     },
-
-    "pages" : {
-        "choiceWin" : {
-            "title" : "Crush",
-
-            "playRoblox" : "Play Roblox",
-            "config" : "Config"
+    "pages": {
+        "choiceWin": {
+            "title": "Crush",
+            "playRoblox": "Play Roblox",
+            "config": "Config"
         },
-
-        "boostrapWin" : {
-            "cancel" : "Cancel",
-            "retry" : "Retry"
+        "boostrapWin": {
+            "cancel": "Cancel",
+            "retry": "Retry"
         },
-
-        "appearance" : {
+        "appearance": {
             "appearance": "Appearance",
             "description": "Customize the look and feel of the Roblox bootstrapper.",
-            "boostrapThemeCard" : {
+            "boostrapThemeCard": {
                 "title": "Bootstrapper Theme",
                 "description": "Choose between the default Crush theme or a custom XML theme.",
-                "dropdown" : {
+                "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
                 },
-                "customDropDownContents" : {
-                    "importNew" : "Import New",
-                    "noThemes" : "No custom themes imported yet.",
-                    "missingAssets" : "Missing Theme Assets"
+                "customDropDownContents": {
+                    "importNew": "Import New",
+                    "noThemes": "No custom themes imported yet.",
+                    "missingAssets": "Missing Theme Assets"
                 }
             }
         },
-        "integrations" : {
+        "integrations": {
             "integrations": "Integrations",
             "description": "Config intergrations outside roblox",
-            "serverNotifierCard" : {
+            "serverNotifierCard": {
                 "title": "Server Location Notifier",
                 "description": "Get notify when client connect to a server."
             },
-            "rpcCard" : {
+            "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Replace the Roblox Rich Presence with Crush's",
-
-                "option1" : "Let people join your game",
-                "option2" : "Display Your Account when playing roblox"
+                "option1": "Let people join your game",
+                "option2": "Display Your Account when playing roblox"
             },
-
             "gameHistoryCard": {
-                "title" : "Your game history",
-                "description" : "View & play your recently played games.",
-                
-                "button" : "View"
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "button": "View"
             },
-
-            "roValraCard" : {
-                "title" : "Better match making with RoValra",
-                "description" : "Crush have a built-in match making intergration. RoValra's Privacy Policy applies.",
-
-                "button" : "Open"
+            "roValraCard": {
+                "title": "Better match making with RoValra",
+                "description": "Crush have a built-in match making intergration. RoValra's Privacy Policy applies.",
+                "button": "Open"
             },
-
-            "roValra" : {
-                "description" : "Configuration",
-
-                "joinServerForYouCard" : {
-                    "title" : "Let Crush join server for you",
-                    "description" : "Instead of Roblox match making, we'll use Rovalra API & find the best server."
+            "roValra": {
+                "description": "Configuration",
+                "joinServerForYouCard": {
+                    "title": "Let Crush join server for you",
+                    "description": "Instead of Roblox match making, we'll use Rovalra API & find the best server."
                 }
             },
-
-            "gameHistory" : {
-                "title" : "Your game history",
-                "description" : "View & play your recently played games.",
-
-                "gameHistoryEmpty" : "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
-                "gameHistoryLoading" : "Loading, please wait a moment...",
-                "clearHistory" : "Clear history",
-                "backToIntegrations" : "Back",
-
-                "gameHistoryCard" : {
-                    "titleUnknown" : "Unknown game",
-                    "lastPlayed" : "Last played: {time}",
-
-                    "play" : "Play",
-                    "deeplink" : "Copy DeepLink"
+            "gameHistory": {
+                "title": "Your game history",
+                "description": "View & play your recently played games.",
+                "gameHistoryEmpty": "Your game history is empty. Play some games to see them here! (Note that not every single server is rejoinable)",
+                "gameHistoryLoading": "Loading, please wait a moment...",
+                "clearHistory": "Clear history",
+                "backToIntegrations": "Back",
+                "gameHistoryCard": {
+                    "titleUnknown": "Unknown game",
+                    "lastPlayed": "Last played: {time}",
+                    "play": "Play",
+                    "deeplink": "Copy DeepLink"
                 }
-
             }
         },
-        "installations" : {
+        "installations": {
             "installations": "Installations",
-
-            "customVersion" : {
-                "title" : "Install a custom Roblox version",
-                "description" : "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
+            "customVersion": {
+                "title": "Install a custom Roblox version",
+                "description": "Skip update check and download the version. The default value is latest. Invalid version will not get downloaded and will fallback into the latest version."
             },
-            
-            "forceReinstallCard" : {
-                "title" : "Force Reinstall Roblox",
-                "description" : "Reinstall roblox everytime you launch it."
+            "forceReinstallCard": {
+                "title": "Force Reinstall Roblox",
+                "description": "Reinstall roblox everytime you launch it."
             },
-
-            "dontUpdateCard" : {
-                "title" : "Don't update Roblox",
-                "description" : "Skip Roblox updating and launch instantly"
+            "dontUpdateCard": {
+                "title": "Don't update Roblox",
+                "description": "Skip Roblox updating and launch instantly"
             }
         },
-
-        "fastflag" : {
+        "fastflag": {
             "fastflag": "Fast Flags",
             "description": "Add/Remove Roblox Fastflags and configurations.",
-            "generalBack" : "Back to fastflag",
-
-            "selectScreeen" : {
-                "title" : "Please choose an action.",
-
-                "editCard" : {
-                    "title" : "Edit",
-                    "description" : "Edit Feature Flags"
+            "generalBack": "Back to fastflag",
+            "selectScreeen": {
+                "title": "Please choose an action.",
+                "editCard": {
+                    "title": "Edit",
+                    "description": "Edit Feature Flags"
                 },
-
-                "presetCard" : {
-                    "title" : "Preset",
-                    "description" : "Use Feature Flag Preset built in in crush."
+                "presetCard": {
+                    "title": "Preset",
+                    "description": "Use Feature Flag Preset built in in crush."
                 }
             },
-
-            "editor" : {
-                "flagTable" : {
+            "editor": {
+                "flagTable": {
                     "texboxFlagName": "Flag name",
                     "texboxFlagValue": "Value",
                     "buttonAdd": "Add",
                     "search": "Search all fflags...",
                     "searchNotFound": "No flags found matching your search.",
-
-                    "flagCol" : {
+                    "flagCol": {
                         "deleteNote": "Delete Flag",
-
-                        "name" : "flag name",
-                        "type" : "type",
-                        "value" : "value"
+                        "name": "flag name",
+                        "type": "type",
+                        "value": "value"
                     }
                 }
             },
-
-            "preset" : {
-                "preset" : "Presets",
-                "description" : "Use our built-in fast-flag preset",
-
-                "msaaCard" : {
-                    "title" : "Anti-Aliasing Quality (MSAA)",
-                    "description" : "Smooths jagged edges. Higher values look better but may reduce performance."
+            "preset": {
+                "preset": "Presets",
+                "description": "Use our built-in fast-flag preset",
+                "msaaCard": {
+                    "title": "Anti-Aliasing Quality (MSAA)",
+                    "description": "Smooths jagged edges. Higher values look better but may reduce performance."
                 },
-
-                "pauseVoxelizerCard" : {
-                    "title" : "Pause Voxelier",
-                    "description" : "Stops voxelization to improve performance"
+                "pauseVoxelizerCard": {
+                    "title": "Pause Voxelier",
+                    "description": "Stops voxelization to improve performance"
                 },
-
-                "grassAnimationCard" : {
-                    "title" : "Grass waving animation",
-                    "description" : "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
+                "grassAnimationCard": {
+                    "title": "Grass waving animation",
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freezes the grass, 0 & 1 slightly reduced motion and value that greater than 1 is strongly reduced motion, approaching stillness)"
                 },
-
-                "overwriteTextureQualityCard" : {
-                    "title" : "Overwrite texture quality level",
-                    "description" : "Forces a custom texture quality level.",
-
-                    "dropdownDefault" : "Default"
+                "overwriteTextureQualityCard": {
+                    "title": "Overwrite texture quality level",
+                    "description": "Forces a custom texture quality level.",
+                    "dropdownDefault": "Default"
                 },
-
-                "lowMeshQualityCard" : {
-                    "title" : "Enable Low Quality Meshes",
-                    "description" : "May improves performance."
+                "lowMeshQualityCard": {
+                    "title": "Enable Low Quality Meshes",
+                    "description": "May improves performance."
                 }
             }
         },
-        "mod" : {
+        "mod": {
             "mod": "Mod",
-
             "tab": {
-
-                "modManagement" : {
+                "modManagement": {
                     "title": "Mod Management",
                     "description": "Manage your mods Roblox mods.",
-
                     "addModButton": "Add A Mod",
-                    "noModsFound" : "We found no mods here, Yuppies.",
-                    "noModsFoundCreateButton" : "Create your first mod",
-
-                    "modCards" : {
+                    "noModsFound": "We found no mods here, Yuppies.",
+                    "noModsFoundCreateButton": "Create your first mod",
+                    "modCards": {
                         "toggleNoteDisable": "Disable Mod",
                         "toggleNoteEnable": "Enable Mod",
                         "renameNote": "Rename Mod",
                         "openFolderNote": "Open Mod Folder",
                         "deleteNote": "Delete Mod",
-                        "layoutNote" : "Mods layout inspired by Frostrap's mods manager",
-
-
+                        "layoutNote": "Mods layout inspired by Frostrap's mods manager",
                         "description": "Enable mod loading and set the mod folder location."
                     }
                 },
-
-                "prebuiltMods" : {
+                "prebuiltMods": {
                     "title": "Prebuilt Mods",
                     "description": "Install ready-to-use mods.",
-
                     "cursorCard": {
                         "title": "Cursor",
                         "description": "Change your Roblox cursor to older versions.",
-
-                        "dropdown" : {
-                            "default" : "Default"
+                        "dropdown": {
+                            "default": "Default"
                         }
                     },
-
                     "customFontCard": {
                         "title": "Custom Font",
                         "description": "Change your roblox font to whatever you like.",
-
-                        "button" : "Change Font"
+                        "button": "Change Font"
                     }
-
                 },
-
-                "communityMods" : {
+                "communityMods": {
                     "title": "Community Mods",
                     "description": "Explore mods created by the community.",
-
-                    "notice" : {
+                    "notice": {
                         "title": "No mod yet",
                         "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton" : "Submit a mod "
+                        "submissionButton": "Submit a mod "
                     }
                 }
-
             }
         },
-
-        "settings" : {
+        "settings": {
             "settings": "Settings",
-            
-            "aboutCard" : {
+            "aboutCard": {
                 "title": "About",
                 "description": "Information about this crush build",
-                "note" : "Remember! crush is free to use, anyone trying to reskin & sell it please tell us in our Discord server!",
-
-                "builtOn" : "Built on: {date}",
-                "commitHash" : "Commit hash: {hash}",
-                "version" : "Version: {version}"
+                "note": "Remember! crush is free to use, anyone trying to reskin & sell it please tell us in our Discord server!",
+                "builtOn": "Built on: {date}",
+                "commitHash": "Commit hash: {hash}",
+                "version": "Version: {version}"
             },
-
-            "onBoardCard" : {
-                "title" : "Crush Hello",
-                "description" : "Force you to onboard again.",
-
-                "button" : "Reset"
+            "onBoardCard": {
+                "title": "Crush Hello",
+                "description": "Force you to onboard again.",
+                "button": "Reset"
             },
-
-            "languageCard" : {
+            "languageCard": {
                 "title": "Language",
                 "description": "Select your preferred language for crush."
             },
-
-            "windowVibrancyCard" : {
+            "windowVibrancyCard": {
                 "title": "Window Vibrancy",
                 "description": "Choose the background blur effect for the application windows."
             },
-
-            "enableCrushRpcCard" : {
+            "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
                 "description": "Toggle whether to show what you are doing using Discord RPC. Restart is recommended."
             },
-
-            "donateCard" : {
+            "donateCard": {
                 "title": "Donate",
                 "description": "Love crush? Donate to Mally to support his work!",
-
-                "button" : "Donate"
+                "button": "Donate"
             }
         }
     }

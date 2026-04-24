@@ -2,7 +2,7 @@
     "rpc": {
         "general": "Un bootrapper roblox écrit à partir de zéro",
         "integrations": "In Intergrations Route",
-        "installation": "Dans le chemin des installations",
+        "installation": "Dans l'itinéraire des installations",
         "fastflag": "Dans l'itinéraire Fastflag",
         "mod": "In Mod Route",
         "appearance": "Itinéraire en apparence",
@@ -107,7 +107,7 @@
             "installations": "Installations",
             "customVersion": {
                 "title": "Installer une version Roblox personnalisée",
-                "description": "Ignorez la vérification de la mise à jour et téléchargez la version. La valeur par défaut est la plus récente. La version non valide ne sera pas téléchargée et se repliera dans la dernière version."
+                "description": "Ignorer la vérification de la mise à jour et télécharger la version. La valeur par défaut est la plus récente. La version non valide ne sera pas téléchargée et se repliera dans la dernière version."
             },
             "forceReinstallCard": {
                 "title": "Forcer la réinstallation de Roblox",
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Votre langue",
                 "description": "Sélectionnez votre langue préférée pour Crush."
+            },
+            "windowVibrancyCard": {
+                "title": "Vibrance des fenêtres",
+                "description": "Choisissez l'effet de flou d'arrière-plan pour les fenêtres de l'application."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Indiquez si vous souhaitez afficher ce que vous faites à l'aide de Discord RPC. Le redémarrage est recommandé."
             },
             "donateCard": {
                 "title": "Faire un don",

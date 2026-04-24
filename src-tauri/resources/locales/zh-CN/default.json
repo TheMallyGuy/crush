@@ -79,7 +79,7 @@
             "roValraCard": {
                 "title": "与RoValra更好地搭配",
                 "description": "Crush具有内置的匹配功能，可实现集成。RoValra的隐私政策适用。",
-                "button": "开放性"
+                "button": "打开"
             },
             "roValra": {
                 "description": "Configuration",
@@ -233,11 +233,19 @@
             "onBoardCard": {
                 "title": "粉碎你好",
                 "description": "迫使您再次加入。",
-                "button": "重置"
+                "button": "洗 点"
             },
             "languageCard": {
                 "title": "语言",
                 "description": "选择您喜欢的粉碎语言。"
+            },
+            "windowVibrancyCard": {
+                "title": "窗户活力",
+                "description": "选择应用程序窗口的背景模糊效果。"
+            },
+            "enableCrushRpcCard": {
+                "title": "粉碎Discord RPC",
+                "description": "切换是否显示您正在使用Discord RPC执行的操作。建议重新启动。"
             },
             "donateCard": {
                 "title": "捐献",

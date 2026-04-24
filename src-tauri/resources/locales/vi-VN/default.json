@@ -161,7 +161,7 @@
                 },
                 "grassAnimationCard": {
                     "title": "Hoạt ảnh vẫy cỏ",
-                    "description": "Điều chỉnh cường độ chuyển động của cỏ. (0 là không giảm, 999 hoặc bất kỳ số cao hơn sẽ đóng băng cỏ, 0 & 1 giảm nhẹ chuyển động và giá trị lớn hơn 1 là chuyển động giảm mạnh, tiếp cận tĩnh lặng)"
+                    "description": "Điều chỉnh cường độ chuyển động của cỏ. (0 là không giảm, 999 hoặc bất kỳ số cao hơn sẽ đóng băng cỏ, 0 & 1 giảm nhẹ chuyển động và giá trị lớn hơn 1 là giảm mạnh chuyển động, tiếp cận tĩnh lặng)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Ghi đè mức chất lượng kết cấu",
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Ngôn ngữ:",
                 "description": "Chọn ngôn ngữ ưa thích của bạn cho crush."
+            },
+            "windowVibrancyCard": {
+                "title": "Độ sống động của cửa sổ",
+                "description": "Chọn hiệu ứng mờ nền cho cửa sổ ứng dụng."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Chuyển đổi để hiển thị những gì bạn đang làm bằng Discord RPC. Nên khởi động lại."
             },
             "donateCard": {
                 "title": "Ủng hộ",

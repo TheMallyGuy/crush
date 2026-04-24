@@ -144,7 +144,7 @@
                         "deleteNote": "Удалить флаг",
                         "name": "Обозначение (Flag Name)",
                         "type": "насоса",
-                        "value": "значение"
+                        "value": "стоимостном"
                     }
                 }
             },
@@ -238,6 +238,14 @@
             "languageCard": {
                 "title": "Язык",
                 "description": "Выберите предпочитаемый язык для влюбленности."
+            },
+            "windowVibrancyCard": {
+                "title": "Вибрация окна",
+                "description": "Выберите эффект размытия фона для окон приложений."
+            },
+            "enableCrushRpcCard": {
+                "title": "Раздавить Discord RPC",
+                "description": "Выберите, показывать ли, что вы делаете, используя Discord RPC. Рекомендуется перезапустить."
             },
             "donateCard": {
                 "title": "Пожертвовать",

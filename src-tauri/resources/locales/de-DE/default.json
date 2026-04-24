@@ -239,6 +239,14 @@
                 "title": "Sprache",
                 "description": "Wählen Sie Ihre bevorzugte Sprache für Crush."
             },
+            "windowVibrancyCard": {
+                "title": "Fenster Lebendigkeit",
+                "description": "Wählen Sie den Hintergrundunschärfeeffekt für die Anwendungsfenster."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Umschalten, ob angezeigt werden soll, was Sie mit Discord RPC tun. Ein Neustart wird empfohlen."
+            },
             "donateCard": {
                 "title": "Spenden",
                 "description": "Love Crush? Spende an Mally, um seine Arbeit zu unterstützen!",

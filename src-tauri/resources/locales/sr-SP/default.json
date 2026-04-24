@@ -239,6 +239,14 @@
                 "title": "Jezik",
                 "description": "Izaberite željeni jezik za simpatije."
             },
+            "windowVibrancyCard": {
+                "title": "Živahnost prozora",
+                "description": "Izaberite efekat zamućenja pozadine za prozore aplikacije."
+            },
+            "enableCrushRpcCard": {
+                "title": "Crush Discord RPC",
+                "description": "Uključite opciju da li želite da prikažete šta radite koristeći Discord RPC. Preporučuje se ponovno pokretanje."
+            },
             "donateCard": {
                 "title": "Донирајте",
                 "description": "Zaljubljeni ste? Donirajte Meliju da biste podržali njegov rad!",
