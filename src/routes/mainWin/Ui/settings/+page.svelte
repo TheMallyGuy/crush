@@ -144,8 +144,8 @@
     </SettingCard>
 
     <SettingCard
-        title="Window Vibrancy"
-        description="Choose the background blur effect for the application windows."
+        title={$_("pages.settings.windowVibrancyCard.title")}
+        description={$_("pages.settings.windowVibrancyCard.description")}
         icon={AppWindow}
     >
         <Dropdown
@@ -166,13 +166,13 @@
             slot="action"
             variant="danger"
         >
-            Reset
+            {$_("pages.settings.onBoardCard.button")}
         </Button>
     </SettingCard>
 
     <SettingCard
-        title="Enable Crush Discord RPC"
-        description="Toggle whether to show what you are doing using Discord RPC. Restart is recommended."
+        title={$_("pages.settings.enableCrushRpcCard.title")}
+        description={$_("pages.settings.enableCrushRpcCard.description")}
         icon={AudioWaveform}
     >
         <Switch
