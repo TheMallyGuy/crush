@@ -1,5 +1,4 @@
 use crate::rpc::{apply_rpc_full, start_rpc, RpcState};
-use serde_json::Value;
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 
