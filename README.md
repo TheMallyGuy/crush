@@ -10,12 +10,23 @@
 
 Crush is a Roblox Boostrapper written from scratch, inpsired by many other boostrappers.
 
-<img src="./demo.gif" />
+<img src="./demo.mp4" />
 
-Crush is currently in beta testing stage, Keep track of the project [here](/TODO.md)
+Crush is now available to use. Download using the latest release.
 Made with Tauri + Svelte.
 
-Lab rat? Download the nightly builds using [nightly.link!](https://nightly.link/TheMallyGuy/crush/workflows/ci-test/master/tauri-windows-build) (bugs incomming alert)
+# Features
+- Not a bloxstrap fork
+- Fastflag editor (Preset & Editing)
+- Better Discord Rich Presence
+- Server join notifier
+- View game history
+- Disable roblox update
+- Download a roblox version and use it (Not all versions work)
+- Bootstrap Theme
+- Config importing for bloxstrap based forks
+- Modding and such
+- Better Match Making (using RoVlara apis, Submission by Yuki)
 
 # Crush's speed
 Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
