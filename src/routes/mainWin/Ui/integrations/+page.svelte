@@ -1,13 +1,13 @@
 <script lang="ts">
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
-    import Button from '$lib/components/atoms/Button.svelte';
+    import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History } from '@lucide/svelte';
+    import { Bell, Plug, History } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-    import type { Integrations, DiscordRpc } from '$lib/types';
-    import { _ } from 'svelte-i18n';
+    import type { Integrations, DiscordRpc } from '$lib/types'
+    import { _ } from 'svelte-i18n'
     import { goto } from '$app/navigation'
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
 
@@ -15,9 +15,8 @@
     let letJoin = false
     let displayAccount = false
     let serverLocationNotifier = false
-    const roValaraLogoColored = "/RovalraColored.svg"
-    const roValaraLogo = "/Rovalra.svg"
-
+    const roValaraLogoColored = '/RovalraColored.svg'
+    const roValaraLogo = '/Rovalra.svg'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -55,7 +54,7 @@
             ...current,
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
-            roValra: current?.roValra ?? { joinServerForYouValue: false }
+            roValra: current?.roValra ?? { joinServerForYouValue: false },
         }
 
         await store.set('integrations', newIntegrations)
@@ -79,7 +78,9 @@
     <div class="flex flex-col gap-3">
         <SettingCard
             title={$_('pages.integrations.serverNotifierCard.title')}
-            description={$_('pages.integrations.serverNotifierCard.description')}
+            description={$_(
+                'pages.integrations.serverNotifierCard.description'
+            )}
             icon={Bell}
         >
             <Switch
@@ -99,20 +100,24 @@
                 on:change={handleChanges}
             />
 
-            <div class="flex gap-3"> <!-- option 1 -->
+            <div class="flex gap-3">
+                <!-- option 1 -->
                 <p>
                     {$_('pages.integrations.rpcCard.option1')}
                 </p>
-                <Switch bind:checked={letJoin} on:change={handleChanges}/>
+                <Switch bind:checked={letJoin} on:change={handleChanges} />
             </div>
 
-            <div class="flex gap-3"> <!-- option 2 -->
+            <div class="flex gap-3">
+                <!-- option 2 -->
                 <p>
                     {$_('pages.integrations.rpcCard.option2')}
                 </p>
-                <Switch bind:checked={displayAccount} on:change={handleChanges}/>
+                <Switch
+                    bind:checked={displayAccount}
+                    on:change={handleChanges}
+                />
             </div>
-
         </ExpandableSettingCard>
 
         <SettingCard
@@ -130,17 +135,22 @@
                 {$_('pages.integrations.gameHistoryCard.button')}
             </Button>
         </SettingCard>
-        
-        <SettingCard
-            title={$_("pages.integrations.roValraCard.title")}
-            description={$_("pages.integrations.roValraCard.description")}
 
+        <SettingCard
+            title={$_('pages.integrations.roValraCard.title')}
+            description={$_('pages.integrations.roValraCard.description')}
             icon={roValaraLogo}
             iconHover={roValaraLogoColored}
         >
-        <Button slot="action" variant="secondary" on:click={() => {goto("integrations/roValra")}}> 
-            {$_("pages.integrations.roValraCard.button")}
-        </Button>
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto('integrations/roValra')
+                }}
+            >
+                {$_('pages.integrations.roValraCard.button')}
+            </Button>
         </SettingCard>
     </div>
 </div>

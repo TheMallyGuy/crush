@@ -55,19 +55,14 @@ async function ensureDir(path: string) {
     }
 }
 
-async function downloadAssetFile(
-    assetUrl: string,
-    onProgress: ProgressCallback,
-    done: number,
-    total: number
-) {
+async function downloadAssetFile(assetUrl: string): Promise<string> {
     const match = assetUrl.match(/version-[^-]+-(.+)$/)
-    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file-${done}.zip`
+    let fileName = match?.[1] ?? assetUrl.split('/').pop()?.split('?')[0] ?? `file.zip`
     if (!fileName.endsWith('.zip')) fileName += '.zip'
     fileName = fileName.toLowerCase()
 
     const res = await fetch(assetUrl)
-    if (!res.ok){
+    if (!res.ok) {
         info(`error url : ${assetUrl}`)
         throw new Error(`HTTP ${res.status}`)
     }
@@ -75,8 +70,10 @@ async function downloadAssetFile(
     await writeFile(fileName, new Uint8Array(buffer), {
         baseDir: BaseDirectory.AppCache,
     })
-    onProgress({ type: 'download', file: fileName, done, total })
+
+    return fileName
 }
+
 
 async function downloadAssets(
     assetsUrls: string[],
@@ -85,7 +82,7 @@ async function downloadAssets(
 ) {
     const uniqueUrls = Array.from(new Set(assetsUrls))
     const total = uniqueUrls.length
-    let done = 0
+    let completed = 0
     let currentIndex = 0
 
     const workers = Array.from({ length: limit }, async () => {
@@ -94,7 +91,9 @@ async function downloadAssets(
             const assetUrl = uniqueUrls[index]
             if (!assetUrl) break
 
-            await downloadAssetFile(assetUrl, onProgress, ++done, total)
+            const fileName = await downloadAssetFile(assetUrl)
+            // Increment only after the file is fully written
+            onProgress({ type: 'download', file: fileName, done: ++completed, total })
         }
     })
 

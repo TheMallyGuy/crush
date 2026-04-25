@@ -49,11 +49,20 @@
         if (e.type === 'status') {
             status = e.message
             textValues['StatusText'] = e.message
+            downloadDone = 0
+            downloadTotal = 0
+            extractDone = 0
+            extractTotal = 0
         } else if (e.type === 'download') {
+            extractDone = 0
+            extractTotal = 0
             downloadFile = e.file
             downloadDone = e.done
             downloadTotal = e.total
         } else if (e.type === 'extract') {
+            downloadFile = ''
+            downloadDone = 0
+            downloadTotal = 0
             extractFile = e.file
             extractDone = e.done
             extractTotal = e.total
