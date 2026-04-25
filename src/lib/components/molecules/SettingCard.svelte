@@ -24,7 +24,7 @@
         <div class="flex items-center gap-5">
             {#if icon || $$slots.icon}
                 <div
-                    class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 group-hover:text-sapphire transition-colors duration-150"
+                    class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 transition-colors duration-150"
                 >
                     <slot name="icon">
                         {#if typeof icon === 'string'}
