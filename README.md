@@ -6,11 +6,10 @@
 [![Svelte][svelteBadge]][svelte]
 [![tailwindcss][tailwindcssBadge]][tailwindcss]
 [![jules][julesBadge]][jules]
-[![n8n][n8nBadge]][n8n]
 
 Crush is a Roblox Boostrapper written from scratch, inpsired by many other boostrappers.
 
-<img src="./demo.mp4" />
+<img src="./demo.gif" />
 
 Crush is now available to use. Download using the latest release.
 Made with Tauri + Svelte.
@@ -38,7 +37,7 @@ Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
 [tailwindcssBadge]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tauriBadge]: https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
 [julesBadge]: https://img.shields.io/badge/jules-purple?style=for-the-badge&logo=googlejules
-[n8nBadge]: https://img.shields.io/badge/suggest%20a%20feature-%23990033?style=for-the-badge&logo=n8n
+
 
 [tailwindcss]: https://tailwindcss.com/
 [tauri]: https://tauri.app/
@@ -46,4 +45,3 @@ Crush is faster than bloxstrap! Check it out [here.](/tests/speed.md)
 [discord]: https://discord.gg/ER64xhvQkw
 [rust]: https://rust-lang.org/
 [jules]: https://jules.google/
-[n8n]: https://n8n-yhiwxdlu.ap-southeast-1.clawcloudrun.com/form/Crush/Feature-Request
