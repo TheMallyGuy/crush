@@ -153,6 +153,9 @@ export interface LoadResult {
     missing: string[]
 }
 
+export type AppType = 'player' | 'studio'
+
+
 
 export type BoostrapConfigs = { // bloxstrap, froststrap
     // general forks (from bloxstrap)
