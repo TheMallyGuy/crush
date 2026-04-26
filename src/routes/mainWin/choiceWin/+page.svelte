@@ -14,6 +14,7 @@
     import { _ } from 'svelte-i18n'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { info } from '@tauri-apps/plugin-log'
+    import { launchAppType } from '$lib/stores/launchAppType'   
 
     let firstLaunchValue: boolean | undefined
     let showVariantMenu = false
@@ -41,10 +42,12 @@
 
     function handlePlayClick() {
         if (playVariant === 'default') {
-            launchBoostrap()
+            launchAppType.set("player")
         } else {
-            // do absolutely nothing
+            launchAppType.set("studio")
         }
+
+        launchBoostrap()
     }
 
     async function checkLaunch() {

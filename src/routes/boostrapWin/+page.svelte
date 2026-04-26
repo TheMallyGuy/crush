@@ -7,7 +7,7 @@
         Installation,
         Integrations,
     } from '$lib/types'
-    import { launchPlayer, applyMods } from '$lib/launchRoblox'
+    import { launchPlayer, launchStudio, applyMods } from '$lib/launchRoblox'
     import { relaunch } from '@tauri-apps/plugin-process'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { onMount, onDestroy } from 'svelte'
@@ -25,6 +25,7 @@
     import { getBestServers } from '$lib/rovalraHelper/rovalra'
     import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
     import { Window } from '@tauri-apps/api/window';
+    import { launchAppType } from '$lib/stores/launchAppType'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -118,23 +119,30 @@
         try {
             const store = await load('config.json')
             const installation = await store.get<Installation>('installation')
+            const appType = $launchAppType === 'studio' ? 'studio' : 'player'
 
             const version = await downloadRoblox(
                 handleProgress,
-                installation?.version === 'latest'
-                    ? undefined
-                    : installation?.version
+                appType,
+                appType === 'player' && installation?.version !== 'latest'
+                    ? installation?.version
+                    : undefined
             )
 
             done = true
             handleProgress({ type: 'status', message: 'Applying modification' })
-            await applyMods(version)
+            await applyMods(version, appType)
 
             handleProgress({ type: 'status', message: 'Launching' })
 
             const integrations = await store.get<Integrations>('integrations')
-            const url = $deepLinkUrl ?? ''
-            await performLaunch(version, url, integrations)
+
+            if (appType === 'studio') {
+                await launchStudio(version)
+            } else {
+                const url = $deepLinkUrl ?? ''
+                await performLaunch(version, url, integrations)
+            }
 
             await sleep(1000)
             await invoke('watch_logs')
