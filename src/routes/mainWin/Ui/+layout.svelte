@@ -1,7 +1,7 @@
 <script lang="ts">
     import Sidebar from '$lib/components/molecules/Sidebar.svelte'
     import LaunchBar from '$lib/components/molecules/LaunchBar.svelte'
-    import { preparePageTransition } from '$lib/page-transition'
+    import { preparePageTransition } from '$lib/pageTransition'
 
     preparePageTransition()
 </script>

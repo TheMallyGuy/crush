@@ -23,7 +23,9 @@ const URLS: &[&str] = &[
     "https://setup-cfly.rbxcdn.com", // us region
 ];
 
-const FILES: &[&str] = &[
+// https://github.com/latte-soft/rdd/blob/master/src/js/rdd.js
+
+const PLAYER_FILES: &[&str] = &[
     "RobloxApp.zip",
     "WebView2RuntimeInstaller.zip",
     "content-avatar.zip",
@@ -46,6 +48,44 @@ const FILES: &[&str] = &[
     "extracontent-textures.zip",
     "extracontent-places.zip",
 ];
+
+const STUDIO_FILES: &[&str] = &[
+    "RobloxStudio.zip",
+    "redist.zip",
+    "Libraries.zip",
+    "LibrariesQt5.zip",
+    "WebView2.zip",
+    "WebView2RuntimeInstaller.zip",
+    "shaders.zip",
+    "ssl.zip",
+    "Plugins.zip",
+    "StudioFonts.zip",
+    "BuiltInPlugins.zip",
+    "ApplicationConfig.zip",
+    "BuiltInStandalonePlugins.zip",
+    "content-qt_translations.zip",
+    "content-sky.zip",
+    "content-fonts.zip",
+    "content-avatar.zip",
+    "content-models.zip",
+    "content-sounds.zip",
+    "content-configs.zip",
+    "content-api-docs.zip",
+    "content-textures2.zip",
+    "content-studio_svg_textures.zip",
+    "content-platform-fonts.zip",
+    "content-platform-dictionaries.zip",
+    "content-terrain.zip",
+    "content-textures3.zip",
+    "extracontent-translations.zip",
+    "extracontent-luapackages.zip",
+    "extracontent-textures.zip",
+    "extracontent-scripts.zip",
+    "extracontent-models.zip",
+    "studiocontent-models.zip",
+    "studiocontent-textures.zip",
+];
+
 
 async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str, u128) {
     log::info!("[BACKEND] testing : {}", url);
@@ -79,7 +119,7 @@ pub async fn best_region() -> Option<&'static str> {
     fastest
 }
 
-pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error>> {
+pub async fn latest_version_player() -> Result<LatestVersion, Box<dyn std::error::Error>> {
     let latest: LatestVersion = get_client()
         .get("https://clientsettings.roblox.com/v2/client-version/WindowsPlayer")
         .send()
@@ -90,36 +130,57 @@ pub async fn latest_version() -> Result<LatestVersion, Box<dyn std::error::Error
     Ok(latest)
 }
 
+pub async fn latest_version_studio() -> Result<LatestVersion, Box<dyn std::error::Error>> {
+    let latest: LatestVersion = get_client()
+        .get("https://clientsettings.roblox.com/v2/client-version/WindowsStudio64")
+        .send()
+        .await?
+        .json()
+        .await?;
+
+    Ok(latest)
+}
+
 pub async fn get_download_urls(
+    is_player: bool,
     version_hash: Option<&str>,
     region_url: Option<&str>,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-    let raw_hash_owned;
-    let raw_hash = match version_hash {
-        Some(hash) => hash,
+    let raw_hash: String = match version_hash {
+        Some(hash) => hash.to_string(),
         None => {
-            raw_hash_owned = latest_version().await?.client_version_upload;
-            &raw_hash_owned
+            if is_player {
+                latest_version_player().await?.client_version_upload
+            } else {
+                latest_version_studio().await?.client_version_upload
+            }
         }
     };
 
     let base_version = format!(
         "version-{}",
-        raw_hash.strip_prefix("version-").unwrap_or(raw_hash)
+        raw_hash.strip_prefix("version-").unwrap_or(&raw_hash)
     );
 
     let base_url = match region_url {
-        Some(url) => url.to_owned(),
+        Some(url) => url.to_string(),
         None => best_region()
             .await
             .unwrap_or("https://setup.rbxcdn.com")
-            .to_owned(),
+            .to_string(),
     };
 
-    let urls = FILES
-        .iter()
-        .map(|file| format!("{base_url}/{base_version}-{file}"))
-        .collect();
+    let urls: Vec<String> = if is_player {
+        PLAYER_FILES
+            .iter()
+            .map(|file| format!("{base_url}/{base_version}-{file}"))
+            .collect()
+    } else {
+        STUDIO_FILES
+            .iter()
+            .map(|file| format!("{base_url}/{base_version}-{file}"))
+            .collect()
+    };
 
     Ok(urls)
 }

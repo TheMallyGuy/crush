@@ -9,8 +9,8 @@ Crush is about **67%** done! <!-- @pochita 22/33 tasks completed -->
         - [x] Launch Roblox
         - [ ] Change channels
     - Studio
-        - [ ] Download Roblox
-        - [ ] Launch Roblox
+        - [X] Download Roblox
+        - [X] Launch Roblox
         - [ ] Change channels
 
 - [x] Use Discord RPC to display whats game the current client in

@@ -8,7 +8,7 @@ use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::rename::rename;
 use commands::roblox_deployment::{
-    get_best_region, get_download_deployment_urls, get_latest_version_player,
+    get_best_region, get_download_deployment_urls, get_latest_version_player, get_latest_version_studio
 };
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window, set_window_vibrancy, apply_vibrancy_to_window};
@@ -232,7 +232,8 @@ pub fn run() {
             set_rpc,
             copy_file,
             export_boostrapconfig,
-            set_window_vibrancy
+            set_window_vibrancy,
+            get_latest_version_studio
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
