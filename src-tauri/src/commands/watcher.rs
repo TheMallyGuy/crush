@@ -30,6 +30,10 @@ fn re_udmux() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
     R.get_or_init(|| Regex::new(r"UDMUX Address = ([0-9\.]+), Port = [0-9]+ \| RCC Server Address = ([0-9\.]+), Port = [0-9]+").unwrap())
 }
+fn re_bloxstrap_rpc() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| Regex::new(r"\[BloxstrapRPC\] (.+)").unwrap())
+}
 
 // states
 
@@ -53,6 +57,7 @@ struct WatcherState {
     pending_server_ip: Option<String>,
     pending_server_location: Option<String>,
     location_notified: bool,
+    bloxstrap_rpc: Option<RichPresence>,
 }
 
 impl WatcherState {
@@ -62,6 +67,7 @@ impl WatcherState {
         self.pending_server_ip = None;
         self.pending_server_location = None;
         self.location_notified = false;
+        self.bloxstrap_rpc = None; 
     }
 
     fn reset_fully(&mut self) {
@@ -77,6 +83,23 @@ impl WatcherState {
 #[derive(Deserialize)] struct IpInfo { city: String, region: String }
 #[derive(Deserialize)] struct IconEntry { #[serde(rename = "imageUrl")] image_url: String }
 #[derive(Deserialize)] struct IconResponse { data: Vec<IconEntry> }
+
+// bloxstrap rpc types 
+
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct RichPresence {
+    details:     Option<String>,
+    state:       Option<String>,
+    // small_image: Option<RichPresenceImage>,
+    // large_image: Option<RichPresenceImage>,
+}
+ 
+#[derive(Deserialize)]
+struct BloxstrapRpcMessage {
+    data: RichPresence,
+}
+
 
 // entry
 
@@ -231,6 +254,14 @@ async fn handle_line(
         return Ok(());
     }
 
+    // bloxstrapRPC detected
+    if let Some(caps) = re_bloxstrap_rpc().captures(line) {
+        if let Some(raw) = caps.get(1) {
+            on_bloxstrap_rpc(app, raw.as_str(), state, store).await?;
+        }
+    }
+
+
     // left
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
@@ -313,6 +344,59 @@ async fn send_location_notification(
     }
     Ok(())
 }
+
+async fn on_bloxstrap_rpc(
+    app: &AppHandle,
+    raw: &str,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    if !integration_enabled(store, &["discordRpc", "enable"]) {
+        return Ok(());
+    }
+    
+    log::info!("BloxstrapRPC raw: {}", raw);
+
+    let msg: BloxstrapRpcMessage = match serde_json::from_str(raw) {
+        Ok(v) => v,
+        Err(e) => {
+            log::warn!("BloxstrapRPC: failed to parse: {} — raw: {}", e, raw);
+            return Ok(());
+        }
+    };
+
+    let rpc = msg.data;
+    log::info!("BloxstrapRPC: {:?}", rpc);
+    state.bloxstrap_rpc = Some(rpc.clone());
+ 
+
+ 
+    let rpc_state = app.state::<RpcState>();
+    const CLIENT_ID: &str = "1484521125550620813";
+ 
+    if rpc_state.client.lock().await.is_none() {
+        if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
+            log::error!("RPC start failed: {}", e);
+            return Ok(());
+        }
+    }
+ 
+    apply_rpc_full(
+        &rpc_state,
+        rpc.details.as_deref(),
+        rpc.state.as_deref(),
+        // large.as_deref(),
+        None,
+        None,
+        // rpc.large_image.as_ref().and_then(|i| i.hover_text.as_deref()),
+        // small.as_deref(),
+        None,
+        None,
+    )
+    .await
+    .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))
+}
+
 
 async fn update_discord_rpc(
     app: &AppHandle,
