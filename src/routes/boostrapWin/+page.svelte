@@ -142,10 +142,11 @@
             } else {
                 const url = $deepLinkUrl ?? ''
                 await performLaunch(version, url, integrations)
+
+                await sleep(1000)
+                await invoke('watch_logs')
             }
 
-            await sleep(1000)
-            await invoke('watch_logs')
             await finalizeBootstrap()
         } catch (e: any) {
             handleBootstrapError(e)
