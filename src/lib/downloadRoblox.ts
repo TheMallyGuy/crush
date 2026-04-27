@@ -7,7 +7,7 @@ import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
 
-const extractRoots: Record<string, string> = {
+const playerExtractRoots: Record<string, string> = {
     'RobloxApp.zip': '',
     'shaders.zip': 'shaders/',
     'ssl.zip': 'ssl/',
@@ -25,7 +25,7 @@ const extractRoots: Record<string, string> = {
 
     'content-platform-fonts.zip': 'PlatformContent/pc/fonts/',
     'content-platform-dictionaries.zip':
-    'PlatformContent/pc/shared_compression_dictionaries/',
+        'PlatformContent/pc/shared_compression_dictionaries/',
     'content-terrain.zip': 'PlatformContent/pc/terrain/',
     'content-textures3.zip': 'PlatformContent/pc/textures/',
 
@@ -36,14 +36,67 @@ const extractRoots: Record<string, string> = {
     'extracontent-places.zip': 'ExtraContent/places/',
 }
 
-const sortedExtractRoots = Object.entries(extractRoots).sort(
+const studioExtractRoots: Record<string, string> = {
+    'RobloxStudio.zip': '',
+    'redist.zip': '',
+    'Libraries.zip': '',
+    'LibrariesQt5.zip': '',
+    'WebView2.zip': '',
+    'WebView2RuntimeInstaller.zip': 'WebView2RuntimeInstaller/',
+    'shaders.zip': 'shaders/',
+    'ssl.zip': 'ssl/',
+    'Plugins.zip': 'Plugins/',
+    'StudioFonts.zip': 'StudioFonts/',
+    'BuiltInPlugins.zip': 'BuiltInPlugins/',
+    'ApplicationConfig.zip': 'ApplicationConfig/',
+    'BuiltInStandalonePlugins.zip': 'BuiltInStandalonePlugins/',
+    'content-qt_translations.zip': 'content/qt_translations/',
+    'content-sky.zip': 'content/sky/',
+    'content-fonts.zip': 'content/fonts/',
+    'content-avatar.zip': 'content/avatar/',
+    'content-models.zip': 'content/models/',
+    'content-sounds.zip': 'content/sounds/',
+    'content-configs.zip': 'content/configs/',
+    'content-api-docs.zip': 'content/api_docs/',
+    'content-textures2.zip': 'content/textures/',
+    'content-studio_svg_textures.zip': 'content/studio_svg_textures/',
+    'content-platform-fonts.zip': 'PlatformContent/pc/fonts/',
+    'content-platform-dictionaries.zip':
+        'PlatformContent/pc/shared_compression_dictionaries/',
+    'content-terrain.zip': 'PlatformContent/pc/terrain/',
+    'content-textures3.zip': 'PlatformContent/pc/textures/',
+    'extracontent-translations.zip': 'ExtraContent/translations/',
+    'extracontent-luapackages.zip': 'ExtraContent/LuaPackages/',
+    'extracontent-textures.zip': 'ExtraContent/textures/',
+    'extracontent-scripts.zip': 'ExtraContent/scripts/',
+    'extracontent-models.zip': 'ExtraContent/models/',
+    'studiocontent-models.zip': 'StudioContent/models/',
+    'studiocontent-textures.zip': 'StudioContent/textures/',
+}
+
+export type AppType = 'player' | 'studio'
+
+function getExtractRoots(appType: AppType): Record<string, string> {
+    return appType === 'studio' ? studioExtractRoots : playerExtractRoots
+}
+
+function getSortedExtractRoots(appType: AppType) {
+    return Object.entries(getExtractRoots(appType)).sort(
+        (a, b) => b[1].length - a[1].length
+    )
+}
+
+function getLowercaseExtractRoots(appType: AppType) {
+    return Object.entries(getExtractRoots(appType)).map(([k, v]) => [
+        k.toLowerCase(),
+        v,
+    ])
+}
+
+// Keep legacy non-parameterised references for Player (backwards compat)
+const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
     (a, b) => b[1].length - a[1].length
 )
-
-const lowercaseExtractRoots = Object.entries(extractRoots).map(([k, v]) => [
-    k.toLowerCase(),
-    v,
-])
 
 import type { ProgressEvent, ProgressCallback, Installation, Versions } from './types'
 
@@ -74,7 +127,6 @@ async function downloadAssetFile(assetUrl: string): Promise<string> {
     return fileName
 }
 
-
 async function downloadAssets(
     assetsUrls: string[],
     onProgress: ProgressCallback,
@@ -92,7 +144,6 @@ async function downloadAssets(
             if (!assetUrl) break
 
             const fileName = await downloadAssetFile(assetUrl)
-            // Increment only after the file is fully written
             onProgress({ type: 'download', file: fileName, done: ++completed, total })
         }
     })
@@ -117,42 +168,52 @@ async function extractIndividualZip(
     return true
 }
 
-async function extractAll(versionHash: string, onProgress: ProgressCallback) {
+async function extractAll(
+    versionHash: string,
+    onProgress: ProgressCallback,
+    appType: AppType = 'player'
+) {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
-    const installRoot = await join(dataDir, 'Player', 'Versions', versionHash)
+    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const installRoot = await join(dataDir, appFolder, 'Versions', versionHash)
     await ensureDir(installRoot)
 
-    const total = lowercaseExtractRoots.length
+    const lowercaseRoots = getLowercaseExtractRoots(appType)
+    const total = lowercaseRoots.length
 
-    for (const [index, [zipName, dest]] of lowercaseExtractRoots.entries()) {
+    for (const [index, [zipName, dest]] of lowercaseRoots.entries()) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
 }
 
-async function checkForUpdates(CurrentVersions: Versions): Promise<boolean> {
-    const latest: string = await invoke('get_latest_version_player')
-
+async function checkForUpdates(
+    CurrentVersions: Versions,
+    appType: AppType = 'player'
+): Promise<boolean> {
+    const latest: string = await invoke(
+        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
+    )
     return !CurrentVersions.versions.includes(latest)
 }
 
-export async function getLatestVersion(): Promise<string> {
-    const versionStore = await load('versions.json')
+export async function getLatestVersion(appType: AppType = 'player'): Promise<string> {
+    const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
+    const versionStore = await load(storeKey)
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
-    const latestVersion = versionList.at(-1) ?? ''
-
-    return latestVersion
+    return versionList.at(-1) ?? ''
 }
 
-async function resolveBestRegion(
-    onProgress: ProgressCallback
-): Promise<string> {
+async function resolveBestRegion(onProgress: ProgressCallback): Promise<string> {
     const conf = await load('config.json')
     let bestRegion = await conf.get<string>('bestRegion')
 
     if (!bestRegion) {
-        onProgress({ type: 'status', message: get(_)('typescript.downloader.findingBestRegion') })
+        onProgress({
+            type: 'status',
+            message: get(_)('typescript.downloader.findingBestRegion'),
+        })
         bestRegion = await invoke<string>('get_best_region')
         await conf.set('bestRegion', bestRegion)
         await conf.save()
@@ -160,11 +221,14 @@ async function resolveBestRegion(
     return bestRegion
 }
 
-async function writeAppSettings(versionHash: string) {
+async function writeAppSettings(versionHash: string, appType: AppType = 'player') {
     const dataDir = await appDataDir()
+    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const exeName =
+        appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const xmlPath = await join(
         dataDir,
-        'Player',
+        appFolder,
         'Versions',
         versionHash,
         'AppSettings.xml'
@@ -179,6 +243,7 @@ async function writeAppSettings(versionHash: string) {
 
 async function getInstallationUrls(
     onProgress: ProgressCallback,
+    appType: AppType = 'player',
     version?: string
 ): Promise<string[]> {
     onProgress({
@@ -191,15 +256,15 @@ async function getInstallationUrls(
         type: 'status',
         message: get(_)('typescript.downloader.fetchingUrls'),
     })
+
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        player: appType === 'player',
         region: bestRegion,
         ...(version && { version }),
     })
 
     if (!assetsUrls || assetsUrls.length === 0) {
-        throw new Error(
-            'No download URLs found for the specified version/region.'
-        )
+        throw new Error('No download URLs found for the specified version/region.')
     }
 
     return assetsUrls
@@ -207,26 +272,28 @@ async function getInstallationUrls(
 
 async function completeInstallation(
     onProgress: ProgressCallback,
-    versionHash: string
+    versionHash: string,
+    appType: AppType = 'player'
 ): Promise<void> {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.extractingFiles'),
     })
-    await extractAll(versionHash, onProgress)
+    await extractAll(versionHash, onProgress, appType)
 
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.xmlWriting'),
     })
-    await writeAppSettings(versionHash)
+    await writeAppSettings(versionHash, appType)
 }
 
 async function performFullInstallation(
     onProgress: ProgressCallback,
+    appType: AppType = 'player',
     version?: string
 ): Promise<string> {
-    const assetsUrls = await getInstallationUrls(onProgress, version)
+    const assetsUrls = await getInstallationUrls(onProgress, appType, version)
 
     onProgress({
         type: 'status',
@@ -237,30 +304,32 @@ async function performFullInstallation(
     const versionHash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
 
-    await completeInstallation(onProgress, versionHash)
+    await completeInstallation(onProgress, versionHash, appType)
 
     return versionHash
 }
 
-async function checkInstallationExists(version?: string): Promise<boolean> {
+async function checkInstallationExists(
+    appType: AppType = 'player',
+    version?: string
+): Promise<boolean> {
     if (!version) return false
     const dataDir = await appDataDir()
-    const exePath = await join(
-        dataDir,
-        'Player',
-        'Versions',
-        version,
-        'RobloxPlayerBeta.exe'
-    )
+    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const exeName =
+        appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
+    const exePath = await join(dataDir, appFolder, 'Versions', version, exeName)
     return await exists(exePath)
 }
 
 export async function downloadRoblox(
     onProgress: ProgressCallback,
+    appType: AppType = 'player',
     version?: string
 ): Promise<string> {
-    const config = await load("config.json")
-    const versionStore = await load('versions.json')
+    const config = await load('config.json')
+    const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
+    const versionStore = await load(storeKey)
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
     const savedInstallation = await config.get<Installation>('installation')
 
@@ -270,21 +339,24 @@ export async function downloadRoblox(
     }
 
     if (version) {
-        return handleExplicitVersion(onProgress, version, versionList, versionStore)
+        return handleExplicitVersion(onProgress, appType, version, versionList, versionStore)
     }
 
-    return handleLatestVersion(onProgress, versionList, versionStore, config)
+    return await invoke(
+        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
+    )
 }
 
 async function handleExplicitVersion(
     onProgress: ProgressCallback,
+    appType: AppType,
     version: string,
     versionList: string[],
     versionStore: Store
 ): Promise<string> {
-    const isMissing = !(await checkInstallationExists(version))
+    const isMissing = !(await checkInstallationExists(appType, version))
     if (isMissing) {
-        await performFullInstallation(onProgress, version)
+        await performFullInstallation(onProgress, appType, version)
     }
 
     await saveVersion(onProgress, version, versionList, versionStore)
@@ -293,6 +365,7 @@ async function handleExplicitVersion(
 
 async function handleLatestVersion(
     onProgress: ProgressCallback,
+    appType: AppType,
     versionList: string[],
     versionStore: Store,
     store: Store
@@ -302,17 +375,17 @@ async function handleLatestVersion(
         message: get(_)('typescript.downloader.updateChecking'),
     })
 
-    const needsUpdate = await checkForUpdates({ versions: versionList })
-    const isMissing = !(await checkInstallationExists(versionList.at(-1)))
-    const installationCfg = await store.get<Installation>("installation")
+    const needsUpdate = await checkForUpdates({ versions: versionList }, appType)
+    const isMissing = !(await checkInstallationExists(appType, versionList.at(-1)))
+    const installationCfg = await store.get<Installation>('installation')
     const shouldForceInstall = await installationCfg?.forceReinstall
 
     if (needsUpdate || isMissing || shouldForceInstall) {
-        const versionHash = await performFullInstallation(onProgress)
+        const versionHash = await performFullInstallation(onProgress, appType)
         await saveVersion(onProgress, versionHash, versionList, versionStore)
     }
 
-    return await invoke('get_latest_version_player')
+    return await invoke('get_latest_version', { player: appType === 'player' })
 }
 
 async function saveVersion(
@@ -336,10 +409,14 @@ async function saveVersion(
     })
 }
 
-export function getPackageForFile(relativePath: string): string | null {
+export function getPackageForFile(
+    relativePath: string,
+    appType: AppType = 'player'
+): string | null {
     const normalized = relativePath.replace(/\\/g, '/').toLowerCase()
+    const sorted = getSortedExtractRoots(appType)
     const [packageName] =
-        sortedExtractRoots.find(
+        sorted.find(
             ([, prefix]) => prefix === '' || normalized.startsWith(prefix.toLowerCase())
         ) ?? []
     return packageName ?? null
@@ -350,9 +427,10 @@ export async function restoreFileFromPackage(
     versionGuid: string,
     versionDir: string,
     isPackageInput = false,
-    files?: string[]
+    files?: string[],
+    appType: AppType = 'player'
 ) {
-    const { packageName, prefix } = resolvePackageInfo(input, isPackageInput)
+    const { packageName, prefix } = resolvePackageInfo(input, isPackageInput, appType)
 
     if (!packageName) {
         info(`No package found for ${input}, skipping restore`)
@@ -400,7 +478,13 @@ export async function restoreFileFromPackage(
     })
 }
 
-export function resolvePackageInfo(input: string, isPackageInput: boolean) {
+export function resolvePackageInfo(
+    input: string,
+    isPackageInput: boolean,
+    appType: AppType = 'player'
+) {
+    const extractRoots = getExtractRoots(appType)
+
     if (isPackageInput) {
         return {
             packageName: input,
@@ -409,8 +493,9 @@ export function resolvePackageInfo(input: string, isPackageInput: boolean) {
     }
 
     const normalized = input.replace(/\\/g, '/').toLowerCase()
+    const sorted = getSortedExtractRoots(appType)
     const [packageName, prefix] =
-        sortedExtractRoots.find(
+        sorted.find(
             ([, p]) => p === '' || normalized.startsWith(p.toLowerCase())
         ) ?? []
 
@@ -429,27 +514,35 @@ async function downloadMissingPackage(
     const url = `https://setup.rbxcdn.com/${versionGuid}-${packageName}`
     const res = await fetch(url)
     if (!res.ok) {
-        throw new Error(get(_)('typescript.downloader.packageDownloadFailed', { values : { packageName, error: res.statusText } }))
+        throw new Error(
+            get(_)('typescript.downloader.packageDownloadFailed', {
+                values: { packageName, error: res.statusText },
+            })
+        )
     }
 
     const buffer = await res.arrayBuffer()
     await writeFile(zipPath, new Uint8Array(buffer))
 }
 
-export async function getCurrentInstallation(): Promise<{
+export async function getCurrentInstallation(appType: AppType = 'player'): Promise<{
     version: string
     installPath: string
     exists: boolean
 } | null> {
-    const versionStore = await load('versions.json')
+    const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
+    const versionStore = await load(storeKey)
     const versionList = (await versionStore.get<string[]>('versions')) ?? []
     const latestVersion = versionList.at(-1)
 
     if (!latestVersion) return null
 
     const dataDir = await appDataDir()
-    const installPath = await join(dataDir, 'Player', 'Versions', latestVersion)
-    const exePath = await join(installPath, 'RobloxPlayerBeta.exe')
+    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const exeName =
+        appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
+    const installPath = await join(dataDir, appFolder, 'Versions', latestVersion)
+    const exePath = await join(installPath, exeName)
     const installExists = await exists(exePath)
 
     return {
