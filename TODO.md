@@ -15,7 +15,7 @@ Crush is about **67%** done! <!-- @pochita 22/33 tasks completed -->
 
 - [x] Use Discord RPC to display whats game the current client in
     - [x] Games
-    - [ ] __BloxstrapRPC__
+    - [x] __BloxstrapRPC__
 
 - [x] Mods
     - [x] Apply mods on launch
