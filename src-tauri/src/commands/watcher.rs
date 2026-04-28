@@ -6,7 +6,7 @@ use regex::Regex;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use windows::Win32::Foundation::HWND;
-use crate::interactive::{set_transparency, find_windows_by_title};
+use crate::interactive::{set_transparency, find_windows_by_title, move_window,maximize_window,minimize_window,focus_window,get_window_rect,set_borderless,set_window_title,restore_window};
 use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
 use std::thread::{self, sleep};
 use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
@@ -474,15 +474,55 @@ async fn on_interactive(
     };
 
     match msg.command.as_str() {
-        
         "info" => {
-                        app.notification()
-            .builder()
-            .title("This game uses InteractiveAPI!")
-            .body("You can turn off InteractiveAPI anytime in the intergrations tab.")
-            .show()
-            .map_err(|e| e.to_string())?;
+            app.notification()
+                .builder()
+                .title("This game uses InteractiveAPI!")
+                .body("You can turn off InteractiveAPI anytime in the integrations tab.")
+                .show()
+                .map_err(|e| e.to_string())?;
         }
+
+        "moveWindow" => {
+            let x = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let y = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let w = msg.data.get("width").and_then(|v| v.as_i64()).unwrap_or(800) as i32;
+            let h = msg.data.get("height").and_then(|v| v.as_i64()).unwrap_or(600) as i32;
+
+            move_window(hwnd, x, y, w, h);
+        }
+
+        "minimize" => {
+            minimize_window(hwnd);
+        }
+
+        "maximize" => {
+            maximize_window(hwnd);
+        }
+
+        "restore" => {
+            restore_window(hwnd);
+        }
+
+        "focus" => {
+            focus_window(hwnd);
+        }
+
+        "setTitle" => {
+            if let Some(title) = msg.data.get("title").and_then(|v| v.as_str()) {
+                set_window_title(hwnd, title);
+            }
+        }
+
+        "setBorderless" => {
+            let enabled = msg.data
+                .get("enabled")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(true);
+
+            set_borderless(hwnd, enabled);
+        }
+
         "setTransparency" => {
             let alpha = msg.data
                 .get("value")
@@ -491,8 +531,15 @@ async fn on_interactive(
                 .unwrap_or(255);
 
             set_transparency(hwnd, alpha);
-        },
+        }
 
+        "getRect" => {
+            if let Some((x, y, w, h)) = get_window_rect(hwnd) {
+                log::info!("Window rect: x={} y={} w={} h={}", x, y, w, h);
+                // optionally emit to frontend:
+                // app.emit("windowRect", serde_json::json!({ "x": x, "y": y, "w": w, "h": h })).ok();
+            }
+        }
 
         other => {
             log::warn!("InteractiveAPI: unknown command '{}'", other);
