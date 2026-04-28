@@ -1,17 +1,17 @@
 # TODO
-Crush is about **80%** done! <!-- @pochita 20/25 tasks completed -->
+Crush is about **100%** done! Download crush using the latest release.
 
 ## Functions
 
-- [ ] Able to download & launch roblox
+- [x] Able to download & launch roblox
     - Player
         - [x] Download Roblox
         - [x] Launch Roblox
-        - [ ] Change channels
+       <!-- - [ ] Change channels  scraped -->
     - Studio
         - [X] Download Roblox
         - [X] Launch Roblox
-        - [ ] Change channels
+       <!-- - [ ] Change channels  scraped -->
 
 - [x] Use Discord RPC to display whats game the current client in
     - [x] Games
@@ -23,11 +23,10 @@ Crush is about **80%** done! <!-- @pochita 20/25 tasks completed -->
     - [x] Prebuilt mods
 - [x] Fastflag(clientsetting.json)
 
-- [ ] Community mods
+- [ ] Community mods (Will be impl)
     - [ ] Community mods from other sources (Frostrap, Kilo's modloader... etc mod library)
 
-- [ ] Account management
-- [ ] [Mod genarator](https://github.com/Froststrap/mod-generator)
+- [ ] [Mod genarator](https://github.com/Froststrap/mod-generator)?
 
 ## UI
 
