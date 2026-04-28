@@ -1,5 +1,5 @@
 # TODO
-Crush is about **67%** done! <!-- @pochita 22/33 tasks completed -->
+Crush is about **80%** done! <!-- @pochita 20/25 tasks completed -->
 
 ## Functions
 
@@ -31,16 +31,16 @@ Crush is about **67%** done! <!-- @pochita 22/33 tasks completed -->
 
 ## UI
 
-- [ ] Pages
+- [x] Pages
     - [x] Integrations
     - [x] Installation
     - [x] Mods
     - [x] FastFlag
         - [x] Editor
-        - [ ] Presets
+        - [x] Presets
     - [x] Appearance
     - [x] Settings
-    - [ ] Hello homepage
+    - [x] Hello homepage
     - [x] Game history
 
 - [x] Support localization
