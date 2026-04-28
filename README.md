@@ -7,6 +7,9 @@
 [![tailwindcss][tailwindcssBadge]][tailwindcss]
 [![jules][julesBadge]][jules]
 
+> [!NOTE]
+> There is a [Gitea mirror](https://git.mally.qzz.io/Mally/crush) from my homelab.
+
 Crush is a Roblox Boostrapper written from scratch, inpsired by many other boostrappers.
 
 <img src="./demo.gif" />
