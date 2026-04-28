@@ -342,9 +342,7 @@ export async function downloadRoblox(
         return handleExplicitVersion(onProgress, appType, version, versionList, versionStore)
     }
 
-    return await invoke(
-        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
-    )
+    return handleLatestVersion(onProgress, appType, versionList, versionStore, config)
 }
 
 async function handleExplicitVersion(

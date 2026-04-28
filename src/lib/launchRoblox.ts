@@ -3,6 +3,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
 import type { AppType ,Mod } from '$lib/types'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
+import { exists } from '@tauri-apps/plugin-fs'
 
 function getAppFolder(appType: AppType): string {
     return appType === 'studio' ? 'Studio' : 'Player'
@@ -140,6 +141,10 @@ export async function launchPlayer(hash: string, deeplink: string | null) {
 }
 
 export async function launchStudio(hash: string, placeFile?: string | null) {
+    if (!hash) {
+        throw new Error('No Studio version installed. Please install Studio first.')
+    }
+
     const appData = await appDataDir()
     const studioLocation = await join(
         appData,
@@ -148,7 +153,12 @@ export async function launchStudio(hash: string, placeFile?: string | null) {
         hash,
         'RobloxStudioBeta.exe'
     )
-    const args = placeFile ? [placeFile] : []
 
+    const studioExists = await exists(studioLocation)
+    if (!studioExists) {
+        throw new Error(`Studio not found at: ${studioLocation}`)
+    }
+
+    const args = placeFile ? [placeFile] : []
     await invoke('launch', { path: studioLocation, arguments: args })
 }
