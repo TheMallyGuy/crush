@@ -110,7 +110,7 @@
         await win.show()
     }
 
-    async function runBootstrap() {
+   async function runBootstrap() {
         error = false
         errorMessage = ''
         done = false
@@ -119,7 +119,15 @@
         try {
             const store = await load('config.json')
             const installation = await store.get<Installation>('installation')
-            const appType = $launchAppType === 'studio' ? 'studio' : 'player'
+
+            const url = $deepLinkUrl ?? ''
+            const appType = url.startsWith('roblox-player:')
+                ? 'player'
+                : url.startsWith('roblox-studio:')
+                ? 'studio'
+                : $launchAppType === 'studio'
+                ? 'studio'
+                : 'player'
 
             const version = await downloadRoblox(
                 handleProgress,
@@ -140,9 +148,7 @@
             if (appType === 'studio') {
                 await launchStudio(version)
             } else {
-                const url = $deepLinkUrl ?? ''
                 await performLaunch(version, url, integrations)
-
                 await sleep(1000)
                 await invoke('watch_logs')
             }
