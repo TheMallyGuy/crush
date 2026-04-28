@@ -8,6 +8,7 @@ use serde_json::{Value, json};
 use windows::Win32::Foundation::HWND;
 use crate::interactive::{set_transparency, find_windows_by_title};
 use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
+use std::thread::{self, sleep};
 use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager};
@@ -450,7 +451,7 @@ async fn on_bloxstrap_rpc(
 
 
 async fn on_interactive(
-    _app: &AppHandle,
+    app: &AppHandle,
     raw: &str,
     state: &mut WatcherState,
     _store: &tauri_plugin_store::Store<tauri::Wry>,
@@ -473,6 +474,15 @@ async fn on_interactive(
     };
 
     match msg.command.as_str() {
+        
+        "info" => {
+                        app.notification()
+            .builder()
+            .title("This game uses InteractiveAPI!")
+            .body("You can turn off InteractiveAPI anytime in the intergrations tab.")
+            .show()
+            .map_err(|e| e.to_string())?;
+        }
         "setTransparency" => {
             let alpha = msg.data
                 .get("value")
@@ -481,7 +491,8 @@ async fn on_interactive(
                 .unwrap_or(255);
 
             set_transparency(hwnd, alpha);
-        }
+        },
+
 
         other => {
             log::warn!("InteractiveAPI: unknown command '{}'", other);
