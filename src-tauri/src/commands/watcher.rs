@@ -5,6 +5,8 @@ use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::Deserialize;
 use serde_json::{Value, json};
+use windows::Win32::Foundation::HWND;
+use crate::interactive::{set_transparency, find_windows_by_title};
 use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
 use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
@@ -34,6 +36,11 @@ fn re_bloxstrap_rpc() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
     R.get_or_init(|| Regex::new(r"\[BloxstrapRPC\] (.+)").unwrap())
 }
+fn re_interactive() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| Regex::new(r"\[InteractiveAPI\] (.+)").unwrap())
+}
+
 
 // states
 
@@ -58,6 +65,8 @@ struct WatcherState {
     pending_server_location: Option<String>,
     location_notified: bool,
     bloxstrap_rpc: Option<RichPresence>,
+    interactive: Option<bool>,
+    roblox_hwnd: Option<HWND>,
 }
 
 impl WatcherState {
@@ -67,7 +76,9 @@ impl WatcherState {
         self.pending_server_ip = None;
         self.pending_server_location = None;
         self.location_notified = false;
-        self.bloxstrap_rpc = None; 
+        self.bloxstrap_rpc = None;
+        self.interactive = None;
+        self.roblox_hwnd = None;
     }
 
     fn reset_fully(&mut self) {
@@ -98,6 +109,16 @@ struct RichPresence {
 #[derive(Deserialize)]
 struct BloxstrapRpcMessage {
     data: RichPresence,
+}
+
+// interactive
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct InteractiveMessage {
+    command: String,
+    #[serde(default)]
+    data: Value,
 }
 
 
@@ -146,7 +167,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
             }
         }
 
-        tokio::time::sleep(Duration::from_millis(500)).await;
+        tokio::time::sleep(Duration::from_millis(16)).await;
     }
 }
 
@@ -179,6 +200,24 @@ async fn read_new_lines(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) {
+
+    let Some(path) = state.current_file.as_ref() else { return; };
+
+    if let Ok(metadata) = std::fs::metadata(path) {
+        let file_size = metadata.len();
+
+        if file_size > state.offset + 1024 * 1024 {
+            log::warn!(
+                "Falling behind (offset: {}, size: {}), skipping old logs",
+                state.offset,
+                file_size
+            );
+
+            state.offset = file_size;
+            return;
+        }
+    }
+
     let mut reader = match open_reader(state) {
         Ok(r) => r,
         Err(e) => { log::error!("open reader: {}", e); return; }
@@ -204,9 +243,6 @@ async fn read_new_lines(
 }
 
 fn open_reader(state: &mut WatcherState) -> Result<BufReader<File>, String> {
-    if let Some(r) = state.reader.take() {
-        return Ok(r);
-    }
     let path = state.current_file.as_ref().ok_or("No current file")?;
     let mut file = File::open(path).map_err(|e| e.to_string())?;
     file.seek(SeekFrom::Start(state.offset)).map_err(|e| e.to_string())?;
@@ -222,6 +258,7 @@ async fn handle_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     // new join
+    
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps.get(1).map(|m| m.as_str().to_string()).unwrap_or_default();
         let place_id: u64 = caps.get(2).and_then(|m| m.as_str().parse().ok()).unwrap_or(0);
@@ -232,6 +269,13 @@ async fn handle_line(
         state.activity.instance_id = Some(instance_id);
         log::info!("joining place {} instance {}", place_id, state.activity.instance_id.as_deref().unwrap_or("?"));
         return Ok(());
+    }
+
+    // interactive api
+    if let Some(caps) = re_interactive().captures(line) {
+        if let Some(raw) = caps.get(1) {
+            on_interactive(app, raw.as_str(), state, store).await?;
+        }
     }
 
     // UDMUX (server IP)
@@ -261,7 +305,6 @@ async fn handle_line(
         }
     }
 
-
     // left
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
@@ -284,7 +327,7 @@ async fn on_joined(
     let Some(place_id) = state.activity.place_id else { return Ok(()); };
 
     if !state.activity.join_initiated {
-        log::warn!("serverId seen without a prior join — stale log?");
+        log::warn!("serverId seen without a prior join, stale log?");
         return Ok(());
     }
     if state.activity.in_game || state.activity.notified {
@@ -293,6 +336,14 @@ async fn on_joined(
 
     state.activity.in_game = true;
     state.activity.notified = true;
+
+    state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+
+    if state.roblox_hwnd.is_some() {
+        log::info!("cached Roblox HWND");
+    } else {
+        log::warn!("failed to cache Roblox HWND");
+    }
     log::info!("joined game {}", place_id);
 
     save_game_history(state, store, place_id)?;
@@ -307,7 +358,7 @@ async fn on_joined(
 
 async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<(), String> {
     if state.activity.place_id.is_none() {
-        log::info!("UDMUX fired but no place_id — skipping");
+        log::info!("UDMUX fired but no place_id, skipping");
         return Ok(());
     }
     log::info!("UDMUX IP: {}", ip);
@@ -360,7 +411,7 @@ async fn on_bloxstrap_rpc(
     let msg: BloxstrapRpcMessage = match serde_json::from_str(raw) {
         Ok(v) => v,
         Err(e) => {
-            log::warn!("BloxstrapRPC: failed to parse: {} — raw: {}", e, raw);
+            log::warn!("BloxstrapRPC: failed to parse: {} raw debug : {}", e, raw);
             return Ok(());
         }
     };
@@ -396,6 +447,50 @@ async fn on_bloxstrap_rpc(
     .await
     .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))
 }
+
+
+async fn on_interactive(
+    _app: &AppHandle,
+    raw: &str,
+    state: &mut WatcherState,
+    _store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    log::info!("InteractiveAPI raw: {}", raw);
+
+    let msg: InteractiveMessage = match serde_json::from_str(raw) {
+        Ok(v) => v,
+        Err(e) => {
+            log::warn!("InteractiveAPI parse failed: {} raw: {}", e, raw);
+            return Ok(());
+        }
+    };
+
+    log::info!("InteractiveAPI command: {}", msg.command);
+
+    let Some(hwnd) = get_or_find_hwnd(state) else {
+        log::warn!("InteractiveAPI: no Roblox window found");
+        return Ok(());
+    };
+
+    match msg.command.as_str() {
+        "setTransparency" => {
+            let alpha = msg.data
+                .get("value")
+                .and_then(|v| v.as_u64())
+                .map(|v| v as u8)
+                .unwrap_or(255);
+
+            set_transparency(hwnd, alpha);
+        }
+
+        other => {
+            log::warn!("InteractiveAPI: unknown command '{}'", other);
+        }
+    }
+
+    Ok(())
+}
+ 
 
 
 async fn update_discord_rpc(
@@ -450,6 +545,19 @@ async fn update_discord_rpc(
 }
 
 // helpers
+
+fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
+    if let Some(hwnd) = state.roblox_hwnd {
+        return Some(hwnd);
+    }
+
+    let hwnd = find_windows_by_title("Roblox").into_iter().next();
+    if hwnd.is_some() {
+        state.roblox_hwnd = hwnd;
+    }
+
+    hwnd
+}
 
 fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: &[&str]) -> bool {
     let v = store.get("integrations").or_else(|| store.get("intergrations"));

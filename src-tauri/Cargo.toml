@@ -19,6 +19,11 @@ vergen = { version = "9.0.0", features = ["build", "rustc"] }
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
+windows = { version = "0.56", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_Graphics_Dwm"
+] } # window window sahur
 walkdir = "2"
 dirs-next = "2.0"
 md5 = "0.8.0"
