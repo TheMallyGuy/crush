@@ -383,7 +383,9 @@ async function handleLatestVersion(
         await saveVersion(onProgress, versionHash, versionList, versionStore)
     }
 
-    return await invoke('get_latest_version', { player: appType === 'player' })
+    return await invoke(
+        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
+    )
 }
 
 async function saveVersion(
