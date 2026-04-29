@@ -23,17 +23,16 @@ export type DiscordRpc = {
 
 export type gameScopes = {
     allowAllGames: boolean,
-    allowedGames: [Number],
+    allowedGames: [number],
 }
 
 export type transparencyScopes = {
     enabled : boolean,
-    maxTransparency : Number,
-    minTransparency : Number
+    maxTransparency : number,
+    minTransparency : number
 }
 
 export type interactiveAPIScopes = {
-    gameScopes : gameScopes
     transparencyScopes : transparencyScopes
     minimize : boolean
     focus : boolean
@@ -42,6 +41,7 @@ export type interactiveAPIScopes = {
     restore : boolean
     setTitle : boolean
     setBorderless : boolean
+    // gameScopes : gameScopes save this for later xd
 }
 
 export type interactiveAPI = {
@@ -55,6 +55,8 @@ export type Integrations = {
     roValra : RoValra
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
+    interactive?: interactiveAPI
+
 }
 
 export type BuildInfo = {
