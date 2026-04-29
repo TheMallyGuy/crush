@@ -21,12 +21,42 @@ export type DiscordRpc = {
     letJoin: boolean
 }
 
+export type gameScopes = {
+    allowAllGames: boolean,
+    allowedGames: [number],
+}
+
+export type transparencyScopes = {
+    enabled : boolean,
+    maxTransparency : number,
+    minTransparency : number
+}
+
+export type interactiveAPIScopes = {
+    transparencyScopes : transparencyScopes
+    minimize : boolean
+    focus : boolean
+    moveWindow : boolean
+    maximize : boolean
+    restore : boolean
+    setTitle : boolean
+    setBorderless : boolean
+    // gameScopes : gameScopes save this for later xd
+}
+
+export type interactiveAPI = {
+    enable : boolean,
+    scopes : interactiveAPIScopes 
+}
+
 export type Integrations = {
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
     roValra : RoValra
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
+    interactive?: interactiveAPI
+
 }
 
 export type BuildInfo = {

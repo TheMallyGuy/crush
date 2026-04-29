@@ -2,7 +2,7 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History } from '@lucide/svelte'
+    import { Bell, Plug, History, CodeXml } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -119,6 +119,22 @@
                 />
             </div>
         </ExpandableSettingCard>
+
+        <SettingCard
+            title="Interactive API"
+            description="Let supported game move your window, resize, notify, interact with your hardware. Only support games with Interactive API only! not all game works. Inspired by the way BloxstrapRPC work."
+            icon={CodeXml}
+        >
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto('integrations/interactiveSettings')
+                }}
+            >
+                Open
+            </Button>
+        </SettingCard>
 
         <SettingCard
             title={$_('pages.integrations.gameHistoryCard.title')}

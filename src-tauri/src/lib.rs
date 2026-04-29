@@ -28,6 +28,7 @@ use crate::rpc::kill_rpc;
 
 pub mod rd;
 pub mod rpc;
+pub mod interactive;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
