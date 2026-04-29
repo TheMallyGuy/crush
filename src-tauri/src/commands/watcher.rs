@@ -533,13 +533,6 @@ async fn on_interactive(
             set_transparency(hwnd, alpha);
         }
 
-        "getRect" => {
-            if let Some((x, y, w, h)) = get_window_rect(hwnd) {
-                log::info!("Window rect: x={} y={} w={} h={}", x, y, w, h);
-                // optionally emit to frontend:
-                // app.emit("windowRect", serde_json::json!({ "x": x, "y": y, "w": w, "h": h })).ok();
-            }
-        }
 
         other => {
             log::warn!("InteractiveAPI: unknown command '{}'", other);
