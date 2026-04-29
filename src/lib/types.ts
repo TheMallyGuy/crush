@@ -21,6 +21,34 @@ export type DiscordRpc = {
     letJoin: boolean
 }
 
+export type gameScopes = {
+    allowAllGames: boolean,
+    allowedGames: [Number],
+}
+
+export type transparencyScopes = {
+    enabled : boolean,
+    maxTransparency : Number,
+    minTransparency : Number
+}
+
+export type interactiveAPIScopes = {
+    gameScopes : gameScopes
+    transparencyScopes : transparencyScopes
+    minimize : boolean
+    focus : boolean
+    moveWindow : boolean
+    maximize : boolean
+    restore : boolean
+    setTitle : boolean
+    setBorderless : boolean
+}
+
+export type interactiveAPI = {
+    enable : boolean,
+    scopes : interactiveAPIScopes 
+}
+
 export type Integrations = {
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
