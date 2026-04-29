@@ -125,7 +125,15 @@
             description="Let supported game move your window, resize, notify, interact with your hardware. Only support games with Interactive API only! not all game works. Inspired by the way BloxstrapRPC work."
             icon={CodeXml}
         >
-            <Switch slot="action"/>
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto('integrations/interactiveSettings')
+                }}
+            >
+                Open
+            </Button>
         </SettingCard>
 
         <SettingCard
