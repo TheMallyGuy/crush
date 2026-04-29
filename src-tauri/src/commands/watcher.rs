@@ -453,11 +453,15 @@ async fn on_bloxstrap_rpc(
 async fn on_interactive(
     app: &AppHandle,
     raw: &str,
-    state: &mut WatcherState,
+    __state__: &mut WatcherState,
     _store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-    log::info!("InteractiveAPI raw: {}", raw);
+    if !integration_enabled(_store, &["interactive", "enable"]) {
+        log::info!("InteractiveAPI: disabled, ignoring");
+        return Ok(());
+    }
 
+    log::info!("InteractiveAPI raw: {}", raw);
     let msg: InteractiveMessage = match serde_json::from_str(raw) {
         Ok(v) => v,
         Err(e) => {
@@ -465,10 +469,8 @@ async fn on_interactive(
             return Ok(());
         }
     };
-
     log::info!("InteractiveAPI command: {}", msg.command);
-
-    let Some(hwnd) = get_or_find_hwnd(state) else {
+    let Some(hwnd) = get_or_find_hwnd(__state__) else {
         log::warn!("InteractiveAPI: no Roblox window found");
         return Ok(());
     };
@@ -482,8 +484,11 @@ async fn on_interactive(
                 .show()
                 .map_err(|e| e.to_string())?;
         }
-
         "moveWindow" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "moveWindow"]) {
+                log::info!("InteractiveAPI: moveWindow scope disabled");
+                return Ok(());
+            }
             let x = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
             let y = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
             let w = msg.data.get("width").and_then(|v| v.as_i64()).unwrap_or(800) as i32;
@@ -493,55 +498,85 @@ async fn on_interactive(
         }
 
         "minimize" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "minimize"]) {
+                log::info!("InteractiveAPI: minimize scope disabled");
+                return Ok(());
+            }
             minimize_window(hwnd);
         }
 
         "maximize" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "maximize"]) {
+                log::info!("InteractiveAPI: maximize scope disabled");
+                return Ok(());
+            }
             maximize_window(hwnd);
         }
 
         "restore" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "restore"]) {
+                log::info!("InteractiveAPI: restore scope disabled");
+                return Ok(());
+            }
             restore_window(hwnd);
         }
 
         "focus" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "focus"]) {
+                log::info!("InteractiveAPI: focus scope disabled");
+                return Ok(());
+            }
             focus_window(hwnd);
         }
 
         "setTitle" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "setTitle"]) {
+                log::info!("InteractiveAPI: setTitle scope disabled");
+                return Ok(());
+            }
             if let Some(title) = msg.data.get("title").and_then(|v| v.as_str()) {
                 set_window_title(hwnd, title);
             }
         }
 
         "setBorderless" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "setBorderless"]) {
+                log::info!("InteractiveAPI: setBorderless scope disabled");
+                return Ok(());
+            }
             let enabled = msg.data
                 .get("enabled")
                 .and_then(|v| v.as_bool())
                 .unwrap_or(true);
 
-            set_borderless(hwnd, enabled);
+                set_borderless(hwnd, enabled);
         }
 
         "setTransparency" => {
+            if !integration_enabled(_store, &["interactive", "scopes", "transparencyScopes", "enabled"]) {
+                log::info!("InteractiveAPI: transparency scope disabled");
+                return Ok(());
+            }
             let alpha = msg.data
                 .get("value")
                 .and_then(|v| v.as_u64())
                 .map(|v| v as u8)
                 .unwrap_or(255);
 
+            let min = get_transparency_bound(_store, "minTransparency", 0);
+            let max = get_transparency_bound(_store, "maxTransparency", 255);
+            let alpha = alpha.clamp(min, max);
+
             set_transparency(hwnd, alpha);
         }
-
 
         other => {
             log::warn!("InteractiveAPI: unknown command '{}'", other);
         }
     }
-
     Ok(())
 }
- 
+
 
 
 async fn update_discord_rpc(
@@ -596,6 +631,22 @@ async fn update_discord_rpc(
 }
 
 // helpers
+
+fn get_transparency_bound(
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+    key: &str,
+    default: u8,
+) -> u8 {
+    let v = store.get("integrations").or_else(|| store.get("intergrations"));
+    let Some(root) = v else { return default };
+    root.get("interactive")
+        .and_then(|v| v.get("scopes"))
+        .and_then(|v| v.get("transparencyScopes"))
+        .and_then(|v| v.get(key))
+        .and_then(|v| v.as_u64())
+        .map(|v| v.clamp(0, 255) as u8)
+        .unwrap_or(default)
+}
 
 fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
     if let Some(hwnd) = state.roblox_hwnd {
