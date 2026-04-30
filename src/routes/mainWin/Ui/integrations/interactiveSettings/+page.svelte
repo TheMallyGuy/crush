@@ -44,7 +44,7 @@
         borderlessValue = scopes?.setBorderless ?? true
         transparencyValue = transparencyScope?.enabled ?? true
         minimumTransValue = transparencyScope?.minTransparency ?? 0
-        maximizeTransValue = transparencyScope?.maxTransparency ?? 250
+        maximizeTransValue = transparencyScope?.maxTransparency ?? 255
     }
 
     async function handleChanges() {
