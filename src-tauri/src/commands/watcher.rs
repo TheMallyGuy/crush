@@ -6,7 +6,8 @@ use regex::Regex;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use windows::Win32::Foundation::HWND;
-use crate::interactive::{set_transparency, find_windows_by_title, move_window,maximize_window,minimize_window,focus_window,get_window_rect,set_borderless,set_window_title,restore_window};
+use std::path::Path;
+use crate::interactive::{set_transparency, find_windows_by_title, move_window, get_window_rect, set_window_title};
 use std::sync::{OnceLock, atomic::{AtomicBool, Ordering}};
 use std::thread::{self, sleep};
 use std::{fs::File, io::{BufRead, BufReader, Seek, SeekFrom}, path::PathBuf, time::{Duration, Instant}};
@@ -37,17 +38,13 @@ fn re_bloxstrap_rpc() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
     R.get_or_init(|| Regex::new(r"\[BloxstrapRPC\] (.+)").unwrap())
 }
-fn re_interactive() -> &'static Regex {
-    static R: OnceLock<Regex> = OnceLock::new();
-    R.get_or_init(|| Regex::new(r"\[InteractiveAPI\] (.+)").unwrap())
-}
-
 
 // states
 
 #[derive(Default, Debug)]
 struct Activity {
     place_id: Option<u64>,
+    universe_id: Option<u64>,
     instance_id: Option<String>,
     in_game: bool,
     notified: bool,
@@ -66,8 +63,8 @@ struct WatcherState {
     pending_server_location: Option<String>,
     location_notified: bool,
     bloxstrap_rpc: Option<RichPresence>,
-    interactive: Option<bool>,
     roblox_hwnd: Option<HWND>,
+    window_started: bool,
 }
 
 impl WatcherState {
@@ -78,8 +75,8 @@ impl WatcherState {
         self.pending_server_location = None;
         self.location_notified = false;
         self.bloxstrap_rpc = None;
-        self.interactive = None;
         self.roblox_hwnd = None;
+        self.window_started = false;
     }
 
     fn reset_fully(&mut self) {
@@ -96,32 +93,21 @@ impl WatcherState {
 #[derive(Deserialize)] struct IconEntry { #[serde(rename = "imageUrl")] image_url: String }
 #[derive(Deserialize)] struct IconResponse { data: Vec<IconEntry> }
 
-// bloxstrap rpc types 
+// bloxstrap rpc types
 
 #[derive(Debug, Clone, Default, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct RichPresence {
     details:     Option<String>,
     state:       Option<String>,
-    // small_image: Option<RichPresenceImage>,
-    // large_image: Option<RichPresenceImage>,
 }
- 
+
 #[derive(Deserialize)]
 struct BloxstrapRpcMessage {
-    data: RichPresence,
-}
-
-// interactive
-
-#[derive(Debug, Clone, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct InteractiveMessage {
     command: String,
     #[serde(default)]
     data: Value,
 }
-
 
 // entry
 
@@ -142,7 +128,7 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     Ok(())
 }
 
-// loop 
+// loop
 
 async fn run_watcher(app: AppHandle) -> Result<(), String> {
     let mut state = WatcherState::default();
@@ -154,6 +140,12 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         let running = is_roblox_running(&mut system);
 
         if was_running && !running {
+            // send StopWindow before fully resetting if we had a window session
+            if state.window_started {
+                if let Some(hwnd) = state.roblox_hwnd {
+                    send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
+                }
+            }
             state.reset_fully();
             let _ = kill_rpc(&app.state::<RpcState>()).await;
         }
@@ -172,7 +164,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
     }
 }
 
-// log management 
+// log management
 
 async fn maybe_switch_log_file(
     app: &AppHandle,
@@ -203,19 +195,16 @@ async fn read_new_lines(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) {
-
     let Some(path) = state.current_file.as_ref() else { return; };
 
     if let Ok(metadata) = std::fs::metadata(path) {
         let file_size = metadata.len();
-
         if file_size > state.offset + 1024 * 1024 {
             log::warn!(
                 "Falling behind (offset: {}, size: {}), skipping old logs",
                 state.offset,
                 file_size
             );
-
             state.offset = file_size;
             return;
         }
@@ -252,7 +241,7 @@ fn open_reader(state: &mut WatcherState) -> Result<BufReader<File>, String> {
     Ok(BufReader::new(file))
 }
 
-// line checker or sum idk 
+// line handler
 
 async fn handle_line(
     app: &AppHandle,
@@ -261,10 +250,16 @@ async fn handle_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
     // new join
-    
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps.get(1).map(|m| m.as_str().to_string()).unwrap_or_default();
         let place_id: u64 = caps.get(2).and_then(|m| m.as_str().parse().ok()).unwrap_or(0);
+
+        // stop any previous window session cleanly
+        if state.window_started {
+            if let Some(hwnd) = state.roblox_hwnd {
+                send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
+            }
+        }
 
         state.reset_for_new_game();
         state.activity.join_initiated = true;
@@ -274,14 +269,14 @@ async fn handle_line(
         return Ok(());
     }
 
-    // interactive api
-    if let Some(caps) = re_interactive().captures(line) {
+    // BloxstrapRPC (now handles both RPC and window control)
+    if let Some(caps) = re_bloxstrap_rpc().captures(line) {
         if let Some(raw) = caps.get(1) {
-            on_interactive(app, raw.as_str(), state, store).await?;
+            on_bloxstrap_rpc(app, raw.as_str(), state, store).await?;
         }
     }
 
-    // UDMUX (server IP)
+    // UDMUX
     if let Some(caps) = re_udmux().captures(line) {
         if !state.udmux_handled {
             if let Some(ip) = caps.get(1) {
@@ -295,34 +290,31 @@ async fn handle_line(
         return Ok(());
     }
 
-    // fully joined server
+    // fully joined
     if re_joined().is_match(line) {
         on_joined(app, state, store).await?;
         return Ok(());
     }
 
-    // bloxstrapRPC detected
-    if let Some(caps) = re_bloxstrap_rpc().captures(line) {
-        if let Some(raw) = caps.get(1) {
-            on_bloxstrap_rpc(app, raw.as_str(), state, store).await?;
-        }
-    }
-
     // left
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
+        if state.window_started {
+            if let Some(hwnd) = state.roblox_hwnd {
+                send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
+            }
+            state.window_started = false;
+        }
         state.reset_for_new_game();
         if integration_enabled(store, &["discordRpc", "enable"]) {
             let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
-        } else {
-            log::info!("Discord RPC integration disabled, skipping RPC update on leave");
         }
     }
 
     Ok(())
 }
 
-// event handlers 
+// event handlers
 
 async fn on_joined(
     app: &AppHandle,
@@ -344,23 +336,349 @@ async fn on_joined(
 
     state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
 
-    if state.roblox_hwnd.is_some() {
+    if let Some(hwnd) = state.roblox_hwnd {
         log::info!("cached Roblox HWND");
+
+        let universe_id = match fetch_universe_id(place_id).await {
+            Ok(uid) => uid,
+            Err(e) => {
+                log::warn!("failed to fetch universe ID for PNG: {}", e);
+                place_id // fallback to place_id if fetch fails
+            }
+        };
+
+        state.activity.universe_id = Some(universe_id);
+
+        let store_val = |key: &str| integration_enabled(store, &["interactive", "scopes", key]);
+        if let Err(e) = write_game_permission_png(
+            universe_id,
+            store_val("moveWindow"),
+            store_val("setTitle"),
+            integration_enabled(store, &["interactive", "scopes", "transparencyScopes", "enabled"]),
+            app,
+        ) {
+            log::warn!("failed to write game permission PNG: {}", e);
+        }
+
+        send_bloxstrap_command(hwnd, "StartWindow", Value::Null);
+        state.window_started = true;
     } else {
         log::warn!("failed to cache Roblox HWND");
     }
-    log::info!("joined game {}", place_id);
 
+    log::info!("joined game {}", place_id);
     save_game_history(state, store, place_id)?;
     send_location_notification(app, state, store).await?;
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
         update_discord_rpc(app, state, place_id, store).await?;
-    } else {
-        log::info!("Discord RPC integration disabled, skipping RPC update on join");
     }
 
     Ok(())
+}
+
+async fn on_bloxstrap_rpc(
+    app: &AppHandle,
+    raw: &str,
+    state: &mut WatcherState,
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+) -> Result<(), String> {
+    log::info!("BloxstrapRPC raw: {}", raw);
+
+    let msg: BloxstrapRpcMessage = match serde_json::from_str(raw) {
+        Ok(v) => v,
+        Err(e) => {
+            log::warn!("BloxstrapRPC: failed to parse: {} raw: {}", e, raw);
+            return Ok(());
+        }
+    };
+
+    log::info!("BloxstrapRPC command: {}", msg.command);
+
+    match msg.command.as_str() {
+        // rich presence
+        "SetRichPresence" => {
+            if !integration_enabled(store, &["discordRpc", "enable"]) {
+                return Ok(());
+            }
+
+            let rpc: RichPresence = match serde_json::from_value(msg.data) {
+                Ok(v) => v,
+                Err(e) => {
+                    log::warn!("BloxstrapRPC: SetRichPresence parse failed: {}", e);
+                    return Ok(());
+                }
+            };
+
+            log::info!("BloxstrapRPC SetRichPresence: {:?}", rpc);
+            state.bloxstrap_rpc = Some(rpc.clone());
+
+            let rpc_state = app.state::<RpcState>();
+            const CLIENT_ID: &str = "1484521125550620813";
+
+            if rpc_state.client.lock().await.is_none() {
+                if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
+                    log::error!("RPC start failed: {}", e);
+                    return Ok(());
+                }
+            }
+
+            apply_rpc_full(
+                &rpc_state,
+                rpc.details.as_deref(),
+                rpc.state.as_deref(),
+                None, None, None, None,
+            )
+            .await
+            .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))?;
+        }
+
+        "RequestWindowPermission" => {
+            log::info!("BloxstrapRPC: RequestWindowPermission received (handled via PNG)");
+        }
+
+        "SetWindow" => {
+            if !integration_enabled(store, &["interactive", "enable"]) {
+                log::info!("BloxstrapRPC: SetWindow ignored, interactive disabled");
+                return Ok(());
+            }
+            if !state.window_started {
+                log::warn!("BloxstrapRPC: SetWindow received before StartWindow, ignoring");
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else {
+                log::warn!("BloxstrapRPC: SetWindow — no HWND");
+                return Ok(());
+            };
+
+            let x      = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let y      = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+            let w      = msg.data.get("width").and_then(|v| v.as_i64()).unwrap_or(800) as i32;
+            let h      = msg.data.get("height").and_then(|v| v.as_i64()).unwrap_or(600) as i32;
+
+
+            let scale_w = msg.data.get("scaleWidth").and_then(|v| v.as_f64()).unwrap_or(1920.0);
+            let scale_h = msg.data.get("scaleHeight").and_then(|v| v.as_f64()).unwrap_or(1080.0);
+
+            // TODO: replace with actual screen resolution query if available
+            let screen_w = 1920.0_f64;
+            let screen_h = 1080.0_f64;
+
+            let sx = (x as f64 * screen_w / scale_w).round() as i32;
+            let sy = (y as f64 * screen_h / scale_h).round() as i32;
+            let sw = (w as f64 * screen_w / scale_w).round() as i32;
+            let sh = (h as f64 * screen_h / scale_h).round() as i32;
+
+            move_window(hwnd, sx, sy, sw, sh);
+        }
+
+        "SetWindowTitle" => {
+            if !integration_enabled(store, &["interactive", "enable"]) {
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else { return Ok(()); };
+            let title = msg.data.as_str().unwrap_or("Roblox");
+            set_window_title(hwnd, title);
+        }
+
+        "SetWindowTransparency" => {
+            if !integration_enabled(store, &["interactive", "enable"]) {
+                return Ok(());
+            }
+            if !state.window_started {
+                log::warn!("BloxstrapRPC: SetWindowTransparency received before StartWindow, ignoring");
+                return Ok(());
+            }
+            let Some(hwnd) = get_or_find_hwnd(state) else { return Ok(()); };
+
+            let t = msg.data.get("transparency")
+                .and_then(|v| v.as_f64())
+                .unwrap_or(1.0)
+                .clamp(0.0, 1.0);
+
+            let alpha = (t * 255.0).round() as u8;
+
+            let min = get_transparency_bound(store, "minTransparency", 0);
+            let max = get_transparency_bound(store, "maxTransparency", 255);
+            set_transparency(hwnd, alpha.clamp(min, max));
+        }
+
+        "StartWindow" => {
+            if let Some(hwnd) = get_or_find_hwnd(state) {
+                state.window_started = true;
+                log::info!("BloxstrapRPC: StartWindow acknowledged");
+            }
+        }
+
+        "StopWindow" => {
+            state.window_started = false;
+            log::info!("BloxstrapRPC: StopWindow acknowledged");
+        }
+
+        "ResetWindow" => {
+            if !state.window_started {
+                return Ok(());
+            }
+
+            log::info!("BloxstrapRPC: ResetWindow acknowledged");
+        }
+
+        other => {
+            log::warn!("BloxstrapRPC: unknown command '{}'", other);
+        }
+    }
+
+    Ok(())
+}
+
+fn write_game_permission_png(
+    game_id: u64,
+    allow_control: bool,
+    allow_title: bool,
+    allow_transparency: bool,
+    app: &AppHandle,
+) -> Result<(), String> {
+    let data_dir = app.path().app_data_dir().map_err(|e| e.to_string())?;
+
+    let versions_dir = data_dir.join("Player").join("Versions");
+
+    let version_dir = std::fs::read_dir(&versions_dir)
+        .map_err(|e| format!("can't read versions dir {:?}: {}", versions_dir, e))?
+        .filter_map(|e| e.ok())
+        .filter(|e| e.file_type().map(|t| t.is_dir()).unwrap_or(false))
+        .filter(|e| e.path().join("RobloxPlayerBeta.exe").exists())
+        .max_by_key(|e| e.metadata().and_then(|m| m.modified()).ok())
+        .map(|e| e.path())
+        .ok_or_else(|| format!("no RobloxPlayerBeta.exe found under {:?}", versions_dir))?;
+
+    let bloxstrap_dir = version_dir.join("content").join("bloxstrap");
+    std::fs::create_dir_all(&bloxstrap_dir).map_err(|e| e.to_string())?;
+
+    if let Ok(entries) = std::fs::read_dir(&bloxstrap_dir) {
+        for entry in entries.filter_map(|e| e.ok()) {
+            let name = entry.file_name();
+            let name_str = name.to_string_lossy();
+            if name_str != "enabled.png" {
+                let _ = std::fs::remove_file(entry.path());
+            }
+        }
+    }
+
+    let enabled_path = bloxstrap_dir.join("enabled.png");
+    if !enabled_path.exists() {
+        write_png_rgba(&enabled_path, 1, 1, &[255, 255, 255, 255])?;
+        log::info!("wrote enabled.png to {:?}", enabled_path);
+    }
+
+    let game_png_path = bloxstrap_dir.join(format!("{}.png", game_id));
+    let pixel = |on: bool| -> [u8; 4] {
+        if on { [255, 255, 255, 255] } else { [0, 0, 0, 0] }
+    };
+
+    let mut pixels: Vec<u8> = Vec::with_capacity(12);
+    pixels.extend_from_slice(&pixel(allow_control));
+    pixels.extend_from_slice(&pixel(allow_title));
+    pixels.extend_from_slice(&pixel(allow_transparency));
+
+    write_png_rgba(&game_png_path, 3, 1, &pixels)?;
+    log::info!(
+        "wrote game permission PNG for {} -> {:?} (control={}, title={}, transparency={})",
+        game_id, game_png_path, allow_control, allow_title, allow_transparency
+    );
+
+    Ok(())
+}
+
+fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(), String> {
+
+    fn adler32(data: &[u8]) -> u32 {
+        let (mut a, mut b) = (1u32, 0u32);
+        for &byte in data {
+            a = (a + byte as u32) % 65521;
+            b = (b + a) % 65521;
+        }
+        (b << 16) | a
+    }
+
+    fn crc32(data: &[u8]) -> u32 {
+        static TABLE: OnceLock<[u32; 256]> = OnceLock::new();
+        let table = TABLE.get_or_init(|| {
+            let mut t = [0u32; 256];
+            for i in 0..256 {
+                let mut c = i as u32;
+                for _ in 0..8 {
+                    c = if c & 1 != 0 { 0xedb88320 ^ (c >> 1) } else { c >> 1 };
+                }
+                t[i] = c;
+            }
+            t
+        });
+        let mut crc = 0xffffffff_u32;
+        for &byte in data {
+            crc = table[((crc ^ byte as u32) & 0xff) as usize] ^ (crc >> 8);
+        }
+        crc ^ 0xffffffff
+    }
+
+    fn write_chunk(out: &mut Vec<u8>, tag: &[u8; 4], data: &[u8]) {
+        let len = data.len() as u32;
+        out.extend_from_slice(&len.to_be_bytes());
+        out.extend_from_slice(tag);
+        out.extend_from_slice(data);
+        let mut crc_input = Vec::with_capacity(4 + data.len());
+        crc_input.extend_from_slice(tag);
+        crc_input.extend_from_slice(data);
+        out.extend_from_slice(&crc32(&crc_input).to_be_bytes());
+    }
+
+    let mut out: Vec<u8> = Vec::new();
+
+    // PNG signature
+    out.extend_from_slice(&[137, 80, 78, 71, 13, 10, 26, 10]);
+
+    // IHDR
+    let mut ihdr = Vec::new();
+    ihdr.extend_from_slice(&width.to_be_bytes());
+    ihdr.extend_from_slice(&height.to_be_bytes());
+    ihdr.push(8);  // bit depth
+    ihdr.push(6);  // colour type: RGBA
+    ihdr.push(0);  // compression
+    ihdr.push(0);  // filter
+    ihdr.push(0);  // interlace
+    write_chunk(&mut out, b"IHDR", &ihdr);
+
+    let mut raw: Vec<u8> = Vec::new();
+    for row in 0..height as usize {
+        raw.push(0); // filter type None
+        raw.extend_from_slice(&rgba[row * width as usize * 4..(row + 1) * width as usize * 4]);
+    }
+
+    let mut zlib: Vec<u8> = Vec::new();
+    zlib.push(0x78); // CMF
+    zlib.push(0x01); // FLG (no dict, check bits)
+    zlib.push(0x01); // BFINAL=1, BTYPE=00
+
+    let len16 = raw.len() as u16;
+    let nlen16 = !len16;
+
+    zlib.extend_from_slice(&len16.to_le_bytes());
+    zlib.extend_from_slice(&nlen16.to_le_bytes());
+    zlib.extend_from_slice(&raw);
+
+    zlib.extend_from_slice(&adler32(&raw).to_be_bytes());
+
+    write_chunk(&mut out, b"IDAT", &zlib);
+
+    write_chunk(&mut out, b"IEND", &[]);
+
+    std::fs::write(path, &out).map_err(|e| e.to_string())
+}
+
+
+fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
+    let payload = serde_json::to_string(&json!({ "command": command, "data": data }))
+        .unwrap_or_default();
+    println!("[BloxstrapRPC] {}", payload);
 }
 
 async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<(), String> {
@@ -403,188 +721,6 @@ async fn send_location_notification(
     Ok(())
 }
 
-async fn on_bloxstrap_rpc(
-    app: &AppHandle,
-    raw: &str,
-    state: &mut WatcherState,
-    store: &tauri_plugin_store::Store<tauri::Wry>,
-) -> Result<(), String> {
-    if !integration_enabled(store, &["discordRpc", "enable"]) {
-        return Ok(());
-    }
-    
-    log::info!("BloxstrapRPC raw: {}", raw);
-
-    let msg: BloxstrapRpcMessage = match serde_json::from_str(raw) {
-        Ok(v) => v,
-        Err(e) => {
-            log::warn!("BloxstrapRPC: failed to parse: {} raw debug : {}", e, raw);
-            return Ok(());
-        }
-    };
-
-    let rpc = msg.data;
-    log::info!("BloxstrapRPC: {:?}", rpc);
-    state.bloxstrap_rpc = Some(rpc.clone());
- 
-
- 
-    let rpc_state = app.state::<RpcState>();
-    const CLIENT_ID: &str = "1484521125550620813";
- 
-    if rpc_state.client.lock().await.is_none() {
-        if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
-            log::error!("RPC start failed: {}", e);
-            return Ok(());
-        }
-    }
- 
-    apply_rpc_full(
-        &rpc_state,
-        rpc.details.as_deref(),
-        rpc.state.as_deref(),
-        // large.as_deref(),
-        None,
-        None,
-        // rpc.large_image.as_ref().and_then(|i| i.hover_text.as_deref()),
-        // small.as_deref(),
-        None,
-        None,
-    )
-    .await
-    .map_err(|e| format!("BloxstrapRPC apply failed: {}", e))
-}
-
-
-async fn on_interactive(
-    app: &AppHandle,
-    raw: &str,
-    __state__: &mut WatcherState,
-    _store: &tauri_plugin_store::Store<tauri::Wry>,
-) -> Result<(), String> {
-    if !integration_enabled(_store, &["interactive", "enable"]) {
-        log::info!("InteractiveAPI: disabled, ignoring");
-        return Ok(());
-    }
-
-    log::info!("InteractiveAPI raw: {}", raw);
-    let msg: InteractiveMessage = match serde_json::from_str(raw) {
-        Ok(v) => v,
-        Err(e) => {
-            log::warn!("InteractiveAPI parse failed: {} raw: {}", e, raw);
-            return Ok(());
-        }
-    };
-    log::info!("InteractiveAPI command: {}", msg.command);
-    let Some(hwnd) = get_or_find_hwnd(__state__) else {
-        log::warn!("InteractiveAPI: no Roblox window found");
-        return Ok(());
-    };
-
-    match msg.command.as_str() {
-        "info" => {
-            app.notification()
-                .builder()
-                .title("This game uses InteractiveAPI!")
-                .body("You can turn off InteractiveAPI anytime in the integrations tab.")
-                .show()
-                .map_err(|e| e.to_string())?;
-        }
-        "moveWindow" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "moveWindow"]) {
-                log::info!("InteractiveAPI: moveWindow scope disabled");
-                return Ok(());
-            }
-            let x = msg.data.get("x").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let y = msg.data.get("y").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let w = msg.data.get("width").and_then(|v| v.as_i64()).unwrap_or(800) as i32;
-            let h = msg.data.get("height").and_then(|v| v.as_i64()).unwrap_or(600) as i32;
-
-            move_window(hwnd, x, y, w, h);
-        }
-
-        "minimize" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "minimize"]) {
-                log::info!("InteractiveAPI: minimize scope disabled");
-                return Ok(());
-            }
-            minimize_window(hwnd);
-        }
-
-        "maximize" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "maximize"]) {
-                log::info!("InteractiveAPI: maximize scope disabled");
-                return Ok(());
-            }
-            maximize_window(hwnd);
-        }
-
-        "restore" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "restore"]) {
-                log::info!("InteractiveAPI: restore scope disabled");
-                return Ok(());
-            }
-            restore_window(hwnd);
-        }
-
-        "focus" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "focus"]) {
-                log::info!("InteractiveAPI: focus scope disabled");
-                return Ok(());
-            }
-            focus_window(hwnd);
-        }
-
-        "setTitle" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "setTitle"]) {
-                log::info!("InteractiveAPI: setTitle scope disabled");
-                return Ok(());
-            }
-            if let Some(title) = msg.data.get("title").and_then(|v| v.as_str()) {
-                set_window_title(hwnd, title);
-            }
-        }
-
-        "setBorderless" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "setBorderless"]) {
-                log::info!("InteractiveAPI: setBorderless scope disabled");
-                return Ok(());
-            }
-            let enabled = msg.data
-                .get("enabled")
-                .and_then(|v| v.as_bool())
-                .unwrap_or(true);
-
-                set_borderless(hwnd, enabled);
-        }
-
-        "setTransparency" => {
-            if !integration_enabled(_store, &["interactive", "scopes", "transparencyScopes", "enabled"]) {
-                log::info!("InteractiveAPI: transparency scope disabled");
-                return Ok(());
-            }
-            let alpha = msg.data
-                .get("value")
-                .and_then(|v| v.as_u64())
-                .map(|v| v as u8)
-                .unwrap_or(255);
-
-            let min = get_transparency_bound(_store, "minTransparency", 0);
-            let max = get_transparency_bound(_store, "maxTransparency", 255);
-            let alpha = alpha.clamp(min, max);
-
-            set_transparency(hwnd, alpha);
-        }
-
-        other => {
-            log::warn!("InteractiveAPI: unknown command '{}'", other);
-        }
-    }
-    Ok(())
-}
-
-
-
 async fn update_discord_rpc(
     app: &AppHandle,
     state: &mut WatcherState,
@@ -603,10 +739,6 @@ async fn update_discord_rpc(
         ("Join Server".to_string(), format!("https://deeplink.multicrew.dev?placeId={}&jobId={}", place_id, instance_id)),
         ("View Game".to_string(), format!("https://www.roblox.com/games/{}", place_id)),
     ];
-
-    let show_account = integration_enabled(store, &["discordRpc", "displayAccount"]);
-    let let_join     = integration_enabled(store, &["discordRpc", "letJoin"]);
-    let _ = (show_account, let_join); // reserved for future use
 
     const CLIENT_ID: &str = "1484521125550620813";
     let rpc = app.state::<RpcState>();
@@ -658,12 +790,10 @@ fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
     if let Some(hwnd) = state.roblox_hwnd {
         return Some(hwnd);
     }
-
     let hwnd = find_windows_by_title("Roblox").into_iter().next();
     if hwnd.is_some() {
         state.roblox_hwnd = hwnd;
     }
-
     hwnd
 }
 
@@ -714,6 +844,14 @@ fn save_game_history(
 
     store.set("gameHistory", Value::Array(history));
     store.save().map_err(|e| e.to_string())
+}
+
+async fn fetch_universe_id(place_id: u64) -> Result<u64, String> {
+    let universe: UniverseResponse = get_client()
+        .get(format!("https://apis.roblox.com/universes/v1/places/{}/universe", place_id))
+        .send().await.map_err(|e| e.to_string())?
+        .json().await.map_err(|e| e.to_string())?;
+    Ok(universe.universe_id)
 }
 
 async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, String> {
