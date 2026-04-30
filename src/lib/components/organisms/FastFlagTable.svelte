@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
     import Button from '$lib/components/atoms/Button.svelte'
-    import { Search, Plus, Trash2 } from '@lucide/svelte'
+    import { Search, Plus, Trash2, Upload } from '@lucide/svelte'
     import { _ } from 'svelte-i18n';
     import { detectType, validateValue } from '$lib/fastflag/flagTypes'
     import type { FlagType } from '$lib/types'
@@ -12,12 +12,14 @@
     let newFlagName = ''
     let newFlagValue = ''
     let addError = ''
+    let jsonFileInput: HTMLInputElement
 
     const dispatch = createEventDispatcher<{
         delete: string
         update: { name: string; value: string }
         add: { name: string; value: string }
         search: string
+        import: Record<string, string>
     }>()
 
     $: entries = Object.entries(flags)
@@ -45,7 +47,7 @@
 
     function handleUpdate(name: string, raw: string) {
         const type = detectType(flags[name])
-        if (!validateValue(raw, type)) return // silently reject invalid input
+        if (!validateValue(raw, type)) return
         flags = { ...flags, [name]: raw }
         dispatch('update', { name, value: raw })
     }
@@ -71,36 +73,62 @@
         if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
     }
 
+    function handleImportClick() {
+        jsonFileInput.click()
+    }
+
+    function handleFileChange(e: Event) {
+        addError = ''
+        const file = (e.target as HTMLInputElement).files?.[0]
+        if (!file) return
+        const reader = new FileReader()
+        reader.onload = (ev) => {
+            try {
+                const parsed = JSON.parse(ev.target?.result as string)
+                if (typeof parsed !== 'object' || Array.isArray(parsed)) {
+                    addError = 'JSON must be a flat key-value object.'
+                    return
+                }
+                const imported: Record<string, string> = {}
+                for (const [k, v] of Object.entries(parsed)) {
+                    imported[k] = String(v)
+                }
+                flags = { ...flags, ...imported }
+                dispatch('import', imported)
+            } catch {
+                addError = 'Invalid JSON file.'
+            }
+        }
+        reader.readAsText(file)
+        ;(e.target as HTMLInputElement).value = ''
+    }
+
     $: newValueType = newFlagValue.trim()
         ? detectType(newFlagValue.trim())
         : null
 </script>
 
-<div class="flex flex-col gap-6 w-full">
-    <!-- Add row -->
-    <div
-        class="flex items-center gap-3 p-4 bg-anthracite/40 rounded-2xl border border-stone-800/20 shadow-sm backdrop-blur-sm"
-    >
-        <div class="flex-[2]">
-            <input
-                type="text"
-                bind:value={newFlagName}
-                placeholder={$_('pages.fastflag.editor.flagTable.flagCol.name')}
-                class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
-            />
-        </div>
-        <div class="flex-[1] relative">
+<div class="flex flex-col gap-4 w-full">
+    <!-- Compact add row + import -->
+    <div class="flex items-center gap-2">
+        <input
+            type="text"
+            bind:value={newFlagName}
+            placeholder={$_('pages.fastflag.editor.flagTable.flagCol.name')}
+            on:keydown={(e) => e.key === 'Enter' && handleAdd()}
+            class="flex-[2] min-w-0 bg-stone-900/50 border border-stone-800/40 rounded-xl px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
+        />
+        <div class="flex-[1] min-w-0 relative">
             <input
                 type="text"
                 bind:value={newFlagValue}
                 placeholder={$_('pages.fastflag.editor.flagTable.flagCol.value')}
-                class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 pr-16"
+                on:keydown={(e) => e.key === 'Enter' && handleAdd()}
+                class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType ? 'pr-14' : ''}"
             />
             {#if newValueType}
                 <span
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border {typeBadge[
-                        newValueType
-                    ]}"
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border {typeBadge[newValueType]}"
                 >
                     {newValueType}
                 </span>
@@ -108,15 +136,36 @@
         </div>
         <Button
             variant="primary"
-            size="md"
-            class="rounded-xl h-11 px-6 transition-all duration-150"
+            size="sm"
+            class="rounded-xl shrink-0"
             on:click={handleAdd}
             disabled={!newFlagName || !newFlagValue}
         >
-            <Plus class="h-5 w-5 mr-2" />
-            <span class="font-bold">{$_('pages.fastflag.editor.flagTable.buttonAdd')}</span>
+            <Plus class="h-4 w-4 mr-1" />
+            <span class="font-semibold text-sm">{$_('pages.fastflag.editor.flagTable.buttonAdd')}</span>
         </Button>
+
+        <!-- Divider -->
+        <div class="w-px h-6 bg-stone-800/60 shrink-0"></div>
+
+        <!-- Import from JSON -->
+        <input
+            type="file"
+            accept=".json,application/json"
+            class="hidden"
+            bind:this={jsonFileInput}
+            on:change={handleFileChange}
+        />
+        <button
+            on:click={handleImportClick}
+            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
+            title="Import flags from a JSON file"
+        >
+            <Upload class="h-4 w-4" />
+            <span>Import JSON</span>
+        </button>
     </div>
+
     {#if addError}
         <p class="text-red-400 text-xs px-1 font-medium">{addError}</p>
     {/if}
