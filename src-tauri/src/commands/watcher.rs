@@ -193,6 +193,8 @@ async fn maybe_switch_log_file(
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
         let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+    } else {
+        log::info!("Discord RPC integration disabled, skipping initial RPC set");
     }
 }
 
@@ -312,6 +314,8 @@ async fn handle_line(
         state.reset_for_new_game();
         if integration_enabled(store, &["discordRpc", "enable"]) {
             let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+        } else {
+            log::info!("Discord RPC integration disabled, skipping RPC update on leave");
         }
     }
 
@@ -352,6 +356,8 @@ async fn on_joined(
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
         update_discord_rpc(app, state, place_id, store).await?;
+    } else {
+        log::info!("Discord RPC integration disabled, skipping RPC update on join");
     }
 
     Ok(())

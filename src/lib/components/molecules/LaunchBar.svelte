@@ -1,11 +1,9 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import { deepLinkUrl } from '$lib/stores/deeplink'
-    import { Rocket } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { _ } from 'svelte-i18n';
-
     async function launchBoostrap() {
         deepLinkUrl.set(null)
         localStorage.removeItem('deepLinkUrl')
@@ -18,24 +16,18 @@
             minWidth: 500,
             minHeight: 350.0,
         })
-
         setTimeout(() => {
-            // wait before killing to prevent crash
             getCurrentWindow().close()
         }, 100)
     }
 </script>
-
-<div
-    class=" p-4 px-8 rounded-tl-3xl flex items-center"
->
+<div class="p-4 px-8 rounded-tl-3xl flex items-center transparent">
     <Button
         variant="primary"
-        size="md"
-        class="rounded-full px-10 shadow-lg "
+        size="sm"
+        class="rounded-full px-4 shadow-lg h-9"
         on:click={launchBoostrap}
     >
-        <Rocket class="size-4 mr-2" />
         {$_('elements.launchBar')}
     </Button>
 </div>
