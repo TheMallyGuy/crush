@@ -1,6 +1,6 @@
 [package]
 name = "crush"
-version = "0.1.4"
+version = "0.1.5"
 description = "the first roblox boostraper that is not a bloxstrap fork"
 authors = ["Mally"]
 edition = "2021"
