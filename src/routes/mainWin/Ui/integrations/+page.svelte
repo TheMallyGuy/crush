@@ -80,8 +80,10 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title="Activity Watcher"
-            description="Watch your activity on Roblox. Some feature required this to be enabled"
+            title={$_("pages.integrations.activityWatcherCard.title")}
+            description={$_(
+                'pages.integrations.activityWatcherCard.description'
+            )}
             icon={View}
         >
             <Switch

@@ -44,7 +44,7 @@
         "serverInfomationPage": {
             "title": "Server Information",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
+                "serverRegion" : "Region : {region}",
                 "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
@@ -71,6 +71,10 @@
         "integrations": {
             "integrations": "Integrations",
             "description": "Configure integrations outside Roblox.",
+            "activityWatcherCard": {
+                "title": "Activity Watcher",
+                "description" : "Watch your activity on Roblox. Some feature required this to be enabled."
+            },
             "serverNotifierCard": {
                 "title": "Server Location Notifier",
                 "description": "Get notified when the client connects to a server."
