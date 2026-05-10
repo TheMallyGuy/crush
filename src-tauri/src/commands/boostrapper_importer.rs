@@ -9,6 +9,24 @@ pub struct BloxstrapConfig {
     pub BackgroundUpdatesEnabled: bool,
     pub UseDiscordRichPresence: bool,
     pub ShowServerDetails: bool,
+    pub ShowAccountOnRichPresence: bool, // show account
+    pub HideRPCButtons: bool, // allow joining server
+
+
+    // frostrap only
+    pub EnableBetterMatchmaking: bool,
+    pub ShowUsingFroststrapRPC: bool,
+
+    pub UpdateRoblox : bool, // frost & void??? (ps : fish)
+
+    // voidstrap only
+    pub VoidRPC: bool,
+
+    // funkstrap
+    pub UseWindowControl: bool,
+    pub MoveWindowAllowed: bool,
+    pub TitleControlAllowed: bool,
+    pub WindowTransparencyAllowed: bool,
 }
 
 #[tauri::command]
