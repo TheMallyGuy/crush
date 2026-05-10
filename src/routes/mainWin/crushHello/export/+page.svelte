@@ -43,6 +43,7 @@
             
             const newIntegrations: Integrations = {
                 interactive: windowManipulation,
+                activityWatching: boostraperConfig.EnableActivityTracking,
                 discordRpc: integrations?.discordRpc ?? {
                     enable: boostraperConfig.UseDiscordRichPresence ?? false,
                     displayAccount: boostraperConfig.ShowAccountOnRichPresence ?? false,

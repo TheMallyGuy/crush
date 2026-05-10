@@ -50,6 +50,7 @@ export type interactiveAPI = {
 }
 
 export type Integrations = {
+    activityWatching: boolean
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
     roValra : RoValra
@@ -197,6 +198,7 @@ export type ServerInfoFromBackend = {
 
 export type BoostrapConfigs = { // bloxstrap, froststrap
     // general forks (from bloxstrap)
+    EnableActivityTracking: boolean,
     CheckForUpdates: boolean,
     BackgroundUpdatesEnabled: boolean,
     UseDiscordRichPresence: boolean,

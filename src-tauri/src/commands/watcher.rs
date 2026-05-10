@@ -228,6 +228,13 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
         return Ok(());
     }
 
+    let store = app.store("config.json").map_err(|e| e.to_string())?;
+
+    if integration_enabled(&store, &["EnableActivityTracking"]) {
+        log::info!("watching logs is disabled, returning");
+        return Ok(());
+    }
+
     std::thread::spawn(move || {
         let rt = tokio::runtime::Builder::new_multi_thread()
             .enable_all()

@@ -2,7 +2,7 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History, CodeXml } from '@lucide/svelte'
+    import { Bell, Plug, History, CodeXml, View } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -15,6 +15,7 @@
     let letJoin = false
     let displayAccount = false
     let serverLocationNotifier = false
+    let activityWatching = true
     const roValaraLogoColored = '/RovalraColored.svg'
     const roValaraLogo = '/Rovalra.svg'
 
@@ -34,6 +35,7 @@
                 displayAccount = savedRpc.displayAccount
             }
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
+            activityWatching = activityWatching
         }
     }
 
@@ -55,6 +57,7 @@
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
             roValra: current?.roValra ?? { joinServerForYouValue: false },
+            activityWatching: activityWatching,
         }
 
         await store.set('integrations', newIntegrations)
@@ -77,6 +80,18 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
+            title="Activity Watcher"
+            description="Watch your activity on Roblox. Some feature required this to be enabled"
+            icon={View}
+        >
+            <Switch
+                slot="action"
+                bind:checked={activityWatching}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
             title={$_('pages.integrations.serverNotifierCard.title')}
             description={$_(
                 'pages.integrations.serverNotifierCard.description'
@@ -89,6 +104,7 @@
                 on:change={handleChanges}
             />
         </SettingCard>
+
         <ExpandableSettingCard
             title={$_('pages.integrations.rpcCard.title')}
             description={$_('pages.integrations.rpcCard.description')}
@@ -121,8 +137,10 @@
         </ExpandableSettingCard>
 
         <SettingCard
-            title={$_("pages.integrations.windowManipulationCard.title")}
-            description={$_("pages.integrations.windowManipulationCard.description")}
+            title={$_('pages.integrations.windowManipulationCard.title')}
+            description={$_(
+                'pages.integrations.windowManipulationCard.description'
+            )}
             icon={CodeXml}
         >
             <Button
@@ -132,7 +150,7 @@
                     goto('integrations/interactiveSettings')
                 }}
             >
-                {$_("pages.integrations.windowManipulationCard.button")}
+                {$_('pages.integrations.windowManipulationCard.button')}
             </Button>
         </SettingCard>
 
