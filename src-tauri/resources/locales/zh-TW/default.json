@@ -10,7 +10,11 @@
             "watcher": {
                 "general": "Playing Roblox",
                 "idle": "不屬於",
-                "playing": "In game"
+                "playing": "In a game",
+                "serverInfomation": {
+                    "title": "Connected to a server!",
+                    "description": "IP : {ip}\nLocation : {location}"
+                }
             }
         }
     },
@@ -71,6 +75,10 @@
         "integrations": {
             "integrations": "串接",
             "description": "Configure integrations outside Roblox.",
+            "activityWatcherCard": {
+                "title": "Activity Watcher",
+                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+            },
             "serverNotifierCard": {
                 "title": "伺服器位置通知程式",
                 "description": "Get notified when the client connects to a server."
