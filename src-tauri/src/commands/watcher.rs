@@ -388,7 +388,6 @@ async fn handle_line(
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
 
-    log::info!("LINE: {}", line);
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps
             .get(1)
