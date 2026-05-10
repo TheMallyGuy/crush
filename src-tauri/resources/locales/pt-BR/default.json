@@ -8,9 +8,9 @@
         "appearance": "Na Rota de Aparência",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Jogando Roblox",
                 "idle": "Nenhuma",
-                "playing": "In game"
+                "playing": "Em jogo"
             }
         }
     },
@@ -42,28 +42,28 @@
             "retry": "Tentar novamente"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Informações do servidor",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "Região: {region}",
+                "description": "Informações sobre esse servidor",
+                "uptime": "Tempo de atividade: desconhecido",
+                "instanceId": "ID da Instância: {id}",
+                "inviteLink": "Copiar link de convite:"
             }
         },
         "appearance": {
             "appearance": "Aparência",
             "description": "Personalize a aparência do bootstrapper Roblox.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "title": "Tema do Bootstrapper",
+                "description": "Escolha entre o tema padrão do Crush ou um tema XML personalizado.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Padrão (Crush)",
+                    "custom": "Personalizado"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
+                    "importNew": "Importar um Novo",
+                    "noThemes": "Nenhum tema personalizado importado.",
                     "missingAssets": "Missing Theme Assets"
                 }
             }
