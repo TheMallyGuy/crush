@@ -19,9 +19,9 @@
             "updateChecking": "Đang kiểm tra bản cập nhật…",
             "findingBestRegion": "Đang tìm khu vực tải xuống tốt nhất...",
             "preparingForDownload": "Đang chuẩn bị tải xuống",
-            "fetchingUrls": "Đang tìm nạp URL tài sản...",
-            "downloadingAssets": "Đang tải xuống tài sản....,",
-            "extractingFiles": "Đang trích xuất tệp…",
+            "fetchingUrls": "Đang tìm URL tài nguyên...",
+            "downloadingAssets": "Đang tải xuống tài nguyên....,",
+            "extractingFiles": "Đang giải nén tệp…",
             "xmlWriting": "Đang viết AppSettings.xml...",
             "versionSaving": "Đang lưu thông tin phiên bản...",
             "installationComplete": "Cài đặt hoàn thành",
@@ -76,8 +76,8 @@
                 "description": "Nhận thông báo khi client kết nối tới server."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Thay thế trạng thái hoạt động Roblox bằng của Crush",
+                "title": "Trạng thái hoạt động Discord (Crush)",
+                "description": "Thay thế trạng thái hoạt động Roblox bằng của Crush.",
                 "option1": "Cho phép mọi người tham gia trò chơi của bạn",
                 "option2": "Hiển thị tài khoản của bạn khi đang chơi Roblox"
             },
@@ -177,7 +177,7 @@
             }
         },
         "installations": {
-            "installations": "Cài đặt",
+            "installations": "Thiết lập cài đặt Roblox",
             "description": "Quản lý trình cài đặt Roblox của bạn.",
             "customVersion": {
                 "title": "Cài đặt phiên bản Roblox tùy chỉnh",
@@ -197,9 +197,9 @@
             }
         },
         "fastflag": {
-            "fastflag": "Cờ nhanh",
-            "description": "Thêm/Xóa Fast Flags Roblox và cấu hình.",
-            "generalBack": "Quay lại Fast Flags",
+            "fastflag": "Fast Flag",
+            "description": "Thêm/Xóa Fast Flag Roblox và cấu hình.",
+            "generalBack": "Quay lại Fast Flag",
             "selectScreeen": {
                 "title": "Vui lòng chọn một hành động.",
                 "editCard": {
@@ -208,7 +208,7 @@
                 },
                 "presetCard": {
                     "title": "Có sẵn",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Sử dụng flag có sẵn của Crush."
                 }
             },
             "editor": {
@@ -216,7 +216,7 @@
                     "texboxFlagName": "Tên flag",
                     "texboxFlagValue": "Giá trị",
                     "buttonAdd": "Thêm",
-                    "search": "Tìm kiếm tất cả fast flag...",
+                    "search": "Tìm kiếm tất cả Fast Flag...",
                     "searchNotFound": "Không tìm thấy flag nào phù hợp với tìm kiếm của bạn.",
                     "flagCol": {
                         "deleteNote": "Xóa flag",
@@ -228,7 +228,7 @@
             },
             "preset": {
                 "preset": "Có sẵn",
-                "description": "Sử dụng các thiết lập fast flag có sẵn của chúng tôi.",
+                "description": "Sử dụng các thiết lập Fast Flag có sẵn của chúng tôi.",
                 "msaaCard": {
                     "title": "Chất lượng khử răng cưa (MSAA)",
                     "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."
@@ -257,7 +257,7 @@
             }
         },
         "mod": {
-            "mod": "Mod. ",
+            "mod": "Mod",
             "tab": {
                 "modManagement": {
                     "title": "Quản lý Mod",
@@ -276,10 +276,10 @@
                     }
                 },
                 "prebuiltMods": {
-                    "title": "Mods dựng sẵn",
-                    "description": "Cài đặt mods sẵn sàng sử dụng.",
+                    "title": "Mod có sẵn",
+                    "description": "Cài đặt mod sẵn sàng sử dụng.",
                     "cursorCard": {
-                        "title": "Con Trỏ -- Cursor",
+                        "title": "Con trỏ",
                         "description": "Thay đổi con trỏ Roblox của bạn sang các phiên bản cũ hơn.",
                         "dropdown": {
                             "default": "Mặc định"
@@ -308,9 +308,9 @@
                 "title": "Giới thiệu",
                 "description": "Thông tin về bản xây dựng Crush này.",
                 "note": "Xin nhớ rằng! Crush là miễn phí để dùng, nếu có ai cố gắng reskin và bán nó, xin hãy cho chúng tôi biết trong máy chủ Discord của chúng tôi!",
-                "builtOn": "Được xây dựng trên:  {date}",
-                "commitHash": "Hàm băm cam kết:  {hash}",
-                "version": "Phiên bản:"
+                "builtOn": "Được xây dựng vào ngày:  {date}",
+                "commitHash": "Mã hash:  {hash}",
+                "version": "Phiên bản: {version}"
             },
             "onBoardCard": {
                 "title": "Crush xin chào",
@@ -319,7 +319,7 @@
             },
             "languageCard": {
                 "title": "Ngôn ngữ:",
-                "description": "Chọn ngôn ngữ ưa thích cho Crush"
+                "description": "Chọn ngôn ngữ ưa thích cho Crush."
             },
             "windowVibrancyCard": {
                 "title": "Độ sống động của cửa sổ",
