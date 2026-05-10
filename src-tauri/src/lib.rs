@@ -21,11 +21,13 @@ use tauri_plugin_store::StoreExt;
 mod commands;
 use crate::rpc::kill_rpc;
 use rpc::RpcState;
+use simple_i18n::I18n;
 
 pub mod interactive;
 pub mod rd;
 pub mod rpc;
 pub mod tray;
+pub mod simple_i18n;
 
 use crate::tray::setup_tray;
 
@@ -131,6 +133,18 @@ pub fn run() {
             print_debug_info();
 
             let platform = tauri_plugin_os::platform();
+
+            let locale = app
+                .get_store("config.json")
+                .and_then(|store| store.get("language"))
+                .and_then(|v| v.as_str().map(|s| s.to_string()))
+                .unwrap_or_else(|| "en-US".to_string());
+
+            let path = app.path().resolve("resources/locales", tauri::path::BaseDirectory::Resource)?;
+
+            let i18n = I18n::new(path, &locale).unwrap();
+
+            app.manage(i18n);
 
             if platform != "windows" {
                 app.dialog()

@@ -5,6 +5,7 @@ use crate::interactive::{
 };
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
+use crate::simple_i18n::I18n;
 use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
 use dirs_next::data_local_dir;
@@ -27,6 +28,7 @@ use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use windows::Win32::Foundation::HWND;
+use crate::t;
 
 // regex
 
@@ -313,8 +315,10 @@ async fn maybe_switch_log_file(
     state.current_file = Some(path);
     state.offset = initial_offset;
 
+    let i18n = app.state::<I18n>().inner().clone();
+
     if integration_enabled(store, &["discordRpc", "enable"]) {
-        let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+        let _ = apply_rpc(&app.state::<RpcState>(), &i18n.t("rpc.rust.watcher.general"), &i18n.t("rpc.rust.watcher.idle")).await;
     } else {
         log::info!("Discord RPC integration disabled, skipping initial RPC set");
     }
@@ -449,8 +453,11 @@ async fn handle_line(
             state.window_started = false;
         }
         state.reset_for_new_game(app);
+
+        let i18n = app.state::<I18n>().inner().clone();
+
         if integration_enabled(store, &["discordRpc", "enable"]) {
-            let _ = apply_rpc(&app.state::<RpcState>(), "Playing Roblox", "Not in game").await;
+            let _ = apply_rpc(&app.state::<RpcState>(), &i18n.t("rpc.rust.watcher.general"), &i18n.t("rpc.rust.watcher.idle")).await;
         }
     }
 
@@ -1137,6 +1144,8 @@ async fn send_location_notification(
         return Ok(());
     }
 
+    let i18n = app.state::<I18n>().inner().clone();
+
     if let (Some(ip), Some(location)) = (
         state.pending_server_ip.take(),
         state.pending_server_location.take(),
@@ -1144,8 +1153,8 @@ async fn send_location_notification(
         state.location_notified = true;
         app.notification()
             .builder()
-            .title("Connected to a server!")
-            .body(format!("IP : {}\nLocation : {}", ip, location))
+            .title(&i18n.t("rpc.rust.watcher.serverInfomation.title"))
+            .body(&t!(i18n, "rpc.rust.watcher.serverInfomation.description", ip = &ip.to_string(), location = &location.to_string()))
             .show()
             .map_err(|e| e.to_string())?;
     }
@@ -1199,12 +1208,14 @@ async fn update_discord_rpc(
             }
         }
 
+        let i18n = app_c.state::<I18n>().inner().clone();
+
         let res = tokio::time::timeout(
             Duration::from_secs(5),
             apply_rpc_full(
                 &rpc,
                 Some("Crush"),
-                Some("Playing Roblox"),
+                Some(&i18n.t("rpc.rust.watcher.general").to_string()),
                 Some(&name),
                 None,
                 None,
@@ -1223,12 +1234,14 @@ async fn update_discord_rpc(
                 return;
             }
 
+            let i18n = app_c.state::<I18n>().inner().clone();
+
             let _ = tokio::time::timeout(
                 Duration::from_secs(5),
                 apply_rpc_full(
                     &rpc,
                     Some("Crush"),
-                    Some("Playing Roblox"),
+                    Some(&i18n.t("rpc.rust.watcher.general")),
                     Some(&name),
                     None,
                     None,
