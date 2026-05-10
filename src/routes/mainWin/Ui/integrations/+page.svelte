@@ -35,7 +35,7 @@
                 displayAccount = savedRpc.displayAccount
             }
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
-            activityWatching = activityWatching
+            activityWatching = savedIntegrations.activityWatching
         }
     }
 
@@ -100,6 +100,7 @@
         >
             <Switch
                 slot="action"
+                disabled={!activityWatching}
                 bind:checked={serverLocationNotifier}
                 on:change={handleChanges}
             />
@@ -112,6 +113,7 @@
         >
             <Switch
                 slot="action"
+                disabled={!activityWatching}
                 bind:checked={discordRpc}
                 on:change={handleChanges}
             />
@@ -121,7 +123,11 @@
                 <p>
                     {$_('pages.integrations.rpcCard.option1')}
                 </p>
-                <Switch bind:checked={letJoin} on:change={handleChanges} />
+                <Switch
+                    bind:checked={letJoin}
+                    on:change={handleChanges}
+                    disabled={!activityWatching}
+                />
             </div>
 
             <div class="flex gap-3">
@@ -132,6 +138,7 @@
                 <Switch
                     bind:checked={displayAccount}
                     on:change={handleChanges}
+                    disabled={!activityWatching}
                 />
             </div>
         </ExpandableSettingCard>
@@ -146,6 +153,7 @@
             <Button
                 slot="action"
                 variant="secondary"
+                disabled={!activityWatching}
                 on:click={() => {
                     goto('integrations/interactiveSettings')
                 }}
@@ -161,6 +169,7 @@
         >
             <Button
                 slot="action"
+                disabled={!activityWatching}
                 variant="secondary"
                 on:click={() => {
                     goto('integrations/gameHistory')
