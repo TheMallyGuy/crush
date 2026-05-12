@@ -25,7 +25,7 @@
     <Button
         variant="primary"
         size="sm"
-        class="rounded-full px-4 shadow-lg h-9"
+        class="rounded-full px-4 h-9"
         on:click={launchBoostrap}
     >
         {$_('elements.launchBar')}
