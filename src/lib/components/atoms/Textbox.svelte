@@ -46,7 +46,7 @@
     {#if label}
         <label
             for={id}
-            class="px-1 text-[11px] font-bold uppercase tracking-widest text-stone-500"
+            class="text-[11px] text-stone-500"
         >
             {label}
         </label>
