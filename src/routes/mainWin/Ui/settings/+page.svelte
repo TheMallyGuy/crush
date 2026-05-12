@@ -14,6 +14,7 @@
     import { load } from '@tauri-apps/plugin-store'
     import Switch from '$lib/components/atoms/Switch.svelte'
     import { goto } from '$app/navigation'
+    import Gem from '$lib/components/molecules/Gem.svelte'
 
     const Arona = '/Arona.png'
 
@@ -220,4 +221,6 @@
             >{$_('pages.settings.donateCard.button')}</Button
         >
     </ExpandableSettingCard>
+
 </div>
+<Gem />
