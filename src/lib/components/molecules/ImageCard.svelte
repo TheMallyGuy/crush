@@ -9,12 +9,11 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite/40 backdrop-blur-md border border-stone-800/20 transition-all duration-150 
+    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite/40 backdrop-blur-md transition-all duration-150 
     {!disabled ? 'hover:bg-stone-900/50 hover:border-stone-700/40 hover:shadow-glow-sapphire/5' : 'opacity-50'} 
     {className}"
     {...$$restProps}
 >
-    <!-- Left Side: Image -->
     {#if image}
         <div class="relative w-48 shrink-0 overflow-hidden border-r border-stone-800/20">
             <img
@@ -28,7 +27,6 @@
         </div>
     {/if}
 
-    <!-- Right Side: Content & Actions -->
     <div class="flex flex-1 flex-col gap-4 p-5">
         <div class="flex flex-col gap-1.5">
             {#if title || $$slots.title}
