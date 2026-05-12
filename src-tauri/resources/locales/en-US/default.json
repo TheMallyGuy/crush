@@ -12,7 +12,10 @@
                 "idle": "Not in a game",
                 "playing": "In a game",
                 "serverInfomation": {
-                    "title": "Connected to a server!",
+                    "titles": {
+                        "public": "Connected to a public server!",
+                        "private": "Connected to a private server!"
+                    },
                     "description": "IP : {ip}\nLocation : {location}"
                 }
             }

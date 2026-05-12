@@ -67,6 +67,8 @@ struct Activity {
     in_game: bool,
     notified: bool,
     join_initiated: bool,
+    is_private_server: bool,
+    access_code: Option<String>,
 }
 
 struct WatcherState {
@@ -418,6 +420,16 @@ async fn handle_line(
             state.activity.instance_id.as_deref().unwrap_or("?")
         );
         return Ok(());
+    }
+
+    if !state.activity.in_game && state.activity.place_id.is_none() {
+        if line.contains("GameJoinUtil::joinGamePostPrivateServer") {
+            state.activity.is_private_server = true;
+            let re = Regex::new(r#""accessCode":"([0-9a-f\-]{36})""#).unwrap(); // access code
+            if let Some(caps) = re.captures(line) {
+                state.activity.access_code = Some(caps[1].to_string());
+            }
+        }
     }
 
     if let Some(caps) = re_bloxstrap_rpc().captures(line) {
@@ -1151,10 +1163,15 @@ async fn send_location_notification(
         state.pending_server_location.take(),
     ) {
         state.location_notified = true;
+        let title_key = if state.activity.is_private_server {
+            "rpc.rust.watcher.serverInfomation.titles.private"
+        } else {
+            "rpc.rust.watcher.serverInfomation.titles.public"
+        };
         app.notification()
             .builder()
-            .title(&i18n.t("rpc.rust.watcher.serverInfomation.title"))
-            .body(&t!(i18n, "rpc.rust.watcher.serverInfomation.description", ip = &ip.to_string(), location = &location.to_string()))
+            .title(&i18n.t(title_key))
+            .body(&t!(i18n, "rpc.rust.watcher.serverInfomation.description", ip = &ip, location = &location))
             .show()
             .map_err(|e| e.to_string())?;
     }
@@ -1178,25 +1195,38 @@ async fn update_discord_rpc(
     let instance_id = state.activity.instance_id.clone().unwrap_or_default();
     let app_c = app.clone();
 
+    let is_private = state.activity.is_private_server;
+
     tauri::async_runtime::spawn(async move {
         let (name, _image) = match fetch_place_info(place_id).await {
             Ok(Some(v)) => v,
             _ => ("Roblox".to_string(), String::new()),
         };
 
-        let buttons = vec![
-            (
-                "Join Server".to_string(),
-                format!(
-                    "https://deeplink.multicrew.dev?placeId={}&jobId={}",
-                    place_id, instance_id
+        let buttons: Vec<(String, String)>;
+        if is_private {
+            buttons =  vec![
+                (
+                    "View Game".to_string(),
+                    format!("https://www.roblox.com/games/{}", place_id),
                 ),
-            ),
-            (
-                "View Game".to_string(),
-                format!("https://www.roblox.com/games/{}", place_id),
-            ),
-        ];
+            ];
+        } else {
+            buttons = vec![
+                (
+                    "Join Server".to_string(),
+                    format!(
+                        "https://deeplink.multicrew.dev?placeId={}&jobId={}",
+                        place_id, instance_id
+                    ),
+                ),
+                (
+                    "View Game".to_string(),
+                    format!("https://www.roblox.com/games/{}", place_id),
+                ),
+            ];
+        }
+
 
         const CLIENT_ID: &str = "1484521125550620813";
         let rpc = app_c.state::<RpcState>();
