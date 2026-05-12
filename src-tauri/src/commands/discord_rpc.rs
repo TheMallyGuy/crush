@@ -13,7 +13,7 @@ pub async fn set_rpc(
     let needs_start = rpc_state.client.lock().await.is_none();
 
     if needs_start {
-        start_rpc(&rpc_state, "1484521125550620813")
+        start_rpc(&rpc_state, "363445589247131668")
             .await
             .map_err(|e| format!("Failed to connect to Discord RPC: {e}"))?;
     }
@@ -49,7 +49,7 @@ pub async fn set_rpc(
         *rpc_state.client.lock().await = None;
         *rpc_state.runner.lock().await = None;
 
-        start_rpc(&rpc_state, "1484521125550620813")
+        start_rpc(&rpc_state, "363445589247131668")
             .await
             .map_err(|e| format!("Failed to reconnect to Discord RPC: {e}"))?;
 

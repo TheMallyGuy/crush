@@ -601,7 +601,7 @@ async fn on_bloxstrap_rpc(
             let app_c = app.clone();
             tauri::async_runtime::spawn(async move {
                 let rpc_state = app_c.state::<RpcState>();
-                const CLIENT_ID: &str = "1484521125550620813";
+                const CLIENT_ID: &str = "363445589247131668";
 
                 if rpc_state.client.lock().await.is_none() {
                     if let Err(e) = start_rpc(&rpc_state, CLIENT_ID).await {
@@ -1256,7 +1256,7 @@ async fn update_discord_rpc(
             ];
         }
 
-        const CLIENT_ID: &str = "1484521125550620813";
+        const CLIENT_ID: &str = "363445589247131668";
         let rpc = app_c.state::<RpcState>();
 
         if rpc.client.lock().await.is_none() {

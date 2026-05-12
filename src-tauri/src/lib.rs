@@ -113,7 +113,7 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
     tauri::async_runtime::spawn(async move {
         let state: tauri::State<'_, RpcState> = app_handle.state::<RpcState>();
 
-        if let Err(e) = crate::rpc::start_rpc(&state, "1484521125550620813").await {
+        if let Err(e) = crate::rpc::start_rpc(&state, "363445589247131668").await {
             log::error!("RPC error: {}", e);
         };
     });
