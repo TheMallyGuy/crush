@@ -57,7 +57,7 @@
     listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
         serverInstanceId = event.payload.server_id
         gameId = event.payload.game_id
-        gameRegion = event.payload.region_info ?? "Cannot fetch region, try rejoin with this window open."
+        gameRegion = event.payload.region_info
 
         serverInviteLink = `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
 
@@ -83,12 +83,12 @@
 
     <ExpandableSettingCard
         title={gameName}
-        description="Infomation about this server"
+        description={$_("pages.serverInfomation.infomationCard.description")}
         isOpen={true}
     >
         <div class="flex flex-col gap-3 p-4">
             <p>
-                {$_('pages.serverInfomationPage.infomationCard.serverRegion', { values: { region: gameRegion || "Fetching..." } })}
+                {$_('pages.serverInfomationPage.infomationCard.serverRegion', { values: { region: gameRegion || $_("pages.serverInfomationPage.infomationCard.waitRegion") } })}
             </p>
             <p>{$_('pages.serverInfomationPage.infomationCard.uptime')}</p>
             <p> 
