@@ -48,9 +48,8 @@
   function diamond(canvas: HTMLCanvasElement): () => void {
     const illo = new Zdog.Illustration({
       element: canvas,
-      dragRotate: true,
-      rotate: { x: -0.18 },
-      scale: 30
+      rotate: { x: -0.10 },
+      scale: 20
     });
 
     const gem = new Zdog.Anchor({
@@ -208,7 +207,7 @@
 
 <canvas
   width="500"
-  height="60"
+  height="40"
   class={className}
   {@attach diamond}
 >
