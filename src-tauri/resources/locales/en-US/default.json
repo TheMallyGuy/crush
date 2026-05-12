@@ -11,6 +11,7 @@
                 "general": "Playing Roblox",
                 "idle": "Not in a game",
                 "playing": "In a game",
+                "playingPrivate": "In a game, Private server",
                 "serverInfomation": {
                     "titles": {
                         "public": "Connected to a public server!",
@@ -52,6 +53,7 @@
             "title": "Server Information",
             "infomationCard": {
                 "serverRegion": "Region : {region}",
+                "waitRegion": "Fetching region...",
                 "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
