@@ -58,6 +58,7 @@
         const savedTransparency = savedScopes?.transparencyScopes
 
         const newIntegrations: Integrations = {
+            activityWatching: savedIntegrations?.activityWatching ?? true,
             discordRpc: savedIntegrations?.discordRpc ?? {
                 enable: false,
                 displayAccount: false,

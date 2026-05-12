@@ -35,6 +35,7 @@
         }
 
         const newIntegrations: Integrations = {
+            activityWatching: savedIntegrations?.activityWatching ?? true,
             discordRpc: {
                 enable: savedRpc.enable,
                 displayAccount: savedRpc.displayAccount,

@@ -3,33 +3,39 @@
 <script lang="ts">
   import Zdog from 'zdog';
 
-  export let className = ''
+  export let className: string = '';
 
   const TAU = Zdog.TAU;
   const SIDES = 8;
 
+  type Point = {
+    x: number;
+    y: number;
+    z: number;
+  };
+
   // Colors
-  const tableColor     = '#dff0ff';
-  const crownColorA    = '#b8d8f8';
-  const crownColorB    = '#7ab4ee';
-  const crownColorC    = '#4a8fd4';
+  const tableColor = '#dff0ff';
+  const crownColorA = '#b8d8f8';
+  const crownColorB = '#7ab4ee';
+  const crownColorC = '#4a8fd4';
   const pavilionColorA = '#5a9ee0';
   const pavilionColorB = '#2c6ab8';
   const pavilionColorC = '#1a4a90';
-  const girdleColorA   = '#a0c8f0';
-  const girdleColorB   = '#6aaae0';
+  const girdleColorA = '#a0c8f0';
+  const girdleColorB = '#6aaae0';
 
   // Geometry
-  const girdleRadius  = 1;
-  const tableRadius   = 0.55;
-  const crownHeight   = 0.35;
+  const girdleRadius = 1;
+  const tableRadius = 0.55;
+  const crownHeight = 0.35;
   const pavilionDepth = 1;
-  const girdleHeight  = 0.02;
+  const girdleHeight = 0.02;
 
-  const apothem   = girdleRadius * Math.cos(Math.PI / SIDES);
+  const apothem = girdleRadius * Math.cos(Math.PI / SIDES);
   const halfWidth = girdleRadius * Math.sin(Math.PI / SIDES);
 
-  function pt(index, radius, y) {
+  function pt(index: number, radius: number, y: number): Point {
     const angle = (index / SIDES) * TAU;
 
     return {
@@ -39,7 +45,7 @@
     };
   }
 
-  function diamond(canvas) {
+  function diamond(canvas: HTMLCanvasElement): () => void {
     const illo = new Zdog.Illustration({
       element: canvas,
       dragRotate: true,
@@ -51,7 +57,7 @@
       addTo: illo
     });
 
-    const culet = { x: 0, y: pavilionDepth, z: 0 };
+    const culet: Point = { x: 0, y: pavilionDepth, z: 0 };
 
     for (let i = 0; i < SIDES; i++) {
       const even = i % 2 === 0;
@@ -68,9 +74,9 @@
         addTo: girdleRotor,
         path: [
           { x: -halfWidth, y: -girdleHeight / 2, z: apothem },
-          { x:  halfWidth, y: -girdleHeight / 2, z: apothem },
-          { x:  halfWidth, y:  girdleHeight / 2, z: apothem },
-          { x: -halfWidth, y:  girdleHeight / 2, z: apothem }
+          { x: halfWidth, y: -girdleHeight / 2, z: apothem },
+          { x: halfWidth, y: girdleHeight / 2, z: apothem },
+          { x: -halfWidth, y: girdleHeight / 2, z: apothem }
         ],
         stroke: 1,
         fill: true,
@@ -174,7 +180,7 @@
       addTo: gem,
       path: Array.from(
         { length: SIDES },
-        (_, i) => pt(i, tableRadius, -crownHeight)
+        (_, i): Point => pt(i, tableRadius, -crownHeight)
       ),
       stroke: 1,
       fill: true,
@@ -182,9 +188,9 @@
       backface: tableColor
     });
 
-    let frame;
+    let frame: number;
 
-    function animate() {
+    function animate(): void {
       illo.rotate.y += 0.01;
       illo.updateRenderGraph();
 
@@ -194,7 +200,7 @@
     animate();
 
     // cleanup
-    return () => {
+    return (): void => {
       cancelAnimationFrame(frame);
     };
   }
