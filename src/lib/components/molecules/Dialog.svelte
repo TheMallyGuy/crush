@@ -37,12 +37,6 @@
             class="w-full max-w-md bg-anthracite/80 backdrop-blur-xl border border-stone-800/40 rounded-xl p-6  relative overflow-hidden flex flex-col {className}"
             transition:fly={{ y: 20, duration: 250, opacity: 0 }}
         >
-            <div
-                class="absolute -top-12 -left-12 w-32 h-32 bg-sapphire/10 blur-3xl rounded-full pointer-events-none"
-            ></div>
-            <div
-                class="absolute -bottom-12 -right-12 w-32 h-32 bg-sapphire/5 blur-3xl rounded-full pointer-events-none"
-            ></div>
 
             <div class="flex items-start justify-between mb-2">
                 <h3 class="text-xl font-bold tracking-tight text-stone-100">
