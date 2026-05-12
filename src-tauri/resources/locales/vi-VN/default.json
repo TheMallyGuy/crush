@@ -11,8 +11,12 @@
                 "general": "Đang chơi Roblox",
                 "idle": "Không có trong trò chơi",
                 "playing": "In a game",
+                "playingPrivate": "In a game, Private server",
                 "serverInfomation": {
-                    "title": "Connected to a server!",
+                    "titles": {
+                        "public": "Connected to a public server!",
+                        "private": "Connected to a private server!"
+                    },
                     "description": "IP : {ip}\nLocation : {location}"
                 }
             }
@@ -49,6 +53,7 @@
             "title": "Thông tin máy chủ",
             "infomationCard": {
                 "serverRegion": "Vùng : {region}",
+                "waitRegion": "Fetching region...",
                 "description": "Thông tin về máy chủ này.",
                 "uptime": "Thời gian hoạt động : Không rõ",
                 "instanceId": "ID máy chủ: {id}",
