@@ -23,36 +23,55 @@
     import { ask } from '@tauri-apps/plugin-dialog'
     import { invoke } from '@tauri-apps/api/core'
     import { _ } from 'svelte-i18n'
+    import Dialog from '$lib/components/molecules/Dialog.svelte'
+    import Textbox from '$lib/components/atoms/Textbox.svelte'
 
     let items: Mod[] = []
+    let deleteDialog: boolean = false
+
+    let createDialog: boolean = false
+    let modNmae: string
+
+    let existDialog: boolean = false
 
     onMount(async () => {
         items = await loadMods()
     })
 
+    let resolveCreate: ((value: string | null) => void) | null = null
+    let modName: string = ''
+
     async function handleNewMod() {
-        const name = prompt('Enter mod name:')
+        createDialog = true
+
+        const name = await new Promise<string | null>((resolve) => {
+            resolveCreate = resolve
+        })
+
+        createDialog = false
+
         if (name) {
             const exists = items.some(
                 (mod) => mod.name.toLowerCase() === name.toLowerCase()
             )
             if (exists) {
-                alert(`A mod named "${name}" already exists.`)
+                existDialog = true
                 return
             }
             await createNewMod(name)
             items = await loadMods()
         }
     }
+    let resolveDelete: ((value: boolean) => void) | null = null
 
     async function handleDelete(id: string, name: string) {
-        const confirmed = await ask(
-            `Are you sure you want to delete "${name}"?`,
-            {
-                title: 'Delete Mod',
-                kind: 'warning',
-            }
-        )
+        deleteDialog = true
+
+        const confirmed = await new Promise<boolean>((resolve) => {
+            resolveDelete = (value: boolean) => resolve(value)
+        })
+
+        deleteDialog = false
 
         if (confirmed) {
             await deleteMod(id)
@@ -83,11 +102,67 @@
     }
 </script>
 
+<Dialog
+    bind:open={deleteDialog}
+    on:close={() => resolveDelete?.(false)}
+    title="Confirm Action"
+    description="Are you sure to delete this mod?"
+>
+    <div slot="actions">
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => resolveDelete?.(false)}
+        >
+            Cancel
+        </Button>
+        <Button
+            variant="danger"
+            size="sm"
+            on:click={() => resolveDelete?.(true)}
+        >
+            Confirm
+        </Button>
+    </div>
+</Dialog>
+
+<Dialog
+    bind:open={createDialog}
+    on:close={() => resolveCreate?.(null)}
+    title="Create a new mod"
+>
+    <Textbox label="Mod name" placeholder="My new mod" bind:value={modName} />
+
+    <div slot="actions">
+        <Button variant="secondary" size="sm" on:click={() => resolveCreate?.(null)}>
+            Cancel
+        </Button>
+        <Button variant="primary" size="sm" on:click={() => resolveCreate?.(modName)}>
+            Confirm
+        </Button>
+    </div>
+</Dialog>
+
+
+<Dialog
+    bind:open={existDialog}
+    on:close={() => (existDialog = false)}
+    title="This name is already exists!"
+    description="Please choose a diffrent name."
+>
+
+    <div slot="actions">
+        <Button variant="secondary" size="sm" on:click={() => (existDialog = false)}>
+            OK
+        </Button>
+    </div>
+</Dialog>
+
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <Button variant="primary" size="md" on:click={handleNewMod}>
             <Plus class="size-4 mr-2" />
-            {$_("pages.mod.tab.modManagement.addModButton")}
+            {$_('pages.mod.tab.modManagement.addModButton')}
         </Button>
     </div>
 
@@ -96,11 +171,15 @@
             <div
                 class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
             >
-                <p class="text-stone-500">{$_("pages.mod.tab.modManagement.noModsFound")}</p>
+                <p class="text-stone-500">
+                    {$_('pages.mod.tab.modManagement.noModsFound')}
+                </p>
                 <button
                     on:click={handleNewMod}
                     class="text-blue-500 hover:underline text-sm mt-2"
-                    >{$_("pages.mod.tab.modManagement.noModsFoundCreateButton")}</button
+                    >{$_(
+                        'pages.mod.tab.modManagement.noModsFoundCreateButton'
+                    )}</button
                 >
             </div>
         {:else}
@@ -112,7 +191,13 @@
                             class="p-2 rounded-lg transition-colors {item.enabled
                                 ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
                                 : 'bg-stone-800 text-stone-500 hover:bg-stone-700'}"
-                            title={item.enabled ? $_("pages.mod.tab.modManagement.modCards.toggleNoteDisable") : $_("pages.mod.tab.modManagement.modCards.toggleNoteEnable")}
+                            title={item.enabled
+                                ? $_(
+                                      'pages.mod.tab.modManagement.modCards.toggleNoteDisable'
+                                  )
+                                : $_(
+                                      'pages.mod.tab.modManagement.modCards.toggleNoteEnable'
+                                  )}
                         >
                             {#if item.enabled}
                                 <Power class="size-4" />
@@ -134,7 +219,9 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleRename(item.id, item.name)}
-                            title={$_("pages.mod.tab.modManagement.modCards.renameNote")}
+                            title={$_(
+                                'pages.mod.tab.modManagement.modCards.renameNote'
+                            )}
                         >
                             <SquarePen class="size-4 text-stone-400" />
                         </Button>
@@ -142,7 +229,9 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleOpenFolder(item.name)}
-                            title={$_("pages.mod.tab.modManagement.modCards.openFolderNote")}
+                            title={$_(
+                                'pages.mod.tab.modManagement.modCards.openFolderNote'
+                            )}
                         >
                             <Folder class="size-4 text-stone-400" />
                         </Button>
@@ -150,7 +239,9 @@
                             size="sm"
                             variant="ghost"
                             on:click={() => handleDelete(item.id, item.name)}
-                            title={$_("pages.mod.tab.modManagement.modCards.deleteNote")}
+                            title={$_(
+                                'pages.mod.tab.modManagement.modCards.deleteNote'
+                            )}
                             class="hover:text-red-400 hover:bg-red-400/10"
                         >
                             <Trash2 class="size-4" />
@@ -163,7 +254,7 @@
 
     <div class="pt-4 border-t border-stone-900">
         <p class="text-sm text-stone-500 italic">
-            {$_("pages.mod.tab.modManagement.modCards.layoutNote")}
+            {$_('pages.mod.tab.modManagement.modCards.layoutNote')}
         </p>
     </div>
 </div>
