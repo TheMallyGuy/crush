@@ -6,6 +6,7 @@ use crate::interactive::{
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
 use crate::simple_i18n::I18n;
+use crate::t;
 use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
 use dirs_next::data_local_dir;
@@ -28,7 +29,6 @@ use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use windows::Win32::Foundation::HWND;
-use crate::t;
 
 // regex
 
@@ -183,8 +183,8 @@ struct GamesResponse {
 }
 #[derive(Deserialize)]
 struct IpInfo {
-    city: String,
-    region: String,
+    city: Option<String>,
+    region: Option<String>,
 }
 #[derive(Deserialize)]
 struct IconEntry {
@@ -320,7 +320,12 @@ async fn maybe_switch_log_file(
     let i18n = app.state::<I18n>().inner().clone();
 
     if integration_enabled(store, &["discordRpc", "enable"]) {
-        let _ = apply_rpc(&app.state::<RpcState>(), &i18n.t("rpc.rust.watcher.general"), &i18n.t("rpc.rust.watcher.idle")).await;
+        let _ = apply_rpc(
+            &app.state::<RpcState>(),
+            &i18n.t("rpc.rust.watcher.general"),
+            &i18n.t("rpc.rust.watcher.idle"),
+        )
+        .await;
     } else {
         log::info!("Discord RPC integration disabled, skipping initial RPC set");
     }
@@ -393,7 +398,6 @@ async fn handle_line(
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
 ) -> Result<(), String> {
-
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps
             .get(1)
@@ -441,7 +445,7 @@ async fn handle_line(
     if let Some(caps) = re_udmux().captures(line) {
         if !state.udmux_handled {
             if let Some(ip) = caps.get(1) {
-                fetch_and_store_location(ip.as_str(), state).await?;
+                fetch_and_store_location(ip.as_str(), state, app).await?;
                 state.udmux_handled = true;
                 if !state.location_notified {
                     send_location_notification(app, state, store).await?;
@@ -469,7 +473,12 @@ async fn handle_line(
         let i18n = app.state::<I18n>().inner().clone();
 
         if integration_enabled(store, &["discordRpc", "enable"]) {
-            let _ = apply_rpc(&app.state::<RpcState>(), &i18n.t("rpc.rust.watcher.general"), &i18n.t("rpc.rust.watcher.idle")).await;
+            let _ = apply_rpc(
+                &app.state::<RpcState>(),
+                &i18n.t("rpc.rust.watcher.general"),
+                &i18n.t("rpc.rust.watcher.idle"),
+            )
+            .await;
         }
     }
 
@@ -1116,7 +1125,7 @@ fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
     log::info!("Sending Bloxstrap command: {}", payload);
 }
 
-async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<(), String> {
+async fn fetch_and_store_location(ip: &str, state: &mut WatcherState, app: &AppHandle) -> Result<(), String> {
     if state.activity.place_id.is_none() {
         log::info!("UDMUX fired but no place_id, skipping");
         return Ok(());
@@ -1125,7 +1134,9 @@ async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<
 
     let res = tokio::time::timeout(
         Duration::from_secs(5),
-        get_client().get(format!("https://ipinfo.io/{}/json", ip)).send(),
+        get_client()
+            .get(format!("https://ipinfo.io/{}/json", ip))
+            .send(),
     )
     .await;
 
@@ -1141,7 +1152,22 @@ async fn fetch_and_store_location(ip: &str, state: &mut WatcherState) -> Result<
         .map_err(|e| e.to_string())?;
 
     state.pending_server_ip = Some(ip.to_string());
-    state.pending_server_location = Some(format!("{}, {}", info.city, info.region));
+    state.pending_server_location = Some(format!(
+        "{}, {}",
+        info.city.as_deref().unwrap_or("Unknown City"),
+        info.region.as_deref().unwrap_or("Unknown Region")
+    ));
+
+    if state.activity.in_game {
+        if let (Some(id), Some(loc)) = (
+            state.activity.instance_id.as_deref(),
+            state.pending_server_location.as_deref(),
+        ) {
+            if let Some(place_id) = state.activity.place_id {
+                emit_server_info(app, id, place_id, loc);
+            }
+        }
+    }
     Ok(())
 }
 
@@ -1159,8 +1185,8 @@ async fn send_location_notification(
     let i18n = app.state::<I18n>().inner().clone();
 
     if let (Some(ip), Some(location)) = (
-        state.pending_server_ip.take(),
-        state.pending_server_location.take(),
+        state.pending_server_ip.as_deref(),
+        state.pending_server_location.as_deref(),
     ) {
         state.location_notified = true;
         let title_key = if state.activity.is_private_server {
@@ -1171,7 +1197,12 @@ async fn send_location_notification(
         app.notification()
             .builder()
             .title(&i18n.t(title_key))
-            .body(&t!(i18n, "rpc.rust.watcher.serverInfomation.description", ip = &ip, location = &location))
+            .body(&t!(
+                i18n,
+                "rpc.rust.watcher.serverInfomation.description",
+                ip = ip,
+                location = location
+            ))
             .show()
             .map_err(|e| e.to_string())?;
     }
@@ -1205,12 +1236,10 @@ async fn update_discord_rpc(
 
         let buttons: Vec<(String, String)>;
         if is_private {
-            buttons =  vec![
-                (
-                    "View Game".to_string(),
-                    format!("https://www.roblox.com/games/{}", place_id),
-                ),
-            ];
+            buttons = vec![(
+                "View Game".to_string(),
+                format!("https://www.roblox.com/games/{}", place_id),
+            )];
         } else {
             buttons = vec![
                 (
@@ -1226,7 +1255,6 @@ async fn update_discord_rpc(
                 ),
             ];
         }
-
 
         const CLIENT_ID: &str = "1484521125550620813";
         let rpc = app_c.state::<RpcState>();
@@ -1288,6 +1316,7 @@ async fn update_discord_rpc(
 }
 
 fn emit_server_info(app: &AppHandle, instance_id: &str, game_id: u64, region_info: &str) {
+    log::info!("{}", region_info);
     let payload = EmitServerInfomation {
         server_id: instance_id.to_string(),
         game_id,
@@ -1415,7 +1444,10 @@ async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, Str
         .map_err(|e| e.to_string())?;
 
     let (games_data, icon_data) = tokio::join!(
-        tokio::time::timeout(Duration::from_secs(5), games_response.json::<GamesResponse>()),
+        tokio::time::timeout(
+            Duration::from_secs(5),
+            games_response.json::<GamesResponse>()
+        ),
         tokio::time::timeout(Duration::from_secs(5), icon_response.json::<IconResponse>()),
     );
 

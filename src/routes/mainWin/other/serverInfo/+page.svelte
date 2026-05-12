@@ -7,12 +7,13 @@
     import { writeText } from '@tauri-apps/plugin-clipboard-manager'
     import { fetch } from '@tauri-apps/plugin-http'
     import { _ } from 'svelte-i18n'
+    import { info } from '@tauri-apps/plugin-log'
 
-    let serverInstanceId: string = 'Unkown'
+    let serverInstanceId: string = 'Unknown'
     let gameId: number = 1234
-    let gameRegion: string = 'Unkown'
+    let gameRegion: string = 'Unknown'
     let serverInviteLink: string
-    let gameName: string = 'Unkown game'
+    let gameName: string = 'Unknown game'
 
     async function getUniverse(
         placeId: number
@@ -56,7 +57,7 @@
     listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
         serverInstanceId = event.payload.server_id
         gameId = event.payload.game_id
-        gameRegion = event.payload.region_info
+        gameRegion = event.payload.region_info ?? "Cannot fetch region, try rejoin with this window open."
 
         serverInviteLink = `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
 
@@ -70,6 +71,10 @@
         const details = await getGameDetails(gameId, universeData.universeId)
 
         gameName = details.name
+
+        console.log(`instance id : ${event.payload.server_id}`)
+        console.log(`game id : ${event.payload.game_id}`)
+        console.log(`region : ${event.payload.region_info}`)
     })
 </script>
 
@@ -83,11 +88,10 @@
     >
         <div class="flex flex-col gap-3 p-4">
             <p>
-                {($_('pages.serverInfomationPage.infomationCard.serverRegion'),
-                { values: { region: gameRegion } })}
+                {$_('pages.serverInfomationPage.infomationCard.serverRegion', { values: { region: gameRegion || "Fetching..." } })}
             </p>
             <p>{$_('pages.serverInfomationPage.infomationCard.uptime')}</p>
-            <p>
+            <p> 
                 {$_('pages.serverInfomationPage.infomationCard.instanceId', {
                     values: { id: serverInstanceId },
                 })}
