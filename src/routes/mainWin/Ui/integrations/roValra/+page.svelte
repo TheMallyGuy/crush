@@ -35,6 +35,7 @@
         }
 
         const newIntegrations: Integrations = {
+            closeCrashHandler: savedIntegrations?.closeCrashHandler ?? false,
             priority: savedIntegrations?.priority ?? "NORMAL_PRIORITY_CLASS",
             activityWatching: savedIntegrations?.activityWatching ?? true,
             discordRpc: {

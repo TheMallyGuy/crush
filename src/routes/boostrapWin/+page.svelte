@@ -153,6 +153,10 @@
                 await invoke('watch_logs')
                 await sleep(3000)
                 await invoke('set_process_priority', {"priority" : integrations?.priority ?? "NORMAL_PRIORITY_CLASS"})
+                
+                if (integrations?.closeCrashHandler) {
+                    await invoke('close_crash_handler')
+                }
             }
 
             await finalizeBootstrap()

@@ -5,7 +5,7 @@ use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
-use commands::priority::set_process_priority;
+use commands::pre_processing::{set_process_priority, close_crash_handler};
 use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
@@ -15,7 +15,7 @@ use commands::watcher::watch_logs;
 use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
-use tauri::{AppHandle, Emitter, Manager};
+use tauri::{Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_notification::NotificationExt;
@@ -285,7 +285,8 @@ pub fn run() {
             export_boostrapconfig,
             set_window_vibrancy,
             get_latest_version_studio,
-            set_process_priority
+            set_process_priority,
+            close_crash_handler
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

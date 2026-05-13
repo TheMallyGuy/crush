@@ -2,7 +2,7 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History, CodeXml, View, Cpu } from '@lucide/svelte'
+    import { Bell, Plug, History, CodeXml, View, Cpu, Bomb } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -36,6 +36,7 @@
     ]
     let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
 
+    let crashHandler = false
     let discordRpc = false
     let letJoin = false
     let displayAccount = false
@@ -60,6 +61,7 @@
                 letJoin = savedRpc.letJoin
                 displayAccount = savedRpc.displayAccount
             }
+            crashHandler = savedIntegrations.closeCrashHandler
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
             activityWatching = savedIntegrations.activityWatching
         }
@@ -80,6 +82,7 @@
 
         const newIntegrations: Integrations = {
             ...current,
+            closeCrashHandler: crashHandler ?? false,
             priority: processPriority ?? 'NORMAL_PRIORITY_CLASS',
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
@@ -144,6 +147,18 @@
                 slot="action"
                 options={processPriorityItems}
                 bind:value={processPriority}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title={$_("pages.integrations.closeCrashHandlerCard.title")}
+            description={$_("pages.integrations.closeCrashHandlerCard.description")}
+            icon={Bomb}
+        >
+            <Switch
+                slot="action"
+                bind:checked={crashHandler}
                 on:change={handleChanges}
             />
         </SettingCard>

@@ -57,6 +57,7 @@ export type PriorityClass =
   | "REALTIME_PRIORITY_CLASS";
 
 export type Integrations = {
+    closeCrashHandler: boolean
     activityWatching: boolean
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
@@ -216,11 +217,13 @@ export type BoostrapConfigs = { // bloxstrap, froststrap
     // frostrap only
     EnableBetterMatchmaking: boolean,
     ShowUsingFroststrapRPC: boolean,
+    AutoCloseCrashHandler: boolean,
 
     UpdateRoblox : boolean, // frost & void??? (ps : fish)
 
     // voidstrap only
     VoidRPC: boolean,
+    DisableCrash: boolean,
 
     // funkstrap
     UseWindowControl: boolean
