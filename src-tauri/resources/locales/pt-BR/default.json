@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "A paixão súbita",
             "playRoblox": "Jogar Roblox",
-            "config": "Configurações"
+            "config": "Configurações",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Cancelar",
@@ -73,7 +74,7 @@
                 "customDropDownContents": {
                     "importNew": "Importar um Novo",
                     "noThemes": "Nenhum tema personalizado importado.",
-                    "missingAssets": "Missing Theme Assets"
+                    "missingAssets": "Ativos de tema ausentes"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Substitua a Roblox Rich Presence por Crush's.",
                 "option1": "Permita que as pessoas entrem no seu jogo",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Abrir"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Interrompe a voxelização para melhorar o desempenho."
                 },
                 "grassAnimationCard": {
                     "title": "Animação de ondulação de grama",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Cancelar"
                         }
                     }
                 },

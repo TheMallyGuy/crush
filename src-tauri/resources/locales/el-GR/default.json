@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Σύνθλιψη",
             "playRoblox": "Παίξτε Roblox",
-            "config": "Ρύθμιση"
+            "config": "Ρύθμιση",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Άκυρο",
@@ -64,16 +65,16 @@
             "appearance": "Εμφάνιση",
             "description": "Προσαρμόστε την εμφάνιση και την αίσθηση του bootstrapper Roblox.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Θέμα Bootstrapper",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Προεπιλογή (Crush)",
+                    "custom": "Προσαρμοσμένος"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "εισάγετε νέα γραμματοσειρά",
+                    "noThemes": "Δεν έχουν εισαχθεί ακόμα προσαρμοσμένα θέματα.",
+                    "missingAssets": "Λείπουν στοιχεία θέματος"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Σύνθλιψη)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Αντικαταστήστε το Roblox Rich Presence με το Crush's.",
                 "option1": "Επιτρέψτε στους ανθρώπους να συμμετάσχουν στο παιχνίδι σας",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Άνοιγμα"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Διακοπή της voxelization για βελτίωση της απόδοσης."
                 },
                 "grassAnimationCard": {
                     "title": "Κινούμενα σχέδια κυματισμού γρασιδιού",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Άκυρο"
                         }
                     }
                 },

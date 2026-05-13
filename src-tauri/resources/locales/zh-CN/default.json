@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "粉碎",
             "playRoblox": "玩Roblox",
-            "config": "配置"
+            "config": "配置",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "取消",
@@ -64,16 +65,16 @@
             "appearance": "设备外观",
             "description": "自定义Roblox引导程序的外观和感觉。",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "引导程序主题",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "默认（挤压）",
+                    "custom": "自定义"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "导入新",
+                    "noThemes": "尚未导入自定义主题。",
+                    "missingAssets": "缺少主题资产"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "将Roblox Rich Presence替换为Crush的.",
                 "option1": "让人们加入您的游戏",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "打开"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -234,7 +235,7 @@
                     "flagCol": {
                         "deleteNote": "删除标签...",
                         "name": "标志和名称",
-                        "type": "type",
+                        "type": "種類",
                         "value": "价值"
                     }
                 }
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "停止体素化以提高性能."
                 },
                 "grassAnimationCard": {
                     "title": "草地挥舞动画",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "取消"
                         }
                     }
                 },

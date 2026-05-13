@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "粉碎",
             "playRoblox": "玩Roblox",
-            "config": "内容"
+            "config": "内容",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "取消",
@@ -64,16 +65,16 @@
             "appearance": "外觀",
             "description": "自訂Roblox bootstrapper的外觀和感覺。",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Bootstrapper主題",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "預設（粉碎）",
+                    "custom": "自訂"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "匯入新檔",
+                    "noThemes": "尚未匯入自訂佈景主題。",
+                    "missingAssets": "缺少主題資產"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "用Crush's替換Roblox Rich Presence.",
                 "option1": "讓其他人加入你的遊戲",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "開啟"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "停止體素化以提高性能."
                 },
                 "grassAnimationCard": {
                     "title": "草地揮舞動畫",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "取消"
                         }
                     }
                 },
