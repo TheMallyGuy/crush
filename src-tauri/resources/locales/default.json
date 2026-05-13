@@ -89,6 +89,10 @@
                 "title": "Server Location Notifier",
                 "description": "Get notified when the client connects to a server."
             },
+            "processPriorityCard" : {
+                "title" : "Process Priority",
+                "description" : "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Replace the Roblox Rich Presence with Crush's.",

@@ -136,8 +136,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Process Priority"
-            description="EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            title={$_("pages.integrations.processPriorityCard.title")}
+            description={$_("pages.integrations.processPriorityCard.description")}
             icon={Cpu}
         >
             <Dropdown
