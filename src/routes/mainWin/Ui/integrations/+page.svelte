@@ -2,14 +2,39 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History, CodeXml, View } from '@lucide/svelte'
+    import { Bell, Plug, History, CodeXml, View, Cpu } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
-    import type { Integrations, DiscordRpc } from '$lib/types'
+    import type { Integrations, DiscordRpc, PriorityClass } from '$lib/types'
     import { _ } from 'svelte-i18n'
     import { goto } from '$app/navigation'
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
+    import Dropdown from '$lib/components/molecules/Dropdown.svelte'
+
+    let processPriorityItems = [
+        {
+            value: 'BELOW_NORMAL_PRIORITY_CLASS',
+            label: 'BELOW_NORMAL',
+        },
+        {
+            value: 'NORMAL_PRIORITY_CLASS',
+            label: 'NORMAL',
+        },
+        {
+            value: 'ABOVE_NORMAL_PRIORITY_CLASS',
+            label: 'ABOVE_NORMAL',
+        },
+        {
+            value: 'HIGH_PRIORITY_CLASS',
+            label: 'HIGH',
+        },
+        {
+            value: 'REALTIME_PRIORITY_CLASS',
+            label: 'REALTIME',
+        },
+    ]
+    let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
 
     let discordRpc = false
     let letJoin = false
@@ -29,6 +54,7 @@
         }
 
         if (savedIntegrations) {
+            processPriority = savedIntegrations.priority
             if (savedRpc) {
                 discordRpc = savedRpc.enable
                 letJoin = savedRpc.letJoin
@@ -54,6 +80,7 @@
 
         const newIntegrations: Integrations = {
             ...current,
+            priority: processPriority ?? 'NORMAL_PRIORITY_CLASS',
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
             roValra: current?.roValra ?? { joinServerForYouValue: false },
@@ -80,7 +107,7 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title={$_("pages.integrations.activityWatcherCard.title")}
+            title={$_('pages.integrations.activityWatcherCard.title')}
             description={$_(
                 'pages.integrations.activityWatcherCard.description'
             )}
@@ -104,6 +131,19 @@
                 slot="action"
                 disabled={!activityWatching}
                 bind:checked={serverLocationNotifier}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Process Priority"
+            description="EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            icon={Cpu}
+        >
+            <Dropdown
+                slot="action"
+                options={processPriorityItems}
+                bind:value={processPriority}
                 on:change={handleChanges}
             />
         </SettingCard>

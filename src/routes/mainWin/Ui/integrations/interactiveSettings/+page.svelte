@@ -58,6 +58,7 @@
         const savedTransparency = savedScopes?.transparencyScopes
 
         const newIntegrations: Integrations = {
+            priority: savedIntegrations?.priority ?? "NORMAL_PRIORITY_CLASS",
             activityWatching: savedIntegrations?.activityWatching ?? true,
             discordRpc: savedIntegrations?.discordRpc ?? {
                 enable: false,

@@ -49,15 +49,22 @@ export type interactiveAPI = {
     scopes : interactiveAPIScopes 
 }
 
+export type PriorityClass =
+  | "BELOW_NORMAL_PRIORITY_CLASS"
+  | "NORMAL_PRIORITY_CLASS"
+  | "ABOVE_NORMAL_PRIORITY_CLASS"
+  | "HIGH_PRIORITY_CLASS"
+  | "REALTIME_PRIORITY_CLASS";
+
 export type Integrations = {
     activityWatching: boolean
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
+    priority : PriorityClass
     roValra : RoValra
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI
-
 }
 
 export type BuildInfo = {

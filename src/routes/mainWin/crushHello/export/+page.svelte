@@ -42,6 +42,7 @@
             }
             
             const newIntegrations: Integrations = {
+                priority : integrations?.priority ?? "NORMAL_PRIORITY_CLASS",
                 interactive: windowManipulation,
                 activityWatching: boostraperConfig.EnableActivityTracking,
                 discordRpc: integrations?.discordRpc ?? {
