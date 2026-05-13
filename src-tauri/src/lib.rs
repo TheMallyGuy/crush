@@ -6,6 +6,7 @@ use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::rename::rename;
+use commands::priority::set_process_priority;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,
@@ -27,6 +28,7 @@ pub mod interactive;
 pub mod rd;
 pub mod rpc;
 pub mod tray;
+pub mod priorites;
 pub mod simple_i18n;
 
 use crate::tray::setup_tray;
@@ -216,7 +218,8 @@ pub fn run() {
             copy_file,
             export_boostrapconfig,
             set_window_vibrancy,
-            get_latest_version_studio
+            get_latest_version_studio,
+            set_process_priority
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -151,6 +151,8 @@
                 await performLaunch(version, url, integrations)
                 await sleep(1000)
                 await invoke('watch_logs')
+                await sleep(3000)
+                await invoke('set_process_priority', {"priority" : integrations?.priority ?? "NORMAL_PRIORITY_CLASS"})
             }
 
             await finalizeBootstrap()
@@ -211,7 +213,6 @@
         const win = getCurrentWindow()
         if (win.label === 'crushBoostrapChoiceWindow') {
             await goto('/mainWin/choiceWin')
-            return
         }
 
         const choiceWin = await Window.getByLabel('crushBoostrapChoiceWindow')
