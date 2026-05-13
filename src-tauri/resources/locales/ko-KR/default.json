@@ -89,6 +89,14 @@
                 "title": "서버 위치 알림",
                 "description": "Get notified when the client connects to a server."
             },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
+            },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "로블록스 리치 프레즌스를 크러쉬로 교체.",

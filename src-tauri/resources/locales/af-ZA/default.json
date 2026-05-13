@@ -89,6 +89,14 @@
                 "title": "Bediener Ligging Kennisgewer",
                 "description": "Get notified when the client connects to a server."
             },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
+            },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Vervang die Roblox Rich Presence met Crush's.",

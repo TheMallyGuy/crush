@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "En Roblox bootstrapper skriven från grunden",
+        "integrations": "I integrationer rutt",
         "installation": "I Installationsrutt",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "I snabba flaggor rutt",
         "mod": "I Mod-rutt",
         "appearance": "I utseende rutt",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Spelar Roblox",
                 "idle": "Inte i ett spel",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "I ett spel",
+                "playingPrivate": "I ett spel, privat server",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Ansluten till en publik server!",
+                        "private": "Ansluten till en privat server!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\nPlats : {location}"
                 }
             }
         }
@@ -44,7 +44,7 @@
             "title": "Krossa",
             "playRoblox": "Spela Roblox",
             "config": "Konfig",
-            "discord": "Our Community"
+            "discord": "Vår gemenskap"
         },
         "boostrapWin": {
             "cancel": "Avbryt",
@@ -54,11 +54,11 @@
             "title": "Server Information",
             "infomationCard": {
                 "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "waitRegion": "Hämtar region...",
+                "description": "Serverinformation om denna server",
+                "uptime": "Upptid : Inte hämtad",
+                "instanceId": "Server Instans ID : {id}",
+                "inviteLink": "Kopiera inbjudningslänk :"
             }
         },
         "appearance": {
@@ -66,7 +66,7 @@
             "description": "Anpassa utseendet på Roblox bootstrapper.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper-tema",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Välj mellan standard Crush tema eller en anpassad XML-tema. Bloxstrap och HTML stöds. Observera att inte alla bloxstrap tema fungerar.",
                 "dropdown": {
                     "default": "Standard (Crush)",
                     "custom": "Anpassad"
@@ -80,20 +80,28 @@
         },
         "integrations": {
             "integrations": "Integrationer",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Konfigurera integrationer utanför Roblox.",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Aktivitet bevakare",
+                "description": "Titta på din aktivitet på Roblox. Vissa funktioner som krävs för att detta ska aktiveras."
             },
             "serverNotifierCard": {
                 "title": "Meddelande om serverplats",
-                "description": "Get notified when the client connects to a server."
+                "description": "Få meddelande när klienten ansluter till en server."
+            },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Byt ut Roblox Rich Presence mot Crush's.",
                 "option1": "Låt folk gå med i ditt spel",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Visa ditt konto när du spelar Roblox"
             },
             "gameHistoryCard": {
                 "title": "Din spelhistorik",
@@ -101,20 +109,20 @@
                 "button": "Visa"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Fönstermanipulation (tidigare interaktivt API)",
+                "description": "Låt spel som stöds flytta ditt fönster, ändra storlek, meddela och interagera med din hårdvara. Stöder bara spel med fönster manipulation - inte alla spel fungerar. Inspirerad av hur BloxstrapRPC & Funkstrap arbete.",
                 "button": "Öppen"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "Bättre matchmaking med RoValra",
+                "description": "Crush har en inbyggd matchmaking integration. RoValras integritetspolicy gäller.",
                 "button": "Öppen"
             },
             "roValra": {
                 "description": "Konfiguration",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Låt Crush ansluta till en server åt dig",
+                    "description": "Istället för Roblox matchmaking, använder vi RoValra API för att hitta den bästa servern."
                 }
             },
             "gameHistory": {
@@ -132,59 +140,59 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Fönster Manipulation inställningar",
+                "description": "Konfigurera hur Fönstermanipulation ska bete sig.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "Aktivera",
+                    "description": "Välj om du vill aktivera Fönstermanipulation eller inte."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "Avancerat",
+                    "description": "Djupt konfigurera Fönster Manipulation.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "Omfattningar",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "description": "Om du vill minimera kontrollen via Fönstermanipulation eller inte."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "description": "Om du vill maximera kontrollen via Fönstermanipulation eller inte."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "Fokus",
+                            "description": "Om du vill aktivera fokusstyrning via Fönstermanipulation eller inte."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "Flytta fönster",
+                            "description": "Om du vill aktivera flyttfönsterstyrning via Fönstermanipulation eller inte."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "Återställ",
+                            "description": "Om du vill aktivera återställningsstyrning via Fönstermanipulation eller inte."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "Ange fönstertitel",
+                            "description": "Om du vill aktivera fönstrets titelkontroll via Fönstermanipulation eller inte."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "Ställ in gränslös",
+                            "description": "Om du vill aktivera gränslös fönsterstyrning via Fönstermanipulation eller inte."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "Insynsinställningar",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "Aktivera",
+                            "description": "Om du vill aktivera genomskinlighetskontroll via Interactive API."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "Minsta genomskinlighet",
+                            "description": "Den minimala transparensnivån som ditt fönster kan nå."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "Max genomskinlighet",
+                            "description": "Den maximala transparensnivån som ditt fönster kan nå."
                         }
                     }
                 }
@@ -192,28 +200,28 @@
         },
         "installations": {
             "installations": "Installationer",
-            "description": "Manage your Roblox installation.",
+            "description": "Hantera din Roblox installation.",
             "customVersion": {
                 "title": "Installera en anpassad Roblox-version",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "Hoppa över uppdateringskontrollen och ladda ner en specifik version. Standardvärdet är senast. En ogiltig version kommer inte att laddas ner och kommer att falla tillbaka till den senaste versionen."
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Parallell nedladdning",
+                "description": "Ladda ner flera tillgångar istället för en åt gången. Standard är 4."
             },
             "forceReinstallCard": {
                 "title": "Tvinga ominstallera Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "Installera om Roblox varje gång du startar den."
             },
             "dontUpdateCard": {
                 "title": "Uppdatera inte Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Hoppa över Roblox uppdateringskontroll och starta omedelbart."
             }
         },
         "fastflag": {
             "fastflag": "Snabba flaggor",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Lägg till/ta bort Roblox Snabba flaggor och konfigurationer.",
+            "generalBack": "Tillbaka till Snabba Flaggor",
             "selectScreeen": {
                 "title": "Välj en åtgärd!",
                 "editCard": {
@@ -222,7 +230,7 @@
                 },
                 "presetCard": {
                     "title": "Förinställningar",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Använd förinställningar för Feature Flag inbyggda i Crush."
                 }
             },
             "editor": {
@@ -230,7 +238,7 @@
                     "texboxFlagName": "Flaggnamn",
                     "texboxFlagValue": "Värde",
                     "buttonAdd": "Lägg till",
-                    "search": "Search all fast flags...",
+                    "search": "Sök alla snabba flaggor...",
                     "searchNotFound": "Inga flaggor hittades som matchade din sökning.",
                     "flagCol": {
                         "deleteNote": "Ta bort flagga",
@@ -242,18 +250,18 @@
             },
             "preset": {
                 "preset": "Förval",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Använd våra inbyggda snabbflaggsförinställningar.",
                 "msaaCard": {
                     "title": "Anti-Aliasing Kvalitet (MSAA)",
                     "description": "Jämnar ut ojämna kanter. Högre värden ser bättre ut men kan minska prestandan."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Pausa Voxelizer",
                     "description": "Stoppar voxelisering för att förbättra prestanda."
                 },
                 "grassAnimationCard": {
                     "title": "Gräsvinkande animering",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Justerar intensiteten i gräsrörelsen. (0 är ingen minskning, 999 eller något högre antal kommer att frysa gräs, 0 & 1 minskar något rörelse och värden större än 1 kraftigt minska rörelse, närmar sig stillhet)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Skriv över texturkvalitetsnivån",
@@ -262,11 +270,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Aktivera lågkvalitativa nät",
-                    "description": "May improve performance."
+                    "description": "Kan förbättra prestanda."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "Grå Himmel",
+                    "description": "Ändrar himlen till grå. Kan förbättra prestanda."
                 }
             }
         },
@@ -274,8 +282,8 @@
             "mod": "Mod",
             "tab": {
                 "modManagement": {
-                    "title": "Mod Management",
-                    "description": "Manage your Roblox mods.",
+                    "title": "Mod Hantering",
+                    "description": "Hantera dina Roblox mods.",
                     "addModButton": "Lägg till en mod",
                     "noModsFound": "Vi hittade inga mods här, Yuppies.",
                     "noModsFoundCreateButton": "Skapa din första mod",
@@ -285,27 +293,27 @@
                         "renameNote": "Byt namn på mod",
                         "openFolderNote": "Öppna Mod-mapp",
                         "deleteNote": "Radera mod",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Mod-layout inspirerad av Frostraps mod manager.",
                         "description": "Aktivera mod-laddning och ställ in mod-mappens plats."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "Skapa en ny mod",
                             "textbox": {
                                 "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "placeholder": "Min nya mod"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "Bekräfta åtgärd",
+                            "description": "Är du säker på att ta bort denna mod?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Detta namn finns redan!",
+                            "description": "Välj ett annat namn."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Bekräfta",
                             "cancel": "Avbryt"
                         }
                     }
@@ -322,15 +330,15 @@
                     },
                     "customFontCard": {
                         "title": "Anpassat typsnitt",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Ändra ditt Roblox typsnitt till vad du vill.",
                         "button": "Ändra teckensnitt..."
                     }
                 },
                 "communityMods": {
-                    "title": "Community Mods",
+                    "title": "Gemenskapens Mods",
                     "description": "Utforska modifieringar skapade av communityn.",
                     "notice": {
-                        "title": "No mods yet",
+                        "title": "Inga moddar ännu",
                         "description": "Vi har inga communitymodifieringar ännu. Bli först med att bidra och hjälp oss att utöka kollektionen!",
                         "submissionButton": "Skicka in en mod"
                     }
@@ -341,20 +349,20 @@
             "settings": "Inställningar",
             "aboutCard": {
                 "title": "Om",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "Information om detta Crush bygge.",
+                "note": "Kom ihåg! Crush är gratis att använda. Om någon försöker att reskin och sälja den, vänligen meddela oss i vår Discord-server!",
                 "builtOn": "Byggt på",
                 "commitHash": "Arkivera hash:  {hash}",
                 "version": "Version:"
             },
             "onBoardCard": {
                 "title": "Krossa Hej",
-                "description": "Force the onboarding flow to run again.",
+                "description": "Tvinga registreringsflödet att köras igen.",
                 "button": "Återställ"
             },
             "languageCard": {
                 "title": "Språk",
-                "description": "Select your preferred language for Crush."
+                "description": "Välj önskat språk för Crush."
             },
             "windowVibrancyCard": {
                 "title": "Fönster Vibrancy",
@@ -362,11 +370,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Krossa Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "Bestäm om du vill visa din aktivitet via Discord RPC. En omstart rekommenderas."
             },
             "donateCard": {
                 "title": "Donera",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Love Crush? Donera till Mally för att stödja hans arbete!",
                 "button": "Donera"
             }
         }
