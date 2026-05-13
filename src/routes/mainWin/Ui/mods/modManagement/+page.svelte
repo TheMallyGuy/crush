@@ -105,8 +105,8 @@
 <Dialog
     bind:open={deleteDialog}
     on:close={() => resolveDelete?.(false)}
-    title={$_("pages.mod.tab.modManagement.dialogs.delete.title")}
-    description={$_("pages.mod.tab.modManagement.dialogs.delete.description")}
+    title={$_('pages.mod.tab.modManagement.dialogs.delete.title')}
+    description={$_('pages.mod.tab.modManagement.dialogs.delete.description')}
 >
     <div slot="actions">
         <Button
@@ -114,14 +114,14 @@
             size="sm"
             on:click={() => resolveDelete?.(false)}
         >
-            {$_("pages.mod.tab.modManagement.dialogs.buttons.cancel")}
+            {$_('pages.mod.tab.modManagement.dialogs.buttons.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
             on:click={() => resolveDelete?.(true)}
         >
-            {$_("pages.mod.tab.modManagement.dialogs.buttons.confirm")}
+            {$_('pages.mod.tab.modManagement.dialogs.buttons.confirm')}
         </Button>
     </div>
 </Dialog>
@@ -129,30 +129,46 @@
 <Dialog
     bind:open={createDialog}
     on:close={() => resolveCreate?.(null)}
-    title={$_("pages.mod.tab.modManagement.dialogs.create.title")}
+    title={$_('pages.mod.tab.modManagement.dialogs.create.title')}
 >
-    <Textbox label={$_("pages.mod.tab.modManagement.dialogs.create.textbox.title")} placeholder={$_("pages.mod.tab.modManagement.dialogs.create.textbox.placeholder")} bind:value={modName} />
+    <Textbox
+        label={$_('pages.mod.tab.modManagement.dialogs.create.textbox.title')}
+        placeholder={$_(
+            'pages.mod.tab.modManagement.dialogs.create.textbox.placeholder'
+        )}
+        bind:value={modName}
+    />
 
     <div slot="actions">
-        <Button variant="secondary" size="sm" on:click={() => resolveCreate?.(null)}>
-            {$_("pages.mod.tab.modManagement.dialogs.buttons.cancel")}
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => resolveCreate?.(null)}
+        >
+            {$_('pages.mod.tab.modManagement.dialogs.buttons.cancel')}
         </Button>
-        <Button variant="primary" size="sm" on:click={() => resolveCreate?.(modName)}>
-            {$_("pages.mod.tab.modManagement.dialogs.buttons.confirm")}
+        <Button
+            variant="primary"
+            size="sm"
+            on:click={() => resolveCreate?.(modName)}
+        >
+            {$_('pages.mod.tab.modManagement.dialogs.buttons.confirm')}
         </Button>
     </div>
 </Dialog>
 
-
 <Dialog
     bind:open={existDialog}
     on:close={() => (existDialog = false)}
-    title={$_("pages.mod.tab.modManagement.dialogs.exists.title")}
-    description={$_("pages.mod.tab.modManagement.dialogs.exists.description")}
+    title={$_('pages.mod.tab.modManagement.dialogs.exists.title')}
+    description={$_('pages.mod.tab.modManagement.dialogs.exists.description')}
 >
-
     <div slot="actions">
-        <Button variant="secondary" size="sm" on:click={() => (existDialog = false)}>
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => (existDialog = false)}
+        >
             OK
         </Button>
     </div>
