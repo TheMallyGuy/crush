@@ -152,8 +152,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Close crash handler"
-            description="Kill Roblox's crash handler to save performance."
+            title={$_("pages.integrations.closeCrashHandlerCard.title")}
+            description={$_("pages.integrations.closeCrashHandlerCard.description")}
             icon={Bomb}
         >
             <Switch
