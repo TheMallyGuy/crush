@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "Роблокс bootstrapper написанный с нуля",
+        "integrations": "В Маршруте Интеграций",
         "installation": "В маршруте установки",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "В Быстрые Флаги Маршрут",
         "mod": "[ERROR] In Mod Route",
         "appearance": "По внешнему виду Маршрут",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Играет в Робло",
                 "idle": "Не в",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "В игре",
+                "playingPrivate": "В игре, приватный сервер",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Подключено к публичному серверу!",
+                        "private": "Подключено к личному серверу!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\nМестоположение : {location}"
                 }
             }
         }
@@ -44,21 +44,21 @@
             "title": "Ты моя любовь",
             "playRoblox": "Играть в Roblox",
             "config": "Конфиг",
-            "discord": "Our Community"
+            "discord": "Наше сообщество"
         },
         "boostrapWin": {
             "cancel": "Отмена",
             "retry": "Повторить попытку"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Информация о сервере",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "Регион : {region}",
+                "waitRegion": "Получение региона...",
+                "description": "Информация о сервере",
+                "uptime": "Аптайм: Не загружено",
+                "instanceId": "Идентификатор экземпляра сервера : {id}",
+                "inviteLink": "Скопировать ссылку приглашения:"
             }
         },
         "appearance": {
@@ -66,7 +66,7 @@
             "description": "Настройте внешний вид бутстреппера Roblox.",
             "bootstrapThemeCard": {
                 "title": "Тема Bootstrapper",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Выберите между шаблоном по умолчанию Crush или пользовательской XML темой. Поддерживаются Bloxstrap и HTML. Обратите внимание, что не все работает тема bloxstrap.",
                 "dropdown": {
                     "default": "По умолчанию (Crush)",
                     "custom": "Другое"
@@ -80,20 +80,28 @@
         },
         "integrations": {
             "integrations": "Интеграции",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Настройте интеграцию вне Roblox.",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Наблюдатель",
+                "description": "Смотрите вашу активность на Робло. Для включения требуется некоторая функция."
             },
             "serverNotifierCard": {
                 "title": "Уведомление о местоположении сервера",
-                "description": "Get notified when the client connects to a server."
+                "description": "Получать уведомления при подключении клиента к серверу."
+            },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
             },
             "rpcCard": {
                 "title": "[ERROR] Discord RPC (Crush)",
                 "description": "Замените Roblox Rich Presence на Crush's.",
                 "option1": "Позвольте людям присоединиться к вашей игре",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Отображение аккаунта при игре в Roblox"
             },
             "gameHistoryCard": {
                 "title": "История вашей игры",
@@ -101,20 +109,20 @@
                 "button": "Просмотр"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Управление окном (предыдущий интерактивный API)",
+                "description": "Поддерживаемые игры перемещают ваше окно, изменяют, уведомляют и взаимодействуют с вашим оборудованием. Поддерживает только игры с манипуляциями окнами — не все игры работают. Вдохновлена работой BloxstrapRPC и Funkstrap.",
                 "button": "Открыть"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "Лучший подбор игр с RoValra",
+                "description": "Crush имеет встроенную интеграцию с подбором игр. Политика конфиденциальности RoValra.",
                 "button": "Открыть"
             },
             "roValra": {
                 "description": "Конфигурация",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Разрешить Crush присоединиться к серверу для вас",
+                    "description": "Вместо создания матчей Roblox, мы будем использовать API RoValra для поиска лучшего сервера."
                 }
             },
             "gameHistory": {
@@ -132,59 +140,59 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Настройки управления окном",
+                "description": "Настройте поведение Манипуляции Окна.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "Включить",
+                    "description": "Выберите, включить ли управление окном."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "Расширенные",
+                    "description": "Глубокая настройка Манипуляции Окна.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "Области",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "description": "Включить или нет управление минимизацией через Манипуляцию Окна."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "description": "Включить ли максимизацию управления через Манипуляцию Окна."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "Фокус",
+                            "description": "Включить или нет управление фокусом через Манипуляцию Окна."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "Переместить окно",
+                            "description": "Включить или нет управление окном через Манипуляцию Окна."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "Восстановить",
+                            "description": "Включить или нет восстановление управления через Манипуляцию Окна."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "Задать заголовок окна",
+                            "description": "Включить или нет управление заголовком окна через Манипуляцию Окна."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "Установить безграничный",
+                            "description": "Включить или нет управление бесграничным окном через Манипуляцию Окна."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "Настройки прозрачности",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "Включить",
+                            "description": "Включить ли управление прозрачностью через интерактивный API."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "Мин. прозрачность",
+                            "description": "Минимальный уровень прозрачности вашего окна."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "Максимальная прозрачность",
+                            "description": "Максимальный уровень прозрачности вашего окна."
                         }
                     }
                 }
@@ -192,28 +200,28 @@
         },
         "installations": {
             "installations": "Установки",
-            "description": "Manage your Roblox installation.",
+            "description": "Управление установкой Roblox.",
             "customVersion": {
                 "title": "Установите пользовательскую версию Roblox",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "Пропустите проверку обновлений и загрузите определенную версию. Значение по умолчанию является последним. Неправильная версия не будет загружена и возвращена к последней версии."
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Параллельная загрузка",
+                "description": "Загрузка нескольких активов вместо одного за раз. По умолчанию - 4."
             },
             "forceReinstallCard": {
                 "title": "Принудительная переустановка Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "Переустанавливайте Roblox каждый раз при запуске."
             },
             "dontUpdateCard": {
                 "title": "Не обновлять Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Пропустите обновление Roblox и запустите его мгновенно."
             }
         },
         "fastflag": {
             "fastflag": "Быстрые флаги",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Добавить/Убрать Fast Flags и конфигурации.",
+            "generalBack": "Назад к флагам",
             "selectScreeen": {
                 "title": "Пожалуйста, выберите действие!",
                 "editCard": {
@@ -222,7 +230,7 @@
                 },
                 "presetCard": {
                     "title": "Предустановка",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Использовать пресеты Флага встроенные в Crush."
                 }
             },
             "editor": {
@@ -230,7 +238,7 @@
                     "texboxFlagName": "Обозначение (Flag Name)",
                     "texboxFlagValue": "Значение",
                     "buttonAdd": "Добавить",
-                    "search": "Search all fast flags...",
+                    "search": "Поиск всех флагов...",
                     "searchNotFound": "Флаги, соответствующие вашему запросу, не найдены.",
                     "flagCol": {
                         "deleteNote": "Удалить флаг",
@@ -242,18 +250,18 @@
             },
             "preset": {
                 "preset": "Пресеты",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Воспользуйтесь встроенными настройками быстрого флага.",
                 "msaaCard": {
                     "title": "Качество сглаживания (MSAA)",
                     "description": "Сглаживает зубчатые края. Более высокие значения выглядят лучше, но могут снизить производительность."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Пауза",
                     "description": "Останавливает вокселизацию для повышения производительности."
                 },
                 "grassAnimationCard": {
                     "title": "Анимация размахивания травой",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Регулирует интенсивность движения травы. (0 не уменьшается, 999 или любое более высокое число замерзает траву, 0 и 1 слегка уменьшает движение и значения больше, чем 1, сильно уменьшая движение, неуклонно приближаясь)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Перезаписать уровень качества текстур",
@@ -262,11 +270,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Включить низкокачественные сетки",
-                    "description": "May improve performance."
+                    "description": "Может повысить производительность."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "Серое небо",
+                    "description": "Изменяет небо на серый. Может улучшить производительность."
                 }
             }
         },
@@ -275,7 +283,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Управление модами",
-                    "description": "Manage your Roblox mods.",
+                    "description": "Управляйте вашими модами Roblox.",
                     "addModButton": "Добавить мод",
                     "noModsFound": "Мы не нашли здесь модов, Яппи.",
                     "noModsFoundCreateButton": "Создайте свой первый мод",
@@ -285,27 +293,27 @@
                         "renameNote": "Переименовать мод",
                         "openFolderNote": "Открыть папку модов",
                         "deleteNote": "Удалить мод",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Мод макет вдохновил менеджер модов Frostrap.",
                         "description": "Включите загрузку модов и установите местоположение папки модов."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "Создать новый мод",
                             "textbox": {
                                 "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "placeholder": "Мой новый мод"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "Подтвердить действие",
+                            "description": "Вы уверены, что хотите удалить этот мод?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Это имя уже существует!",
+                            "description": "Пожалуйста, выберите другое имя."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Подтвердить",
                             "cancel": "Отмена"
                         }
                     }
@@ -322,7 +330,7 @@
                     },
                     "customFontCard": {
                         "title": "Пользовательский шрифт",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Измените шрифт Roblox на то, что вам нравится.",
                         "button": "Изменить шрифт"
                     }
                 },
@@ -330,7 +338,7 @@
                     "title": "Модификации для сообщества",
                     "description": "Исследуйте моды, созданные сообществом.",
                     "notice": {
-                        "title": "No mods yet",
+                        "title": "Пока нет модов",
                         "description": "У нас пока нет комьюнити-модов. Станьте первым, кто внесет свой вклад и поможет нам расширить коллекцию!",
                         "submissionButton": "Отправить мод"
                     }
@@ -341,20 +349,20 @@
             "settings": "Настройки",
             "aboutCard": {
                 "title": "Сведения",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "Информация об этой Crush сборке.",
+                "note": "Помните! Crush является бесплатным для использования. Если кто-нибудь пытается переуйти и продать его, пожалуйста, дайте нам знать на нашем сервере Discord!",
                 "builtOn": "Дата версии",
                 "commitHash": "Зафиксировать хэш:  {hash}",
                 "version": "Редакция:"
             },
             "onBoardCard": {
                 "title": "Раздавить Здравствуйте",
-                "description": "Force the onboarding flow to run again.",
+                "description": "Принудительно снова запустить процесс посадки.",
                 "button": "Reset (сброс - уст 0)"
             },
             "languageCard": {
                 "title": "Язык",
-                "description": "Select your preferred language for Crush."
+                "description": "Выберите предпочитаемый язык для Crush."
             },
             "windowVibrancyCard": {
                 "title": "Вибрация окна",
@@ -362,11 +370,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "Раздавить Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "Включите, чтобы показать вашу активность через Discord RPC. Рекомендуется перезагрузка."
             },
             "donateCard": {
                 "title": "Пожертвовать",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Нравится Crush? Пожертвуйте Mally чтобы поддержать его работу!",
                 "button": "Пожертвовать"
             }
         }

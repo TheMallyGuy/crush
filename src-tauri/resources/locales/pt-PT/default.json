@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "Um Roblox bootstrapper escrito do zero",
+        "integrations": "Em Integrações Rota",
         "installation": "Em Rota de Instalações",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "Na Rota de Bandeiras Rápida",
         "mod": "Na Rota Mod",
         "appearance": "Na Rota de Aparência",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Jogando Roblox",
                 "idle": "Não num jogo",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "Em um jogo",
+                "playingPrivate": "Em um jogo, servidor privado",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Conectado a um servidor público!",
+                        "private": "Conectado a um servidor privado!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\nLocalização: {location}"
                 }
             }
         }
@@ -44,21 +44,21 @@
             "title": "Esmagamento",
             "playRoblox": "Jogar Roblox",
             "config": "Configuração",
-            "discord": "Our Community"
+            "discord": "Nossa Comunidade"
         },
         "boostrapWin": {
             "cancel": "Cancelar",
             "retry": "Tentar novamente"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Informações do servidor",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "Região : {region}",
+                "waitRegion": "Buscando região...",
+                "description": "Informações do servidor sobre este servidor",
+                "uptime": "Tempo de atividade : não obtido",
+                "instanceId": "ID da Instância do Servidor: {id}",
+                "inviteLink": "Copiar link do convite:"
             }
         },
         "appearance": {
@@ -66,7 +66,7 @@
             "description": "Personalize a aparência do bootstrapper Roblox.",
             "bootstrapThemeCard": {
                 "title": "Tema Bootstrapper",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Escolha entre o tema padrão de Crush ou o tema XML personalizado. Bloxstrap e HTML são suportados. Note que nem todos os temas bloxstrap funcionam.",
                 "dropdown": {
                     "default": "Padrão (Esmagamento)",
                     "custom": "Personalizado"
@@ -80,20 +80,28 @@
         },
         "integrations": {
             "integrations": "Integrações",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Configurar integrações fora do Roblox.",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Observador de Atividade",
+                "description": "Assista à sua atividade no Roblox. Alguns recursos são necessários para ativar a atividade."
             },
             "serverNotifierCard": {
                 "title": "Notificador de localização do servidor",
-                "description": "Get notified when the client connects to a server."
+                "description": "Seja notificado quando o cliente se conectar a um servidor."
+            },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
+                "title": "Discagem RPC do Discord (Crush)",
                 "description": "Substitua a Roblox Rich Presence por Crush's.",
                 "option1": "Permita que as pessoas entrem no seu jogo",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Exibir sua conta ao jogar Roblox"
             },
             "gameHistoryCard": {
                 "title": "histórico de jogo",
@@ -101,20 +109,20 @@
                 "button": "Ver"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Manipulação de janelas (API anteriormente interativa)",
+                "description": "Permitir que os jogos suportados movam sua janela, redimensionem, notifiquem e interajam com seu hardware. Suporta apenas jogos com manipulação de janelas — nem todos os jogos funcionam. Inspirado pelo caminho BloxstrapRPC & Funkstrap funciona.",
                 "button": "Transparente"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "Melhor matchmaking com RoValra",
+                "description": "O crush tem uma integração de matchmaking embutida. Aplica-se a Política de Privacidade do RoValra.",
                 "button": "Transparente"
             },
             "roValra": {
                 "description": "Configuração",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Deixe que o Esmague entre em um servidor para você",
+                    "description": "Em vez de \"matchmaking\" Roblox, vamos usar a API RoValra para encontrar o melhor servidor."
                 }
             },
             "gameHistory": {
@@ -132,59 +140,59 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Configurações de Manipulação",
+                "description": "Configurar como o Manipulação da Janela deve se comportar.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "Habilitado",
+                    "description": "Escolher se quer ou não habilitar a Manipulação de Janela."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "Avançado",
+                    "description": "Configurar amplamente Manipulação de Janelas.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "Âmbitos",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "description": "Se deve ou não habilitar o controle minimizado através da Manipulação da Janela."
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "description": "Se deseja ou não ativar o controle máximo via Manipulação de Janela."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "Focar",
+                            "description": "Se deve ou não ativar o controle de foco através da Manipulação da Janela."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "Mover Janela",
+                            "description": "Se deve ou não ativar o controle de movimento da janela através da Manipulação da Janela."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "RESTAURAR",
+                            "description": "Se deseja ou não ativar o controle de restauração através da Manipulação de Janela."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "Definir título da janela",
+                            "description": "Se deve ou não ativar o controle de título da janela através da Manipulação da Janela."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "Definir sem fronteiras",
+                            "description": "Se habilitar ou não o controle de janelas sem fronteiras através da Manipulação da Janela."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "Configurações de transparência",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "Habilitado",
+                            "description": "Ativar ou não o controle de transparência através da API interativa."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "Mínima transparência",
+                            "description": "O nível mínimo de transparência que sua janela pode alcançar."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "Transparência máxima",
+                            "description": "O nível máximo de transparência que sua janela pode alcançar."
                         }
                     }
                 }
@@ -192,28 +200,28 @@
         },
         "installations": {
             "installations": "Instalações",
-            "description": "Manage your Roblox installation.",
+            "description": "Gerencie sua instalação do Roblox.",
             "customVersion": {
                 "title": "Instale uma versão personalizada do Roblox",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "Ignore a verificação de atualização e baixe uma versão específica. O valor padrão é mais recente. Uma versão inválida não será baixada e voltará para a versão mais recente."
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Baixando Paralelo",
+                "description": "Baixar vários recursos em vez de um de cada vez. O padrão é 4."
             },
             "forceReinstallCard": {
                 "title": "Forçar reinstalação do Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "Reinstale o Roblox toda vez que você o lançar."
             },
             "dontUpdateCard": {
                 "title": "Não atualize o Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Ignore a verificação de atualizações do Roblox e lance instantaneamente."
             }
         },
         "fastflag": {
             "fastflag": "Bandeiras rápidas",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Adicionar/remover configurações e sinalizações Roblox Rápido.",
+            "generalBack": "Voltar para Flags Rápidas",
             "selectScreeen": {
                 "title": "Escolha uma ação",
                 "editCard": {
@@ -222,15 +230,15 @@
                 },
                 "presetCard": {
                     "title": "Predefinição",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Use Feature flag presets embutidos no Crush."
                 }
             },
             "editor": {
                 "flagTable": {
                     "texboxFlagName": "Nome da bandeira",
                     "texboxFlagValue": "Valor",
-                    "buttonAdd": "Add",
-                    "search": "Search all fast flags...",
+                    "buttonAdd": "Adicionar",
+                    "search": "Procurar todas as bandeiras rápidas...",
                     "searchNotFound": "Não foram encontradas bandeiras que correspondam à sua pesquisa.",
                     "flagCol": {
                         "deleteNote": "Excluir marcador UC",
@@ -242,18 +250,18 @@
             },
             "preset": {
                 "preset": "Predefinições",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Use nossas predefinições de bandeira rápida embutidas.",
                 "msaaCard": {
                     "title": "Qualidade do Anti-Aliasing",
                     "description": "Suaviza bordas irregulares. Valores mais altos parecem melhores, mas podem reduzir o desempenho."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Pausar Voxelizer",
                     "description": "Interrompe a voxelização para melhorar o desempenho."
                 },
                 "grassAnimationCard": {
                     "title": "Animação de aceno de relva",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Ajusta a intensidade do movimento de grama. (0 não é redução, 999 ou qualquer outro número maior congelará a grama, 0 e 1 ligeiramente reduz o movimento e os valores maiores que 1 reduz fortemente o movimento, aproximando-se da parte)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Substituir o nível de qualidade da textura",
@@ -262,11 +270,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Ativar Malhas de Baixa Qualidade",
-                    "description": "May improve performance."
+                    "description": "Pode melhorar o desempenho."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "Céu Cinza",
+                    "description": "Muda o céu para cinza. Pode melhorar o desempenho."
                 }
             }
         },
@@ -275,7 +283,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Gestão de Mod",
-                    "description": "Manage your Roblox mods.",
+                    "description": "Gerencie os seus mods Roblox.",
                     "addModButton": "Adicionar um Mod",
                     "noModsFound": "Não encontramos mods aqui, Yuppies.",
                     "noModsFoundCreateButton": "Crie o seu primeiro mod",
@@ -285,27 +293,27 @@
                         "renameNote": "Mudar o nome do mod",
                         "openFolderNote": "Abrir pasta Mod",
                         "deleteNote": "Eliminar Mod",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Layout de mod inspirado no Gerenciador de mods de Frostrap.",
                         "description": "Ative o carregamento do mod e defina a localização da pasta mod."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "Criar um novo mod",
                             "textbox": {
                                 "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "placeholder": "Meu novo mod"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "Confirmar ação",
+                            "description": "Tem certeza que deseja excluir este mod?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Este nome já existe!",
+                            "description": "Por favor, escolha um nome de frente."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Confirmar",
                             "cancel": "Cancelar"
                         }
                     }
@@ -322,7 +330,7 @@
                     },
                     "customFontCard": {
                         "title": "Fonte personalizada",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Mude a fonte Roblox para o que quiser.",
                         "button": "Alterar fonte"
                     }
                 },
@@ -330,7 +338,7 @@
                     "title": "Mods da comunidade",
                     "description": "Explore os mods criados pela comunidade.",
                     "notice": {
-                        "title": "No mods yet",
+                        "title": "Ainda sem mods",
                         "description": "Ainda não temos mods da comunidade. Seja o primeiro a contribuir e ajude-nos a aumentar a coleção!",
                         "submissionButton": "Enviar um mod"
                     }
@@ -341,32 +349,32 @@
             "settings": "Definições",
             "aboutCard": {
                 "title": "Sobre",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "Informações sobre esta construção do Esmagador.",
+                "note": "Lembre-se! Crush é grátis de usar. Se alguém tentar saltar e vender isso, por favor, nos avise em nosso servidor do Discord!",
                 "builtOn": "Baseado em:  {date}",
                 "commitHash": "Hash do commit:  {hash}",
                 "version": "Versão:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force the onboarding flow to run again.",
+                "title": "Olá Esmague",
+                "description": "Força o fluxo de integração a correr novamente.",
                 "button": "Repor"
             },
             "languageCard": {
                 "title": "Línguas",
-                "description": "Select your preferred language for Crush."
+                "description": "Selecione seu idioma preferido para Crush."
             },
             "windowVibrancyCard": {
                 "title": "Vibração da janela",
                 "description": "Escolha o efeito de desfoque de fundo para as janelas da aplicação."
             },
             "enableCrushRpcCard": {
-                "title": "Crush Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "title": "Esmague o Discord RPC",
+                "description": "Habilite para mostrar sua atividade via RPC do Discord. Recomenda-se reiniciar."
             },
             "donateCard": {
                 "title": "Doar",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Gosta do Crush? Doe para Mally para apoiar o trabalho dele!",
                 "button": "Doar"
             }
         }

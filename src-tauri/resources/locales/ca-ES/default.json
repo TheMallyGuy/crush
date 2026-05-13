@@ -89,6 +89,14 @@
                 "title": "Notificador d'ubicació del servidor",
                 "description": "Get notified when the client connects to a server."
             },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
+            },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "Substitueix Roblox Rich Presence per Crush's.",

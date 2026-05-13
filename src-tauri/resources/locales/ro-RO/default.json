@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "Un bootstrapper Roblox scris de la zero",
+        "integrations": "În ruta Integrări",
         "installation": "Instalare",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "În steaguri rapide",
         "mod": "Moduri",
         "appearance": "Aspect",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Se redă Roblox",
                 "idle": "Nu este într-un joc",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "Într-un joc",
+                "playingPrivate": "Într-un joc, un server privat",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Conectat la un server public!",
+                        "private": "Conectat la un server privat!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\nLocație : {location}"
                 }
             }
         }
@@ -41,24 +41,24 @@
     },
     "pages": {
         "choiceWin": {
-            "title": "Crush",
+            "title": "Zdrobește",
             "playRoblox": "Joacă Roblox",
             "config": "Configurație",
-            "discord": "Our Community"
+            "discord": "Comunitatea noastră"
         },
         "boostrapWin": {
             "cancel": "Anulează",
             "retry": "Reîncearcă"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Informatii server",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "Regiune: {region}",
+                "waitRegion": "Preluare regiune...",
+                "description": "Informații server despre acest server",
+                "uptime": "Uptime : Nepreluat",
+                "instanceId": "ID Instanță server: {id}",
+                "inviteLink": "Copiază link-ul de invitație:"
             }
         },
         "appearance": {
@@ -66,7 +66,7 @@
             "description": "Personalizează aspectul bootstrapperului Roblox.",
             "bootstrapThemeCard": {
                 "title": "Tema Bootstrapper",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Alegeți între tema Crush implicită sau o temă XML personalizată. Bloxstrap și HTML sunt acceptate. Rețineți că nu funcționează toată tema bloxstrap.",
                 "dropdown": {
                     "default": "Implicit (Crush)",
                     "custom": "Personalizat"
@@ -80,20 +80,28 @@
         },
         "integrations": {
             "integrations": "Integrări",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Configurați integrarea în afara Roblox.",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Observator Activități",
+                "description": "Urmărește activitatea ta pe Roblox. Unele caracteristici sunt necesare pentru a fi activate."
             },
             "serverNotifierCard": {
                 "title": "Notificator locație server",
-                "description": "Get notified when the client connects to a server."
+                "description": "Primește notificări când clientul se conectează la un server."
+            },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
+                "title": "Discord RPC (Rush)",
                 "description": "Înlocuiește Rich Presence-ul Roblox cu cel al Crush.",
                 "option1": "Permite altora să se alăture jocului tău",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Afișează contul tău când joci Roblox"
             },
             "gameHistoryCard": {
                 "title": "Istoricul jocurilor",
@@ -101,20 +109,20 @@
                 "button": "Vezi"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Manipularea Ferestrei (API anterior interactiv)",
+                "description": "Permiteți jocurilor acceptate să vă mute fereastra, să vă redimensioneze, să notificați și să interacționați cu hardware-ul. Acceptă doar jocurile cu manipularea ferestrei - nu funcționează toate jocurile. Inspirate prin modul în care funcționează BloxstrapRPC & Funkstrap.",
                 "button": "Deschide"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "O mai bună potrivire cu RoValra",
+                "description": "Zdrobirea are o integrare integratoare. Se aplică Politica de confidenţialitate a RoValra.",
                 "button": "Deschide"
             },
             "roValra": {
                 "description": "Configurare",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Lăsați Zdrobirea să se alăture unui server pentru tine",
+                    "description": "În loc de potrivire Roblox, vom folosi API-ul RoValra pentru a găsi cel mai bun server."
                 }
             },
             "gameHistory": {
@@ -132,8 +140,8 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Setări Manipulare Fereastră",
+                "description": "Configurați cum ar trebui să se comporte Manipularea ferestrelor.",
                 "enableCard": {
                     "title": "Activează",
                     "description": "Alege dacă vrei să activezi manipularea ferestrei."
@@ -145,46 +153,46 @@
                         "title": "Permisiuni",
                         "minimizeCard": {
                             "title": "Minimizare",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "description": "Activarea sau nu a minimizării controlului prin Manipularea ferestrelor."
                         },
                         "maximizeCard": {
                             "title": "Maximizare",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "description": "Activează sau nu controlul maxim prin Manipularea ferestrelor."
                         },
                         "focusCard": {
                             "title": "Focalizare",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "description": "Activarea sau nu a controlului focalizării prin Manipularea ferestrelor."
                         },
                         "moveWindowCard": {
                             "title": "Mutare fereastră",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "description": "Activarea sau nu a controlului ferestrei prin Manipularea ferestrelor."
                         },
                         "restoreCard": {
                             "title": "Restaurare",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "description": "Activarea sau nu a restaurării controlului prin Manipularea ferestrelor."
                         },
                         "setWindowTitleCard": {
                             "title": "Setează titlul ferestrei",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "description": "Activarea sau nu a controlului titlului ferestrei prin Manipularea ferestrei."
                         },
                         "setBorderless": {
                             "title": "Fereastră fără margini",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "description": "Activarea sau nu a controlului ferestrei fără frontiere prin Manipularea ferestrelor."
                         }
                     },
                     "transparencySettings": {
                         "title": "Setări transparență",
                         "enableCard": {
                             "title": "Activează",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "description": "Activarea sau nu a controlului transparenței prin API-ul interactiv."
                         },
                         "minTransparency": {
                             "title": "Transparență minimă",
-                            "description": "The minimum transparency level your window can reach."
+                            "description": "Nivelul minim de transparență la care poate ajunge fereastra dvs."
                         },
                         "maxTransparency": {
                             "title": "Transparență maximă",
-                            "description": "The maximum transparency level your window can reach."
+                            "description": "Nivelul maxim de transparență pe care îl poate atinge fereastra dvs."
                         }
                     }
                 }
@@ -192,28 +200,28 @@
         },
         "installations": {
             "installations": "Instalații",
-            "description": "Manage your Roblox installation.",
+            "description": "Gestionează-ți instalarea Roblox.",
             "customVersion": {
                 "title": "Instalează o versiune Roblox personalizată",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "Săriți peste verificarea actualizării și descărcați o versiune specifică. Valoarea implicită este cea mai recentă. O versiune nevalidă nu va fi descărcată și va reveni la cea mai recentă versiune."
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Descărcare paralelă",
+                "description": "Descarcă mai multe active în loc de una în același timp. Implicit este 4."
             },
             "forceReinstallCard": {
                 "title": "Reinstalare forțată Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "Reinstalați Roblox de fiecare dată când îl lansați."
             },
             "dontUpdateCard": {
                 "title": "Nu actualiza Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Săriți peste verificarea actualizării Roblox și lansați instant."
             }
         },
         "fastflag": {
             "fastflag": "Semnalizări rapide",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Adaugă/Elimină steaguri și configurații Roblox.",
+            "generalBack": "Înapoi la steagurile rapide",
             "selectScreeen": {
                 "title": "Alege o acțiune.",
                 "editCard": {
@@ -222,7 +230,7 @@
                 },
                 "presetCard": {
                     "title": "Presetare",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Utilizează presetări de steag caracteristice încorporate în Crush."
                 }
             },
             "editor": {
@@ -230,7 +238,7 @@
                     "texboxFlagName": "Nume flag",
                     "texboxFlagValue": "Valoare",
                     "buttonAdd": "Adaugă",
-                    "search": "Search all fast flags...",
+                    "search": "Caută toate steagurile rapide...",
                     "searchNotFound": "Nu s-au găsit flag-uri.",
                     "flagCol": {
                         "deleteNote": "Șterge flag",
@@ -242,18 +250,18 @@
             },
             "preset": {
                 "preset": "Presetări",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Folosește presetările noastre rapide încorporate.",
                 "msaaCard": {
                     "title": "Calitate anti-aliasing (MSAA)",
                     "description": "Netezește marginile. Valorile mai mari arată mai bine, dar reduc performanța."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Întrerupeți Voxelizer",
                     "description": "Oprește voxelizarea pentru a îmbunătăți performanța."
                 },
                 "grassAnimationCard": {
                     "title": "Animația ierbii",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Ajustează intensitatea mişcării de iarnă. (0 nu este reducere, 999 sau orice alt număr mai mare va îngheța iarba; 0 & 1 reduce ușor mișcarea și valorile mai mari de 1 mișcare care se apropie de boală)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Suprascriere calitate texturi",
@@ -262,11 +270,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Calitate scăzută mesh-uri",
-                    "description": "May improve performance."
+                    "description": "Poate îmbunătăți performanța."
                 },
                 "graySkyCard": {
                     "title": "Cer gri",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "description": "Schimbă cerul spre gri. Poţi îmbunătăţi performanţa."
                 }
             }
         },
@@ -275,7 +283,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Gestionare moduri",
-                    "description": "Manage your Roblox mods.",
+                    "description": "Gestionează-ți modurile Roblox.",
                     "addModButton": "Adaugă mod",
                     "noModsFound": "Nu au fost găsite moduri.",
                     "noModsFoundCreateButton": "Creează primul mod",
@@ -285,27 +293,27 @@
                         "renameNote": "Redenumește mod",
                         "openFolderNote": "Deschide folderul modului",
                         "deleteNote": "Șterge mod",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Mod layout inspirat de managerul de moduri Frostrap.",
                         "description": "Activează încărcarea modurilor și setează folderul acestora."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "Creează un mod nou",
                             "textbox": {
                                 "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "placeholder": "Modul meu nou"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "Confirmare acțiune",
+                            "description": "Ești sigur că vrei să ștergi acest mod?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Acest nume există deja!",
+                            "description": "Te rugăm să alegi un nume diffrent."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Confirmare",
                             "cancel": "Anulează"
                         }
                     }
@@ -322,7 +330,7 @@
                     },
                     "customFontCard": {
                         "title": "Font personalizat",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Schimbă fontul Roblox în orice dorești.",
                         "button": "Schimbă fontul"
                     }
                 },
@@ -330,7 +338,7 @@
                     "title": "Moduri comunitare",
                     "description": "Explorează modurile create de comunitate.",
                     "notice": {
-                        "title": "No mods yet",
+                        "title": "Nici un mod inca",
                         "description": "Nu există moduri comunitare încă. Fii primul care contribuie!",
                         "submissionButton": "Trimite mod"
                     }
@@ -341,32 +349,32 @@
             "settings": "Setări",
             "aboutCard": {
                 "title": "Despre",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "Informaţii despre acest Crush construit.",
+                "note": "Amintește-ți! Zdrobirea este gratuită de folosit. Dacă cineva încearcă să se refacă și să o vândă, te rugăm să ne spui pe serverul nostru de Discord!",
                 "builtOn": "Construit pe:  {date}",
                 "commitHash": "Comutare hash:  {hash}",
                 "version": "Versiune: {version}"
             },
             "onBoardCard": {
                 "title": "Reinițializare Crush",
-                "description": "Force the onboarding flow to run again.",
+                "description": "Forțează fluxul de înregistrare să ruleze din nou.",
                 "button": "Resetare"
             },
             "languageCard": {
                 "title": "Limbă",
-                "description": "Select your preferred language for Crush."
+                "description": "Selectează limba preferată pentru Crush."
             },
             "windowVibrancyCard": {
                 "title": "Transparență fereastră",
                 "description": "Alege efectul de blur pentru ferestre."
             },
             "enableCrushRpcCard": {
-                "title": "Crush Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "title": "Zdrobește RPC Discord",
+                "description": "Comută dacă să îți afișeze activitatea prin intermediul Discord RPC. Se recomandă o repornire a aplicației."
             },
             "donateCard": {
                 "title": "Donează",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Iubiți cruzea? Donați în Maliu pentru a sprijini munca lui!",
                 "button": "Donează"
             }
         }

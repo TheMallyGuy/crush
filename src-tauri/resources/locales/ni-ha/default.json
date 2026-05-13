@@ -89,6 +89,14 @@
                 "title": "nihahahaha nihahahaha nihahaha",
                 "description": "nihahahahaha nihahahahahaha nihahahahahahaha nihahahaha nihahaha nihahahahahahaha nihahahahaha nihahahaha nihaha"
             },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
+            },
             "rpcCard": {
                 "title": "nihahahahaha nihahahahahahaha nihahahahaha",
                 "description": "nihahahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahahahaha",

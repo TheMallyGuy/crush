@@ -1,21 +1,21 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "从头写入的 Roblox 引导器",
+        "integrations": "在集成路由",
         "installation": "在安装路线中",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "快速标志路由",
         "mod": "在Mod路线中",
         "appearance": "外观路线",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "正在播放Roblox",
                 "idle": "不在游戏中",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "在游戏中",
+                "playingPrivate": "在游戏中，私人服务器",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "已连接到公共服务器！",
+                        "private": "已连接到私人服务器！"
                     },
                     "description": "IP : {ip}\nLocation : {location}"
                 }
@@ -44,21 +44,21 @@
             "title": "粉碎",
             "playRoblox": "玩Roblox",
             "config": "配置",
-            "discord": "Our Community"
+            "discord": "我们的社区"
         },
         "boostrapWin": {
             "cancel": "取消",
             "retry": "重试"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "服务器信息",
             "infomationCard": {
                 "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
+                "waitRegion": "正在获取区域...",
+                "description": "服务器关于此服务器的信息",
+                "uptime": "运行时间: 未获取",
                 "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "inviteLink": "复制邀请链接："
             }
         },
         "appearance": {
@@ -66,7 +66,7 @@
             "description": "自定义Roblox引导程序的外观和感觉。",
             "bootstrapThemeCard": {
                 "title": "引导程序主题",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "在默认的 crush 主题或自定义 XML 主题之间选择。Bloxstrap 和 HTML 都支持。请注意并非所有bloxstrap 主题都有效。",
                 "dropdown": {
                     "default": "默认（挤压）",
                     "custom": "自定义"
@@ -80,20 +80,28 @@
         },
         "integrations": {
             "integrations": "集成",
-            "description": "Configure integrations outside Roblox.",
+            "description": "配置Roblox之外的集成。",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "活动监视器",
+                "description": "在Roblox上观看您的活动。某些功能需要启用此功能。"
             },
             "serverNotifierCard": {
                 "title": "服务器位置通知程序",
-                "description": "Get notified when the client connects to a server."
+                "description": "当客户端连接到服务器时收到通知。"
+            },
+            "processPriorityCard": {
+                "title": "Process Priority",
+                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+            },
+            "closeCrashHandlerCard": {
+                "title": "Close crash handler",
+                "description": "Kill Roblox's crash handler to save performance."
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
                 "description": "将Roblox Rich Presence替换为Crush的.",
                 "option1": "让人们加入您的游戏",
-                "option2": "Display your account when playing Roblox"
+                "option2": "播放Roblox时显示您的帐户"
             },
             "gameHistoryCard": {
                 "title": "您的游戏历史记录",
@@ -101,20 +109,20 @@
                 "button": "查看"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "窗口操纵(上次交互式API)",
+                "description": "让支持的游戏移动您的窗口，重定大小，通知和与您的硬件交互。 仅支持操作窗口的游戏——不是所有游戏都能工作。BloxstrapRPC 和 Funkstrap的工作方式激励了游戏。",
                 "button": "打开"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "更好地与RoValra配对",
+                "description": "粉碎有内置的匹配集成。RoValra的隐私政策适用。",
                 "button": "打开"
             },
             "roValra": {
-                "description": "Configuration",
+                "description": "配置",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "允许您加入一个服务器",
+                    "description": "我们将使用 RoValra API 来寻找最好的服务器，而不是Roblox 匹配。"
                 }
             },
             "gameHistory": {
@@ -132,59 +140,59 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "窗口操作设置",
+                "description": "配置窗口操纵行为方式。",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "启用",
+                    "description": "选择是否启用窗口操纵。"
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "高级版",
+                    "description": "深入配置窗口操纵。",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "范围",
                         "minimizeCard": {
                             "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "description": "是否启用通过窗口操纵控制最小化。"
                         },
                         "maximizeCard": {
                             "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "description": "是否通过窗口操纵启用最大限度的控制。"
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "聚焦点",
+                            "description": "是否通过窗口操纵启用焦点控制。"
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "移动窗口",
+                            "description": "是否启用通过窗口操纵移动窗口控制。"
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "恢复",
+                            "description": "是否启用通过窗口操作恢复控制。"
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "设置窗口标题",
+                            "description": "是否启用通过窗口操纵设置窗口标题控制。"
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "设置无边框",
+                            "description": "是否通过窗口操纵启用无边界窗口控制。"
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "透明设置",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "启用",
+                            "description": "是否通过交互式API启用透明度控制。"
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "最小透明度",
+                            "description": "您的窗口能达到的最低透明度水平。"
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "最大透明度",
+                            "description": "您的窗口可以达到的最大透明度等级。"
                         }
                     }
                 }
@@ -192,28 +200,28 @@
         },
         "installations": {
             "installations": "装置",
-            "description": "Manage your Roblox installation.",
+            "description": "管理您的 Roblox 安装。",
             "customVersion": {
                 "title": "安装自定义Roblox版本",
-                "description": "Skip the update check and download a specific version. The default value is latest. An invalid version will not be downloaded and will fall back to the latest version."
+                "description": "跳过更新检查并下载特定版本。默认值是最新的。 无效的版本将不会被下载，将会退回到最新版本。"
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "并行下载",
+                "description": "一次下载多个资源而不是一个。默认是 4。"
             },
             "forceReinstallCard": {
                 "title": "强制重新安装Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "每次你启动Rohlox都会重新安装。"
             },
             "dontUpdateCard": {
                 "title": "不要更新Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "跳过 Roblox 更新检查并立即启动。"
             }
         },
         "fastflag": {
             "fastflag": "快速标记",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "添加/删除 Roblox 快速标志和配置。",
+            "generalBack": "返回到快速标志",
             "selectScreeen": {
                 "title": "请选择操作",
                 "editCard": {
@@ -222,7 +230,7 @@
                 },
                 "presetCard": {
                     "title": "预置",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "使用置于粉碎中的特征标志预设。"
                 }
             },
             "editor": {
@@ -230,7 +238,7 @@
                     "texboxFlagName": "旗帜+名称",
                     "texboxFlagValue": "值",
                     "buttonAdd": "新增",
-                    "search": "Search all fast flags...",
+                    "search": "搜索所有快速标志...",
                     "searchNotFound": "未找到与您的搜索匹配的标记。",
                     "flagCol": {
                         "deleteNote": "删除标签...",
@@ -242,18 +250,18 @@
             },
             "preset": {
                 "preset": "预案",
-                "description": "Use our built-in fast flag presets.",
+                "description": "使用我们内置的快速标志预设。",
                 "msaaCard": {
                     "title": "抗锯齿质量",
                     "description": "平滑锯齿状边缘。较高的值看起来更好，但可能会降低性能。"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "暂停 Voxelizer",
                     "description": "停止体素化以提高性能."
                 },
                 "grassAnimationCard": {
                     "title": "草地挥舞动画",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "调整草动的强度。 （0不会减少，999或更多的人会冻结草地。） 0 & 1 稍微减少运动和值大于1强化减速，接近死灵)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "覆盖纹理质量级别",
@@ -262,11 +270,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "启用低质量网格",
-                    "description": "May improve performance."
+                    "description": "可能会提高性能。"
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "灰色天空",
+                    "description": "将天空切换为灰色。可以提高性能。"
                 }
             }
         },
@@ -275,7 +283,7 @@
             "tab": {
                 "modManagement": {
                     "title": "改装配件管理",
-                    "description": "Manage your Roblox mods.",
+                    "description": "管理您的Roblex模组。",
                     "addModButton": "新增改装配件",
                     "noModsFound": "我们在这里没有找到改装配件，雅皮士。",
                     "noModsFoundCreateButton": "创建您的第一个模组",
@@ -285,27 +293,27 @@
                         "renameNote": "重命名Mod",
                         "openFolderNote": "打开Mod文件夹",
                         "deleteNote": "删除MOD",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "模版布局受法讲台模组管理员的启发。",
                         "description": "启用mod加载并设置mod文件夹位置。"
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "创建一个新的模组",
                             "textbox": {
                                 "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "placeholder": "我的新模组"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "确认操作",
+                            "description": "您确定要删除此版主吗？"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "此名称已经存在！",
+                            "description": "请选择一个不同的名称。"
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "确认",
                             "cancel": "取消"
                         }
                     }
@@ -322,7 +330,7 @@
                     },
                     "customFontCard": {
                         "title": "自定义字体 ",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "将您的 Roblox 字体更改为您喜欢的字体。",
                         "button": "變更字型"
                     }
                 },
@@ -330,7 +338,7 @@
                     "title": "社区改装配件",
                     "description": "探索社区创建的改装配件。",
                     "notice": {
-                        "title": "No mods yet",
+                        "title": "尚无模组",
                         "description": "我们还没有任何社区模组。抢先做出贡献，帮助我们拓展产品系列！",
                         "submissionButton": "提交改装配件"
                     }
@@ -341,20 +349,20 @@
             "settings": "设置",
             "aboutCard": {
                 "title": "软件简介",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "关于这个破损构建的信息。",
+                "note": "记住！粉碎是免费使用的。如果有人试图重新销售它，请在我们的 Discord 服务器上告诉我们！",
                 "builtOn": "由 小昊汉化 建立在",
                 "commitHash": "提交哈希： # # #",
                 "version": "版  本："
             },
             "onBoardCard": {
                 "title": "粉碎你好",
-                "description": "Force the onboarding flow to run again.",
+                "description": "强制上船流再次运行。",
                 "button": "洗 点"
             },
             "languageCard": {
                 "title": "语言",
-                "description": "Select your preferred language for Crush."
+                "description": "选择您的首选语言用于破折叠。"
             },
             "windowVibrancyCard": {
                 "title": "窗户活力",
@@ -362,11 +370,11 @@
             },
             "enableCrushRpcCard": {
                 "title": "粉碎Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "切换是否通过 Discord RPC 显示您的活动。建议重启。"
             },
             "donateCard": {
                 "title": "捐献",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "喜欢粉碎吗？捐赠给马利以支持他的工作！",
                 "button": "捐献"
             }
         }
