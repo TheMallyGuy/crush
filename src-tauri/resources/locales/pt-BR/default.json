@@ -65,7 +65,7 @@
             "description": "Personalize a aparência do bootstrapper Roblox.",
             "bootstrapThemeCard": {
                 "title": "Tema do Bootstrapper",
-                "description": "Escolha entre o tema padrão do Crush ou um tema XML personalizado.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Padrão (Crush)",
                     "custom": "Personalizado"
@@ -286,6 +286,27 @@
                         "deleteNote": "Excluir Mod",
                         "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Habilite o carregamento do mod e defina o local da pasta mod."
+                    },
+                    "dialogs": {
+                        "create": {
+                            "title": "Create a new mod",
+                            "textbox": {
+                                "title": "Mod name",
+                                "placeholder": "My new mod"
+                            }
+                        },
+                        "delete": {
+                            "title": "Confirm Action",
+                            "description": "Are you sure to delete this mod?"
+                        },
+                        "exists": {
+                            "title": "This name is already exists!",
+                            "description": "Please choose a diffrent name."
+                        },
+                        "buttons": {
+                            "confirm": "Confirm",
+                            "cancel": "Cancel"
+                        }
                     }
                 },
                 "prebuiltMods": {

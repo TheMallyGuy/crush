@@ -11,7 +11,7 @@
                 "general": "Playing Roblox",
                 "idle": "Not in a game",
                 "playing": "In a game",
-                "playingPrivate" : "In a game, Private server",
+                "playingPrivate": "In a game, Private server",
                 "serverInfomation": {
                     "titles": {
                         "public": "Connected to a public server!",
@@ -53,7 +53,7 @@
             "title": "Server Information",
             "infomationCard": {
                 "serverRegion": "Region : {region}",
-                "waitRegion" : "Fetching region...",
+                "waitRegion": "Fetching region...",
                 "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
@@ -65,7 +65,7 @@
             "description": "Customize the look and feel of the Roblox bootstrapper.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
@@ -287,29 +287,25 @@
                         "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Enable mod loading and set the mod folder location."
                     },
-
-                    "dialogs" : {
-                        "create" : {
-                            "title" : "Create a new mod",
-                            "textbox" : {
-                                "title" : "Mod name",
-                                "placeholder" : "My new mod"
+                    "dialogs": {
+                        "create": {
+                            "title": "Create a new mod",
+                            "textbox": {
+                                "title": "Mod name",
+                                "placeholder": "My new mod"
                             }
                         },
-
-                        "delete" : {
-                            "title" : "Confirm Action",
-                            "description" : "Are you sure to delete this mod?"
+                        "delete": {
+                            "title": "Confirm Action",
+                            "description": "Are you sure to delete this mod?"
                         },
-
-                        "exists" : {
-                            "title" : "This name is already exists!",
-                            "description" : "Please choose a diffrent name."
+                        "exists": {
+                            "title": "This name is already exists!",
+                            "description": "Please choose a diffrent name."
                         },
-                        
-                        "buttons" : {
-                            "confirm" : "Confirm",
-                            "cancel" : "Cancel"
+                        "buttons": {
+                            "confirm": "Confirm",
+                            "cancel": "Cancel"
                         }
                     }
                 },

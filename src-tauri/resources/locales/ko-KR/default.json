@@ -65,7 +65,7 @@
             "description": "Roblox 부트스트래퍼의 모양과 느낌을 커스터마이징합니다.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
@@ -286,6 +286,27 @@
                         "deleteNote": "모드 삭제",
                         "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "MOD 로딩을 활성화하고 MOD 폴더 위치를 설정합니다."
+                    },
+                    "dialogs": {
+                        "create": {
+                            "title": "Create a new mod",
+                            "textbox": {
+                                "title": "Mod name",
+                                "placeholder": "My new mod"
+                            }
+                        },
+                        "delete": {
+                            "title": "Confirm Action",
+                            "description": "Are you sure to delete this mod?"
+                        },
+                        "exists": {
+                            "title": "This name is already exists!",
+                            "description": "Please choose a diffrent name."
+                        },
+                        "buttons": {
+                            "confirm": "Confirm",
+                            "cancel": "Cancel"
+                        }
                     }
                 },
                 "prebuiltMods": {
