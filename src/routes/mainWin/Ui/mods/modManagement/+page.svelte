@@ -105,8 +105,8 @@
 <Dialog
     bind:open={deleteDialog}
     on:close={() => resolveDelete?.(false)}
-    title="Confirm Action"
-    description="Are you sure to delete this mod?"
+    title={$_("pages.mod.tab.modManagement.dialogs.delete.title")}
+    description={$_("pages.mod.tab.modManagement.dialogs.delete.description")}
 >
     <div slot="actions">
         <Button
@@ -114,14 +114,14 @@
             size="sm"
             on:click={() => resolveDelete?.(false)}
         >
-            Cancel
+            {$_("pages.mod.tab.modManagement.dialogs.buttons.cancel")}
         </Button>
         <Button
             variant="danger"
             size="sm"
             on:click={() => resolveDelete?.(true)}
         >
-            Confirm
+            {$_("pages.mod.tab.modManagement.dialogs.buttons.confirm")}
         </Button>
     </div>
 </Dialog>
@@ -129,16 +129,16 @@
 <Dialog
     bind:open={createDialog}
     on:close={() => resolveCreate?.(null)}
-    title="Create a new mod"
+    title={$_("pages.mod.tab.modManagement.dialogs.create.title")}
 >
-    <Textbox label="Mod name" placeholder="My new mod" bind:value={modName} />
+    <Textbox label={$_("pages.mod.tab.modManagement.dialogs.create.textbox.title")} placeholder={$_("pages.mod.tab.modManagement.dialogs.create.textbox.placeholder")} bind:value={modName} />
 
     <div slot="actions">
         <Button variant="secondary" size="sm" on:click={() => resolveCreate?.(null)}>
-            Cancel
+            {$_("pages.mod.tab.modManagement.dialogs.buttons.cancel")}
         </Button>
         <Button variant="primary" size="sm" on:click={() => resolveCreate?.(modName)}>
-            Confirm
+            {$_("pages.mod.tab.modManagement.dialogs.buttons.confirm")}
         </Button>
     </div>
 </Dialog>
@@ -147,8 +147,8 @@
 <Dialog
     bind:open={existDialog}
     on:close={() => (existDialog = false)}
-    title="This name is already exists!"
-    description="Please choose a diffrent name."
+    title={$_("pages.mod.tab.modManagement.dialogs.exists.title")}
+    description={$_("pages.mod.tab.modManagement.dialogs.exists.description")}
 >
 
     <div slot="actions">

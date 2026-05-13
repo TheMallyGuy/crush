@@ -286,6 +286,31 @@
                         "deleteNote": "Delete Mod",
                         "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
                         "description": "Enable mod loading and set the mod folder location."
+                    },
+
+                    "dialogs" : {
+                        "create" : {
+                            "title" : "Create a new mod",
+                            "textbox" : {
+                                "title" : "Mod name",
+                                "placeholder" : "My new mod"
+                            }
+                        },
+
+                        "delete" : {
+                            "title" : "Confirm Action",
+                            "description" : "Are you sure to delete this mod?"
+                        },
+
+                        "exists" : {
+                            "title" : "This name is already exists!",
+                            "description" : "Please choose a diffrent name."
+                        },
+                        
+                        "buttons" : {
+                            "confirm" : "Confirm",
+                            "cancel" : "Cancel"
+                        }
                     }
                 },
                 "prebuiltMods": {
