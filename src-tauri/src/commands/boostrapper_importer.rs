@@ -16,11 +16,13 @@ pub struct BloxstrapConfig {
     // frostrap only
     pub EnableBetterMatchmaking: bool,
     pub ShowUsingFroststrapRPC: bool,
+    pub AutoCloseCrashHandler: bool,
 
     pub UpdateRoblox : bool, // frost & void??? (ps : fish)
 
     // voidstrap only
     pub VoidRPC: bool,
+    pub DisableCrash: bool,
 
     // funkstrap
     pub UseWindowControl: bool,

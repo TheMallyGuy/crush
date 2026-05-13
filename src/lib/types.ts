@@ -217,11 +217,13 @@ export type BoostrapConfigs = { // bloxstrap, froststrap
     // frostrap only
     EnableBetterMatchmaking: boolean,
     ShowUsingFroststrapRPC: boolean,
+    AutoCloseCrashHandler: boolean,
 
     UpdateRoblox : boolean, // frost & void??? (ps : fish)
 
     // voidstrap only
     VoidRPC: boolean,
+    DisableCrash: boolean,
 
     // funkstrap
     UseWindowControl: boolean
