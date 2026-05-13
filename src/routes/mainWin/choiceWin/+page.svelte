@@ -9,6 +9,7 @@
         Info,
         ChevronDown,
         DraftingCompass,
+        MessageCircleHeart,
     } from '@lucide/svelte'
     import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window'
     import { _ } from 'svelte-i18n'
@@ -214,8 +215,8 @@
                 on:click={openDiscordServer}
                 class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center"
             >
-                <Info class="size-5" />
-                Discord
+                <MessageCircleHeart class="size-5" />
+                {$_("pages.choiceWin.discord")}
             </button>
         </div>
     </div>

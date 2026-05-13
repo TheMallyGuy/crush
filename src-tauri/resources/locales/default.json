@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "Play Roblox",
-            "config": "Config"
+            "config": "Config",
+            "discord" : "Our Community"
         },
         "boostrapWin": {
             "cancel": "Cancel",

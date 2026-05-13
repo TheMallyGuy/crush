@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "Play Roblox",
-            "config": "Config"
+            "config": "Config",
+            "discord" : "Our Community"
         },
         "boostrapWin": {
             "cancel": "Cancel",
@@ -65,7 +66,7 @@
             "description": "Customize the look and feel of the Roblox bootstrapper.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
