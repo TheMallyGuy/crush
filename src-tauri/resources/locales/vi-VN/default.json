@@ -65,7 +65,7 @@
             "description": "Tùy chỉnh giao diện của trình khởi động Roblox.",
             "bootstrapThemeCard": {
                 "title": "Chủ đề trình khởi động",
-                "description": "Chọn giữa giao diện Crush mặc định hoặc giao diện XML tùy chỉnh.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Mặc định (Crush)",
                     "custom": "Tùy chỉnh"
@@ -286,6 +286,27 @@
                         "deleteNote": "Xóa Mod",
                         "layoutNote": "Bố cục mod lấy cảm hứng từ trình quản lý mod của Froststrap.",
                         "description": "Bật tải mod và đặt vị trí thư mục mod."
+                    },
+                    "dialogs": {
+                        "create": {
+                            "title": "Create a new mod",
+                            "textbox": {
+                                "title": "Mod name",
+                                "placeholder": "My new mod"
+                            }
+                        },
+                        "delete": {
+                            "title": "Confirm Action",
+                            "description": "Are you sure to delete this mod?"
+                        },
+                        "exists": {
+                            "title": "This name is already exists!",
+                            "description": "Please choose a diffrent name."
+                        },
+                        "buttons": {
+                            "confirm": "Confirm",
+                            "cancel": "Cancel"
+                        }
                     }
                 },
                 "prebuiltMods": {
