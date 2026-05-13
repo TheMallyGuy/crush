@@ -5,8 +5,8 @@ use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
-use commands::rename::rename;
 use commands::priority::set_process_priority;
+use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,
@@ -15,21 +15,23 @@ use commands::watcher::watch_logs;
 use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
-use tauri::{Emitter, Manager};
+use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
+use tauri_plugin_updater::UpdaterExt;
 mod commands;
 use crate::rpc::kill_rpc;
 use rpc::RpcState;
 use simple_i18n::I18n;
 
 pub mod interactive;
+pub mod priorites;
 pub mod rd;
 pub mod rpc;
-pub mod tray;
-pub mod priorites;
 pub mod simple_i18n;
+pub mod tray;
 
 use crate::tray::setup_tray;
 
@@ -96,7 +98,8 @@ fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Erro
         }
     });
 
-    if let Ok(Some(urls)) = app.deep_link().get_current() { // store bef emit
+    if let Ok(Some(urls)) = app.deep_link().get_current() {
+        // store bef emit
         if let Some(url) = urls.first() {
             let url_str = url.to_string();
             let app_handle = app.handle().clone();
@@ -119,6 +122,58 @@ fn spawn_discord_rpc(app_handle: tauri::AppHandle) {
             log::error!("RPC error: {}", e);
         };
     });
+}
+
+async fn update(app: tauri::AppHandle) -> tauri_plugin_updater::Result<()> {
+    if let Some(update) = app.updater()?.check().await? {
+        let mut downloaded = 0u64;
+        let mut last_notified_percent = 0u64;
+
+        let app_download = app.clone(); // for download closure
+        let app_finish = app.clone(); // for finish closure
+
+        update
+            .download_and_install(
+                move |chunk_length, content_length| {
+                    downloaded += chunk_length as u64;
+                    println!("downloaded {downloaded} from {content_length:?}");
+
+                    if let Some(total) = content_length {
+                        let percent = (downloaded * 100) / total;
+                        if percent >= last_notified_percent + 30 {
+                            last_notified_percent = percent;
+                            app_download
+                                .notification()
+                                .builder()
+                                .title("Auto updater")
+                                .body(format!("Downloading... {}%", percent))
+                                .show()
+                                .unwrap();
+                        }
+                    }
+                },
+                move || {
+                    app_finish
+                        .notification()
+                        .builder()
+                        .title("Auto updater")
+                        .body("Download finished!")
+                        .show()
+                        .unwrap();
+                },
+            )
+            .await?;
+
+        app.notification()
+            .builder()
+            .title("Auto updater")
+            .body("Update installed! The new update will take effect after restart.")
+            .show()
+            .unwrap();
+        app.restart();
+    }
+
+    Ok(())
 }
 
 fn print_debug_info() {
@@ -148,7 +203,9 @@ pub fn run() {
                 .and_then(|v| v.as_str().map(|s| s.to_string()))
                 .unwrap_or_else(|| "en-US".to_string());
 
-            let path = app.path().resolve("resources/locales", tauri::path::BaseDirectory::Resource)?;
+            let path = app
+                .path()
+                .resolve("resources/locales", tauri::path::BaseDirectory::Resource)?;
 
             let i18n = I18n::new(path, &locale).unwrap();
 
@@ -180,7 +237,16 @@ pub fn run() {
 
             setup_deep_links(app)?;
             spawn_discord_rpc(app.handle().clone());
-            setup_tray(app)?; // <-- now lives in tray.rs, manages TrayState
+            setup_tray(app)?;
+
+            // run auto update after startup
+            // https://v2.tauri.app/plugin/updater/
+
+            let app_handle = app.handle().clone();
+
+            tauri::async_runtime::spawn(async move {
+                update(app_handle).await.unwrap();
+            });
 
             Ok(())
         })

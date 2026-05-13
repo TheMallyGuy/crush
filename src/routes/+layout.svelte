@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { loadSavedTheme } from '$lib/theme/themeLoader'
-    import { check } from '@tauri-apps/plugin-updater'
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { goto } from '$app/navigation'
@@ -24,13 +23,6 @@
                 goto('/boostrapWin')
             }
         })
-
-        const update = await check()
-        if (update) {
-            sendNotification("New update detected. Downloading it for you!")
-            await update.downloadAndInstall()
-            return
-        }
 
         // On startup, we only redirect to the bootstrapper if a deep link was actually received.
         // This prevents the app from launching into Roblox instantly every time it's opened normally.
