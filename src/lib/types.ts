@@ -57,6 +57,7 @@ export type PriorityClass =
   | "REALTIME_PRIORITY_CLASS";
 
 export type Integrations = {
+    closeCrashHandler: boolean
     activityWatching: boolean
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean

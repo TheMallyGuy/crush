@@ -42,6 +42,7 @@
             }
             
             const newIntegrations: Integrations = {
+                closeCrashHandler: integrations?.closeCrashHandler ?? false,
                 priority : integrations?.priority ?? "NORMAL_PRIORITY_CLASS",
                 interactive: windowManipulation,
                 activityWatching: boostraperConfig.EnableActivityTracking,
