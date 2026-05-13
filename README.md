@@ -22,6 +22,7 @@ Built with **Tauri + Svelte**.
 ## Features
 
 * Not a Bloxstrap fork
+* Roblox Process Priority
 * Both Studio & Player Support
 * FastFlag editor (presets + manual editing)
 * Improved Discord Rich Presence
