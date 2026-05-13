@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "שחק ב - Roblox",
-            "config": "הגדרות"
+            "config": "הגדרות",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "בטל",
@@ -64,16 +65,16 @@
             "appearance": "עיצוב",
             "description": "התאם אישית את המראה והתחושה של ה - bootstrapper של Roblox.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "ערכת עיצוב Bootstrapper",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "ברירת מחדל (קראש)",
+                    "custom": "התאמה אישית"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "ייבוא חדש",
+                    "noThemes": "עדיין לא יובאו ערכות עיצוב מותאמות אישית.",
+                    "missingAssets": "חסרים נכסי ערכת נושא"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "החלף את הנוכחות העשירה של Roblox עם זו של Crush.",
                 "option1": "אפשר לאנשים להצטרף למשחק שלך",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "פתיחה"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "עוצר את voxelization כדי לשפר את הביצועים."
                 },
                 "grassAnimationCard": {
                     "title": "הנפשת נפנוף דשא",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "בטל"
                         }
                     }
                 },

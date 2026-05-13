@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "hienontaa",
             "playRoblox": "Pelaa Robloxia",
-            "config": "Määritys"
+            "config": "Määritys",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Peruuta",
@@ -64,16 +65,16 @@
             "appearance": "Vaikutelma",
             "description": "Mukauta Roblox-boottrapperin ulkonäköä ja tuntumaa.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Bootstrapper-teema",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Oletus (murskaus)",
+                    "custom": "Mukautettu"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Tuo uusi",
+                    "noThemes": "Mukautettuja teemoja ei ole vielä tuotu.",
+                    "missingAssets": "Puuttuvat teeman materiaalit"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (murskaus)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Korvaa Roblox Rich Presence Crushin.",
                 "option1": "Anna ihmisten liittyä peliisi",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Avaa"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Pysäyttää vokselisaation suorituskyvyn parantamiseksi."
                 },
                 "grassAnimationCard": {
                     "title": "Ruohoa heiluttava animaatio",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Peruuta"
                         }
                     }
                 },

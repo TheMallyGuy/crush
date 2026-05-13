@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "szétzúz",
             "playRoblox": "Roblox lejátszása",
-            "config": "Konfigurálás"
+            "config": "Konfigurálás",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Mégse",
@@ -64,16 +65,16 @@
             "appearance": "Megjelenés",
             "description": "Szabja testre a Roblox bootstrapper megjelenését és hangulatát.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Bootstrapper téma",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Alapértelmezett (Crush)",
+                    "custom": "Egyedi"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Új megjegyzés importálása",
+                    "noThemes": "Még nincsenek egyéni témák importálva.",
+                    "missingAssets": "Hiányzó témaeszközök"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Cserélje ki a Roblox Rich jelenlétet a Crush.",
                 "option1": "Engedd, hogy mások is csatlakozzanak a",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Nyitva"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -235,7 +236,7 @@
                         "deleteNote": "Jelző törlése",
                         "name": "zászló neve",
                         "type": "típus:",
-                        "value": "value"
+                        "value": "érték"
                     }
                 }
             },
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Leállítja a voxelizációt a teljesítmény javítása érdekében."
                 },
                 "grassAnimationCard": {
                     "title": "Fű integető animáció",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Mégse"
                         }
                     }
                 },

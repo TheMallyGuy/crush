@@ -4,7 +4,7 @@
         "integrations": "In Integrations Route",
         "installation": "В маршруте установки",
         "fastflag": "In Fast Flags Route",
-        "mod": "In Mod Route",
+        "mod": "[ERROR] In Mod Route",
         "appearance": "По внешнему виду Маршрут",
         "rust": {
             "watcher": {
@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Ты моя любовь",
             "playRoblox": "Играть в Roblox",
-            "config": "Конфиг"
+            "config": "Конфиг",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Отмена",
@@ -64,16 +65,16 @@
             "appearance": "Внешний вид",
             "description": "Настройте внешний вид бутстреппера Roblox.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Тема Bootstrapper",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "По умолчанию (Crush)",
+                    "custom": "Другое"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Импортировать как новое",
+                    "noThemes": "Настраиваемые темы еще не импортированы.",
+                    "missingAssets": "Отсутствуют активы темы"
                 }
             }
         },
@@ -89,8 +90,8 @@
                 "description": "Get notified when the client connects to a server."
             },
             "rpcCard": {
-                "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "title": "[ERROR] Discord RPC (Crush)",
+                "description": "Замените Roblox Rich Presence на Crush's.",
                 "option1": "Позвольте людям присоединиться к вашей игре",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Открыть"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Останавливает вокселизацию для повышения производительности."
                 },
                 "grassAnimationCard": {
                     "title": "Анимация размахивания травой",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Отмена"
                         }
                     }
                 },

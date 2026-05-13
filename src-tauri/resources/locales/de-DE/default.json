@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Zermalmen",
             "playRoblox": "Spiele Roblox.",
-            "config": "Konfiguration"
+            "config": "Konfiguration",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Abbrechen",
@@ -67,13 +68,13 @@
                 "title": "Bootstrapper Theme",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Standard (Crush)",
+                    "custom": "Angepasst"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Neue Datei importieren",
+                    "noThemes": "Noch keine benutzerdefinierten Designs importiert.",
+                    "missingAssets": "Fehlende Theme-Assets"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Ersetzen Sie die Roblox Rich Presence durch Crush's.",
                 "option1": "Lass Leute an deinem Spiel teilnehmen",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Öffnen"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Stoppt die Voxelisierung, um die Leistung zu verbessern."
                 },
                 "grassAnimationCard": {
                     "title": "Gras winkende Animation",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Abbrechen"
                         }
                     }
                 },

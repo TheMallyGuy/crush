@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "Robloxをプレイ",
-            "config": "構成"
+            "config": "構成",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "取り消す",
@@ -64,16 +65,16 @@
             "appearance": "Appearance",
             "description": "Robloxブートストラッパーの外観をカスタマイズします。",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "ブートストラッパーのテーマ",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "デフォルト（クラッシュ）",
+                    "custom": "カスタム"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "新規インポート",
+                    "noThemes": "カスタムテーマはまだインポートされていません。",
+                    "missingAssets": "不足しているテーマアセット"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC （クラッシュ）",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Roblox Rich PresenceをCrushの.",
                 "option1": "他の人にあなたのゲームに参加してもらう",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "開く"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "パフォーマンスを向上させるためにボクセリゼーションを停止します."
                 },
                 "grassAnimationCard": {
                     "title": "草を振るアニメーション",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "取り消す"
                         }
                     }
                 },

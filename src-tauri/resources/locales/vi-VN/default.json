@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "Chơi Roblox",
-            "config": "Cấu hình"
+            "config": "Cấu hình",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Hủy",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Hủy"
                         }
                     }
                 },

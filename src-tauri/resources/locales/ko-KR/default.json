@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "\n\t\t\t\t크러시\t\t\t",
             "playRoblox": "Roblox 플레이",
-            "config": "구성"
+            "config": "구성",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "취소",
@@ -64,16 +65,16 @@
             "appearance": "외형",
             "description": "Roblox 부트스트래퍼의 모양과 느낌을 커스터마이징합니다.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Bootstrapper 테마",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "기본값 (Crush)",
+                    "custom": "커스텀"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "새로 가져오기",
+                    "noThemes": "아직 가져온 사용자 정의 테마가 없습니다.",
+                    "missingAssets": "테마 자산 누락"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "로블록스 리치 프레즌스를 크러쉬로 교체.",
                 "option1": "사람들이 내 게임에 참여하도록 하세요",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "열기"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "성능 향상을 위해 복셀화를 중지합니다."
                 },
                 "grassAnimationCard": {
                     "title": "잔디 흔들기 애니메이션",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "취소"
                         }
                     }
                 },

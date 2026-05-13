@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "Zgniatanie",
             "playRoblox": "Graj w Roblox",
-            "config": "Konfiguracja"
+            "config": "Konfiguracja",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Anuluj",
@@ -64,16 +65,16 @@
             "appearance": "Wygląd",
             "description": "Dostosuj wygląd i działanie urządzenia Roblox Bootstrapper.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Motyw Bootstrapper",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Domyślnie (zmiażdżenie)",
+                    "custom": "Własny"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Importuj nowe",
+                    "noThemes": "Nie zaimportowano jeszcze żadnych niestandardowych motywów.",
+                    "missingAssets": "Brakujące zasoby motywu"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Wymień Roblox Rich Presence na Crush.",
                 "option1": "Pozwól innym dołączyć do Twojej gry",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Otwarte"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Zatrzymuje wokselizację, aby poprawić wydajność."
                 },
                 "grassAnimationCard": {
                     "title": "Animacja falowania trawy",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Anuluj"
                         }
                     }
                 },

@@ -43,7 +43,8 @@
         "choiceWin": {
             "title": "mačkat",
             "playRoblox": "Zahrajte si Roblox",
-            "config": "Nastavení"
+            "config": "Nastavení",
+            "discord": "Our Community"
         },
         "boostrapWin": {
             "cancel": "Zrušit",
@@ -64,16 +65,16 @@
             "appearance": "Vzhled",
             "description": "Přizpůsobte si vzhled a dojem z bootstrapperu Roblox.",
             "bootstrapThemeCard": {
-                "title": "Bootstrapper Theme",
+                "title": "Téma Bootstrapper",
                 "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
-                    "default": "Default (Crush)",
-                    "custom": "Custom"
+                    "default": "Výchozí (rozdrcení)",
+                    "custom": "Vlastní"
                 },
                 "customDropDownContents": {
-                    "importNew": "Import New",
-                    "noThemes": "No custom themes imported yet.",
-                    "missingAssets": "Missing Theme Assets"
+                    "importNew": "Import nového souboru",
+                    "noThemes": "Zatím nebyly importovány žádné vlastní motivy.",
+                    "missingAssets": "Chybějící aktiva šablony"
                 }
             }
         },
@@ -90,7 +91,7 @@
             },
             "rpcCard": {
                 "title": "Discord RPC (rozdrtit)",
-                "description": "Replace the Roblox Rich Presence with Crush's.",
+                "description": "Vyměňte Roblox Rich Presence za Crush's.",
                 "option1": "Umožněte lidem připojit se k vaší hře",
                 "option2": "Display your account when playing Roblox"
             },
@@ -102,7 +103,7 @@
             "windowManipulationCard": {
                 "title": "Window Manipulation (Previously Interactive API)",
                 "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
-                "button": "Open"
+                "button": "Otevřít"
             },
             "roValraCard": {
                 "title": "Better Matchmaking with RoValra",
@@ -248,7 +249,7 @@
                 },
                 "pauseVoxelizerCard": {
                     "title": "Pause Voxelizer",
-                    "description": "Stops voxelization to improve performance."
+                    "description": "Zastavuje voxelizaci pro zlepšení výkonu."
                 },
                 "grassAnimationCard": {
                     "title": "Animace mávání trávy",
@@ -305,7 +306,7 @@
                         },
                         "buttons": {
                             "confirm": "Confirm",
-                            "cancel": "Cancel"
+                            "cancel": "Zrušit"
                         }
                     }
                 },
