@@ -5,7 +5,14 @@
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import type { BuildInfo } from '$lib/types'
     import { relaunch } from '@tauri-apps/plugin-process'
-    import { Heart, Info, Languages, BookHeart, AppWindow, AudioWaveform } from '@lucide/svelte'
+    import {
+        Heart,
+        Info,
+        Languages,
+        BookHeart,
+        AppWindow,
+        AudioWaveform,
+    } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
@@ -57,7 +64,7 @@
         'vls-BE': 'Vlaams',
         'zh-CN': '中文 (简体)',
         'zh-TW': '中文 (繁體)',
-        "ni-ha" : "NIHAHAHA!"
+        'ni-ha': 'NIHAHAHA!',
     }
 
     const dropdownOptions = derived(locales, ($locales) =>
@@ -75,7 +82,6 @@
         { value: 'acrylic', label: 'Acrylic' },
         { value: 'mica', label: 'Mica' },
     ]
-
 
     async function updateVibrancy() {
         const store = await load('config.json')
@@ -99,10 +105,11 @@
         await store.save()
     }
 
-    async function handleResetCrushOnboarding() { // its called crush hello dumbfuck
-        const store = await load("config.json");
+    async function handleResetCrushOnboarding() {
+        // its called crush hello dumbfuck
+        const store = await load('config.json')
 
-        await store.set("firstLaunch", true)
+        await store.set('firstLaunch', true)
         await relaunch()
     }
 
@@ -119,7 +126,8 @@
 
         const store = await load('config.json')
         vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
-        discordRpcEnabled = await store.get<boolean>('discordRpcEnabled') ?? true
+        discordRpcEnabled =
+            (await store.get<boolean>('discordRpcEnabled')) ?? true
     })
 </script>
 
@@ -146,8 +154,8 @@
     </SettingCard>
 
     <SettingCard
-        title={$_("pages.settings.windowVibrancyCard.title")}
-        description={$_("pages.settings.windowVibrancyCard.description")}
+        title={$_('pages.settings.windowVibrancyCard.title')}
+        description={$_('pages.settings.windowVibrancyCard.description')}
         icon={AppWindow}
     >
         <Dropdown
@@ -159,8 +167,8 @@
     </SettingCard>
 
     <SettingCard
-        title={$_("pages.settings.onBoardCard.title")}
-        description={$_("pages.settings.onBoardCard.description")}
+        title={$_('pages.settings.onBoardCard.title')}
+        description={$_('pages.settings.onBoardCard.description')}
         icon={BookHeart}
     >
         <Button
@@ -168,13 +176,13 @@
             slot="action"
             variant="danger"
         >
-            {$_("pages.settings.onBoardCard.button")}
+            {$_('pages.settings.onBoardCard.button')}
         </Button>
     </SettingCard>
 
     <SettingCard
-        title={$_("pages.settings.enableCrushRpcCard.title")}
-        description={$_("pages.settings.enableCrushRpcCard.description")}
+        title={$_('pages.settings.enableCrushRpcCard.title')}
+        description={$_('pages.settings.enableCrushRpcCard.description')}
         icon={AudioWaveform}
     >
         <Switch
@@ -207,10 +215,24 @@
             </p>
 
             <p class="sm text-gray-600">
-                {$_("pages.settings.aboutCard.note")}
+                {$_('pages.settings.aboutCard.note')}
             </p>
         </div>
     </ExpandableSettingCard>
+
+    <SettingCard
+        title="Websocket controller"
+        description="DO NOT try this out"
+        icon={Arona}
+    >
+        <Button
+            variant="secondary"
+            on:click={() => {
+                goto('./settings/socket')
+            }}
+            slot="action">Open</Button
+        >
+    </SettingCard>
 
     <ExpandableSettingCard
         title={$_('pages.settings.donateCard.title')}
@@ -221,6 +243,5 @@
             >{$_('pages.settings.donateCard.button')}</Button
         >
     </ExpandableSettingCard>
-
 </div>
 <Gem />
