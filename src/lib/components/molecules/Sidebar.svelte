@@ -44,7 +44,7 @@
             href: `${baseUiUrl}/appearance`,
         },
         {
-            name: "Global Basic Settings",
+            name: $_('pages.gbs.gbs'),
             icon: SlidersHorizontal,
             href: `${baseUiUrl}/gbs`
         }

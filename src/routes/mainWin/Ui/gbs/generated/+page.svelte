@@ -115,7 +115,7 @@
         {#each Object.entries(gbs) as [key, value]}
             <SettingCard title={truncate(key, 16)}>
                 <p slot="footer">
-                    {#if getType(value) === 'number'}
+                    {#if getType(value) === 'number' || getType(value) === 'string'}
                         <Textbox
                             value={String(gbs[key])}
                             on:change={(e) => saveSetting(key, e.target.value)}
