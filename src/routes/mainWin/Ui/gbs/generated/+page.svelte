@@ -72,18 +72,23 @@
         await saveGBS()
     }
 
+    function truncate(str: string, maxLength: number): string {
+        if (str.length <= maxLength) return str
+        return str.slice(0, maxLength) + '...'
+    }
+
+    function getType(value: undefined) {
+        if (value === null) return 'null'
+        if (value === undefined) return 'undefined'
+        if (Array.isArray(value)) return 'array'
+        return typeof value
+    }
+
     let loaded = false
 
     onMount(async () => {
         rawGBS = await invoke<string>('get_gbs')
         gbs = parseGBS(rawGBS)
-
-        // fuck types
-
-        fpsLimit = gbs.FramerateCap
-        graphicQuaity = gbs.SavedQualityLevel
-        fullscreen = gbs.Fullscreen
-        reducedMotion = gbs.ReducedMotion
 
         loaded = true // guard
     })
@@ -93,79 +98,39 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Global Basic Settings
+                Generated Global Basic Settings
             </h1>
             <p class="text-stone-400 mt-1">
-                Configure Roblox's default settings.
+                Auto generated based on the GBS file.
             </p>
+        </div>
+        <div class="flex items-center gap-2">
+            <Button variant="secondary" onclick={() => goto('../gbs')}>
+                Back
+            </Button>
         </div>
     </div>
 
-    <div class="flex flex-col gap-3">
-        <div class="flex flex-row gap-3">
-            <SettingCard
-                title="FPS limit"
-                description="Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
-            >
-                <Textbox
-                    slot="footer"
-                    bind:value={fpsLimit}
-                    on:change={() =>
-                        saveSetting('FramerateCap', String(fpsLimit))}
-                />
+    <div class="grid grid-cols-3 gap-3">
+        {#each Object.entries(gbs) as [key, value]}
+            <SettingCard title={truncate(key, 16)}>
+                <p slot="footer">
+                    {#if getType(value) === 'number'}
+                        <Textbox
+                            value={String(gbs[key])}
+                            on:change={(e) => saveSetting(key, e.target.value)}
+                        />
+                    {:else if getType(value) === 'boolean'}
+                        <Switch
+                            checked={gbs[key]}
+                            on:change={() => {
+                                gbs[key] = !gbs[key]
+                                saveSetting(key, String(gbs[key]))
+                            }}
+                        />
+                    {/if}
+                </p>
             </SettingCard>
-
-            <SettingCard
-                title="Graphics Quality Level"
-                description="description i guess"
-            >
-                <p slot="action">{graphicQuaity}</p>
-
-                <Slider
-                    bind:value={graphicQuaity}
-                    min={0}
-                    max={10}
-                    slot="footer"
-                    onchange={() =>
-                        saveSetting('SavedQualityLevel', String(graphicQuaity))}
-                />
-            </SettingCard>
-
-            <SettingCard
-                title="Reduced Motion"
-                description="Reduce the ui's motion"
-            >
-                <Switch
-                    slot="footer"
-                    bind:checked={reducedMotion}
-                    on:change={() =>
-                        saveSetting('ReducedMotion', String(reducedMotion))}
-                />
-            </SettingCard>
-        </div>
-
-        <div class="flex flex-row gap-3">
-            <SettingCard title="Fullscreen" description="roblox fullscreen">
-                <Switch
-                    slot="footer"
-                    bind:checked={fullscreen}
-                    on:change={() =>
-                        saveSetting('Fullscreen', String(fullscreen))}
-                />
-            </SettingCard>
-
-            <SettingCard
-                title="Auto generated settings"
-                description="Generated from roblox's GBS file. Process with caution."
-            >
-                <Button
-                    slot="footer"
-                    variant="secondary"
-                    on:click={() => {
-                        goto('./gbs/generated')
-                    }}>Open</Button
-                >
-            </SettingCard>
-        </div>
+        {/each}
     </div>
 </div>
