@@ -67,15 +67,8 @@ console.log('component module loaded')
     async function loadState() {
         loaded = false
         appType = (get(launchAppType) as AppType) || 'player'
-        
-        const installation = await getCurrentInstallation(appType)
-        if (installation && installation.exists) {
-            version = installation.version
-        } else {
-            version = await getLatestVersion(appType)
-        }
-        
-        flags = await getFastFlags(version, appType)
+
+        flags = await getFastFlags(appType)
 
         msaaValue = flags[MSAA_KEY] ?? '0'
         textureQuality = flags[TEXTURE_KEY] ?? '-1'
@@ -104,7 +97,7 @@ console.log('component module loaded')
                 await tick()
                 console.log('[Preset] Saving state:', { msaaValue, textureQuality, pauseVoxelizer, wavingGrass, lowMeshQuality, graySky })
                 
-                const latestFlags = await getFastFlags(version, appType)
+                const latestFlags = await getFastFlags(appType)
                 const newFlags = { ...latestFlags }
 
                 newFlags[MSAA_KEY] = msaaValue
@@ -118,7 +111,7 @@ console.log('component module loaded')
                 }
 
                 flags = newFlags
-                await saveFastFlags(version, flags, appType)
+                await saveFastFlags(flags, appType)
                 console.log('[Preset] Save successful')
             } catch (e) {
                 console.error('[Preset] Save failed:', e)
