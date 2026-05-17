@@ -129,9 +129,9 @@
     <div class="flex flex-col gap-3">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                {$_("pages.integrations.windowManipulation.title")}
+                {$_("pages.integrations.windowManipulation.advanced.title")}
             </h1>
-            <p class="text-stone-400 mt-1">{$_("pages.integrations.windowManipulation.description")}</p>
+            <p class="text-stone-400 mt-1">{$_("pages.integrations.windowManipulation.advanced.description")}</p>
         </div>
 
         <div class="flex flex-col gap-2">
