@@ -1027,6 +1027,7 @@ name = "crush"
 version = "0.2.0"
 dependencies = [
  "chrono",
+ "dirs",
  "dirs-next",
  "filthy-rich",
  "futures",

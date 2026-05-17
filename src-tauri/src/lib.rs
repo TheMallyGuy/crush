@@ -3,9 +3,10 @@ use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::crush;
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
+use commands::gbs_operations::{get_gbs, write_gbs};
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
-use commands::pre_processing::{set_process_priority, close_crash_handler};
+use commands::pre_processing::{close_crash_handler, set_process_priority};
 use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
@@ -286,7 +287,9 @@ pub fn run() {
             set_window_vibrancy,
             get_latest_version_studio,
             set_process_priority,
-            close_crash_handler
+            close_crash_handler,
+            get_gbs,
+            write_gbs
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
