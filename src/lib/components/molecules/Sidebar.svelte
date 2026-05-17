@@ -8,9 +8,11 @@
         Settings,
         Info,
         Menu,
+        SlidersHorizontal,
     } from '@lucide/svelte'
     import { page } from '$app/stores'
-    import { _ } from 'svelte-i18n';
+    import { _ } from 'svelte-i18n'
+    import { icon } from 'tauri-plugin-fs-pro-api'
 
     let baseUiUrl: string = '/mainWin/Ui'
 
@@ -25,18 +27,40 @@
             icon: HardDrive,
             href: `${baseUiUrl}/installation`,
         },
-        { name: $_('pages.mod.mod'), icon: Hammer, href: `${baseUiUrl}/mods/modManagement`, activePrefix: `${baseUiUrl}/mods` },
-        { name: $_('pages.fastflag.fastflag'), icon: Flag, href: `${baseUiUrl}/fastflags` },
-        { name: $_('pages.appearance.appearance'), icon: Palette, href: `${baseUiUrl}/appearance` },
+        {
+            name: $_('pages.mod.mod'),
+            icon: Hammer,
+            href: `${baseUiUrl}/mods/modManagement`,
+            activePrefix: `${baseUiUrl}/mods`,
+        },
+        {
+            name: $_('pages.fastflag.fastflag'),
+            icon: Flag,
+            href: `${baseUiUrl}/fastflags`,
+        },
+        {
+            name: $_('pages.appearance.appearance'),
+            icon: Palette,
+            href: `${baseUiUrl}/appearance`,
+        },
+        {
+            name: $_('pages.gbs.gbs'),
+            icon: SlidersHorizontal,
+            href: `${baseUiUrl}/gbs`
+        }
     ]
 
     const footerNav = [
-        { name: $_('pages.settings.settings'), icon: Settings, href: `${baseUiUrl}/settings` },
+        {
+            name: $_('pages.settings.settings'),
+            icon: Settings,
+            href: `${baseUiUrl}/settings`,
+        },
     ]
 </script>
 
 <aside
-    class="flex flex-col h-screen  backdrop-blur-2xl text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
+    class="flex flex-col h-screen backdrop-blur-2xl text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
 >
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
         <button class="hover:text-stone-100 transition-colors">
@@ -46,11 +70,13 @@
 
     <nav class="flex flex-col gap-1 overflow-hidden">
         {#each mainNav as item}
-           {@const isActive = $page.url.pathname.startsWith(item.activePrefix ?? item.href)}
+            {@const isActive = $page.url.pathname.startsWith(
+                item.activePrefix ?? item.href
+            )}
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all  group
+                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all group
                 {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
@@ -69,9 +95,7 @@
 
     <div class="flex-grow"></div>
 
-    <nav
-        class="flex flex-col gap-1 pt-4 overflow-hidden"
-    >
+    <nav class="flex flex-col gap-1 pt-4 overflow-hidden">
         {#each footerNav as item}
             {@const isActive = $page.url.pathname === item.href}
 

@@ -1125,7 +1125,11 @@ fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
     log::info!("Sending Bloxstrap command: {}", payload);
 }
 
-async fn fetch_and_store_location(ip: &str, state: &mut WatcherState, app: &AppHandle) -> Result<(), String> {
+async fn fetch_and_store_location(
+    ip: &str,
+    state: &mut WatcherState,
+    app: &AppHandle,
+) -> Result<(), String> {
     if state.activity.place_id.is_none() {
         log::info!("UDMUX fired but no place_id, skipping");
         return Ok(());
@@ -1272,9 +1276,9 @@ async fn update_discord_rpc(
             Duration::from_secs(5),
             apply_rpc_full(
                 &rpc,
-                Some("Crush"),
-                Some(&i18n.t("rpc.rust.watcher.general").to_string()),
                 Some(&name),
+                Some(&i18n.t("rpc.rust.watcher.general").to_string()),
+                None,
                 None,
                 None,
                 Some(buttons.clone()),
@@ -1298,12 +1302,12 @@ async fn update_discord_rpc(
                 Duration::from_secs(5),
                 apply_rpc_full(
                     &rpc,
-                    Some("Crush"),
-                    Some(&i18n.t("rpc.rust.watcher.general")),
                     Some(&name),
+                    Some(&i18n.t("rpc.rust.watcher.general").to_string()),
                     None,
                     None,
-                    Some(buttons),
+                    None,
+                    Some(buttons.clone()),
                 ),
             )
             .await;
