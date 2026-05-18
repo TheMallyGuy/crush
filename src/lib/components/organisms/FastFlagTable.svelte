@@ -147,7 +147,7 @@
             title="Import flags from a JSON file"
         >
             <Upload class="h-4 w-4" />
-            <span>Import JSON</span>
+            <span>{$_("pages.fastflag.editor.flagTable.import")}</span>
         </button>
     </div>
 
