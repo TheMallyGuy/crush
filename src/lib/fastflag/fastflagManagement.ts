@@ -181,6 +181,5 @@ export async function loadFlag(app_type: AppType, version: string) {
         await mkdir(clientSettingDir, { recursive: true })
     }
 
-    info(`app json : ${raw}`)
     await writeTextFile(clientSettingPath, raw)
 }
