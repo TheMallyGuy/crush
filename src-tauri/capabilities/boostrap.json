@@ -9,6 +9,20 @@
         "opener:default",
         "store:default",
         "log:default",
+        {
+            "identifier": "fs:allow-write-text-file",
+            "allow": [
+                {
+                    "path": "$APPDATA/**"
+                },
+                {
+                    "path": "$LOCALDATA/**"
+                },
+                {
+                    "path": "$CACHE/**"
+                }
+            ]
+        },
         "core:window:allow-close",
         "core:window:allow-set-size",
         "core:window:allow-center",
