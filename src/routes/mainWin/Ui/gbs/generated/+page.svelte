@@ -72,11 +72,6 @@
         await saveGBS()
     }
 
-    function truncate(str: string, maxLength: number): string {
-        if (str.length <= maxLength) return str
-        return str.slice(0, maxLength) + '...'
-    }
-
     function getType(value: undefined) {
         if (value === null) return 'null'
         if (value === undefined) return 'undefined'
@@ -113,7 +108,7 @@
 
     <div class="grid grid-cols-3 gap-3">
         {#each Object.entries(gbs) as [key, value]}
-            <SettingCard title={truncate(key, 16)}>
+            <SettingCard title={key}>
                 <p slot="footer">
                     {#if getType(value) === 'number' || getType(value) === 'string'}
                         <Textbox

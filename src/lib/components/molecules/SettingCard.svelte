@@ -11,6 +11,7 @@
     let hovered = false
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
     class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
     {clickable
@@ -42,7 +43,7 @@
             <div class="flex flex-col gap-0.5">
                 {#if title || $$slots.title}
                     <h3
-                        class="text-base font-semibold tracking-tight text-stone-100"
+                        class="text-base font-semibold tracking-tight text-stone-100 break-all"
                     >
                         <slot name="title">{title}</slot>
                     </h3>
