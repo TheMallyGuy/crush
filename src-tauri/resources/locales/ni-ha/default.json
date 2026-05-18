@@ -1,39 +1,39 @@
 {
     "rpc": {
-        "general": "nihaha nihahahaha nihaha nihahaha nihahaha nihahahahahahaha",
-        "integrations": "nihahahahahaha nihahahahaha nihahahaha",
-        "installation": "nihaha nihahaha nihahahahahaha",
-        "fastflag": "nihahahahahahaha nihaha nihaha nihahahaha",
-        "mod": "nihahaha nihaha nihaha",
-        "appearance": "nihahaha nihahaha nihahahahaha",
+        "general": "nihaha nihahahahahaha nihahahahaha nihahahahahahaha nihahahahahaha nihaha",
+        "integrations": "nihahahahahahaha nihahahahahahaha nihahahahahaha",
+        "installation": "nihahahaha nihahahaha nihahahahahahaha",
+        "fastflag": "nihahahaha nihahahaha nihahahaha nihahahahahahaha",
+        "mod": "nihahahahahahaha nihahahaha nihahaha",
+        "appearance": "nihahahahahahaha nihaha nihahahahahaha",
         "rust": {
             "watcher": {
-                "general": "nihaha nihahahahahahaha",
-                "idle": "nihahaha nihahaha nihahahahaha nihahahahahahaha",
-                "playing": "nihahahahahaha nihahahaha nihahahahahahaha",
-                "playingPrivate": "nihaha nihahahaha nihahahahahaha nihahahahahahaha nihahahaha",
+                "general": "nihaha nihaha",
+                "idle": "nihaha nihahahahahaha nihaha nihahahahahahaha",
+                "playing": "nihahahahahaha nihaha nihaha",
+                "playingPrivate": "nihaha nihahahahahaha nihahaha nihahaha nihahaha",
                 "serverInfomation": {
                     "titles": {
-                        "public": "nihahahaha nihahahaha nihahahahahahaha nihahaha nihahahahaha",
-                        "private": "nihaha nihahahahaha nihahahahahahaha nihahaha nihahahahahaha"
+                        "public": "nihahaha nihahahahaha nihahahaha nihaha nihahahahaha",
+                        "private": "nihahahahaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha"
                     },
-                    "description": "nihahahahahahaha nihahahahahaha nihaha nihahaha nihahahahahaha nihahahahahahaha"
+                    "description": "nihahahaha nihaha nihaha nihahaha nihahahaha nihahahahahaha"
                 }
             }
         }
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "nihahahahahaha nihahahahahaha nihaha",
-            "findingBestRegion": "nihahahahaha nihahahahaha nihahahahahahaha nihahahahahahaha nihahaha",
-            "preparingForDownload": "nihahahahahaha nihahahahahahaha nihaha",
-            "fetchingUrls": "nihaha nihahahaha nihahahahahahaha",
+            "updateChecking": "nihahaha nihahahaha nihahahahahaha",
+            "findingBestRegion": "nihahahahahaha nihahahahaha nihahahahahahaha nihaha nihahahahaha",
+            "preparingForDownload": "nihaha nihahahahaha nihaha",
+            "fetchingUrls": "nihahahahaha nihahahahaha nihahahahahahaha",
             "downloadingAssets": "nihahaha nihahahaha",
-            "extractingFiles": "nihaha nihahahaha",
-            "xmlWriting": "nihahahahahahaha nihaha",
-            "versionSaving": "nihahaha nihahahahaha nihaha",
-            "installationComplete": "nihahahahahaha nihahahaha",
-            "packageDownloadFailed": "nihahahahahaha nihahahahahaha nihaha nihahaha nihahahahahahaha"
+            "extractingFiles": "nihahahahaha nihahahahaha",
+            "xmlWriting": "nihahahahahaha nihahahahahaha",
+            "versionSaving": "nihahahahahahaha nihaha nihahahaha",
+            "installationComplete": "nihahahahahaha nihahahahaha",
+            "packageDownloadFailed": "nihahahahahahaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahaha"
         }
     },
     "elements": {
@@ -41,240 +41,272 @@
     },
     "pages": {
         "choiceWin": {
-            "title": "nihahahaha",
-            "playRoblox": "nihahahahaha nihahahaha",
-            "config": "nihahahahahaha",
-            "discord": "nihahahaha nihahahahaha"
+            "title": "nihahahahahaha",
+            "playRoblox": "nihaha nihaha",
+            "config": "nihahahahahahaha",
+            "discord": "nihahahahaha nihahahahahahaha"
         },
         "boostrapWin": {
             "cancel": "nihahahahahahaha",
-            "retry": "nihahahahaha"
+            "retry": "nihahahaha"
         },
         "serverInfomationPage": {
-            "title": "nihahahahahahaha nihahahaha",
+            "title": "nihahahaha nihahahahaha",
             "infomationCard": {
-                "serverRegion": "nihahahahahaha nihahahahahaha nihahahahahaha",
-                "waitRegion": "nihahahaha nihahaha",
-                "description": "nihahahaha nihaha nihahahahahahaha nihahahahahaha nihahahaha",
-                "uptime": "nihaha nihahahaha nihahahaha nihahahahaha",
-                "instanceId": "nihahaha nihaha nihahahaha nihahahahahaha nihaha",
-                "inviteLink": "nihaha nihahahahaha nihahahaha nihahahahahahaha"
+                "serverRegion": "nihahaha nihahahahahaha nihahahahaha",
+                "waitRegion": "nihahahahahaha nihahaha",
+                "description": "nihaha nihahahahaha nihahahahahahaha nihahaha nihahahahahaha",
+                "uptime": "nihahahahahaha nihaha nihahahaha nihahahahahaha",
+                "instanceId": "nihahahaha nihaha nihahahahahahaha nihaha nihahahahaha",
+                "inviteLink": "nihaha nihaha nihahaha nihahahahaha"
             }
         },
         "appearance": {
-            "appearance": "nihahahahaha",
-            "description": "nihahaha nihahahahaha nihahahahahaha nihahahaha nihahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahaha",
+            "appearance": "nihahahahahaha",
+            "description": "nihahahahahahaha nihahahahahaha nihahaha nihahaha nihahaha nihahahaha nihaha nihahahaha nihahahahahaha",
             "bootstrapThemeCard": {
-                "title": "nihahahaha nihahahahahahaha",
-                "description": "nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahaha nihaha nihahahahahahaha nihahahaha nihahahahahahaha nihahaha nihahahahahaha nihaha nihaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihaha nihahahahahaha nihahahaha nihahahahahahaha",
+                "title": "nihahahahaha nihahahahahahaha",
+                "description": "nihahahaha nihahahahaha nihahahahaha nihaha nihahahahahaha nihahahahaha nihahahahahaha nihahahaha nihahahahahaha nihahahaha nihahahahahaha nihaha nihahahahaha nihahaha nihahahahahaha nihahahahaha nihahaha nihahahaha nihahahahahahaha nihahahaha nihahahahahahaha nihahahahaha nihahahahahahaha",
                 "dropdown": {
-                    "default": "nihahahahahaha nihahahaha",
-                    "custom": "nihaha"
+                    "default": "nihahaha nihahahahaha",
+                    "custom": "nihahahahaha"
                 },
                 "customDropDownContents": {
-                    "importNew": "nihahahaha nihahahahahaha",
-                    "noThemes": "nihahahahahahaha nihaha nihahahahahahaha nihaha nihahahahaha",
-                    "missingAssets": "nihaha nihahahahahahaha nihaha"
+                    "importNew": "nihahahahaha nihahahahaha",
+                    "noThemes": "nihahahahahahaha nihahahahaha nihahahahaha nihahahahahahaha nihaha",
+                    "missingAssets": "nihahahahahaha nihahaha nihahaha"
                 }
             }
         },
         "integrations": {
-            "integrations": "nihahaha",
-            "description": "nihahahahaha nihahaha nihahahahahahaha nihahahahahaha",
+            "integrations": "nihahahahahahaha",
+            "description": "nihahahaha nihahaha nihahahahaha nihahahaha",
             "activityWatcherCard": {
-                "title": "nihahahahaha nihahahahahahaha",
-                "description": "nihahahahahahaha nihahahahahaha nihahahahahahaha nihahahahaha nihahahaha nihahahahahaha nihahahahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahaha nihaha"
+                "title": "nihaha nihaha",
+                "description": "nihahahaha nihaha nihahahahaha nihahahaha nihahahahahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahahahaha nihahahahahaha nihahahaha nihahahahaha"
             },
             "serverNotifierCard": {
-                "title": "nihahahaha nihahahaha nihahaha",
-                "description": "nihahahahaha nihahahahahaha nihahahahahahaha nihahahaha nihahaha nihahahahahahaha nihahahahaha nihahahaha nihaha"
+                "title": "nihahahahahaha nihahahahahaha nihahahahahaha",
+                "description": "nihahaha nihahahahahahaha nihahahahaha nihaha nihahahahahaha nihahahaha nihahahahaha nihahahahahahaha nihahahaha"
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "nihahahaha nihaha",
+                "description": "nihahahahahaha nihahahaha nihahahahaha nihaha nihahahahaha nihaha nihahaha nihahahaha nihahahahahahaha"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "nihahahahahahaha nihahahahahahaha nihahaha",
+                "description": "nihahahahahahaha nihahahahahaha nihahahaha nihahahaha nihaha nihahaha nihaha"
             },
             "rpcCard": {
-                "title": "nihahahahaha nihahahahahahaha nihahahahaha",
-                "description": "nihahahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahahahaha",
-                "option1": "nihahahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahaha",
-                "option2": "nihahahaha nihahahahahaha nihahahahahaha nihahahaha nihahahahahaha nihahahaha"
+                "title": "nihahahahaha nihahahaha nihahahahahahaha",
+                "description": "nihahahahahahaha nihahahahaha nihahahaha nihahahahaha nihaha nihahaha nihaha",
+                "option1": "nihahahaha nihaha nihaha nihahahahaha nihahahaha",
+                "option2": "nihahahahaha nihahahahahaha nihahahahahaha nihahaha nihahaha nihahaha"
             },
             "gameHistoryCard": {
-                "title": "nihahahahahahaha nihahahahahahaha nihaha",
-                "description": "nihahahahahaha nihahahaha nihahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahahaha",
-                "button": "nihahahahahahaha"
+                "title": "nihahahahahaha nihaha nihahahahahaha",
+                "description": "nihahahahaha nihaha nihahahahaha nihaha nihahahahahahaha nihahaha nihahahaha",
+                "button": "nihahahahaha"
             },
             "windowManipulationCard": {
-                "title": "nihahahahahaha nihaha nihahahahahahaha nihahahaha nihahahaha",
-                "description": "nihahahahahahaha nihahahahaha nihaha nihahaha nihahahaha nihahahahaha nihahahahahaha nihaha nihahahaha nihahahahaha nihahaha nihahahaha nihahahahahaha nihahahahaha nihahahaha nihahahaha nihaha nihahahahahaha nihahahahaha nihahahahahaha nihahahahaha nihahahaha nihaha nihahahahahahaha nihahahaha nihaha nihahahaha nihahahahaha nihahaha nihaha nihaha nihaha",
-                "button": "nihahahahahahaha"
+                "title": "nihahaha nihahahahahaha nihahahahaha nihahahahahaha nihahahahaha",
+                "description": "nihahaha nihahahahaha nihahahahahaha nihaha nihahahahahaha nihahaha nihahahahaha nihahahahahaha nihahahaha nihahahaha nihahahahahaha nihahahahahaha nihahaha nihahaha nihahahahaha nihaha nihahahahahahaha nihahahahahahaha nihahahahaha nihahahahahaha nihahaha nihahaha nihahahahaha nihahahahahahaha nihahahahahaha nihahaha nihahahahahaha nihahahahaha nihahahahahahaha nihahahaha nihahahahaha nihaha",
+                "button": "nihahaha"
             },
             "roValraCard": {
-                "title": "nihahaha nihahaha nihaha nihahaha",
-                "description": "nihaha nihahahaha nihahahahaha nihahahahahaha nihahahahaha nihaha nihahahahahahaha nihaha nihahaha nihaha",
+                "title": "nihahaha nihaha nihahahahahaha nihahahahaha",
+                "description": "nihahaha nihahahaha nihahahahahaha nihahahahahahaha nihahaha nihahahaha nihahaha nihahaha nihahahaha nihahahahahahaha",
                 "button": "nihaha"
             },
             "roValra": {
-                "description": "nihahahahahaha",
+                "description": "nihahahahaha",
                 "joinServerForYouCard": {
-                    "title": "nihaha nihahahahahahaha nihahaha nihahahaha nihahahahaha nihahahahahahaha nihahahahahahaha",
-                    "description": "nihaha nihaha nihahahahahaha nihahahahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahaha nihahahahahaha nihaha nihahahahaha"
+                    "title": "nihahahahahahaha nihahahahahahaha nihahahahahaha nihaha nihahahahahahaha nihaha nihaha",
+                    "description": "nihahaha nihaha nihahahahaha nihahaha nihahahahahaha nihahahaha nihahahaha nihahahaha nihahaha nihahahaha nihaha nihaha nihahahahahahaha nihahahahaha"
                 }
             },
             "gameHistory": {
-                "title": "nihahahaha nihahaha nihahaha",
-                "description": "nihahahaha nihahahahahaha nihahahaha nihahahahahaha nihahaha nihahaha nihahahahahaha",
-                "gameHistoryEmpty": "nihahahahahahaha nihahahahahahaha nihahahaha nihaha nihahahahahaha nihahaha nihahahahaha nihahahahahahaha nihahahahaha nihahahaha nihahaha nihahahahahahaha nihaha nihahaha nihaha nihahaha nihahahahahaha nihahahahaha nihaha nihahahahahaha",
-                "gameHistoryLoading": "nihahahaha nihahahaha nihaha nihaha nihahahahahaha",
-                "clearHistory": "nihahahahahaha nihahahahahahaha",
-                "backToIntegrations": "nihahahahahahaha",
+                "title": "nihahahaha nihahaha nihahahaha",
+                "description": "nihahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahaha nihahaha nihahaha",
+                "gameHistoryEmpty": "nihahaha nihahahaha nihahahahahahaha nihahaha nihaha nihahahahaha nihaha nihahahahahaha nihahahaha nihahahahahahaha nihahaha nihahahahahahaha nihahaha nihahahaha nihahahahahaha nihahahahaha nihaha nihahahahaha nihahahaha nihahahahahaha",
+                "gameHistoryLoading": "nihaha nihahahahahaha nihahaha nihaha nihahahahahaha",
+                "clearHistory": "nihahahahahaha nihaha",
+                "backToIntegrations": "nihaha",
                 "gameHistoryCard": {
-                    "titleUnknown": "nihaha nihahahahaha",
-                    "lastPlayed": "nihahahahahahaha nihahahahaha nihahahahaha",
-                    "play": "nihahaha",
-                    "deeplink": "nihahahahahahaha nihahaha"
+                    "titleUnknown": "nihahahahahahaha nihaha",
+                    "lastPlayed": "nihahahahahahaha nihahahahahahaha nihahahahahaha",
+                    "play": "nihahahahaha",
+                    "deeplink": "nihahahahahaha nihahaha"
                 }
             },
             "windowManipulation": {
-                "title": "nihahaha nihahahahaha nihahahaha",
-                "description": "nihahahahahaha nihaha nihahahahahahaha nihahaha nihahahahahaha nihahahahaha",
+                "title": "nihahahahaha nihahaha nihahaha",
+                "description": "nihaha nihaha nihahahaha nihahahahahaha nihahaha nihahahaha",
                 "enableCard": {
                     "title": "nihahahahaha",
-                    "description": "nihahahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahaha nihaha"
+                    "description": "nihahahahahahaha nihahahahahaha nihahaha nihahahaha nihahahahahaha nihahahahaha nihaha nihahahahahaha"
                 },
                 "advanced": {
-                    "title": "nihahaha",
-                    "description": "nihahahaha nihahahaha nihahahahahahaha nihahahaha",
+                    "title": "nihahahahahahaha",
+                    "description": "nihahahahahahaha nihahahahahaha nihaha nihahahahahahaha",
                     "scopes": {
-                        "title": "nihahahahaha",
+                        "title": "nihahahahahaha",
                         "minimizeCard": {
-                            "title": "nihahahahahahaha",
-                            "description": "nihahahahahaha nihahahahahaha nihahahaha nihahahaha nihahahahahaha nihahahaha nihaha nihahahaha nihahahaha nihahahahahahaha"
+                            "title": "nihahahaha",
+                            "description": "nihahahahahahaha nihahahaha nihahaha nihahahahahaha nihahahahahahaha nihaha nihahahahaha nihahahaha nihahaha nihahahahahahaha"
                         },
                         "maximizeCard": {
-                            "title": "nihahaha",
-                            "description": "nihahaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahahaha nihahaha nihahahaha"
+                            "title": "nihahahahaha",
+                            "description": "nihahahahaha nihahaha nihaha nihaha nihahaha nihahahahaha nihahahahahaha nihahaha nihaha nihahahahaha"
                         },
                         "focusCard": {
-                            "title": "nihahahaha",
-                            "description": "nihahahahahaha nihahahahaha nihahahahahahaha nihaha nihaha nihaha nihahaha nihahahahahahaha nihahaha nihahahaha"
+                            "title": "nihahaha",
+                            "description": "nihahahahahahaha nihahahahaha nihahahahahahaha nihahahahahahaha nihaha nihahahaha nihahahahaha nihahahahaha nihahahahaha nihahahaha"
                         },
                         "moveWindowCard": {
-                            "title": "nihahahaha nihahahahahahaha",
-                            "description": "nihahaha nihahahahaha nihahahahahaha nihahahahahahaha nihahahahahaha nihahahaha nihahahahaha nihahahahahaha nihahahaha nihahaha nihahaha"
+                            "title": "nihahahahahahaha nihahaha",
+                            "description": "nihahahahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahahahaha nihahahahahahaha nihahaha nihahaha nihahahahahahaha nihaha"
                         },
                         "restoreCard": {
-                            "title": "nihahahaha",
-                            "description": "nihahaha nihaha nihaha nihaha nihahahahaha nihahahahahaha nihaha nihaha nihahaha nihaha"
+                            "title": "nihahaha",
+                            "description": "nihahahahahaha nihahahaha nihaha nihahaha nihahahahahaha nihahahahahaha nihahahahahaha nihaha nihahahahahaha nihahahahahaha"
                         },
                         "setWindowTitleCard": {
-                            "title": "nihaha nihahahahahahaha nihahahahahahaha",
-                            "description": "nihaha nihahahaha nihahahahaha nihahaha nihahahahahaha nihahahahahaha nihahaha nihahaha nihahahahahaha nihahahahahaha nihahahahahaha nihahahahahahaha"
+                            "title": "nihahahaha nihahahahahaha nihahahahaha",
+                            "description": "nihahahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahahaha nihaha nihahahahahahaha nihahahahaha nihahaha nihahahaha nihaha nihahahahahaha"
                         },
                         "setBorderless": {
-                            "title": "nihahahahahahaha nihahahaha",
-                            "description": "nihahahahahahaha nihahahahahahaha nihahahahaha nihaha nihahahaha nihahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahaha nihahahahaha"
+                            "title": "nihahahahaha nihahahaha",
+                            "description": "nihahaha nihahahaha nihaha nihahahahaha nihahahahahahaha nihahaha nihahahahahahaha nihahahahahahaha nihahahaha nihaha nihahahahaha"
                         }
                     },
                     "transparencySettings": {
-                        "title": "nihaha nihahahaha",
+                        "title": "nihahahahaha nihaha",
                         "enableCard": {
-                            "title": "nihahahahahaha",
-                            "description": "nihahaha nihahahaha nihahahahahaha nihaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahaha nihahahaha"
+                            "title": "nihahaha",
+                            "description": "nihahahaha nihahaha nihahahahahaha nihahahaha nihahahaha nihaha nihahahahahahaha nihaha nihahahahahahaha nihahahahaha nihahahahaha"
                         },
                         "minTransparency": {
-                            "title": "nihahahahaha nihahahahahahaha",
-                            "description": "nihaha nihahahahahahaha nihaha nihahahahahahaha nihaha nihahahahaha nihaha nihahaha"
+                            "title": "nihahahaha nihahahaha",
+                            "description": "nihahahaha nihaha nihahahahahahaha nihahahahaha nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahaha"
                         },
                         "maxTransparency": {
-                            "title": "nihahahahahaha nihahahahaha",
-                            "description": "nihahahahahaha nihahaha nihahahahaha nihaha nihahahahahaha nihaha nihahahahahaha nihahahaha"
+                            "title": "nihaha nihahahahahahaha",
+                            "description": "nihahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahahahaha nihahahaha nihahaha nihahahaha"
                         }
                     }
                 }
             }
         },
+        "gbs": {
+            "gbs": "nihahahahahaha nihahaha nihaha",
+            "description": "nihahahaha nihahahahaha nihahahahahaha nihahahahahaha",
+            "fpsLimitCard": {
+                "title": "nihahahahahahaha nihahaha",
+                "description": "nihahahahahaha nihahaha nihahaha nihaha nihahahahahaha nihahahahahahaha nihahahaha nihahahahaha nihahahaha nihahahahahaha nihahahahahaha nihaha nihaha nihahahahahaha nihaha nihaha nihaha nihahahaha"
+            },
+            "graphicsQualityLevel": {
+                "title": "nihahahaha nihaha nihahahahahahaha",
+                "description": "nihahahahaha nihahahahahaha nihahahahahahaha nihahahaha"
+            },
+            "reducedMotionCard": {
+                "title": "nihahahaha nihahahahaha",
+                "description": "nihahahahahaha nihahahahahahaha nihahahahaha nihaha"
+            },
+            "fullscreenCard": {
+                "title": "nihahahahahahaha",
+                "description": "nihahaha nihahaha nihahahahahaha nihahahaha nihahahaha nihahahaha"
+            },
+            "autoGeneratedGbsCard": {
+                "title": "nihahahahahahaha nihahahahahaha nihahahaha",
+                "description": "nihahahaha nihahahahahaha nihahahahahahaha nihahahaha nihahahahahahaha nihahahahahahaha nihahaha nihahahahahahaha",
+                "button": "nihahahahahahaha"
+            },
+            "autoGeneratedGbs": {
+                "title": "nihahaha nihahahahaha nihaha nihahaha",
+                "description": "nihahahahahahaha nihahahahahahaha nihahaha nihahahaha nihahahahahaha nihahahahahahaha nihahahaha",
+                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
+                "back": "nihaha"
+            }
+        },
         "installations": {
-            "installations": "nihahahahaha",
-            "description": "nihahahahaha nihahahahaha nihahahaha nihahahahaha",
+            "installations": "nihaha",
+            "description": "nihahahaha nihahahahaha nihahahahahaha nihahahahahaha",
             "customVersion": {
-                "title": "nihaha nihahahahahaha nihahahahahaha nihahahahaha nihahahaha",
-                "description": "nihahahahahaha nihaha nihaha nihaha nihaha nihaha nihahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahaha nihahahahahahaha nihahahahahaha nihahahahaha nihahahaha nihahaha nihahaha nihahahaha nihahahahahaha nihahahahahahaha nihaha nihaha nihahahahahahaha nihahahahahaha nihahahaha nihahahahahahaha nihahahahaha nihahahahahahaha"
+                "title": "nihahaha nihaha nihahahahaha nihahahaha nihahahaha",
+                "description": "nihaha nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihaha nihahaha nihahaha nihaha nihahahahahahaha nihahaha nihahaha nihahahaha nihaha nihaha nihahahaha nihahaha nihahahahahaha nihahaha nihahahahahaha nihaha nihahahahaha nihaha nihahahahahahaha nihahahahahaha nihahaha nihaha nihahaha nihahahahaha"
             },
             "parallelDownloadingCard": {
-                "title": "nihahaha nihahaha",
-                "description": "nihahahahahaha nihahahaha nihahaha nihahahaha nihahahahahaha nihahahaha nihaha nihahaha nihahahaha nihahahahahaha nihahahahaha nihahaha"
+                "title": "nihahaha nihahahahaha",
+                "description": "nihahahahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahahahahaha nihahahahahaha nihahahahaha nihaha nihahahaha nihahahaha nihaha nihahahahahaha"
             },
             "forceReinstallCard": {
-                "title": "nihahahahahaha nihahahaha nihahahaha",
-                "description": "nihahahahaha nihaha nihahahahahaha nihahahahahahaha nihahahaha nihahaha nihahaha"
+                "title": "nihahahahaha nihahahahaha nihahaha",
+                "description": "nihahahahahahaha nihahahahaha nihaha nihahahahaha nihahahahahahaha nihahahaha nihaha"
             },
             "dontUpdateCard": {
-                "title": "nihahahahahahaha nihahahahahaha nihahahahahahaha",
-                "description": "nihahahaha nihahahahahahaha nihahaha nihahahahahahaha nihahahaha nihahahahaha nihahahahaha nihaha"
+                "title": "nihahahahahahaha nihahahahaha nihahahahahahaha",
+                "description": "nihahahahaha nihahahahaha nihahahahahaha nihaha nihahahahaha nihahahaha nihahaha nihahaha"
             }
         },
         "fastflag": {
-            "fastflag": "nihahaha nihahahahaha",
-            "description": "nihahahahahahaha nihahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahaha",
-            "generalBack": "nihahahahaha nihaha nihahaha nihahahahaha",
+            "fastflag": "nihahaha nihahahaha",
+            "description": "nihahahahahahaha nihaha nihahahahahaha nihahahahahaha nihahaha nihahahaha",
+            "generalBack": "nihahahahahaha nihahaha nihahahahahahaha nihahahaha",
             "selectScreeen": {
-                "title": "nihahahahahaha nihahahaha nihahahahahaha nihahahaha",
+                "title": "nihaha nihahaha nihahaha nihahahahahahaha",
                 "editCard": {
-                    "title": "nihaha",
-                    "description": "nihahahaha nihaha nihahahahahaha"
+                    "title": "nihahahahaha",
+                    "description": "nihahahahahahaha nihaha nihahahahaha"
                 },
                 "presetCard": {
-                    "title": "nihaha",
-                    "description": "nihahahahaha nihahaha nihahahahahahaha nihahahaha nihahahahaha nihahaha nihahahahaha"
+                    "title": "nihahahahaha",
+                    "description": "nihahahahahaha nihahahahahahaha nihahaha nihahaha nihahahahahaha nihahaha nihahaha"
                 }
             },
             "editor": {
                 "flagTable": {
-                    "texboxFlagName": "nihahahaha nihaha",
-                    "texboxFlagValue": "nihahahahahaha",
-                    "buttonAdd": "nihaha",
-                    "search": "nihahahahahahaha nihahahahahaha nihahaha nihahahahahaha",
-                    "searchNotFound": "nihahahahaha nihahahahaha nihahahahaha nihahahahaha nihahahahaha nihaha",
+                    "texboxFlagName": "nihaha nihahahahaha",
+                    "texboxFlagValue": "nihahaha",
+                    "buttonAdd": "nihahahahahaha",
+                    "search": "nihahahaha nihahahaha nihahahahahaha nihahahahahahaha",
+                    "searchNotFound": "nihahahahaha nihahahahahaha nihahahahaha nihahahaha nihahahaha nihahahahahaha",
+                    "import": "nihahahahahahaha nihahahahahahaha",
                     "flagCol": {
-                        "deleteNote": "nihahaha nihahahaha",
+                        "deleteNote": "nihahaha nihahahahahahaha",
                         "name": "nihahaha nihahahahahahaha",
                         "type": "nihahaha",
-                        "value": "nihahahaha"
+                        "value": "nihahahahahahaha"
                     }
                 }
             },
             "preset": {
-                "preset": "nihahahahaha",
-                "description": "nihahaha nihaha nihahaha nihahahahahaha nihahahahaha nihahahahahaha",
+                "preset": "nihahahahahaha",
+                "description": "nihahahahaha nihahaha nihahaha nihahahahahaha nihahahahahahaha nihahahahahahaha",
                 "msaaCard": {
-                    "title": "nihahahahahahaha nihaha nihahahaha",
-                    "description": "nihahahahaha nihahahahahahaha nihahahahahaha nihahahaha nihahaha nihahahahahaha nihahahahaha nihahahaha nihahahahahaha nihaha nihahahahahahaha"
+                    "title": "nihahahaha nihahahahahaha nihahahahahahaha",
+                    "description": "nihaha nihahaha nihahahahaha nihaha nihahahahahahaha nihahahaha nihahahahahaha nihahaha nihahaha nihahahahahaha nihahahahaha"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "nihahahahaha nihahahahahahaha",
-                    "description": "nihahahahaha nihahahahahaha nihahahaha nihahahahahaha nihahahahahaha"
+                    "title": "nihaha nihahaha",
+                    "description": "nihahahaha nihahahahaha nihahaha nihahahaha nihahahaha"
                 },
                 "grassAnimationCard": {
-                    "title": "nihahahahahahaha nihahahahahaha nihahaha",
-                    "description": "nihahaha nihahahahahaha nihahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahahahahaha nihaha nihaha nihahahahaha nihaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahaha nihahahaha nihahaha nihahahahahaha nihahahahahaha nihaha nihahahahahahaha nihahaha nihaha nihahahaha nihahahahahaha nihahahahahahaha nihahahahaha nihahahaha nihaha nihaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahaha"
+                    "title": "nihahahahahahaha nihahahahahahaha nihahahahaha",
+                    "description": "nihahahahaha nihaha nihahaha nihahaha nihahahahahahaha nihahahahahahaha nihahahahaha nihahahahahahaha nihahahahaha nihahaha nihahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahaha nihahahahahahaha nihahahaha nihahahaha nihahahahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahaha nihahaha nihaha nihaha nihaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahahahaha nihaha nihahahahahahaha"
                 },
                 "overwriteTextureQualityCard": {
-                    "title": "nihahahahahaha nihahahaha nihahahahahaha nihahahahahahaha",
-                    "description": "nihaha nihahaha nihahahahahaha nihahahahahaha nihahahaha nihahahahaha",
-                    "dropdownDefault": "nihaha"
+                    "title": "nihahahahahaha nihaha nihahahaha nihahahaha",
+                    "description": "nihahahahahahaha nihahahaha nihahahahahahaha nihahahahahahaha nihahahaha nihahahahahahaha",
+                    "dropdownDefault": "nihahaha"
                 },
                 "lowMeshQualityCard": {
-                    "title": "nihahahaha nihahahahahahaha nihaha nihahahahahaha",
-                    "description": "nihaha nihahahahaha nihahaha"
+                    "title": "nihahahahahaha nihahahahahahaha nihahaha nihahahahaha",
+                    "description": "nihahaha nihahahahahaha nihaha"
                 },
                 "graySkyCard": {
-                    "title": "nihahahahaha nihahaha",
-                    "description": "nihahahahahaha nihahahahahahaha nihahaha nihahahaha nihahahahahaha nihahahaha nihahahahahaha nihahahahahahaha"
+                    "title": "nihaha nihahahaha",
+                    "description": "nihahahaha nihahahahahaha nihahahaha nihahaha nihahaha nihahaha nihahahahahaha nihahahahahaha"
                 }
             }
         },
@@ -282,100 +314,100 @@
             "mod": "nihahahaha",
             "tab": {
                 "modManagement": {
-                    "title": "nihaha nihahaha",
-                    "description": "nihahahahaha nihahahahahaha nihahahaha nihahahaha",
-                    "addModButton": "nihahahahahaha nihahaha nihahaha",
-                    "noModsFound": "nihahahahaha nihahaha nihaha nihahahahaha nihaha nihahahahahaha",
-                    "noModsFoundCreateButton": "nihahahahahahaha nihahaha nihaha nihahahahahahaha",
+                    "title": "nihahahahahahaha nihahaha",
+                    "description": "nihahahahahahaha nihahahahahaha nihahahahahaha nihahaha",
+                    "addModButton": "nihahaha nihahahahahahaha nihahahahaha",
+                    "noModsFound": "nihahahahahahaha nihahahahahaha nihahahahaha nihahaha nihahahaha nihahahahahahaha",
+                    "noModsFoundCreateButton": "nihaha nihahahahaha nihahahahahaha nihahahahahaha",
                     "modCards": {
-                        "toggleNoteDisable": "nihahaha nihahaha",
-                        "toggleNoteEnable": "nihahahahahahaha nihahahahahaha",
-                        "renameNote": "nihahahahaha nihahahaha",
-                        "openFolderNote": "nihaha nihahahahahaha nihahahaha",
-                        "deleteNote": "nihahahahahahaha nihaha",
-                        "layoutNote": "nihaha nihaha nihaha nihahahahahaha nihahahaha nihahahaha nihahahaha",
-                        "description": "nihahahahaha nihahahahaha nihahaha nihaha nihahahaha nihahaha nihahaha nihahaha nihahahahahahaha"
+                        "toggleNoteDisable": "nihahahahahahaha nihahahahahaha",
+                        "toggleNoteEnable": "nihahahaha nihahahahahaha",
+                        "renameNote": "nihahahahahahaha nihahahahahaha",
+                        "openFolderNote": "nihahahahahaha nihahahahahaha nihahahahahaha",
+                        "deleteNote": "nihahahahahaha nihaha",
+                        "layoutNote": "nihaha nihahahahaha nihahahahahahaha nihahaha nihahahahaha nihahahahahahaha nihaha",
+                        "description": "nihahahahahaha nihahahahaha nihahahahahaha nihahahaha nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahaha nihaha"
                     },
                     "dialogs": {
                         "create": {
-                            "title": "nihaha nihahahahaha nihahahahahaha nihahahaha",
+                            "title": "nihahahahahahaha nihahaha nihahahahaha nihahahahahahaha",
                             "textbox": {
-                                "title": "nihaha nihahaha",
-                                "placeholder": "nihahahaha nihahahahaha nihaha"
+                                "title": "nihahahahahaha nihaha",
+                                "placeholder": "nihahahaha nihahahahahahaha nihaha"
                             }
                         },
                         "delete": {
-                            "title": "nihaha nihahahaha",
-                            "description": "nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihaha nihahahahahaha nihahahahaha"
+                            "title": "nihahahahaha nihahahaha",
+                            "description": "nihahahahahahaha nihaha nihahahahahaha nihahahahahaha nihahahahaha nihahahahahahaha nihahahahahaha"
                         },
                         "exists": {
-                            "title": "nihahahahahahaha nihahahahahahaha nihahaha nihahahahaha nihahahaha",
-                            "description": "nihaha nihahahahahaha nihahahaha nihahahaha nihahahaha"
+                            "title": "nihahahahahaha nihahaha nihahahahaha nihahahahahaha nihahahahahahaha",
+                            "description": "nihahahaha nihahahahaha nihahahahahaha nihaha nihahahahahaha"
                         },
                         "buttons": {
-                            "confirm": "nihahaha",
+                            "confirm": "nihaha",
                             "cancel": "nihahahahahahaha"
                         }
                     }
                 },
                 "prebuiltMods": {
-                    "title": "nihahahahahahaha nihaha",
-                    "description": "nihahahahahahaha nihaha nihaha",
+                    "title": "nihahahahahahaha nihahahaha",
+                    "description": "nihahahahahaha nihahaha nihahahahahahaha",
                     "cursorCard": {
-                        "title": "nihaha",
-                        "description": "nihahaha nihahahaha nihaha nihahahahahaha nihaha nihahahahahahaha nihahahahahaha",
+                        "title": "nihahahahahaha",
+                        "description": "nihahahaha nihahahahaha nihahaha nihahahaha nihahahahaha nihahahaha nihahahahaha",
                         "dropdown": {
-                            "default": "nihaha"
+                            "default": "nihahahahaha"
                         }
                     },
                     "customFontCard": {
-                        "title": "nihahahahahaha nihahaha",
-                        "description": "nihahahaha nihaha nihaha nihahahahaha nihahahahahaha nihahahaha nihahaha nihahahahahaha",
-                        "button": "nihaha nihaha"
+                        "title": "nihahahahahaha nihahahahahaha",
+                        "description": "nihahahaha nihahahahahahaha nihaha nihahaha nihahahahahaha nihahahahahaha nihahaha nihaha",
+                        "button": "nihahahahahahaha nihahahaha"
                     }
                 },
                 "communityMods": {
-                    "title": "nihahahahahahaha nihahaha",
-                    "description": "nihahahahahaha nihahahaha nihahahaha nihaha nihahahaha nihahaha",
+                    "title": "nihahahahahaha nihaha",
+                    "description": "nihahaha nihaha nihahahahaha nihahahaha nihahaha nihahahahaha",
                     "notice": {
-                        "title": "nihahaha nihahahahaha nihahahahaha",
-                        "description": "nihahaha nihahahahaha nihahahahahaha nihahaha nihahahahahahaha nihaha nihahaha nihahahaha nihahahahahahaha nihahahahaha nihahahaha nihahahahaha nihahahahahaha nihahahahaha nihahahahahaha nihaha nihahaha nihahahahahaha",
-                        "submissionButton": "nihahaha nihaha nihahahaha"
+                        "title": "nihaha nihahahahaha nihahahahahaha",
+                        "description": "nihahahahaha nihaha nihahahahahaha nihahahaha nihaha nihahahaha nihahahahahahaha nihaha nihahaha nihahahahahahaha nihahaha nihahahahahaha nihahahahahahaha nihaha nihahaha nihahaha nihahahahaha nihahaha",
+                        "submissionButton": "nihaha nihaha nihahahahaha"
                     }
                 }
             }
         },
         "settings": {
-            "settings": "nihahahaha",
+            "settings": "nihahaha",
             "aboutCard": {
-                "title": "nihahahaha",
-                "description": "nihahahahahahaha nihahahaha nihahahahahahaha nihahaha nihahahahaha",
-                "note": "nihahahaha nihahahaha nihahahahahaha nihahahahaha nihahahaha nihaha nihahahahahaha nihahahahahahaha nihahaha nihahahaha nihaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihahahahaha nihaha nihahahahahaha nihahahahahaha nihaha nihahahahahaha nihahahaha nihahahahahahaha",
-                "builtOn": "nihahahahaha nihahaha nihaha",
-                "commitHash": "nihahahahahahaha nihahahahahaha nihahahahahahaha",
-                "version": "nihahahahahaha nihahahahahahaha"
+                "title": "nihaha",
+                "description": "nihahahahaha nihahahahaha nihahaha nihahahahahaha nihahahaha",
+                "note": "nihahahahahaha nihahahaha nihahahaha nihahahaha nihahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahahaha nihaha nihahaha nihahahaha nihahaha nihahaha nihahahahaha nihaha nihaha nihahaha nihahahaha nihahahahahaha nihahaha nihahahahahahaha",
+                "builtOn": "nihaha nihahahahaha nihahahahahahaha",
+                "commitHash": "nihahahaha nihahaha nihahahahaha",
+                "version": "nihahahahaha nihahaha"
             },
             "onBoardCard": {
-                "title": "nihahaha nihahahahaha",
-                "description": "nihahahaha nihahaha nihahaha nihahahahaha nihahaha nihahaha nihaha",
-                "button": "nihahahaha"
+                "title": "nihahahaha nihahaha",
+                "description": "nihahaha nihahaha nihaha nihahahahahahaha nihahahaha nihahahaha nihahaha",
+                "button": "nihaha"
             },
             "languageCard": {
-                "title": "nihahahahahahaha",
-                "description": "nihahahahahahaha nihahahaha nihahahahahahaha nihahahahahahaha nihahahahahaha nihahahaha"
+                "title": "nihahahaha",
+                "description": "nihahahaha nihaha nihahahahahaha nihahahaha nihaha nihahahahahaha"
             },
             "windowVibrancyCard": {
-                "title": "nihahahaha nihahahahahahaha",
-                "description": "nihahahaha nihahahahahaha nihaha nihaha nihahahahahahaha nihahahaha nihaha nihahahahaha nihaha"
+                "title": "nihahahahahaha nihahahahahaha",
+                "description": "nihahahahahaha nihahahaha nihahaha nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahahaha nihahahaha nihahahahahahaha"
             },
             "enableCrushRpcCard": {
-                "title": "nihahahahaha nihahahahahaha nihahahahaha",
-                "description": "nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahahahahaha nihaha nihaha nihahahahahaha nihaha nihahahahahahaha"
+                "title": "nihahahahahahaha nihahahahahaha nihahahahahahaha",
+                "description": "nihahahahahahaha nihahahahahahaha nihahahahahahaha nihahahahaha nihahahahaha nihahahahahaha nihahaha nihaha nihaha nihahahahahaha nihaha nihahahahahaha nihahaha"
             },
             "donateCard": {
-                "title": "nihahahahaha",
-                "description": "nihahahahaha nihahaha nihahaha nihahahahahaha nihahahahahahaha nihahaha nihahahaha nihahahaha nihahahahahaha",
-                "button": "nihahahahahahaha"
+                "title": "nihahahahahaha",
+                "description": "nihahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahahahaha nihaha nihahaha nihaha nihahahahahaha",
+                "button": "nihahahahaha"
             }
         }
     }
