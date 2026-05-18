@@ -8,7 +8,9 @@
 // import type { AppType } from '$lib/types'
 
 import type { AppType } from "$lib/downloadRoblox";
+import { appDataDir, join } from "@tauri-apps/api/path";
 import { BaseDirectory, exists, mkdir, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { info } from "@tauri-apps/plugin-log";
 import { load, Store } from "@tauri-apps/plugin-store";
 import { store } from "@tauri-store/svelte";
 
@@ -18,11 +20,6 @@ import { store } from "@tauri-store/svelte";
 //     }
 // }
 
-async function ensureShit(path: string) {
-    if (!(await exists(path))) {
-        await mkdir(path, { recursive: true, baseDir: BaseDirectory.AppData })
-    }
-}
 
 function coerceValue(value: string): boolean | number | string {
     if (value === 'true') return true
@@ -161,4 +158,29 @@ export async function saveFastFlags(
 
     const content = JSON.stringify(coerced, null, 2)
     await writeTextFile(clientSettings, content, { baseDir: BaseDirectory.AppData })
+}
+
+export async function loadFlag(app_type: AppType, version: string) {
+    let path
+
+    if (app_type === "player") {
+        path = await join(await appDataDir(), "Player", "Versions", version)
+    } else {
+        path = await join(await appDataDir(), "Studio", "Versions", version)
+    }
+
+    const clientSettingDir = await join(path, "ClientSettings")
+    const clientSettingPath = await join(clientSettingDir, "ClientAppSettings.json")
+
+    const clientSettings = `${app_type}GlobalClientSettings.json`
+    if (!(await exists(clientSettings, { baseDir: BaseDirectory.AppData }))) return
+
+    const raw = await readTextFile(clientSettings, { baseDir: BaseDirectory.AppData })
+
+    if (!(await exists(clientSettingDir))) {
+        await mkdir(clientSettingDir, { recursive: true })
+    }
+
+    info(`app json : ${raw}`)
+    await writeTextFile(clientSettingPath, raw)
 }

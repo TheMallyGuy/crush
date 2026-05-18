@@ -26,6 +26,7 @@
     import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
     import { Window } from '@tauri-apps/api/window'
     import { launchAppType } from '$lib/stores/launchAppType'
+    import { loadFlag } from '$lib/fastflag/fastflagManagement'
 
     let state: ThemeState | null = null
     const unsub = themeStore.subscribe((v) => {
@@ -144,6 +145,8 @@
             handleProgress({ type: 'status', message: 'Launching' })
 
             const integrations = await store.get<Integrations>('integrations')
+            
+            await loadFlag(appType, version)
 
             if (appType === 'studio') {
                 await launchStudio(version)
