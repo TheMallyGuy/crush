@@ -30,7 +30,6 @@
     let deleteDialog: boolean = false
 
     let createDialog: boolean = false
-    let modNmae: string
 
     let existDialog: boolean = false
 
