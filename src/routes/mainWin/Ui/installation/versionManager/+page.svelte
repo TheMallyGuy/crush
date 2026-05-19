@@ -7,6 +7,7 @@
     import { Play, Plus, Trash2 } from '@lucide/svelte'
     import { load, Store } from '@tauri-apps/plugin-store'
     import { onMount } from 'svelte'
+    import { _ } from 'svelte-i18n'
 
     type Versions = {
         appType: AppType
@@ -123,8 +124,10 @@
 <Dialog
     bind:open={deleteDialog}
     on:close={() => resolveDelete?.(false)}
-    title="Confirm Action"
-    description="Are you sure you want to delete this version?"
+    title={$_('pages.installations.versionManager.dialogs.delete.title')}
+    description={$_(
+        'pages.installations.versionManager.dialogs.delete.description'
+    )}
 >
     <div slot="actions">
         <Button
@@ -132,14 +135,14 @@
             size="sm"
             on:click={() => resolveDelete?.(false)}
         >
-            Cancel
+            {$_('pages.installations.versionManager.dialogs.delete.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
             on:click={() => resolveDelete?.(true)}
         >
-            Confirm
+            {$_('pages.installations.versionManager.dialogs.delete.confirm')}
         </Button>
     </div>
 </Dialog>
@@ -147,11 +150,11 @@
 <Dialog
     bind:open={createDialog}
     on:close={() => resolveCreate?.(null)}
-    title="Add a new version"
+    title={$_("pages.installations.versionManager.dialogs.new.title")}
 >
     <Textbox
-        label="Version name"
-        placeholder="Version 1"
+        label={$_("pages.installations.versionManager.dialogs.new.textbox1.title")}
+        placeholder={$_("pages.installations.versionManager.dialogs.new.textbox1.placeholder")}
         bind:value={versionName}
     />
 
@@ -167,14 +170,14 @@
             size="sm"
             on:click={() => resolveCreate?.(null)}
         >
-            Cancel
+            {$_("pages.installations.versionManager.dialogs.new.cancel")}
         </Button>
         <Button
             variant="primary"
             size="sm"
             on:click={() => resolveCreate?.(versionName)}
         >
-            Confirm
+            {$_("pages.installations.versionManager.dialogs.new.confirm")}
         </Button>
     </div>
 </Dialog>
@@ -183,10 +186,10 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Versions manager
+                {$_('pages.installations.versionManager.title')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Easily manage your roblox versions.
+                {$_('pages.installations.versionManager.description')}
             </p>
         </div>
     </div>
@@ -200,7 +203,9 @@
             <div
                 class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
             >
-                <p class="text-stone-500">No installations yet.</p>
+                <p class="text-stone-500">
+                    {$_('pages.installations.versionManager.none')}
+                </p>
             </div>
         {:else}
             <SortableList {items} let:item>

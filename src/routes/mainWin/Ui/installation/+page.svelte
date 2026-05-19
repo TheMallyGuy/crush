@@ -74,8 +74,8 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title="Versions Manager"
-            description="Manage multiple roblox versions with speed"
+            title={$_("pages.installations.versionManagerCard.title")}
+            description={$_("pages.installations.versionManagerCard.description")}
             icon={Rocket}
         >
             <Button slot="action" variant="secondary" on:click={() => {goto("./installation/versionManager")}}>
