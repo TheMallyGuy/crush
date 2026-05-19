@@ -98,39 +98,71 @@ const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
     (a, b) => b[1].length - a[1].length
 )
 
-import type { ProgressEvent, ProgressCallback, Installation, Versions } from './types'
+import type { ProgressEvent, ProgressCallback, Installation, Versions, InstallationEntry } from './types'
 
-async function reindexVersions(appType: AppType = 'player'): Promise<string[]> {
+async function reindexVersions(appType: AppType = 'player'): Promise<InstallationEntry[]> {
     const dataDir = await appDataDir()
     const appFolder = appType === 'studio' ? 'Studio' : 'Player'
     const versionsDir = await join(dataDir, appFolder, 'Versions')
     const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
 
+    const storeKey = 'versions.json'
+    const versionStore = await load(storeKey)
+    const storedVersions = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
+
     const dirExists = await exists(versionsDir)
-    if (!dirExists) return []
+    if (!dirExists) {
+        // wipe stored entries for this appType since the folder is gone
+        const filtered = storedVersions.filter(e => e.appType !== appType)
+        await versionStore.set('versions', filtered)
+        await versionStore.save()
+        return []
+    }
 
     const entries = await readDir(versionsDir)
-    const validVersions: string[] = []
+    const validEntries: InstallationEntry[] = []
 
     for (const entry of entries) {
         if (!entry.isDirectory) continue
-        // test if its look like a version name thing
-        if (!entry.name?.startsWith('version-')) continue
+        if (!entry.name || typeof entry.name !== 'string') continue
+        if (!entry.name.startsWith('version-')) continue
 
         const exePath = await join(versionsDir, entry.name, exeName)
+
         const appSettingsPath = await join(versionsDir, entry.name, 'AppSettings.xml')
 
         const isComplete = await exists(exePath) && await exists(appSettingsPath)
-        if (isComplete) {
-            validVersions.push(entry.name)
-        } else {
-            // clean up
-            info(`Removing incomplete installation: ${entry.name}`)
+
+        if (!isComplete) {
+            info(`removing incomplete installation: ${entry.name}`)
             await remove(await join(versionsDir, entry.name), { recursive: true })
+
+            continue
         }
+
+        const existing = storedVersions.find(
+            e => e.versionHash === entry.name && e.appType === appType
+        )
+
+        validEntries.push(
+            existing ?? {
+                id: `Installation ${validEntries.length + 1}`,
+                versionHash: entry.name,
+                appType,
+                installedAt: new Date().toISOString(),
+            }
+        )
     }
 
-    return validVersions
+    // merge
+
+    const otherAppTypeEntries = storedVersions.filter(e => e.appType !== appType)
+    const merged = [...otherAppTypeEntries, ...validEntries]
+    await versionStore.set('versions', merged)
+
+    await versionStore.save()
+
+    return validEntries
 }
 
 async function ensureDir(path: string) {
@@ -243,10 +275,9 @@ async function checkForUpdates(
 }
 
 export async function getLatestVersion(appType: AppType = 'player'): Promise<string> {
-    const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
-    const versionStore = await load(storeKey)
-    const versionList = (await versionStore.get<string[]>('versions')) ?? []
-    return versionList.at(-1) ?? ''
+    const versionStore = await load('versions.json')
+    const installations = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
+    return installations.filter(i => i.appType === appType).at(-1)?.versionHash ?? ''
 }
 
 async function resolveBestRegion(onProgress: ProgressCallback): Promise<string> {
@@ -360,7 +391,7 @@ async function checkInstallationExists(
     appType: AppType = 'player',
     version?: string
 ): Promise<boolean> {
-    if (!version) return false
+    if (!version || typeof version !== 'string') return false
     const dataDir = await appDataDir()
     const appFolder = appType === 'studio' ? 'Studio' : 'Player'
     const exeName =
@@ -372,35 +403,32 @@ async function checkInstallationExists(
 export async function downloadRoblox(
     onProgress: ProgressCallback,
     appType: AppType = 'player',
-    version?: string
 ): Promise<string> {
     const config = await load('config.json')
     const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
     const versionStore = await load(storeKey)
 
     // reindex
-    const actualVersions = await reindexVersions(appType)
-    const storedVersions = (await versionStore.get<string[]>('versions')) ?? []
+    const actualEntries = await reindexVersions(appType)
+    const actualVersions = actualEntries.map(e => e.versionHash)
+
+    const storedEntries = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
+    const storedVersions = storedEntries.map(e => e.versionHash)
 
     if (actualVersions.length !== storedVersions.length ||
         actualVersions.some(v => !storedVersions.includes(v))) {
-        info(`Version list mismatch, reindexing. Stored: ${storedVersions}, Actual: ${actualVersions}`)
-        await versionStore.set('versions', actualVersions)
+        info(`Version list mismatch, reindexing.`)
+        await versionStore.set('versions', actualEntries)
         await versionStore.save()
     }
 
-    const versionList = actualVersions
     const savedInstallation = await config.get<Installation>('installation')
-
     if (savedInstallation?.dontUpdate) {
-        return versionList.at(-1) ?? ''
+        const current = await versionStore.get<InstallationEntry>('currentlyUsing')
+        return current?.versionHash ?? actualVersions.at(-1) ?? ''
     }
 
-    if (version) {
-        return handleExplicitVersion(onProgress, appType, version, versionList, versionStore)
-    }
-
-    return handleLatestVersion(onProgress, appType, versionList, versionStore, config)
+    return handleLatestVersion(onProgress, appType, actualEntries, versionStore, config)
 }
 
 async function handleExplicitVersion(
@@ -415,14 +443,14 @@ async function handleExplicitVersion(
         await performFullInstallation(onProgress, appType, version)
     }
 
-    await saveVersion(onProgress, version, versionList, versionStore)
+    await saveVersion(onProgress, version, versionStore, appType)
     return version
 }
 
 async function handleLatestVersion(
     onProgress: ProgressCallback,
     appType: AppType,
-    versionList: string[],
+    entries: InstallationEntry[],
     versionStore: Store,
     store: Store
 ): Promise<string> {
@@ -431,34 +459,54 @@ async function handleLatestVersion(
         message: get(_)('typescript.downloader.updateChecking'),
     })
 
-    const needsUpdate = await checkForUpdates({ versions: versionList }, appType)
-    const isMissing = !(await checkInstallationExists(appType, versionList.at(-1)))
+    const versionHashes = entries.map(e => e.versionHash)
+    const needsUpdate = await checkForUpdates({ versions: versionHashes }, appType)
+    const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
+    const isMissing = !(await checkInstallationExists(appType, currentlyUsing?.versionHash))
     const installationCfg = await store.get<Installation>('installation')
-    const shouldForceInstall = await installationCfg?.forceReinstall
+    const shouldForceInstall = installationCfg?.forceReinstall
 
     if (needsUpdate || isMissing || shouldForceInstall) {
         const versionHash = await performFullInstallation(onProgress, appType)
-        await saveVersion(onProgress, versionHash, versionList, versionStore)
+        await saveVersion(onProgress, versionHash, versionStore, appType)
+        return versionHash
     }
 
-    return await invoke(
-        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
-    )
+    // no update needed
+    return currentlyUsing?.versionHash ?? versionHashes.at(-1) ?? ''
 }
 
 async function saveVersion(
     onProgress: ProgressCallback,
     version: string,
-    versionList: string[],
-    versionStore: Store
+    versionStore: Store,
+    appType: AppType = 'player',
+    label?: string
 ) {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.versionSaving'),
     })
 
-    const updatedList = Array.from(new Set([...versionList, version]))
-    await versionStore.set('versions', updatedList)
+    const existing = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
+    const alreadyExists = existing.some(e => e.versionHash === version && e.appType === appType)
+
+    const newEntry: InstallationEntry = alreadyExists
+        ? existing.find(e => e.versionHash === version && e.appType === appType)!
+        : {
+            id: label ?? `Installation ${existing.length + 1}`,
+            versionHash: version,
+            appType,
+            installedAt: new Date().toISOString(),
+        }
+
+    if (!alreadyExists) {
+        existing.push(newEntry)
+        await versionStore.set('versions', existing)
+    }
+
+    // always update currentlyUsing to the latest launched version
+    await versionStore.set('currentlyUsing', newEntry)
     await versionStore.save()
 
     onProgress({
@@ -590,21 +638,22 @@ export async function getCurrentInstallation(appType: AppType = 'player'): Promi
 } | null> {
     const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
     const versionStore = await load(storeKey)
-    const versionList = (await versionStore.get<string[]>('versions')) ?? []
-    const latestVersion = versionList.at(-1)
+    const versionList = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
+    const latest = versionList.filter(e => e.appType === appType).at(-1)
 
-    if (!latestVersion) return null
+    if (!latest) return null
+
 
     const dataDir = await appDataDir()
     const appFolder = appType === 'studio' ? 'Studio' : 'Player'
-    const exeName =
-        appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
-    const installPath = await join(dataDir, appFolder, 'Versions', latestVersion)
+    const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
+    const installPath = await join(dataDir, appFolder, 'Versions', latest.versionHash)
     const exePath = await join(installPath, exeName)
     const installExists = await exists(exePath)
 
+
     return {
-        version: latestVersion,
+        version: latest.versionHash,
         installPath,
         exists: installExists,
     }

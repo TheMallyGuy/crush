@@ -130,13 +130,7 @@
                     ? 'studio'
                     : 'player'
 
-            const version = await downloadRoblox(
-                handleProgress,
-                appType,
-                appType === 'player' && installation?.version !== 'latest'
-                    ? installation?.version
-                    : undefined
-            )
+            const version = await downloadRoblox(handleProgress, appType)
 
             done = true
             handleProgress({ type: 'status', message: 'Applying modification' })
@@ -145,7 +139,7 @@
             handleProgress({ type: 'status', message: 'Launching' })
 
             const integrations = await store.get<Integrations>('integrations')
-            
+
             await loadFlag(appType, version)
 
             if (appType === 'studio') {
@@ -155,8 +149,10 @@
                 await sleep(1000)
                 await invoke('watch_logs')
                 await sleep(3000)
-                await invoke('set_process_priority', {"priority" : integrations?.priority ?? "NORMAL_PRIORITY_CLASS"})
-                
+                await invoke('set_process_priority', {
+                    priority: integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
+                })
+
                 if (integrations?.closeCrashHandler) {
                     await invoke('close_crash_handler')
                 }
