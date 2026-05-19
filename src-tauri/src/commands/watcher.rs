@@ -9,6 +9,7 @@ use crate::simple_i18n::I18n;
 use crate::t;
 use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
+use chrono::{Local, Timelike};
 use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
@@ -83,6 +84,7 @@ struct WatcherState {
     bloxstrap_rpc: Option<RichPresence>,
     roblox_hwnd: Option<HWND>,
     window_started: bool,
+    sleep_schedule: bool,
 
     // window geometry saved at StartWindow
     starting_x: i32,
@@ -123,6 +125,7 @@ impl Default for WatcherState {
             bloxstrap_rpc: None,
             roblox_hwnd: None,
             window_started: false,
+            sleep_schedule: false,
 
             starting_x: 0,
             starting_y: 0,
@@ -462,6 +465,8 @@ async fn handle_line(
 
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
+            let _ = sleep_schedule(&app, state).await;
+
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
@@ -506,6 +511,7 @@ async fn on_joined(
 
     state.activity.in_game = true;
     state.activity.notified = true;
+    let _ = sleep_schedule(&app, state).await;
 
     state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
 
@@ -1172,6 +1178,32 @@ async fn fetch_and_store_location(
             }
         }
     }
+    Ok(())
+}
+
+async fn sleep_schedule(app: &AppHandle, state: &mut WatcherState) -> Result<(), String> {
+    let now = Local::now();
+
+    if !state.sleep_schedule {
+        if now.hour() >= 23 { // 12 AM if im not wrong
+            app.notification()
+                .builder()
+                .title("About your sleep schedule...")
+                .body("It's getting late. Can you go to bed now? Video game can not be that interesting.")
+                .show()
+                .map_err(|e| e.to_string())?;
+
+            state.sleep_schedule = true;
+        }
+    } else if state.activity.in_game && state.sleep_schedule {
+        app.notification()
+            .builder()
+            .title("Thanks")
+            .body("Now go to bed and have sweet dreams")
+            .show()
+            .map_err(|e| e.to_string())?;
+    }
+
     Ok(())
 }
 
