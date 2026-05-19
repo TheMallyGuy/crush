@@ -58,7 +58,7 @@ jobs:
                       exit 1
                   fi
                   # Base64 encode signature (single line)
-                  SIGNATURE=$(base64 -w 0 "$SIG_PATH")
+                  SIGNATURE=$(cat "$SIG_PATH")
                   FILE_NAME=$(basename "$EXE_PATH")
                   cat > updater.json <<EOF
                   {
