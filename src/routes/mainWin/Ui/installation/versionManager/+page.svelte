@@ -1,9 +1,11 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
+    import Textbox from '$lib/components/atoms/Textbox.svelte'
+    import Dialog from '$lib/components/molecules/Dialog.svelte'
     import SortableList from '$lib/components/molecules/SortableList.svelte'
     import type { AppType } from '$lib/types'
     import { Play, Plus, Trash2 } from '@lucide/svelte'
-    import { load } from '@tauri-apps/plugin-store'
+    import { load, Store } from '@tauri-apps/plugin-store'
     import { onMount } from 'svelte'
 
     type Versions = {
@@ -21,8 +23,87 @@
     let currentlyUsing: Versions | null = null
     let items: Versions[] = []
 
-    onMount(async () => {
-        const raw = await load('versions.json')
+    let raw: Store
+
+    let createDialog: boolean
+
+    let resolveCreate: ((value: string | null) => void) | null = null
+    let versionName: string
+    let versionHash: string
+
+    async function handleNewVersion() {
+        createDialog = true
+
+        const IsReslove = await new Promise<string | null>((resolve) => {
+            resolveCreate = resolve
+        })
+
+        createDialog = false
+
+        if (IsReslove) {
+            let versions = await raw.get<Versions[]>('versions')
+
+            versions?.push({
+                appType: 'player',
+                id: versionName,
+                installedAt: new Date().toISOString(),
+                versionHash: versionHash,
+            })
+
+            await raw.set('versions', versions)
+            await raw.save()
+            await loadConfig()
+        }
+    }
+
+    let deleteDialog: boolean
+
+    let resolveDelete: ((value: boolean | null) => void) | null = null
+    let deleteId: string | null = null
+
+    async function popVersion() {
+        deleteDialog = true
+
+        const IsReslove = await new Promise<boolean | null>((resolve) => {
+            resolveDelete = resolve
+        })
+
+        if (IsReslove) {
+            if (!deleteId) return
+
+            let versions = await raw.get<Versions[]>('versions')
+
+            const filtered = versions?.filter((v) => v.id !== deleteId) ?? []
+
+            await raw.set('versions', filtered)
+            await raw.save()
+
+            if (currentlyUsing?.id === deleteId) {
+                await raw.set('currentlyUsing', null)
+                currentlyUsing = null
+            }
+
+            deleteDialog = false
+
+            await loadConfig()
+        }
+    }
+
+    async function makePrimary(id: string) {
+        const versions = await raw.get<Versions[]>('versions')
+
+        const item = versions?.find((v) => v.id === id)
+
+        if (!item) return
+
+        await raw.set('currentlyUsing', item)
+        await raw.save()
+
+        currentlyUsing = item
+    }
+
+    async function loadConfig() {
+        raw = await load('versions.json')
 
         const versions = await raw.get<Versions[]>('versions')
         const current = await raw.get<Versions>('currentlyUsing')
@@ -32,8 +113,71 @@
 
         items = versions ?? []
         currentlyUsing = current ?? null
+    }
+
+    onMount(async () => {
+        await loadConfig()
     })
 </script>
+
+<Dialog
+    bind:open={deleteDialog}
+    on:close={() => resolveDelete?.(false)}
+    title="Confirm Action"
+    description="Are you sure you want to delete this version?"
+>
+    <div slot="actions">
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => resolveDelete?.(false)}
+        >
+            Cancel
+        </Button>
+        <Button
+            variant="danger"
+            size="sm"
+            on:click={() => resolveDelete?.(true)}
+        >
+            Confirm
+        </Button>
+    </div>
+</Dialog>
+
+<Dialog
+    bind:open={createDialog}
+    on:close={() => resolveCreate?.(null)}
+    title="Add a new version"
+>
+    <Textbox
+        label="Version name"
+        placeholder="Version 1"
+        bind:value={versionName}
+    />
+
+    <Textbox
+        label="Version hash"
+        placeholder="version-ecoai3i1ojfoi1"
+        bind:value={versionHash}
+    />
+
+    <div slot="actions">
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => resolveCreate?.(null)}
+        >
+            Cancel
+        </Button>
+        <Button
+            variant="primary"
+            size="sm"
+            on:click={() => resolveCreate?.(versionName)}
+        >
+            Confirm
+        </Button>
+    </div>
+</Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
@@ -47,7 +191,7 @@
         </div>
     </div>
 
-    <Button variant="primary" size="md">
+    <Button variant="primary" size="md" on:click={handleNewVersion}>
         <Plus class="size-4 mr-2" />
     </Button>
 
@@ -75,10 +219,23 @@
                         >
                     </div>
                     <div class="flex items-center gap-1.5">
-                        <Button size="sm" variant="ghost">
+                        <Button
+                            size="sm"
+                            variant="ghost"
+                            on:click={() => {
+                                makePrimary(item.id)
+                            }}
+                        >
                             <Play class="size-4" />
                         </Button>
-                        <Button size="sm" variant="ghost">
+                        <Button
+                            size="sm"
+                            variant="ghost"
+                            on:click={() => {
+                                deleteId = item.id
+                                popVersion()
+                            }}
+                        >
                             <Trash2 class="size-4" />
                         </Button>
                     </div>
