@@ -69,6 +69,8 @@
             resolveDelete = resolve
         })
 
+        deleteDialog = false
+
         if (IsReslove) {
             if (!deleteId) return
 
@@ -83,8 +85,6 @@
                 await raw.set('currentlyUsing', null)
                 currentlyUsing = null
             }
-
-            deleteDialog = false
 
             await loadConfig()
         }
@@ -150,11 +150,15 @@
 <Dialog
     bind:open={createDialog}
     on:close={() => resolveCreate?.(null)}
-    title={$_("pages.installations.versionManager.dialogs.new.title")}
+    title={$_('pages.installations.versionManager.dialogs.new.title')}
 >
     <Textbox
-        label={$_("pages.installations.versionManager.dialogs.new.textbox1.title")}
-        placeholder={$_("pages.installations.versionManager.dialogs.new.textbox1.placeholder")}
+        label={$_(
+            'pages.installations.versionManager.dialogs.new.textbox1.title'
+        )}
+        placeholder={$_(
+            'pages.installations.versionManager.dialogs.new.textbox1.placeholder'
+        )}
         bind:value={versionName}
     />
 
@@ -170,14 +174,14 @@
             size="sm"
             on:click={() => resolveCreate?.(null)}
         >
-            {$_("pages.installations.versionManager.dialogs.new.cancel")}
+            {$_('pages.installations.versionManager.dialogs.new.cancel')}
         </Button>
         <Button
             variant="primary"
             size="sm"
             on:click={() => resolveCreate?.(versionName)}
         >
-            {$_("pages.installations.versionManager.dialogs.new.confirm")}
+            {$_('pages.installations.versionManager.dialogs.new.confirm')}
         </Button>
     </div>
 </Dialog>
