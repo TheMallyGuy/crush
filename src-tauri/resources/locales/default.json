@@ -93,6 +93,10 @@
                 "title": "Process Priority",
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
+            "disableFullscreenoptimizationCard" : {
+                "title" : "Disable Fullscreen optimization",
+                "description" : "Use dark magic to disable fullscreen optimization"
+            },
             "closeCrashHandlerCard": {
                 "title": "Close crash handler",
                 "description": "Kill Roblox's crash handler to save performance."

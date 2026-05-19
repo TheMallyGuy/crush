@@ -7,6 +7,7 @@ use commands::gbs_operations::{get_gbs, write_gbs};
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::pre_processing::{close_crash_handler, set_process_priority};
+use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
 use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
@@ -289,7 +290,9 @@ pub fn run() {
             set_process_priority,
             close_crash_handler,
             get_gbs,
-            write_gbs
+            write_gbs,
+            set_fullscreen_prop,
+            read_fullscreen_prop
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

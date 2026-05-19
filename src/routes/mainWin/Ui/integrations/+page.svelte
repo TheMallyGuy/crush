@@ -2,7 +2,16 @@
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { Bell, Plug, History, CodeXml, View, Cpu, Bomb } from '@lucide/svelte'
+    import {
+        Bell,
+        Plug,
+        History,
+        CodeXml,
+        View,
+        Cpu,
+        Bomb,
+        Expand,
+    } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -11,6 +20,7 @@
     import { goto } from '$app/navigation'
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
+    import { getCurrentInstallation } from '$lib/downloadRoblox'
 
     let processPriorityItems = [
         {
@@ -42,6 +52,17 @@
     let displayAccount = false
     let serverLocationNotifier = false
     let activityWatching = true
+    let fullscreenOpts: boolean = false
+
+    type shi = {
+        version: string
+        installPath: string
+        exists: boolean
+    } | null
+
+    let exe: shi
+    let exePath: string
+
     const roValaraLogoColored = '/RovalraColored.svg'
     const roValaraLogo = '/Rovalra.svg'
 
@@ -65,6 +86,17 @@
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
             activityWatching = savedIntegrations.activityWatching
         }
+
+        exe = await getCurrentInstallation('player')
+
+        exePath =
+            exe?.installPath.replace(/\//g, '\\') + '\\RobloxPlayerBeta.exe'
+
+        fullscreenOpts = await invoke('read_fullscreen_prop', {
+            rblxExe: exePath,
+        })
+
+        console.log(fullscreenOpts)
     }
 
     onMount(async () => {
@@ -89,6 +121,11 @@
             roValra: current?.roValra ?? { joinServerForYouValue: false },
             activityWatching: activityWatching,
         }
+
+        await invoke('set_fullscreen_prop', {
+            disable: fullscreenOpts,
+            rblxExe: exePath,
+        })
 
         await store.set('integrations', newIntegrations)
 
@@ -139,8 +176,10 @@
         </SettingCard>
 
         <SettingCard
-            title={$_("pages.integrations.processPriorityCard.title")}
-            description={$_("pages.integrations.processPriorityCard.description")}
+            title={$_('pages.integrations.processPriorityCard.title')}
+            description={$_(
+                'pages.integrations.processPriorityCard.description'
+            )}
             icon={Cpu}
         >
             <Dropdown
@@ -152,8 +191,26 @@
         </SettingCard>
 
         <SettingCard
-            title={$_("pages.integrations.closeCrashHandlerCard.title")}
-            description={$_("pages.integrations.closeCrashHandlerCard.description")}
+            title={$_(
+                'pages.integrations.disableFullscreenoptimizationCard.title'
+            )}
+            description={$_(
+                'pages.integrations.disableFullscreenoptimizationCard.description'
+            )}
+            icon={Expand}
+        >
+            <Switch
+                slot="action"
+                bind:checked={fullscreenOpts}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title={$_('pages.integrations.closeCrashHandlerCard.title')}
+            description={$_(
+                'pages.integrations.closeCrashHandlerCard.description'
+            )}
             icon={Bomb}
         >
             <Switch
