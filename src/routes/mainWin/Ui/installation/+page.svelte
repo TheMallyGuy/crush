@@ -13,6 +13,8 @@
     import type { Installation } from '$lib/types'
     import { _ } from 'svelte-i18n'
     import Switch from '$lib/components/atoms/Switch.svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
+    import { goto } from '$app/navigation'
 
     let version: string
     let forceReinstall: boolean
@@ -72,16 +74,13 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title={$_('pages.installations.customVersion.title')}
-            description={$_('pages.installations.customVersion.description')}
+            title={$_("pages.installations.versionManagerCard.title")}
+            description={$_("pages.installations.versionManagerCard.description")}
             icon={Rocket}
         >
-            <Textbox
-                slot="action"
-                class="w-48 h-8 text-sm"
-                bind:value={version}
-                on:change={handleChanges}
-            />
+            <Button slot="action" variant="secondary" on:click={() => {goto("./installation/versionManager")}}>
+                Open
+            </Button>
         </SettingCard>
 
         <SettingCard

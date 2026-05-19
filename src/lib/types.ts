@@ -87,6 +87,14 @@ export type GameCache = {
     cachedAt: string;
 };
 
+export type InstallationEntry = {
+  id: string
+  versionHash: string
+  appType: AppType
+  installedAt: string
+  active?: boolean
+}
+
 export type Installation = {
     version: string,
     forceReinstall: boolean,
