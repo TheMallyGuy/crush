@@ -93,6 +93,10 @@
                 "title": "nihahahaha nihaha",
                 "description": "nihahahahahaha nihahahaha nihahahahaha nihaha nihahahahaha nihaha nihahaha nihahahaha nihahahahahahaha"
             },
+            "disableFullscreenoptimizationCard": {
+                "title": "Disable Fullscreen optimization",
+                "description": "Use dark magic to disable fullscreen optimization"
+            },
             "closeCrashHandlerCard": {
                 "title": "nihahahahahahaha nihahahahahahaha nihahaha",
                 "description": "nihahahahahahaha nihahahahahaha nihahahaha nihahahaha nihaha nihahaha nihaha"
@@ -232,9 +236,10 @@
         "installations": {
             "installations": "nihaha",
             "description": "nihahahaha nihahahahaha nihahahahahaha nihahahahahaha",
-            "customVersion": {
-                "title": "nihahaha nihaha nihahahahaha nihahahaha nihahahaha",
-                "description": "nihaha nihahahahahaha nihahahahahaha nihahahahahahaha nihahahahahahaha nihaha nihahaha nihahaha nihaha nihahahahahahaha nihahaha nihahaha nihahahaha nihaha nihaha nihahahaha nihahaha nihahahahahaha nihahaha nihahahahahaha nihaha nihahahahaha nihaha nihahahahahahaha nihahahahahaha nihahaha nihaha nihahaha nihahahahaha"
+            "versionManagerCard": {
+                "title": "Versions Manager",
+                "description": "Manage multiple roblox versions with speed",
+                "button": "Open"
             },
             "parallelDownloadingCard": {
                 "title": "nihahaha nihahahahaha",
@@ -247,6 +252,31 @@
             "dontUpdateCard": {
                 "title": "nihahahahahahaha nihahahahaha nihahahahahahaha",
                 "description": "nihahahahaha nihahahahaha nihahahahahaha nihaha nihahahahaha nihahahaha nihahaha nihahaha"
+            },
+            "versionManager": {
+                "title": "Versions manager",
+                "description": "Easily manage your roblox versions.",
+                "none": "You didnt install any versions yet!",
+                "dialogs": {
+                    "delete": {
+                        "title": "Confirm Action",
+                        "description": "Are you sure you want to delete this version?",
+                        "cancel": "Cancel",
+                        "confirm": "Confirm"
+                    },
+                    "new": {
+                        "title": "Add a new version",
+                        "textbox1": {
+                            "title": "Version name",
+                            "placeholder": "New version"
+                        },
+                        "texbox2": {
+                            "title": "Version hash"
+                        },
+                        "cancel": "Cancel",
+                        "confirm": "Confirm"
+                    }
+                }
             }
         },
         "fastflag": {

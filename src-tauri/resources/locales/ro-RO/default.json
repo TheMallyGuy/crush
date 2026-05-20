@@ -93,6 +93,10 @@
                 "title": "Process Priority",
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
+            "disableFullscreenoptimizationCard": {
+                "title": "Disable Fullscreen optimization",
+                "description": "Use dark magic to disable fullscreen optimization"
+            },
             "closeCrashHandlerCard": {
                 "title": "Close crash handler",
                 "description": "Kill Roblox's crash handler to save performance."
@@ -232,9 +236,10 @@
         "installations": {
             "installations": "Instalații",
             "description": "Gestionează-ți instalarea Roblox.",
-            "customVersion": {
-                "title": "Instalează o versiune Roblox personalizată",
-                "description": "Săriți peste verificarea actualizării și descărcați o versiune specifică. Valoarea implicită este cea mai recentă. O versiune nevalidă nu va fi descărcată și va reveni la cea mai recentă versiune."
+            "versionManagerCard": {
+                "title": "Versions Manager",
+                "description": "Manage multiple roblox versions with speed",
+                "button": "Open"
             },
             "parallelDownloadingCard": {
                 "title": "Descărcare paralelă",
@@ -247,6 +252,31 @@
             "dontUpdateCard": {
                 "title": "Nu actualiza Roblox",
                 "description": "Săriți peste verificarea actualizării Roblox și lansați instant."
+            },
+            "versionManager": {
+                "title": "Versions manager",
+                "description": "Easily manage your roblox versions.",
+                "none": "You didnt install any versions yet!",
+                "dialogs": {
+                    "delete": {
+                        "title": "Confirm Action",
+                        "description": "Are you sure you want to delete this version?",
+                        "cancel": "Cancel",
+                        "confirm": "Confirm"
+                    },
+                    "new": {
+                        "title": "Add a new version",
+                        "textbox1": {
+                            "title": "Version name",
+                            "placeholder": "New version"
+                        },
+                        "texbox2": {
+                            "title": "Version hash"
+                        },
+                        "cancel": "Cancel",
+                        "confirm": "Confirm"
+                    }
+                }
             }
         },
         "fastflag": {
