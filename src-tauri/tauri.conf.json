@@ -58,7 +58,7 @@
             "endpoints": [
                 "https://github.com/TheMallyGuy/crush/releases/latest/download/updater.json"
             ],
-            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEU1N0YzRkQyM0Q4RkFDMTMKUldRVHJJODkwajkvNVN4RnJXZ2lRNXRBVEhGT3dmTmZlMncwQ1dYclRxNDd2L25HRHV2MDRteGQK",
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDkwRkUzQUYyRjk3QTRCQUYKUldTdlMzcjU4anIra0VVbVA0U1d0WlNLbnBtTjVENnZJcmtOcTJQdnN1V0p5TnNLMTRvbWNmbDAK",
             "windows": {
                 "installMode": "passive"
             }
