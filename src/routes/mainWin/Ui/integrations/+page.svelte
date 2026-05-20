@@ -11,6 +11,7 @@
         Cpu,
         Bomb,
         Expand,
+        BedSingle,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
@@ -23,26 +24,11 @@
     import { getCurrentInstallation } from '$lib/downloadRoblox'
 
     let processPriorityItems = [
-        {
-            value: 'BELOW_NORMAL_PRIORITY_CLASS',
-            label: 'BELOW_NORMAL',
-        },
-        {
-            value: 'NORMAL_PRIORITY_CLASS',
-            label: 'NORMAL',
-        },
-        {
-            value: 'ABOVE_NORMAL_PRIORITY_CLASS',
-            label: 'ABOVE_NORMAL',
-        },
-        {
-            value: 'HIGH_PRIORITY_CLASS',
-            label: 'HIGH',
-        },
-        {
-            value: 'REALTIME_PRIORITY_CLASS',
-            label: 'REALTIME',
-        },
+        { value: 'BELOW_NORMAL_PRIORITY_CLASS', label: 'BELOW_NORMAL' },
+        { value: 'NORMAL_PRIORITY_CLASS', label: 'NORMAL' },
+        { value: 'ABOVE_NORMAL_PRIORITY_CLASS', label: 'ABOVE_NORMAL' },
+        { value: 'HIGH_PRIORITY_CLASS', label: 'HIGH' },
+        { value: 'REALTIME_PRIORITY_CLASS', label: 'REALTIME' },
     ]
     let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
 
@@ -53,6 +39,8 @@
     let serverLocationNotifier = false
     let activityWatching = true
     let fullscreenOpts: boolean = false
+    let sleepSchedule: boolean = true
+    let isLateNightGamer: boolean = false
 
     type shi = {
         version: string
@@ -69,14 +57,19 @@
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
-        let savedRpc = <DiscordRpc>savedIntegrations?.discordRpc
 
+        // Fix: Fallback for the old typo before reading inner properties like discordRpc
         if (!savedIntegrations) {
             savedIntegrations = await store.get<Integrations>('intergrations')
         }
 
         if (savedIntegrations) {
+            const savedRpc = savedIntegrations.discordRpc as DiscordRpc
+
             processPriority = savedIntegrations.priority
+            isLateNightGamer = savedIntegrations.sleepSchedule?.visible ?? false
+            sleepSchedule = savedIntegrations.sleepSchedule?.enabled ?? true
+
             if (savedRpc) {
                 discordRpc = savedRpc.enable
                 letJoin = savedRpc.letJoin
@@ -114,6 +107,10 @@
 
         const newIntegrations: Integrations = {
             ...current,
+            sleepSchedule: {
+                enabled: sleepSchedule ?? true,
+                visible: current?.sleepSchedule?.visible ?? isLateNightGamer,
+            },
             closeCrashHandler: crashHandler ?? false,
             priority: processPriority ?? 'NORMAL_PRIORITY_CLASS',
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
@@ -128,7 +125,6 @@
         })
 
         await store.set('integrations', newIntegrations)
-
         await store.save()
     }
 </script>
@@ -159,6 +155,21 @@
                 on:change={handleChanges}
             />
         </SettingCard>
+
+        {#if isLateNightGamer}
+            <SettingCard
+                title={$_('pages.integrations.sleepScheduleCard.title')}
+                description={$_('pages.integrations.sleepScheduleCard.description')}
+                icon={BedSingle}
+            >
+                <Switch
+                    slot="action"
+                    disabled={!activityWatching}
+                    bind:checked={sleepSchedule}
+                    on:change={handleChanges}
+                />
+            </SettingCard>
+        {/if}
 
         <SettingCard
             title={$_('pages.integrations.serverNotifierCard.title')}
@@ -233,10 +244,7 @@
             />
 
             <div class="flex gap-3">
-                <!-- option 1 -->
-                <p>
-                    {$_('pages.integrations.rpcCard.option1')}
-                </p>
+                <p>{$_('pages.integrations.rpcCard.option1')}</p>
                 <Switch
                     bind:checked={letJoin}
                     on:change={handleChanges}
@@ -245,10 +253,7 @@
             </div>
 
             <div class="flex gap-3">
-                <!-- option 2 -->
-                <p>
-                    {$_('pages.integrations.rpcCard.option2')}
-                </p>
+                <p>{$_('pages.integrations.rpcCard.option2')}</p>
                 <Switch
                     bind:checked={displayAccount}
                     on:change={handleChanges}
@@ -268,9 +273,7 @@
                 slot="action"
                 variant="secondary"
                 disabled={!activityWatching}
-                on:click={() => {
-                    goto('integrations/interactiveSettings')
-                }}
+                on:click={() => goto('integrations/interactiveSettings')}
             >
                 {$_('pages.integrations.windowManipulationCard.button')}
             </Button>
@@ -285,9 +288,7 @@
                 slot="action"
                 disabled={!activityWatching}
                 variant="secondary"
-                on:click={() => {
-                    goto('integrations/gameHistory')
-                }}
+                on:click={() => goto('integrations/gameHistory')}
             >
                 {$_('pages.integrations.gameHistoryCard.button')}
             </Button>
@@ -302,9 +303,7 @@
             <Button
                 slot="action"
                 variant="secondary"
-                on:click={() => {
-                    goto('integrations/roValra')
-                }}
+                on:click={() => goto('integrations/roValra')}
             >
                 {$_('pages.integrations.roValraCard.button')}
             </Button>

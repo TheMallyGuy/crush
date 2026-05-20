@@ -56,6 +56,11 @@ export type PriorityClass =
   | "HIGH_PRIORITY_CLASS"
   | "REALTIME_PRIORITY_CLASS";
 
+export type sleepSchedule = {
+    visible: boolean,
+    enabled: boolean
+}
+
 export type Integrations = {
     closeCrashHandler: boolean
     activityWatching: boolean
@@ -63,6 +68,7 @@ export type Integrations = {
     serverLocationNotifier: boolean
     priority : PriorityClass
     roValra : RoValra
+    sleepSchedule: sleepSchedule,
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI

@@ -85,6 +85,8 @@ struct WatcherState {
     roblox_hwnd: Option<HWND>,
     window_started: bool,
 
+    sleep_schedule_count: u64,
+
     // window geometry saved at StartWindow
     starting_x: i32,
     starting_y: i32,
@@ -124,6 +126,8 @@ impl Default for WatcherState {
             bloxstrap_rpc: None,
             roblox_hwnd: None,
             window_started: false,
+
+            sleep_schedule_count: 0,
 
             starting_x: 0,
             starting_y: 0,
@@ -298,7 +302,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
 
                 let app_c = app.clone();
                 let in_game = state.activity.in_game;
-                let count = sleep_schedule_count;
+                let count = state.sleep_schedule_count;
 
                 let handle = tauri::async_runtime::spawn(async move {
                     match sleep_schedule_inner(&app_c, in_game, count).await {
@@ -311,7 +315,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                 });
 
                 match handle.await {
-                    Ok(new_count) => sleep_schedule_count = new_count,
+                    Ok(new_count) => state.sleep_schedule_count = new_count,
                     Err(e) => log::warn!("sleep_schedule task panicked: {}", e),
                 }
             }
@@ -496,7 +500,16 @@ async fn handle_line(
             }
             state.window_started = false;
         }
+
+        let current_count = state.sleep_schedule_count;
         state.reset_for_new_game(app);
+
+        let app_c = app.clone();
+        tauri::async_runtime::spawn(async move {
+            if let Err(e) = sleep_schedule_inner(&app_c, false, current_count).await {
+                log::warn!("sleep_schedule on leave error: {}", e);
+            }
+        });
 
         let i18n = app.state::<I18n>().inner().clone();
 
@@ -1205,7 +1218,8 @@ async fn fetch_and_store_location(
 
 async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Result<u64, String> {
     let hour = Local::now().hour();
-    let is_late = hour >= 23 || hour < 6;
+    let is_late = true;
+
     if !is_late {
         return Ok(count);
     }
@@ -1219,20 +1233,46 @@ async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Res
             .map_err(|e| e.to_string())
     };
 
-    if count == 0 {
-        notify(
-            "About your sleep schedule...",
-            "It's getting late. You should go to sleep.",
-        )?;
-    } else if count == 1 {
-        notify("Hiya...", "Sleep now?")?;
-    } else if count == 2 {
-        notify("Last warning", "This is the last one, go to sleep or else")?;
-    } else if !in_game {
-        notify("Good night", "Now go to bed and have sweet dreams")?;
+    let store = app.store("config.json").map_err(|e| e.to_string())?;
+
+    if integration_enabled(&store, &["sleepSchedule", "enabled"]) {
+        if count == 0 {
+            notify(
+                "About your sleep schedule...",
+                "It's getting late. You should go to sleep.",
+            )?;
+
+            let mut integrations = store
+                .get("integrations")
+                .or_else(|| store.get("intergrations"))
+                .unwrap_or_else(
+                    || json!({ "sleepSchedule": { "visible": true, "enabled": true } }),
+                );
+
+            if let Some(integrations_obj) = integrations.as_object_mut() {
+                if let Some(sleep_schedule) = integrations_obj.get_mut("sleepSchedule") {
+                    if let Some(sleep_obj) = sleep_schedule.as_object_mut() {
+                        sleep_obj.insert("enabled".to_string(), json!(true));
+                    }
+                }
+            }
+
+            store.set("integrations", integrations);
+            let _ = store
+                .save()
+                .map_err(|e| log::error!("Failed to save store: {}", e));
+        } else if count == 1 {
+            notify("Hiya...", "Sleep now?")?;
+        } else if count == 2 {
+            notify("Last warning", "This is the last one, go to sleep or else")?;
+        } else if !in_game {
+            notify("Good night", "Now go to bed and have sweet dreams")?;
+        }
+
+        return Ok(count + 1);
     }
 
-    Ok(count + 1)
+    Ok(count)
 }
 
 async fn send_location_notification(
