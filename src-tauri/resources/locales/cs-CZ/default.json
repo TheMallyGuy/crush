@@ -85,6 +85,10 @@
                 "title": "Sledování aktivity",
                 "description": "Sledujte vaši aktivitu na Robloxu. Některé funkce vyžadují, aby to bylo povoleno."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Oznámení o umístění serveru",
                 "description": "Dostat oznámení, když se klient připojí k serveru."

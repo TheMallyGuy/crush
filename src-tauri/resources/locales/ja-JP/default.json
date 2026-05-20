@@ -85,6 +85,10 @@
                 "title": "アクティビティの監視者",
                 "description": "Robloxであなたのアクティビティをご覧ください。いくつかの機能はこれを有効にする必要があります。"
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "サーバー位置通知",
                 "description": "クライアントがサーバーに接続したときに通知を受け取ります。"

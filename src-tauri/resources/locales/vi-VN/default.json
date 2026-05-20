@@ -10,14 +10,14 @@
             "watcher": {
                 "general": "Đang chơi Roblox",
                 "idle": "Không có trong trò chơi",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "Trong trò chơi",
+                "playingPrivate": "Trong trò chơi, Máy chủ riêng tư",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Đã kết nối đến máy chủ công khai!",
+                        "private": "Đã kết nối đến máy chủ riêng tư!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "Địa chỉ IP : {ip}\nVị trí : {location}"
                 }
             }
         }
@@ -44,7 +44,7 @@
             "title": "Crush",
             "playRoblox": "Chơi Roblox",
             "config": "Cấu hình",
-            "discord": "Our Community"
+            "discord": "Cộng đồng chúng tôi"
         },
         "boostrapWin": {
             "cancel": "Hủy",
@@ -54,7 +54,7 @@
             "title": "Thông tin máy chủ",
             "infomationCard": {
                 "serverRegion": "Vùng : {region}",
-                "waitRegion": "Fetching region...",
+                "waitRegion": "Đang tìm vùng...",
                 "description": "Thông tin về máy chủ này.",
                 "uptime": "Thời gian hoạt động : Không rõ",
                 "instanceId": "ID máy chủ: {id}",
@@ -66,7 +66,7 @@
             "description": "Tùy chỉnh giao diện của trình khởi động Roblox.",
             "bootstrapThemeCard": {
                 "title": "Chủ đề trình khởi động",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Chọn giữa chủ đề Crush mặc định hoặc chủ đề XML tùy chỉnh. Bloxstrap và HTML được hỗ trợ. Lưu ý rằng không phải tất cả các chủ đề Bloxstrap đều hoạt động.",
                 "dropdown": {
                     "default": "Mặc định (Crush)",
                     "custom": "Tùy chỉnh"
@@ -82,24 +82,28 @@
             "integrations": "Tích hợp",
             "description": "Cấu hình các tích hợp bên ngoài Roblox.",
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Theo dõi hoạt động",
+                "description": "Theo dõi hoạt động của bạn trên Roblox. Một số tính năng yêu cầu bạn phải bật tính năng này."
+            },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
             },
             "serverNotifierCard": {
                 "title": "Thông báo vị trí máy chủ",
                 "description": "Nhận thông báo khi client kết nối tới server."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "Ưu tiên tiến trình",
+                "description": "ĐANG THỬ NGHIỆM. Thay đổi mức độ ưu tiên của tiến trình Roblox. Có thể tăng hiệu suất."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "Vô hiệu tối ưu hóa toàn màn hình",
+                "description": "Dùng \"ma thuật hắc ám\" để vô hiệu chế độ tối ưu hóa toàn màn hình."
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "Đóng Crash Handler",
+                "description": "Đóng Crash Handler của Roblox để tiết kiệm hiệu năng."
             },
             "rpcCard": {
                 "title": "Trạng thái hoạt động Discord (Crush)",
@@ -203,43 +207,43 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "Cài đặt cơ bản toàn cầu",
+            "description": "Cấu hình cài đặt mặc định của Roblox.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "Giới hạn FPS",
+                "description": "Cấu hình giới hạn FPS của Roblox. Lưu ý rằng Roblox chỉ được cho tối đa 240 FPS, việc thiết lập cao hơn có thể làm hỏng Roblox."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "Mức chất lượng đồ họa",
+                "description": "Thay đổi mức chất lượng đồ họa của Roblox"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "Giảm chuyển động",
+                "description": "Giảm chuyển động giao diện người dùng"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "Toàn màn hình",
+                "description": "Có nên chuyển sang chế độ toàn màn hình hay không"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "Cài đặt được tạo tự động",
+                "description": "Tạo từ tệp GBS của Roblox. Hãy sử dụng cẩn thận.",
+                "button": "Mở"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "Tạo cài đặt cơ bản toàn cầu",
+                "description": "Tạo tự động dựa trên tệp GBS.",
+                "noInstallation": "Ôi! Không tìm thấy bản cài đặt hiện tại! Bạn nên nhấn nút khởi chạy trước khi xem trang này.",
+                "back": "Quay lại"
             }
         },
         "installations": {
             "installations": "Thiết lập cài đặt Roblox",
             "description": "Quản lý trình cài đặt Roblox của bạn.",
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "Quản lý các phiên bản",
+                "description": "Quản lý nhiều phiên bản Roblox một cách nhanh chóng.",
+                "button": "Mở"
             },
             "parallelDownloadingCard": {
                 "title": "Tải xuống song song",
@@ -254,27 +258,27 @@
                 "description": "Bỏ qua kiểm tra cập nhật Roblox và khởi chạy ngay lập tức."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "Quản lý các phiên bản",
+                "description": "Dễ dàng quản lý các phiên bản Roblox của bạn.",
+                "none": "Bạn chưa cài đặt phiên bản nào!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "Xác nhận hành động",
+                        "description": "Bạn có chắc bạn muốn xóa phiên bản này?",
+                        "cancel": "Hủy",
+                        "confirm": "Xác nhận"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "Thêm một phiên bản mới",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "Tên phiên bản",
+                            "placeholder": "Phiên bản mới"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Phiên bản băm (Hash)"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "Hủy",
+                        "confirm": "Xác nhận"
                     }
                 }
             }
@@ -301,7 +305,7 @@
                     "buttonAdd": "Thêm",
                     "search": "Tìm kiếm tất cả Fast Flag...",
                     "searchNotFound": "Không tìm thấy flag nào phù hợp với tìm kiếm của bạn.",
-                    "import": "Import JSON",
+                    "import": "Nhập JSON",
                     "flagCol": {
                         "deleteNote": "Xóa flag",
                         "name": "tên flag",
@@ -362,20 +366,20 @@
                         "create": {
                             "title": "Tạo mod mới",
                             "textbox": {
-                                "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "title": "Tên mod",
+                                "placeholder": "Mod mới của tôi"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "Xác nhận hành động",
+                            "description": "Bạn có chắc muốn xóa mod này?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Tên này đã tồn tại!",
+                            "description": "Hãy chọn một tên khác."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Xác nhận",
                             "cancel": "Hủy"
                         }
                     }
