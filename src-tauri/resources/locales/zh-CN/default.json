@@ -85,6 +85,10 @@
                 "title": "活动监视器",
                 "description": "在Roblox上观看您的活动。某些功能需要启用此功能。"
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "服务器位置通知程序",
                 "description": "当客户端连接到服务器时收到通知。"

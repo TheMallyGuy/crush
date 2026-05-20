@@ -85,6 +85,10 @@
                 "title": "Aktivitäts-Beobachter",
                 "description": "Beobachten Sie Ihre Aktivität auf Roblox. Einige Funktionen erforderten dies, um aktiviert zu sein."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Benachrichtigung zum Serverstandort",
                 "description": "Wird benachrichtigt, wenn sich der Client mit einem Server verbindet."

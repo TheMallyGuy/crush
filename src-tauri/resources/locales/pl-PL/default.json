@@ -85,6 +85,10 @@
                 "title": "Obserwator Aktywności",
                 "description": "Obejrzyj swoją aktywność na Roblox. Niektóre funkcje wymagały włączenia tej funkcji."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Powiadomienie o lokalizacji serwera",
                 "description": "Otrzymuj powiadomienia, gdy klient łączy się z serwerem."

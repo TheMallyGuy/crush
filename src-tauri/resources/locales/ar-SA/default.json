@@ -85,6 +85,10 @@
                 "title": "مشاهدة النشاط",
                 "description": "شاهد نشاطك على Roblox. بعض الميزات اقتضت تمكين ذلك."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "مخطر موقع الخادم",
                 "description": "احصل على إشعار عندما يتصل العميل بخادم."

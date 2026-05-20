@@ -85,6 +85,10 @@
                 "title": "Παρατηρητής Δραστηριότητας",
                 "description": "Παρακολουθήστε τη δραστηριότητά σας στο Roblox. Κάποια δυνατότητα απαιτούσε αυτό για να ενεργοποιηθεί."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Ειδοποίηση τοποθεσίας διακομιστή",
                 "description": "Ενημερωθείτε όταν ο πελάτης συνδέεται σε έναν διακομιστή."

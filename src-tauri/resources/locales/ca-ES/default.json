@@ -85,6 +85,10 @@
                 "title": "Activity Watcher",
                 "description": "Watch your activity on Roblox. Some feature required this to be enabled."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Notificador d'ubicació del servidor",
                 "description": "Get notified when the client connects to a server."

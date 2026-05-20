@@ -85,6 +85,10 @@
                 "title": "Aktivitetvakt",
                 "description": "Se aktiviteten din på Roblox. Noen funksjoner krever at dette er aktivert."
             },
+            "sleepScheduleCard": {
+                "title": "Sleep schedule",
+                "description": "If you're out here asking 'Since when is this here?', your sleep schedule is officially fucked. Letting your crush telling you to sleep is a sign. Get some sleep early next time."
+            },
             "serverNotifierCard": {
                 "title": "Serverplasseringsvarsler",
                 "description": "Få beskjed når klienten kobler til en server."
