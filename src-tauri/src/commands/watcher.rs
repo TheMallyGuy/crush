@@ -84,7 +84,6 @@ struct WatcherState {
     bloxstrap_rpc: Option<RichPresence>,
     roblox_hwnd: Option<HWND>,
     window_started: bool,
-    sleep_schedule: bool,
 
     // window geometry saved at StartWindow
     starting_x: i32,
@@ -125,7 +124,6 @@ impl Default for WatcherState {
             bloxstrap_rpc: None,
             roblox_hwnd: None,
             window_started: false,
-            sleep_schedule: false,
 
             starting_x: 0,
             starting_y: 0,
@@ -266,6 +264,8 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
     let mut system = System::new();
     let mut was_running = false;
     let store = app.store("config.json").map_err(|e| e.to_string())?;
+    let mut sleep_schedule_count: u64 = 0;
+    let mut last_sleep_check = Instant::now() - Duration::from_secs(61);
     log::info!("watcher is now running");
 
     loop {
@@ -290,6 +290,30 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
 
             if state.current_file.is_some() {
                 read_new_lines(&app, &mut state, &store).await;
+            }
+
+            if last_sleep_check.elapsed() >= Duration::from_secs(60) {
+                log::info!("sleep check firing, roblox running={}", running);
+                last_sleep_check = Instant::now();
+
+                let app_c = app.clone();
+                let in_game = state.activity.in_game;
+                let count = sleep_schedule_count;
+
+                let handle = tauri::async_runtime::spawn(async move {
+                    match sleep_schedule_inner(&app_c, in_game, count).await {
+                        Ok(new_count) => new_count,
+                        Err(e) => {
+                            log::warn!("sleep_schedule error: {}", e);
+                            count
+                        }
+                    }
+                });
+
+                match handle.await {
+                    Ok(new_count) => sleep_schedule_count = new_count,
+                    Err(e) => log::warn!("sleep_schedule task panicked: {}", e),
+                }
             }
         }
 
@@ -465,7 +489,6 @@ async fn handle_line(
 
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
-            let _ = sleep_schedule(&app, state).await;
 
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
@@ -511,7 +534,6 @@ async fn on_joined(
 
     state.activity.in_game = true;
     state.activity.notified = true;
-    let _ = sleep_schedule(&app, state).await;
 
     state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
 
@@ -1181,30 +1203,36 @@ async fn fetch_and_store_location(
     Ok(())
 }
 
-async fn sleep_schedule(app: &AppHandle, state: &mut WatcherState) -> Result<(), String> {
-    let now = Local::now();
-
-    if !state.sleep_schedule {
-        if now.hour() >= 23 { // 12 AM if im not wrong
-            app.notification()
-                .builder()
-                .title("About your sleep schedule...")
-                .body("It's getting late. Can you go to bed now? Video game can not be that interesting.")
-                .show()
-                .map_err(|e| e.to_string())?;
-
-            state.sleep_schedule = true;
-        }
-    } else if state.activity.in_game && state.sleep_schedule {
-        app.notification()
-            .builder()
-            .title("Thanks")
-            .body("Now go to bed and have sweet dreams")
-            .show()
-            .map_err(|e| e.to_string())?;
+async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Result<u64, String> {
+    let hour = Local::now().hour();
+    let is_late = hour >= 23 || hour < 6;
+    if !is_late {
+        return Ok(count);
     }
 
-    Ok(())
+    let notify = |title: &str, body: &str| {
+        app.notification()
+            .builder()
+            .title(title)
+            .body(body)
+            .show()
+            .map_err(|e| e.to_string())
+    };
+
+    if count == 0 {
+        notify(
+            "About your sleep schedule...",
+            "It's getting late. You should go to sleep.",
+        )?;
+    } else if count == 1 {
+        notify("Hiya...", "Sleep now?")?;
+    } else if count == 2 {
+        notify("Last warning", "This is the last one, go to sleep or else")?;
+    } else if !in_game {
+        notify("Good night", "Now go to bed and have sweet dreams")?;
+    }
+
+    Ok(count + 1)
 }
 
 async fn send_location_notification(
