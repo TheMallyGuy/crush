@@ -68,6 +68,7 @@
             }
             
             const newInstallation: Installation = {
+                vng: false, // currently no boostraper has this so just default to false
                 version: "latest",
                 forceReinstall: false,
                 dontUpdate: boostraperConfig.UpdateRoblox ?? false,

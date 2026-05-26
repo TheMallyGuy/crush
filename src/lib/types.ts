@@ -105,6 +105,7 @@ export type Installation = {
     version: string,
     forceReinstall: boolean,
     dontUpdate: boolean,
+    vng: boolean,
     parallel: number
 }
 

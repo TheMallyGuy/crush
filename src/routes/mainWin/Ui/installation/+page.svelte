@@ -16,9 +16,12 @@
     import Button from '$lib/components/atoms/Button.svelte'
     import { goto } from '$app/navigation'
 
+    const vngLogo = "/VNG.png"
+
     let version: string
     let forceReinstall: boolean
     let dontUpdate: boolean
+    let vng: boolean
     let parallel: number
 
     async function loadConfig() {
@@ -29,6 +32,7 @@
             version = savedInstallation.version ?? 'latest'
             forceReinstall = savedInstallation.forceReinstall ?? false
             dontUpdate = savedInstallation.dontUpdate ?? false
+            vng = savedInstallation.vng ?? false
             parallel = savedInstallation.parallel ?? 4
         }
     }
@@ -49,6 +53,7 @@
 
         const newInstallation: Installation = {
             version,
+            vng,
             forceReinstall,
             dontUpdate,
             parallel,
@@ -74,18 +79,28 @@
 
     <div class="flex flex-col gap-3">
         <SettingCard
-            title={$_("pages.installations.versionManagerCard.title")}
-            description={$_("pages.installations.versionManagerCard.description")}
+            title={$_('pages.installations.versionManagerCard.title')}
+            description={$_(
+                'pages.installations.versionManagerCard.description'
+            )}
             icon={Rocket}
         >
-            <Button slot="action" variant="secondary" on:click={() => {goto("./installation/versionManager")}}>
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto('./installation/versionManager')
+                }}
+            >
                 Open
             </Button>
         </SettingCard>
 
         <SettingCard
-            title={$_("pages.installations.parallelDownloadingCard.title")}
-            description={$_("pages.installations.parallelDownloadingCard.description")}
+            title={$_('pages.installations.parallelDownloadingCard.title')}
+            description={$_(
+                'pages.installations.parallelDownloadingCard.description'
+            )}
             icon={Folders}
         >
             <Textbox
@@ -106,6 +121,18 @@
             <Switch
                 slot="action"
                 bind:checked={forceReinstall}
+                on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Use Vietnamese Roblox"
+            description="This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on"
+            icon={vngLogo}
+        >
+            <Switch
+                slot="action"
+                bind:checked={vng}
                 on:change={handleChanges}
             />
         </SettingCard>

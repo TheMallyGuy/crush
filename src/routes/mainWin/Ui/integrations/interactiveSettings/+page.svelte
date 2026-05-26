@@ -61,6 +61,10 @@
             closeCrashHandler: savedIntegrations?.closeCrashHandler ?? false,
             priority: savedIntegrations?.priority ?? "NORMAL_PRIORITY_CLASS",
             activityWatching: savedIntegrations?.activityWatching ?? true,
+            sleepSchedule: {
+                enabled:  savedIntegrations?.sleepSchedule?.enabled ?? true,
+                visible: savedIntegrations?.sleepSchedule?.visible ?? false,
+            },
             discordRpc: savedIntegrations?.discordRpc ?? {
                 enable: false,
                 displayAccount: false,
