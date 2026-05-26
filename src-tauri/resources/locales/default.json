@@ -339,7 +339,7 @@
                     "dropdownDefault": "Default"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {
