@@ -126,8 +126,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Use Vietnamese Roblox"
-            description="This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on"
+            title={$_('pages.installations.useVNGCard.title')}
+            description={$_('pages.installations.useVNGCard.description')}
             icon={vngLogo}
         >
             <Switch
