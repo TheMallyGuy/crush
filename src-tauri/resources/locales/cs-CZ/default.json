@@ -253,6 +253,10 @@
                 "title": "Vynutit přeinstalaci Robloxu",
                 "description": "Při každém spuštění Roblox znovu nainstalujete."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Neaktualizovat Roblox",
                 "description": "Přeskočit kontrolu aktualizací Robloxu a spustit okamžitě."

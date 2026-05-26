@@ -253,6 +253,10 @@
                 "title": "Αναγκαστική επανεγκατάσταση του Roblox",
                 "description": "Επανεγκαταστήστε το Roblox κάθε φορά που το εκκινήσετε."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Μην ενημερώνετε το Roblox",
                 "description": "Παράλειψη του ελέγχου ενημέρωσης Roblox και άμεση εκκίνηση."

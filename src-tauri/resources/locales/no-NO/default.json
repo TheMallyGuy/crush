@@ -253,6 +253,10 @@
                 "title": "Tving Roblox på nytt",
                 "description": "Installer Roblox igjen hver gang du starter den."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Ikke oppdater Roblox",
                 "description": "Hopp over Roblox oppdateringen sjekk og start umiddelbart."

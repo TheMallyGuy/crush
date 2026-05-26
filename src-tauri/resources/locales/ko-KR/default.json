@@ -253,6 +253,10 @@
                 "title": "Roblox 강제 재설치",
                 "description": "Reinstall Roblox every time you launch it."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Roblox 업데이트 안 함",
                 "description": "Skip the Roblox update check and launch instantly."

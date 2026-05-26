@@ -253,6 +253,10 @@
                 "title": "Robloxを強制的に再インストールする",
                 "description": "Robloxを起動するたびに再インストールします。"
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Robloxを更新しない",
                 "description": "Robloxのアップデートチェックをスキップして即座に起動します。"
