@@ -30,7 +30,7 @@ pub async fn get_best_region() -> String {
 }
 
 #[tauri::command]
-pub async fn get_latest_version_player(vng: bool) -> Result<String, String> {
+pub async fn get_latest_version_player() -> Result<String, String> {
     latest_version_player()
         .await
         .map(|v| v.client_version_upload)
