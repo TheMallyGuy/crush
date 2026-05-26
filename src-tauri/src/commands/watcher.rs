@@ -268,7 +268,6 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
     let mut system = System::new();
     let mut was_running = false;
     let store = app.store("config.json").map_err(|e| e.to_string())?;
-    let mut sleep_schedule_count: u64 = 0;
     let mut last_sleep_check = Instant::now() - Duration::from_secs(61);
     log::info!("watcher is now running");
 
@@ -1218,7 +1217,7 @@ async fn fetch_and_store_location(
 
 async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Result<u64, String> {
     let hour = Local::now().hour();
-    let is_late = true;
+    let is_late = hour >= 23 || hour < 7; // 11 PM to 7 AM
 
     if !is_late {
         return Ok(count);
