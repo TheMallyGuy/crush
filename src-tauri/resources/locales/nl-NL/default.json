@@ -339,7 +339,7 @@
                     "dropdownDefault": "Standaard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Schakel mazen van lage kwaliteit in",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Kan de prestaties verbeteren."
                 },
                 "graySkyCard": {

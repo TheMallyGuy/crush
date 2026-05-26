@@ -339,7 +339,7 @@
                     "dropdownDefault": "Par défaut"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Activer les maillages de faible qualité",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Peut améliorer les performances."
                 },
                 "graySkyCard": {

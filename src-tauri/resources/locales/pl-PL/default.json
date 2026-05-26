@@ -339,7 +339,7 @@
                     "dropdownDefault": "Domyślna"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Włącz siatki niskiej jakości",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Może poprawić wydajność."
                 },
                 "graySkyCard": {

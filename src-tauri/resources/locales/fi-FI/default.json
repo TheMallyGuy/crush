@@ -339,7 +339,7 @@
                     "dropdownDefault": "Oletusarvoinen"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Ota käyttöön heikkolaatuiset verkot",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Voi parantaa suorituskykyä."
                 },
                 "graySkyCard": {

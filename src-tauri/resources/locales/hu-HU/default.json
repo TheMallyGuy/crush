@@ -339,7 +339,7 @@
                     "dropdownDefault": "Alapértelmezett"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Gyenge minőségű hálók engedélyezése",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {

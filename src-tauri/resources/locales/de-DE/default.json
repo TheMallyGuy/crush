@@ -339,7 +339,7 @@
                     "dropdownDefault": "Standard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Aktivieren Sie Netze mit niedriger Qualität",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Kann die Leistung verbessern."
                 },
                 "graySkyCard": {

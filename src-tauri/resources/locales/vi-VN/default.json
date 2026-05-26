@@ -339,7 +339,7 @@
                     "dropdownDefault": "Mặc định"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Bật mắt lưới chất lượng thấp",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Có thể cải thiện hiệu năng."
                 },
                 "graySkyCard": {

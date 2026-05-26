@@ -339,7 +339,7 @@
                     "dropdownDefault": "По умолчанию"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Включить низкокачественные сетки",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Может повысить производительность."
                 },
                 "graySkyCard": {
