@@ -266,10 +266,12 @@ async function extractAll(
 
 async function checkForUpdates(
     CurrentVersions: Versions,
-    appType: AppType = 'player'
+    appType: AppType = 'player',
+    vng?: boolean
 ): Promise<boolean> {
     const latest: string = await invoke(
-        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player'
+        appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player',
+        { vng }
     )
     return !CurrentVersions.versions.includes(latest)
 }
@@ -319,6 +321,7 @@ async function writeAppSettings(versionHash: string, appType: AppType = 'player'
 async function getInstallationUrls(
     onProgress: ProgressCallback,
     appType: AppType = 'player',
+    vng?: boolean,
     version?: string
 ): Promise<string[]> {
     onProgress({
@@ -336,6 +339,7 @@ async function getInstallationUrls(
         player: appType === 'player',
         region: bestRegion,
         ...(version && { version }),
+        ...(vng !== undefined && { vng }),
     })
 
     if (!assetsUrls || assetsUrls.length === 0) {
@@ -369,8 +373,8 @@ async function performFullInstallation(
     version?: string,
 ): Promise<string> {
     const store = await load('config.json')
-    const assetsUrls = await getInstallationUrls(onProgress, appType, version)
     const installation = await store.get<Installation>('installation')
+    const assetsUrls = await getInstallationUrls(onProgress, appType, installation?.vng ?? false, version)
     const limit = installation?.parallel ?? 4
 
     onProgress({
@@ -460,10 +464,10 @@ async function handleLatestVersion(
     })
 
     const versionHashes = entries.map(e => e.versionHash)
-    const needsUpdate = await checkForUpdates({ versions: versionHashes }, appType)
     const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
     const isMissing = !(await checkInstallationExists(appType, currentlyUsing?.versionHash))
     const installationCfg = await store.get<Installation>('installation')
+    const needsUpdate = await checkForUpdates({ versions: versionHashes }, appType, installationCfg?.vng ?? false)
     const shouldForceInstall = installationCfg?.forceReinstall
 
     if (needsUpdate || isMissing || shouldForceInstall) {

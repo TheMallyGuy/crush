@@ -144,6 +144,7 @@ pub async fn get_download_urls(
     is_player: bool,
     version_hash: Option<&str>,
     region_url: Option<&str>,
+    vng: bool,
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     let raw_hash: String = match version_hash {
         Some(hash) => hash.to_string(),
@@ -161,13 +162,25 @@ pub async fn get_download_urls(
         raw_hash.strip_prefix("version-").unwrap_or(&raw_hash)
     );
 
-    let base_url = match region_url {
-        Some(url) => url.to_string(),
-        None => best_region()
-            .await
-            .unwrap_or("https://setup.rbxcdn.com")
-            .to_string(),
-    };
+    let base_url: String;
+
+    if !vng {
+        base_url = match region_url {
+            Some(url) => url.to_string(),
+            None => best_region()
+                .await
+                .unwrap_or("https://setup.rbxcdn.com")
+                .to_string(),
+        };
+    } else {
+        base_url = match region_url {
+            Some(url) => format!("{url}/vng"),
+            None => best_region()
+                .await
+                .unwrap_or("https://setup.rbxcdn.com/vng")
+                .to_string(),
+        };
+    }
 
     let urls: Vec<String> = if is_player {
         PLAYER_FILES

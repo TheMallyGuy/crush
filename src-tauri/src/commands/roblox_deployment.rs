@@ -5,10 +5,12 @@ pub async fn get_download_deployment_urls(
     player: bool,
     region: Option<&str>,
     version: Option<&str>,
+    vng: bool,
 ) -> Result<Vec<String>, String> {
-    let urls = get_download_urls(player, version, region)
+    let urls = get_download_urls(player, version, region, vng)
         .await
         .map_err(|e| e.to_string())?;
+
 
     log::info!("download urls: {:?}", urls);
 
@@ -28,7 +30,7 @@ pub async fn get_best_region() -> String {
 }
 
 #[tauri::command]
-pub async fn get_latest_version_player() -> Result<String, String> {
+pub async fn get_latest_version_player(vng: bool) -> Result<String, String> {
     latest_version_player()
         .await
         .map(|v| v.client_version_upload)
