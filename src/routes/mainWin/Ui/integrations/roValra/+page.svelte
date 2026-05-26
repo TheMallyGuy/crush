@@ -46,6 +46,10 @@
             serverLocationNotifier: savedIntegrations?.serverLocationNotifier ?? false,
             roValra: {
                 joinServerForYouValue,
+            },
+            sleepSchedule: {
+                enabled: savedIntegrations?.sleepSchedule?.enabled ?? true,
+                visible: savedIntegrations?.sleepSchedule?.visible ?? false,
             }
         }
 

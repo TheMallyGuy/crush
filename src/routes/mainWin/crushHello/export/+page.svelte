@@ -42,6 +42,10 @@
             }
             
             const newIntegrations: Integrations = {
+                sleepSchedule: {
+                    enabled:  integrations?.sleepSchedule?.enabled ?? true,
+                    visible: integrations?.sleepSchedule?.visible ?? false,
+                },
                 closeCrashHandler: boostraperConfig.AutoCloseCrashHandler ?? boostraperConfig.DisableCrash ?? false,
                 priority : integrations?.priority ?? "NORMAL_PRIORITY_CLASS",
                 interactive: windowManipulation,
