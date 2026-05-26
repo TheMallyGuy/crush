@@ -4,9 +4,9 @@
     "version": "0.2.1",
     "identifier": "com.mally.crush",
     "build": {
-        "beforeDevCommand": "pnpm dev",
+        "beforeDevCommand": "bun dev",
         "devUrl": "http://localhost:1420",
-        "beforeBuildCommand": "pnpm build",
+        "beforeBuildCommand": "bun build",
         "frontendDist": "../build"
     },
     "app": {
