@@ -51,8 +51,7 @@
     let exe: shi
     let exePath: string
 
-    const roValaraLogoColored = '/RovalraColored.svg'
-    const roValaraLogo = '/Rovalra.svg'
+    const roValaraLogo = '/Rovalra.png'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -298,7 +297,7 @@
             title={$_('pages.integrations.roValraCard.title')}
             description={$_('pages.integrations.roValraCard.description')}
             icon={roValaraLogo}
-            iconHover={roValaraLogoColored}
+            doTheGrayThing={true}
         >
             <Button
                 slot="action"

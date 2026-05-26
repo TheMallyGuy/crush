@@ -3,7 +3,7 @@
     export let title = ''
     export let description = ''
     export let icon: Component | string | null = null
-    export let iconHover: string | null = null
+    export let doTheGrayThing: boolean = false
     export let clickable = false
     let className = ''
     export { className as class }
@@ -30,9 +30,10 @@
                     <slot name="icon">
                         {#if typeof icon === 'string'}
                             <img
-                                src={iconHover && hovered ? iconHover : icon}
+                                src={icon}
                                 alt=""
-                                class="w-10 h-10 object-contain transition-opacity duration-150"
+                                class="w-10 h-10 object-contain transition-all duration-150 grayscale-0"
+                                class:grayscale={doTheGrayThing && !hovered}
                             />
                         {:else if icon}
                             <svelte:component this={icon} size={24} />
