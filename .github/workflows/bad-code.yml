@@ -15,20 +15,18 @@ jobs:
 
         steps:
             - uses: actions/checkout@v6
-
+            - uses: oven-sh/setup-bun@v2
+  
             - name: Install Node
               uses: actions/setup-node@v6
               with:
                   node-version: 20
 
-            - name: Install pnpm
-              run: npm install -g pnpm
-
             - name: Install deps
-              run: pnpm install
+              run: bun install
 
             - name: Type check
-              run: pnpm check
+              run: bun svelte-check
 
             - name: Rust checks
               working-directory: ./src-tauri
@@ -39,4 +37,4 @@ jobs:
             - name: Build
               env:
                   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-              run: pnpm tauri build
+              run: bun tauri build
