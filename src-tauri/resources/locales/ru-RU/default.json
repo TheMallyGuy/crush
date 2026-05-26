@@ -253,6 +253,10 @@
                 "title": "Принудительная переустановка Roblox",
                 "description": "Переустанавливайте Roblox каждый раз при запуске."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Не обновлять Roblox",
                 "description": "Пропустите обновление Roblox и запустите его мгновенно."

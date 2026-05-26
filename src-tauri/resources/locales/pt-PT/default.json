@@ -253,6 +253,10 @@
                 "title": "Forçar reinstalação do Roblox",
                 "description": "Reinstale o Roblox toda vez que você o lançar."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Não atualize o Roblox",
                 "description": "Ignore a verificação de atualizações do Roblox e lance instantaneamente."

@@ -253,6 +253,10 @@
                 "title": "Bắt buộc cài đặt lại Roblox",
                 "description": "Cài đặt lại Roblox mỗi khi bạn khởi chạy nó."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Không cập nhật Roblox",
                 "description": "Bỏ qua kiểm tra cập nhật Roblox và khởi chạy ngay lập tức."

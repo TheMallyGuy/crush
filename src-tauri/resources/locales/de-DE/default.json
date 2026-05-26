@@ -253,6 +253,10 @@
                 "title": "Roblox neu installieren",
                 "description": "Starte Roblox bei jedem Start neu."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Roblox nicht aktualisieren",
                 "description": "Überspringen Sie die Roblox-Updateprüfung und starten Sie sofort."

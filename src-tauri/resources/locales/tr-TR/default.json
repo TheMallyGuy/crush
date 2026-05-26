@@ -253,6 +253,10 @@
                 "title": "Roblox'u Yeniden Yüklemeye Zorla",
                 "description": "Reinstall Roblox every time you launch it."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Roblox'u güncelleme",
                 "description": "Skip the Roblox update check and launch instantly."

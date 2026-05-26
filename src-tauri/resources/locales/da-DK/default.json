@@ -253,6 +253,10 @@
                 "title": "Gennemtving geninstallation af Roblox",
                 "description": "Geninstaller Roblox hver gang du starter det."
             },
+            "useVNGCard": {
+                "title": "Use Vietnamese Roblox",
+                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users."
+            },
             "dontUpdateCard": {
                 "title": "Opdater ikke Roblox",
                 "description": "Spring Roblox opdatering kontrol og lancering med det samme."
