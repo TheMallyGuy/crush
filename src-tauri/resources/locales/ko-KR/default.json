@@ -339,7 +339,7 @@
                     "dropdownDefault": "기본"
                 },
                 "lowMeshQualityCard": {
-                    "title": "저품질 메시 활성화",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {

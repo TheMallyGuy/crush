@@ -339,7 +339,7 @@
                     "dropdownDefault": "الافتراضي"
                 },
                 "lowMeshQualityCard": {
-                    "title": "تمكين الشبكات منخفضة الجودة",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "قد يحسن الأداء."
                 },
                 "graySkyCard": {

@@ -339,7 +339,7 @@
                     "dropdownDefault": "Standard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Aktivér masker af lav kvalitet",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Kan forbedre ydeevnen."
                 },
                 "graySkyCard": {

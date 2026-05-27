@@ -339,7 +339,7 @@
                     "dropdownDefault": "Predeterminado"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Habilitar Mesules de baja calidad",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Puede mejorar el rendimiento."
                 },
                 "graySkyCard": {

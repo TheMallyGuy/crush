@@ -339,7 +339,7 @@
                     "dropdownDefault": "Původní nastavení"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Povolit sítě nízké kvality",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Může zlepšit výkon."
                 },
                 "graySkyCard": {

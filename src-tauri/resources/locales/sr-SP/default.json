@@ -339,7 +339,7 @@
                     "dropdownDefault": "Zadano"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Omogućite mrežice niskog kvaliteta",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {

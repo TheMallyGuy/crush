@@ -339,7 +339,7 @@
                     "dropdownDefault": "Sistem"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Düşük Kaliteli Ağları Etkinleştir",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {

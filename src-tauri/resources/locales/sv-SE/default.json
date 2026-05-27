@@ -339,7 +339,7 @@
                     "dropdownDefault": "Standard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Aktivera lågkvalitativa nät",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Kan förbättra prestanda."
                 },
                 "graySkyCard": {

@@ -339,7 +339,7 @@
                     "dropdownDefault": "Implicit"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Calitate scăzută mesh-uri",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Poate îmbunătăți performanța."
                 },
                 "graySkyCard": {

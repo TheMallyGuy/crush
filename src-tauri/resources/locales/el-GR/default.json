@@ -339,7 +339,7 @@
                     "dropdownDefault": "Αθέτηση"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Ενεργοποίηση Πλέγματος Χαμηλής Ποιότητας",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "Μπορεί να βελτιώσει τις επιδόσεις."
                 },
                 "graySkyCard": {
