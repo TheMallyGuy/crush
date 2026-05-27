@@ -47,6 +47,11 @@
             "discord": "我们的社区"
         },
         "boostrapWin": {
+            "steps": {
+                "prep": "Preparing...",
+                "applyMods": "Applying modifications",
+                "launch": "Launching"
+            },
             "cancel": "取消",
             "retry": "重试"
         },
@@ -412,6 +417,24 @@
                         "description": "我们还没有任何社区模组。抢先做出贡献，帮助我们拓展产品系列！",
                         "submissionButton": "提交改装配件"
                     }
+                }
+            }
+        },
+        "shortcuts": {
+            "shortcuts": "Create shortcuts",
+            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "creator": {
+                "title": "Create a shortcut",
+                "button": "Create Shortcut",
+                "gameIdInput": "Game ID",
+                "status": {
+                    "idle": "Please fetch...",
+                    "fetching": "Fetching...",
+                    "notFound": "Game not found",
+                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
+                    "noThumb": "No thumbnail available",
+                    "error": "Error fetching game",
+                    "done": "Look at your desktop!"
                 }
             }
         },

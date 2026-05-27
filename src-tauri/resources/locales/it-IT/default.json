@@ -47,6 +47,11 @@
             "discord": "La Nostra Community"
         },
         "boostrapWin": {
+            "steps": {
+                "prep": "Preparing...",
+                "applyMods": "Applying modifications",
+                "launch": "Launching"
+            },
             "cancel": "Annulla",
             "retry": "Riprova"
         },
@@ -412,6 +417,24 @@
                         "description": "Non abbiamo ancora nessuna mod della community. Sii il primo a contribuire e ad aiutarci a far crescere la collezione!",
                         "submissionButton": "Invia una mod"
                     }
+                }
+            }
+        },
+        "shortcuts": {
+            "shortcuts": "Create shortcuts",
+            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "creator": {
+                "title": "Create a shortcut",
+                "button": "Create Shortcut",
+                "gameIdInput": "Game ID",
+                "status": {
+                    "idle": "Please fetch...",
+                    "fetching": "Fetching...",
+                    "notFound": "Game not found",
+                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
+                    "noThumb": "No thumbnail available",
+                    "error": "Error fetching game",
+                    "done": "Look at your desktop!"
                 }
             }
         },
