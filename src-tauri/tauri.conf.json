@@ -54,6 +54,18 @@
                 "schemes": ["roblox", "roblox-player"]
             }
         },
+        "cli" : {
+            "description": "CLI part for using shortcuts",
+            "args": [
+                {
+                    "short" : "l",
+                    "name" : "launch",
+                    "description" : "Launch the game with the specified place id",
+                    "takesValue" : true,
+                    "required" : false
+                }
+            ]
+        },
         "updater": {
             "endpoints": [
                 "https://github.com/TheMallyGuy/crush/releases/latest/download/updater.json"

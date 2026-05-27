@@ -18,6 +18,7 @@ use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
 use tauri::{Emitter, Manager};
+use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_notification::NotificationExt;
@@ -238,6 +239,42 @@ pub fn run() {
                 .unwrap_or_else(|| "auto".to_string());
 
             apply_vibrancy_to_window(&window, &effect);
+
+            match app.cli().matches() {
+                // https://v2.tauri.app/plugin/cli/
+
+                // `matches` here is a Struct with { args, subcommand }.
+                // `args` is `HashMap<String, ArgData>` where `ArgData` is a struct with { value, occurrences }.
+                // `subcommand` is `Option<Box<SubcommandMatches>>` where `SubcommandMatches` is a struct with { name, matches }.
+                Ok(matches) => {
+                    log::info!("app launched with args: {:?}", matches.args);
+                    if matches.args.contains_key("launch") {
+                        let game_id = matches
+                            .args
+                            .get("launch")
+                            .and_then(|arg| arg.value.as_str())
+                            .map(|s| s.to_string())
+                            .unwrap_or_default();
+
+                        let app_handle = app.handle().clone();
+
+                        if game_id.is_empty() {
+                            log::info!("maybe didnt input game id, but cli still picking up arg, ingoring"); // tauri be weird sometimes
+                            return Ok(());
+                        }
+
+                        tauri::async_runtime::spawn(async move {
+                            tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+
+                            handle_received_url(
+                                &app_handle,
+                                format!("roblox://experiences/start?placeId={}", game_id), // not sure
+                            );
+                        });
+                    }
+                }
+                Err(_) => {}
+            }
 
             setup_deep_links(app)?;
             spawn_discord_rpc(app.handle().clone());
