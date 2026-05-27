@@ -339,7 +339,7 @@
                     "dropdownDefault": "默认"
                 },
                 "lowMeshQualityCard": {
-                    "title": "启用低质量网格",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "可能会提高性能。"
                 },
                 "graySkyCard": {

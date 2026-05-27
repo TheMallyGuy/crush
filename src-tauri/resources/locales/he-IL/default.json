@@ -339,7 +339,7 @@
                     "dropdownDefault": "ברירת המחדל"
                 },
                 "lowMeshQualityCard": {
-                    "title": "הפעלת מסרים באיכות נמוכה",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {

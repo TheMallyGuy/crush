@@ -339,7 +339,7 @@
                     "dropdownDefault": "デフォルト"
                 },
                 "lowMeshQualityCard": {
-                    "title": "低品質のメッシュを有効にする",
+                    "title": "Enable Low Quality Meshes (LOD)",
                     "description": "パフォーマンスを向上させることができます。"
                 },
                 "graySkyCard": {
