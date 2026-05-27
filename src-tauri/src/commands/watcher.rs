@@ -72,9 +72,9 @@ struct Activity {
     access_code: Option<String>,
 }
 
+    reader: Option<BufReader<File>>,
 struct WatcherState {
     current_file: Option<PathBuf>,
-    reader: Option<BufReader<File>>,
     offset: u64,
     activity: Activity,
     last_rpc: Option<Instant>,
@@ -115,9 +115,9 @@ struct WatcherState {
 
 impl Default for WatcherState {
     fn default() -> Self {
+            reader: None,
         Self {
             current_file: None,
-            reader: None,
             offset: 0,
             activity: Activity::default(),
             last_rpc: None,
@@ -169,9 +169,11 @@ impl WatcherState {
     }
 
     fn reset_fully(&mut self) {
+    fn reset_fully(&mut self) {
+        let old_reader = self.reader.take();
         *self = WatcherState::default();
+        self.reader = old_reader;
     }
-}
 
 // API types
 
@@ -236,6 +238,10 @@ static WATCHER_RUNNING: AtomicBool = AtomicBool::new(false);
 pub fn watch_logs(app: AppHandle) -> Result<(), String> {
     if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
         log::warn!("ignoring duplicate watch_logs call");
+#[tauri::command]
+pub fn watch_logs(app: AppHandle) -> Result<(), String> {
+    if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
+        log::warn!("ignoring duplicate watch_logs call");
         return Ok(());
     }
 
@@ -249,9 +255,13 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
 
     tauri::async_runtime::spawn(async move {
         if let Err(e) = run_watcher(app).await {
-            log::error!("watcher error: {}", e);
+            log::error!("watcher error: {}" , e);
         }
         WATCHER_RUNNING.store(false, Ordering::SeqCst);
+    });
+
+    Ok(())
+}
     });
 
     Ok(())
@@ -309,15 +319,15 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
                     }
                 });
 
-                match handle.await {
+        let sleep_ms = if running { 100 } else { 1000 };
+        tokio::time::sleep(Duration::from_millis(sleep_ms)).await;
                     Ok(new_count) => state.sleep_schedule_count = new_count,
                     Err(e) => log::warn!("sleep_schedule task panicked: {}", e),
                 }
             }
         }
 
-        let sleep_ms = if running { 100 } else { 1000 };
-        tokio::time::sleep(Duration::from_millis(sleep_ms)).await;
+        tokio::time::sleep(Duration::from_millis(16)).await;
     }
 }
 
@@ -386,7 +396,7 @@ async fn read_new_lines(
         match open_reader(state) {
             Ok(r) => r,
             Err(e) => {
-                log::error!("open reader: {}", e);
+                log::error!("open reader: {}" , e);
                 return;
             }
         }
@@ -400,13 +410,13 @@ async fn read_new_lines(
             Ok(0) => break,
             Ok(_) => {
                 if let Err(e) = handle_line(app, &line, state, store).await {
-                    log::error!("handle_line: {}", e);
+                    log::error!("handle_line: {}" , e);
                     err_occurred = true;
                     break;
                 }
             }
             Err(e) => {
-                log::error!("read_line: {}", e);
+                log::error!("read_line: {}" , e);
                 err_occurred = true;
                 break;
             }
@@ -414,7 +424,6 @@ async fn read_new_lines(
     }
 
     state.offset = reader.stream_position().unwrap_or(state.offset);
-
     if !err_occurred {
         state.reader = Some(reader);
     }
@@ -1450,7 +1459,6 @@ pub fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: 
     }
     cur.as_bool().unwrap_or(false)
 }
-
 fn is_roblox_running(system: &mut System) -> bool {
     static R: OnceLock<Regex> = OnceLock::new();
     let re = R.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());

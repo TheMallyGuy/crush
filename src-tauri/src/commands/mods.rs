@@ -39,7 +39,6 @@ fn process_mod_entry(
     Some(rel_str)
 }
 
-fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
     let Ok(src_meta) = src.metadata() else {
         return false;
     };
@@ -54,9 +53,8 @@ fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
     md5_file(src)
         .zip(md5_file(dest))
         .is_some_and(|(s, d)| s == d)
-}
 
-/// Computes MD5 hash using an 64KB buffer to balance memory usage and I/O performance.
+/// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
 fn md5_file(path: &Path) -> Option<md5::Digest> {
     let mut file = fs::File::open(path).ok()?;
     let mut context = md5::Context::new();

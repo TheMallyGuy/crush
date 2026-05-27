@@ -38,6 +38,8 @@ pub mod tray;
 
 use crate::tray::setup_tray;
 
+#[tauri::command]
+}
 
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
     builder
