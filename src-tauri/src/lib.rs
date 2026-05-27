@@ -259,18 +259,19 @@ pub fn run() {
                         let app_handle = app.handle().clone();
 
                         if game_id.is_empty() {
-                            log::info!("maybe didnt input game id, but cli still picking up arg, ingoring"); // tauri be weird sometimes
-                            return Ok(());
+                            log::info!(
+                                "maybe didnt input game id, but cli still picking up arg, ingoring"
+                            ); // tauri be weird sometimes
+                        } else { // add a guard here
+                            tauri::async_runtime::spawn(async move {
+                                tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+
+                                handle_received_url(
+                                    &app_handle,
+                                    format!("roblox://experiences/start?placeId={}", game_id), // not sure
+                                );
+                            });
                         }
-
-                        tauri::async_runtime::spawn(async move {
-                            tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-
-                            handle_received_url(
-                                &app_handle,
-                                format!("roblox://experiences/start?placeId={}", game_id), // not sure
-                            );
-                        });
                     }
                 }
                 Err(_) => {}
