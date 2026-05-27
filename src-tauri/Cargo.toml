@@ -59,7 +59,11 @@ chrono = "0.4.44"
 windows-result = "0.4.1"
 tauri-plugin-clipboard-manager = "2"
 
+[target.'cfg(windows)'.dependencies]
+lnks = "0.2" # we plan macos support in the future
+
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-cli = "2"
 tauri-plugin-single-instance = { version = "2.4.1", features = ["deep-link"] }
 tauri-plugin-updater = "2"
 
