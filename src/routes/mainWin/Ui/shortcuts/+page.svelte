@@ -6,10 +6,11 @@
     import { BaseDirectory, create, exists, mkdir } from '@tauri-apps/plugin-fs'
     import { fetch } from '@tauri-apps/plugin-http'
     import { error, info } from '@tauri-apps/plugin-log'
+    import { _ } from 'svelte-i18n'
 
     let image = $state(null as string | null)
     let gameId = $state(null as string | null)
-    let status = $state('Please fetch...' as string)
+    let status = $state($_('pages.shortcuts.creator.idle') as string)
 
     async function getGameUniverse(placeID: number): Promise<number | null> {
         const res = await fetch(
@@ -108,18 +109,18 @@
             error(`Error creating shortcut: ${err}`)
         })
 
-        status = 'Look at your desktop!'
+        status = $_('pages.shortcuts.creator.done')
     }
 
     $effect(() => {
         if (!gameId) return
-        status = 'Fetching...'
+        status = $_('pages.shortcuts.creator.fetching')
 
         const timeout = setTimeout(async () => {
             try {
                 const universeId = await getGameUniverse(Number(gameId))
                 if (!universeId) {
-                    status = 'Game not found'
+                    status = $_('pages.shortcuts.creator.notFound')
                     image = null
                     return
                 }
@@ -127,10 +128,10 @@
                 const thumbnail = await getThumbnailViaUniverseId(universeId)
                 image = thumbnail
                 status = thumbnail
-                    ? 'Fetched Game Information! Now jusssttt gonna press that create shortcut button'
-                    : 'No thumbnail available'
+                    ? $_('pages.shortcuts.creator.fetched')
+                    : $_('pages.shortcuts.creator.noThumb')
             } catch (error) {
-                status = 'Error fetching game'
+                status = $_('pages.shortcuts.creator.error')
                 image = null
             }
         }, 500)
@@ -143,10 +144,10 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Create shortcuts
+                {$_('pages.shortcuts.shortcuts')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Easily create shortcuts to instantly play your favourite games.
+                {$_('pages.shortcuts.description')}
             </p>
         </div>
     </div>
@@ -159,7 +160,7 @@
         </div>
 
         <div class="flex flex-col w-full gap-5">
-            <Textbox label="Game ID" placeholder="" bind:value={gameId} />
+            <Textbox label={$_("pages.shortcuts.creator.gameIdInput")} placeholder="" bind:value={gameId} />
 
             <div class="flex w-full flex-row gap-5 justify-between relative">
                 <p class="opacity-75 text-xs text-wrap wrap-normal w-2/3">
@@ -167,7 +168,7 @@
                 </p>
 
                 <Button class="" on:click={createShortCut}
-                    >Create shortcut</Button
+                    >{$_('pages.shortcuts.creator.button')}</Button
                 >
             </div>
         </div>
