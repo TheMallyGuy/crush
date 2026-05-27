@@ -4,9 +4,9 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "dev": "vite dev",
-        "build": "vite build",
-        "preview": "vite preview",
+        "dev": "bunx --bun vite dev",
+        "build": "bunx --bun vite build",
+        "preview": "bunx --bun vite preview",
         "format": "concurrently \"npm:format:svelte\" \"npm:format:tauri\"",
         "format:svelte": "prettier . --write",
         "format:tauri": "cd ./src-tauri/ && cargo fmt",
