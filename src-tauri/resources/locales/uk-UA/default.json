@@ -47,6 +47,11 @@
             "discord": "Наші спільноти"
         },
         "boostrapWin": {
+            "steps": {
+                "prep": "Preparing...",
+                "applyMods": "Applying modifications",
+                "launch": "Launching"
+            },
             "cancel": "Скасувати",
             "retry": "Повторити спробу"
         },
@@ -412,6 +417,24 @@
                         "description": "У нас ще немає модів спільноти. Будьте першими, хто зробить свій внесок і допоможе нам збільшити колекцію!",
                         "submissionButton": "Надіслати модифікацію"
                     }
+                }
+            }
+        },
+        "shortcuts": {
+            "shortcuts": "Create shortcuts",
+            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "creator": {
+                "title": "Create a shortcut",
+                "button": "Create Shortcut",
+                "gameIdInput": "Game ID",
+                "status": {
+                    "idle": "Please fetch...",
+                    "fetching": "Fetching...",
+                    "notFound": "Game not found",
+                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
+                    "noThumb": "No thumbnail available",
+                    "error": "Error fetching game",
+                    "done": "Look at your desktop!"
                 }
             }
         },

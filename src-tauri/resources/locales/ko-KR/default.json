@@ -47,6 +47,11 @@
             "discord": "Our Community"
         },
         "boostrapWin": {
+            "steps": {
+                "prep": "Preparing...",
+                "applyMods": "Applying modifications",
+                "launch": "Launching"
+            },
             "cancel": "취소",
             "retry": "다시 시도"
         },
@@ -412,6 +417,24 @@
                         "description": "아직 커뮤니티 개조 부품이 없습니다. 가장 먼저 참여하여 컬렉션을 성장시킬 수 있도록 도와주세요!",
                         "submissionButton": "모드 제출"
                     }
+                }
+            }
+        },
+        "shortcuts": {
+            "shortcuts": "Create shortcuts",
+            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "creator": {
+                "title": "Create a shortcut",
+                "button": "Create Shortcut",
+                "gameIdInput": "Game ID",
+                "status": {
+                    "idle": "Please fetch...",
+                    "fetching": "Fetching...",
+                    "notFound": "Game not found",
+                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
+                    "noThumb": "No thumbnail available",
+                    "error": "Error fetching game",
+                    "done": "Look at your desktop!"
                 }
             }
         },
