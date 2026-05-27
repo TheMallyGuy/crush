@@ -99,6 +99,7 @@ export type InstallationEntry = {
   appType: AppType
   installedAt: string
   active?: boolean
+  channel: 'global' | 'vng'
 }
 
 export type Installation = {

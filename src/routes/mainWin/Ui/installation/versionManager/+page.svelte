@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from '$app/navigation'
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
@@ -196,6 +197,12 @@
                 {$_('pages.installations.versionManager.description')}
             </p>
         </div>
+
+        <div class="flex items-center gap-2">
+            <Button variant="secondary" onclick={() => goto('../installation')}>
+                {$_('pages.integrations.gameHistory.backToIntegrations')}
+            </Button>
+        </div>
     </div>
 
     <Button variant="primary" size="md" on:click={handleNewVersion}>
@@ -218,6 +225,14 @@
                         <span class="text-sm font-medium text-stone-100">
                             {item.id}
                             {#if currentlyUsing?.id === item.id}
+                                <span
+                                    class="ml-2 text-xs {item.channel === 'vng'
+                                        ? 'text-orange-400'
+                                        : 'text-blue-400'}"
+                                    >{item.channel === 'vng'
+                                        ? 'VNG'
+                                        : 'Global'}</span
+                                >
                                 <span class="ml-2 text-xs text-green-400"
                                     >(active)</span
                                 >

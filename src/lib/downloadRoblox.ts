@@ -150,6 +150,7 @@ async function reindexVersions(appType: AppType = 'player'): Promise<Installatio
                 versionHash: entry.name,
                 appType,
                 installedAt: new Date().toISOString(),
+                channel: 'global' as const,
             }
         )
     }
@@ -271,7 +272,7 @@ async function checkForUpdates(
 ): Promise<boolean> {
     const latest: string = await invoke(
         appType === 'studio' ? 'get_latest_version_studio' : 'get_latest_version_player',
-        { vng }
+        vng ? { vng: true } : {}
     )
     return !CurrentVersions.versions.includes(latest)
 }
@@ -335,12 +336,14 @@ async function getInstallationUrls(
         message: get(_)('typescript.downloader.fetchingUrls'),
     })
 
+    const useVng = vng === true
+
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         player: appType === 'player',
         region: bestRegion,
-        ...(version && { version }),
-        ...(vng !== undefined && { vng }),
-    })
+        version: version || null,
+        vng: vng === true,
+    }); ``
 
     if (!assetsUrls || assetsUrls.length === 0) {
         throw new Error('No download URLs found for the specified version/region.')
@@ -371,10 +374,13 @@ async function performFullInstallation(
     onProgress: ProgressCallback,
     appType: AppType = 'player',
     version?: string,
+    vng?: boolean
 ): Promise<string> {
+    info(`performing full installation, version: ${version}, vng: ${vng}`)
+
     const store = await load('config.json')
     const installation = await store.get<Installation>('installation')
-    const assetsUrls = await getInstallationUrls(onProgress, appType, installation?.vng ?? false, version)
+    const assetsUrls = await getInstallationUrls(onProgress, appType, vng, version)
     const limit = installation?.parallel ?? 4
 
     onProgress({
@@ -431,24 +437,11 @@ export async function downloadRoblox(
         const current = await versionStore.get<InstallationEntry>('currentlyUsing')
         return current?.versionHash ?? actualVersions.at(-1) ?? ''
     }
+    const useVng = savedInstallation?.vng === true
 
-    return handleLatestVersion(onProgress, appType, actualEntries, versionStore, config)
-}
+    info(`vng debug: ${useVng}`)
 
-async function handleExplicitVersion(
-    onProgress: ProgressCallback,
-    appType: AppType,
-    version: string,
-    versionList: string[],
-    versionStore: Store
-): Promise<string> {
-    const isMissing = !(await checkInstallationExists(appType, version))
-    if (isMissing) {
-        await performFullInstallation(onProgress, appType, version)
-    }
-
-    await saveVersion(onProgress, version, versionStore, appType)
-    return version
+    return handleLatestVersion(onProgress, appType, actualEntries, versionStore, config, useVng)
 }
 
 async function handleLatestVersion(
@@ -456,23 +449,27 @@ async function handleLatestVersion(
     appType: AppType,
     entries: InstallationEntry[],
     versionStore: Store,
-    store: Store
+    store: Store,
+    useVng: boolean
 ): Promise<string> {
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.updateChecking'),
-    })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.updateChecking') })
 
     const versionHashes = entries.map(e => e.versionHash)
     const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
     const isMissing = !(await checkInstallationExists(appType, currentlyUsing?.versionHash))
     const installationCfg = await store.get<Installation>('installation')
-    const needsUpdate = await checkForUpdates({ versions: versionHashes }, appType, installationCfg?.vng ?? false)
+
+    const expectedChannel: 'global' | 'vng' = useVng ? 'vng' : 'global'
+    const channelMismatch = currentlyUsing?.channel !== expectedChannel  // ← if channel switched, force reinstall
+
+    const needsUpdate = await checkForUpdates({ versions: versionHashes }, appType, useVng)
     const shouldForceInstall = installationCfg?.forceReinstall
 
-    if (needsUpdate || isMissing || shouldForceInstall) {
-        const versionHash = await performFullInstallation(onProgress, appType)
-        await saveVersion(onProgress, versionHash, versionStore, appType)
+    info(`channel check: currently on "${currentlyUsing?.channel}", expected "${expectedChannel}", mismatch: ${channelMismatch}`)
+
+    if (needsUpdate || isMissing || shouldForceInstall || channelMismatch) {
+        const versionHash = await performFullInstallation(onProgress, appType, undefined, useVng)
+        await saveVersion(onProgress, versionHash, versionStore, appType, undefined, expectedChannel)
         return versionHash
     }
 
@@ -485,38 +482,37 @@ async function saveVersion(
     version: string,
     versionStore: Store,
     appType: AppType = 'player',
-    label?: string
+    label?: string,
+    channel: 'global' | 'vng' = 'global'
 ) {
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.versionSaving'),
-    })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.versionSaving') })
 
     const existing = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
     const alreadyExists = existing.some(e => e.versionHash === version && e.appType === appType)
 
     const newEntry: InstallationEntry = alreadyExists
-        ? existing.find(e => e.versionHash === version && e.appType === appType)!
+        ? { ...existing.find(e => e.versionHash === version && e.appType === appType)!, channel }
         : {
             id: label ?? `Installation ${existing.length + 1}`,
             versionHash: version,
             appType,
             installedAt: new Date().toISOString(),
+            channel,
         }
 
-    if (!alreadyExists) {
+    if (alreadyExists) {
+        const idx = existing.findIndex(e => e.versionHash === version && e.appType === appType)
+        existing[idx] = newEntry
+    } else {
         existing.push(newEntry)
-        await versionStore.set('versions', existing)
     }
 
     // always update currentlyUsing to the latest launched version
+    await versionStore.set('versions', existing)
     await versionStore.set('currentlyUsing', newEntry)
     await versionStore.save()
 
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.installationComplete'),
-    })
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
 }
 
 export function getPackageForFile(
