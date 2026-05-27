@@ -39,18 +39,26 @@ fn process_mod_entry(
     Some(rel_str)
 }
 
-fn is_file_up_to_date(src: &Path, dest: &Path) -> bool {
-    dest.exists()
-        && md5_file(src)
-            .zip(md5_file(dest))
-            .is_some_and(|(s, d)| s == d)
-}
+    let Ok(src_meta) = src.metadata() else {
+        return false;
+    };
+    let Ok(dest_meta) = dest.metadata() else {
+        return false;
+    };
+
+    if src_meta.len() != dest_meta.len() {
+        return false;
+    }
+
+    md5_file(src)
+        .zip(md5_file(dest))
+        .is_some_and(|(s, d)| s == d)
 
 /// Computes MD5 hash using an 8KB buffer to minimize peak RSS memory usage.
 fn md5_file(path: &Path) -> Option<md5::Digest> {
     let mut file = fs::File::open(path).ok()?;
     let mut context = md5::Context::new();
-    let mut buffer = [0u8; 8192];
+    let mut buffer = [0u8; 65536];
 
     loop {
         let n = file.read(&mut buffer).ok()?;

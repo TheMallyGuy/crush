@@ -39,8 +39,6 @@ pub mod tray;
 use crate::tray::setup_tray;
 
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
@@ -296,7 +294,6 @@ pub fn run() {
             }
         })
         .invoke_handler(tauri::generate_handler![
-            greet,
             kill_window,
             get_download_deployment_urls,
             get_best_region,
