@@ -92,7 +92,7 @@
                     goto('./installation/versionManager')
                 }}
             >
-                Open
+                {$_('pages.installations.versionManagerCard.button')}
             </Button>
         </SettingCard>
 

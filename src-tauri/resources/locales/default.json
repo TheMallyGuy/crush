@@ -47,6 +47,11 @@
             "discord": "Our Community"
         },
         "boostrapWin": {
+            "steps" : {
+                "prep" : "Preparing...",
+                "applyMods" : "Applying modifications",
+                "launch" : "Launching"
+            },
             "cancel": "Cancel",
             "retry": "Retry"
         },

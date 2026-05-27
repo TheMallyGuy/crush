@@ -113,7 +113,7 @@
         error = false
         errorMessage = ''
         done = false
-        handleProgress({ type: 'status', message: 'Preparing...' })
+        handleProgress({ type: 'status', message: {$_("pages.boostrapWin.steps.prep")} })
 
         try {
             const store = await load('config.json')
@@ -131,10 +131,10 @@
             const version = await downloadRoblox(handleProgress, appType)
 
             done = true
-            handleProgress({ type: 'status', message: 'Applying modification' })
+            handleProgress({ type: 'status', message: {$_("pages.boostrapWin.steps.applyMods")} })
             await applyMods(version, appType)
 
-            handleProgress({ type: 'status', message: 'Launching' })
+            handleProgress({ type: 'status', message: {$_("pages.boostrapWin.steps.launch")} })
 
             const integrations = await store.get<Integrations>('integrations')
 
