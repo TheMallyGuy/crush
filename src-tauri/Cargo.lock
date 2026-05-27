@@ -1114,6 +1114,7 @@ dependencies = [
  "dirs-next",
  "filthy-rich",
  "futures",
+ "image",
  "lnks",
  "log",
  "md5",

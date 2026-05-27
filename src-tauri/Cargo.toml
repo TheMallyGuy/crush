@@ -58,6 +58,8 @@ tauri-plugin-deep-link = "2"
 chrono = "0.4.44"
 windows-result = "0.4.1"
 tauri-plugin-clipboard-manager = "2"
+image = "0.25"
+
 
 [target.'cfg(windows)'.dependencies]
 lnks = "0.2" # we plan macos support in the future

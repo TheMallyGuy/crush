@@ -9,6 +9,7 @@
         Info,
         Menu,
         SlidersHorizontal,
+        Grid2x2Plus,
     } from '@lucide/svelte'
     import { page } from '$app/stores'
     import { _ } from 'svelte-i18n'
@@ -47,6 +48,11 @@
             name: $_('pages.gbs.gbs'),
             icon: SlidersHorizontal,
             href: `${baseUiUrl}/gbs`
+        },
+        {
+            name: "Shortcuts",
+            icon: Grid2x2Plus,
+            href: `${baseUiUrl}/shortcuts`
         }
     ]
 

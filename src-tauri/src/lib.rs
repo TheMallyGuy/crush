@@ -13,6 +13,7 @@ use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,
 };
+use commands::shortcuts::new_shorcut;
 use commands::watcher::watch_logs;
 use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
@@ -249,7 +250,8 @@ pub fn run() {
                             log::info!(
                                 "maybe didnt input game id, but cli still picking up arg, ingoring"
                             ); // tauri be weird sometimes
-                        } else { // add a guard here
+                        } else {
+                            // add a guard here
                             tauri::async_runtime::spawn(async move {
                                 tokio::time::sleep(std::time::Duration::from_millis(500)).await;
 
@@ -301,6 +303,7 @@ pub fn run() {
             get_download_deployment_urls,
             get_best_region,
             create_or_focus_window,
+            new_shorcut,
             extract_zip,
             extract_files_from_zip,
             launch,
