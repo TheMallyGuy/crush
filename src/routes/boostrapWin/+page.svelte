@@ -17,8 +17,6 @@
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { goto } from '$app/navigation'
-    import { get } from 'svelte/store'
-    import { page } from '$app/stores'
     import { load } from '@tauri-apps/plugin-store'
     import { _ } from 'svelte-i18n'
     import { info } from '@tauri-apps/plugin-log'
