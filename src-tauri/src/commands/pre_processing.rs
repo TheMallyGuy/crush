@@ -1,5 +1,5 @@
 use crate::priorites::set_priority;
-use sysinfo::{System, ProcessesToUpdate};
+use sysinfo::{ProcessesToUpdate, System};
 use windows::Win32::System::Threading::{
     ABOVE_NORMAL_PRIORITY_CLASS, BELOW_NORMAL_PRIORITY_CLASS, HIGH_PRIORITY_CLASS,
     NORMAL_PRIORITY_CLASS, PROCESS_CREATION_FLAGS, REALTIME_PRIORITY_CLASS,
@@ -34,7 +34,6 @@ pub async fn set_process_priority(priority: &str) -> Result<(), String> {
 
     Ok(())
 }
-
 
 #[tauri::command]
 pub async fn close_crash_handler() -> Result<(), String> {

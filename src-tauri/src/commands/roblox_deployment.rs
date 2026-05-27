@@ -11,7 +11,6 @@ pub async fn get_download_deployment_urls(
         .await
         .map_err(|e| e.to_string())?;
 
-
     log::info!("download urls: {:?}", urls);
 
     Ok(urls)

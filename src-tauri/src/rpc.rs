@@ -46,10 +46,13 @@ pub async fn apply_rpc(state: &RpcState, details: &str, state_text: &str) -> Res
             .build()
             .map_err(|e| e.to_string())?;
 
-        tokio::time::timeout(std::time::Duration::from_secs(5), client.set_activity(activity))
-            .await
-            .map_err(|_| "RPC application timed out".to_string())?
-            .map_err(|e| e.to_string())?;
+        tokio::time::timeout(
+            std::time::Duration::from_secs(5),
+            client.set_activity(activity),
+        )
+        .await
+        .map_err(|_| "RPC application timed out".to_string())?
+        .map_err(|e| e.to_string())?;
         Ok(())
     } else {
         Err("RPC not initialized".into())
@@ -116,11 +119,17 @@ pub async fn apply_rpc_full(
 pub async fn set_name(state: &RpcState, name: &str) -> Result<(), String> {
     let lock = state.client.lock().await;
     if let Some(client) = lock.as_ref() {
-        let activity = Activity::new().name(name).build().map_err(|e| e.to_string())?;
-        tokio::time::timeout(std::time::Duration::from_secs(5), client.set_activity(activity))
-            .await
-            .map_err(|_| "RPC set_name timed out".to_string())?
-            .map_err(|e| e.to_string())
+        let activity = Activity::new()
+            .name(name)
+            .build()
+            .map_err(|e| e.to_string())?;
+        tokio::time::timeout(
+            std::time::Duration::from_secs(5),
+            client.set_activity(activity),
+        )
+        .await
+        .map_err(|_| "RPC set_name timed out".to_string())?
+        .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }
@@ -136,10 +145,13 @@ pub async fn set_activity_type(
             .activity_type(activity_type)
             .build()
             .map_err(|e| e.to_string())?;
-        tokio::time::timeout(std::time::Duration::from_secs(5), client.set_activity(activity))
-            .await
-            .map_err(|_| "RPC set_activity_type timed out".to_string())?
-            .map_err(|e| e.to_string())
+        tokio::time::timeout(
+            std::time::Duration::from_secs(5),
+            client.set_activity(activity),
+        )
+        .await
+        .map_err(|_| "RPC set_activity_type timed out".to_string())?
+        .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }
@@ -155,10 +167,13 @@ pub async fn set_status_display_type(
             .status_display_type(display_type)
             .build()
             .map_err(|e| e.to_string())?;
-        tokio::time::timeout(std::time::Duration::from_secs(5), client.set_activity(activity))
-            .await
-            .map_err(|_| "RPC set_status_display_type timed out".to_string())?
-            .map_err(|e| e.to_string())
+        tokio::time::timeout(
+            std::time::Duration::from_secs(5),
+            client.set_activity(activity),
+        )
+        .await
+        .map_err(|_| "RPC set_status_display_type timed out".to_string())?
+        .map_err(|e| e.to_string())
     } else {
         Err("RPC not initialized".into())
     }

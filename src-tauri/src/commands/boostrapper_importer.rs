@@ -10,15 +10,14 @@ pub struct BloxstrapConfig {
     pub UseDiscordRichPresence: bool,
     pub ShowServerDetails: bool,
     pub ShowAccountOnRichPresence: bool, // show account
-    pub HideRPCButtons: bool, // allow joining server
-
+    pub HideRPCButtons: bool,            // allow joining server
 
     // frostrap only
     pub EnableBetterMatchmaking: bool,
     pub ShowUsingFroststrapRPC: bool,
     pub AutoCloseCrashHandler: bool,
 
-    pub UpdateRoblox : bool, // frost & void??? (ps : fish)
+    pub UpdateRoblox: bool, // frost & void??? (ps : fish)
 
     // voidstrap only
     pub VoidRPC: bool,

@@ -7,13 +7,12 @@ use windows::{
             EnumWindows, GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
             IsWindowVisible, SetForegroundWindow, SetLayeredWindowAttributes, SetWindowLongW,
             SetWindowPos, SetWindowTextW, ShowWindow, LAYERED_WINDOW_ATTRIBUTES_FLAGS,
-            SET_WINDOW_POS_FLAGS, SM_CXSCREEN, SM_CXVIRTUALSCREEN, SM_CYSCREEN,
-            SM_CYVIRTUALSCREEN, SWP_ASYNCWINDOWPOS, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+            SET_WINDOW_POS_FLAGS, SM_CXSCREEN, SM_CXVIRTUALSCREEN, SM_CYSCREEN, SM_CYVIRTUALSCREEN,
+            SWP_ASYNCWINDOWPOS, SWP_FRAMECHANGED, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
             SWP_NOZORDER, SW_MAXIMIZE, SW_MINIMIZE, SW_RESTORE, WINDOW_LONG_PTR_INDEX,
         },
     },
 };
-
 
 use windows::Win32::Graphics::Gdi::{
     GetMonitorInfoW, MonitorFromWindow, MONITORINFO, MONITOR_DEFAULTTONEAREST,
@@ -41,17 +40,13 @@ const fn swp(v: u32) -> SET_WINDOW_POS_FLAGS {
     SET_WINDOW_POS_FLAGS(v)
 }
 
-
 pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
     struct SearchData {
         keyword: String,
         results: *mut Vec<HWND>,
     }
 
-    unsafe extern "system" fn enum_cb(
-        hwnd: HWND,
-        lparam: LPARAM,
-    ) -> windows_result::BOOL {
+    unsafe extern "system" fn enum_cb(hwnd: HWND, lparam: LPARAM) -> windows_result::BOOL {
         let data = &mut *(lparam.0 as *mut SearchData);
 
         if !IsWindowVisible(hwnd).as_bool() {
@@ -120,7 +115,6 @@ pub fn get_virtual_screen_size() -> (i32, i32) {
     }
 }
 
-
 pub fn move_window(hwnd: HWND, x: i32, y: i32, width: i32, height: i32) {
     unsafe {
         let _ = SetWindowPos(
@@ -159,7 +153,6 @@ pub fn focus_window(hwnd: HWND) {
     }
 }
 
-
 pub fn set_window_title(hwnd: HWND, title: &str) {
     let wide: Vec<u16> = title.encode_utf16().chain(std::iter::once(0)).collect();
     unsafe {
@@ -167,13 +160,16 @@ pub fn set_window_title(hwnd: HWND, title: &str) {
     }
 }
 
-
 pub fn set_borderless(hwnd: HWND, borderless: bool) {
     unsafe {
         let mut style = GetWindowLongW(hwnd, GWLW_STYLE);
         if borderless {
-            style &= !(WS_CAPTION | WS_THICKFRAME | WS_BORDER | WS_SYSMENU
-                | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
+            style &= !(WS_CAPTION
+                | WS_THICKFRAME
+                | WS_BORDER
+                | WS_SYSMENU
+                | WS_MINIMIZEBOX
+                | WS_MAXIMIZEBOX);
         } else {
             style |= WS_CAPTION | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
         }
@@ -185,11 +181,15 @@ pub fn set_borderless(hwnd: HWND, borderless: bool) {
             0,
             0,
             0,
-            swp(SWP_NOMOVE.0 | SWP_NOSIZE.0 | SWP_NOZORDER.0 | SWP_FRAMECHANGED.0 | SWP_ASYNCWINDOWPOS.0 | SWP_NOACTIVATE.0),
+            swp(SWP_NOMOVE.0
+                | SWP_NOSIZE.0
+                | SWP_NOZORDER.0
+                | SWP_FRAMECHANGED.0
+                | SWP_ASYNCWINDOWPOS.0
+                | SWP_NOACTIVATE.0),
         );
     }
 }
-
 
 pub fn set_layered_transparency(hwnd: HWND, color: u32, alpha: u8, mode: u32) {
     unsafe {

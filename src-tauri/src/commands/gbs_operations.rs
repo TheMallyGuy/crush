@@ -1,29 +1,27 @@
-use std::path::PathBuf;
 use std::fs;
+use std::path::PathBuf;
 extern crate dirs;
 
 #[tauri::command]
 pub async fn get_gbs() -> Result<String, String> {
-    let mut roblox_path: PathBuf = dirs::data_local_dir()
-        .ok_or("Could not find local data directory")?;
-    
+    let mut roblox_path: PathBuf =
+        dirs::data_local_dir().ok_or("Could not find local data directory")?;
+
     roblox_path.push("Roblox");
     roblox_path.push("GlobalBasicSettings_13.xml");
-        
-    fs::read_to_string(&roblox_path)
-        .map_err(|e| e.to_string())
-}
 
+    fs::read_to_string(&roblox_path).map_err(|e| e.to_string())
+}
 
 #[tauri::command]
 pub async fn write_gbs(content: String) -> Result<(), String> {
-    let mut roblox_path: PathBuf = dirs::data_local_dir()
-        .ok_or("Could not find local data directory")?;
-    
+    let mut roblox_path: PathBuf =
+        dirs::data_local_dir().ok_or("Could not find local data directory")?;
+
     roblox_path.push("Roblox");
     roblox_path.push("GlobalBasicSettings_13.xml");
 
     // log::info!("contents : {}", content);
-    
+
     fs::write(roblox_path, content).map_err(|e| e.to_string())
 }

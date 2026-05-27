@@ -13,7 +13,6 @@ pub async fn set_fullscreen_prop(disable: bool, rblx_exe: &str) -> Result<(), St
         .open_subkey_with_flags(layers_path, KEY_READ | KEY_WRITE)
         .map_err(|e| e.to_string())?;
 
-    
     if disable {
         let current: String = key.get_value(rblx_exe).unwrap_or_default();
 
@@ -23,7 +22,8 @@ pub async fn set_fullscreen_prop(disable: bool, rblx_exe: &str) -> Result<(), St
             } else {
                 format!("{} {}", current, FLAG)
             };
-            key.set_value(rblx_exe, &updated).map_err(|e| e.to_string())?;
+            key.set_value(rblx_exe, &updated)
+                .map_err(|e| e.to_string())?;
         }
     } else {
         let current: String = key.get_value(rblx_exe).unwrap_or_default();
@@ -32,7 +32,8 @@ pub async fn set_fullscreen_prop(disable: bool, rblx_exe: &str) -> Result<(), St
         if updated.is_empty() {
             let _ = key.delete_value(rblx_exe);
         } else {
-            key.set_value(rblx_exe, &updated).map_err(|e| e.to_string())?;
+            key.set_value(rblx_exe, &updated)
+                .map_err(|e| e.to_string())?;
         }
     }
     Ok(())
@@ -50,6 +51,6 @@ pub async fn read_fullscreen_prop(rblx_exe: &str) -> Result<bool, String> {
     };
 
     let current: String = key.get_value(rblx_exe).unwrap_or_default();
-    
+
     Ok(current.contains(FLAG))
 }

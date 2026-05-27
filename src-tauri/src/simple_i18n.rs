@@ -22,7 +22,10 @@ impl I18n {
     pub fn new(lang_dir: impl Into<PathBuf>, default_locale: &str) -> Result<Self, String> {
         let dir = lang_dir.into();
         let mut translations = HashMap::new();
-        translations.insert(default_locale.to_string(), Self::load_file(&dir, default_locale)?);
+        translations.insert(
+            default_locale.to_string(),
+            Self::load_file(&dir, default_locale)?,
+        );
         Ok(Self(Arc::new(Inner {
             translations: RwLock::new(translations),
             locale: RwLock::new(default_locale.to_string()),
@@ -34,7 +37,11 @@ impl I18n {
     pub fn set_locale(&self, locale: &str) -> Result<(), String> {
         if !self.0.translations.read().unwrap().contains_key(locale) {
             let flat = Self::load_file(&self.0.dir, locale)?;
-            self.0.translations.write().unwrap().insert(locale.to_string(), flat);
+            self.0
+                .translations
+                .write()
+                .unwrap()
+                .insert(locale.to_string(), flat);
         }
         *self.0.locale.write().unwrap() = locale.to_string();
         Ok(())
@@ -72,8 +79,14 @@ impl I18n {
     pub fn has(&self, key: &str) -> bool {
         let locale = self.0.locale.read().unwrap().clone();
         let translations = self.0.translations.read().unwrap();
-        translations.get(&locale).map(|m| m.contains_key(key)).unwrap_or(false)
-            || translations.get(&self.0.fallback).map(|m| m.contains_key(key)).unwrap_or(false)
+        translations
+            .get(&locale)
+            .map(|m| m.contains_key(key))
+            .unwrap_or(false)
+            || translations
+                .get(&self.0.fallback)
+                .map(|m| m.contains_key(key))
+                .unwrap_or(false)
     }
 
     fn resolve(&self, locale: &str, key: &str) -> String {
@@ -104,12 +117,20 @@ impl I18n {
         match value {
             serde_json::Value::Object(map) => {
                 for (k, v) in map {
-                    let key = if prefix.is_empty() { k.clone() } else { format!("{prefix}.{k}") };
+                    let key = if prefix.is_empty() {
+                        k.clone()
+                    } else {
+                        format!("{prefix}.{k}")
+                    };
                     Self::flatten_json(v, &key, flat);
                 }
             }
-            serde_json::Value::String(s) => { flat.insert(prefix.to_string(), s.clone()); }
-            other => { flat.insert(prefix.to_string(), other.to_string()); }
+            serde_json::Value::String(s) => {
+                flat.insert(prefix.to_string(), s.clone());
+            }
+            other => {
+                flat.insert(prefix.to_string(), other.to_string());
+            }
         }
     }
 }
