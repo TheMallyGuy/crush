@@ -60,6 +60,9 @@
                 },
                 {
                     "url": "https://apis.rovalra.com/"
+                },
+                {
+                    "url" : "https://*.rbxcdn.com/"
                 }
             ],
             "deny": [
@@ -73,6 +76,14 @@
         "opener:allow-open-path",
         {
             "identifier": "fs:allow-mkdir",
+            "allow": [
+                { "path": "$APPDATA/**" },
+                { "path": "$LOCALDATA/**" },
+                { "path": "$CACHE/**" }
+            ]
+        },
+        {
+            "identifier": "fs:allow-create",
             "allow": [
                 { "path": "$APPDATA/**" },
                 { "path": "$LOCALDATA/**" },
