@@ -101,19 +101,6 @@ fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Erro
         }
     });
 
-    if let Ok(Some(urls)) = app.deep_link().get_current() {
-        // store bef emit
-        if let Some(url) = urls.first() {
-            let url_str = url.to_string();
-            let app_handle = app.handle().clone();
-
-            tauri::async_runtime::spawn(async move {
-                tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-                handle_received_url(&app_handle, url_str);
-            });
-        }
-    }
-
     Ok(())
 }
 
