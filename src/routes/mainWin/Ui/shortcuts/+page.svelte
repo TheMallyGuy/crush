@@ -10,7 +10,7 @@
 
     let image = $state(null as string | null)
     let gameId = $state(null as string | null)
-    let status = $state($_('pages.shortcuts.creator.idle') as string)
+    let status = $state($_('pages.shortcuts.creator.status.idle') as string)
 
     async function getGameUniverse(placeID: number): Promise<number | null> {
         const res = await fetch(
@@ -109,18 +109,18 @@
             error(`Error creating shortcut: ${err}`)
         })
 
-        status = $_('pages.shortcuts.creator.done')
+        status = $_('pages.shortcuts.creator.status.done')
     }
 
     $effect(() => {
         if (!gameId) return
-        status = $_('pages.shortcuts.creator.fetching')
+        status = $_('pages.shortcuts.creator.status.fetching')
 
         const timeout = setTimeout(async () => {
             try {
                 const universeId = await getGameUniverse(Number(gameId))
                 if (!universeId) {
-                    status = $_('pages.shortcuts.creator.notFound')
+                    status = $_('pages.shortcuts.creator.status.notFound')
                     image = null
                     return
                 }
@@ -128,10 +128,10 @@
                 const thumbnail = await getThumbnailViaUniverseId(universeId)
                 image = thumbnail
                 status = thumbnail
-                    ? $_('pages.shortcuts.creator.fetched')
-                    : $_('pages.shortcuts.creator.noThumb')
+                    ? $_('pages.shortcuts.creator.status.fetched')
+                    : $_('pages.shortcuts.creator.status.noThumb')
             } catch (error) {
-                status = $_('pages.shortcuts.creator.error')
+                status = $_('pages.shortcuts.creator.status.error')
                 image = null
             }
         }, 500)
