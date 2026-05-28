@@ -66,6 +66,7 @@ chrono = "0.4.44"
 windows-result = "0.4.1"
 tauri-plugin-clipboard-manager = "2"
 image = "0.25"
+tao = "0.35.3"
 
 
 [target.'cfg(windows)'.dependencies]
