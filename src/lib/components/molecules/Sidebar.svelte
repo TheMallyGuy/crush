@@ -10,6 +10,7 @@
         Menu,
         SlidersHorizontal,
         Grid2x2Plus,
+        UsersRound,
     } from '@lucide/svelte'
     import { page } from '$app/stores'
     import { _ } from 'svelte-i18n'
@@ -53,6 +54,11 @@
             name: "Shortcuts",
             icon: Grid2x2Plus,
             href: `${baseUiUrl}/shortcuts`
+        },
+        {
+            name: "Acouunts",
+            icon: UsersRound,
+            href: `${baseUiUrl}/accountManagement`
         }
     ]
 
