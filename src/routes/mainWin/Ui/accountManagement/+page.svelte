@@ -13,6 +13,7 @@
     import { error, info } from '@tauri-apps/plugin-log'
     import { load } from '@tauri-apps/plugin-store'
     import { onMount } from 'svelte'
+    import { _ } from 'svelte-i18n'
 
     let addDialog: boolean = $state(false)
     let activeTab = $state('browser')
@@ -81,8 +82,10 @@
             const cookieValue = extractRoblosecurity(rawCookie)
 
             if (!cookieValue) {
-                loginViaWebviewStatus =
-                    'Could not find .ROBLOSECURITY cookie. Make sure you are logged in.'
+                // what the fuck is this shit??????? do i write bullshit when im high
+                loginViaWebviewStatus = $_(
+                    'pages.accountManagement.dialogs.add.tabs.webview.failed'
+                )
                 return
             }
 
@@ -102,8 +105,13 @@
 
             notify.send({
                 variant: 'success',
-                title: 'That was a total success!',
-                description: `Hello ${data.displayName}! You can now use the account manager!`,
+                title: $_(
+                    'pages.accountManagement.notifiers.addAccountSuccess.title'
+                ),
+                description: $_(
+                    'pages.accountManagement.notifiers.addAccountSuccess.description',
+                    { values: { username: data.id } }
+                ),
                 duration: 5000,
             })
 
@@ -117,8 +125,9 @@
             )
         } catch (err) {
             openedWebview = false
-            loginViaWebviewStatus =
-                'Failed to get cookie, make sure you are logged in and try again.'
+            loginViaWebviewStatus = $_(
+                'pages.accountManagement.dialogs.add.tabs.webview.failed'
+            )
             error(`Error checking cookie: ${err}`)
         }
     }
@@ -187,9 +196,13 @@
     async function validateAccounts() {
         notify.send({
             variant: 'info',
-            title: 'Validating accounts',
+            title: $_(
+                'pages.accountManagement.notifiers.validateAccounts.title'
+            ),
 
-            description: "Hang tight, we're validating your accounts",
+            description: $_(
+                'pages.accountManagement.notifiers.validateAccounts.description'
+            ),
         })
 
         for (const account of accountsData) {
@@ -207,23 +220,35 @@
                 error(`account ${account.id} is invalid! error: ${err}`)
                 notify.send({
                     variant: 'danger',
-                    title: `${account.id} is invaild`,
+                    title: $_(
+                        'pages.accountManagement.notifiers.validateAccountsInvaild.title',
+                        { values: { account: account.id } }
+                    ),
 
-                    description: `The account ${account.id} is invaild. We've removed it from the list.`,
+                    description: $_(
+                        'pages.accountManagement.notifiers.validateAccountsInvaild.description',
+                        { values: { account: account.id } }
+                    ),
                 })
                 popUser(account.id)
             }
         }
         notify.send({
             variant: 'info',
-            title: 'Validate Complete',
-            description: 'All invaild accounts (if present) have been removed',
+            title: $_(
+                'pages.accountManagement.notifiers.validateAccountsSucess.title'
+            ),
+            description: $_(
+                'pages.accountManagement.notifiers.validateAccountsSucess.description'
+            ),
         })
     }
 
     async function startQuickSignIn() {
         try {
-            quickSignStatus = 'Creating code...'
+            quickSignStatus = $_(
+                'pages.accountManagement.dialogs.add.tabs.quickSignIn.creating'
+            )
             quickSignPolling = true
 
             const creation = await invoke<{
@@ -232,7 +257,9 @@
                 expirationTime: string
             }>('quick_sign_create')
             quickSignCode = creation.code
-            quickSignStatus = 'Waiting for approval...'
+            quickSignStatus = $_(
+                'pages.accountManagement.dialogs.add.tabs.quickSignIn.approval'
+            )
 
             // poll
             const result = await invoke<{
@@ -246,8 +273,12 @@
             if (result.status !== 'Validated' || !result.cookie) {
                 quickSignStatus =
                     result.status === 'Cancelled'
-                        ? 'Cancelled.'
-                        : 'Timed out or failed.'
+                        ? $_(
+                              'pages.accountManagement.dialogs.add.tabs.quickSignIn.cancelled'
+                          )
+                        : $_(
+                              'pages.accountManagement.dialogs.add.tabs.quickSignIn.timeout'
+                          )
                 quickSignPolling = false
                 quickSignCode = null
                 return
@@ -262,8 +293,13 @@
 
             notify.send({
                 variant: 'success',
-                title: 'Signed in!',
-                description: `Hello ${data.displayName}! You can now use the account manager!`,
+                title: $_(
+                    'pages.accountManagement.notifiers.addAccountSuccess.title'
+                ),
+                description: $_(
+                    'pages.accountManagement.notifiers.addAccountSuccess.description',
+                    { values: { username: data.displayName } }
+                ),
                 duration: 5000,
             })
             addDialog = false
@@ -336,7 +372,9 @@
             error(`launch failed: ${err}`)
             notify.send({
                 variant: 'danger',
-                title: 'Launch failed!',
+                title: $_(
+                    'pages.accountManagement.notifiers.launchError.title'
+                ),
                 description: `${err}`,
                 duration: 5000,
             })
@@ -353,8 +391,16 @@
     }
 
     let tabs = $state([
-        { label: 'Login via WebView (browser)', value: 'webView' },
-        { label: 'Login via quick sign in', value: 'quickSignIn' },
+        {
+            label: $_('pages.accountManagement.dialogs.add.tabs.webview.tab'),
+            value: 'webView',
+        },
+        {
+            label: $_(
+                'pages.accountManagement.dialogs.add.tabs.quickSignIn.tab'
+            ),
+            value: 'quickSignIn',
+        },
     ])
 
     onMount(async () => {
@@ -367,8 +413,8 @@
 <Dialog
     bind:open={deleteDialog}
     on:close={() => resolveDelete?.(false)}
-    title="Confirm deletion"
-    description="Are you sure you want to delete this account? This action cannot be undone."
+    title={$_('pages.accountManagement.dialogs.delete.title')}
+    description={$_('pages.accountManagement.dialogs.delete.description')}
 >
     <div slot="actions">
         <Button
@@ -376,14 +422,14 @@
             size="sm"
             on:click={() => resolveDelete?.(false)}
         >
-            Cancel
+            {$_('pages.accountManagement.dialogs.delete.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
             on:click={() => resolveDelete?.(true)}
         >
-            Confirm
+            {$_('pages.accountManagement.dialogs.delete.confirm')}
         </Button>
     </div>
 </Dialog>
@@ -391,8 +437,8 @@
 <Dialog
     bind:open={addDialog}
     on:close={() => (addDialog = false)}
-    title="Add an account"
-    description="Add a new account to the list"
+    title={$_('pages.accountManagement.dialogs.add.title')}
+    description={$_('pages.accountManagement.dialogs.add.description')}
 >
     <Tabs {tabs} bind:activeTab>
         {#if activeTab === 'webView'}
@@ -400,7 +446,10 @@
                 <Button
                     variant="primary"
                     size="sm"
-                    on:click={checkWebviewCookie}>Check cookie</Button
+                    on:click={checkWebviewCookie}
+                    >{$_(
+                        'pages.accountManagement.dialogs.add.tabs.webview.check'
+                    )}</Button
                 >
             {:else if loginViaWebviewStatus}
                 <p class="text-red-400">{loginViaWebviewStatus}</p>
@@ -408,21 +457,29 @@
                     variant="primary"
                     size="sm"
                     class="flex w-max justify-between"
-                    on:click={openWebview}>Open webview</Button
+                    on:click={openWebview}
+                    >{$_(
+                        'pages.accountManagement.dialogs.add.tabs.webview.open'
+                    )}</Button
                 >
             {:else}
                 <Button
                     variant="primary"
                     size="sm"
                     class="flex w-max justify-between"
-                    on:click={openWebview}>Open webview</Button
+                    on:click={openWebview}
+                    >{$_(
+                        'pages.accountManagement.dialogs.add.tabs.webview.open'
+                    )}</Button
                 >
             {/if}
         {:else if activeTab === 'quickSignIn'}
             <div class="flex flex-col gap-4">
                 {#if quickSignCode}
                     <p class="text-stone-400">
-                        {$_("pages.accountManagement.dialogs.add.tabs.quickSignIn.enter")}
+                        {$_(
+                            'pages.accountManagement.dialogs.add.tabs.quickSignIn.title'
+                        )}
                     </p>
                     <div class="flex items-center justify-center w-full">
                         <code
@@ -433,7 +490,10 @@
                     <p class="text-sm text-stone-400">{quickSignStatus}</p>
                 {:else}
                     <p class="text-stone-400">
-                        {quickSignStatus || 'Sign in using quick sign in.'}
+                        {quickSignStatus ||
+                            $_(
+                                'pages.accountManagement.dialogs.add.tabs.quickSignIn.title'
+                            )}
                     </p>
                     <Button
                         variant="primary"
@@ -441,7 +501,9 @@
                         disabled={quickSignPolling}
                         on:click={startQuickSignIn}
                     >
-                        Start Quick Sign In
+                        {$_(
+                            'pages.accountManagement.dialogs.add.tabs.quickSignIn.start'
+                        )}
                     </Button>
                 {/if}
             </div>
@@ -449,8 +511,9 @@
     </Tabs>
     <div slot="actions" class="flex items-center justify-end gap-2">
         <Checkbox bind:checked={vngAccount}
-            >Mark as an VNG account (Do not check this if you dont know what
-            you're doing)</Checkbox
+            >{$_(
+                'pages.accountManagement.dialogs.add.tabs.quickSignIn.checkbox'
+            )}</Checkbox
         >
     </div>
 </Dialog>
@@ -459,18 +522,22 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Account Management
+                {$_('pages.accountManagement.accountManagement')}
             </h1>
-            <p class="text-stone-400 mt-1">Swtich between accounts made easy</p>
+            <p class="text-stone-400 mt-1">
+                {$_('pages.accountManagement.description')}
+            </p>
         </div>
     </div>
 
     <div class="flex items-center justify-between">
         <Button variant="primary" size="md" on:click={() => (addDialog = true)}>
-            <Plus class="size-4 mr-2" /> Add an account
+            <Plus class="size-4 mr-2" />
+            {$_('pages.accountManagement.addAnAccount')}
         </Button>
         <Button variant="secondary" size="md" on:click={validateAccounts}>
-            <RefreshCw class="size-4 mr-2" /> Validate accounts
+            <RefreshCw class="size-4 mr-2" />
+            {$_('pages.accountManagement.validateAccounts')}
         </Button>
     </div>
 
