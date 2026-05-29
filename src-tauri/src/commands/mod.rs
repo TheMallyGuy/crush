@@ -13,3 +13,4 @@ pub mod roblox_deployment;
 pub mod watcher;
 pub mod window;
 pub mod shortcuts;
+pub mod account_operations;

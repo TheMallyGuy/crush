@@ -46,6 +46,7 @@ pub async fn create_or_focus_window(
     height: f64,
     min_width: Option<f64>,
     min_height: Option<f64>,
+    decorations: Option<bool>,
 ) -> Result<(), String> {
     if let Some(window) = app.get_webview_window(&label) {
         window.show().map_err(|e| e.to_string())?;
@@ -69,7 +70,7 @@ pub async fn create_or_focus_window(
         .closable(true)
         .inner_size(width, height)
         .center()
-        .decorations(false)
+        .decorations(decorations.unwrap_or(false))
         .transparent(true);
 
     if let (Some(w), Some(h)) = (min_width, min_height) {

@@ -1109,7 +1109,9 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 name = "crush"
 version = "0.2.1"
 dependencies = [
+ "base64 0.22.1",
  "chrono",
+ "cookie",
  "dirs",
  "dirs-next",
  "filthy-rich",
@@ -1147,6 +1149,7 @@ dependencies = [
  "walkdir",
  "window-vibrancy 0.7.1",
  "windows 0.62.2",
+ "windows-dpapi",
  "windows-result 0.4.1",
  "winreg 0.56.0",
  "zip 8.6.0",
@@ -7461,6 +7464,17 @@ dependencies = [
  "windows-link 0.2.1",
  "windows-result 0.4.1",
  "windows-strings 0.5.1",
+]
+
+[[package]]
+name = "windows-dpapi"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2981752d6f11bdcab4db52be8ad5c0e6a6d4d6d566764b3058cc1ee473e6479e"
+dependencies = [
+ "anyhow",
+ "log",
+ "winapi",
 ]
 
 [[package]]
