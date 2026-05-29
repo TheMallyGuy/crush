@@ -438,6 +438,67 @@
                 }
             }
         },
+        "accountManagement": {
+            "accountManagement": "Account Management",
+            "description": "Swtich between accounts made easy",
+            "validateAccounts": "Validate accounts",
+            "addAnAccount": "Add an account",
+            "notifiers": {
+                "addAccountSuccess": {
+                    "title": "Success!",
+                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                },
+                "launchError": {
+                    "title": "Switch failed",
+                    "description": "idk something happened"
+                },
+                "validateAccounts": {
+                    "title": "Validating accounts",
+                    "description": "Hang tight, we're validating your accounts"
+                },
+                "validateAccountsInvaild": {
+                    "title": "{account} is invaild",
+                    "description": "The account {account} is invaild. We've removed it from the list."
+                },
+                "validateAccountsSucess": {
+                    "title": "Validate Complete",
+                    "description": "All invaild accounts (if present) have been removed"
+                }
+            },
+            "dialogs": {
+                "add": {
+                    "title": "Add an account",
+                    "description": "Add a new account to the list.",
+                    "tabs": {
+                        "webview": {
+                            "tab": "Login via webview (browser)",
+                            "open": "Open webview",
+                            "check": "Check for cookies",
+                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                        },
+                        "quickSignIn": {
+                            "tab": "Login via quick sign in",
+                            "title": "Sign in using quick sign in.",
+                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
+                            "start": "Start quick sign in",
+                            "creating": "Creating code...",
+                            "enter": "Enter this code in the Quick Sign In field :",
+                            "approval": "Waiting for approval...",
+                            "cancelled": "Cancelled.",
+                            "timeout": "Timed out or failed",
+                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
+                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                        }
+                    }
+                },
+                "delete": {
+                    "title": "Confirm Deletion",
+                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
+                    "cancel": "Cancel",
+                    "confirm": "Confirm"
+                }
+            }
+        },
         "settings": {
             "settings": "Indstillinger",
             "aboutCard": {
