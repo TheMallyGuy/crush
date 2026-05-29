@@ -1,3 +1,7 @@
+use commands::account_operations::{
+    clear_cookies, decrypt_cookie_data, encrypt_cookie_data, export_all_cookies, get_auth_ticket,
+    get_csrf_token, quick_sign_create, quick_sign_poll, validate_roblox_cookie,
+};
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::crush;
@@ -18,6 +22,7 @@ use commands::watcher::watch_logs;
 use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
+use image::GenericImageView;
 use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
@@ -42,6 +47,13 @@ use crate::tray::setup_tray;
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+fn load_icon(path: &std::path::Path) -> tauri::image::Image<'static> {
+    let img = image::open(path).expect("Failed to open icon");
+    let (width, height) = img.dimensions();
+    let rgba = img.into_rgba8().into_raw();
+    tauri::image::Image::new_owned(rgba, width, height)
 }
 
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
@@ -228,6 +240,12 @@ pub fn run() {
 
             apply_vibrancy_to_window(&window, &effect);
 
+            let icon_resource = app
+                .path()
+                .resolve("resources/icon.ico", tauri::path::BaseDirectory::Resource)?;
+            let icon = load_icon(&icon_resource);
+            window.set_icon(icon).ok(); // does this fucking work?????
+
             match app.cli().matches() {
                 // https://v2.tauri.app/plugin/cli/
 
@@ -322,7 +340,16 @@ pub fn run() {
             get_gbs,
             write_gbs,
             set_fullscreen_prop,
-            read_fullscreen_prop
+            read_fullscreen_prop,
+            get_csrf_token,
+            get_auth_ticket,
+            export_all_cookies,
+            clear_cookies,
+            decrypt_cookie_data,
+            encrypt_cookie_data,
+            quick_sign_poll,
+            quick_sign_create,
+            validate_roblox_cookie,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

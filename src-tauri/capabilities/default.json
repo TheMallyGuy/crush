@@ -5,7 +5,8 @@
     "windows": [
         "crushBoostrapChoiceWindow",
         "CrushMainWindow",
-        "CrushHello"
+        "CrushHello",
+        "loginToRoblox"
     ],
     "permissions": [
         "core:default",
@@ -63,6 +64,9 @@
                 },
                 {
                     "url" : "https://*.rbxcdn.com/"
+                },
+                {
+                    "url": "https://users.roblox.com/v1/users/authenticated"
                 }
             ],
             "deny": [

@@ -45,7 +45,9 @@
             "./resources/**/*.png",
             "./resources/locales/**/*.json",
 
-            "./resources/tortellini.jpg"
+            "./resources/tortellini.jpg",
+
+            "./resources/icon.ico"
         ]
     },
     "plugins": {
