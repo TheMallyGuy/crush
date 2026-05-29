@@ -6,6 +6,7 @@ use crate::interactive::{
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
 use crate::simple_i18n::I18n;
+use std::sync::Mutex;
 use crate::t;
 use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
@@ -29,6 +30,7 @@ use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
+use tokio_util::sync::CancellationToken;
 use windows::Win32::Foundation::HWND;
 
 // regex
@@ -229,19 +231,33 @@ struct EmitServerInfomation {
 // entry
 
 static WATCHER_RUNNING: AtomicBool = AtomicBool::new(false);
+static WATCHER_CANCEL: Mutex<Option<CancellationToken>> = Mutex::new(None);
 
 #[tauri::command]
-pub fn watch_logs(app: AppHandle) -> Result<(), String> {
+pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
+    if let Ok(mut guard) = WATCHER_CANCEL.lock() {
+        if let Some(token) = guard.take() {
+            token.cancel();
+        }
+    }
+
+    WATCHER_RUNNING.store(false, Ordering::SeqCst);
+
     if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
         log::warn!("ignoring duplicate watch_logs call");
         return Ok(());
     }
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
-
     if integration_enabled(&store, &["EnableActivityTracking"]) {
         log::info!("watching logs is disabled, returning");
         return Ok(());
+    }
+
+    let token = CancellationToken::new();
+
+    if let Ok(mut guard) = WATCHER_CANCEL.lock() {
+        *guard = Some(token.clone());
     }
 
     std::thread::spawn(move || {
@@ -251,8 +267,15 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
             .expect("failed to build watcher runtime");
 
         rt.block_on(async move {
-            if let Err(e) = run_watcher(app).await {
-                log::error!("watcher error: {}", e);
+            tokio::select! {
+                result = run_watcher(app, is_vng.unwrap_or(false)) => {
+                    if let Err(e) = result {
+                        log::error!("watcher error: {}", e);
+                    }
+                }
+                _ = token.cancelled() => {
+                    log::info!("watcher cancelled by new watch_logs call");
+                }
             }
             WATCHER_RUNNING.store(false, Ordering::SeqCst);
         });
@@ -263,7 +286,7 @@ pub fn watch_logs(app: AppHandle) -> Result<(), String> {
 
 // loop
 
-async fn run_watcher(app: AppHandle) -> Result<(), String> {
+async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
     let mut state = WatcherState::default();
     let mut system = System::new();
     let mut was_running = false;
@@ -287,7 +310,7 @@ async fn run_watcher(app: AppHandle) -> Result<(), String> {
         was_running = running;
 
         if running {
-            if let Some(path) = get_latest_log() {
+            if let Some(path) = get_latest_log(is_vng) {
                 maybe_switch_log_file(&app, &mut state, path, &store).await;
             }
 
@@ -1449,8 +1472,10 @@ fn is_roblox_running(system: &mut System) -> bool {
         .any(|p| re.is_match(p.name().to_string_lossy().as_ref()))
 }
 
-fn get_latest_log() -> Option<PathBuf> {
-    let dir = data_local_dir()?.join("Roblox").join("logs");
+fn get_latest_log(vng: bool) -> Option<PathBuf> {
+    let dir = data_local_dir()?
+        .join(if vng { "RobloxPCVNG" } else { "Roblox" })
+        .join("logs");
     std::fs::read_dir(dir)
         .ok()?
         .filter_map(|e| {

@@ -1,11 +1,4 @@
-use serde::{Deserialize, Serialize};
 use windows_dpapi::{decrypt_data, encrypt_data, Scope};
-
-#[derive(Deserialize, Serialize)]
-struct Cookies {
-    #[serde(rename = "CookiesData")]
-    cookies_data: String,
-}
 
 #[tauri::command]
 pub async fn clear_cookies(webview: tauri::Webview) -> Result<(), String> {

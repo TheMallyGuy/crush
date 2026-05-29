@@ -145,7 +145,7 @@
             } else {
                 await performLaunch(version, url, integrations)
                 await sleep(1000)
-                await invoke('watch_logs')
+                await invoke('watch_logs', {isVng: installation?.vng})
                 await sleep(3000)
                 await invoke('set_process_priority', {
                     priority: integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',

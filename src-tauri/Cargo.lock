@@ -1145,6 +1145,7 @@ dependencies = [
  "tauri-plugin-store",
  "tauri-plugin-updater",
  "tokio",
+ "tokio-util",
  "vergen",
  "walkdir",
  "window-vibrancy 0.7.1",
@@ -6488,6 +6489,7 @@ dependencies = [
  "bytes",
  "futures-core",
  "futures-sink",
+ "futures-util",
  "pin-project-lite",
  "tokio",
 ]

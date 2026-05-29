@@ -422,7 +422,7 @@
             <div class="flex flex-col gap-4">
                 {#if quickSignCode}
                     <p class="text-stone-400">
-                        Enter this code in the Roblox app under Quick Sign In:
+                        {$_("pages.accountManagement.dialogs.add.tabs.quickSignIn.enter")}
                     </p>
                     <div class="flex items-center justify-center w-full">
                         <code
