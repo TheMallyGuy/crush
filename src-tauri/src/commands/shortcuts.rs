@@ -1,11 +1,12 @@
 use dirs::desktop_dir;
 use image;
 use lnks::{Icon, Shortcut};
+use tauri::Manager;
 use std::env;
 
 #[tauri::command]
-pub async fn new_shorcut(name: String, game_id: u64, image_path: String) -> Result<(), String> {
-    let crush = env::current_exe().unwrap();
+pub async fn new_shorcut(app: tauri::AppHandle,name: String, game_id: u64, image_path: String) -> Result<(), String> {
+    let crush = app.path().resolve("./open_game.bat", tauri::path::BaseDirectory::Resource).map_err(|e| e.to_string())?;
 
     let ico_path = image_path.replace(".png", ".ico");
     let img = image::open(&image_path).map_err(|e| e.to_string())?;
@@ -13,7 +14,7 @@ pub async fn new_shorcut(name: String, game_id: u64, image_path: String) -> Resu
     resized.save(&ico_path).map_err(|e| e.to_string())?;
 
     let mut shortcut = Shortcut::new(crush);
-    shortcut.arguments = Some(format!("-l {game_id}"));
+    shortcut.arguments = Some(format!(" {game_id}"));
     shortcut.icon = Some(Icon {
         path: ico_path.into(),
         index: 0,

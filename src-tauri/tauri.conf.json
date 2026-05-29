@@ -47,7 +47,8 @@
 
             "./resources/tortellini.jpg",
 
-            "./resources/icon.ico"
+            "./resources/icon.ico",
+            "./open_game.bat"
         ]
     },
     "plugins": {
