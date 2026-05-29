@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Đang chuẩn bị...",
+                "applyMods": "Đang áp dụng những chỉnh sửa",
+                "launch": "Đang khởi chạy"
             },
             "cancel": "Hủy",
             "retry": "Thử lại"
@@ -259,8 +259,8 @@
                 "description": "Cài đặt lại Roblox mỗi khi bạn khởi chạy nó."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Sử dụng Roblox bản Việt Nam (VNG)",
+                "description": "Đây là tùy chọn để tải xuống Roblox VNG, nếu bạn không biết mình đang làm gì, đừng bật cái này lên. Tính năng này chỉ dành cho người dùng ở Việt Nam. Một khi tài khoản của bạn được gắn cờ là tài khoản VNG, bạn không thể nào quay lại sang quốc tế."
             },
             "dontUpdateCard": {
                 "title": "Không cập nhật Roblox",
@@ -421,44 +421,44 @@
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
+            "shortcuts": "Tạo lối tắt",
             "description": "Easily create shortcuts to instantly play your favourite games.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Tạo một lối tắt",
+                "button": "Tạo lối tắt",
+                "gameIdInput": "ID trò chơi",
                 "status": {
                     "idle": "Please fetch...",
                     "fetching": "Fetching...",
-                    "notFound": "Game not found",
+                    "notFound": "Không tìm thấy trò chơi",
                     "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
+                    "noThumb": "Không có ảnh thu nhỏ khả dụng",
                     "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "done": "Hãy nhìn vào desktop của bạn!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
+            "accountManagement": "Quản lý tài khoản",
+            "description": "Chuyển đổi các tài khoản một cách dễ dàng",
             "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
+            "addAnAccount": "Thêm một tài khoản",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Thành công!",
+                    "description": "Xin chào {username}! Bây giờ bạn có thể đổi các tài khoản bằng cách sử dụng trình quản lý tài khoản!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Chuyển đổi thất bại",
+                    "description": "không biết vừa nãy xảy ra gì"
                 },
                 "validateAccounts": {
                     "title": "Validating accounts",
                     "description": "Hang tight, we're validating your accounts"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} không hợp lệ",
+                    "description": "Tài khoản {account} không hợp lệ. Chúng tôi đã bỏ ra khỏi danh sách."
                 },
                 "validateAccountsSucess": {
                     "title": "Validate Complete",
@@ -467,35 +467,35 @@
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Thêm một tài khoản",
+                    "description": "Thêm một tài khoản mới vào danh sách.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Đăng nhập bằng webview (trình duyệt)",
+                            "open": "Mở webview",
+                            "check": "Kiểm tra cookies",
+                            "failed": "Lấy cookie thất bại, hãy đảm bảo rằng bạn đã đăng nhập và thử lại."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Đăng nhập bằng đăng nhập nhanh",
+                            "title": "Đăng nhập sử dụng đăng nhập nhanh.",
+                            "checkbox": "Đánh dấu là tài khoản VNG (Đừng chọn mục này nếu bạn không biết mình đang làm gì)",
+                            "start": "Bắt đầu đăng nhập nhanh",
+                            "creating": "Đang tạo mã...",
+                            "enter": "Nhập mã này vào ô Đăng nhập nhanh :",
+                            "approval": "Đang đợi chấp nhận...",
+                            "cancelled": "Đã hủy.",
+                            "timeout": "Hết thời gian hoặc thất bại",
+                            "failedToGetCookies": "Lấy cookie thất bại, hãy đảm bảo rằng bạn đã đăng nhập và thử lại.",
+                            "robloxsecFailed": "Không tìm thấy cookie .ROBLOXSECURITY. Hãy đảm bảo bạn đã đăng nhập."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "Xác nhận xoá",
+                    "description": "Bạn có chắc bạn muốn xoá tài khoản này? Hành động này không thể đảo ngược.",
+                    "cancel": "Hủy",
+                    "confirm": "Xâc nhận"
                 }
             }
         },
