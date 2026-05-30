@@ -49,13 +49,6 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-fn load_icon(path: &std::path::Path) -> tauri::image::Image<'static> {
-    let img = image::open(path).expect("Failed to open icon");
-    let (width, height) = img.dimensions();
-    let rgba = img.into_rgba8().into_raw();
-    tauri::image::Image::new_owned(rgba, width, height)
-}
-
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
     builder
         .plugin(tauri_plugin_deep_link::init())
@@ -266,12 +259,6 @@ pub fn run() {
                 .unwrap_or_else(|| "auto".to_string());
 
             apply_vibrancy_to_window(&window, &effect);
-
-            let icon_resource = app
-                .path()
-                .resolve("resources/icon.ico", tauri::path::BaseDirectory::Resource)?;
-            let icon = load_icon(&icon_resource);
-            window.set_icon(icon).ok(); // does this fucking work?????
 
             match app.cli().matches() {
                 // https://v2.tauri.app/plugin/cli/
