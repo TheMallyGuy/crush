@@ -59,21 +59,6 @@ fn load_icon(path: &std::path::Path) -> tauri::image::Image<'static> {
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
     builder
         .plugin(tauri_plugin_deep_link::init())
-        .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
-            let is_deep_link = args
-                .iter()
-                .any(|a| a.starts_with("roblox-player:") || a.starts_with("roblox:"));
-
-            if is_deep_link {
-                return;
-            }
-
-            app.dialog()
-                .message("The app is already running! Look for it in your system tray.")
-                .kind(MessageDialogKind::Info)
-                .title("Already Running")
-                .blocking_show();
-        }))
         .plugin(tauri_plugin_notification::init())
         .plugin(
             tauri_plugin_log::Builder::new()
@@ -191,7 +176,49 @@ fn print_debug_info() {
 pub fn run() {
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cli::init())
-        .plugin(tauri_plugin_clipboard_manager::init());
+        .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
+            let is_deep_link = args
+                .iter()
+                .any(|a| a.starts_with("roblox-player:") || a.starts_with("roblox:"));
+
+            if is_deep_link {
+                return;
+            }
+
+            let launch_id = args
+                .windows(2)
+                .find_map(|w| {
+                    if w[0] == "-l" || w[0] == "--launch" {
+                        Some(w[1].clone())
+                    } else {
+                        None
+                    }
+                })
+                .or_else(|| {
+                    args.iter().find_map(|a| {
+                        a.strip_prefix("--launch=")
+                            .or_else(|| a.strip_prefix("-l="))
+                            .map(|s| s.to_string())
+                    })
+                });
+
+            if let Some(game_id) = launch_id {
+                if !game_id.is_empty() {
+                    handle_received_url(
+                        app,
+                        format!("roblox://experiences/start?placeId={}", game_id),
+                    );
+                    return;
+                }
+            }
+
+            if let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") {
+                let _ = window.show();
+                let _ = window.unminimize();
+                let _ = window.set_focus();
+            }
+        }));
 
     builder = register_plugins(builder);
 
