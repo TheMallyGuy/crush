@@ -91,8 +91,8 @@
                 "description": "Theo dõi hoạt động của bạn trên Roblox. Một số tính năng yêu cầu bạn phải bật tính năng này."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Lịch trình ngủ",
+                "description": "Lịch trình ngủ của bạn đã bị đảo lộn rồi"
             },
             "serverNotifierCard": {
                 "title": "Thông báo vị trí máy chủ",
@@ -344,7 +344,7 @@
                     "dropdownDefault": "Mặc định"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "Bật lưới chất lượng thấp (LOD)",
                     "description": "Có thể cải thiện hiệu năng."
                 },
                 "graySkyCard": {
@@ -422,18 +422,18 @@
         },
         "shortcuts": {
             "shortcuts": "Tạo lối tắt",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "description": "Dễ dàng tạo lối tắt để chơi ngay các trò chơi yêu thích của bạn.",
             "creator": {
                 "title": "Tạo một lối tắt",
                 "button": "Tạo lối tắt",
                 "gameIdInput": "ID trò chơi",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
+                    "idle": "Vui lòng lấy...",
+                    "fetching": "Đang lấy...",
                     "notFound": "Không tìm thấy trò chơi",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
+                    "fetched": "Thông tin trò chơi đã được lấy. Giờ chỉ cầnnn nhấn nút tạo lối tắt thôi",
                     "noThumb": "Không có ảnh thu nhỏ khả dụng",
-                    "error": "Error fetching game",
+                    "error": "Lỗi khi lấy trò chơi",
                     "done": "Hãy nhìn vào desktop của bạn!"
                 }
             }
@@ -441,8 +441,10 @@
         "accountManagement": {
             "accountManagement": "Quản lý tài khoản",
             "description": "Chuyển đổi các tài khoản một cách dễ dàng",
-            "validateAccounts": "Validate accounts",
+            "validateAccounts": "Xác thực tài khoản",
             "addAnAccount": "Thêm một tài khoản",
+            "use": "Use",
+            "delete": "Xóa",
             "notifiers": {
                 "addAccountSuccess": {
                     "title": "Thành công!",
@@ -453,16 +455,16 @@
                     "description": "không biết vừa nãy xảy ra gì"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Đang xác thực tài khoản",
+                    "description": "Chờ chút, chúng tôi đang xác thực tài khoản của bạn"
                 },
                 "validateAccountsInvaild": {
                     "title": "{account} không hợp lệ",
                     "description": "Tài khoản {account} không hợp lệ. Chúng tôi đã bỏ ra khỏi danh sách."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Xác thực hoàn tất",
+                    "description": "Tất cả các tài khoản không hợp lệ (nếu có) đã bị loại bỏ"
                 }
             },
             "dialogs": {

@@ -443,6 +443,8 @@
             "description": "Swtich between accounts made easy",
             "validateAccounts": "Validate accounts",
             "addAnAccount": "Add an account",
+            "use": "Use",
+            "delete": "Delete",
             "notifiers": {
                 "addAccountSuccess": {
                     "title": "Success!",
