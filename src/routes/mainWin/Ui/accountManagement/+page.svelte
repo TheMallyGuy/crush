@@ -561,12 +561,12 @@
                 <Button
                     variant="secondary"
                     size="sm"
-                    on:click={() => useAccount(item.id)}>Use</Button
+                    on:click={() => useAccount(item.id)}>{$_("pages.accountManagement.use")}</Button
                 >
                 <Button
                     variant="danger"
                     size="sm"
-                    on:click={() => deleteAccount(item.id)}>Delete</Button
+                    on:click={() => deleteAccount(item.id)}>{$_("pages.accountManagement.delete")}</Button
                 >
             </div>
         </div>

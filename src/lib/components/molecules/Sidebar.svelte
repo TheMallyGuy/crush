@@ -51,12 +51,12 @@
             href: `${baseUiUrl}/gbs`
         },
         {
-            name: "Shortcuts",
+            name: $_("pages.shortcuts.shortcuts"),
             icon: Grid2x2Plus,
             href: `${baseUiUrl}/shortcuts`
         },
         {
-            name: "Acouunts",
+            name: $_("pages.accountManagement.accountManagement"),
             icon: UsersRound,
             href: `${baseUiUrl}/accountManagement`
         }
