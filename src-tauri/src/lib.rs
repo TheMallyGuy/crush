@@ -22,11 +22,10 @@ use commands::watcher::watch_logs;
 use commands::window::{
     apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
 };
-use image::GenericImageView;
 use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_dialog::{DialogExt};
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use tauri_plugin_updater::UpdaterExt;
