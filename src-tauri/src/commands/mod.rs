@@ -1,3 +1,4 @@
+pub mod account_operations;
 pub mod archive;
 pub mod boostrapper_importer;
 pub mod crush;
@@ -10,7 +11,6 @@ pub mod pre_processing;
 pub mod properity;
 pub mod rename;
 pub mod roblox_deployment;
+pub mod shortcuts;
 pub mod watcher;
 pub mod window;
-pub mod shortcuts;
-pub mod account_operations;

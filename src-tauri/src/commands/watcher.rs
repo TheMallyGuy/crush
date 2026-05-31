@@ -3,10 +3,10 @@ use crate::interactive::{
     get_window_rect, move_window, reset_layered, set_borderless, set_layered_transparency,
     set_window_color, set_window_title, LWA_ALPHA, LWA_COLORKEY,
 };
+use crate::larp_focuser::start_larping;
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
 use crate::simple_i18n::I18n;
-use std::sync::Mutex;
 use crate::t;
 use crate::tray::{add_menu_item, remove_menu_item};
 use chrono::Utc;
@@ -16,6 +16,7 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::Path;
+use std::sync::Mutex;
 use std::sync::{
     atomic::{AtomicBool, Ordering},
     OnceLock,
@@ -89,6 +90,8 @@ struct WatcherState {
 
     sleep_schedule_count: u64,
 
+    larp_started: bool,
+
     // window geometry saved at StartWindow
     starting_x: i32,
     starting_y: i32,
@@ -128,6 +131,8 @@ impl Default for WatcherState {
             bloxstrap_rpc: None,
             roblox_hwnd: None,
             window_started: false,
+
+            larp_started: false,
 
             sleep_schedule_count: 0,
 
@@ -296,6 +301,22 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
 
     loop {
         let running = is_roblox_running(&mut system);
+
+        if running && state.roblox_hwnd.is_none() {
+            state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+        }
+
+        if let Some(hwnd) = state.roblox_hwnd {
+            if !state.larp_started {
+                state.larp_started = true;
+                let app_c = app.clone();
+                let hwnd_val = hwnd.0 as usize;
+                std::thread::spawn(move || {
+                    let hwnd = HWND(hwnd_val as *mut _);
+                    start_larping(hwnd, app_c);
+                });
+            }
+        }
 
         if was_running && !running {
             if state.window_started {
