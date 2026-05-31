@@ -26,13 +26,15 @@ vergen = { version = "9.0.0", features = ["build", "rustc"] }
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
+# window window sahur
 windows = { version = "0.62", features = [
     "Win32_Foundation",
     "Win32_UI_WindowsAndMessaging",
     "Win32_Graphics_Dwm",
     "Win32_Graphics_Gdi",
-    "Win32_System_Threading"
-] } # window window sahur
+    "Win32_System_Threading",
+    "Win32_System_Diagnostics_ToolHelp",
+] }
 walkdir = "2"
 dirs = "6.0.0"
 winreg = "0.56.0"
@@ -55,7 +57,7 @@ tauri-plugin-fs = "2"
 tauri-plugin-process = "2"
 tauri-plugin-fs-pro = "2.4.0"
 notify = "8.2.0"
-tokio = {version = "1.52.2", features = ["process", "full", "tracing"] }
+tokio = { version = "1.52.2", features = ["process", "full", "tracing"] }
 tokio-util = { version = "0.7", features = ["rt"] }
 filthy-rich = "1.0.5"
 regex = "1.12.3"
@@ -73,11 +75,10 @@ base64 = "0.22.1"
 
 
 [target.'cfg(windows)'.dependencies]
-lnks = "0.2" # we plan macos support in the future
+lnks = "0.2"            # we plan macos support in the future
 windows-dpapi = "0.2.0"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-cli = "2"
 tauri-plugin-single-instance = { version = "2.4.1", features = ["deep-link"] }
 tauri-plugin-updater = "2"
-
