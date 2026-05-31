@@ -33,6 +33,11 @@ use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use tokio_util::sync::CancellationToken;
 use windows::Win32::Foundation::HWND;
+use windows::Win32::Foundation::LPARAM;
+use windows::Win32::UI::WindowsAndMessaging::{
+    EnumWindows, GetWindowThreadProcessId, IsWindowVisible,
+};
+use windows_result::BOOL;
 
 // regex
 
@@ -303,9 +308,12 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
         let running = is_roblox_running(&mut system);
 
         if running && state.roblox_hwnd.is_none() {
-            state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
-        }
+            let roblox_pid = get_roblox_pid(&mut system);
 
+            if let Some(pid) = roblox_pid {
+                state.roblox_hwnd = find_hwnd_by_pid(pid);
+            }
+        }
         if let Some(hwnd) = state.roblox_hwnd {
             if !state.larp_started {
                 state.larp_started = true;
@@ -1530,6 +1538,43 @@ fn save_game_history(
 
     store.set("gameHistory", Value::Array(history));
     store.save().map_err(|e| e.to_string())
+}
+
+fn get_roblox_pid(system: &mut System) -> Option<u32> {
+    static R: OnceLock<Regex> = OnceLock::new();
+    let re = R.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
+    system
+        .processes()
+        .values()
+        .find(|p| re.is_match(p.name().to_string_lossy().as_ref()))
+        .map(|p| p.pid().as_u32())
+}
+
+fn find_hwnd_by_pid(target_pid: u32) -> Option<HWND> {
+    struct SearchState {
+        pid: u32,
+        result: Option<HWND>,
+    }
+
+    unsafe extern "system" fn callback(hwnd: HWND, lparam: LPARAM) -> BOOL {
+        let state = &mut *(lparam.0 as *mut SearchState);
+        let mut pid: u32 = 0;
+        GetWindowThreadProcessId(hwnd, Some(&mut pid));
+        if pid == state.pid && IsWindowVisible(hwnd).as_bool() {
+            state.result = Some(hwnd);
+            return false.into();
+        }
+        true.into()
+    }
+
+    let mut search = SearchState {
+        pid: target_pid,
+        result: None,
+    };
+    unsafe {
+        let _ = EnumWindows(Some(callback), LPARAM(&mut search as *mut _ as isize));
+    }
+    search.result
 }
 
 async fn fetch_universe_id(place_id: u64) -> Result<u64, String> {
