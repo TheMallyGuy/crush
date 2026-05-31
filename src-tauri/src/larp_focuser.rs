@@ -5,7 +5,9 @@ use tauri_plugin_store::StoreExt;
 use windows::Win32::Foundation::{CloseHandle, HANDLE, HWND};
 use windows::Win32::System::SystemInformation::{GetSystemInfo, SYSTEM_INFO};
 use windows::Win32::System::Threading::{
-    ABOVE_NORMAL_PRIORITY_CLASS, IDLE_PRIORITY_CLASS, OpenProcess, PROCESS_CREATION_FLAGS, PROCESS_SET_INFORMATION, PROCESS_SET_QUOTA, SetPriorityClass, SetProcessAffinityMask, SetProcessWorkingSetSize
+    OpenProcess, SetPriorityClass, SetProcessAffinityMask, SetProcessWorkingSetSize,
+    ABOVE_NORMAL_PRIORITY_CLASS, IDLE_PRIORITY_CLASS, PROCESS_CREATION_FLAGS,
+    PROCESS_SET_INFORMATION, PROCESS_SET_QUOTA,
 };
 use windows_result::Error;
 
@@ -13,71 +15,54 @@ use crate::commands::pre_processing::parse_priority;
 
 use std::thread;
 use std::time::Duration;
-use windows::Win32::UI::WindowsAndMessaging::{GetForegroundWindow, GetWindowThreadProcessId};
+use windows::Win32::UI::WindowsAndMessaging::{
+    GetForegroundWindow, GetWindowThreadProcessId, IsWindow,
+};
 
-pub async fn start_larping(hwnd: HWND, app_handle: tauri::AppHandle) {
-    log::info!("hi wassup hello optimizer running");
-
-    let roblox;
-    let mut pid: u32;
+pub fn start_larping(hwnd: HWND, app_handle: tauri::AppHandle) {
+    let mut pid: u32 = 0;
     let num_cpus = get_cpu_count();
     let full_mask: usize = (1 << num_cpus) - 1;
     let limited_mask: usize = 0b0011; // TODO make this flexable by adding a config to it
     let mut last_focused: bool = false;
 
     unsafe {
-        pid = 0;
         GetWindowThreadProcessId(hwnd, Some(&mut pid));
 
         if pid == 0 {
             log::error!("failed to get roblox's PID via HWND when larping");
             return;
         }
-
-        roblox = OpenProcess(PROCESS_SET_INFORMATION, false, pid);
     }
 
+    log::info!("hi wassup hello optimizer running, pid={}", pid);
+
     loop {
+        if unsafe { !IsWindow(Some(hwnd)).as_bool() } {
+            log::info!("roblox closed, stopping optimizer");
+            break;
+        }
+
         let focused = is_hwnd_focused(hwnd);
 
         if focused != last_focused {
             last_focused = focused;
-            let priority = get_priority(&app_handle).unwrap_or(ABOVE_NORMAL_PRIORITY_CLASS);
 
-            set_affinity(pid, full_mask);
+            if focused {
+                log::info!("focused on pid {}", pid);
 
-            unsafe {
-                match roblox {
-                    Ok(h) => {
-                        if let Err(e) = SetPriorityClass(h, priority) {
-                            log::error!("failed to set priority for roblox {e}");
-                        }
-                        let _ = CloseHandle(h);
-                    }
+                let priority = get_priority(&app_handle).unwrap_or(ABOVE_NORMAL_PRIORITY_CLASS);
+                set_affinity(pid, full_mask);
+                set_priority(pid, priority);
+            } else {
+                log::info!("NOT focused on pid {}", pid);
 
-                    Err(ref e) => log::error!("failed to open roblox process {e}"),
-                }
-            }
-        } else {
-            log::info!("window not focus, larping the window");
-
-            set_affinity(pid, limited_mask);
-            trim_working_set(pid);
-
-            unsafe {
-                // TODO turn this into a reusable function
-                match roblox {
-                    Ok(h) => {
-                        if let Err(e) = SetPriorityClass(h, IDLE_PRIORITY_CLASS) {
-                            log::error!("failed to set priority for roblox {e}");
-                        }
-                        let _ = CloseHandle(h);
-                    }
-
-                    Err(ref e) => log::error!("failed to open roblox process {e}"),
-                }
+                set_affinity(pid, limited_mask);
+                trim_working_set(pid);
+                set_priority(pid, IDLE_PRIORITY_CLASS);
             }
         }
+
         thread::sleep(Duration::from_millis(500));
     }
 }
@@ -96,6 +81,21 @@ fn get_priority(app: &tauri::AppHandle) -> Option<PROCESS_CREATION_FLAGS> {
     let priority = store.get("priority")?;
     let priority_str = priority.as_str()?;
     parse_priority(priority_str)
+}
+
+fn set_priority(pid: u32, priority: PROCESS_CREATION_FLAGS) {
+    unsafe {
+        let roblox = OpenProcess(PROCESS_SET_INFORMATION, false, pid);
+        match roblox {
+            Ok(h) => {
+                if let Err(e) = SetPriorityClass(h, priority) {
+                    log::error!("failed to set priority for roblox {e}");
+                }
+                let _ = CloseHandle(h);
+            }
+            Err(ref e) => log::error!("failed to open roblox process {e}"),
+        }
+    }
 }
 
 fn trim_working_set(pid: u32) {
