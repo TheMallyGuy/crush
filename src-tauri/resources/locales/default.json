@@ -102,6 +102,10 @@
                 "title": "Process Priority",
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
+            "optimizerCard" : {
+                "title" : "Enable optimizer",
+                "description" : "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
                 "description": "Use dark magic to disable fullscreen optimization"

@@ -207,8 +207,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Enable optimizer"
-            description="Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            title={$_("pages.integrations.optimizerCard.title")}
+            description={$_("pages.integrations.optimizerCard.description")}
             icon={Sparkles}
         >
             <Switch
