@@ -12,6 +12,7 @@
         Bomb,
         Expand,
         BedSingle,
+        Sparkles,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
@@ -37,6 +38,7 @@
     let letJoin = false
     let displayAccount = false
     let serverLocationNotifier = false
+    let optimizer: boolean
     let activityWatching = true
     let fullscreenOpts: boolean = false
     let sleepSchedule: boolean = true
@@ -77,6 +79,7 @@
             crashHandler = savedIntegrations.closeCrashHandler
             serverLocationNotifier = savedIntegrations.serverLocationNotifier
             activityWatching = savedIntegrations.activityWatching
+            optimizer = savedIntegrations.optimizer
         }
 
         exe = await getCurrentInstallation('player')
@@ -116,6 +119,7 @@
             serverLocationNotifier,
             roValra: current?.roValra ?? { joinServerForYouValue: false },
             activityWatching: activityWatching,
+            optimizer: optimizer,
         }
 
         await invoke('set_fullscreen_prop', {
@@ -158,7 +162,9 @@
         {#if isLateNightGamer}
             <SettingCard
                 title={$_('pages.integrations.sleepScheduleCard.title')}
-                description={$_('pages.integrations.sleepScheduleCard.description')}
+                description={$_(
+                    'pages.integrations.sleepScheduleCard.description'
+                )}
                 icon={BedSingle}
             >
                 <Switch
@@ -197,6 +203,18 @@
                 options={processPriorityItems}
                 bind:value={processPriority}
                 on:change={handleChanges}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Enable optimizer"
+            description="Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            icon={Sparkles}
+        >
+            <Switch
+                slot="action"
+                on:change={handleChanges}
+                bind:checked={optimizer}
             />
         </SettingCard>
 

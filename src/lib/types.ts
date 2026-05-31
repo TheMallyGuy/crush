@@ -68,6 +68,7 @@ export type Integrations = {
     serverLocationNotifier: boolean
     priority : PriorityClass
     roValra : RoValra
+    optimizer: boolean
     sleepSchedule: sleepSchedule,
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
