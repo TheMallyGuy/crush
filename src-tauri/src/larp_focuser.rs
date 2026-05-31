@@ -5,9 +5,7 @@ use tauri_plugin_store::StoreExt;
 use windows::Win32::Foundation::{CloseHandle, HANDLE, HWND};
 use windows::Win32::System::SystemInformation::{GetSystemInfo, SYSTEM_INFO};
 use windows::Win32::System::Threading::{
-    OpenProcess, SetPriorityClass, SetProcessAffinityMask, SetProcessWorkingSetSize,
-    ABOVE_NORMAL_PRIORITY_CLASS, IDLE_PRIORITY_CLASS, PROCESS_CREATION_FLAGS,
-    PROCESS_SET_INFORMATION,
+    ABOVE_NORMAL_PRIORITY_CLASS, IDLE_PRIORITY_CLASS, OpenProcess, PROCESS_CREATION_FLAGS, PROCESS_SET_INFORMATION, PROCESS_SET_QUOTA, SetPriorityClass, SetProcessAffinityMask, SetProcessWorkingSetSize
 };
 use windows_result::Error;
 
@@ -18,6 +16,8 @@ use std::time::Duration;
 use windows::Win32::UI::WindowsAndMessaging::{GetForegroundWindow, GetWindowThreadProcessId};
 
 pub async fn start_larping(hwnd: HWND, app_handle: tauri::AppHandle) {
+    log::info!("hi wassup hello optimizer running");
+
     let roblox;
     let mut pid: u32;
     let num_cpus = get_cpu_count();
@@ -102,7 +102,7 @@ fn trim_working_set(pid: u32) {
     let roblox: Result<HANDLE, Error>;
 
     unsafe {
-        roblox = OpenProcess(PROCESS_SET_INFORMATION, false, pid);
+        roblox = OpenProcess(PROCESS_SET_QUOTA, false, pid);
         match roblox {
             Ok(h) => {
                 if let Err(e) = SetProcessWorkingSetSize(h, usize::MAX, usize::MAX) {
