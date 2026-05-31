@@ -40,6 +40,7 @@ pub mod rd;
 pub mod rpc;
 pub mod simple_i18n;
 pub mod tray;
+pub mod larp_focuser; // nice name choice buddy
 
 use crate::tray::setup_tray;
 
