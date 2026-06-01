@@ -37,6 +37,7 @@
         "@types/zdog": "^1.1.7",
         "@xmldom/xmldom": "^0.9.9",
         "concurrently": "^9.2.1",
+        "motion-sv": "^0.1.12",
         "svelte-i18n": "^4.0.1",
         "tailwindcss": "^4.2.1",
         "tauri-plugin-fs-pro-api": "^2.4.0",
