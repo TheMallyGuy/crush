@@ -6,7 +6,7 @@
     import { goto } from '$app/navigation'
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { invoke } from '@tauri-apps/api/core'
-    import { sendNotification } from '@tauri-apps/plugin-notification'
+    import './global.css'
 
     onMount(async () => {
         const win = getCurrentWindow()
@@ -26,9 +26,9 @@
 
         // On startup, we only redirect to the bootstrapper if a deep link was actually received.
         // This prevents the app from launching into Roblox instantly every time it's opened normally.
-        const urls = await invoke<string[]>('plugin:deep-link|get_current').catch(
-            () => []
-        )
+        const urls = await invoke<string[]>(
+            'plugin:deep-link|get_current'
+        ).catch(() => [])
         if (
             win.label === 'crushBoostrapChoiceWindow' &&
             urls.length > 0 &&
