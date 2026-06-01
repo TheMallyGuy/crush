@@ -102,6 +102,10 @@
                 "title": "nihahahaha nihaha",
                 "description": "nihahahahahaha nihahahaha nihahahahaha nihaha nihahahahaha nihaha nihahaha nihahahaha nihahahahahahaha"
             },
+            "optimizerCard": {
+                "title": "Enable optimizer",
+                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
                 "description": "Use dark magic to disable fullscreen optimization"

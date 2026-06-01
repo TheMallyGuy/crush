@@ -102,6 +102,10 @@
                 "title": "Ưu tiên tiến trình",
                 "description": "ĐANG THỬ NGHIỆM. Thay đổi mức độ ưu tiên của tiến trình Roblox. Có thể tăng hiệu suất."
             },
+            "optimizerCard": {
+                "title": "Enable optimizer",
+                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            },
             "disableFullscreenoptimizationCard": {
                 "title": "Vô hiệu tối ưu hóa toàn màn hình",
                 "description": "Dùng \"ma thuật hắc ám\" để vô hiệu chế độ tối ưu hóa toàn màn hình."
@@ -443,7 +447,7 @@
             "description": "Chuyển đổi các tài khoản một cách dễ dàng",
             "validateAccounts": "Xác thực tài khoản",
             "addAnAccount": "Thêm một tài khoản",
-            "use": "Use",
+            "use": "Dùng",
             "delete": "Xóa",
             "notifiers": {
                 "addAccountSuccess": {
