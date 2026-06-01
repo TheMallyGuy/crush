@@ -315,14 +315,16 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             }
         }
         if let Some(hwnd) = state.roblox_hwnd {
-            if !state.larp_started {
-                state.larp_started = true;
-                let app_c = app.clone();
-                let hwnd_val = hwnd.0 as usize;
-                std::thread::spawn(move || {
-                    let hwnd = HWND(hwnd_val as *mut _);
-                    start_larping(hwnd, app_c);
-                });
+            if integration_enabled(&store, &["optimizer"]) {
+                if !state.larp_started {
+                    state.larp_started = true;
+                    let app_c = app.clone();
+                    let hwnd_val = hwnd.0 as usize;
+                    std::thread::spawn(move || {
+                        let hwnd = HWND(hwnd_val as *mut _);
+                        start_larping(hwnd, app_c);
+                    });
+                }
             }
         }
 
