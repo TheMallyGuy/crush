@@ -58,6 +58,7 @@
         const savedTransparency = savedScopes?.transparencyScopes
 
         const newIntegrations: Integrations = {
+            optimizer: savedIntegrations?.optimizer ?? false,
             closeCrashHandler: savedIntegrations?.closeCrashHandler ?? false,
             priority: savedIntegrations?.priority ?? "NORMAL_PRIORITY_CLASS",
             activityWatching: savedIntegrations?.activityWatching ?? true,

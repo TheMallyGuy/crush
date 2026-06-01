@@ -5,7 +5,7 @@ use windows::Win32::System::Threading::{
     NORMAL_PRIORITY_CLASS, PROCESS_CREATION_FLAGS, REALTIME_PRIORITY_CLASS,
 };
 
-fn parse_priority(name: &str) -> Option<PROCESS_CREATION_FLAGS> {
+pub fn parse_priority(name: &str) -> Option<PROCESS_CREATION_FLAGS> {
     match name {
         "BELOW_NORMAL_PRIORITY_CLASS" => Some(BELOW_NORMAL_PRIORITY_CLASS),
         "NORMAL_PRIORITY_CLASS" => Some(NORMAL_PRIORITY_CLASS),
