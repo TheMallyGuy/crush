@@ -43,6 +43,7 @@
         "choiceWin": {
             "title": "Crush",
             "playRoblox": "Play Roblox",
+            "makeGames" : "Make Games",
             "config": "Config",
             "discord": "Our Community"
         },

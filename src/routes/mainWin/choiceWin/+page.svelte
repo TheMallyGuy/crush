@@ -6,7 +6,6 @@
     import {
         Gamepad2,
         Wrench,
-        Info,
         ChevronDown,
         DraftingCompass,
         MessageCircleHeart,
@@ -15,7 +14,7 @@
     import { _ } from 'svelte-i18n'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { info } from '@tauri-apps/plugin-log'
-    import { launchAppType } from '$lib/stores/launchAppType'   
+    import { launchAppType } from '$lib/stores/launchAppType'
 
     let firstLaunchValue: boolean | undefined
     let showVariantMenu = false
@@ -43,9 +42,9 @@
 
     function handlePlayClick() {
         if (playVariant === 'default') {
-            launchAppType.set("player")
+            launchAppType.set('player')
         } else {
-            launchAppType.set("studio")
+            launchAppType.set('studio')
         }
 
         launchBoostrap()
@@ -53,7 +52,6 @@
 
     async function checkLaunch() {
         const store = await load('config.json')
-
         let firstLaunch = await store.get<boolean>('firstLaunch')
 
         if (firstLaunch === undefined || firstLaunch === true) {
@@ -61,7 +59,6 @@
             await store.save()
             return true
         }
-
         return false
     }
 
@@ -113,111 +110,131 @@
         })
         firstLaunchValue = await checkLaunch()
     })
+    import { BlurFade } from '$lib/components/magic/blur-fade'
 </script>
 
 <div
-    class="flex flex-col items-center justify-center bg-transparent h-screen flex-1 p-3 gap-5 0 text-white selection:bg-stone-800"
+    class="flex flex-col items-center justify-between bg-transparent h-screen w-screen flex-1 p-3 py-8 gap-5 text-white selection:bg-stone-800"
 >
     <div>
         <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
-            Crush
+            <BlurFade delay={0}>Crush</BlurFade>
         </h1>
     </div>
 
-    <div class="flex flex-col gap-2 w-full max-w-sm">
-        <div class="relative w-full max-w-sm">
-            <div
-                class="w-full flex rounded-lg border border-stone-800 bg-transparent hover:border-stone-700 overflow-hidden transition-all"
-            >
-                <button
-                    on:click={handlePlayClick}
-                    class="flex-1 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 p-4 flex items-center justify-center gap-3 transition-all text-stone-200"
+    <div class="flex gap-3 w-full max-w-md">
+        <div class="relative w-1/2 h-24">
+            <BlurFade delay={0.2} class="h-full flex">
+                <div
+                    class="w-full h-full flex rounded-lg border border-stone-800 bg-transparent hover:border-stone-700 transition-all"
                 >
-                    {#if playVariant === 'default'}
-                        <Gamepad2 class="size-5" />
-                    {:else}
-                        <DraftingCompass class="size-5" />
-                    {/if}
-                    <span class="font-medium">
-                        {playVariant === 'default'
-                            ? $_('pages.choiceWin.playRoblox')
-                            : 'Make Games'}  <!--localize this-->
-                    </span>
-                </button>
+                    <button
+                        on:click={handlePlayClick}
+                        class="flex-1 h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 p-4 flex flex-col items-center justify-center gap-2 transition-all text-stone-200 rounded-l-lg overflow-hidden"
+                    >
+                        {#if playVariant === 'default'}
+                            <Gamepad2 class="size-6" />
+                        {:else}
+                            <DraftingCompass class="size-6" />
+                        {/if}
+                        <span
+                            class="font-medium text-sm text-center line-clamp-1"
+                        >
+                            {playVariant === 'default'
+                                ? $_('pages.choiceWin.playRoblox')
+                                : $_('pages.choiceWin.makeGames')}
+                        </span>
+                    </button>
 
-                <div class="w-px bg-stone-800 shrink-0"></div>
+                    <div class="w-px h-full bg-stone-800 shrink-0"></div>
 
-                <button
-                    on:click={() => (showVariantMenu = !showVariantMenu)}
-                    class="bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] px-3 flex items-center justify-center text-stone-400 hover:text-stone-200 transition-all"
-                >
-                    <ChevronDown
-                        class="size-4 transition-transform duration-200 {showVariantMenu
-                            ? 'rotate-180'
-                            : ''}"
-                    />
-                    <!-- animation -->
-                </button>
-            </div>
+                    <button
+                        on:click={() => (showVariantMenu = !showVariantMenu)}
+                        class="h-full px-2.5 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] flex items-center justify-center text-stone-400 hover:text-stone-200 transition-all rounded-r-lg overflow-hidden"
+                    >
+                        <ChevronDown
+                            class="size-4 transition-transform duration-200 {showVariantMenu
+                                ? 'rotate-180'
+                                : ''}"
+                        />
+                    </button>
+                </div>
+            </BlurFade>
 
             {#if showVariantMenu}
-                <div
-                    class="absolute top-full right-0 mt-1 z-50 bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-35"
-                >
-                    <button
-                        on:click={() => {
-                            playVariant = 'default'
-                            showVariantMenu = false
-                        }}
-                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
-                        'default'
-                            ? 'bg-stone-800/50'
-                            : ''}"
-                    >
-                        <Gamepad2 class="size-3.5" />
-                        Player
-                        {#if playVariant === 'default'}<span
-                                class="ml-auto pl-3 text-purple-400 text-xs"
-                                >✓</span
-                            >{/if}
-                    </button>
-                    <button
-                        on:click={() => {
-                            playVariant = 'v2'
-                            showVariantMenu = false
-                        }}
-                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
-                        'v2'
-                            ? 'bg-stone-800/50'
-                            : ''}"
-                    >
-                        <DraftingCompass class="size-3.5" />
-                        Studio
-                        {#if playVariant === 'v2'}<span
-                                class="ml-auto pl-3 text-purple-400 text-xs"
-                                >✓</span
-                            >{/if}
-                    </button>
+                <div class="absolute bottom-full right-0 mb-2 z-50">
+                    <BlurFade duration={0.15}>
+                        <div
+                            class="bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-[140px] shadow-xl"
+                        >
+                            <button
+                                on:click={() => {
+                                    playVariant = 'default'
+                                    showVariantMenu = false
+                                }}
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                                'default'
+                                    ? 'bg-stone-800/50'
+                                    : ''}"
+                            >
+                                <Gamepad2 class="size-3.5" />
+                                Player
+                                {#if playVariant === 'default'}
+                                    <span
+                                        class="ml-auto pl-3 text-purple-400 text-xs"
+                                        >✓</span
+                                    >
+                                {/if}
+                            </button>
+                            <button
+                                on:click={() => {
+                                    playVariant = 'v2'
+                                    showVariantMenu = false
+                                }}
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                                'v2'
+                                    ? 'bg-stone-800/50'
+                                    : ''}"
+                            >
+                                <DraftingCompass class="size-3.5" />
+                                Studio
+                                {#if playVariant === 'v2'}
+                                    <span
+                                        class="ml-auto pl-3 text-purple-400 text-xs"
+                                        >✓</span
+                                    >
+                                {/if}
+                            </button>
+                        </div>
+                    </BlurFade>
                 </div>
             {/if}
         </div>
 
-        <div class="flex flex-row gap-2 w-full">
-            <button
-                on:click={openmainwin}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
-            >
-                <Wrench class="size-5" />
-                {$_('pages.choiceWin.config')}
-            </button>
+        <div class="flex flex-col gap-2 w-1/2 h-24">
+            <BlurFade delay={0.4} class="flex-1 flex">
+                <button
+                    on:click={openmainwin}
+                    class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm overflow-hidden"
+                >
+                    <Wrench class="size-4 shrink-0" />
+                    <span class="font-medium truncate"
+                        >{$_('pages.choiceWin.config')}</span
+                    >
+                </button>
+            </BlurFade>
 
-            <button
-                on:click={openDiscordServer}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center"
-            >
-                <MessageCircleHeart class="size-5" />
-                {$_("pages.choiceWin.discord")}
-            </button>
+            <BlurFade delay={0.6} class="flex-1 flex">
+                <button
+                    on:click={openDiscordServer}
+                    class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm overflow-hidden"
+                >
+                    <MessageCircleHeart class="size-4 shrink-0" />
+                    <span class="font-medium truncate"
+                        >{$_('pages.choiceWin.discord')}</span
+                    >
+                </button>
+            </BlurFade>
         </div>
     </div>
 </div>
