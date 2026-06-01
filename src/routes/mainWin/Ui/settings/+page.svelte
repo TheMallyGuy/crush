@@ -126,7 +126,7 @@
 <div class="flex flex-col gap-4">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_('pages.settings.settings')}
             </h1>
         </div>
@@ -206,7 +206,7 @@
                 })}
             </p>
 
-            <p class="sm text-gray-600">
+            <p class="sm text-muted-foreground">
                 {$_("pages.settings.aboutCard.note")}
             </p>
         </div>

@@ -1,22 +1,28 @@
 <script lang="ts">
     import WizardSidebar from '$lib/components/molecules/WizardSidebar.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
-    import { page } from '$app/stores';
-    import { steps, currentStep, isFirst, isLast, next, back } from '$lib/stores/wizard'
+    import { page } from '$app/stores'
+    import {
+        steps,
+        currentStep,
+        isFirst,
+        isLast,
+        next,
+        back,
+    } from '$lib/stores/wizard'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import { load } from '@tauri-apps/plugin-store';
-
+    import { load } from '@tauri-apps/plugin-store'
 
     $: {
-        const idx = steps.findIndex(s => s.path === $page.url.pathname)
+        const idx = steps.findIndex((s) => s.path === $page.url.pathname)
         if (idx !== -1) currentStep.set(idx)
     }
 
     async function imBadAtNamingHandlerFunctions() {
-        const config = await load("config.json")
+        const config = await load('config.json')
 
-        await config.set("firstLaunch", false)
+        await config.set('firstLaunch', false)
 
         await config.save()
 
@@ -37,7 +43,7 @@
     }
 </script>
 
-<div class="flex h-screen w-screen bg-transparent text-white">
+<div class="flex h-screen w-screen text-white">
     <WizardSidebar {steps} currentStep={$currentStep} />
 
     <div class="flex-1 flex flex-col p-10 gap-10">

@@ -116,10 +116,10 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-center bg-transparent h-screen flex-1 p-3 gap-5 0 text-white selection:bg-stone-800"
+    class="flex flex-col items-center justify-center bg-transparent h-screen flex-1 p-3 gap-5 0 text-foreground selection:bg-muted"
 >
     <div>
-        <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
+        <h1 class="text-4xl tracking-tight text-foreground font-medium">
             Crush
         </h1>
     </div>
@@ -127,11 +127,11 @@
     <div class="flex flex-col gap-2 w-full max-w-sm">
         <div class="relative w-full max-w-sm">
             <div
-                class="w-full flex rounded-lg border border-stone-800 bg-transparent hover:border-stone-700 overflow-hidden transition-all"
+                class="w-full flex rounded-lg border border-border bg-transparent hover:border-border overflow-hidden transition-all"
             >
                 <button
                     on:click={handlePlayClick}
-                    class="flex-1 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 p-4 flex items-center justify-center gap-3 transition-all text-stone-200"
+                    class="flex-1 bg-muted/60 hover:bg-muted active:scale-[0.98] disabled:opacity-50 p-4 flex items-center justify-center gap-3 transition-all text-foreground"
                 >
                     {#if playVariant === 'default'}
                         <Gamepad2 class="size-5" />
@@ -145,11 +145,11 @@
                     </span>
                 </button>
 
-                <div class="w-px bg-stone-800 shrink-0"></div>
+                <div class="w-px bg-border shrink-0"></div>
 
                 <button
                     on:click={() => (showVariantMenu = !showVariantMenu)}
-                    class="bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] px-3 flex items-center justify-center text-stone-400 hover:text-stone-200 transition-all"
+                    class="bg-muted/60 hover:bg-muted active:scale-[0.98] px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-all"
                 >
                     <ChevronDown
                         class="size-4 transition-transform duration-200 {showVariantMenu
@@ -162,16 +162,16 @@
 
             {#if showVariantMenu}
                 <div
-                    class="absolute top-full right-0 mt-1 z-50 bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-35"
+                    class="absolute top-full right-0 mt-1 z-50 bg-background border border-border rounded-lg p-1 flex flex-col gap-0.5 min-w-35"
                 >
                     <button
                         on:click={() => {
                             playVariant = 'default'
                             showVariantMenu = false
                         }}
-                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-muted text-sm text-foreground transition-all whitespace-nowrap {playVariant ===
                         'default'
-                            ? 'bg-stone-800/50'
+                            ? 'bg-muted/50'
                             : ''}"
                     >
                         <Gamepad2 class="size-3.5" />
@@ -186,9 +186,9 @@
                             playVariant = 'v2'
                             showVariantMenu = false
                         }}
-                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-muted text-sm text-foreground transition-all whitespace-nowrap {playVariant ===
                         'v2'
-                            ? 'bg-stone-800/50'
+                            ? 'bg-muted/50'
                             : ''}"
                     >
                         <DraftingCompass class="size-3.5" />
@@ -205,7 +205,7 @@
         <div class="flex flex-row gap-2 w-full">
             <button
                 on:click={openmainwin}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm"
+                class="w-1/2 bg-muted/60 hover:bg-muted active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-border hover:border-border text-foreground text-sm"
             >
                 <Wrench class="size-5" />
                 {$_('pages.choiceWin.config')}
@@ -213,7 +213,7 @@
 
             <button
                 on:click={openDiscordServer}
-                class="w-1/2 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm text-center"
+                class="w-1/2 bg-muted/60 hover:bg-muted active:scale-[0.98] disabled:opacity-50 rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-all border border-border hover:border-border text-foreground text-sm text-center"
             >
                 <MessageCircleHeart class="size-5" />
                 {$_("pages.choiceWin.discord")}

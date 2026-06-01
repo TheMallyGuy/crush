@@ -18,7 +18,7 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen backdrop-blur-2xl bg-anthracite/60 backdrop-blur-md text-stone-400 px-7 pb-7 pt-14 transition-all duration-150 w-64 "
+    class="flex flex-col h-screen backdrop-blur-2xl bg-card/60 backdrop-blur-md text-muted-foreground px-7 pb-7 pt-14 transition-all duration-150 w-64 "
 >
     <div class="flex flex-col items-center sm:items-start mb-10 gap-2 mt-1">
         <img
@@ -26,8 +26,8 @@
             alt="Logo"
             class="w-10 h-10 mb-2"
         />
-        <h2 class="text-stone-100 font-bold text-lg tracking-tight">First launch? Welcome to Crush!</h2>
-        <p class="text-xs text-stone-500 tracking-wider">Crush hello</p>
+        <h2 class="text-foreground font-bold text-lg tracking-tight">First launch? Welcome to Crush!</h2>
+        <p class="text-xs text-muted-foreground tracking-wider">Crush hello</p>
     </div>
 
     <nav class="flex flex-col gap-6">
@@ -38,8 +38,8 @@
                     <div
                         class="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 z-10
                         {stepState === 'completed' ? 'bg-sapphire text-white' : 
-                         stepState === 'active' ? 'bg-stone-800 text-white' : 
-                         'bg-stone-900 text-stone-600'}"
+                         stepState === 'active' ? 'bg-muted text-white' : 
+                         'bg-background text-muted-foreground'}"
                     >
                         {#if stepState === 'completed'}
                             <Check size={14} strokeWidth={3} />
@@ -51,7 +51,7 @@
                     {#if i < steps.length - 1}
                         <div
                             class="absolute top-6 w-0.5 h-6 transition-colors duration-300
-                            {stepState === 'completed' ? 'bg-sapphire' : 'bg-stone-800'}"
+                            {stepState === 'completed' ? 'bg-sapphire' : 'bg-muted'}"
                         ></div>
                     {/if}
                 </div>
@@ -59,15 +59,15 @@
                 <div class="flex flex-col gap-0.5 pt-0.5">
                     <span
                         class="text-sm font-semibold transition-colors duration-300
-                        {stepState === 'active' ? 'text-stone-100' : 
-                         stepState === 'completed' ? 'text-stone-300' : 'text-stone-600'}"
+                        {stepState === 'active' ? 'text-foreground' : 
+                         stepState === 'completed' ? 'text-foreground/80' : 'text-muted-foreground'}"
                     >
                         {step.label}
                     </span>
                     {#if step.description}
                         <span
                             class="text-[11px] leading-tight transition-colors duration-300
-                            {stepState === 'active' ? 'text-stone-400' : 'text-stone-700'}"
+                            {stepState === 'active' ? 'text-muted-foreground' : 'text-muted-foreground/40'}"
                         >
                             {step.description}
                         </span>

@@ -46,7 +46,7 @@
     {#if label}
         <label
             for={id}
-            class="text-[11px] text-stone-500"
+            class="text-[11px] text-muted-foreground"
         >
             {label}
         </label>
@@ -55,7 +55,7 @@
     <div class="relative w-full">
         {#if $$slots.icon}
             <div
-                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-500"
+                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground"
             >
                 <slot name="icon" />
             </div>
@@ -74,8 +74,8 @@
                 {$$slots.icon ? 'pl-11' : 'px-4'}
                 py-2.5
                 {disabled
-                ? 'bg-stone-900/30 border-stone-800/20 text-stone-600 cursor-not-allowed'
-                : 'bg-stone-900/50 border-stone-800/40 text-stone-200 placeholder-stone-600 hover:border-stone-700/60'}
+                ? 'bg-muted/30 border-border text-muted-foreground cursor-not-allowed'
+                : 'bg-secondary border-border text-foreground placeholder:text-muted-foreground hover:border-accent'}
                 {error
                 ? 'border-red-500/40 focus:ring-2 focus:ring-red-500/10 focus:border-red-500/60'
                 : 'focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40'}

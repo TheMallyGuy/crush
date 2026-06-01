@@ -42,13 +42,13 @@
         >
             <Card class="p-3! flex-row items-center gap-3">
                 <div
-                    class="cursor-grab active:cursor-grabbing text-stone-600 hover:text-stone-400 shrink-0"
+                    class="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground shrink-0"
                 >
                     <GripVertical size={18} />
                 </div>
                 <div class="grow">
                     <slot {item}>
-                        <span class="text-stone-200 font-medium"
+                        <span class="text-foreground font-medium"
                             >{item.label || item.id}</span
                         >
                     </slot>

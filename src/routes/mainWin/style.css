@@ -11,9 +11,14 @@
     --transition-snappy: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@utility border {
+    border-width: 0.5px;
+}
+
 html,
 body {
-    background: transparent !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
     overflow: hidden;
 }
 
@@ -39,7 +44,8 @@ main {
 :global(body) {
     margin: 0;
     padding: 0;
-    background: transparent !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
     overflow: hidden;
 }
 
@@ -49,16 +55,15 @@ input[type="password"],
 input[type="email"],
 textarea,
 select {
-    background-color: rgba(20, 20, 20, 0.4) !important;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: var(--input) !important;
+    border-color: var(--border) !important;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    background-color: rgba(30, 30, 30, 0.6) !important;
-    border-color: var(--color-sapphire) !important;
+    background-color: var(--background) !important;
+    border-color: var(--ring) !important;
 }
 
 @keyframes slide-in {

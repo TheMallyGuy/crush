@@ -143,19 +143,19 @@
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_('pages.shortcuts.shortcuts')}
             </h1>
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_('pages.shortcuts.description')}
             </p>
         </div>
     </div>
 
     <div
-        class="group relative gap-10 flex w-full flex-row rounded-xl bg-anthracite/40 p-5 transition-all duration-150"
+        class="group relative gap-10 flex w-full flex-row rounded-xl bg-card/40 p-5 transition-all duration-150"
     >
-        <div class="h-40 w-60 rounded-xl bg-anthracite/40">
+        <div class="h-40 w-60 rounded-xl bg-card/40">
             <img src={image} class="rounded-xl" />
         </div>
 

@@ -110,10 +110,10 @@
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_("pages.integrations.windowManipulation.title")}
             </h1>
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_("pages.integrations.windowManipulation.description")}
             </p>
         </div>
@@ -133,14 +133,14 @@
 
     <div class="flex flex-col gap-3">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_("pages.integrations.windowManipulation.advanced.title")}
             </h1>
-            <p class="text-stone-400 mt-1">{$_("pages.integrations.windowManipulation.advanced.description")}</p>
+            <p class="text-muted-foreground mt-1">{$_("pages.integrations.windowManipulation.advanced.description")}</p>
         </div>
 
         <div class="flex flex-col gap-2">
-            <h1 class="text-2xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-2xl font-bold tracking-tight text-foreground">
                 {$_("pages.integrations.windowManipulation.advanced.scopes.title")}
             </h1>
 
@@ -189,7 +189,7 @@
         </div>
 
         <div class="flex flex-col gap-2">
-            <h1 class="text-2xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-2xl font-bold tracking-tight text-foreground">
                 {$_("pages.integrations.windowManipulation.advanced.transparencySettings.title")}
             </h1>
 

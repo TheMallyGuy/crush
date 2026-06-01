@@ -114,10 +114,10 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-between bg-transparent h-screen w-screen flex-1 p-3 py-8 gap-5 text-white selection:bg-stone-800"
+    class="flex flex-col items-center justify-between h-screen w-screen flex-1 p-3 py-8 gap-5 text-foreground bg-background selection:bg-primary/30"
 >
     <div>
-        <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
+        <h1 class="text-4xl tracking-tight text-foreground font-medium">
             <BlurFade delay={0}>Crush</BlurFade>
         </h1>
     </div>
@@ -126,11 +126,11 @@
         <div class="relative w-1/2 h-24">
             <BlurFade delay={0.2} class="h-full flex">
                 <div
-                    class="w-full h-full flex rounded-lg border border-stone-800 bg-transparent hover:border-stone-700 transition-all"
+                    class="w-full h-full flex rounded-lg border border-border bg-card hover:border-primary/50 transition-all shadow-sm"
                 >
                     <button
                         on:click={handlePlayClick}
-                        class="flex-1 h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 p-4 flex flex-col items-center justify-center gap-2 transition-all text-stone-200 rounded-l-lg overflow-hidden"
+                        class="flex-1 h-full bg-transparent hover:bg-accent active:scale-[0.98] disabled:opacity-50 p-4 flex flex-col items-center justify-center gap-2 transition-all text-card-foreground rounded-l-lg overflow-hidden"
                     >
                         {#if playVariant === 'default'}
                             <Gamepad2 class="size-6" />
@@ -146,11 +146,11 @@
                         </span>
                     </button>
 
-                    <div class="w-px h-full bg-stone-800 shrink-0"></div>
+                    <div class="w-px h-full bg-border shrink-0"></div>
 
                     <button
                         on:click={() => (showVariantMenu = !showVariantMenu)}
-                        class="h-full px-2.5 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] flex items-center justify-center text-stone-400 hover:text-stone-200 transition-all rounded-r-lg overflow-hidden"
+                        class="h-full px-2.5 bg-transparent hover:bg-accent active:scale-[0.98] flex items-center justify-center text-muted-foreground hover:text-accent-foreground transition-all rounded-r-lg overflow-hidden"
                     >
                         <ChevronDown
                             class="size-4 transition-transform duration-200 {showVariantMenu
@@ -165,23 +165,23 @@
                 <div class="absolute bottom-full right-0 mb-2 z-50">
                     <BlurFade duration={0.15}>
                         <div
-                            class="bg-stone-900 border border-stone-800 rounded-lg p-1 flex flex-col gap-0.5 min-w-[140px] shadow-xl"
+                            class="bg-popover border border-border rounded-lg p-1 flex flex-col gap-0.5 min-w-[140px] shadow-xl"
                         >
                             <button
                                 on:click={() => {
                                     playVariant = 'default'
                                     showVariantMenu = false
                                 }}
-                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-accent text-sm text-popover-foreground transition-all whitespace-nowrap {playVariant ===
                                 'default'
-                                    ? 'bg-stone-800/50'
+                                    ? 'bg-accent/50'
                                     : ''}"
                             >
                                 <Gamepad2 class="size-3.5" />
                                 Player
                                 {#if playVariant === 'default'}
                                     <span
-                                        class="ml-auto pl-3 text-purple-400 text-xs"
+                                        class="ml-auto pl-3 text-primary text-xs"
                                         >✓</span
                                     >
                                 {/if}
@@ -191,16 +191,16 @@
                                     playVariant = 'v2'
                                     showVariantMenu = false
                                 }}
-                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-stone-800 text-sm text-stone-200 transition-all whitespace-nowrap {playVariant ===
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-accent text-sm text-popover-foreground transition-all whitespace-nowrap {playVariant ===
                                 'v2'
-                                    ? 'bg-stone-800/50'
+                                    ? 'bg-accent/50'
                                     : ''}"
                             >
                                 <DraftingCompass class="size-3.5" />
                                 Studio
                                 {#if playVariant === 'v2'}
                                     <span
-                                        class="ml-auto pl-3 text-purple-400 text-xs"
+                                        class="ml-auto pl-3 text-primary text-xs"
                                         >✓</span
                                     >
                                 {/if}
@@ -215,7 +215,7 @@
             <BlurFade delay={0.4} class="flex-1 flex">
                 <button
                     on:click={openmainwin}
-                    class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm overflow-hidden"
+                    class="w-full h-full bg-card hover:bg-accent active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-border hover:border-primary/50 text-card-foreground text-sm overflow-hidden shadow-sm"
                 >
                     <Wrench class="size-4 shrink-0" />
                     <span class="font-medium truncate"
@@ -227,7 +227,7 @@
             <BlurFade delay={0.6} class="flex-1 flex">
                 <button
                     on:click={openDiscordServer}
-                    class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200 text-sm overflow-hidden"
+                    class="w-full h-full bg-card hover:bg-accent active:scale-[0.98] disabled:opacity-50 rounded-lg px-4 flex items-center justify-center gap-3 transition-all border border-border hover:border-primary/50 text-card-foreground text-sm overflow-hidden shadow-sm"
                 >
                     <MessageCircleHeart class="size-4 shrink-0" />
                     <span class="font-medium truncate"

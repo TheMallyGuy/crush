@@ -14,7 +14,7 @@
 
 <div class="flex flex-col gap-6 w-full">
     <div
-        class="flex items-center gap-1 p-1 bg-stone-900/60 backdrop-blur-md rounded-2xl border border-white/5 w-fit self-center sm:self-start"
+        class="flex items-center gap-1 p-1 bg-muted/60 backdrop-blur-md rounded-2xl border border-border w-fit self-center sm:self-start"
     >
         {#each tabs as tab}
             <button
@@ -22,7 +22,7 @@
                 class="relative flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 group
                 {activeTab === tab.value
                     ? 'text-white'
-                    : 'text-stone-400 hover:text-stone-200 hover:bg-white/5'}"
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent'}"
                 on:click={() => selectTab(tab.value)}
             >
                 {#if activeTab === tab.value}

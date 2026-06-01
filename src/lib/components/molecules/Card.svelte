@@ -1,17 +1,19 @@
 <script lang="ts">
+    import * as Card from '$lib/components/ui/card/index.js'
+
     export let clickable = false
 
     let className = ''
     export { className as class }
 </script>
 
-<div
-    class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
-  {clickable
-        ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
+<Card.Root
+    class="group relative flex w-full flex-col bg-sidebar/20 backdrop-blur-md transition-all duration-150 border-sidebar-border/40
+    {clickable
+        ? 'cursor-pointer hover:bg-sidebar-accent/50 active:scale-[0.995]'
         : ''}
-  {className}"
+    {className}"
     {...$$restProps}
 >
     <slot />
-</div>
+</Card.Root>

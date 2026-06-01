@@ -66,7 +66,7 @@
             {sizes[size].box}
             {isActive
                 ? 'bg-sapphire border-sapphire'
-                : 'bg-transparent border-stone-600 hover:border-stone-500 hover:bg-white/[0.04]'}"
+                : 'bg-transparent border-input hover:border-foreground/30 hover:bg-accent/40'}"
     >
         <!-- Check icon -->
         <svg
@@ -101,7 +101,7 @@
     </div>
 
     {#if label || $$slots.default}
-        <span class="font-medium text-stone-100 leading-none {labelSizes[size]}">
+        <span class="font-medium text-foreground leading-none {labelSizes[size]}">
             <slot>{label}</slot>
         </span>
     {/if}

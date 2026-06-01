@@ -190,10 +190,10 @@
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_('pages.installations.versionManager.title')}
             </h1>
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_('pages.installations.versionManager.description')}
             </p>
         </div>
@@ -212,9 +212,9 @@
     <div class="space-y-4">
         {#if items.length === 0}
             <div
-                class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
+                class="p-8 border-2 border-dashed border-border rounded-xl text-center"
             >
-                <p class="text-stone-500">
+                <p class="text-muted-foreground">
                     {$_('pages.installations.versionManager.none')}
                 </p>
             </div>
@@ -222,7 +222,7 @@
             <SortableList {items} let:item>
                 <div class="flex items-center justify-between w-full pr-2">
                     <div class="flex flex-col gap-0.5">
-                        <span class="text-sm font-medium text-stone-100">
+                        <span class="text-sm font-medium text-foreground">
                             {item.id}
                             {#if currentlyUsing?.id === item.id}
                                 <span
@@ -238,7 +238,7 @@
                                 >
                             {/if}
                         </span>
-                        <span class="text-xs text-stone-400"
+                        <span class="text-xs text-muted-foreground"
                             >{item.versionHash}</span
                         >
                     </div>

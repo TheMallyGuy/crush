@@ -72,10 +72,10 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen backdrop-blur-2xl text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
+    class="flex flex-col h-screen backdrop-blur-2xl text-sidebar-foreground p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-sidebar-border"
 >
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
-        <button class="hover:text-stone-100 transition-colors">
+        <button class="hover:text-sidebar-foreground transition-colors">
             <Menu size={20} />
         </button>
     </div>
@@ -89,7 +89,7 @@
             <a
                 href={item.href}
                 class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all group
-                {isActive ? 'bg-white/10 text-sapphire' : ''}"
+                {isActive ? 'bg-sidebar-accent text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div
@@ -113,8 +113,8 @@
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all hover:bg-stone-800/50 hover:text-stone-100 group
-                {isActive ? 'bg-white/10 text-sapphire' : ''}"
+                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all hover:bg-sidebar-accent hover:text-sidebar-foreground group
+                {isActive ? 'bg-sidebar-accent text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div

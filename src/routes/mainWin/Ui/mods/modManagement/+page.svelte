@@ -184,9 +184,9 @@
     <div class="space-y-4">
         {#if items.length === 0}
             <div
-                class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
+                class="p-8 border-2 border-dashed border-border rounded-xl text-center"
             >
-                <p class="text-stone-500">
+                <p class="text-muted-foreground">
                     {$_('pages.mod.tab.modManagement.noModsFound')}
                 </p>
                 <button
@@ -205,7 +205,7 @@
                             on:click={() => handleToggle(item.id)}
                             class="p-2 rounded-lg transition-colors {item.enabled
                                 ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
-                                : 'bg-stone-800 text-stone-500 hover:bg-stone-700'}"
+                                : 'bg-muted text-muted-foreground hover:bg-accent'}"
                             title={item.enabled
                                 ? $_(
                                       'pages.mod.tab.modManagement.modCards.toggleNoteDisable'
@@ -223,8 +223,8 @@
                         <div class="flex flex-col gap-0.5">
                             <span
                                 class="text-sm font-medium {item.enabled
-                                    ? 'text-stone-100'
-                                    : 'text-stone-500'}">{item.name}</span
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground'}">{item.name}</span
                             >
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                                 'pages.mod.tab.modManagement.modCards.renameNote'
                             )}
                         >
-                            <SquarePen class="size-4 text-stone-400" />
+                            <SquarePen class="size-4 text-muted-foreground" />
                         </Button>
                         <Button
                             size="sm"
@@ -248,7 +248,7 @@
                                 'pages.mod.tab.modManagement.modCards.openFolderNote'
                             )}
                         >
-                            <Folder class="size-4 text-stone-400" />
+                            <Folder class="size-4 text-muted-foreground" />
                         </Button>
                         <Button
                             size="sm"
@@ -267,8 +267,8 @@
         {/if}
     </div>
 
-    <div class="pt-4 border-t border-stone-900">
-        <p class="text-sm text-stone-500 italic">
+    <div class="pt-4 border-t border-border">
+        <p class="text-sm text-muted-foreground italic">
             {$_('pages.mod.tab.modManagement.modCards.layoutNote')}
         </p>
     </div>

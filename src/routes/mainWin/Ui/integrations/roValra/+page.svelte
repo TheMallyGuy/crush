@@ -69,7 +69,7 @@
     <div class="flex items-center justify-between">
         <div>
             <img src={rovalraTitle} class="w-70 h-auto" />
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_("pages.integrations.roValra.description")}
             </p>
         </div>

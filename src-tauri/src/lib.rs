@@ -258,7 +258,7 @@ pub fn run() {
                 .and_then(|v| v.as_str().map(|s| s.to_string()))
                 .unwrap_or_else(|| "auto".to_string());
 
-            apply_vibrancy_to_window(&window, &effect);
+            // apply_vibrancy_to_window(&window, &effect);
 
             match app.cli().matches() {
                 // https://v2.tauri.app/plugin/cli/

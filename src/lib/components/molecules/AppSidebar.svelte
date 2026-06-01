@@ -71,7 +71,7 @@
 </script>
 
 <Sidebar.Root
-    class="backdrop-blur-2xl bg-transparent border-r border-white/5 text-stone-400 select-none"
+    class="backdrop-blur-2xl  border-r border-sidebar-border text-sidebar-foreground select-none"
 >
     <Sidebar.Content class="p-2 pt-4 flex flex-col h-full overflow-hidden">
         <Sidebar.Group class="p-0">
@@ -89,8 +89,8 @@
                                     {isActive}
                                     class="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out group h-10
                                            {isActive
-                                        ? 'bg-white/10 text-sapphire shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]'
-                                        : 'hover:bg-white/[0.04] hover:text-stone-100 hover:translate-x-0.5'}"
+                                       ? 'bg-sidebar-accent text-sapphire shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]'
+                                       : 'hover:bg-sidebar-accent/50 hover:text-sidebar-foreground hover:translate-x-0.5'}"
                                 >
                                     {#snippet child({ props })}
                                         <a href={item.href} {...props}>
@@ -121,7 +121,7 @@
 
         <div class="flex-grow"></div>
 
-        <Sidebar.SidebarFooter class="p-0 pt-4 border-t border-white/5">
+        <Sidebar.SidebarFooter class="p-0 pt-4 border-t border-sidebar-border">
             <Sidebar.Menu class="gap-1.5">
                 {#each footerNav as item (item.name)}
                     {@const isActive = $page.url.pathname === item.href}
@@ -129,9 +129,9 @@
                         <Sidebar.MenuButton
                             {isActive}
                             class="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out group h-10
-                           {isActive
-                                ? 'bg-white/10 text-sapphire'
-                                : 'hover:bg-white/[0.04] hover:text-stone-100 hover:translate-x-0.5'}"
+                            {isActive
+                                ? 'bg-sidebar-accent text-sapphire'
+                                : 'hover:bg-sidebar-accent/50 hover:text-sidebar-foreground hover:translate-x-0.5'}"
                         >
                             {#snippet child({ props })}
                                 <a href={item.href} {...props}>

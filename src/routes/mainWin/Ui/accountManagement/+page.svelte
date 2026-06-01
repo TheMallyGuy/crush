@@ -476,20 +476,20 @@
         {:else if activeTab === 'quickSignIn'}
             <div class="flex flex-col gap-4">
                 {#if quickSignCode}
-                    <p class="text-stone-400">
+                    <p class="text-muted-foreground">
                         {$_(
                             'pages.accountManagement.dialogs.add.tabs.quickSignIn.title'
                         )}
                     </p>
                     <div class="flex items-center justify-center w-full">
                         <code
-                            class="text-2xl font-bold tracking-tight text-stone-100"
+                            class="text-2xl font-bold tracking-tight text-foreground"
                             >{quickSignCode}</code
                         >
                     </div>
-                    <p class="text-sm text-stone-400">{quickSignStatus}</p>
+                    <p class="text-sm text-muted-foreground">{quickSignStatus}</p>
                 {:else}
-                    <p class="text-stone-400">
+                    <p class="text-muted-foreground">
                         {quickSignStatus ||
                             $_(
                                 'pages.accountManagement.dialogs.add.tabs.quickSignIn.title'
@@ -521,10 +521,10 @@
 <div class="flex flex-col gap-5">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_('pages.accountManagement.accountManagement')}
             </h1>
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_('pages.accountManagement.description')}
             </p>
         </div>
@@ -544,7 +544,7 @@
     <SortableList items={accountsData ?? []} let:item>
         <div class="flex items-center justify-between w-full pr-2">
             <div class="flex flex-col gap-0.5">
-                <span class="text-sm font-medium text-stone-100">
+                <span class="text-sm font-medium text-foreground">
                     {item.id}
                     <span
                         class="ml-2 text-xs {item.type === 'vng'
@@ -553,7 +553,7 @@
                         >{item.type === 'vng' ? 'VNG' : 'Global'}</span
                     >
                 </span>
-                <span class="text-xs text-stone-400"
+                <span class="text-xs text-muted-foreground"
                     >{item.username} ({item.userId})</span
                 >
             </div>

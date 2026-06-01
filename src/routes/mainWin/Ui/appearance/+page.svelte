@@ -148,10 +148,10 @@
 
 <div class="flex flex-col gap-8">
     <div>
-        <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+        <h1 class="text-3xl font-bold tracking-tight text-foreground">
             {$_('pages.appearance.appearance')}
         </h1>
-        <p class="text-stone-400 mt-1">
+        <p class="text-muted-foreground mt-1">
             {$_('pages.appearance.description')}
         </p>
     </div>
@@ -189,7 +189,7 @@
                     {#if themeType === 'custom'}
                         <button
                             on:click={pick}
-                            class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
+                            class="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />
                             {$_('pages.appearance.bootstrapThemeCard.customDropDownContents.importNew')}
@@ -200,17 +200,17 @@
                 {#if themeType === 'custom'}
                     <div class="flex flex-col gap-2">
                         {#if themes.length === 0}
-                            <p class="text-xs text-stone-500 italic py-2">
+                            <p class="text-xs text-muted-foreground italic py-2">
                                 {$_('pages.appearance.bootstrapThemeCard.customDropDownContents.noThemes')}
                             </p>
                         {:else}
                             <div class="grid gap-2">
                                 {#each themes as theme}
                                     <div
-                                        class="group flex items-center justify-between px-3 py-2 bg-stone-900/50 border {activeName ===
-                                        theme
-                                            ? 'border-stone-700 bg-stone-800/50'
-                                            : 'border-stone-800'} rounded-lg transition-all"
+                                    class="group flex items-center justify-between px-3 py-2 bg-muted/50 border {activeName ===
+                                    theme
+                                        ? 'border-border bg-muted/50'
+                                        : 'border-border'} rounded-lg transition-all"
                                     >
                                         <button
                                             on:click={() => selectTheme(theme)}
@@ -219,14 +219,14 @@
                                             <div
                                                 class="w-2 h-2 rounded-full {activeName ===
                                                 theme
-                                                    ? 'bg-green-500'
-                                                    : 'bg-stone-700'}"
+                                                ? 'bg-green-500'
+                                                : 'bg-muted'}"
                                             ></div>
                                             <span
                                                 class="text-sm {activeName ===
                                                 theme
-                                                    ? 'text-stone-100 font-medium'
-                                                    : 'text-stone-400'}"
+                                                ? 'text-foreground font-medium'
+                                                : 'text-muted-foreground'}"
                                                 >{theme}</span
                                             >
                                         </button>
@@ -241,7 +241,7 @@
                                             {/if}
                                             <button
                                                 on:click={() => delTheme(theme)}
-                                                class="p-1.5 text-stone-600 hover:text-red-400 hover:bg-red-400/10 rounded-md transition-all opacity-0 group-hover:opacity-100"
+                                                class="p-1.5 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 rounded-md transition-all opacity-0 group-hover:opacity-100"
                                             >
                                                 <Trash2 size={14} />
                                             </button>

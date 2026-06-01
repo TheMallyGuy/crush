@@ -35,18 +35,18 @@
         <div class="flex justify-between items-center px-0.5">
             <label
                 for={id}
-                class="text-[11px] font-semibold tracking-tight text-stone-500 uppercase"
+                class="text-[11px] font-semibold tracking-tight text-muted-foreground uppercase"
             >
                 {label}
             </label>
-            <span class="font-mono text-[11px] tabular-nums text-stone-400">
+            <span class="font-mono text-[11px] tabular-nums text-muted-foreground">
                 {value}
             </span>
         </div>
     {/if}
     <div class="group relative flex h-5 items-center">
         <div
-            class="h-4 w-full rounded-full border border-stone-800/40 bg-stone-900/50"
+            class="h-4 w-full rounded-full border border-border bg-muted/50"
         ></div>
         <div
             class="absolute h-4 rounded-full bg-white transition-all duration-75"

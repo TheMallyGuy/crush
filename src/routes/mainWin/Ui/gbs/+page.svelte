@@ -103,10 +103,10 @@
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground">
                 {$_('pages.gbs.gbs')}
             </h1>
-            <p class="text-stone-400 mt-1">
+            <p class="text-muted-foreground mt-1">
                 {$_('pages.gbs.description')}
             </p>
         </div>

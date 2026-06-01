@@ -19,7 +19,7 @@
                 "url": "/mainWin/choiceWin",
                 "decorations": false,
                 "center": true,
-                "transparent": true
+                "transparent": false
             }
         ],
         "security": {

@@ -9,13 +9,13 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite/40 backdrop-blur-md transition-all duration-150 
-    {!disabled ? 'hover:bg-stone-900/50 hover:border-stone-700/40 hover:shadow-glow-sapphire/5' : 'opacity-50'} 
+    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-card/40 backdrop-blur-md transition-all duration-150 
+    {!disabled ? 'hover:bg-muted/50 hover:border-border hover:shadow-glow-sapphire/5' : 'opacity-50'} 
     {className}"
     {...$$restProps}
 >
     {#if image}
-        <div class="relative w-48 shrink-0 overflow-hidden border-r border-stone-800/20">
+        <div class="relative w-48 shrink-0 overflow-hidden border-r border-border">
             <img
                 src={image}
                 alt={title}
@@ -31,7 +31,7 @@
         <div class="flex flex-col gap-1.5">
             {#if title || $$slots.title}
                 <h3
-                    class="text-lg font-bold tracking-tight text-stone-100 transition-colors duration-150 group-hover:text-white"
+                    class="text-lg font-bold tracking-tight text-foreground transition-colors duration-150 group-hover:text-foreground"
                 >
                     <slot name="title">{title}</slot>
                 </h3>
@@ -39,7 +39,7 @@
 
             {#if description || $$slots.description}
                 <p
-                    class="text-sm font-medium leading-relaxed text-stone-500 transition-colors duration-150 group-hover:text-stone-400"
+                    class="text-sm font-medium leading-relaxed text-muted-foreground transition-colors duration-150 group-hover:text-muted-foreground/80"
                 >
                     <slot name="description">{description}</slot>
                 </p>

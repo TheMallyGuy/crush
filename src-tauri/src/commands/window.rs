@@ -30,7 +30,7 @@ pub fn apply_vibrancy_to_window(window: &WebviewWindow, effect: &str) {
 #[command]
 pub async fn set_window_vibrancy(app: AppHandle, effect: String) -> Result<(), String> {
     for window in app.webview_windows().values() {
-        apply_vibrancy_to_window(window, &effect);
+        // apply_vibrancy_to_window(window, &effect);
     }
     Ok(())
 }
@@ -58,7 +58,7 @@ pub async fn create_or_focus_window(
             .and_then(|v| v.as_str().map(|s| s.to_string()))
             .unwrap_or_else(|| "auto".to_string());
 
-        apply_vibrancy_to_window(&window, &effect);
+        // apply_vibrancy_to_window(&window, &effect);
 
         return Ok(());
     }
@@ -71,7 +71,7 @@ pub async fn create_or_focus_window(
         .inner_size(width, height)
         .center()
         .decorations(decorations.unwrap_or(false))
-        .transparent(true);
+        .transparent(false);
 
     if let (Some(w), Some(h)) = (min_width, min_height) {
         builder = builder.min_inner_size(w, h);
@@ -85,7 +85,7 @@ pub async fn create_or_focus_window(
         .and_then(|v| v.as_str().map(|s| s.to_string()))
         .unwrap_or_else(|| "auto".to_string());
 
-    apply_vibrancy_to_window(&window, &effect);
+    // apply_vibrancy_to_window(&window, &effect);
 
     Ok(())
 }

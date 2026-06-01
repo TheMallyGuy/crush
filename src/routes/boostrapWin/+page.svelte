@@ -330,12 +330,8 @@
         ></div>
     {:else if cfg}
         <div
-            class="relative overflow-hidden h-screen w-screen"
+            class="relative overflow-hidden h-screen w-screen bg-background text-foreground"
             style="
-                background:{isDark
-                ? 'rgba(0,0,0,0.8)'
-                : 'rgba(255,255,255,0.8)'};
-                color:{isDark ? '#fff' : '#000'};
                 border-radius:{noRound ? '0' : '8px'};
             "
         >
@@ -472,16 +468,16 @@
     {/if}
 {:else}
     <div
-        class="relative h-screen bg-transparent text-white selection:bg-stone-800"
+        class="relative h-screen bg-background text-foreground selection:bg-primary/30"
     >
         <div
             class="absolute inset-0 flex flex-col items-center justify-center text-center p-3 pb-24 gap-6"
         >
             <div>
-                <h1 class="text-4xl tracking-tight text-stone-100 font-medium">
+                <h1 class="text-4xl tracking-tight text-foreground font-medium">
                     Crush
                 </h1>
-                <p class={error ? 'text-red-400 mt-2' : 'text-stone-400 mt-2'}>
+                <p class={error ? 'text-destructive mt-2' : 'text-muted-foreground mt-2'}>
                     {status}
                 </p>
             </div>
@@ -490,7 +486,7 @@
                     {#if downloadTotal > 0}
                         <div class="flex flex-col gap-1.5">
                             <div
-                                class="flex justify-between text-xs text-stone-400"
+                                class="flex justify-between text-xs text-muted-foreground"
                             >
                                 <span class="truncate max-w-[70%]"
                                     >{downloadFile}</span
@@ -498,10 +494,10 @@
                                 <span>{downloadDone}/{downloadTotal}</span>
                             </div>
                             <div
-                                class="w-full h-1 bg-stone-800 rounded-full overflow-hidden"
+                                class="w-full h-1 bg-secondary rounded-full overflow-hidden"
                             >
                                 <div
-                                    class="h-full bg-stone-200 rounded-full transition-all duration-300"
+                                    class="h-full bg-primary rounded-full transition-all duration-300"
                                     style="width: {(downloadDone /
                                         downloadTotal) *
                                         100}%"
@@ -512,7 +508,7 @@
                     {#if extractTotal > 0}
                         <div class="flex flex-col gap-1.5">
                             <div
-                                class="flex justify-between text-xs text-stone-400"
+                                class="flex justify-between text-xs text-muted-foreground"
                             >
                                 <span class="truncate max-w-[70%]"
                                     >{extractFile}</span
@@ -520,10 +516,10 @@
                                 <span>{extractDone}/{extractTotal}</span>
                             </div>
                             <div
-                                class="w-full h-1 bg-stone-800 rounded-full overflow-hidden"
+                                class="w-full h-1 bg-secondary rounded-full overflow-hidden"
                             >
                                 <div
-                                    class="h-full bg-stone-200 rounded-full transition-all duration-300"
+                                    class="h-full bg-primary rounded-full transition-all duration-300"
                                     style="width: {(extractDone /
                                         extractTotal) *
                                         100}%"
@@ -541,7 +537,7 @@
                 {#if error}
                     <button
                         on:click={runBootstrap}
-                        class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
+                        class="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
                     >
                         {$_('pages.boostrapWin.retry')}
                     </button>
@@ -550,7 +546,7 @@
                     on:click={cancel}
                     class="{error
                         ? 'flex-1'
-                        : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
+                        : 'w-full'} bg-secondary hover:bg-secondary/80 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-border hover:border-primary/50 text-secondary-foreground"
                 >
                     <span class="font-medium"
                         >{$_('pages.boostrapWin.cancel')}</span
