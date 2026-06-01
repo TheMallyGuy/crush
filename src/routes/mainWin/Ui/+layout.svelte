@@ -1,10 +1,7 @@
 <script lang="ts">
     import Sidebar from '$lib/components/molecules/Sidebar.svelte'
     import LaunchBar from '$lib/components/molecules/LaunchBar.svelte'
-    import { preparePageTransition } from '$lib/pageTransition'
     import NotifyContainer from '$lib/components/molecules/NotifyContainer.svelte'
-
-    preparePageTransition()
 </script>
 
 <div class="flex h-screen w-screen overflow-hidden bg-transparent text-white">
