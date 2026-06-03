@@ -86,7 +86,7 @@
         <Button on:click={() => importConfigs(userBasePath)}>
             Export
         </Button>
-        <div class="rounded-xl overflow-hidden border border-stone-800 max-h-[40vh]">
+        <div class="overflow-hidden border border-stone-800 max-h-[40vh]">
             <video class="w-full h-full object-cover" autoplay muted loop>
                 <source src="/export.webm" type="video/webm"/>
             </video>

@@ -113,7 +113,10 @@
         error = false
         errorMessage = ''
         done = false
-        handleProgress({ type: 'status', message: $_("pages.boostrapWin.steps.prep") })
+        handleProgress({
+            type: 'status',
+            message: $_('pages.boostrapWin.steps.prep'),
+        })
 
         try {
             const store = await load('config.json')
@@ -131,10 +134,16 @@
             const version = await downloadRoblox(handleProgress, appType)
 
             done = true
-            handleProgress({ type: 'status', message: $_("pages.boostrapWin.steps.applyMods") })
+            handleProgress({
+                type: 'status',
+                message: $_('pages.boostrapWin.steps.applyMods'),
+            })
             await applyMods(version, appType)
 
-            handleProgress({ type: 'status', message: $_("pages.boostrapWin.steps.launch") })
+            handleProgress({
+                type: 'status',
+                message: $_('pages.boostrapWin.steps.launch'),
+            })
 
             const integrations = await store.get<Integrations>('integrations')
 
@@ -145,7 +154,7 @@
             } else {
                 await performLaunch(version, url, integrations)
                 await sleep(1000)
-                await invoke('watch_logs', {isVng: installation?.vng})
+                await invoke('watch_logs', { isVng: installation?.vng })
                 await sleep(3000)
                 await invoke('set_process_priority', {
                     priority: integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
@@ -498,10 +507,10 @@
                                 <span>{downloadDone}/{downloadTotal}</span>
                             </div>
                             <div
-                                class="w-full h-1 bg-stone-800 rounded-full overflow-hidden"
+                                class="w-full h-1 bg-stone-800 overflow-hidden"
                             >
                                 <div
-                                    class="h-full bg-stone-200 rounded-full transition-all duration-300"
+                                    class="h-full bg-stone-200 transition-all duration-300"
                                     style="width: {(downloadDone /
                                         downloadTotal) *
                                         100}%"
@@ -520,10 +529,10 @@
                                 <span>{extractDone}/{extractTotal}</span>
                             </div>
                             <div
-                                class="w-full h-1 bg-stone-800 rounded-full overflow-hidden"
+                                class="w-full h-1 bg-stone-800 overflow-hidden"
                             >
                                 <div
-                                    class="h-full bg-stone-200 rounded-full transition-all duration-300"
+                                    class="h-full bg-stone-200 transition-all duration-300"
                                     style="width: {(extractDone /
                                         extractTotal) *
                                         100}%"
@@ -541,7 +550,7 @@
                 {#if error}
                     <button
                         on:click={runBootstrap}
-                        class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all font-medium"
+                        class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] p-4 flex items-center justify-center gap-3 transition-all font-medium"
                     >
                         {$_('pages.boostrapWin.retry')}
                     </button>
@@ -550,7 +559,7 @@
                     on:click={cancel}
                     class="{error
                         ? 'flex-1'
-                        : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] rounded-lg p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
+                        : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"
                 >
                     <span class="font-medium"
                         >{$_('pages.boostrapWin.cancel')}</span

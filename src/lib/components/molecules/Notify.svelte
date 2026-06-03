@@ -33,12 +33,12 @@
 <div
     in:fly={{ y: -6, duration: 200 }}
     out:fade={{ duration: 150 }}
-    class="flex items-start gap-3 rounded-xl border p-3.5 transition-all
+    class="flex items-start gap-3 border p-3.5 transition-all
         {styles[variant].wrap} {className}"
     role="alert"
     aria-live="polite"
 >
-    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg mt-0.5
+    <div class="flex h-8 w-8 shrink-0 items-center justify-center mt-0.5
         {styles[variant].icon}">
         <svelte:component this={icons[variant]} size={16} />
     </div>
@@ -69,7 +69,7 @@
     {#if dismissible}
         <button
             type="button"
-            class="shrink-0 rounded-md p-1 text-stone-500 transition-colors hover:bg-stone-800/50 hover:text-stone-200 focus:outline-none focus:ring-2 focus:ring-sapphire/50"
+            class="shrink-0 p-1 text-stone-500 transition-colors hover:bg-stone-800/50 hover:text-stone-200 focus:outline-none focus:ring-2 focus:ring-sapphire/50"
             aria-label="Dismiss"
             on:click={() => dispatch('dismiss')}
         >

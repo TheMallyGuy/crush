@@ -27,7 +27,7 @@
     {type}
     {disabled}
     on:click
-    class="inline-flex items-center justify-center rounded-xl font-semibold duration-150 active:opacity-10 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 {variants[variant]} {sizes[size]} {className}"
+    class="inline-flex items-center justify-center font-semibold duration-150 active:opacity-10 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 {variants[variant]} {sizes[size]} {className}"
     {...$$restProps}
 >
     <slot />

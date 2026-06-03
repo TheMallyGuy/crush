@@ -33,9 +33,9 @@
     }
 
     const sizes = {
-        sm: { box: 'w-3.5 h-3.5 rounded', icon: 9 },
-        md: { box: 'w-[18px] h-[18px] rounded-[5px]', icon: 11 },
-        lg: { box: 'w-[22px] h-[22px] rounded-[6px]', icon: 13 },
+        sm: { box: 'w-3.5 h-3.5', icon: 9 },
+        md: { box: 'w-[18px] h-[18px]', icon: 11 },
+        lg: { box: 'w-[22px] h-[22px]', icon: 13 },
     }
 
     const labelSizes = {

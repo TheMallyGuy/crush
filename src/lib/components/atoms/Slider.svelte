@@ -46,10 +46,10 @@
     {/if}
     <div class="group relative flex h-5 items-center">
         <div
-            class="h-4 w-full rounded-full border border-stone-800/40 bg-stone-900/50"
+            class="h-4 w-full border border-stone-800/40 bg-stone-900/50"
         ></div>
         <div
-            class="absolute h-4 rounded-full bg-white transition-all duration-75"
+            class="absolute h-4 bg-white transition-all duration-75"
             style="width: {percentage}%"
         ></div>
         <input
@@ -68,7 +68,7 @@
             style="left: {percentage}%"
         >
             <div
-                class="h-5.5 w-4 -translate-x-1/2 rounded-full bg-white transition-transform duration-150 group-hover:scale-110 group-active:scale-95"
+                class="h-5.5 w-4 -translate-x-1/2 bg-white transition-transform duration-150 group-hover:scale-110 group-active:scale-95"
             ></div>
         </div>
     </div>

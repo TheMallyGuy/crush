@@ -153,14 +153,18 @@
     </div>
 
     <div
-        class="group relative gap-10 flex w-full flex-row rounded-xl bg-anthracite/40 p-5 transition-all duration-150"
+        class="group relative gap-10 flex w-full flex-row bg-anthracite/40 p-5 transition-all duration-150"
     >
-        <div class="h-40 w-60 rounded-xl bg-anthracite/40">
-            <img src={image} class="rounded-xl" />
+        <div class="h-40 w-60 bg-anthracite/40">
+            <img src={image} />
         </div>
 
         <div class="flex flex-col w-full gap-5">
-            <Textbox label={$_("pages.shortcuts.creator.gameIdInput")} placeholder="" bind:value={gameId} />
+            <Textbox
+                label={$_('pages.shortcuts.creator.gameIdInput')}
+                placeholder=""
+                bind:value={gameId}
+            />
 
             <div class="flex w-full flex-row gap-5 justify-between relative">
                 <p class="opacity-75 text-xs text-wrap wrap-normal w-2/3">

@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import { Search, Plus, Trash2, Upload } from '@lucide/svelte'
-    import { _ } from 'svelte-i18n';
+    import { _ } from 'svelte-i18n'
     import { detectType, validateValue } from '$lib/fastflag/flagTypes'
     import type { FlagType } from '$lib/types'
 
@@ -103,19 +103,25 @@
             bind:value={newFlagName}
             placeholder={$_('pages.fastflag.editor.flagTable.flagCol.name')}
             on:keydown={(e) => e.key === 'Enter' && handleAdd()}
-            class="flex-[2] min-w-0 bg-stone-900/50 border border-stone-800/40 rounded-xl px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
+            class="flex-[2] min-w-0 bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
         />
         <div class="flex-[1] min-w-0 relative">
             <input
                 type="text"
                 bind:value={newFlagValue}
-                placeholder={$_('pages.fastflag.editor.flagTable.flagCol.value')}
+                placeholder={$_(
+                    'pages.fastflag.editor.flagTable.flagCol.value'
+                )}
                 on:keydown={(e) => e.key === 'Enter' && handleAdd()}
-                class="w-full bg-stone-900/50 border border-stone-800/40 rounded-xl px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType ? 'pr-14' : ''}"
+                class="w-full bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType
+                    ? 'pr-14'
+                    : ''}"
             />
             {#if newValueType}
                 <span
-                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] {typeBadge[newValueType]}"
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] {typeBadge[
+                        newValueType
+                    ]}"
                 >
                     {newValueType}
                 </span>
@@ -124,12 +130,14 @@
         <Button
             variant="primary"
             size="sm"
-            class="rounded-xl shrink-0"
+            class="shrink-0"
             on:click={handleAdd}
             disabled={!newFlagName || !newFlagValue}
         >
             <Plus class="h-4 w-4 mr-1" />
-            <span class="font-semibold text-sm">{$_('pages.fastflag.editor.flagTable.buttonAdd')}</span>
+            <span class="font-semibold text-sm"
+                >{$_('pages.fastflag.editor.flagTable.buttonAdd')}</span
+            >
         </Button>
 
         <div class="w-px h-6 bg-stone-800/60 shrink-0"></div>
@@ -143,11 +151,11 @@
         />
         <button
             on:click={handleImportClick}
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
+            class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
             title="Import flags from a JSON file"
         >
             <Upload class="h-4 w-4" />
-            <span>{$_("pages.fastflag.editor.flagTable.import")}</span>
+            <span>{$_('pages.fastflag.editor.flagTable.import')}</span>
         </button>
     </div>
 
@@ -169,19 +177,25 @@
                 bind:value={searchQuery}
                 on:input={handleSearch}
                 placeholder={$_('pages.fastflag.editor.flagTable.search')}
-                class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 rounded-2xl bg-anthracite/40 backdrop-blur-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
+                class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
             />
         </div>
 
         <div
-            class="flex flex-col rounded-2xl border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm overflow-hidden"
+            class="flex flex-col border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm overflow-hidden"
         >
             <div
                 class="flex items-center px-6 py-3 text-[11px] tracking-widest text-stone-500 border-b border-stone-800/20 bg-stone-900/60"
             >
-                <div class="flex-[2]">{$_('pages.fastflag.editor.flagTable.flagCol.name')}</div>
-                <div class="w-20">{$_('pages.fastflag.editor.flagTable.flagCol.type')}</div>
-                <div class="flex-[1]">{$_('pages.fastflag.editor.flagTable.flagCol.value')}</div>
+                <div class="flex-[2]">
+                    {$_('pages.fastflag.editor.flagTable.flagCol.name')}
+                </div>
+                <div class="w-20">
+                    {$_('pages.fastflag.editor.flagTable.flagCol.type')}
+                </div>
+                <div class="flex-[1]">
+                    {$_('pages.fastflag.editor.flagTable.flagCol.value')}
+                </div>
                 <div class="w-12"></div>
             </div>
 
@@ -216,7 +230,7 @@
                                                 name,
                                                 e.currentTarget.value
                                             )}
-                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] text-purple-400 outline-none transition-all duration-150"
+                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 px-3 py-1.5 font-mono text-[13px] text-purple-400 outline-none transition-all duration-150"
                                     >
                                         <option value="true">true</option>
                                         <option value="false">false</option>
@@ -233,7 +247,7 @@
                                                 e.currentTarget.value
                                             )}
                                         on:keydown={handleKeyDown}
-                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] {type ===
+                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 px-3 py-1.5 font-mono text-[13px] {type ===
                                         'int'
                                             ? 'text-yellow-400'
                                             : 'text-emerald-400'} outline-none transition-all duration-150"
@@ -242,9 +256,11 @@
                             </div>
                             <div class="w-12 flex justify-end">
                                 <button
-                                    class="p-2 text-stone-600 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all duration-150 opacity-0 group-hover:opacity-100 focus:opacity-100"
+                                    class="p-2 text-stone-600 hover:text-red-400 hover:bg-red-400/10 transition-all duration-150 opacity-0 group-hover:opacity-100 focus:opacity-100"
                                     on:click={() => handleDelete(name)}
-                                    title={$_('pages.fastflag.editor.flagTable.flagCol.deleteNote')}
+                                    title={$_(
+                                        'pages.fastflag.editor.flagTable.flagCol.deleteNote'
+                                    )}
                                 >
                                     <Trash2 class="h-4.5 w-4.5" />
                                 </button>

@@ -26,8 +26,14 @@
 
     let themeType = 'default'
     const typeOptions = [
-        { value: 'default', label: $_('pages.appearance.bootstrapThemeCard.dropdown.default') },
-        { value: 'custom', label: $_('pages.appearance.bootstrapThemeCard.dropdown.custom') },
+        {
+            value: 'default',
+            label: $_('pages.appearance.bootstrapThemeCard.dropdown.default'),
+        },
+        {
+            value: 'custom',
+            label: $_('pages.appearance.bootstrapThemeCard.dropdown.custom'),
+        },
     ]
 
     let isInitialized = false
@@ -152,13 +158,13 @@
 
             <div slot="action">
                 {#if themeType === 'custom'}
-                    <Button 
-                        variant="ghost" 
-                        size="sm" 
+                    <Button
+                        variant="ghost"
+                        size="sm"
                         class="h-8 w-8 !p-0"
                         on:click={(e) => {
-                            e.stopPropagation();
-                            themeType = 'default';
+                            e.stopPropagation()
+                            themeType = 'default'
                         }}
                     >
                         <RotateCcw size={16} />
@@ -176,7 +182,9 @@
                             class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />
-                            {$_('pages.appearance.bootstrapThemeCard.customDropDownContents.importNew')}
+                            {$_(
+                                'pages.appearance.bootstrapThemeCard.customDropDownContents.importNew'
+                            )}
                         </button>
                     {/if}
                 </div>
@@ -185,7 +193,9 @@
                     <div class="flex flex-col gap-2">
                         {#if themes.length === 0}
                             <p class="text-xs text-stone-500 italic py-2">
-                                {$_('pages.appearance.bootstrapThemeCard.customDropDownContents.noThemes')}
+                                {$_(
+                                    'pages.appearance.bootstrapThemeCard.customDropDownContents.noThemes'
+                                )}
                             </p>
                         {:else}
                             <div class="grid gap-2">
@@ -194,14 +204,14 @@
                                         class="group flex items-center justify-between px-3 py-2 bg-stone-900/50 border {activeName ===
                                         theme
                                             ? 'border-stone-700 bg-stone-800/50'
-                                            : 'border-stone-800'} rounded-lg transition-all"
+                                            : 'border-stone-800'}  transition-all"
                                     >
                                         <button
                                             on:click={() => selectTheme(theme)}
                                             class="flex items-center gap-3 flex-grow text-left"
                                         >
                                             <div
-                                                class="w-2 h-2 rounded-full {activeName ===
+                                                class="w-2 h-2 {activeName ===
                                                 theme
                                                     ? 'bg-green-500'
                                                     : 'bg-stone-700'}"
@@ -225,7 +235,7 @@
                                             {/if}
                                             <button
                                                 on:click={() => delTheme(theme)}
-                                                class="p-1.5 text-stone-600 hover:text-red-400 hover:bg-red-400/10 rounded-md transition-all opacity-0 group-hover:opacity-100"
+                                                class="p-1.5 text-stone-600 hover:text-red-400 hover:bg-red-400/10 transition-all opacity-0 group-hover:opacity-100"
                                             >
                                                 <Trash2 size={14} />
                                             </button>
@@ -239,7 +249,7 @@
 
                 {#if missing.length > 0}
                     <div
-                        class="bg-yellow-950/30 border border-yellow-900/50 rounded-xl px-4 py-3 text-yellow-500 text-sm"
+                        class="bg-yellow-950/30 border border-yellow-900/50 px-4 py-3 text-yellow-500 text-sm"
                     >
                         <div class="flex items-center gap-2 mb-1">
                             <svg
@@ -255,7 +265,11 @@
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 14c-.77 1.333.192 3 1.732 3z"
                                 />
                             </svg>
-                            <p class="font-semibold">{$_('pages.appearance.bootstrapThemeCard.customDropDownContents.missingAssets')}</p>
+                            <p class="font-semibold">
+                                {$_(
+                                    'pages.appearance.bootstrapThemeCard.customDropDownContents.missingAssets'
+                                )}
+                            </p>
                         </div>
                         <ul
                             class="list-disc list-inside text-xs opacity-80 space-y-0.5 ml-1"
@@ -269,7 +283,7 @@
 
                 {#if error}
                     <div
-                        class="bg-red-950/30 border border-red-900/50 rounded-xl px-4 py-3 text-red-400 text-sm flex items-center gap-2"
+                        class="bg-red-950/30 border border-red-900/50 px-4 py-3 text-red-400 text-sm flex items-center gap-2"
                     >
                         <svg
                             class="w-4 h-4 flex-shrink-0"

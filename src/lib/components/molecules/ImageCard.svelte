@@ -9,20 +9,24 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite transition-all duration-150 
-    {!disabled ? 'hover:bg-stone-900/50 hover:border-stone-700/40 hover:shadow-glow-sapphire/5' : 'opacity-50'} 
+    class="group relative flex w-full flex-row overflow-hidden transition-all duration-150
+    {!disabled
+        ? 'hover:bg-stone-900/50 hover:border-stone-700/40'
+        : 'opacity-50'} 
     {className}"
     {...$$restProps}
 >
     {#if image}
-        <div class="relative w-48 shrink-0 overflow-hidden border-r border-stone-800/20">
+        <div
+            class="relative w-48 shrink-0 overflow-hidden border-r border-stone-800/20"
+        >
             <img
                 src={image}
                 alt={title}
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div
-                class="absolute inset-0 bg-gradient-to-l from-black/40 to-black/40"
+                class="absolute inset-0 bg-linear-to-l from-black/40 to-black/40"
             ></div>
         </div>
     {/if}

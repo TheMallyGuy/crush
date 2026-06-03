@@ -45,10 +45,10 @@
 <div class="flex flex-col gap-6 w-full">
     <div
         bind:this={containerEl}
-        class="relative flex items-center gap-1 p-1 bg-stone-900/60 backdrop-blur-md rounded-2xl border border-white/5 w-fit self-center sm:self-start"
+        class="relative flex items-center gap-1 p-1 bg-stone-900/60 backdrop-blur-md  border border-white/5 w-fit self-center sm:self-start"
     >
         <div
-            class="absolute top-1 bottom-1 bg-sapphire rounded-xl pointer-events-none transition-none"
+            class="absolute top-1 bottom-1 bg-sapphire pointer-events-none transition-none"
             style="
                 transform: translateX({$pillStyle.x}px);
                 width: {$pillStyle.width}px;
@@ -60,7 +60,7 @@
             <button
                 bind:this={tabElements[i]}
                 type="button"
-                class="relative flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold z-10
+                class="relative flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold z-10
                     transition-colors duration-200 group
                     {activeTab === tab.value
                         ? 'text-white'
