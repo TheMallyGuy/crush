@@ -524,13 +524,17 @@
                 "title": "Ngôn ngữ:",
                 "description": "Chọn ngôn ngữ ưa thích cho Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Độ sống động của cửa sổ",
-                "description": "Chọn hiệu ứng mờ nền cho cửa sổ ứng dụng."
-            },
             "enableCrushRpcCard": {
                 "title": "Trạng thái hoạt động Discord của Crush",
                 "description": "Bật/tắt hiển thị hoạt động của bạn qua Discord RPC. Nên khởi động lại ứng dụng."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Ủng hộ",

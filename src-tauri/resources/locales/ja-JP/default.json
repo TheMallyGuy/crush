@@ -524,13 +524,17 @@
                 "title": "言語",
                 "description": "Crush の言語を選択します。"
             },
-            "windowVibrancyCard": {
-                "title": "窓の鮮やかさ",
-                "description": "アプリケーションウィンドウの背景のぼかし効果を選択します。"
-            },
             "enableCrushRpcCard": {
                 "title": "Discord RPCをクラッシュ",
                 "description": "Discord RPC経由でアクティビティを表示するかどうかを切り替えます。再起動をお勧めします。"
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "寄付",

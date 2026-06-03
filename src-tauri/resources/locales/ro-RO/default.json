@@ -524,13 +524,17 @@
                 "title": "Limbă",
                 "description": "Selectează limba preferată pentru Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Transparență fereastră",
-                "description": "Alege efectul de blur pentru ferestre."
-            },
             "enableCrushRpcCard": {
                 "title": "Zdrobește RPC Discord",
                 "description": "Comută dacă să îți afișeze activitatea prin intermediul Discord RPC. Se recomandă o repornire a aplicației."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Donează",

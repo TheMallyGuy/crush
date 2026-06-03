@@ -524,13 +524,17 @@
                 "title": "Nyelv",
                 "description": "Select your preferred language for Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Ablakélénkség",
-                "description": "Válassza ki az alkalmazásablakok háttér elmosódási hatását."
-            },
             "enableCrushRpcCard": {
                 "title": "Zúzza össze a Discord RPC-t",
                 "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Adományozás",

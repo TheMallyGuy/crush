@@ -524,13 +524,17 @@
                 "title": "语言",
                 "description": "选择您的首选语言用于破折叠。"
             },
-            "windowVibrancyCard": {
-                "title": "窗户活力",
-                "description": "选择应用程序窗口的背景模糊效果。"
-            },
             "enableCrushRpcCard": {
                 "title": "粉碎Discord RPC",
                 "description": "切换是否通过 Discord RPC 显示您的活动。建议重启。"
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "捐献",

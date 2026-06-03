@@ -524,13 +524,17 @@
                 "title": "Línguas",
                 "description": "Selecione seu idioma preferido para Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Vibração da janela",
-                "description": "Escolha o efeito de desfoque de fundo para as janelas da aplicação."
-            },
             "enableCrushRpcCard": {
                 "title": "Esmague o Discord RPC",
                 "description": "Habilite para mostrar sua atividade via RPC do Discord. Recomenda-se reiniciar."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Doar",
