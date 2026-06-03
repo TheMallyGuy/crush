@@ -60,7 +60,7 @@
             <button
                 bind:this={tabElements[i]}
                 type="button"
-                class="relative flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold z-10
+                class="relative flex items-center justify-center gap-2 px-5 py-2 text-sm font-semibold z-10 cursor-target
                     transition-colors duration-200 group
                     {activeTab === tab.value
                         ? 'text-white'

@@ -155,7 +155,7 @@
     <div
         class="group relative gap-10 flex w-full flex-row bg-anthracite/40 p-5 transition-all duration-150"
     >
-        <div class="h-40 w-60 bg-anthracite/40">
+        <div class="h-40 w-60 bg-anthracite/40 cursor-target">
             <img src={image} />
         </div>
 

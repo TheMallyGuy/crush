@@ -27,7 +27,7 @@
 </script>
 
 <div
-    class="flex flex-col gap-2 w-full {className} {disabled
+    class="flex flex-col gap-2 w-full cursor-target {className} {disabled
         ? 'opacity-50'
         : ''}"
 >

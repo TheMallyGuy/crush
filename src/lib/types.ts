@@ -111,10 +111,15 @@ export type Installation = {
     parallel: number
 }
 
+export type fun = {
+    lockedIn: boolean
+}
+
 export type Config = {
     installation: Installation
     FirstLaunch: string
     bestRegion: string
+    fun: string
     integrations: Integrations
 }
 

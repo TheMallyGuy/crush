@@ -103,7 +103,7 @@
             bind:value={newFlagName}
             placeholder={$_('pages.fastflag.editor.flagTable.flagCol.name')}
             on:keydown={(e) => e.key === 'Enter' && handleAdd()}
-            class="flex-[2] min-w-0 bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
+            class="flex-[2] cursor-target min-w-0 bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
         />
         <div class="flex-[1] min-w-0 relative">
             <input
@@ -113,7 +113,7 @@
                     'pages.fastflag.editor.flagTable.flagCol.value'
                 )}
                 on:keydown={(e) => e.key === 'Enter' && handleAdd()}
-                class="w-full bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType
+                class="w-full bg-stone-900/50 border cursor-target border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType
                     ? 'pr-14'
                     : ''}"
             />
@@ -151,7 +151,7 @@
         />
         <button
             on:click={handleImportClick}
-            class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
+            class="flex items-center cursor-target gap-1.5 px-3 py-2 text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
             title="Import flags from a JSON file"
         >
             <Upload class="h-4 w-4" />
@@ -164,7 +164,7 @@
     {/if}
 
     <div class="flex flex-col gap-4">
-        <div class="relative group">
+        <div class="relative group cursor-target">
             <div
                 class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
             >
@@ -208,7 +208,7 @@
                     {#each filteredFlags as [name, value] (name)}
                         {@const type = detectType(value)}
                         <div
-                            class="group flex items-center px-6 py-2.5 hover:bg-stone-800/40 transition-colors duration-150"
+                            class="group flex items-center px-6 py-2.5 hover:bg-stone-800/40 transition-colors duration-150 cursor-target"
                         >
                             <div
                                 class="flex-[2] font-mono text-[13px] text-stone-300 truncate pr-6 select-all"

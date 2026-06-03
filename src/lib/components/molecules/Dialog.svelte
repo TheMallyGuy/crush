@@ -43,7 +43,7 @@
                 </h3>
                 <button
                     on:click={close}
-                    class="p-1 text-stone-500 hover:text-stone-300 hover:bg-stone-800/50 transition-all duration-150 active:scale-95"
+                    class="p-1 text-stone-500 hover:text-stone-300 hover:bg-stone-800/50 transition-all duration-150 active:scale-95 cursor-target"
                 >
                     <X size={20} />
                 </button>

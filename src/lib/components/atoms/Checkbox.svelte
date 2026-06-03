@@ -62,7 +62,7 @@
         on:click={toggle}
         on:keydown={handleKeydown}
         class="relative flex items-center justify-center shrink-0 border-[1.5px] transition-all duration-150
-            focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian
+            focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian cursor-target
             {sizes[size].box}
             {isActive
                 ? 'bg-sapphire border-sapphire'
