@@ -202,16 +202,16 @@
     </ExpandableSettingCard>
 
     <SettingCard
-        title="Locked in mode"
-        description="Configuring roblox cannot be THAT serious 😭"
+        title={$_("pages.settings.lockedInCard.title")}
+        description={$_("pages.settings.lockedInCard.description")}
         icon={Crosshair}
     >
         <Switch slot="action" bind:checked={settings.lockedInMode} />
     </SettingCard>
 
     <SettingCard
-        title="Red rings"
-        description="Dude be adding ANYTHING atp ✌️"
+        title={$_("pages.settings.redRingsCard.title")}
+        description={$_("pages.settings.redRingsCard.title")}
         icon={Cuboid}
     >
         <Switch slot="action" bind:checked={settings.redRings} />

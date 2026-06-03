@@ -102,9 +102,9 @@
                 "title": "Process Priority",
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
-            "optimizerCard" : {
-                "title" : "Enable optimizer",
-                "description" : "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+            "optimizerCard": {
+                "title": "Enable optimizer",
+                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
@@ -447,8 +447,8 @@
             "description": "Swtich between accounts made easy",
             "validateAccounts": "Validate accounts",
             "addAnAccount": "Add an account",
-            "use" : "Use",
-            "delete" : "Delete",
+            "use": "Use",
+            "delete": "Delete",
             "notifiers": {
                 "addAccountSuccess": {
                     "title": "Success!",
@@ -524,13 +524,17 @@
                 "title": "Language",
                 "description": "Select your preferred language for Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Window Vibrancy",
-                "description": "Choose the background blur effect for the application windows."
-            },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
                 "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Donate",
