@@ -66,7 +66,7 @@
             {sizes[size].box}
             {isActive
                 ? 'bg-sapphire border-sapphire'
-                : 'bg-transparent border-stone-600 hover:border-stone-500 hover:bg-white/[0.04]'}"
+                : 'bg-stone-900 border-stone-600 hover:border-stone-500 hover:bg-stone-800'}"
     >
         <!-- Check icon -->
         <svg

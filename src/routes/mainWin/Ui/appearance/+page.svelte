@@ -24,21 +24,6 @@
     let activeName = ''
     let themes: string[] = []
 
-    let vibrancyEffect = 'auto'
-    const vibrancyOptions = [
-        { value: 'auto', label: 'Auto' },
-        { value: 'acrylic', label: 'Acrylic' },
-        { value: 'mica', label: 'Mica' },
-        { value: 'blur', label: 'Blur' },
-    ]
-
-    async function updateVibrancy() {
-        const store = await load('config.json')
-        await store.set('vibrancy', vibrancyEffect)
-        await store.save()
-        await invoke('set_window_vibrancy', { effect: vibrancyEffect })
-    }
-
     let themeType = 'default'
     const typeOptions = [
         { value: 'default', label: $_('pages.appearance.bootstrapThemeCard.dropdown.default') },
@@ -124,7 +109,6 @@
         load('config.json').then(async (store) => {
             if (!isMounted) return
 
-            vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
             refreshThemes()
 
             unsub = themeStore.subscribe((v) => {

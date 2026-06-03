@@ -21,7 +21,7 @@
         }, 100)
     }
 </script>
-<div class="p-4 px-8 rounded-tl-3xl flex items-center transparent">
+<div class="p-4 px-8 rounded-tl-3xl flex items-center bg-obsidian">
     <Button
         variant="primary"
         size="sm"

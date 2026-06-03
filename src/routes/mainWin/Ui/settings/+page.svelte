@@ -10,7 +10,6 @@
         Info,
         Languages,
         BookHeart,
-        AppWindow,
         AudioWaveform,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
@@ -78,20 +77,6 @@
 
     let currentLocale: string
 
-    let vibrancyEffect = 'auto'
-    const vibrancyOptions = [
-        { value: 'auto', label: 'Auto' },
-        { value: 'acrylic', label: 'Acrylic' },
-        { value: 'mica', label: 'Mica' },
-    ]
-
-    async function updateVibrancy() {
-        const store = await load('config.json')
-        await store.set('vibrancy', vibrancyEffect)
-        await store.save()
-        await invoke('set_window_vibrancy', { effect: vibrancyEffect })
-    }
-
     async function handleLanguage() {
         let config = await load('config.json')
         locale.set(currentLocale)
@@ -127,7 +112,6 @@
         version = info.version
 
         const store = await load('config.json')
-        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
         discordRpcEnabled =
             (await store.get<boolean>('discordRpcEnabled')) ?? true
     })
@@ -152,19 +136,6 @@
             bind:value={currentLocale}
             options={$dropdownOptions}
             on:change={handleLanguage}
-        />
-    </SettingCard>
-
-    <SettingCard
-        title={$_('pages.settings.windowVibrancyCard.title')}
-        description={$_('pages.settings.windowVibrancyCard.description')}
-        icon={AppWindow}
-    >
-        <Dropdown
-            slot="action"
-            bind:value={vibrancyEffect}
-            options={vibrancyOptions}
-            on:change={updateVibrancy}
         />
     </SettingCard>
 

@@ -216,7 +216,7 @@
                                                 name,
                                                 e.currentTarget.value
                                             )}
-                                        class="w-full bg-stone-900/0 hover:bg-stone-900/40 border border-transparent hover:border-stone-800/50 focus:bg-stone-900/60 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] text-purple-400 outline-none transition-all duration-150"
+                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] text-purple-400 outline-none transition-all duration-150"
                                     >
                                         <option value="true">true</option>
                                         <option value="false">false</option>
@@ -233,7 +233,7 @@
                                                 e.currentTarget.value
                                             )}
                                         on:keydown={handleKeyDown}
-                                        class="w-full bg-stone-900/0 hover:bg-stone-900/40 border border-transparent hover:border-stone-800/50 focus:bg-stone-900/60 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] {type ===
+                                        class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 rounded-lg px-3 py-1.5 font-mono text-[13px] {type ===
                                         'int'
                                             ? 'text-yellow-400'
                                             : 'text-emerald-400'} outline-none transition-all duration-150"

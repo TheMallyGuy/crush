@@ -325,7 +325,7 @@
 {#if state}
     {#if state.isHtmlTheme}
         <div
-            class="relative overflow-hidden h-screen w-screen bg-transparent"
+            class="relative overflow-hidden h-screen w-screen"
             use:mountHtml={state.customHtml || ''}
         ></div>
     {:else if cfg}
@@ -403,7 +403,7 @@
                     <button
                         id={el.name}
                         on:click={cancel}
-                        class="absolute bg-transparent border-0 cursor-pointer focus:outline-none focus:ring-0 {el
+                        class="absolute bg-obsidian border-0 cursor-pointer focus:outline-none focus:ring-0 {el
                             .props.class ||
                             el.props.Class ||
                             ''}"
@@ -472,7 +472,7 @@
     {/if}
 {:else}
     <div
-        class="relative h-screen bg-transparent text-white selection:bg-stone-800"
+        class="relative h-screen bg-obsidian text-white selection:bg-stone-800"
     >
         <div
             class="absolute inset-0 flex flex-col items-center justify-center text-center p-3 pb-24 gap-6"

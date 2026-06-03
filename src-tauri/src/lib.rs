@@ -19,13 +19,11 @@ use commands::roblox_deployment::{
 };
 use commands::shortcuts::new_shorcut;
 use commands::watcher::watch_logs;
-use commands::window::{
-    apply_vibrancy_to_window, create_or_focus_window, kill_window, set_window_vibrancy,
-};
+use commands::window::{create_or_focus_window, kill_window};
 use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
-use tauri_plugin_dialog::{DialogExt};
+use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use tauri_plugin_updater::UpdaterExt;
@@ -35,12 +33,12 @@ use rpc::RpcState;
 use simple_i18n::I18n;
 
 pub mod interactive;
+pub mod larp_focuser;
 pub mod priorites;
 pub mod rd;
 pub mod rpc;
 pub mod simple_i18n;
-pub mod tray;
-pub mod larp_focuser; // nice name choice buddy
+pub mod tray; // nice name choice buddy
 
 use crate::tray::setup_tray;
 
@@ -248,18 +246,6 @@ pub fn run() {
                 std::process::exit(1);
             }
 
-            let Some(window) = app.get_webview_window("crushBoostrapChoiceWindow") else {
-                return Err("Failed to find main bootstrap choice window".into());
-            };
-
-            let effect = app
-                .get_store("config.json")
-                .and_then(|store| store.get("vibrancy"))
-                .and_then(|v| v.as_str().map(|s| s.to_string()))
-                .unwrap_or_else(|| "auto".to_string());
-
-            apply_vibrancy_to_window(&window, &effect);
-
             match app.cli().matches() {
                 // https://v2.tauri.app/plugin/cli/
 
@@ -347,7 +333,6 @@ pub fn run() {
             set_rpc,
             copy_file,
             export_boostrapconfig,
-            set_window_vibrancy,
             get_latest_version_studio,
             set_process_priority,
             close_crash_handler,

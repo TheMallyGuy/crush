@@ -9,7 +9,7 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite/40 backdrop-blur-md transition-all duration-150 
+    class="group relative flex w-full flex-row overflow-hidden rounded-xl bg-anthracite transition-all duration-150 
     {!disabled ? 'hover:bg-stone-900/50 hover:border-stone-700/40 hover:shadow-glow-sapphire/5' : 'opacity-50'} 
     {className}"
     {...$$restProps}
@@ -22,7 +22,7 @@
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div
-                class="absolute inset-0 bg-gradient-to-l from-black/40 to-transparent"
+                class="absolute inset-0 bg-gradient-to-l from-black/40 to-black/40"
             ></div>
         </div>
     {/if}

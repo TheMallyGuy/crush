@@ -20,10 +20,6 @@
     let windowTitleValue: boolean
     let borderlessValue: boolean
 
-    let transparencyValue: boolean
-    let minimumTransValue: number
-    let maximizeTransValue: number
-
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations =
@@ -32,7 +28,6 @@
 
         const interactive = savedIntegrations?.interactive
         const scopes = interactive?.scopes
-        const transparencyScope = scopes?.transparencyScopes
 
         interactAPIValue = interactive?.enable ?? false
         mimimizeValue = scopes?.minimize ?? true
@@ -42,9 +37,6 @@
         restoreValue = scopes?.restore ?? true
         windowTitleValue = scopes?.setTitle ?? true
         borderlessValue = scopes?.setBorderless ?? true
-        transparencyValue = transparencyScope?.enabled ?? true
-        minimumTransValue = transparencyScope?.minTransparency ?? 0
-        maximizeTransValue = transparencyScope?.maxTransparency ?? 255
     }
 
     async function handleChanges() {
@@ -55,7 +47,6 @@
 
         const savedInteractive = savedIntegrations?.interactive
         const savedScopes = savedInteractive?.scopes
-        const savedTransparency = savedScopes?.transparencyScopes
 
         const newIntegrations: Integrations = {
             optimizer: savedIntegrations?.optimizer ?? false,
@@ -88,12 +79,6 @@
                     restore: restoreValue,
                     setTitle: windowTitleValue,
                     setBorderless: borderlessValue,
-                    transparencyScopes: {
-                        ...savedTransparency,
-                        enabled: transparencyValue,
-                        minTransparency: minimumTransValue,
-                        maxTransparency: maximizeTransValue,
-                    },
                 },
             },
         }
@@ -188,31 +173,5 @@
             </SettingCard>
         </div>
 
-        <div class="flex flex-col gap-2">
-            <h1 class="text-2xl font-bold tracking-tight text-stone-100">
-                {$_("pages.integrations.windowManipulation.advanced.transparencySettings.title")}
-            </h1>
-
-            <SettingCard
-                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.enableCard.title")}
-                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.enableCard.description")}
-            >
-                <Switch slot="action" bind:checked={transparencyValue} disabled={!interactAPIValue} on:change={handleChanges}/>
-            </SettingCard>
-
-            <SettingCard
-                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.minTransparency.title")}
-                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.minTransparency.description")}
-            >
-                <Textbox slot="action" bind:value={minimumTransValue} disabled={!interactAPIValue} on:change={handleChanges}/>
-            </SettingCard>
-
-            <SettingCard
-                title={$_("pages.integrations.windowManipulation.advanced.transparencySettings.maxTransparency.title")}
-                description={$_("pages.integrations.windowManipulation.advanced.transparencySettings.maxTransparency.description")}
-            >
-                <Textbox slot="action" bind:value={maximizeTransValue} disabled={!interactAPIValue} on:change={handleChanges}/>
-            </SettingCard>
-        </div>
     </div>
 </div>

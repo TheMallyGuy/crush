@@ -37,7 +37,7 @@
     }
 </script>
 
-<div class="flex h-screen w-screen bg-transparent text-white">
+<div class="flex h-screen w-screen bg-obsidian text-white">
     <WizardSidebar {steps} currentStep={$currentStep} />
 
     <div class="flex-1 flex flex-col p-10 gap-10">

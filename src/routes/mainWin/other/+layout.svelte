@@ -2,7 +2,7 @@
     import Topbar from "$lib/components/organisms/Topbar.svelte";
 </script>
 
-<div class="flex flex-col h-screen w-screen overflow-hidden bg-transparent text-white">
+<div class="flex flex-col h-screen w-screen overflow-hidden bg-obsidian text-white">
   <Topbar />
   <div class="flex-1 flex flex-col">
     <main class="flex-1 relative min-w-0 overflow-hidden">
