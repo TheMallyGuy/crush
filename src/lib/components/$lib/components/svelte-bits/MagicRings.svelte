@@ -128,9 +128,11 @@ void main() {
 		}
 
 		renderer.setClearColor(0x000000, 0);
-		// three.js owns the canvas; attach it imperatively to keep this component standalone.
 		// eslint-disable-next-line svelte/no-dom-manipulating
 		mount.appendChild(renderer.domElement);
+
+		// Pass through all pointer events — content behind remains clickable
+		renderer.domElement.style.pointerEvents = 'none';
 
 		const scene = new THREE.Scene();
 		const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
@@ -155,7 +157,7 @@ void main() {
 			uFadeOut: { value: 0.75 },
 			uMouse: { value: new THREE.Vector2() },
 			uMouseInfluence: { value: 0 },
-			uHoverAmount: { value: 0 },
+			uHoverAmount: { value: 1 },
 			uHoverScale: { value: 1 },
 			uParallax: { value: 0 },
 			uBurst: { value: 0 }
@@ -172,8 +174,10 @@ void main() {
 
 		const resize = () => {
 			if (!mount) return;
-			const w = mount.clientWidth;
-			const h = mount.clientHeight;
+			// Use window size since the div itself has pointer-events none
+			// and may not report size correctly in all browsers
+			const w = window.innerWidth;
+			const h = window.innerHeight;
 			const dpr = Math.min(window.devicePixelRatio, 2);
 			renderer.setSize(w, h);
 			renderer.setPixelRatio(dpr);
@@ -187,32 +191,19 @@ void main() {
 
 		const mouse = [0, 0];
 		const smoothMouse = [0, 0];
-		let hoverAmount = 0;
-		let isHovered = false;
 		let burst = 0;
 
 		const onMouseMove = (e: MouseEvent) => {
-			if (!mount) return;
-			const rect = mount.getBoundingClientRect();
-			mouse[0] = (e.clientX - rect.left) / rect.width - 0.5;
-			mouse[1] = -((e.clientY - rect.top) / rect.height - 0.5);
+			mouse[0] = e.clientX / window.innerWidth - 0.5;
+			mouse[1] = -(e.clientY / window.innerHeight - 0.5);
 		};
-		const onMouseEnter = () => {
-			isHovered = true;
-		};
-		const onMouseLeave = () => {
-			isHovered = false;
-			mouse[0] = 0;
-			mouse[1] = 0;
-		};
+
 		const onClick = () => {
 			burst = 1;
 		};
 
-		mount.addEventListener('mousemove', onMouseMove);
-		mount.addEventListener('mouseenter', onMouseEnter);
-		mount.addEventListener('mouseleave', onMouseLeave);
-		mount.addEventListener('click', onClick);
+		window.addEventListener('mousemove', onMouseMove, { passive: true });
+		window.addEventListener('click', onClick, { passive: true });
 
 		let frameId: number;
 		const animate = (t: number) => {
@@ -220,7 +211,6 @@ void main() {
 
 			smoothMouse[0] += (mouse[0] - smoothMouse[0]) * 0.08;
 			smoothMouse[1] += (mouse[1] - smoothMouse[1]) * 0.08;
-			hoverAmount += ((isHovered ? 1 : 0) - hoverAmount) * 0.08;
 			burst *= 0.95;
 			if (burst < 0.001) burst = 0;
 
@@ -241,7 +231,7 @@ void main() {
 			uniforms.uFadeOut.value = fadeOut;
 			uniforms.uMouse.value.set(smoothMouse[0], smoothMouse[1]);
 			uniforms.uMouseInfluence.value = followMouse ? mouseInfluence : 0;
-			uniforms.uHoverAmount.value = hoverAmount;
+			uniforms.uHoverAmount.value = 1;
 			uniforms.uHoverScale.value = hoverScale;
 			uniforms.uParallax.value = parallax;
 			uniforms.uBurst.value = clickBurst ? burst : 0;
@@ -253,11 +243,9 @@ void main() {
 		return () => {
 			cancelAnimationFrame(frameId);
 			window.removeEventListener('resize', resize);
+			window.removeEventListener('mousemove', onMouseMove);
+			window.removeEventListener('click', onClick);
 			ro.disconnect();
-			mount?.removeEventListener('mousemove', onMouseMove);
-			mount?.removeEventListener('mouseenter', onMouseEnter);
-			mount?.removeEventListener('mouseleave', onMouseLeave);
-			mount?.removeEventListener('click', onClick);
 			if (renderer.domElement.parentNode === mount) {
 				// eslint-disable-next-line svelte/no-dom-manipulating
 				mount?.removeChild(renderer.domElement);

@@ -12,6 +12,7 @@
         BookHeart,
         AudioWaveform,
         Crosshair,
+        Cuboid,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -27,6 +28,8 @@
     const Arona = '/Arona.png'
 
     let wasLockedIn = settings.lockedInMode
+    let wasRedRings = settings.redRings
+
     let info: BuildInfo | undefined = $state()
     let hash: string = $state('Unknown hash')
     let buildtime: string = $state('Unknown Build time')
@@ -83,19 +86,21 @@
     async function handleDonate() {
         openUrl('https://mally.qzz.io/donate')
     }
-    
+
     $effect(() => {
         if (!settings.loaded) return
 
         const rpc = settings.discordRpcEnabled
         const lang = settings.currentLocale
         const locked = settings.lockedInMode
+        const redRinged = settings.redRings
 
         ;(async () => {
             const store = await load('config.json')
             await store.set('discordRpcEnabled', rpc)
             await store.set('language', lang)
             await store.set('lockedIn', locked)
+            await store.set('redRings', redRinged)
             locale.set(lang)
             await store.save()
 
@@ -103,7 +108,12 @@
                 window.location.reload()
             }
 
+            if (wasRedRings && !redRinged) {
+                window.location.reload()
+            }
+
             wasLockedIn = locked
+            wasRedRings = redRinged
         })()
     })
 
@@ -198,6 +208,15 @@
     >
         <Switch slot="action" bind:checked={settings.lockedInMode} />
     </SettingCard>
+
+    <SettingCard
+        title="Red rings"
+        description="Dude be adding ANYTHING atp ✌️"
+        icon={Cuboid}
+    >
+        <Switch slot="action" bind:checked={settings.redRings} />
+    </SettingCard>
+
     <ExpandableSettingCard
         title={$_('pages.settings.donateCard.title')}
         description={$_('pages.settings.donateCard.description')}
