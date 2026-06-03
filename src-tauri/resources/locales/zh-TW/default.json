@@ -524,13 +524,17 @@
                 "title": "語言",
                 "description": "Select your preferred language for Crush."
             },
-            "windowVibrancyCard": {
-                "title": "窗戶活力",
-                "description": "選擇應用程式視窗的背景模糊效果。"
-            },
             "enableCrushRpcCard": {
                 "title": "粉碎Discord RPC",
                 "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "捐贈",

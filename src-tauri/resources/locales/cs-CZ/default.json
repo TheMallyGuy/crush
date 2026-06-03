@@ -524,13 +524,17 @@
                 "title": "Jazyk",
                 "description": "Vyberte preferovaný jazyk pro rozbalování."
             },
-            "windowVibrancyCard": {
-                "title": "Živost okna",
-                "description": "Zvolte efekt rozostření pozadí pro okna aplikace."
-            },
             "enableCrushRpcCard": {
                 "title": "Tlačit Discord RPC",
                 "description": "Určuje, zda zobrazit tvou aktivitu pomocí Discordu RPC. Doporučujeme restartovat."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Přispět",

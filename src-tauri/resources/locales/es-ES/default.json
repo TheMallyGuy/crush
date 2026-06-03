@@ -524,13 +524,17 @@
                 "title": "Lenguaje",
                 "description": "Seleccione el idioma que prefiera para aplastar."
             },
-            "windowVibrancyCard": {
-                "title": "Vibrancia de Ventana",
-                "description": "Elija el efecto de desenfoque de fondo para las ventanas de la aplicación."
-            },
             "enableCrushRpcCard": {
                 "title": "Triturar RPC de Discord",
                 "description": "Cambia si quieres mostrar tu actividad a través de Discord RPC. Se recomienda reiniciar."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Donar ",

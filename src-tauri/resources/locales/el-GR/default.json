@@ -524,13 +524,17 @@
                 "title": "Γλώσσα",
                 "description": "Επιλέξτε την προτιμώμενη γλώσσα σας για το Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Δόνηση παραθύρου",
-                "description": "Επιλέξτε το εφέ θόλωσης φόντου για τα παράθυρα της εφαρμογής."
-            },
             "enableCrushRpcCard": {
                 "title": "Σύνθλιψη Discord RPC",
                 "description": "Αν ενεργοποιηθεί, θα εμφανίζεται η δραστηριότητά σας μέσω του Discord RPC. Συνιστάται η επανεκκίνηση"
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Δωρεά",

@@ -524,13 +524,17 @@
                 "title": "Votre langue",
                 "description": "Sélectionnez votre langue préférée pour Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Vibrance des fenêtres",
-                "description": "Choisissez l'effet de flou d'arrière-plan pour les fenêtres de l'application."
-            },
             "enableCrushRpcCard": {
                 "title": "Écraser le RPC Discord",
                 "description": "Permet de montrer ou non votre activité via Discord RPC. Un redémarrage est recommandé."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Faire un don",

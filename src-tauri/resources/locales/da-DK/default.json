@@ -524,13 +524,17 @@
                 "title": "Sprog",
                 "description": "Vælg dit foretrukne sprog for Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Vinduesvibration",
-                "description": "Vælg baggrundssløringseffekten for applikationsvinduerne."
-            },
             "enableCrushRpcCard": {
                 "title": "Knus Discord RPC",
                 "description": "Skift mellem om din aktivitet skal vises via Discord RPC. En genstart anbefales."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Donér",

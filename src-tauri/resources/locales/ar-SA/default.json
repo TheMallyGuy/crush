@@ -524,13 +524,17 @@
                 "title": "اللغة",
                 "description": "حدد لغتك المفضلة للسخرة."
             },
-            "windowVibrancyCard": {
-                "title": "اهتزاز النافذة",
-                "description": "اختر تأثير عدم وضوح الخلفية لنوافذ التطبيق."
-            },
             "enableCrushRpcCard": {
                 "title": "سحق ديسكورد RPC",
                 "description": "تبديل ما إذا كنت تريد إظهار النشاط الخاص بك عبر ديسكورد RPC. يوصى بإعادة التشغيل."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "تَبرَّع ",

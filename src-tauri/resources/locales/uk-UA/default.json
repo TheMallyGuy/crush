@@ -524,13 +524,17 @@
                 "title": "Мова",
                 "description": "Виберіть бажану мову для Crush."
             },
-            "windowVibrancyCard": {
-                "title": "Яскравість вікна",
-                "description": "Виберіть ефект розмиття фону для вікон програми."
-            },
             "enableCrushRpcCard": {
                 "title": "Розім 'яти Discord RPC",
                 "description": "Рекомендується перезапускати, чи показувати вашу діяльність через Discord RPC. Рекомендується."
+            },
+            "redRingsCard": {
+                "title": "Evil Red Rings",
+                "description": "Dude be adding ANYTHING atp ✌️"
+            },
+            "lockedInCard": {
+                "title": "Locked in mode",
+                "description": "Configuring roblox cannot be THAT serious 😭"
             },
             "donateCard": {
                 "title": "Пожертвувати",
