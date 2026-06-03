@@ -212,7 +212,7 @@
     <div class="space-y-4">
         {#if items.length === 0}
             <div
-                class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
+                class="p-8 border-2 border-dashed border-stone-800 text-center"
             >
                 <p class="text-stone-500">
                     {$_('pages.installations.versionManager.none')}

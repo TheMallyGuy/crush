@@ -33,9 +33,9 @@
     }
 
     const sizes = {
-        sm: { box: 'w-3.5 h-3.5 rounded', icon: 9 },
-        md: { box: 'w-[18px] h-[18px] rounded-[5px]', icon: 11 },
-        lg: { box: 'w-[22px] h-[22px] rounded-[6px]', icon: 13 },
+        sm: { box: 'w-3.5 h-3.5', icon: 9 },
+        md: { box: 'w-[18px] h-[18px]', icon: 11 },
+        lg: { box: 'w-[22px] h-[22px]', icon: 13 },
     }
 
     const labelSizes = {
@@ -62,11 +62,11 @@
         on:click={toggle}
         on:keydown={handleKeydown}
         class="relative flex items-center justify-center shrink-0 border-[1.5px] transition-all duration-150
-            focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian
+            focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian cursor-target
             {sizes[size].box}
             {isActive
                 ? 'bg-sapphire border-sapphire'
-                : 'bg-transparent border-stone-600 hover:border-stone-500 hover:bg-white/[0.04]'}"
+                : 'bg-stone-900 border-stone-600 hover:border-stone-500 hover:bg-stone-800'}"
     >
         <!-- Check icon -->
         <svg

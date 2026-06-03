@@ -1,4 +1,3 @@
-use crate::commands::window::apply_vibrancy_to_window;
 use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::TrayIconId;
@@ -84,23 +83,6 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
                                 .parse()
                                 .expect("Failed to parse URL"),
                         );
-                        let window = WebviewWindowBuilder::new(&app, "CrushHello", webview_url)
-                            .title("Welcome")
-                            .closable(true)
-                            .inner_size(600.0, 500.0)
-                            .min_inner_size(600.0, 500.0)
-                            .center()
-                            .decorations(false)
-                            .transparent(true)
-                            .build()
-                            .expect("Failed to build window");
-
-                        let effect = app
-                            .get_store("config.json")
-                            .and_then(|store| store.get("vibrancy"))
-                            .and_then(|v| v.as_str().map(|s| s.to_string()))
-                            .unwrap_or_else(|| "auto".to_string());
-                        apply_vibrancy_to_window(&window, &effect);
                     }
                 });
             }

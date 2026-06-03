@@ -13,7 +13,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-    class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
+    class="group relative flex w-full flex-col p-3 transition-all duration-150
     {clickable
         ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
         : ''}

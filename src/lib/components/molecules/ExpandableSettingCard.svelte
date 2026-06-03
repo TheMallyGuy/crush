@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20 hover:bg-stone-900/50  {className}"
+    class="group relative flex w-full flex-col p-3 transition-all duration-150 {className}"
 >
   <button
     type="button"
@@ -25,7 +25,7 @@
   >
     <div class="flex items-center gap-5">
       {#if icon || $$slots.icon}
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 transition-colors duration-150 overflow-hidden rounded-lg">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 transition-colors duration-150 overflow-hidden">
           <slot name="icon">
             {#if typeof icon === 'string'}
               <img src={icon} alt="" class="w-full h-full object-cover" />

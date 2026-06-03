@@ -70,7 +70,7 @@
             on:input={handleInput}
             on:change={handleChange}
             on:keydown={handleKeyDown}
-            class="block w-full transition-all duration-150 outline-none text-sm rounded-xl border
+            class="block w-full transition-all duration-150 outline-none text-sm border cursor-target
                 {$$slots.icon ? 'pl-11' : 'px-4'}
                 py-2.5
                 {disabled

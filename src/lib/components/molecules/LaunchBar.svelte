@@ -3,7 +3,7 @@
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { invoke } from '@tauri-apps/api/core'
     import { getCurrentWindow } from '@tauri-apps/api/window'
-    import { _ } from 'svelte-i18n';
+    import { _ } from 'svelte-i18n'
     async function launchBoostrap() {
         deepLinkUrl.set(null)
         localStorage.removeItem('deepLinkUrl')
@@ -21,11 +21,12 @@
         }, 100)
     }
 </script>
-<div class="p-4 px-8 rounded-tl-3xl flex items-center transparent">
+
+<div class="p-4 px-8 flex items-center bg-obsidian">
     <Button
         variant="primary"
         size="sm"
-        class="rounded-full px-4 h-9"
+        class=" px-4 h-9"
         on:click={launchBoostrap}
     >
         {$_('elements.launchBar')}

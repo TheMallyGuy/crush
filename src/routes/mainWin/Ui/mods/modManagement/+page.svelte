@@ -184,7 +184,7 @@
     <div class="space-y-4">
         {#if items.length === 0}
             <div
-                class="p-8 border-2 border-dashed border-stone-800 rounded-xl text-center"
+                class="p-8 border-2 border-dashed border-stone-800 text-center"
             >
                 <p class="text-stone-500">
                     {$_('pages.mod.tab.modManagement.noModsFound')}
@@ -203,7 +203,7 @@
                     <div class="flex items-center gap-4">
                         <button
                             on:click={() => handleToggle(item.id)}
-                            class="p-2 rounded-lg transition-colors {item.enabled
+                            class="p-2 transition-colors {item.enabled
                                 ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
                                 : 'bg-stone-800 text-stone-500 hover:bg-stone-700'}"
                             title={item.enabled

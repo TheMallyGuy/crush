@@ -6,10 +6,8 @@
 </script>
 
 <div
-    class="group relative flex w-full flex-col rounded-xl bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
-  {clickable
-        ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
-        : ''}
+    class="group relative flex w-full flex-col bg-anthracite/40 p-5 transition-all duration-150 border border-stone-800/20
+  {clickable ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]' : ''}
   {className}"
     {...$$restProps}
 >

@@ -13,7 +13,7 @@
         primary: 'bg-sapphire text-white hover:bg-sapphire-light shadow-sapphire/20',
         secondary: 'bg-stone-800/40 text-stone-300 hover:bg-stone-700/60 hover:text-white border border-stone-700/40',
         danger: 'bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/20',
-        ghost: 'bg-transparent text-stone-400 hover:bg-stone-800/40 hover:text-white'
+        ghost: 'bg-stone-900 text-stone-400 hover:bg-stone-800 hover:text-white'
     }
 
     const sizes = {
@@ -27,7 +27,7 @@
     {type}
     {disabled}
     on:click
-    class="inline-flex items-center justify-center rounded-xl font-semibold duration-150 active:opacity-10 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 {variants[variant]} {sizes[size]} {className}"
+    class="inline-flex cursor-target items-center justify-center font-semibold duration-150 active:opacity-10 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 {variants[variant]} {sizes[size]} {className}"
     {...$$restProps}
 >
     <slot />

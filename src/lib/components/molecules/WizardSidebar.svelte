@@ -36,7 +36,7 @@
             <div class="flex gap-4 items-start group">
                 <div class="relative flex flex-col items-center">
                     <div
-                        class="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 z-10
+                        class="w-6 h-6 flex items-center justify-center transition-all duration-300 z-10
                         {stepState === 'completed' ? 'bg-sapphire text-white' : 
                          stepState === 'active' ? 'bg-stone-800 text-white' : 
                          'bg-stone-900 text-stone-600'}"

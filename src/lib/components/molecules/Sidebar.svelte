@@ -88,12 +88,12 @@
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all group
+                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 transition-all group cursor-target
                 {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div
-                        class="absolute left-0 w-1 h-5 bg-sapphire rounded-r-full shadow-glow-sapphire"
+                        class="absolute left-0 w-1 h-5 bg-sapphire shadow-glow-sapphire"
                     ></div>
                 {/if}
 
@@ -113,12 +113,12 @@
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 rounded-lg transition-all hover:bg-stone-800/50 hover:text-stone-100 group
+                class="relative flex items-center justify-center cursor-target sm:justify-start gap-3 px-3 py-2 transition-all hover:bg-stone-800/50 hover:text-stone-100 group
                 {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
                     <div
-                        class="absolute left-0 w-1 h-5 bg-sapphire rounded-r-full shadow-glow-sapphire"
+                        class="absolute left-0 w-1 h-5 bg-sapphire shadow-glow-sapphire"
                     ></div>
                 {/if}
 

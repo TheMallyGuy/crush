@@ -10,29 +10,30 @@
         Info,
         Languages,
         BookHeart,
-        AppWindow,
         AudioWaveform,
+        Crosshair,
+        Cuboid,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
     import { onMount } from 'svelte'
-    import { locale, locales, _, waitLocale } from 'svelte-i18n'
+    import { settings } from '$lib/stores/settings.svelte'
+    import { locale, locales, _ } from 'svelte-i18n'
     import { derived } from 'svelte/store'
     import { load } from '@tauri-apps/plugin-store'
     import Switch from '$lib/components/atoms/Switch.svelte'
-    import { goto } from '$app/navigation'
-    import Gem from '$lib/components/molecules/Gem.svelte'
     import { Backlight } from '$lib/components/magic/backlight'
     import { SmoothCursor } from '$lib/components/magic/smooth-cursor'
 
     const Arona = '/Arona.png'
 
-    let discordRpcEnabled = true
+    let wasLockedIn = settings.lockedInMode
+    let wasRedRings = settings.redRings
 
-    let info: BuildInfo
-    let hash: string
-    let buildtime: string
-    let version: string
+    let info: BuildInfo | undefined = $state()
+    let hash: string = $state('Unknown hash')
+    let buildtime: string = $state('Unknown Build time')
+    let version: string = $state('Unknown Version')
 
     const LOCALE_NAMES: Record<string, string> = {
         'af-ZA': 'Afrikaans',
@@ -76,41 +77,8 @@
         }))
     )
 
-    let currentLocale: string
-
-    let vibrancyEffect = 'auto'
-    const vibrancyOptions = [
-        { value: 'auto', label: 'Auto' },
-        { value: 'acrylic', label: 'Acrylic' },
-        { value: 'mica', label: 'Mica' },
-    ]
-
-    async function updateVibrancy() {
-        const store = await load('config.json')
-        await store.set('vibrancy', vibrancyEffect)
-        await store.save()
-        await invoke('set_window_vibrancy', { effect: vibrancyEffect })
-    }
-
-    async function handleLanguage() {
-        let config = await load('config.json')
-        locale.set(currentLocale)
-        config.set('language', currentLocale)
-        config.save()
-        await waitLocale()
-        location.reload()
-    }
-
-    async function handleRpc() {
-        const store = await load('config.json')
-        await store.set('discordRpcEnabled', discordRpcEnabled)
-        await store.save()
-    }
-
     async function handleResetCrushOnboarding() {
-        // its called crush hello dumbfuck
         const store = await load('config.json')
-
         await store.set('firstLaunch', true)
         await relaunch()
     }
@@ -119,20 +87,54 @@
         openUrl('https://mally.qzz.io/donate')
     }
 
-    onMount(async () => {
-        info = await invoke('crush')
-        currentLocale = $locale ?? 'en'
-        hash = info.hash
-        buildtime = info.build_date
-        version = info.version
+    $effect(() => {
+        if (!settings.loaded) return
 
-        const store = await load('config.json')
-        vibrancyEffect = (await store.get<string>('vibrancy')) || 'auto'
-        discordRpcEnabled =
-            (await store.get<boolean>('discordRpcEnabled')) ?? true
+        const rpc = settings.discordRpcEnabled
+        const lang = settings.currentLocale
+        const locked = settings.lockedInMode
+        const redRinged = settings.redRings
+
+        ;(async () => {
+            const store = await load('config.json')
+            await store.set('discordRpcEnabled', rpc)
+            await store.set('language', lang)
+            await store.set('lockedIn', locked)
+            await store.set('redRings', redRinged)
+            locale.set(lang)
+            await store.save()
+
+            if (wasLockedIn && !locked) {
+                window.location.reload()
+            }
+
+            if (wasRedRings && !redRinged) {
+                window.location.reload()
+            }
+
+            wasLockedIn = locked
+            wasRedRings = redRinged
+        })()
+    })
+
+    onMount(async () => {
+        if (!settings.loaded) {
+            await settings.init()
+        }
+
+        info = await invoke('crush')
+        if (info) {
+            hash = info.hash
+            buildtime = info.build_date
+            version = info.version
+        }
     })
 </script>
-<SmoothCursor/>
+
+{#if !settings.lockedInMode}
+    <SmoothCursor />
+{/if}
+
 <div class="flex flex-col gap-4">
     <div class="flex items-center justify-between">
         <div>
@@ -149,22 +151,8 @@
     >
         <Dropdown
             slot="action"
-            bind:value={currentLocale}
+            bind:value={settings.currentLocale}
             options={$dropdownOptions}
-            on:change={handleLanguage}
-        />
-    </SettingCard>
-
-    <SettingCard
-        title={$_('pages.settings.windowVibrancyCard.title')}
-        description={$_('pages.settings.windowVibrancyCard.description')}
-        icon={AppWindow}
-    >
-        <Dropdown
-            slot="action"
-            bind:value={vibrancyEffect}
-            options={vibrancyOptions}
-            on:change={updateVibrancy}
         />
     </SettingCard>
 
@@ -173,11 +161,7 @@
         description={$_('pages.settings.onBoardCard.description')}
         icon={BookHeart}
     >
-        <Button
-            on:click={handleResetCrushOnboarding}
-            slot="action"
-            variant="danger"
-        >
+        <Button slot="action" variant="danger">
             {$_('pages.settings.onBoardCard.button')}
         </Button>
     </SettingCard>
@@ -187,11 +171,7 @@
         description={$_('pages.settings.enableCrushRpcCard.description')}
         icon={AudioWaveform}
     >
-        <Switch
-            slot="action"
-            bind:checked={discordRpcEnabled}
-            on:change={handleRpc}
-        />
+        <Switch slot="action" bind:checked={settings.discordRpcEnabled} />
     </SettingCard>
 
     <ExpandableSettingCard
@@ -215,12 +195,27 @@
                     values: { version },
                 })}
             </p>
-
             <p class="sm text-gray-600">
                 {$_('pages.settings.aboutCard.note')}
             </p>
         </div>
     </ExpandableSettingCard>
+
+    <SettingCard
+        title={$_("pages.settings.lockedInCard.title")}
+        description={$_("pages.settings.lockedInCard.description")}
+        icon={Crosshair}
+    >
+        <Switch slot="action" bind:checked={settings.lockedInMode} />
+    </SettingCard>
+
+    <SettingCard
+        title={$_("pages.settings.redRingsCard.title")}
+        description={$_("pages.settings.redRingsCard.title")}
+        icon={Cuboid}
+    >
+        <Switch slot="action" bind:checked={settings.redRings} />
+    </SettingCard>
 
     <ExpandableSettingCard
         title={$_('pages.settings.donateCard.title')}

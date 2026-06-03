@@ -1,14 +1,14 @@
 export type Server = {
-  server_id: string;
-  ip_address: string;
-  playing: number;
-  max_players: number;
+    server_id: string;
+    ip_address: string;
+    playing: number;
+    max_players: number;
 }
 
 export type Result = {
-  success: boolean;
-  regionTried: string[];
-  servers: Server[];
+    success: boolean;
+    regionTried: string[];
+    servers: Server[];
 }
 
 export type RoValra = {
@@ -16,7 +16,7 @@ export type RoValra = {
 }
 
 export type DiscordRpc = {
-    enable : boolean,
+    enable: boolean,
     displayAccount: boolean,
     letJoin: boolean
 }
@@ -27,34 +27,34 @@ export type gameScopes = {
 }
 
 export type transparencyScopes = {
-    enabled : boolean,
-    maxTransparency : number,
-    minTransparency : number
+    enabled: boolean,
+    maxTransparency: number,
+    minTransparency: number
 }
 
 export type interactiveAPIScopes = {
-    transparencyScopes : transparencyScopes
-    minimize : boolean
-    focus : boolean
-    moveWindow : boolean
-    maximize : boolean
-    restore : boolean
-    setTitle : boolean
-    setBorderless : boolean
+    transparencyScopes: transparencyScopes
+    minimize: boolean
+    focus: boolean
+    moveWindow: boolean
+    maximize: boolean
+    restore: boolean
+    setTitle: boolean
+    setBorderless: boolean
     // gameScopes : gameScopes save this for later xd
 }
 
 export type interactiveAPI = {
-    enable : boolean,
-    scopes : interactiveAPIScopes 
+    enable: boolean,
+    scopes: interactiveAPIScopes
 }
 
 export type PriorityClass =
-  | "BELOW_NORMAL_PRIORITY_CLASS"
-  | "NORMAL_PRIORITY_CLASS"
-  | "ABOVE_NORMAL_PRIORITY_CLASS"
-  | "HIGH_PRIORITY_CLASS"
-  | "REALTIME_PRIORITY_CLASS";
+    | "BELOW_NORMAL_PRIORITY_CLASS"
+    | "NORMAL_PRIORITY_CLASS"
+    | "ABOVE_NORMAL_PRIORITY_CLASS"
+    | "HIGH_PRIORITY_CLASS"
+    | "REALTIME_PRIORITY_CLASS";
 
 export type sleepSchedule = {
     visible: boolean,
@@ -66,8 +66,8 @@ export type Integrations = {
     activityWatching: boolean
     discordRpc: DiscordRpc
     serverLocationNotifier: boolean
-    priority : PriorityClass
-    roValra : RoValra
+    priority: PriorityClass
+    roValra: RoValra
     optimizer: boolean
     sleepSchedule: sleepSchedule,
     gameCache?: Record<string, GameCache>;
@@ -95,12 +95,12 @@ export type GameCache = {
 };
 
 export type InstallationEntry = {
-  id: string
-  versionHash: string
-  appType: AppType
-  installedAt: string
-  active?: boolean
-  channel: 'global' | 'vng'
+    id: string
+    versionHash: string
+    appType: AppType
+    installedAt: string
+    active?: boolean
+    channel: 'global' | 'vng'
 }
 
 export type Installation = {
@@ -116,6 +116,8 @@ export type Config = {
     FirstLaunch: string
     bestRegion: string
     integrations: Integrations
+    lockedIn?: boolean
+    redRings?: boolean
 }
 
 export type Mod = {
@@ -215,8 +217,8 @@ export type AppType = 'player' | 'studio'
 //
 export type ServerInfoFromBackend = {
     region_info: string
-    game_id : number,
-    server_id : string
+    game_id: number,
+    server_id: string
 }
 
 //
@@ -236,7 +238,7 @@ export type BoostrapConfigs = { // bloxstrap, froststrap
     ShowUsingFroststrapRPC: boolean,
     AutoCloseCrashHandler: boolean,
 
-    UpdateRoblox : boolean, // frost & void??? (ps : fish)
+    UpdateRoblox: boolean, // frost & void??? (ps : fish)
 
     // voidstrap only
     VoidRPC: boolean,
