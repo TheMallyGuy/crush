@@ -73,17 +73,17 @@ pub async fn swift_servers_ping(
 }
 
 #[tauri::command]
-pub async fn connect(state: tauri::State<'_, SdkState>) -> Result<(), String> {
+pub async fn connect(
+    region: String,
+    routing: bool,
+    state: tauri::State<'_, SdkState>,
+) -> Result<(), String> {
     let sdk = state.0.lock().map_err(|e| e.to_string())?;
 
     let options = ConnectOptions {
-        region: "singapore".into(),
+        region: region.into(),
         apps: vec!["robloxplayerbeta.exe".into()],
-        auto_routing: Some(AutoRouting {
-            enabled: true,
-            whitelisted_regions: vec![],
-        }),
-        enable_api_tunneling: true,
+        enable_api_tunneling: routing,
         ..Default::default()
     };
 

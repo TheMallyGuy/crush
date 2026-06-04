@@ -159,9 +159,13 @@
                     })
 
                     try {
-                        await invoke('connect')
+                        await invoke('connect', {
+                            region: integrations.swifttunnel.perferedRegion,
+                            routing: integrations.swifttunnel.enableRouting,
+                        })
                     } catch (e) {
                         // do nothing lmao
+                        info(`${e}`)
                     }
 
                     handleProgress({

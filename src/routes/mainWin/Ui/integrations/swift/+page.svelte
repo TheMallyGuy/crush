@@ -68,16 +68,12 @@
             const countriesMap = new Map<string, string>()
 
             serverList.forEach((item) => {
-                const codeLower =
-                    regionNames.of(item.country_code.toLowerCase()) ??
-                    item.country_code
-
                 const fullName =
                     regionNames.of(item.country_code.toUpperCase()) ??
                     item.country_code
 
-                if (!countriesMap.has(codeLower)) {
-                    countriesMap.set(codeLower, fullName)
+                if (!countriesMap.has(fullName)) {
+                    countriesMap.set(fullName.toLowerCase(), fullName)
                 }
             })
 
