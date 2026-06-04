@@ -9,6 +9,7 @@
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
     import { onMount } from 'svelte'
+    import { _ } from 'svelte-i18n'
 
     interface Server {
         country_code: string
@@ -104,14 +105,16 @@
 
     async function saveSettings() {
         try {
+            const store = await load('config.json')
+            const current = await store.get<Integrations>('integrations')
             const newInte: Integrations = {
+                ...current,
                 swifttunnel: {
                     enable: enableSwifttunnel,
                     enableRouting: enableRouting,
                     perferedRegion: perferedRegion,
                 },
             }
-            const store = await load('config.json')
             await store.set('integrations', newInte)
             await store.save()
         } catch (e) {
@@ -125,7 +128,7 @@
 
         timeoutId = setTimeout(() => {
             isInAuthSwift = false
-            authError = 'Login timed out. Please try again.'
+            authError = $_('pages.integrations.swiftTunnel.loginTimeout')
             timeoutId = null
         }, TIMEOUT_MS)
 
@@ -161,21 +164,21 @@
     <LoadingOverlay
         visible={isInAuthSwift}
         blur={false}
-        message="Please continue in your browser. Auto-cancels after 1 min."
+        message={$_('pages.integrations.swiftTunnel.loadingMessage')}
     />
 
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                SwiftTunnel
+                {$_('pages.integrations.swiftTunnel.title')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Configure SwiftTunnel right in crush.
+                {$_('pages.integrations.swiftTunnel.description')}
             </p>
         </div>
         <div class="flex items-center gap-2">
             <Button variant="secondary" onclick={() => goto('../integrations')}>
-                Back
+                {$_('pages.integrations.swiftTunnel.back')}
             </Button>
         </div>
     </div>
@@ -184,18 +187,18 @@
         <div
             class="flex flex-col gap-3 items-center justify-center py-32 text-stone-400 border border-dashed border-stone-800 rounded-lg"
         >
-            You're not logged in.
+            {$_('pages.integrations.swiftTunnel.notLoggedIn')}
             {#if authError}
                 <p class="text-red-400 text-sm">{authError}</p>
             {/if}
             <Button onclick={auth} disabled={isInAuthSwift}>
-                Login via browser
+                {$_('pages.integrations.swiftTunnel.loginButton')}
             </Button>
         </div>
     {:else}
         <SettingCard
-            title="Enable Tunneling"
-            description="Enable tunneling to route Roblox through the VPN"
+            title={$_('pages.integrations.swiftTunnel.enableTunnelingCard.title')}
+            description={$_('pages.integrations.swiftTunnel.enableTunnelingCard.description')}
         >
             <Switch
                 slot="action"
@@ -205,8 +208,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Enable Roblox Routing"
-            description="Route all roblox API request to the VPN. This can be use to evade blocked game in some country."
+            title={$_('pages.integrations.swiftTunnel.enableRoutingCard.title')}
+            description={$_('pages.integrations.swiftTunnel.enableRoutingCard.description')}
         >
             <Switch
                 slot="action"
@@ -217,8 +220,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Prefered Region"
-            description="Config your perfered region"
+            title={$_('pages.integrations.swiftTunnel.preferredRegionCard.title')}
+            description={$_('pages.integrations.swiftTunnel.preferredRegionCard.description')}
         >
             <Dropdown
                 slot="action"
@@ -230,11 +233,11 @@
 
         <div class="flex flex-col gap-3">
             <h2 class="text-xl font-bold tracking-tight text-stone-100">
-                Server List
+                {$_('pages.integrations.swiftTunnel.serverList.title')}
             </h2>
 
             {#if serverList.length === 0}
-                <p class="text-stone-500 text-sm">No servers available.</p>
+                <p class="text-stone-500 text-sm">{$_('pages.integrations.swiftTunnel.serverList.empty')}</p>
             {:else}
                 {#each serverList as server}
                     <SettingCard

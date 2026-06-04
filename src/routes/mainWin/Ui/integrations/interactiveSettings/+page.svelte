@@ -49,26 +49,7 @@
         const savedScopes = savedInteractive?.scopes
 
         const newIntegrations: Integrations = {
-            optimizer: savedIntegrations?.optimizer ?? false,
-            closeCrashHandler: savedIntegrations?.closeCrashHandler ?? false,
-            priority: savedIntegrations?.priority ?? "NORMAL_PRIORITY_CLASS",
-            activityWatching: savedIntegrations?.activityWatching ?? true,
-            sleepSchedule: {
-                enabled:  savedIntegrations?.sleepSchedule?.enabled ?? true,
-                visible: savedIntegrations?.sleepSchedule?.visible ?? false,
-            },
-            discordRpc: savedIntegrations?.discordRpc ?? {
-                enable: false,
-                displayAccount: false,
-                letJoin: false,
-            },
-            serverLocationNotifier:
-                savedIntegrations?.serverLocationNotifier ?? false,
-            roValra: savedIntegrations?.roValra ?? {
-                joinServerForYouValue: false,
-            },
-            gameCache: savedIntegrations?.gameCache,
-            crushRpc: savedIntegrations?.crushRpc,
+            ...savedIntegrations,
             interactive: {
                 enable: interactAPIValue,
                 scopes: {
@@ -79,11 +60,11 @@
                     restore: restoreValue,
                     setTitle: windowTitleValue,
                     setBorderless: borderlessValue,
-                    transparencyScopes: {
+                    transparencyScopes: savedIntegrations?.interactive?.scopes?.transparencyScopes ?? {
                         enabled: false,
                         maxTransparency: 0,
-                        minTransparency: 0
-                    }
+                        minTransparency: 0,
+                    },
                 },
             },
         }

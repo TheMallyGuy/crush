@@ -6,7 +6,7 @@
     import Switch from '$lib/components/atoms/Switch.svelte'
     import { load } from '@tauri-apps/plugin-store'
     import { onMount } from 'svelte'
-    import type { Integrations, DiscordRpc } from '$lib/types'
+    import type { Integrations } from '$lib/types'
 
     const rovalraTitle = '/RovalraTitle.svg'
     let joinServerForYouValue: boolean = false
@@ -33,30 +33,10 @@
             (await store.get<Integrations>('integrations')) ??
             (await store.get<Integrations>('intergrations'))
 
-        const savedRpc: DiscordRpc = savedIntegrations?.discordRpc ?? {
-            enable: false,
-            displayAccount: false,
-            letJoin: false,
-        }
-
         const newIntegrations: Integrations = {
-            optimizer: savedIntegrations?.optimizer ?? false,
-            closeCrashHandler: savedIntegrations?.closeCrashHandler ?? false,
-            priority: savedIntegrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
-            activityWatching: savedIntegrations?.activityWatching ?? true,
-            discordRpc: {
-                enable: savedRpc.enable,
-                displayAccount: savedRpc.displayAccount,
-                letJoin: savedRpc.letJoin,
-            },
-            serverLocationNotifier:
-                savedIntegrations?.serverLocationNotifier ?? false,
+            ...savedIntegrations,
             roValra: {
                 joinServerForYouValue,
-            },
-            sleepSchedule: {
-                enabled: savedIntegrations?.sleepSchedule?.enabled ?? true,
-                visible: savedIntegrations?.sleepSchedule?.visible ?? false,
             },
         }
 
