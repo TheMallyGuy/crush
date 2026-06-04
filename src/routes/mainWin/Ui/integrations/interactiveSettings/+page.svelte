@@ -79,6 +79,11 @@
                     restore: restoreValue,
                     setTitle: windowTitleValue,
                     setBorderless: borderlessValue,
+                    transparencyScopes: {
+                        enabled: false,
+                        maxTransparency: 0,
+                        minTransparency: 0
+                    }
                 },
             },
         }
