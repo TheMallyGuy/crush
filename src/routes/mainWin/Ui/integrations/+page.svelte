@@ -57,6 +57,7 @@
     let exePath: string
 
     const roValaraLogo = '/Rovalra.png'
+    const swifty = '/swifty.png'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -70,7 +71,8 @@
         if (savedIntegrations) {
             const savedRpc = savedIntegrations.discordRpc as DiscordRpc
 
-            processPriority = savedIntegrations.priority ?? 'NORMAL_PRIORITY_CLASS'
+            processPriority =
+                savedIntegrations.priority ?? 'NORMAL_PRIORITY_CLASS'
             isLateNightGamer = savedIntegrations.sleepSchedule?.visible ?? false
             sleepSchedule = savedIntegrations.sleepSchedule?.enabled ?? true
 
@@ -80,7 +82,8 @@
                 displayAccount = savedRpc.displayAccount
             }
             crashHandler = savedIntegrations.closeCrashHandler ?? false
-            serverLocationNotifier = savedIntegrations.serverLocationNotifier ?? false
+            serverLocationNotifier =
+                savedIntegrations.serverLocationNotifier ?? false
             activityWatching = savedIntegrations.activityWatching ?? false
             optimizer = savedIntegrations.optimizer ?? false
         }
@@ -140,8 +143,8 @@
     on:close={() => {
         warningDialog = false
     }}
-    title="Warning"
-    description="This is a 3rd party library/feature. We dont have control over it. Use at your own risk!"
+    title="3rd party warning"
+    description="This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us."
 >
     <div slot="actions">
         <Button
@@ -246,7 +249,8 @@
         <SettingCard
             title="SwiftTunnel"
             description="Crush have swifttunell.ddl meaning crush have ablities to replicate swifttunnel!"
-            icon={Sparkles}
+            icon={swifty}
+            doTheGrayThing={true}
         >
             <Button
                 slot="action"
