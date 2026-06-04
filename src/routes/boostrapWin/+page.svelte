@@ -157,7 +157,12 @@
                         type: 'status',
                         message: 'Connecting to swifttunnel servers...',
                     })
-                    await invoke('connect')
+
+                    try {
+                        await invoke('connect')
+                    } catch (e) {
+                        // do nothing lmao
+                    }
 
                     handleProgress({
                         type: 'status',
