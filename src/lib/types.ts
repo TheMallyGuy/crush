@@ -73,7 +73,13 @@ export type Integrations = {
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI
-    swifttunnel?: boolean
+    swifttunnel?: Swifttunnel
+}
+
+export type Swifttunnel = {
+    enable: boolean
+    enableRouting: boolean
+    perferedRegion: string
 }
 
 export type BuildInfo = {

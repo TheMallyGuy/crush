@@ -3,6 +3,7 @@
     import Button from '$lib/components/atoms/Button.svelte'
     import LoadingOverlay from '$lib/components/atoms/LoadingOverlay.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
+    import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import type { Integrations } from '$lib/types'
     import { invoke } from '@tauri-apps/api/core'
@@ -20,11 +21,21 @@
         ping: number | null
     }
 
+    interface DropdownOption {
+        label: string
+        value: string
+    }
+
     const TIMEOUT_MS = 60_000
 
     let isLoggedIn = $state(false)
     let isInAuthSwift = $state(false)
     let enableSwifttunnel = $state(false)
+    let enableRouting = $state(true)
+    let perferedRegion = $state('Singapore')
+
+    let perferedRegionItems = $state<DropdownOption[]>([])
+
     let serverList = $state<Server[]>([])
     let authError = $state<string | null>(null)
     let timeoutId: ReturnType<typeof setTimeout> | null = null
@@ -49,17 +60,46 @@
             const raw = await invoke<string>('swift_get_servers')
             const parsed = JSON.parse(raw)
             serverList = parsed.servers as Server[]
+
+            const regionNames = new Intl.DisplayNames(['en'], {
+                type: 'region',
+            })
+
+            const countriesMap = new Map<string, string>()
+
+            serverList.forEach((item) => {
+                const codeLower =
+                    regionNames.of(item.country_code.toLowerCase()) ??
+                    item.country_code
+
+                const fullName =
+                    regionNames.of(item.country_code.toUpperCase()) ??
+                    item.country_code
+
+                if (!countriesMap.has(codeLower)) {
+                    countriesMap.set(codeLower, fullName)
+                }
+            })
+
+            perferedRegionItems = Array.from(countriesMap.entries()).map(
+                ([value, label]) => ({ label, value })
+            )
+
+            console.log(serverList)
         } catch (e) {
             console.error('Failed to fetch servers', e)
         }
     }
 
-        async function loadSettings() {
+    async function loadSettings() {
         try {
             const store = await load('config.json')
             const integrations = await store.get<Integrations>('integrations')
             if (integrations) {
-                enableSwifttunnel = integrations.swifttunnel ?? false
+                enableSwifttunnel = integrations.swifttunnel?.enable ?? false
+                enableRouting = integrations.swifttunnel?.enableRouting ?? true
+                perferedRegion =
+                    integrations.swifttunnel?.perferedRegion ?? 'singapore'
             }
         } catch (e) {
             console.error('Failed to load settings', e)
@@ -69,7 +109,11 @@
     async function saveSettings() {
         try {
             const newInte: Integrations = {
-                swifttunnel: enableSwifttunnel,
+                swifttunnel: {
+                    enable: enableSwifttunnel,
+                    enableRouting: enableRouting,
+                    perferedRegion: perferedRegion,
+                },
             }
             const store = await load('config.json')
             await store.set('integrations', newInte)
@@ -160,6 +204,30 @@
             <Switch
                 slot="action"
                 bind:checked={enableSwifttunnel}
+                on:change={saveSettings}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Enable Roblox Routing"
+            description="Route all roblox API request to the VPN. This can be use to evade blocked game in some country."
+        >
+            <Switch
+                slot="action"
+                disabled={!enableSwifttunnel}
+                bind:checked={enableRouting}
+                on:change={saveSettings}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Prefered Region"
+            description="Config your perfered region"
+        >
+            <Dropdown
+                slot="action"
+                options={perferedRegionItems}
+                bind:value={perferedRegion}
                 on:change={saveSettings}
             />
         </SettingCard>
