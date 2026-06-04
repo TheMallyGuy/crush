@@ -23,9 +23,13 @@ const APP_MANIFEST: &str = r#"<assembly xmlns="urn:schemas-microsoft-com:asm.v1"
 </assembly>"#;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("cargo:rustc-link-search=native=libraries");
+    let manifest_dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let libraries_dir = manifest_dir.join("libraries");
+    let dll_src = libraries_dir.join("swifttunnel.dll");
+
+    println!("cargo:rustc-link-search=native={}", libraries_dir.display());
     println!("cargo:rustc-link-lib=dylib=swifttunnel");
-    println!("cargo:rerun-if-changed=libraries/swifttunnel.dll");
+    println!("cargo:rerun-if-changed={}", dll_src.display());
 
     let out_dir = std::env::var("OUT_DIR").unwrap_or_default();
     let target_dir = std::path::PathBuf::from(&out_dir)
@@ -34,7 +38,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .map(|p| p.to_path_buf())
         .unwrap_or_else(|| std::path::PathBuf::from("target/debug"));
 
-    let _ = std::fs::copy("libraries/swifttunnel.dll", target_dir.join("swifttunnel.dll"));
+    let _ = std::fs::copy(&dll_src, target_dir.join("swifttunnel.dll"));
 
     let rustc = RustcBuilder::all_rustc()?;
     let build = BuildBuilder::all_build()?;
