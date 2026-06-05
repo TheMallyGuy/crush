@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Download, Info } from '@lucide/svelte'
+    import { _ } from 'svelte-i18n'
+    import { Download } from '@lucide/svelte'
     import Button from '$lib/components/atoms/Button.svelte'
 
     export let name = ''
@@ -34,12 +35,17 @@
             <p class="truncate text-sm font-bold text-stone-100">{name}</p>
             {#if author || category}
                 <p class="truncate text-xs font-medium text-stone-500">
-                    {#if author}By: {author}{/if}{#if author && category}
+                    {#if author}{$_('pages.mod.tab.communityMods.itemCard.by', {
+                            values: { name: author },
+                        })}
+                    {/if}{#if author && category}
                         |
                     {/if}{category}
                 </p>
                 <p class="truncate text-xs font-medium text-stone-500">
-                    Adapter : {adapter}
+                    {$_('pages.mod.tab.communityMods.itemCard.adapter', {
+                        values: { library: adapter },
+                    })}
                 </p>
             {/if}
         </div>
