@@ -2,8 +2,7 @@ use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::TrayIconId;
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
-use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
-use tauri_plugin_store::StoreExt;
+use tauri::{AppHandle, Manager, WebviewUrl};
 
 pub struct TrayState {
     pub id: TrayIconId,
@@ -78,7 +77,7 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
                         let _ = window.show();
                         let _ = window.set_focus();
                     } else {
-                        let webview_url = WebviewUrl::App(
+                        let _webview_url = WebviewUrl::App(
                             "mainWin/other/serverInfo"
                                 .parse()
                                 .expect("Failed to parse URL"),
