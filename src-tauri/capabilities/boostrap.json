@@ -90,6 +90,13 @@
                 "$APPDATA/**"
             ]
         },
+        {
+            "identifier": "fs:allow-remove",
+            "allow": [
+                "$APPCACHE/**",
+                "$APPDATA/**"
+            ]
+        },
         "fs:default",
         {
             "identifier": "http:default",

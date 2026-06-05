@@ -62,17 +62,25 @@ export type sleepSchedule = {
 }
 
 export type Integrations = {
-    closeCrashHandler: boolean
-    activityWatching: boolean
-    discordRpc: DiscordRpc
-    serverLocationNotifier: boolean
-    priority: PriorityClass
-    roValra: RoValra
-    optimizer: boolean
-    sleepSchedule: sleepSchedule,
+    closeCrashHandler?: boolean
+    activityWatching?: boolean
+    discordRpc?: DiscordRpc
+    serverLocationNotifier?: boolean
+    priority?: PriorityClass
+    roValra?: RoValra
+    optimizer?: boolean
+    sleepSchedule?: sleepSchedule,
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI
+    swifttunnel?: Swifttunnel
+}
+
+export type Swifttunnel = {
+    enable: boolean
+    enableRouting: boolean
+    perferedRegion: string
+    assetsRouting: boolean
 }
 
 export type BuildInfo = {
@@ -192,6 +200,8 @@ export interface BootstrapConfig {
     theme: Theme
     margin?: Margin
     windowCornerPreference?: string
+    background?: string
+    foreground?: string
     elements: BootstrapElement[]
 }
 

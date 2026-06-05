@@ -48,7 +48,11 @@
             "./resources/tortellini.jpg",
 
             "./resources/icon.ico",
-            "./open_game.bat"
+            "./open_game.bat",
+
+            "./libraries/swifttunnel.dll",
+            "./libraries/swifttunnel.def",
+            "./libraries/swifttunnel.exp"
         ]
     },
     "plugins": {

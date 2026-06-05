@@ -17,10 +17,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::Path;
 use std::sync::Mutex;
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    OnceLock,
-};
+use std::sync::OnceLock;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
@@ -240,7 +237,6 @@ struct EmitServerInfomation {
 
 // entry
 
-static WATCHER_RUNNING: AtomicBool = AtomicBool::new(false);
 static WATCHER_CANCEL: Mutex<Option<CancellationToken>> = Mutex::new(None);
 
 #[tauri::command]
@@ -249,13 +245,6 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
         if let Some(token) = guard.take() {
             token.cancel();
         }
-    }
-
-    WATCHER_RUNNING.store(false, Ordering::SeqCst);
-
-    if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
-        log::warn!("ignoring duplicate watch_logs call");
-        return Ok(());
     }
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
@@ -287,7 +276,6 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
                     log::info!("watcher cancelled by new watch_logs call");
                 }
             }
-            WATCHER_RUNNING.store(false, Ordering::SeqCst);
         });
     });
 
@@ -1288,7 +1276,15 @@ async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Res
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
 
-    if integration_enabled(&store, &["sleepSchedule", "enabled"]) {
+    let sleep_enabled = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"))
+        .and_then(|v| v.get("sleepSchedule").cloned())
+        .and_then(|v| v.get("enabled").cloned())
+        .and_then(|v| v.as_bool())
+        .unwrap_or(true);
+
+    if sleep_enabled {
         if count == 0 {
             notify(
                 "About your sleep schedule...",
@@ -1305,8 +1301,14 @@ async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Res
             if let Some(integrations_obj) = integrations.as_object_mut() {
                 if let Some(sleep_schedule) = integrations_obj.get_mut("sleepSchedule") {
                     if let Some(sleep_obj) = sleep_schedule.as_object_mut() {
+                        sleep_obj.insert("visible".to_string(), json!(true));
                         sleep_obj.insert("enabled".to_string(), json!(true));
                     }
+                } else {
+                    integrations_obj.insert(
+                        "sleepSchedule".to_string(),
+                        json!({ "visible": true, "enabled": true }),
+                    );
                 }
             }
 

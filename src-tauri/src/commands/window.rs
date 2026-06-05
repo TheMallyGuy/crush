@@ -32,7 +32,7 @@ pub async fn create_or_focus_window(
         builder = builder.min_inner_size(w, h);
     }
 
-    let window = builder.build().map_err(|e| e.to_string())?;
+    let _window = builder.build().map_err(|e| e.to_string())?;
 
     Ok(())
 }

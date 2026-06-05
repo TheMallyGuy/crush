@@ -23,13 +23,18 @@
             const windowManipulation: interactiveAPI = {
                 enable: boostraperConfig.UseWindowControl ?? false,
                 scopes: {
-                    setTitle : boostraperConfig.TitleControlAllowed ?? true, // what the FUCK am i doing
+                    setTitle: boostraperConfig.TitleControlAllowed ?? true, // what the FUCK am i doing
                     focus: boostraperConfig.MoveWindowAllowed ?? true,
                     moveWindow: boostraperConfig.MoveWindowAllowed ?? true,
                     maximize: boostraperConfig.MoveWindowAllowed ?? true,
                     minimize: boostraperConfig.MoveWindowAllowed ?? true,
                     restore: boostraperConfig.MoveWindowAllowed ?? true,
-                    setBorderless: boostraperConfig.MoveWindowAllowed ?? true
+                    setBorderless: boostraperConfig.MoveWindowAllowed ?? true,
+                    transparencyScopes: {
+                        enabled: false,
+                        maxTransparency: 0,
+                        minTransparency: 0
+                    }
                 }
             }
             

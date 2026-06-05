@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Community Mods",
                     "description": "Explore mods created by the community.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "We don't have any community mods yet. Be the first to contribute and help us grow the collection!",
-                        "submissionButton": "Submit a mod "
+                    "loading" : "Loading Mods...",
+                    "notFound" : "No {itemsCount} mods found.",
+                    "pills" : {
+                        "all" : "All",
+                        "library" : "Library {libraryName}"
+                    },
+                    "itemCard" : {
+                        "by" : "By {name}",
+                        "adapter" : "Adapter : {library}",
+                        "download" : "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Donate",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Donate"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }
