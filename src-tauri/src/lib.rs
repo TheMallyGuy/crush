@@ -174,6 +174,17 @@ fn print_debug_info() {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    #[cfg(windows)]
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(exe_dir) = exe.parent() {
+            use std::os::windows::ffi::OsStrExt;
+            use windows::Win32::System::LibraryLoader::SetDllDirectoryW;
+            let lib_dir = exe_dir.join("libraries");
+            let mut wide: Vec<u16> = lib_dir.as_os_str().encode_wide().chain([0u16]).collect();
+            let _ = unsafe { SetDllDirectoryW(windows::core::PCWSTR(wide.as_mut_ptr())) };
+        }
+    }
+
     let sdk = SwiftTunnel::init().expect("SwiftTunnel SDK init failed");
 
     let mut builder = tauri::Builder::default()
