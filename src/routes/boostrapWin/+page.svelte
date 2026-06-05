@@ -278,45 +278,110 @@
         return new Promise((resolve) => setTimeout(resolve, ms))
     }
 
-    function getPosStyle(h?: string, v?: string) {
-        const styles: string[] = []
-        const transforms: string[] = []
+    function buildStyle(el: BootstrapElement, zFallback = 0): string {
+        const p: string[] = []
+        const h = el.hAlign
+        const v = el.vAlign
+        let tx = '0', ty = '0', needsTransform = false
 
-        const hPos =
-            h === 'Right' ? 'right:0' : h === 'Center' ? 'left:50%' : 'left:0'
-        styles.push(hPos)
-        if (h === 'Center') transforms.push('translateX(-50%)')
-
-        const vPos =
-            v === 'Bottom' ? 'bottom:0' : v === 'Center' ? 'top:50%' : 'top:0'
-        styles.push(vPos)
-        if (v === 'Center') transforms.push('translateY(-50%)')
-
-        if (transforms.length > 0) {
-            styles.push(`transform:${transforms.join(' ')}`)
+        // Horizontal
+        if (h === 'Stretch') {
+            p.push('left:0', 'right:0', 'width:100%')
+        } else if (h === 'Right') {
+            p.push('right:0')
+            if (el.width != null) p.push(`width:${el.width}px`)
+        } else if (h === 'Center') {
+            p.push('left:50%')
+            tx = '-50%'; needsTransform = true
+            if (el.width != null) p.push(`width:${el.width}px`)
+        } else {
+            p.push('left:0')
+            if (el.width != null) p.push(`width:${el.width}px`)
         }
 
-        return styles.map((s) => `${s};`).join('')
+        // Vertical
+        if (v === 'Stretch') {
+            p.push('top:0', 'bottom:0', 'height:100%')
+        } else if (v === 'Bottom') {
+            p.push('bottom:0')
+            if (el.height != null) p.push(`height:${el.height}px`)
+        } else if (v === 'Center') {
+            p.push('top:50%')
+            ty = '-50%'; needsTransform = true
+            if (el.height != null) p.push(`height:${el.height}px`)
+        } else {
+            p.push('top:0')
+            if (el.height != null) p.push(`height:${el.height}px`)
+        }
+
+        if (needsTransform) p.push(`transform:translate(${tx},${ty})`)
+
+        // Margin — use !== 0 so negative values are never dropped
+        const m = el.margin
+        if (m) {
+            if (m.left   !== 0) p.push(`margin-left:${m.left}px`)
+            if (m.top    !== 0) p.push(`margin-top:${m.top}px`)
+            if (m.right  !== 0) p.push(`margin-right:${m.right}px`)
+            if (m.bottom !== 0) p.push(`margin-bottom:${m.bottom}px`)
+        }
+
+        if (el.opacity != null) p.push(`opacity:${el.opacity}`)
+        p.push(`z-index:${el.zIndex ?? zFallback}`)
+
+        return p.join(';') + ';'
     }
 
-    function opStyle(op?: number) {
-        return op ? `opacity:${op};` : ''
-    }
-
-    function marginStyle(m?: {
-        top: number
-        right: number
-        bottom: number
-        left: number
-    }) {
-        if (!m) return ''
-        return Object.entries(m)
-            .map(([side, val]) => (val ? `margin-${side}:${val}px;` : ''))
-            .join('')
-    }
     function asset(src?: string) {
         if (!state) return ''
         return resolveAsset(state, src)
+    }
+
+    /** Resolve __marker__ binding values to actual runtime colors / strings */
+    function resolveBindingProp(value: string | undefined): string {
+        if (!value) return ''
+        switch (value) {
+            case '__fg__':
+            case '__icon__': return isDark ? '#ffffff' : '#000000'
+            case '__bg__':   return isDark ? 'rgba(30,30,30,0.97)' : 'rgba(255,255,255,0.97)'
+            default:         return value
+        }
+    }
+
+    /**
+     * Map WPF Image Stretch to CSS object-fit.
+     * WPF default is Uniform (contain). object-cover (WPF UniformToFill) is NOT
+     * the default — it crops, which is what causes the "glitched" look.
+     */
+    function imgObjectFit(el: BootstrapElement): string {
+        switch (el.props.Stretch ?? el.props.stretch) {
+            case 'UniformToFill': return 'object-cover'
+            case 'Uniform':       return 'object-contain'
+            case 'None':          return 'object-none'
+            case 'Fill':          return 'object-fill'
+            default:
+                // WPF default = Uniform. With both dims explicit the image fills exactly;
+                // use object-contain so aspect ratio is preserved (no cropping).
+                return 'object-contain'
+        }
+    }
+
+    /** Auto-fit SVG viewBox to the path's actual bounding box after mount */
+    function autoViewBox(svgNode: SVGSVGElement) {
+        requestAnimationFrame(() => {
+            const path = svgNode.querySelector('path')
+            if (!path) return
+            try {
+                const bb = (path as SVGPathElement).getBBox()
+                if (bb.width > 0 && bb.height > 0) {
+                    svgNode.setAttribute(
+                        'viewBox',
+                        `${bb.x} ${bb.y} ${bb.width} ${bb.height}`
+                    )
+                }
+            } catch {
+                // getBBox can throw if SVG isn't in the DOM yet
+            }
+        })
     }
 
     $: cfg = state?.config
@@ -376,126 +441,87 @@
                     <div
                         class="absolute"
                         style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            width:{el.width}px;
-                            height:{el.height}px;
+                            {buildStyle(el)}
                             background:{el.props.Fill || '#000'};
-                            {el.props.RadiusX
-                            ? `border-radius:${el.props.RadiusX}px;`
-                            : ''}
-                            {opStyle(el.opacity)}
-                            {marginStyle(el.margin)}
-                            z-index:{el.zIndex ?? 0};
+                            {el.props.RadiusX ? `border-radius:${el.props.RadiusX}px;` : ''}
                         "
                     ></div>
+
+                {:else if el.type === 'Path' && el.props.svgFigures}
+                    <svg
+                        class="absolute overflow-visible"
+                        style={buildStyle(el)}
+                        viewBox="0 0 1 1"
+                        preserveAspectRatio={el.props.svgStretch === 'Uniform' ? 'xMidYMid meet' : 'none'}
+                        use:autoViewBox
+                    >
+                        <path
+                            d={el.props.svgFigures}
+                            fill={resolveBindingProp(el.props.svgFill)}
+                            fill-rule={el.props.svgFillRule ?? 'evenodd'}
+                        />
+                    </svg>
+
                 {:else if el.type === 'Image' || el.props.source}
-                    <img
-                        src={asset(
-                            el.props.source ||
-                                el.props.Source ||
-                                el.props.ImageSource
-                        )}
-                        class="absolute object-cover {el.props.class ||
-                            el.props.Class ||
-                            ''}"
-                        style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            {el.width ? `width:${el.width}px;` : ''}
-                            {el.height ? `height:${el.height}px;` : ''}
-                            {opStyle(el.opacity)}
-                            {marginStyle(el.margin)}
-                            z-index:{el.zIndex ?? 0};
-                        "
-                        alt=""
-                    />
+                    <!-- skip __logo__ and other unresolvable binding sources -->
+                    {#if el.props.source && !el.props.source.startsWith('__')}
+                        <img
+                            src={asset(el.props.source || el.props.Source || el.props.ImageSource)}
+                            class="absolute {imgObjectFit(el)} {el.props.class || el.props.Class || ''}"
+                            style={buildStyle(el)}
+                            alt=""
+                        />
+                    {/if}
+
                 {:else if el.type === 'TextBlock'}
                     <span
                         id={el.name}
-                        class="absolute whitespace-nowrap pointer-events-none leading-none {el
-                            .props.class ||
-                            el.props.Class ||
-                            ''}"
+                        class="absolute pointer-events-none leading-none {el.props.class || el.props.Class || ''}"
                         style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            {opStyle(el.opacity)}
-                            {marginStyle(el.margin)}
-                            {el.props.Foreground
-                            ? `color:${el.props.Foreground};`
-                            : ''}
-                            {el.props.FontSize
-                            ? `font-size:${el.props.FontSize}px;`
-                            : ''}
-                            z-index:{el.zIndex ?? 0};
+                            {buildStyle(el)}
+                            color:{resolveBindingProp(el.props.Foreground) || (isDark ? '#fff' : '#000')};
+                            {el.props.FontSize ? `font-size:${el.props.FontSize}px;` : ''}
+                            {el.props.fontWeight ? `font-weight:${el.props.fontWeight};` : ''}
+                            {el.props.textAlign ? `text-align:${el.props.textAlign};` : 'white-space:nowrap;'}
                         "
-                        >{textValues[el.name ?? ''] ??
-                            el.props.Text ??
-                            ''}</span
-                    >
+                    >{textValues[el.name ?? ''] ?? el.props.Text ?? ''}</span>
+
                 {:else if el.type === 'Button'}
                     <button
                         id={el.name}
                         on:click={cancel}
-                        class="absolute bg-obsidian border-0 cursor-pointer focus:outline-none focus:ring-0 {el
-                            .props.class ||
-                            el.props.Class ||
-                            ''}"
-                        style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            {el.width ? `width:${el.width}px;` : ''}
-                            {el.height ? `height:${el.height}px;` : ''}
-                            {opStyle(el.opacity)}
-                            {marginStyle(el.margin)}
-                            z-index:{el.zIndex ?? 2};
-                        ">{el.props.Content || el.props.Label || ''}</button
-                    >
+                        class="absolute bg-obsidian border-0 cursor-pointer focus:outline-none focus:ring-0 {el.props.class || el.props.Class || ''}"
+                        style={buildStyle(el, 2)}
+                    >{el.props.Content || el.props.Label || ''}</button>
+
                 {:else if el.type === 'ProgressBar'}
                     <div
-                        class="absolute overflow-hidden bg-white/10 {el.props
-                            .class ||
-                            el.props.Class ||
-                            ''}"
+                        class="absolute overflow-hidden bg-white/10 {el.props.class || el.props.Class || ''}"
                         style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            {el.width ? `width:${el.width}px;` : ''}
-                            {el.height ? `height:${el.height}px;` : ''}
-                            {opStyle(el.opacity)}
+                            {buildStyle(el)}
                             border-radius:{el.props.CornerRadius ?? 0}px;
-                            z-index:{el.zIndex ?? 0};
                         "
                     >
                         {#if !done}
                             <div
                                 class="h-full w-2/5 animate-indeterminate"
-                                style="background:{el.props.Foreground ??
-                                    '#919191'};border-radius:inherit;"
+                                style="background:{el.props.Foreground ?? '#919191'};border-radius:inherit;"
                             ></div>
                         {:else}
                             <div
                                 class="h-full w-full transition-[width] duration-300 ease-out"
-                                style="background:{el.props.Foreground ??
-                                    '#919191'};border-radius:inherit;"
+                                style="background:{el.props.Foreground ?? '#919191'};border-radius:inherit;"
                             ></div>
                         {/if}
                     </div>
+
                 {:else if el.type === 'Html'}
                     {#await loadHtml(el.props.Source || el.props.File) then htmlContent}
                         <div
                             id={el.name}
-                            class="absolute {el.props.class ||
-                                el.props.Class ||
-                                ''}"
-                            style="
-                            {getPosStyle(el.hAlign, el.vAlign)}
-                            {el.width ? `width:${el.width}px;` : ''}
-                            {el.height ? `height:${el.height}px;` : ''}
-                            {opStyle(el.opacity)}
-                            {marginStyle(el.margin)}
-                            z-index:{el.zIndex ?? 0};
-                        "
-                            use:mountHtml={htmlContent ||
-                                el.props.Content ||
-                                el.props.Html ||
-                                ''}
+                            class="absolute {el.props.class || el.props.Class || ''}"
+                            style={buildStyle(el)}
+                            use:mountHtml={htmlContent || el.props.Content || el.props.Html || ''}
                         ></div>
                     {/await}
                 {/if}
