@@ -171,6 +171,48 @@ export async function listThemes(): Promise<string[]> {
     }
 }
 
+export async function importThemeFromDir(
+    sourceDir: string,
+    rawName: string
+): Promise<LoadResult | null> {
+    const themeName = safeName(rawName)
+    const appData = await appDataDir()
+    const destDir = await join(appData, 'themes', themeName)
+    await mkdir(destDir, { recursive: true })
+
+    // Copy all files from the extracted dir into the theme dir
+    const entries = await readDir(sourceDir)
+    let xmlSrcPath: string | null = null
+
+    await Promise.all(
+        entries
+            .filter((e) => !e.isDirectory)
+            .map(async (e) => {
+                const srcPath = await join(sourceDir, e.name)
+                const destPath = await join(destDir, e.name)
+                const bytes = await readFile(srcPath)
+                await writeFile(destPath, bytes)
+
+                if (!xmlSrcPath && e.name.toLowerCase().endsWith('.xml')) {
+                    xmlSrcPath = destPath
+                }
+            })
+    )
+
+    if (!xmlSrcPath) return null
+
+    // Ensure the XML is named <themeName>.xml as loadThemeFromAppData expects
+    const expectedXml = await join(destDir, `${themeName}.xml`)
+    if (xmlSrcPath !== expectedXml) {
+        const bytes = await readFile(xmlSrcPath)
+        await writeFile(expectedXml, bytes)
+        await remove(xmlSrcPath).catch(() => {})
+    }
+
+    await saveActiveTheme(themeName)
+    return loadThemeFromAppData(themeName)
+}
+
 export async function removeTheme(themeName: string): Promise<void> {
     const appData = await appDataDir()
     const themeDir = await join(appData, 'themes', themeName)

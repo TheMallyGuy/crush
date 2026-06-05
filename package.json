@@ -43,6 +43,7 @@
         "svelte-i18n": "^4.0.1",
         "tailwind-merge": "^3.6.0",
         "tailwindcss": "^4.2.1",
+        "tauri-plugin-cache-api": "^0.1.6",
         "tauri-plugin-fs-pro-api": "^2.4.0",
         "three": "^0.184.0",
         "zdog": "^1.1.3"

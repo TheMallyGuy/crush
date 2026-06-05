@@ -71,6 +71,7 @@ image = "0.25"
 tao = "0.35.3"
 cookie = "0.18.1"
 base64 = "0.22.1"
+tauri-plugin-cache = "0.1.6"
 
 
 [target.'cfg(windows)'.dependencies]

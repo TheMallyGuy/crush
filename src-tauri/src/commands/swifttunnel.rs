@@ -1,4 +1,4 @@
-use crate::swifttunnel_sdk::{AutoRouting, ConnectOptions, OAuthPoll};
+use crate::swifttunnel_sdk::{ConnectOptions, OAuthPoll};
 use crate::SdkState;
 use tauri_plugin_opener::OpenerExt;
 

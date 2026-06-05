@@ -177,6 +177,7 @@ pub fn run() {
     let sdk = SwiftTunnel::init().expect("SwiftTunnel SDK init failed");
 
     let mut builder = tauri::Builder::default()
+        .plugin(tauri_plugin_cache::init())
         .plugin(tauri_plugin_cli::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
