@@ -13,6 +13,7 @@
         AudioWaveform,
         Crosshair,
         Cuboid,
+        ScrollText,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -24,11 +25,13 @@
     import Switch from '$lib/components/atoms/Switch.svelte'
     import { Backlight } from '$lib/components/magic/backlight'
     import { SmoothCursor } from '$lib/components/magic/smooth-cursor'
+    import Dialog from '$lib/components/molecules/Dialog.svelte'
 
     const Arona = '/Arona.png'
 
     let wasLockedIn = settings.lockedInMode
     let wasRedRings = settings.redRings
+    let creditDialog = $state(false)
 
     let info: BuildInfo | undefined = $state()
     let hash: string = $state('Unknown hash')
@@ -135,6 +138,38 @@
     <SmoothCursor />
 {/if}
 
+<Dialog
+    open={creditDialog}
+    on:close={() => {
+        creditDialog = false
+    }}
+    title={$_('pages.settings.creditsCard.dialog.title')}
+>
+    <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
+        <div>
+            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.development')}</p>
+            <p class="text-stone-300">Mally - Lead Developer</p>
+        </div>
+        <div>
+            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.inspiration')}</p>
+            <p class="text-stone-300">Bloxstrap, Frostrap, Funkstrap, AppleBlox</p>
+        </div>
+        <div>
+            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.localization')}</p>
+            <p class="text-stone-300">polover - Vietnamese</p>
+        </div>
+        <div>
+            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.specialThanks')}</p>
+            <div class="flex flex-col gap-1 text-stone-300">
+                <p>@miawuawua</p>
+                <p>@polover1682</p>
+                <p>@headlessangelwings</p>
+                <p>@someonehelpme_12</p>
+            </div>
+        </div>
+    </div>
+</Dialog>
+
 <div class="flex flex-col gap-4">
     <div class="flex items-center justify-between">
         <div>
@@ -161,7 +196,11 @@
         description={$_('pages.settings.onBoardCard.description')}
         icon={BookHeart}
     >
-        <Button slot="action" variant="danger">
+        <Button
+            slot="action"
+            variant="danger"
+            on:click={handleResetCrushOnboarding}
+        >
             {$_('pages.settings.onBoardCard.button')}
         </Button>
     </SettingCard>
@@ -172,6 +211,22 @@
         icon={AudioWaveform}
     >
         <Switch slot="action" bind:checked={settings.discordRpcEnabled} />
+    </SettingCard>
+
+    <SettingCard
+        title={$_('pages.settings.lockedInCard.title')}
+        description={$_('pages.settings.lockedInCard.description')}
+        icon={Crosshair}
+    >
+        <Switch slot="action" bind:checked={settings.lockedInMode} />
+    </SettingCard>
+
+    <SettingCard
+        title={$_('pages.settings.redRingsCard.title')}
+        description={$_('pages.settings.redRingsCard.description')}
+        icon={Cuboid}
+    >
+        <Switch slot="action" bind:checked={settings.redRings} />
     </SettingCard>
 
     <ExpandableSettingCard
@@ -201,20 +256,14 @@
         </div>
     </ExpandableSettingCard>
 
-    <SettingCard
-        title={$_("pages.settings.lockedInCard.title")}
-        description={$_("pages.settings.lockedInCard.description")}
-        icon={Crosshair}
-    >
-        <Switch slot="action" bind:checked={settings.lockedInMode} />
-    </SettingCard>
-
-    <SettingCard
-        title={$_("pages.settings.redRingsCard.title")}
-        description={$_("pages.settings.redRingsCard.description")}
-        icon={Cuboid}
-    >
-        <Switch slot="action" bind:checked={settings.redRings} />
+    <SettingCard title={$_('pages.settings.creditsCard.title')} icon={ScrollText}>
+        <Button
+            slot="action"
+            variant="secondary"
+            on:click={() => {
+                creditDialog = true
+            }}>{$_('pages.settings.creditsCard.button')}</Button
+        >
     </SettingCard>
 
     <ExpandableSettingCard

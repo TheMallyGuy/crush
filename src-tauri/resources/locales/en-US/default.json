@@ -546,6 +546,17 @@
                 "title": "Donate",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Donate"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }
