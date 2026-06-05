@@ -103,8 +103,8 @@
                 "description": "ĐANG THỬ NGHIỆM. Thay đổi mức độ ưu tiên của tiến trình Roblox. Có thể tăng hiệu suất."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Bật trình tối ưu hóa",
+                "description": "Tối ưu Roblox bằng cách giới hạn tài nguyên sử dụng của nó. Lấy cảm hứng từ cách hoạt động của 8damon/TASX-Roblox-Optimizer trên github. Tất cả ở đây đều viết từ đầu."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Vô hiệu tối ưu hóa toàn màn hình",
@@ -530,11 +530,11 @@
             },
             "redRingsCard": {
                 "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "description": "Anh bạn này cứ thêm BẤT CỨ THỨ GÌ vào thời điểm này ✌️"
             },
             "lockedInCard": {
                 "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "description": "Cấu hình Roblox không thể nào nghiêm trọng đến thế được 😭"
             },
             "donateCard": {
                 "title": "Ủng hộ",
