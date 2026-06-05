@@ -1,0 +1,60 @@
+<script lang="ts">
+    import { Download, Info } from '@lucide/svelte'
+    import Button from '$lib/components/atoms/Button.svelte'
+
+    export let name = ''
+    export let author = ''
+    export let category = ''
+    export let thumbnail = ''
+    export let downloading = false
+    export let adapter = ''
+
+    let className = ''
+    export { className as class }
+</script>
+
+<div
+    class="group relative flex w-full flex-col overflow-hidden bg-anthracite border border-stone-800/30 transition-all duration-150 hover:border-stone-700/50 {className}"
+    {...$$restProps}
+>
+    <div class="relative h-44 w-full shrink-0 overflow-hidden bg-stone-900">
+        {#if thumbnail}
+            <img
+                src={thumbnail}
+                alt={name}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+        {:else}
+            <div class="h-full w-full bg-stone-800/60" />
+        {/if}
+    </div>
+
+    <div class="flex flex-col gap-3 p-3">
+        <div class="flex flex-col gap-0.5">
+            <p class="truncate text-sm font-bold text-stone-100">{name}</p>
+            {#if author || category}
+                <p class="truncate text-xs font-medium text-stone-500">
+                    {#if author}By: {author}{/if}{#if author && category}
+                        |
+                    {/if}{category}
+                </p>
+                <p class="truncate text-xs font-medium text-stone-500">
+                    Adapter : {adapter}
+                </p>
+            {/if}
+        </div>
+
+        <div class="flex items-center gap-2">
+            <Button
+                variant="primary"
+                size="sm"
+                disabled={downloading}
+                class="flex-1 gap-1.5"
+                on:click
+            >
+                <Download size={13} />
+                {downloading ? '...' : 'Download'}
+            </Button>
+        </div>
+    </div>
+</div>

@@ -75,10 +75,13 @@
           "url": "https://users.roblox.com/v1/users/authenticated"
         },
         {
-          "url": "https://raw.githubusercontent.com/klikos-modloader/marketplace/refs/heads/main/index.json"
+          "url": "https://github.com/klikos-modloader/marketplace/raw/refs/heads/main/mods/*"
         },
         {
-          "url": "https://raw.githubusercontent.com/RealMeddsam/config/refs/heads/main/Data.json"
+          "url": "https://raw.githubusercontent.com/klikos-modloader/marketplace/*"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/RealMeddsam/config/*"
         }
       ],
       "deny": [
@@ -217,6 +220,9 @@
         },
         {
           "path": "$CACHE/**"
+        },
+        {
+          "path": "$TEMP/**"
         }
       ]
     },

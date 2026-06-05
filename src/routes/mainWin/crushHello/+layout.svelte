@@ -24,7 +24,7 @@
             label: 'CrushMainWindow',
             url: 'mainWin/Ui/integrations',
             title: 'Crush',
-            width: 1000,
+            width: 1200,
             height: 600,
             minWidth: 1000,
             minHeight: 600,
