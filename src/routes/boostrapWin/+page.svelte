@@ -168,6 +168,7 @@
                         await invoke('connect', {
                             region: integrations.swifttunnel.perferedRegion,
                             routing: integrations.swifttunnel.enableRouting,
+                            dynamicAssets: integrations.swifttunnel.assetsRouting
                         })
                     } catch (e) {
                         // do nothing lmao

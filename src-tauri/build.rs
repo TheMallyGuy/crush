@@ -29,6 +29,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("cargo:rustc-link-search=native={}", libraries_dir.display());
     println!("cargo:rustc-link-lib=dylib=swifttunnel");
+    println!("cargo:rustc-link-arg=/DELAYLOAD:swifttunnel.dll");
+    println!("cargo:rustc-link-lib=delayimp");
     println!("cargo:rerun-if-changed={}", dll_src.display());
 
     let out_dir = std::env::var("OUT_DIR").unwrap_or_default();

@@ -34,6 +34,7 @@
     let enableSwifttunnel = $state(false)
     let enableRouting = $state(true)
     let perferedRegion = $state('Singapore')
+    let assetsRouting = $state(false)
 
     let perferedRegionItems = $state<DropdownOption[]>([])
 
@@ -97,6 +98,7 @@
                 enableRouting = integrations.swifttunnel?.enableRouting ?? true
                 perferedRegion =
                     integrations.swifttunnel?.perferedRegion ?? 'singapore'
+                assetsRouting = integrations.swifttunnel?.assetsRouting ?? false
             }
         } catch (e) {
             console.error('Failed to load settings', e)
@@ -113,6 +115,7 @@
                     enable: enableSwifttunnel,
                     enableRouting: enableRouting,
                     perferedRegion: perferedRegion,
+                    assetsRouting: assetsRouting,
                 },
             }
             await store.set('integrations', newInte)
@@ -197,8 +200,12 @@
         </div>
     {:else}
         <SettingCard
-            title={$_('pages.integrations.swiftTunnel.enableTunnelingCard.title')}
-            description={$_('pages.integrations.swiftTunnel.enableTunnelingCard.description')}
+            title={$_(
+                'pages.integrations.swiftTunnel.enableTunnelingCard.title'
+            )}
+            description={$_(
+                'pages.integrations.swiftTunnel.enableTunnelingCard.description'
+            )}
         >
             <Switch
                 slot="action"
@@ -209,7 +216,9 @@
 
         <SettingCard
             title={$_('pages.integrations.swiftTunnel.enableRoutingCard.title')}
-            description={$_('pages.integrations.swiftTunnel.enableRoutingCard.description')}
+            description={$_(
+                'pages.integrations.swiftTunnel.enableRoutingCard.description'
+            )}
         >
             <Switch
                 slot="action"
@@ -220,8 +229,24 @@
         </SettingCard>
 
         <SettingCard
-            title={$_('pages.integrations.swiftTunnel.preferredRegionCard.title')}
-            description={$_('pages.integrations.swiftTunnel.preferredRegionCard.description')}
+            title="Route assets to multiple relays"
+            description="This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+        >
+            <Switch
+                slot="action"
+                disabled={!enableSwifttunnel}
+                bind:checked={assetsRouting}
+                on:change={saveSettings}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title={$_(
+                'pages.integrations.swiftTunnel.preferredRegionCard.title'
+            )}
+            description={$_(
+                'pages.integrations.swiftTunnel.preferredRegionCard.description'
+            )}
         >
             <Dropdown
                 slot="action"
@@ -237,7 +262,9 @@
             </h2>
 
             {#if serverList.length === 0}
-                <p class="text-stone-500 text-sm">{$_('pages.integrations.swiftTunnel.serverList.empty')}</p>
+                <p class="text-stone-500 text-sm">
+                    {$_('pages.integrations.swiftTunnel.serverList.empty')}
+                </p>
             {:else}
                 {#each serverList as server}
                     <SettingCard

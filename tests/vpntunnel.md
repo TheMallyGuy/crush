@@ -25,4 +25,3 @@ cargo build --release
 ```
 The output will be at `src/target/release/swifttunnel.dll`, take that and see the [headers](https://github.com/TheMallyGuy/Swifttunnel-sdk/blob/main/include/swifttunnel.h) to get started on integrating this into your app.
 
-This feature is exclusive to crush Extra. Its will not be added in normal crush.
