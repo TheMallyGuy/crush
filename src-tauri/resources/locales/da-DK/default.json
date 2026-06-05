@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Netværksmodifikationer",
                     "description": "Udforsk modifikationer, der er oprettet af netværket.",
-                    "notice": {
-                        "title": "Ingen modifikationer endnu",
-                        "description": "Vi har ingen netværksmodifikationer endnu. Vær den første til at bidrage, og hjælp os med at udvide kollektionen.",
-                        "submissionButton": "Indsend en mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Donér",
                 "description": "Elsker Crush? Doner til Mally for at støtte hans arbejde!",
                 "button": "Donér"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

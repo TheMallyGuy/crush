@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Közösségi módok",
                     "description": "Fedezd fel a közösség által létrehozott módosításokat.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "Még nincsenek közösségi modjaink. Legyen Ön az első, aki hozzájárul és segítsen bővíteni a kollekciót!",
-                        "submissionButton": "Mod beküldése"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Adományozás",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Adományozás"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

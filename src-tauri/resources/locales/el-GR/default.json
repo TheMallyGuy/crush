@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Λειτουργίες κοινότητας",
                     "description": "Εξερευνήστε mods που δημιουργήθηκαν από την κοινότητα.",
-                    "notice": {
-                        "title": "Δεν υπάρχουν mods ακόμα",
-                        "description": "Δεν έχουμε ακόμα τροποποιήσεις κοινότητας. Γίνετε ο πρώτος που θα συνεισφέρει και θα μας βοηθήσει να μεγαλώσουμε τη συλλογή!",
-                        "submissionButton": "Υποβάλετε ένα mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Δωρεά",
                 "description": "Αγάπη Crush? Δωρεά στο Mally για να υποστηρίξει το έργο του!",
                 "button": "Δωρεά"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

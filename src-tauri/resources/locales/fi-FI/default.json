@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Yhteisötilat",
                     "description": "Tutustu yhteisön luomiin modeihin.",
-                    "notice": {
-                        "title": "Ei vielä modeja",
-                        "description": "Meillä ei ole vielä yhteisömodeja. Osallistu ensimmäisenä ja auta meitä kasvattamaan kokoelmaa!",
-                        "submissionButton": "Lähetä modi"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Lahjoita",
                 "description": "Rakastatko murskausta? Lahjoita Mally tukeaksesi hänen työtään!",
                 "button": "Lahjoita"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

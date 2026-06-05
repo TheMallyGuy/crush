@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "커뮤니티 개조 부품",
                     "description": "커뮤니티에서 만든 모드를 살펴보세요.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "아직 커뮤니티 개조 부품이 없습니다. 가장 먼저 참여하여 컬렉션을 성장시킬 수 있도록 도와주세요!",
-                        "submissionButton": "모드 제출"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "기부",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "기부"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Gemenskapens Mods",
                     "description": "Utforska modifieringar skapade av communityn.",
-                    "notice": {
-                        "title": "Inga moddar ännu",
-                        "description": "Vi har inga communitymodifieringar ännu. Bli först med att bidra och hjälp oss att utöka kollektionen!",
-                        "submissionButton": "Skicka in en mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Donera",
                 "description": "Love Crush? Donera till Mally för att stödja hans arbete!",
                 "button": "Donera"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

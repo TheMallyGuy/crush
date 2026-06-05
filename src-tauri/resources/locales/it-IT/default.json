@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Mod della community",
                     "description": "Esplora le mod create dalla community.",
-                    "notice": {
-                        "title": "Ancora nessuna mod",
-                        "description": "Non abbiamo ancora nessuna mod della community. Sii il primo a contribuire e ad aiutarci a far crescere la collezione!",
-                        "submissionButton": "Invia una mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Dona",
                 "description": "Amore Crush? Dona a Mally per sostenere il suo lavoro!",
                 "button": "Dona"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Mod cộng đồng",
                     "description": "Khám phá các bản mod do cộng đồng tạo ra.",
-                    "notice": {
-                        "title": "Chưa có mod nào",
-                        "description": "Chúng tôi chưa có bất kỳ mod cộng đồng nào. Hãy là người đầu tiên đóng góp và giúp chúng tôi phát triển bộ sưu tập!",
-                        "submissionButton": "Gửi mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Ủng hộ",
                 "description": "Thích Crush? Hãy quyên góp cho Mally để ủng hộ công việc của anh ấy!",
                 "button": "Ủng hộ"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

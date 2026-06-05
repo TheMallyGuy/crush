@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Community-Mods",
                     "description": "Entdecke Mods, die von der Community erstellt wurden.",
-                    "notice": {
-                        "title": "Noch keine Mods",
-                        "description": "Wir haben noch keine Community-Mods. Seien Sie der Erste, der einen Beitrag leistet und helfen Sie uns, die Kollektion zu erweitern!",
-                        "submissionButton": "Mod einreichen"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Spenden",
                 "description": "Liebe Crush? Spende Mally um seine Arbeit zu unterstützen!",
                 "button": "Spenden"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }
