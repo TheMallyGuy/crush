@@ -188,6 +188,14 @@ pub struct ConnectOptions {
     /// URLs/hosts to never tunnel. Resolved to IPs at connect time; traffic to
     /// those IPs always bypasses the relay (direct connection).
     pub excluded_urls: Vec<String>,
+    /// Dedicated relay endpoint (`ip:port`/`host:port`) for asset traffic. With
+    /// `asset_urls`, matching traffic rides this relay (different exit IP) to
+    /// dodge Roblox's per-IP 429 on assetdelivery.
+    pub asset_relay_server: Option<String>,
+    /// URLs/hosts whose traffic should ride the asset relay.
+    pub asset_urls: Vec<String>,
+    /// Number of far-region relays in the asset pool (0 = default of 3).
+    pub asset_relay_count: usize,
 }
 
 impl Default for ConnectOptions {
@@ -200,6 +208,9 @@ impl Default for ConnectOptions {
             forced_servers: std::collections::HashMap::new(),
             enable_api_tunneling: false,
             excluded_urls: Vec::new(),
+            asset_relay_server: None,
+            asset_urls: Vec::new(),
+            asset_relay_count: 0,
         }
     }
 }
@@ -252,8 +263,22 @@ impl ConnectOptions {
             .join(",");
         let excluded_urls = format!(",\"excluded_urls\":[{}]", excluded);
 
+        let asset_relay = match &self.asset_relay_server {
+            Some(s) => format!(",\"asset_relay_server\":\"{}\"", escape_json_str(s)),
+            None => String::new(),
+        };
+        let asset: String = self
+            .asset_urls
+            .iter()
+            .map(|u| format!("\"{}\"", escape_json_str(u)))
+            .collect::<Vec<_>>()
+            .join(",");
+        let asset_urls = format!(",\"asset_urls\":[{}]", asset);
+
+        let asset_relay_count = format!(",\"asset_relay_count\":{}", self.asset_relay_count);
+
         format!(
-            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}}}",
+            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}{}{}{}}}",
             escape_json_str(&self.region),
             apps,
             ar,
@@ -261,6 +286,9 @@ impl ConnectOptions {
             forced_servers,
             route_assist,
             excluded_urls,
+            asset_relay,
+            asset_urls,
+            asset_relay_count,
         )
     }
 }
