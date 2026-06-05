@@ -4,7 +4,7 @@ If you already know or not, Roblox split their player base into 2 groups; One is
 
 ## The solution
 
-I've been using a VPN called [SwiftTunnel](https://swifttunnel.net/), it offers free VPN with low latency (28 servers, 10 regions), it's open source, no telemetry and written in Tauri + React. So i integrated it in crush Extra using my forked SDK of SwiftTunnel.
+I've been using a VPN called [SwiftTunnel](https://swifttunnel.net/), it offers free VPN with low latency (28 servers, 10 regions), it's open source, no telemetry and written in Tauri + React. So i integrated it in crush using my forked SDK of SwiftTunnel.
 
 The way it works is only `robloxplayerbeta.exe` gets tunneled, everything else goes through normally. There's also an optional Route Assist mode that tunnels Roblox's TCP API and bootstrap DNS traffic too, which helps Roblox place you in a server near the region you picked instead of near where you actually are.
 
