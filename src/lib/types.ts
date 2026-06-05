@@ -80,6 +80,7 @@ export type Swifttunnel = {
     enable: boolean
     enableRouting: boolean
     perferedRegion: string
+    assetsRouting: boolean
 }
 
 export type BuildInfo = {

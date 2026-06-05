@@ -76,6 +76,7 @@ pub async fn swift_servers_ping(
 pub async fn connect(
     region: String,
     routing: bool,
+    dynamic_assets: bool,
     state: tauri::State<'_, SdkState>,
 ) -> Result<(), String> {
     let sdk = state.0.lock().map_err(|e| e.to_string())?;
@@ -83,10 +84,11 @@ pub async fn connect(
     let options = ConnectOptions {
         region: region.into(),
         apps: vec!["robloxplayerbeta.exe".into()],
-        asset_urls: vec![
-            "assetdelivery.roblox.com".into(),
-            "*.rbxcdn.com".into(),
-        ],
+        asset_urls: if dynamic_assets {
+            vec!["assetdelivery.roblox.com".into(), "*.rbxcdn.com".into()]
+        } else {
+            vec![]
+        },
         enable_api_tunneling: routing,
         ..Default::default()
     };
