@@ -416,6 +416,12 @@
                 "communityMods": {
                     "title": "Community Mods",
                     "description": "Explore mods created by the community.",
+                    "loading" : "Loading Mods...",
+                    "notFound" : "No {itemsCount} mods found.",
+                    "pills" : {
+                        "all" : "All",
+                        "library" : "Library {libraryName}"
+                    },
                     "itemCard" : {
                         "by" : "By {name}",
                         "adapter" : "Adapter : {library}",

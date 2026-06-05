@@ -17,6 +17,12 @@
     let downloading: Record<string, boolean> = {}
     let activeFilter = 'all'
 
+    let fillters = [
+        { key: 'all', label: $_('pages.mod.tab.communityMods.pills.all') },
+        { key: 'mod', label: 'Mods' },
+        { key: 'boostrap', label: 'Bootstrap' },
+    ]
+
     // derive available libraries from loaded mods
     $: libraries = [...new Set(mods.map((m) => m.adapter))]
 
@@ -92,11 +98,13 @@
 
 {#if loading}
     <div class="flex min-h-[60vh] items-center justify-center">
-        <p class="text-sm text-stone-500">Loading mods…</p>
+        <p class="text-sm text-stone-500">
+            {$_('pages.mod.tab.communityMods.loading')}
+        </p>
     </div>
 {:else}
     <div class="flex flex-wrap items-center gap-2 px-4 pt-4">
-        {#each [{ key: 'all', label: 'All' }, { key: 'mod', label: 'Mods' }, { key: 'boostrap', label: 'Bootstrap' }] as f}
+        {#each fillters as f}
             <button
                 class="rounded-full px-3 py-1 text-xs font-medium transition-colors
                     {activeFilter === f.key
@@ -130,7 +138,12 @@
     {#if filteredMods.length === 0}
         <div class="flex min-h-[50vh] items-center justify-center">
             <p class="text-sm text-stone-500">
-                No {activeFilter === 'all' ? '' : activeFilter + ' '}mods found.
+                {$_('pages.mod.tab.communityMods.notFound', {
+                    values: {
+                        itemsCount:
+                            activeFilter === 'all' ? '' : activeFilter + ' ',
+                    },
+                })}
             </p>
         </div>
     {:else}
