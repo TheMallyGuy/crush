@@ -211,7 +211,7 @@
 
     <SettingCard
         title={$_("pages.settings.redRingsCard.title")}
-        description={$_("pages.settings.redRingsCard.title")}
+        description={$_("pages.settings.redRingsCard.description")}
         icon={Cuboid}
     >
         <Switch slot="action" bind:checked={settings.redRings} />
