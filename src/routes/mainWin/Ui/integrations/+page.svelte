@@ -23,6 +23,7 @@
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import { getCurrentInstallation } from '$lib/downloadRoblox'
+    import Dialog from '$lib/components/molecules/Dialog.svelte'
 
     let processPriorityItems = [
         { value: 'BELOW_NORMAL_PRIORITY_CLASS', label: 'BELOW_NORMAL' },
@@ -32,6 +33,8 @@
         { value: 'REALTIME_PRIORITY_CLASS', label: 'REALTIME' },
     ]
     let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
+
+    let warningDialog = false
 
     let crashHandler = false
     let discordRpc = false
@@ -54,6 +57,7 @@
     let exePath: string
 
     const roValaraLogo = '/Rovalra.png'
+    const swifty = '/swifty.png'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -67,7 +71,8 @@
         if (savedIntegrations) {
             const savedRpc = savedIntegrations.discordRpc as DiscordRpc
 
-            processPriority = savedIntegrations.priority
+            processPriority =
+                savedIntegrations.priority ?? 'NORMAL_PRIORITY_CLASS'
             isLateNightGamer = savedIntegrations.sleepSchedule?.visible ?? false
             sleepSchedule = savedIntegrations.sleepSchedule?.enabled ?? true
 
@@ -76,10 +81,11 @@
                 letJoin = savedRpc.letJoin
                 displayAccount = savedRpc.displayAccount
             }
-            crashHandler = savedIntegrations.closeCrashHandler
-            serverLocationNotifier = savedIntegrations.serverLocationNotifier
-            activityWatching = savedIntegrations.activityWatching
-            optimizer = savedIntegrations.optimizer
+            crashHandler = savedIntegrations.closeCrashHandler ?? false
+            serverLocationNotifier =
+                savedIntegrations.serverLocationNotifier ?? false
+            activityWatching = savedIntegrations.activityWatching ?? false
+            optimizer = savedIntegrations.optimizer ?? false
         }
 
         exe = await getCurrentInstallation('player')
@@ -131,6 +137,28 @@
         await store.save()
     }
 </script>
+
+<Dialog
+    bind:open={warningDialog}
+    on:close={() => {
+        warningDialog = false
+    }}
+    title="3rd party warning"
+    description="This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us."
+>
+    <div slot="actions">
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => {
+                warningDialog = false
+                goto('integrations/swift')
+            }}
+        >
+            Got it
+        </Button>
+    </div>
+</Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
@@ -207,8 +235,8 @@
         </SettingCard>
 
         <SettingCard
-            title={$_("pages.integrations.optimizerCard.title")}
-            description={$_("pages.integrations.optimizerCard.description")}
+            title={$_('pages.integrations.optimizerCard.title')}
+            description={$_('pages.integrations.optimizerCard.description')}
             icon={Sparkles}
         >
             <Switch
@@ -216,6 +244,21 @@
                 on:change={handleChanges}
                 bind:checked={optimizer}
             />
+        </SettingCard>
+
+        <SettingCard
+            title="SwiftTunnel"
+            description="Crush have swifttunell.ddl meaning crush have ablities to replicate swifttunnel!"
+            icon={swifty}
+            doTheGrayThing={true}
+        >
+            <Button
+                slot="action"
+                on:click={() => (warningDialog = true)}
+                variant="secondary"
+            >
+                Open</Button
+            >
         </SettingCard>
 
         <SettingCard

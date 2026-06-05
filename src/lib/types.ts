@@ -62,17 +62,24 @@ export type sleepSchedule = {
 }
 
 export type Integrations = {
-    closeCrashHandler: boolean
-    activityWatching: boolean
-    discordRpc: DiscordRpc
-    serverLocationNotifier: boolean
-    priority: PriorityClass
-    roValra: RoValra
-    optimizer: boolean
-    sleepSchedule: sleepSchedule,
+    closeCrashHandler?: boolean
+    activityWatching?: boolean
+    discordRpc?: DiscordRpc
+    serverLocationNotifier?: boolean
+    priority?: PriorityClass
+    roValra?: RoValra
+    optimizer?: boolean
+    sleepSchedule?: sleepSchedule,
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI
+    swifttunnel?: Swifttunnel
+}
+
+export type Swifttunnel = {
+    enable: boolean
+    enableRouting: boolean
+    perferedRegion: string
 }
 
 export type BuildInfo = {

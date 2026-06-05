@@ -1,3 +1,4 @@
+use crate::swifttunnel_sdk::SwiftTunnel;
 use commands::account_operations::{
     clear_cookies, decrypt_cookie_data, encrypt_cookie_data, export_all_cookies, get_auth_ticket,
     get_csrf_token, quick_sign_create, quick_sign_poll, validate_roblox_cookie,
@@ -18,8 +19,13 @@ use commands::roblox_deployment::{
     get_latest_version_studio,
 };
 use commands::shortcuts::new_shorcut;
+use commands::swifttunnel::{
+    connect, start_browser_login, swift_auth_logout, swift_cancel_auth, swift_fetch_servers,
+    swift_get_servers, swift_is_logged_in, swift_servers_ping,
+};
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
+use std::sync::Mutex;
 use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
@@ -38,9 +44,12 @@ pub mod priorites;
 pub mod rd;
 pub mod rpc;
 pub mod simple_i18n;
+pub mod swifttunnel_sdk;
 pub mod tray; // nice name choice buddy
 
 use crate::tray::setup_tray;
+
+pub struct SdkState(pub Mutex<SwiftTunnel>);
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -165,6 +174,8 @@ fn print_debug_info() {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let sdk = SwiftTunnel::init().expect("SwiftTunnel SDK init failed");
+
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cli::init())
         .plugin(tauri_plugin_clipboard_manager::init())
@@ -215,6 +226,7 @@ pub fn run() {
 
     builder
         .manage(RpcState::new())
+        .manage(SdkState(Mutex::new(sdk)))
         .setup(|app| {
             print_debug_info();
 
@@ -349,6 +361,14 @@ pub fn run() {
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
+            start_browser_login,
+            swift_is_logged_in,
+            swift_cancel_auth,
+            swift_auth_logout,
+            swift_get_servers,
+            swift_fetch_servers,
+            connect,
+            swift_servers_ping
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

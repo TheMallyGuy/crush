@@ -213,6 +213,31 @@
                         }
                     }
                 }
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Configure SwiftTunnel right in crush.",
+                "back": "Back",
+                "notLoggedIn": "You're not logged in.",
+                "loginTimeout": "Login timed out. Please try again.",
+                "loadingMessage": "Please continue in your browser. Auto-cancels after 1 min.",
+                "loginButton": "Login via browser",
+                "enableTunnelingCard": {
+                    "title": "Enable Tunneling",
+                    "description": "Enable tunneling to route Roblox through the VPN"
+                },
+                "enableRoutingCard": {
+                    "title": "Enable Roblox Routing",
+                    "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
+                },
+                "preferredRegionCard": {
+                    "title": "Preferred Region",
+                    "description": "Configure your preferred region"
+                },
+                "serverList": {
+                    "title": "Server List",
+                    "empty": "No servers available."
+                }
             }
         },
         "gbs": {

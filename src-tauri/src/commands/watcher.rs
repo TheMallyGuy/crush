@@ -17,10 +17,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::Path;
 use std::sync::Mutex;
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    OnceLock,
-};
+use std::sync::OnceLock;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Seek, SeekFrom},
@@ -240,7 +237,6 @@ struct EmitServerInfomation {
 
 // entry
 
-static WATCHER_RUNNING: AtomicBool = AtomicBool::new(false);
 static WATCHER_CANCEL: Mutex<Option<CancellationToken>> = Mutex::new(None);
 
 #[tauri::command]
@@ -249,13 +245,6 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
         if let Some(token) = guard.take() {
             token.cancel();
         }
-    }
-
-    WATCHER_RUNNING.store(false, Ordering::SeqCst);
-
-    if WATCHER_RUNNING.swap(true, Ordering::SeqCst) {
-        log::warn!("ignoring duplicate watch_logs call");
-        return Ok(());
     }
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
@@ -287,7 +276,6 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
                     log::info!("watcher cancelled by new watch_logs call");
                 }
             }
-            WATCHER_RUNNING.store(false, Ordering::SeqCst);
         });
     });
 

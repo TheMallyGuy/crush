@@ -152,6 +152,28 @@
             if (appType === 'studio') {
                 await launchStudio(version)
             } else {
+                if (integrations?.swifttunnel) {
+                    handleProgress({
+                        type: 'status',
+                        message: 'Connecting to swifttunnel servers...',
+                    })
+
+                    try {
+                        await invoke('connect', {
+                            region: integrations.swifttunnel.perferedRegion,
+                            routing: integrations.swifttunnel.enableRouting,
+                        })
+                    } catch (e) {
+                        // do nothing lmao
+                        info(`${e}`)
+                    }
+
+                    handleProgress({
+                        type: 'status',
+                        message: $_('pages.boostrapWin.steps.launch'),
+                    })
+                }
+
                 await performLaunch(version, url, integrations)
                 await sleep(1000)
                 await invoke('watch_logs', { isVng: installation?.vng })
@@ -159,6 +181,7 @@
                 await invoke('set_process_priority', {
                     priority: integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
                 })
+                await sleep(3000)
 
                 if (integrations?.closeCrashHandler) {
                     await invoke('close_crash_handler')
