@@ -5,7 +5,6 @@
 [![Rust][rustBadge]][rust]
 [![Svelte][svelteBadge]][svelte]
 [![TailwindCSS][tailwindcssBadge]][tailwindcss]
-[![Jules][julesBadge]][jules]
 
 > [!NOTE]
 > A Gitea mirror is available from my homelab: https://git.mally.qzz.io/Mally/crush
@@ -30,24 +29,29 @@ Built with **Tauri + Svelte**.
 * View game history
 * Option to disable Roblox updates
 * Download and use specific Roblox versions *(note: not all versions work)*
+* Versions manager
+* Global basic settings
+* Disable fullscreen optimization
 * Custom bootstrap themes
 * Import configs from Bloxstrap-based forks
 * Modding support and more
 * Window Manipulation (Feature by Funkstrap)
 * Improved matchmaking *(uses RoValra APIs, submitted by Yuki)*
+* Optimizer (Based on [TASX](https://github.com/8damon/TASX-Roblox-Optimizer/), fully reworte in rust)
+* Account management
+* Roblox VNG desktop download
+* Make your sleep schedule better :3
 
-## Performance
+## Misc
 
-Crush is faster than Bloxstrap!
-See benchmark results here: [tests/speed.md](./tests/speed.md)
-
+[Crush's performace](./tests/speed.md)
+[Bypassing blocked games using swifttunnel](./tests/vpntunnel.md)
 
 [discordBadge]: https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white
 [rustBadge]: https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white
 [svelteBadge]: https://img.shields.io/badge/sveltekit-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white
 [tailwindcssBadge]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tauriBadge]: https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
-[julesBadge]: https://img.shields.io/badge/jules-purple?style=for-the-badge&logo=googlejules
 
 
 [tailwindcss]: https://tailwindcss.com/
@@ -55,4 +59,3 @@ See benchmark results here: [tests/speed.md](./tests/speed.md)
 [svelte]: https://svelte.dev
 [discord]: https://discord.gg/ER64xhvQkw
 [rust]: https://rust-lang.org/
-[jules]: https://jules.google/
