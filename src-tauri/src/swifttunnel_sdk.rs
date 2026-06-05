@@ -185,6 +185,9 @@ pub struct ConnectOptions {
     /// its bootstrap DNS. Helps bypass network/country bans and improves the
     /// odds Roblox places the player near the tunneled region.
     pub enable_api_tunneling: bool,
+    /// URLs/hosts to never tunnel. Resolved to IPs at connect time; traffic to
+    /// those IPs always bypasses the relay (direct connection).
+    pub excluded_urls: Vec<String>,
 }
 
 impl Default for ConnectOptions {
@@ -196,6 +199,7 @@ impl Default for ConnectOptions {
             custom_relay_server: None,
             forced_servers: std::collections::HashMap::new(),
             enable_api_tunneling: false,
+            excluded_urls: Vec::new(),
         }
     }
 }
@@ -240,14 +244,23 @@ impl ConnectOptions {
 
         let route_assist = format!(",\"enable_api_tunneling\":{}", self.enable_api_tunneling);
 
+        let excluded: String = self
+            .excluded_urls
+            .iter()
+            .map(|u| format!("\"{}\"", escape_json_str(u)))
+            .collect::<Vec<_>>()
+            .join(",");
+        let excluded_urls = format!(",\"excluded_urls\":[{}]", excluded);
+
         format!(
-            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}}}",
+            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}}}",
             escape_json_str(&self.region),
             apps,
             ar,
             custom_relay,
             forced_servers,
             route_assist,
+            excluded_urls,
         )
     }
 }
