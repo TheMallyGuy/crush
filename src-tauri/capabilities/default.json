@@ -1,177 +1,268 @@
 {
-    "$schema": "../gen/schemas/desktop-schema.json",
-    "identifier": "default",
-    "description": "Capability for the main window",
-    "windows": [
-        "crushBoostrapChoiceWindow",
-        "CrushMainWindow",
-        "CrushHello",
-        "loginToRoblox"
-    ],
-    "permissions": [
-        "core:default",
-        "fs-pro:default",
-        "opener:default",
-        "updater:allow-check",
-        "updater:allow-download-and-install",
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "crushBoostrapChoiceWindow",
+    "CrushMainWindow",
+    "CrushHello",
+    "loginToRoblox"
+  ],
+  "permissions": [
+    "core:default",
+    "fs-pro:default",
+    "opener:default",
+    "cache:allow-set",
+    "cache:allow-get",
+    "cache:allow-has",
+    "cache:allow-remove",
+    "cache:allow-clear",
+    "cache:allow-stats",
+    "updater:allow-check",
+    "updater:allow-download-and-install",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
         {
-            "identifier": "opener:allow-open-url",
-            "allow": [
-                {
-                    "url": "https://discord.gg/EwhG5y5Yw9"
-                }
-            ]
-        },
-        "os:default",
-        "dialog:default",
-        "dialog:allow-open",
-        "clipboard-manager:allow-write-text",
-        "store:default",
-        "core:window:default",
-        "core:window:allow-close",
-        "core:window:allow-minimize",
-        "core:window:allow-toggle-maximize",
-        "core:window:allow-start-dragging",
-        "core:window:allow-set-size",
-        "core:window:allow-center",
-        "core:window:allow-show",
+          "url": "https://discord.gg/EwhG5y5Yw9"
+        }
+      ]
+    },
+    "os:default",
+    "dialog:default",
+    "dialog:allow-open",
+    "clipboard-manager:allow-write-text",
+    "store:default",
+    "core:window:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-size",
+    "core:window:allow-center",
+    "core:window:allow-show",
+    {
+      "identifier": "http:default",
+      "allow": [
         {
-            "identifier": "http:default",
-            "allow": [
-                {
-                    "url": "https://setup-ak.rbxcdn.com"
-                },
-                {
-                    "url": "https://setup-cfly.rbxcdn.com"
-                },
-                {
-                    "url": "https://setup-aws.rbxcdn.com"
-                },
-                {
-                    "url": "https://games.roblox.com/"
-                },
-                {
-                    "url": "https://thumbnails.roblox.com/"
-                },
-                {
-                    "url": "https://apis.roblox.com/"
-                },
-                {
-                    "url": "http://ip-api.com/json"
-                },
-                {
-                    "url": "https://apis.rovalra.com/"
-                },
-                {
-                    "url" : "https://*.rbxcdn.com/"
-                },
-                {
-                    "url": "https://users.roblox.com/v1/users/authenticated"
-                }
-            ],
-            "deny": [
-                {
-                    "url": "https://placeholder.com"
-                }
-            ]
-        },
-        "log:default",
-        "fs:default",
-        "opener:allow-open-path",
-        {
-            "identifier": "fs:allow-mkdir",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://setup-ak.rbxcdn.com"
         },
         {
-            "identifier": "fs:allow-create",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://setup-cfly.rbxcdn.com"
         },
         {
-            "identifier": "fs:allow-copy-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://setup-aws.rbxcdn.com"
         },
         {
-            "identifier": "fs:allow-remove",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://games.roblox.com/"
         },
         {
-            "identifier": "fs:allow-read-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" },
-                { "path": "$HOME/**" },
-                { "path": "$DOCUMENT/**" },
-                { "path": "$DOWNLOAD/**" },
-                { "path": "$DESKTOP/**" },
-                { "path": "**" }
-            ]
+          "url": "https://thumbnails.roblox.com/"
         },
         {
-            "identifier": "fs:allow-read-text-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" },
-                { "path": "$RESOURCE/**" }
-            ]
+          "url": "https://apis.roblox.com/"
         },
         {
-            "identifier": "fs:allow-write-text-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "http://ip-api.com/json"
         },
         {
-            "identifier": "fs:allow-write-file",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://apis.rovalra.com/"
         },
         {
-            "identifier": "opener:allow-open-path",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" }
-            ]
+          "url": "https://*.rbxcdn.com/"
         },
         {
-            "identifier": "fs:allow-exists",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" },
-                { "path": "**" }
-            ]
+          "url": "https://users.roblox.com/v1/users/authenticated"
         },
         {
-            "identifier": "fs:allow-read-dir",
-            "allow": [
-                { "path": "$APPDATA/**" },
-                { "path": "$LOCALDATA/**" },
-                { "path": "$CACHE/**" }
-            ]
+          "url": "https://raw.githubusercontent.com/klikos-modloader/marketplace/refs/heads/main/index.json"
         },
-        "notification:default"
-    ]
+        {
+          "url": "https://raw.githubusercontent.com/RealMeddsam/config/refs/heads/main/Data.json"
+        }
+      ],
+      "deny": [
+        {
+          "url": "https://placeholder.com"
+        }
+      ]
+    },
+    "log:default",
+    "fs:default",
+    "opener:allow-open-path",
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-create",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-copy-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        },
+        {
+          "path": "$HOME/**"
+        },
+        {
+          "path": "$DOCUMENT/**"
+        },
+        {
+          "path": "$DOWNLOAD/**"
+        },
+        {
+          "path": "$DESKTOP/**"
+        },
+        {
+          "path": "**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-text-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        },
+        {
+          "path": "$RESOURCE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-text-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        },
+        {
+          "path": "**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-dir",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "$LOCALDATA/**"
+        },
+        {
+          "path": "$CACHE/**"
+        }
+      ]
+    },
+    "notification:default",
+    "cache:default"
+  ]
 }
