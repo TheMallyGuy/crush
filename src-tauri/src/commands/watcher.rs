@@ -1276,7 +1276,15 @@ async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Res
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
 
-    if integration_enabled(&store, &["sleepSchedule", "enabled"]) {
+    let sleep_enabled = store
+        .get("integrations")
+        .or_else(|| store.get("intergrations"))
+        .and_then(|v| v.get("sleepSchedule").cloned())
+        .and_then(|v| v.get("enabled").cloned())
+        .and_then(|v| v.as_bool())
+        .unwrap_or(true);
+
+    if sleep_enabled {
         if count == 0 {
             notify(
                 "About your sleep schedule...",
@@ -1293,8 +1301,14 @@ async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Res
             if let Some(integrations_obj) = integrations.as_object_mut() {
                 if let Some(sleep_schedule) = integrations_obj.get_mut("sleepSchedule") {
                     if let Some(sleep_obj) = sleep_schedule.as_object_mut() {
+                        sleep_obj.insert("visible".to_string(), json!(true));
                         sleep_obj.insert("enabled".to_string(), json!(true));
                     }
+                } else {
+                    integrations_obj.insert(
+                        "sleepSchedule".to_string(),
+                        json!({ "visible": true, "enabled": true }),
+                    );
                 }
             }
 
