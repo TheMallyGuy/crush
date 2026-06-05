@@ -88,7 +88,7 @@
 
             <a
                 href={item.href}
-                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 transition-all group cursor-target
+                class="relative flex items-center justify-center sm:justify-start gap-3 px-3 py-2 transition-all group cursor-target hover:bg-stone-800/50 hover:text-stone-100
                 {isActive ? 'bg-white/10 text-sapphire' : ''}"
             >
                 {#if isActive}
