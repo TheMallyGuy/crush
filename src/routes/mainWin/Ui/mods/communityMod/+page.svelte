@@ -15,6 +15,17 @@
     let mods: universalAdapter[] = []
     let loading = true
     let downloading: Record<string, boolean> = {}
+    let activeFilter = 'all'
+
+    // derive available libraries from loaded mods
+    $: libraries = [...new Set(mods.map((m) => m.adapter))]
+
+    $: filteredMods = mods.filter((m) => {
+        if (activeFilter === 'all') return true
+        if (activeFilter === 'mod' || activeFilter === 'boostrap')
+            return m.modType === activeFilter
+        return m.adapter === activeFilter // library name
+    })
 
     onMount(async () => {
         try {
@@ -83,24 +94,60 @@
     <div class="flex min-h-[60vh] items-center justify-center">
         <p class="text-sm text-stone-500">Loading mods…</p>
     </div>
-{:else if mods.length === 0}
-    <div class="flex min-h-[60vh] items-center justify-center">
-        <p class="text-sm text-stone-500">No mods found.</p>
-    </div>
 {:else}
-    <div
-        class="grid gap-4 p-4"
-        style="grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr))"
-    >
-        {#each mods as mod (mod.id)}
-            <ModCard
-                name={mod.name}
-                author={mod.author}
-                adapter={mod.adapter}
-                thumbnail={mod.thumbnail}
-                downloading={downloading[mod.id] ?? false}
-                on:click={() => handleDownload(mod)}
-            />
+    <div class="flex flex-wrap items-center gap-2 px-4 pt-4">
+        {#each [{ key: 'all', label: 'All' }, { key: 'mod', label: 'Mods' }, { key: 'boostrap', label: 'Bootstrap' }] as f}
+            <button
+                class="rounded-full px-3 py-1 text-xs font-medium transition-colors
+                    {activeFilter === f.key
+                    ? 'bg-sapphire text-white'
+                    : 'bg-stone-800 text-stone-400 hover:bg-stone-700 hover:text-stone-200'}"
+                on:click={() => (activeFilter = f.key)}
+            >
+                {f.label}
+            </button>
         {/each}
+
+        <span class="h-4 w-px bg-stone-700"></span>
+
+        {#each libraries as lib}
+            <button
+                class="rounded-full px-3 py-1 text-xs font-medium transition-colors
+                    {activeFilter === lib
+                    ? 'bg-sapphire text-white'
+                    : 'bg-stone-800 text-stone-400 hover:bg-stone-700 hover:text-stone-200'}"
+                on:click={() => (activeFilter = lib)}
+            >
+                {lib}
+            </button>
+        {/each}
+
+        <span class="ml-auto text-xs text-stone-600">
+            {filteredMods.length} / {mods.length}
+        </span>
     </div>
+
+    {#if filteredMods.length === 0}
+        <div class="flex min-h-[50vh] items-center justify-center">
+            <p class="text-sm text-stone-500">
+                No {activeFilter === 'all' ? '' : activeFilter + ' '}mods found.
+            </p>
+        </div>
+    {:else}
+        <div
+            class="grid gap-4 p-4"
+            style="grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr))"
+        >
+            {#each filteredMods as mod (mod.id)}
+                <ModCard
+                    name={mod.name}
+                    author={mod.author}
+                    adapter={mod.adapter}
+                    thumbnail={mod.thumbnail}
+                    downloading={downloading[mod.id] ?? false}
+                    on:click={() => handleDownload(mod)}
+                />
+            {/each}
+        </div>
+    {/if}
 {/if}
