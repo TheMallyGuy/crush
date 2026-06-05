@@ -27,8 +27,14 @@
     import { loadFlag } from '$lib/fastflag/fastflagManagement'
 
     let state: ThemeState | null = null
-    const unsub = themeStore.subscribe((v) => {
+    let windowReady = false
+
+    const unsub = themeStore.subscribe(async (v) => {
         state = v
+        // If the theme loads *after* the window is already mounted, resize now
+        if (windowReady && v) {
+            await setupWindow()
+        }
     })
     onDestroy(unsub)
 
@@ -268,6 +274,7 @@
 
     onMount(async () => {
         await setupWindow()
+        windowReady = true
     })
 
     afterNavigate(async () => {
@@ -341,8 +348,8 @@
         if (!value) return ''
         switch (value) {
             case '__fg__':
-            case '__icon__': return isDark ? '#ffffff' : '#000000'
-            case '__bg__':   return isDark ? 'rgba(30,30,30,0.97)' : 'rgba(255,255,255,0.97)'
+            case '__icon__': return rootFg
+            case '__bg__':   return rootBg
             default:         return value
         }
     }
@@ -388,6 +395,9 @@
     $: isDark = cfg?.theme === 'Dark'
     $: noRound = cfg?.windowCornerPreference === 'DoNotRound'
     $: elements = cfg?.elements ?? []
+    // Direct color overrides from root element (BloxstrapCustomBootstrapper)
+    $: rootBg  = cfg?.background ?? (isDark ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.85)')
+    $: rootFg  = cfg?.foreground ?? (isDark ? '#ffffff' : '#000000')
 
     function mountHtml(node: HTMLElement, content: string) {
         if (!content) return
@@ -429,15 +439,49 @@
         <div
             class="relative overflow-hidden h-screen w-screen"
             style="
-                background:{isDark
-                ? 'rgba(0,0,0,0.8)'
-                : 'rgba(255,255,255,0.8)'};
-                color:{isDark ? '#fff' : '#000'};
+                background:{rootBg};
+                color:{rootFg};
                 border-radius:{noRound ? '0' : '8px'};
             "
         >
             {#each elements as el}
-                {#if el.type === 'Rectangle'}
+                {#if el.type === 'TitleBar'}
+                    <!-- Fake title bar: draggable region + optional OS controls -->
+                    <div
+                        class="absolute flex items-center justify-between px-2"
+                        data-tauri-drag-region
+                        style="
+                            {buildStyle(el)}
+                            {el.height == null ? 'height:30px;' : ''}
+                            {el.width  == null ? 'width:100%;left:0;right:0;' : ''}
+                            top:0;
+                            user-select:none;
+                        "
+                    >
+                        {#if el.props.Title}
+                            <span class="text-xs pointer-events-none" style="color:{rootFg};opacity:0.7">
+                                {el.props.Title}
+                            </span>
+                        {/if}
+                        <div class="flex items-center gap-1 ml-auto">
+                            {#if el.props.ShowMinimize === 'True'}
+                                <button
+                                    class="w-5 h-5 flex items-center justify-center text-xs hover:bg-white/20 rounded-sm transition-colors"
+                                    style="color:{rootFg}"
+                                    on:click={() => getCurrentWindow().minimize()}
+                                >─</button>
+                            {/if}
+                            {#if el.props.ShowClose !== 'False'}
+                                <button
+                                    class="w-5 h-5 flex items-center justify-center text-xs hover:bg-red-500 hover:text-white rounded-sm transition-colors"
+                                    style="color:{rootFg}"
+                                    on:click={cancel}
+                                >✕</button>
+                            {/if}
+                        </div>
+                    </div>
+
+                {:else if el.type === 'Rectangle'}
                     <div
                         class="absolute"
                         style="
@@ -479,26 +523,54 @@
                         class="absolute pointer-events-none leading-none {el.props.class || el.props.Class || ''}"
                         style="
                             {buildStyle(el)}
-                            color:{resolveBindingProp(el.props.Foreground) || (isDark ? '#fff' : '#000')};
-                            {el.props.FontSize ? `font-size:${el.props.FontSize}px;` : ''}
-                            {el.props.fontWeight ? `font-weight:${el.props.fontWeight};` : ''}
-                            {el.props.textAlign ? `text-align:${el.props.textAlign};` : 'white-space:nowrap;'}
+                            color:{resolveBindingProp(el.props.Foreground) || rootFg};
+                            {el.props.FontSize   ? `font-size:${el.props.FontSize}px;`     : ''}
+                            {el.props.fontWeight ? `font-weight:${el.props.fontWeight};`   : ''}
+                            {el.props.FontFamily ? `font-family:'${el.props.FontFamily}';` : ''}
+                            {el.props.textAlign  ? `text-align:${el.props.textAlign};`     : 'white-space:nowrap;'}
                         "
                     >{textValues[el.name ?? ''] ?? el.props.Text ?? ''}</span>
+
+                {:else if el.type === 'Border'}
+                    <div
+                        class="absolute"
+                        style="
+                            {buildStyle(el)}
+                            background:{el.props.Background || 'transparent'};
+                            {el.props.BorderBrush
+                                ? `border:${el.props.BorderThickness ?? 1}px solid ${el.props.BorderBrush};`
+                                : ''}
+                            {el.props.CornerRadius ? `border-radius:${el.props.CornerRadius}px;` : ''}
+                        "
+                    ></div>
 
                 {:else if el.type === 'Button'}
                     <button
                         id={el.name}
-                        on:click={cancel}
-                        class="absolute bg-obsidian border-0 cursor-pointer focus:outline-none focus:ring-0 {el.props.class || el.props.Class || ''}"
-                        style={buildStyle(el, 2)}
+                        on:click={el.name === 'CancelButton' || el.props.Content === 'Cancel' ? cancel : undefined}
+                        class="absolute cursor-pointer focus:outline-none {el.props.class || el.props.Class || ''}"
+                        style="
+                            {buildStyle(el, 2)}
+                            background:{el.props.Background ?? 'transparent'};
+                            color:{resolveBindingProp(el.props.Foreground) || rootFg};
+                            {el.props.BorderBrush
+                                ? `border:${el.props.BorderThickness ?? 1}px solid ${el.props.BorderBrush};`
+                                : 'border:none;'}
+                            {el.props.CornerRadius ? `border-radius:${el.props.CornerRadius}px;` : ''}
+                            {el.props.FontSize ? `font-size:${el.props.FontSize}px;` : ''}
+                            padding:0;
+                        "
                     >{el.props.Content || el.props.Label || ''}</button>
 
                 {:else if el.type === 'ProgressBar'}
                     <div
-                        class="absolute overflow-hidden bg-white/10 {el.props.class || el.props.Class || ''}"
+                        class="absolute overflow-hidden {el.props.class || el.props.Class || ''}"
                         style="
                             {buildStyle(el)}
+                            background:{el.props.Background ?? 'rgba(255,255,255,0.1)'};
+                            {el.props.BorderBrush
+                                ? `border:${el.props.BorderThickness ?? 1}px solid ${el.props.BorderBrush};`
+                                : ''}
                             border-radius:{el.props.CornerRadius ?? 0}px;
                         "
                     >

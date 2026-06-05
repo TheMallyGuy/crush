@@ -199,6 +199,8 @@ export interface BootstrapConfig {
     theme: Theme
     margin?: Margin
     windowCornerPreference?: string
+    background?: string
+    foreground?: string
     elements: BootstrapElement[]
 }
 
