@@ -83,6 +83,10 @@ pub async fn connect(
     let options = ConnectOptions {
         region: region.into(),
         apps: vec!["robloxplayerbeta.exe".into()],
+        asset_urls: vec![
+            "assetdelivery.roblox.com".into(),
+            "*.rbxcdn.com".into(),
+        ],
         enable_api_tunneling: routing,
         ..Default::default()
     };
