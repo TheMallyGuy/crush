@@ -31,7 +31,7 @@
 
     async function handleWarning() {
         if (!vng) {
-            vng = false
+            handleChanges()
             return
         }
         warningVng = true
