@@ -106,6 +106,13 @@
 		};
 		window.addEventListener('scroll', scrollHandler, { passive: true });
 
+		const domObserver = new MutationObserver(() => {
+			if (activeTarget && !document.contains(activeTarget)) {
+				currentLeaveHandler?.();
+			}
+		});
+		domObserver.observe(document.body, { childList: true, subtree: true });
+
 		const mouseDown = () => {
 			if (!dot) return;
 			gsap.to(dot, { scale: 0.7, duration: 0.3 });
@@ -219,6 +226,7 @@
 			window.removeEventListener('mousedown', mouseDown);
 			window.removeEventListener('mouseup', mouseUp);
 			if (activeTarget) cleanupTarget(activeTarget);
+			domObserver.disconnect();
 			spinTl?.kill();
 			document.body.style.cursor = originalCursor;
 		};
