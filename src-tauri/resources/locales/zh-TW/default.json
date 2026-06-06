@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "社羣改裝配件",
                     "description": "探索社羣製作的改裝配件。",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "我們還沒有任何社羣改裝配件。成為第一個貢獻並幫助我們擴大收藏的人！",
-                        "submissionButton": "送出改裝配件"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "捐贈",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "捐贈"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

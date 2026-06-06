@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Community-mods",
                     "description": "Ontdek mods die door de community zijn gemaakt.",
-                    "notice": {
-                        "title": "Nog geen mods",
-                        "description": "We hebben nog geen community-mods. Draag als eerste bij en help ons de collectie te laten groeien!",
-                        "submissionButton": "Dien een mod in"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Schenken",
                 "description": "Hou je van Crush? Doneer aan Mally om zijn werk te ondersteunen!",
                 "button": "Schenken"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

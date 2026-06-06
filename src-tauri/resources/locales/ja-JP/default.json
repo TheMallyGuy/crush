@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "コミュニティモッド",
                     "description": "コミュニティが作成したモッドをご覧ください。",
-                    "notice": {
-                        "title": "MODはまだありません",
-                        "description": "コミュニティモッドはまだありません。最初に貢献して、私たちがコレクションを成長させるのを手伝ってください！",
-                        "submissionButton": "MODを送信する"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "寄付",
                 "description": "ラブクラッシュ? マリーに寄付して彼の仕事をサポートしましょう!",
                 "button": "寄付"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

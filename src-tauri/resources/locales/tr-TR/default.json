@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Topluluk Modları",
                     "description": "Topluluk tarafından oluşturulan modları keşfedin.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "Henüz herhangi bir topluluk modumuz yok. Katkıda bulunan ve koleksiyonu büyütmemize yardımcı olan ilk kişi siz olun!",
-                        "submissionButton": "Mod gönder"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Bağış yap",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Bağış yap"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

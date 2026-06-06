@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "社区改装配件",
                     "description": "探索社区创建的改装配件。",
-                    "notice": {
-                        "title": "尚无模组",
-                        "description": "我们还没有任何社区模组。抢先做出贡献，帮助我们拓展产品系列！",
-                        "submissionButton": "提交改装配件"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "捐献",
                 "description": "喜欢粉碎吗？捐赠给马利以支持他的工作！",
                 "button": "捐献"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Mods de la comunitat",
                     "description": "Descobreix els mods creats per la comunitat.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "Encara no tenim cap modificació de la comunitat. Sigues el primer a contribuir i ajuda'ns a fer créixer la col·lecció!",
-                        "submissionButton": "Envia un mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Donar",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Donar"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

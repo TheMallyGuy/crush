@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "nihahahahahaha nihaha",
                     "description": "nihahaha nihaha nihahahahaha nihahahaha nihahaha nihahahahaha",
-                    "notice": {
-                        "title": "nihaha nihahahahaha nihahahahahaha",
-                        "description": "nihahahahaha nihaha nihahahahahaha nihahahaha nihaha nihahahaha nihahahahahahaha nihaha nihahaha nihahahahahahaha nihahaha nihahahahahaha nihahahahahahaha nihaha nihahaha nihahaha nihahahahaha nihahaha",
-                        "submissionButton": "nihaha nihaha nihahahahaha"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "nihahahahahaha",
                 "description": "nihahahahahaha nihahahahahahaha nihahahahahaha nihahahahahaha nihahahahahahaha nihaha nihahaha nihaha nihahahahahaha",
                 "button": "nihahahahaha"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Modyfikacje społeczności",
                     "description": "Poznaj modyfikacje stworzone przez społeczność.",
-                    "notice": {
-                        "title": "Brak modyfikacji",
-                        "description": "Nie mamy jeszcze żadnych modyfikatorów społeczności. Bądź pierwszą osobą, która wniesie swój wkład i pomoże nam rozwijać kolekcję!",
-                        "submissionButton": "Prześlij modyfikację"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Przekaż darowiznę",
                 "description": "Kochasz Crush? Wesprzyj matowi aby wesprzeć jego pracę!",
                 "button": "Przekaż darowiznę"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

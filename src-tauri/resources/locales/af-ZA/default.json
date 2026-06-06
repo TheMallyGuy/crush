@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Gemeenskapsmodes",
                     "description": "Verken modes wat deur die gemeenskap geskep is.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "Ons het nog geen gemeenskapsmode nie. Wees die eerste om by te dra en help ons om die versameling te laat groei!",
-                        "submissionButton": "Dien 'n MOD in"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Skenk",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Skenk"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

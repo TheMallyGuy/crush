@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Моди спільноти",
                     "description": "Перегляньте моди, створені спільнотою.",
-                    "notice": {
-                        "title": "Поки немає модів",
-                        "description": "У нас ще немає модів спільноти. Будьте першими, хто зробить свій внесок і допоможе нам збільшити колекцію!",
-                        "submissionButton": "Надіслати модифікацію"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Пожертвувати",
                 "description": "Подобається Crush? Пожертвуйте батькові, щоб підтримати свою роботу!",
                 "button": "Пожертвувати"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

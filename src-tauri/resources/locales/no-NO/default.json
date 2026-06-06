@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Fellesskapsmodi",
                     "description": "Utforsk modder laget av fellesskapet.",
-                    "notice": {
-                        "title": "Ingen modifikasjoner ennå",
-                        "description": "Vi har ingen fellesskapsmoderatorer ennå. Bli den første til å bidra og hjelp oss med å utvide samlingen!",
-                        "submissionButton": "Send inn en mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Doner",
                 "description": "Liker du Knus? Doner til Mally for å støtte sitt arbeid!",
                 "button": "Doner"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }

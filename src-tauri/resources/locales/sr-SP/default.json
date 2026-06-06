@@ -416,10 +416,16 @@
                 "communityMods": {
                     "title": "Modovi zajednice",
                     "description": "Istražite modove koje je kreirala zajednica.",
-                    "notice": {
-                        "title": "No mods yet",
-                        "description": "Još uvek nemamo nijednu izmenu za zajednicu. Budite prvi koji će doprineti i pomoći nam da povećamo kolekciju!",
-                        "submissionButton": "Pošaljite mod"
+                    "loading": "Loading Mods...",
+                    "notFound": "No {itemsCount} mods found.",
+                    "pills": {
+                        "all": "All",
+                        "library": "Library {libraryName}"
+                    },
+                    "itemCard": {
+                        "by": "By {name}",
+                        "adapter": "Adapter : {library}",
+                        "download": "Download"
                     }
                 }
             }
@@ -540,6 +546,17 @@
                 "title": "Донирајте",
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Донирајте"
+            },
+            "creditsCard": {
+                "title": "Credits",
+                "button": "Open",
+                "dialog": {
+                    "title": "Credits",
+                    "development": "Development",
+                    "inspiration": "Inspiration",
+                    "localization": "Localization",
+                    "specialThanks": "Special Thanks (Early supporters!)"
+                }
             }
         }
     }
