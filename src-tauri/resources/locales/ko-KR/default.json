@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "처음부터 작성된 로블록스 부트래퍼",
+        "integrations": "통합 경로에서",
         "installation": "설치 경로 내",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "Fast Flags 경로에서",
         "mod": "모드 경로 내",
         "appearance": "외관 경로에서",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "로블록스 플레이 중",
                 "idle": "게임에 없음",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "게임 중",
+                "playingPrivate": "게임 중, 비공개 서버",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "공개 서버에 연결되었습니다!",
+                        "private": "비공개 서버에 연결되었습니다!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\n위치 : {location}"
                 }
             }
         }
@@ -44,26 +44,26 @@
             "title": "\n\t\t\t\t크러시\t\t\t",
             "playRoblox": "Roblox 플레이",
             "config": "구성",
-            "discord": "Our Community"
+            "discord": "우리 커뮤니티"
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "준비 중...",
+                "applyMods": "수정 사항 적용 중",
+                "launch": "실행 중"
             },
             "cancel": "취소",
             "retry": "다시 시도"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "서버 정보",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "지역 : {region}",
+                "waitRegion": "지역 가져오는 중...",
+                "description": "이 서버에 대한 서버 정보",
+                "uptime": "가동 시간 : 가져오지 않음",
+                "instanceId": "서버 인스턴스 ID : {id}",
+                "inviteLink": "초대 링크 복사 :"
             }
         },
         "appearance": {
@@ -71,7 +71,7 @@
             "description": "Roblox 부트스트래퍼의 모양과 느낌을 커스터마이징합니다.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper 테마",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "기본 Crush 테마 또는 사용자 정의 XML 테마 중에서 선택하세요. Bloxstrap과 HTML이 지원됩니다. 모든 Bloxstrap 테마가 작동하는 것은 아닙니다.",
                 "dropdown": {
                     "default": "기본값 (Crush)",
                     "custom": "커스텀"
@@ -85,40 +85,70 @@
         },
         "integrations": {
             "integrations": "인터그레이션",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Roblox 외부에서 통합을 구성하세요.",
+            "dialogs": {
+                "title": "제3자 경고",
+                "description": "이 SwiftTunnel 통합은 비공식입니다. 기본 SDK를 포크하여 최신 앱과 동기화해 Crush에서 사용할 수 있게 했습니다. SwiftTunnel 관련 불만은 저희에게 하지 말아 주세요.",
+                "confirm": "알겠어요!"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Crush 내에서 SwiftTunnel을 구성하세요.",
+                "back": "뒤로",
+                "notLoggedIn": "로그인되어 있지 않습니다.",
+                "loginTimeout": "로그인 시간이 초과되었습니다. 다시 시도하세요.",
+                "loadingMessage": "브라우저에서 계속 진행하세요. 1분 후 자동 취소됩니다.",
+                "loginButton": "브라우저로 로그인",
+                "enableTunnelingCard": {
+                    "title": "터널링 활성화",
+                    "description": "터널링을 활성화하여 Roblox 트래픽을 VPN으로 라우팅하세요"
+                },
+                "enableRoutingCard": {
+                    "title": "Roblox 라우팅 활성화",
+                    "description": "모든 Roblox API 요청을 VPN을 통해 라우팅합니다. 일부 국가에서 차단된 게임을 우회하는 데 사용할 수 있습니다."
+                },
+                "preferredRegionCard": {
+                    "title": "선호 지역",
+                    "description": "선호 지역 구성"
+                },
+                "serverList": {
+                    "title": "서버 목록",
+                    "empty": "사용 가능한 서버가 없습니다."
+                }
+            },
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "활동 감시",
+                "description": "Roblox에서의 활동을 감시합니다. 일부 기능은 이 기능이 활성화되어 있어야 합니다."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "수면 일정",
+                "description": "수면 패턴이 엉망이네요"
             },
             "serverNotifierCard": {
                 "title": "서버 위치 알림",
-                "description": "Get notified when the client connects to a server."
+                "description": "클라이언트가 서버에 연결되면 알림을 받습니다."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "프로세스 우선순위",
+                "description": "매우 실험적입니다. Roblox 프로세스 우선순위를 변경합니다. 성능이 향상될 수 있습니다."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "최적화 도구 활성화",
+                "description": "Roblox가 사용할 수 있는 리소스를 제한하여 최적화합니다. GitHub의 8damon/TASX-Roblox-Optimizer에서 영감을 받았습니다. 요즘은 모든 것이 Rust로 재작성되었습니다."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "전체 화면 최적화 비활성화",
+                "description": "어둠의 마법을 사용하여 전체 화면 최적화 비활성화"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "크래시 핸들러 닫기",
+                "description": "Roblox의 크래시 핸들러를 종료하여 성능을 절약합니다."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
                 "description": "로블록스 리치 프레즌스를 크러쉬로 교체.",
                 "option1": "사람들이 내 게임에 참여하도록 하세요",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Roblox 플레이 시 계정 표시"
             },
             "gameHistoryCard": {
                 "title": "게임 기록",
@@ -126,20 +156,20 @@
                 "button": "보기"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Window Manipulation (이전 Interactive API)",
+                "description": "지원되는 게임이 창을 이동, 크기 조정, 알림, 하드웨어와 상호작용하도록 허용합니다. Window Manipulation 기능이 있는 게임만 지원하며, 모든 게임이 작동하는 것은 아닙니다. BloxstrapRPC와 Funkstrap의 방식에서 영감을 받았습니다.",
                 "button": "열기"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "RoValra와 함께 더 나은 매치메이킹",
+                "description": "Crush에는 기본 제공 매치메이킹 통합 기능이 있습니다. RoValra의 개인정보 처리방침이 적용됩니다.",
                 "button": "열기"
             },
             "roValra": {
                 "description": "구성",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Crush가 서버에 대신 입장하도록 허용",
+                    "description": "Roblox 매치메이킹 대신 RoValra API를 사용하여 최적의 서버를 찾습니다."
                 }
             },
             "gameHistory": {
@@ -157,149 +187,157 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Window Manipulation 설정",
+                "description": "Window Manipulation의 동작 방식을 구성하세요.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "활성화",
+                    "description": "Window Manipulation 활성화 여부를 선택하세요."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "고급",
+                    "description": "Window Manipulation을 심층적으로 구성하세요.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "범위",
                         "minimizeCard": {
-                            "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "title": "최소화",
+                            "description": "Window Manipulation을 통한 최소화 제어 활성화 여부."
                         },
                         "maximizeCard": {
-                            "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "title": "최대화",
+                            "description": "Window Manipulation을 통한 최대화 제어 활성화 여부."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "포커스",
+                            "description": "Window Manipulation을 통한 포커스 제어 활성화 여부."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "창 이동",
+                            "description": "Window Manipulation을 통한 창 이동 제어 활성화 여부."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "복원",
+                            "description": "Window Manipulation을 통한 복원 제어 활성화 여부."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "창 제목 설정",
+                            "description": "Window Manipulation을 통한 창 제목 설정 제어 활성화 여부."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "보더리스 설정",
+                            "description": "Window Manipulation을 통한 보더리스 창 제어 활성화 여부."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "투명도 설정",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "활성화",
+                            "description": "Interactive API를 통한 투명도 제어 활성화 여부입니다."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "최소 투명도",
+                            "description": "창이 도달할 수 있는 최소 투명도 수준입니다."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "최대 투명도",
+                            "description": "창이 도달할 수 있는 최대 투명도 수준입니다."
                         }
                     }
                 }
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "전역 기본 설정",
+            "description": "Roblox의 기본 설정을 구성합니다.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS 제한",
+                "description": "roblox의 FPS 제한을 구성합니다. Roblox는 최대 240 FPS로만 설계되었으며, 더 높게 설정하면 Roblox가 손상될 수 있습니다."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "그래픽 품질 수준",
+                "description": "Roblox의 그래픽 품질 변경"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "동작 줄이기",
+                "description": "UI 동작 줄이기"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "전체 화면",
+                "description": "전체 화면 여부 brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "자동 생성된 설정",
+                "description": "Roblox의 GBS 파일에서 생성되었습니다. 주의하여 처리하세요.",
+                "button": "열기"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "생성된 전역 기본 설정",
+                "description": "GBS 파일을 기반으로 자동 생성되었습니다.",
+                "noInstallation": "어라! 현재 설치를 찾을 수 없습니다! 이 페이지를 확인하기 전에 적어도 한 번은 실행을 클릭해야 합니다.",
+                "back": "뒤로"
             }
         },
         "installations": {
             "installations": "설치",
-            "description": "Manage your Roblox installation.",
+            "description": "Roblox 설치를 관리합니다.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "VNG로 전환하시겠습니까?",
+                    "description": "한 번 VNG에 로그인하면 다시 글로벌로 돌아갈 수 없습니다.",
+                    "cancel": "아니요, 돌아가기",
+                    "confirm": "제가 무엇을 하고 있는지 이해합니다."
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "버전 관리자",
+                "description": "빠르게 여러 Roblox 버전 관리",
+                "button": "열기"
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "병렬 다운로드",
+                "description": "한 번에 하나씩이 아닌 여러 애셋을 동시에 다운로드합니다. 기본값은 4입니다."
             },
             "forceReinstallCard": {
                 "title": "Roblox 강제 재설치",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "실행할 때마다 Roblox를 다시 설치합니다."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "베트남 로블록스 사용",
+                "description": "이 옵션은 Roblox VNG를 다운로드하는 것입니다. 무엇을 하는지 모르신다면 켜지 마세요. 이 기능은 베트남 사용자 전용입니다. 계정이 VNG 계정으로 표시되면 글로벌 버전으로 다시 전환할 수 없습니다."
             },
             "dontUpdateCard": {
                 "title": "Roblox 업데이트 안 함",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Roblox 업데이트 확인을 건너뛰고 즉시 실행합니다."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "버전 관리자",
+                "description": "Roblox 버전을 쉽게 관리하세요.",
+                "none": "아직 설치된 버전이 없습니다!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "작업 확인",
+                        "description": "이 버전을 삭제하시겠습니까?",
+                        "cancel": "취소",
+                        "confirm": "확인"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "새 버전 추가",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "버전 이름",
+                            "placeholder": "새 버전"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "버전 해시"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "취소",
+                        "confirm": "확인"
                     }
                 }
             }
         },
         "fastflag": {
             "fastflag": "Fast Flags",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Roblox Fast Flag 및 구성을 추가/제거합니다.",
+            "generalBack": "Fast Flags로 돌아가기",
             "selectScreeen": {
                 "title": "동작을 선택하십시오.",
                 "editCard": {
@@ -308,7 +346,7 @@
                 },
                 "presetCard": {
                     "title": "기본값 설정",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Crush에 내장된 기능 플래그 프리셋을 사용합니다."
                 }
             },
             "editor": {
@@ -316,9 +354,9 @@
                     "texboxFlagName": "표식 이름",
                     "texboxFlagValue": "값",
                     "buttonAdd": "추가",
-                    "search": "Search all fast flags...",
+                    "search": "모든 Fast Flag 검색...",
                     "searchNotFound": "검색 조건에 일치하는 플래그를 찾을 수 없습니다.",
-                    "import": "Import JSON",
+                    "import": "JSON 가져오기",
                     "flagCol": {
                         "deleteNote": "표식 삭제",
                         "name": "표식 이름",
@@ -329,18 +367,18 @@
             },
             "preset": {
                 "preset": "사전 설정",
-                "description": "Use our built-in fast flag presets.",
+                "description": "내장된 Fast Flag 프리셋을 사용합니다.",
                 "msaaCard": {
                     "title": "안티앨리어싱 품질 (MSAA)",
                     "description": "들쭉날쭉한 가장자리를 부드럽게 합니다. 높은 값이 더 좋아 보이지만 성능이 저하될 수 있습니다."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Voxelizer 일시 중지",
                     "description": "성능 향상을 위해 복셀화를 중지합니다."
                 },
                 "grassAnimationCard": {
                     "title": "잔디 흔들기 애니메이션",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "잔디 움직임의 강도를 조정합니다. (0은 감소 없음, 999 또는 그 이상의 숫자는 잔디를 정지시키고, 0과 1은 움직임을 약간 감소시키며, 1보다 큰 값은 움직임을 강하게 감소시켜 정지 상태에 가깝게 만듭니다)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "텍스처 품질 수준 덮어쓰기",
@@ -348,12 +386,12 @@
                     "dropdownDefault": "기본"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
-                    "description": "May improve performance."
+                    "title": "저품질 메시(LOD) 활성화",
+                    "description": "성능이 향상될 수 있습니다."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "회색 하늘",
+                    "description": "하늘을 회색으로 변경합니다. 성능이 향상될 수 있습니다."
                 }
             }
         },
@@ -362,7 +400,7 @@
             "tab": {
                 "modManagement": {
                     "title": "모드 관리",
-                    "description": "Manage your Roblox mods.",
+                    "description": "Roblox 모드를 관리합니다.",
                     "addModButton": "모드 추가",
                     "noModsFound": "여기서 개조 부품을 찾지 못했습니다, Yuppies.",
                     "noModsFoundCreateButton": "첫 번째 모드 만들기",
@@ -372,27 +410,27 @@
                         "renameNote": "모드 이름 바꾸기",
                         "openFolderNote": "모드 폴더 열기",
                         "deleteNote": "모드 삭제",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Frostrap의 모드 관리자에서 영감을 받은 모드 레이아웃입니다.",
                         "description": "MOD 로딩을 활성화하고 MOD 폴더 위치를 설정합니다."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "새 모드 만들기",
                             "textbox": {
-                                "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "title": "모드 이름",
+                                "placeholder": "내 새 모드"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "작업 확인",
+                            "description": "이 모드를 삭제하시겠습니까?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "이 이름은 이미 존재합니다!",
+                            "description": "다른 이름을 선택해 주세요."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "확인",
                             "cancel": "취소"
                         }
                     }
@@ -409,105 +447,105 @@
                     },
                     "customFontCard": {
                         "title": "맞춤 글꼴",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Roblox 글꼴을 원하는 대로 변경합니다.",
                         "button": "글꼴 수정"
                     }
                 },
                 "communityMods": {
                     "title": "커뮤니티 개조 부품",
                     "description": "커뮤니티에서 만든 모드를 살펴보세요.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "모드 로딩 중...",
+                    "notFound": "{itemsCount}개의 모드를 찾을 수 없습니다.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "전체",
+                        "library": "라이브러리 {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "{name} 제작",
+                        "adapter": "어댑터: {library}",
+                        "download": "다운로드"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "바로가기 만들기",
+            "description": "즐겨하는 게임을 바로 플레이할 수 있도록 손쉽게 바로가기를 만드세요.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "바로가기 만들기",
+                "button": "바로가기 생성",
+                "gameIdInput": "게임 ID",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "가져오기 대기 중...",
+                    "fetching": "가져오는 중...",
+                    "notFound": "게임을 찾을 수 없음",
+                    "fetched": "게임 정보를 가져왔습니다! 이제 바로가기 생성 버튼만 누르면 됩니다",
+                    "noThumb": "썸네일 없음",
+                    "error": "게임 가져오기 오류",
+                    "done": "바탕화면을 확인하세요!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "계정 관리",
+            "description": "계정 간 전환을 쉽게",
+            "validateAccounts": "계정 검증",
+            "addAnAccount": "계정 추가",
+            "use": "사용",
+            "delete": "삭제",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "성공!",
+                    "description": "안녕하세요 {username}님! 이제 계정 관리자를 사용하여 계정을 전환할 수 있습니다!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "전환 실패",
+                    "description": "모르겠는데 뭔가 문제가 생겼어요"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "계정 검증 중",
+                    "description": "잠시만 기다려 주세요, 계정을 검증 중입니다"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} 계정이 유효하지 않음",
+                    "description": "계정 {account}이(가) 유효하지 않습니다. 목록에서 제거했습니다."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "검증 완료",
+                    "description": "모든 유효하지 않은 계정(있는 경우)이 제거되었습니다"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "계정 추가",
+                    "description": "목록에 새 계정을 추가합니다.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "웹뷰(브라우저)로 로그인",
+                            "open": "웹뷰 열기",
+                            "check": "쿠키 확인",
+                            "failed": "쿠키를 가져오지 못했습니다. 로그인되어 있는지 확인하고 다시 시도하세요."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "빠른 로그인으로 로그인",
+                            "title": "빠른 로그인을 사용하여 로그인하세요.",
+                            "checkbox": "VNG 계정으로 표시 (무엇을 하는지 모르신다면 체크하지 마세요)",
+                            "start": "빠른 로그인 시작",
+                            "creating": "코드 생성 중...",
+                            "enter": "이 코드를 빠른 로그인 필드에 입력하세요:",
+                            "approval": "승인 대기 중...",
+                            "cancelled": "취소됨.",
+                            "timeout": "시간 초과 또는 실패",
+                            "failedToGetCookies": "쿠키를 가져오지 못했습니다. 로그인되어 있는지 확인하고 다시 시도하세요.",
+                            "robloxsecFailed": ".ROBLOSECURITY 쿠키를 찾을 수 없습니다. 로그인되어 있는지 확인하세요."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "삭제 확인",
+                    "description": "이 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+                    "cancel": "취소",
+                    "confirm": "확인"
                 }
             }
         },
@@ -515,47 +553,47 @@
             "settings": "설정",
             "aboutCard": {
                 "title": "소개",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "이 Crush 빌드에 대한 정보입니다.",
+                "note": "기억하세요! Crush는 무료로 사용할 수 있습니다. 누구라도 리스킨하여 판매하려 한다면, 저희 디스코드 서버로 알려주세요!",
                 "builtOn": "빌트 일：",
                 "commitHash": "커밋 해시: # # #",
                 "version": "버전: "
             },
             "onBoardCard": {
                 "title": "크러쉬 헬로",
-                "description": "Force the onboarding flow to run again.",
+                "description": "온보딩 흐름이 다시 실행되도록 강제합니다.",
                 "button": "초기화"
             },
             "languageCard": {
                 "title": "언어",
-                "description": "Select your preferred language for Crush."
+                "description": "Crush에 사용할 선호 언어를 선택하세요."
             },
             "enableCrushRpcCard": {
                 "title": "Discord RPC 분쇄",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "Discord RPC를 통해 활동을 표시할지 여부를 전환합니다. 재시작을 권장합니다."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "사악한 레드 링",
+                "description": "이 친구는 지금 뭐든 다 추가하네 ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "집중 모드",
+                "description": "Roblox 설정하는 게 그리 심각할 일인가요 😭"
             },
             "donateCard": {
                 "title": "기부",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Crush가 마음에 드시나요? Mally에게 후원하여 그의 작업을 지원해 주세요!",
                 "button": "기부"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "크레딧",
+                "button": "열기",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "title": "크레딧",
+                    "development": "개발",
+                    "inspiration": "영감",
+                    "localization": "현지화",
+                    "specialThanks": "특별 감사의 말씀 (초기 후원자들!)"
                 }
             }
         }

@@ -86,6 +86,36 @@
         "integrations": {
             "integrations": "Tích hợp",
             "description": "Cấu hình các tích hợp bên ngoài Roblox.",
+            "dialogs": {
+                "title": "Cảnh báo bên thứ 3",
+                "description": "Tích hợp SwiftTunnel này không chính thức. Mặc dù chúng tôi sử dụng SDK mặc định, đã fork và đồng bộ với ứng dụng mới nhất để dùng với Crush. Vui lòng không khiếu nại về SwiftTunnel với chúng tôi.",
+                "confirm": "Đã hiểu!"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Cấu hình SwiftTunnel ngay trong Crush.",
+                "back": "Quay lại",
+                "notLoggedIn": "Bạn chưa đăng nhập.",
+                "loginTimeout": "Đăng nhập đã hết thời gian. Vui lòng thử lại.",
+                "loadingMessage": "Vui lòng tiếp tục trên trình duyệt. Tự động hủy sau 1 phút.",
+                "loginButton": "Đăng nhập qua trình duyệt",
+                "enableTunnelingCard": {
+                    "title": "Bật Tunneling",
+                    "description": "Bật tunneling để định tuyến Roblox qua VPN"
+                },
+                "enableRoutingCard": {
+                    "title": "Bật định tuyến Roblox",
+                    "description": "Định tuyến tất cả yêu cầu API Roblox qua VPN. Điều này có thể dùng để truy cập các trò chơi bị chặn ở một số quốc gia."
+                },
+                "preferredRegionCard": {
+                    "title": "Khu vực ưu tiên",
+                    "description": "Cấu hình khu vực ưu tiên của bạn"
+                },
+                "serverList": {
+                    "title": "Danh sách máy chủ",
+                    "empty": "Không có máy chủ nào khả dụng."
+                }
+            },
             "activityWatcherCard": {
                 "title": "Theo dõi hoạt động",
                 "description": "Theo dõi hoạt động của bạn trên Roblox. Một số tính năng yêu cầu bạn phải bật tính năng này."
@@ -249,6 +279,14 @@
         "installations": {
             "installations": "Thiết lập cài đặt Roblox",
             "description": "Quản lý trình cài đặt Roblox của bạn.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "Bạn có chắc muốn chuyển sang VNG?",
+                    "description": "Sau khi đăng nhập VNG, bạn không thể quay lại phiên bản toàn cầu.",
+                    "cancel": "Không, đưa tôi quay lại",
+                    "confirm": "Tôi hiểu những gì mình đang làm."
+                }
+            },
             "versionManagerCard": {
                 "title": "Quản lý các phiên bản",
                 "description": "Quản lý nhiều phiên bản Roblox một cách nhanh chóng.",
@@ -416,16 +454,16 @@
                 "communityMods": {
                     "title": "Mod cộng đồng",
                     "description": "Khám phá các bản mod do cộng đồng tạo ra.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "Đang tải Mods...",
+                    "notFound": "Không tìm thấy {itemsCount} mod.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "Tất cả",
+                        "library": "Thư viện {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "Bởi {name}",
+                        "adapter": "Bộ chuyển đổi: {library}",
+                        "download": "Tải xuống"
                     }
                 }
             }
@@ -535,11 +573,11 @@
                 "description": "Bật/tắt hiển thị hoạt động của bạn qua Discord RPC. Nên khởi động lại ứng dụng."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
+                "title": "Nhẫn đỏ tà ác",
                 "description": "Anh bạn này cứ thêm BẤT CỨ THỨ GÌ vào thời điểm này ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
+                "title": "Chế độ khóa",
                 "description": "Cấu hình Roblox không thể nào nghiêm trọng đến thế được 😭"
             },
             "donateCard": {
@@ -548,14 +586,14 @@
                 "button": "Ủng hộ"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "Lời cảm ơn",
+                "button": "Mở",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "title": "Lời cảm ơn",
+                    "development": "Phát triển",
+                    "inspiration": "Cảm hứng",
+                    "localization": "Bản địa hóa",
+                    "specialThanks": "Cảm ơn đặc biệt (Những người ủng hộ sớm!)"
                 }
             }
         }

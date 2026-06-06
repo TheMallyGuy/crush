@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "準備中…",
+                "applyMods": "変更を適用中",
+                "launch": "起動中"
             },
             "cancel": "取り消す",
             "retry": "再試行"
@@ -86,33 +86,63 @@
         "integrations": {
             "integrations": "統合",
             "description": "Roblox以外での統合を設定します。",
+            "dialogs": {
+                "title": "サードパーティ警告",
+                "description": "このSwiftTunnel連携は非公式です。デフォルトSDKをフォークし、最新アプリと同期してCrushで使用できるようにしました。SwiftTunnelについて私たちに苦情を言わないでください。",
+                "confirm": "了解！"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Crush内でSwiftTunnelを設定できます。",
+                "back": "戻る",
+                "notLoggedIn": "ログインしていません。",
+                "loginTimeout": "ログインがタイムアウトしました。もう一度お試しください。",
+                "loadingMessage": "ブラウザで続行してください。1分後に自動的にキャンセルされます。",
+                "loginButton": "ブラウザでログイン",
+                "enableTunnelingCard": {
+                    "title": "トンネリングを有効にする",
+                    "description": "トンネリングを有効にしてRobloxをVPN経由でルーティングする"
+                },
+                "enableRoutingCard": {
+                    "title": "Robloxルーティングを有効にする",
+                    "description": "すべてのRoblox APIリクエストをVPN経由でルーティングします。これにより、一部の国でブロックされているゲームを回避できます。"
+                },
+                "preferredRegionCard": {
+                    "title": "優先地域",
+                    "description": "優先地域を設定"
+                },
+                "serverList": {
+                    "title": "サーバーリスト",
+                    "empty": "利用可能なサーバーがありません。"
+                }
+            },
             "activityWatcherCard": {
                 "title": "アクティビティの監視者",
                 "description": "Robloxであなたのアクティビティをご覧ください。いくつかの機能はこれを有効にする必要があります。"
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "睡眠スケジュール",
+                "description": "あなたの睡眠スケジュールはめちゃくちゃです"
             },
             "serverNotifierCard": {
                 "title": "サーバー位置通知",
                 "description": "クライアントがサーバーに接続したときに通知を受け取ります。"
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "プロセス優先度",
+                "description": "極めて実験的です。Robloxのプロセス優先度を変更します。パフォーマンスが向上する可能性があります。"
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "オプティマイザーを有効にする",
+                "description": "Robloxが使用できるリソースを制限して最適化します。GitHubの8damon/TASX-Roblox-Optimizerの仕組みに着想を得ました。最近はすべてRustで書き直されています。"
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "全画面表示の最適化を無効化",
+                "description": "ダークマジックを使って全画面表示の最適化を無効化します"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "クラッシュハンドラを閉じる",
+                "description": "Robloxのクラッシュハンドラを終了してパフォーマンスを節約します。"
             },
             "rpcCard": {
                 "title": "Discord RPC （クラッシュ）",
@@ -216,43 +246,51 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "グローバル基本設定",
+            "description": "Robloxのデフォルト設定を構成します。",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS制限",
+                "description": "RobloxのFPS制限を設定します。Robloxは最大240FPSまでしか対応していないため、それ以上に設定するとRobloxが壊れる可能性があります。"
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "グラフィック品質レベル",
+                "description": "Robloxのグラフィック品質を変更します"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "モーションの軽減",
+                "description": "Uiのモーションを軽減します"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "全画面表示",
+                "description": "全画面表示にするかどうか brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "自動生成された設定",
+                "description": "RobloxのGBSファイルから生成されました。慎重に処理してください。",
+                "button": "開く"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "生成されたグローバル基本設定",
+                "description": "GBSファイルに基づいて自動生成されました。",
+                "noInstallation": "おや！現在のインストールが見つかりません！このページを確認する前に、少なくとも起動ボタンをクリックしてください。",
+                "back": "戻る"
             }
         },
         "installations": {
             "installations": "インストール",
             "description": "Robloxのインストールを管理します。",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "VNGに切り替えてもよろしいですか？",
+                    "description": "一度VNGにログインすると、グローバル版に戻ることはできません。",
+                    "cancel": "いいえ、戻る",
+                    "confirm": "私は自分が何をしているか理解しています。"
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "バージョンマネージャー",
+                "description": "複数のRobloxバージョンを高速で管理",
+                "button": "開く"
             },
             "parallelDownloadingCard": {
                 "title": "並列ダウンロード中",
@@ -263,35 +301,35 @@
                 "description": "Robloxを起動するたびに再インストールします。"
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "ベトナム版Robloxを使用",
+                "description": "これはRoblox VNGをダウンロードするオプションです。何をしているのかわからない場合は、オンにしないでください。この機能はベトナムのユーザーのみ対象です。アカウントがVNGアカウントとしてフラグ付けされると、グローバル版に戻すことはできません。"
             },
             "dontUpdateCard": {
                 "title": "Robloxを更新しない",
                 "description": "Robloxのアップデートチェックをスキップして即座に起動します。"
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "バージョンマネージャー",
+                "description": "Robloxのバージョンを簡単に管理できます。",
+                "none": "まだバージョンをインストールしていません！",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "アクションを確認",
+                        "description": "このバージョンを削除してもよろしいですか？",
+                        "cancel": "取り消す",
+                        "confirm": "確認"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "新しいバージョンを追加",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "バージョン名",
+                            "placeholder": "新しいバージョン"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "バージョンハッシュ"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "取り消す",
+                        "confirm": "確認"
                     }
                 }
             }
@@ -318,7 +356,7 @@
                     "buttonAdd": "追加",
                     "search": "すべての高速フラグを検索...",
                     "searchNotFound": "検索に一致するフラグは見つかりませんでした。",
-                    "import": "Import JSON",
+                    "import": "JSONをインポート",
                     "flagCol": {
                         "deleteNote": "フラグを削除します:",
                         "name": "フラグ名",
@@ -348,7 +386,7 @@
                     "dropdownDefault": "デフォルト"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "低品質メッシュ（LOD）を有効化",
                     "description": "パフォーマンスを向上させることができます。"
                 },
                 "graySkyCard": {
@@ -416,98 +454,98 @@
                 "communityMods": {
                     "title": "コミュニティモッド",
                     "description": "コミュニティが作成したモッドをご覧ください。",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "モッドを読み込み中…",
+                    "notFound": "{itemsCount}件のモッドが見つかりません。",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "すべて",
+                        "library": "ライブラリ {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "作者: {name}",
+                        "adapter": "アダプター: {library}",
+                        "download": "ダウンロード"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "ショートカットを作成",
+            "description": "お気に入りのゲームをすぐにプレイできるショートカットを簡単に作成できます。",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "ショートカットを作成",
+                "button": "ショートカットを作成",
+                "gameIdInput": "ゲームID",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "取得してください…",
+                    "fetching": "取得中…",
+                    "notFound": "ゲームが見つかりません",
+                    "fetched": "ゲーム情報を取得しました！あとはショートカット作成ボタンを押すだけです",
+                    "noThumb": "サムネイルがありません",
+                    "error": "ゲームの取得中にエラーが発生しました",
+                    "done": "デスクトップを見てください！"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "アカウント管理",
+            "description": "アカウントの切り替えを簡単に",
+            "validateAccounts": "アカウントを検証",
+            "addAnAccount": "アカウントを追加",
+            "use": "使用する",
+            "delete": "削除",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "成功！",
+                    "description": "こんにちは {username} さん！アカウントマネージャーを使ってアカウントを切り替えられるようになりました！"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "切り替えに失敗しました",
+                    "description": "なんか起こったみたい"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "アカウントを検証中",
+                    "description": "お待ちください、アカウントを検証しています"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} は無効です",
+                    "description": "アカウント {account} は無効です。リストから削除しました。"
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "検証完了",
+                    "description": "すべての無効なアカウント（存在する場合）が削除されました"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "アカウントを追加",
+                    "description": "リストに新しいアカウントを追加します。",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "WebView（ブラウザ）でログイン",
+                            "open": "WebViewを開く",
+                            "check": "Cookieを確認",
+                            "failed": "Cookieの取得に失敗しました。ログイン済みか確認して再試行してください。"
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "クイックサインインでログイン",
+                            "title": "クイックサインインを使用してサインインします。",
+                            "checkbox": "VNGアカウントとしてマーク（何をしているかわからない場合はチェックしないでください）",
+                            "start": "クイックサインインを開始",
+                            "creating": "コードを作成中…",
+                            "enter": "このコードをクイックサインイン欄に入力してください：",
+                            "approval": "承認待ち…",
+                            "cancelled": "キャンセルされました。",
+                            "timeout": "タイムアウトまたは失敗",
+                            "failedToGetCookies": "Cookieの取得に失敗しました。ログイン済みか確認して再試行してください。",
+                            "robloxsecFailed": ".ROBLOSECURITY Cookieが見つかりません。ログイン済みか確認してください。"
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "削除の確認",
+                    "description": "このアカウントを削除してもよろしいですか？この操作は元に戻せません。",
+                    "cancel": "取り消す",
+                    "confirm": "確認"
                 }
             }
         },
@@ -535,12 +573,12 @@
                 "description": "Discord RPC経由でアクティビティを表示するかどうかを切り替えます。再起動をお勧めします。"
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "邪悪な赤いリング",
+                "description": "今や何でも追加しちゃうよね ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "ロックインモード",
+                "description": "Robloxの設定ごときでそんなに真剣になる必要ないでしょ 😭"
             },
             "donateCard": {
                 "title": "寄付",
@@ -548,14 +586,14 @@
                 "button": "寄付"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "クレジット",
+                "button": "開く",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "title": "クレジット",
+                    "development": "開発",
+                    "inspiration": "インスピレーション",
+                    "localization": "ローカライズ",
+                    "specialThanks": "特別な感謝 (初期サポーター!)"
                 }
             }
         }

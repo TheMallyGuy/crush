@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Préparation...",
+                "applyMods": "Application des modifications",
+                "launch": "Lancement"
             },
             "cancel": "Annuler",
             "retry": "Réessayer"
@@ -86,33 +86,63 @@
         "integrations": {
             "integrations": "Intégrations",
             "description": "Configurer les intégrations en dehors de Roblox.",
+            "dialogs": {
+                "title": "Avertissement 3e partie",
+                "description": "Cette intégration SwiftTunnel n'est pas officielle. Bien que nous ayons utilisé le SDK par défaut, forké et synchronisé avec la dernière application pour l'utiliser avec Crush. Merci de ne pas vous plaindre de SwiftTunnel auprès de nous.",
+                "confirm": "C'est noté !"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Configurez SwiftTunnel directement dans Crush.",
+                "back": "Retour",
+                "notLoggedIn": "Vous n'êtes pas connecté.",
+                "loginTimeout": "Connexion expirée. Veuillez réessayer.",
+                "loadingMessage": "Veuillez continuer dans votre navigateur. Annulation automatique après 1 min.",
+                "loginButton": "Connexion via le navigateur",
+                "enableTunnelingCard": {
+                    "title": "Activer le tunneling",
+                    "description": "Activer le tunneling pour router Roblox via le VPN"
+                },
+                "enableRoutingCard": {
+                    "title": "Activer le routage Roblox",
+                    "description": "Router toutes les requêtes API Roblox via le VPN. Cela peut permettre de contourner les jeux bloqués dans certains pays."
+                },
+                "preferredRegionCard": {
+                    "title": "Région préférée",
+                    "description": "Configurer votre région préférée"
+                },
+                "serverList": {
+                    "title": "Liste des serveurs",
+                    "empty": "Aucun serveur disponible."
+                }
+            },
             "activityWatcherCard": {
                 "title": "Observateur d'activité",
                 "description": "Surveillez votre activité sur Roblox. Certaines fonctionnalités doivent être activées."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Horaire de sommeil",
+                "description": "Votre horaire de sommeil est foutu"
             },
             "serverNotifierCard": {
                 "title": "Notifier l'emplacement du serveur",
                 "description": "Soyez averti lorsque le client se connecte à un serveur."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "Priorité du processus",
+                "description": "EXTRÊMEMENT EXPÉRIMENTAL. Changer la priorité du processus Roblox. Peut améliorer les performances."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Activer l'optimiseur",
+                "description": "Optimiser Roblox en limitant les ressources qu'il peut utiliser. Inspiré par le fonctionnement de 8damon/TASX-Roblox-Optimizer sur GitHub. De nos jours, tout est réécrit en Rust."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "Désactiver l'optimisation du plein écran",
+                "description": "Utiliser de la magie noire pour désactiver l'optimisation du plein écran"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "Fermer le gestionnaire de crash",
+                "description": "Tuer le gestionnaire de crash de Roblox pour économiser les performances."
             },
             "rpcCard": {
                 "title": "RPC Discord (russe)",
@@ -216,43 +246,51 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "Paramètres de base globaux",
+            "description": "Configurer les paramètres par défaut de Roblox.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "Limite FPS",
+                "description": "Configurer la limite FPS de Roblox. Notez que Roblox n'est conçu que pour 240 FPS maximum, aller plus haut pourrait casser Roblox."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "Niveau de qualité graphique",
+                "description": "Changer la qualité graphique de Roblox"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "Mouvement réduit",
+                "description": "Réduire le mouvement de l'interface utilisateur"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "Plein écran",
+                "description": "Activer ou non le plein écran brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "Paramètres générés automatiquement",
+                "description": "Généré à partir du fichier GBS de Roblox. Traiter avec précaution.",
+                "button": "Ouvrir"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "Paramètres de base globaux générés",
+                "description": "Généré automatiquement basé sur le fichier GBS.",
+                "noInstallation": "Whoa ! Installation actuelle introuvable ! Vous devriez au moins cliquer sur lancer avant de consulter cette page.",
+                "back": "Retour"
             }
         },
         "installations": {
             "installations": "Installations",
             "description": "Gérez votre installation de Roblox.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "Êtes-vous sûr de vouloir passer à VNG ?",
+                    "description": "Une fois connecté à VNG, vous ne pourrez plus jamais revenir à la version globale.",
+                    "cancel": "Non, ramenez-moi en arrière",
+                    "confirm": "Je comprends ce que je fais."
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "Gestionnaire de versions",
+                "description": "Gérer plusieurs versions de Roblox rapidement",
+                "button": "Ouvrir"
             },
             "parallelDownloadingCard": {
                 "title": "Téléchargement parallèle",
@@ -263,35 +301,35 @@
                 "description": "Réinstallez Roblox chaque fois que vous le lancez."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Utiliser Roblox vietnamien",
+                "description": "Cette option permet de télécharger Roblox VNG. Si vous ne savez pas ce que vous faites, n'activez pas cette option. Cette fonctionnalité est réservée aux utilisateurs vietnamiens. Une fois votre compte marqué comme compte VNG, vous ne pourrez plus revenir à la version globale."
             },
             "dontUpdateCard": {
                 "title": "Ne pas mettre à jour Roblox",
                 "description": "Sautez la vérification de la mise à jour de Roblox et lancez instantanément."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "Gestionnaire de versions",
+                "description": "Gérez facilement vos versions de Roblox.",
+                "none": "Vous n'avez installé aucune version pour l'instant !",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "Confirmer l'action",
+                        "description": "Êtes-vous sûr de vouloir supprimer cette version ?",
+                        "cancel": "Annuler",
+                        "confirm": "Confirmer"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "Ajouter une nouvelle version",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "Nom de la version",
+                            "placeholder": "Nouvelle version"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Hash de la version"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "Annuler",
+                        "confirm": "Confirmer"
                     }
                 }
             }
@@ -318,7 +356,7 @@
                     "buttonAdd": "Ajouter",
                     "search": "Rechercher tous les drapeaux rapide...",
                     "searchNotFound": "Aucun indicateur correspondant à votre recherche n'a été trouvé.",
-                    "import": "Import JSON",
+                    "import": "Importer JSON",
                     "flagCol": {
                         "deleteNote": "Supprimer l’indicateur.",
                         "name": "Nom du marqueur",
@@ -348,7 +386,7 @@
                     "dropdownDefault": "Par défaut"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "Activer les maillages de faible qualité (LOD)",
                     "description": "Peut améliorer les performances."
                 },
                 "graySkyCard": {
@@ -416,98 +454,98 @@
                 "communityMods": {
                     "title": "Mods de la communauté",
                     "description": "Explorez les mods créés par la communauté.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "Chargement des mods...",
+                    "notFound": "Aucun mod trouvé ({itemsCount})",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "Tous",
+                        "library": "Bibliothèque {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "Par {name}",
+                        "adapter": "Adaptateur : {library}",
+                        "download": "Télécharger"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Créer des raccourcis",
+            "description": "Créez facilement des raccourcis pour jouer instantanément à vos jeux préférés.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Créer un raccourci",
+                "button": "Créer le raccourci",
+                "gameIdInput": "ID du jeu",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Veuillez récupérer...",
+                    "fetching": "Récupération en cours...",
+                    "notFound": "Jeu non trouvé",
+                    "fetched": "Informations du jeu récupérées ! Plus qu'à appuyer sur le bouton de création de raccourci",
+                    "noThumb": "Aucune vignette disponible",
+                    "error": "Erreur lors de la récupération du jeu",
+                    "done": "Regardez votre bureau !"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "Gestion des comptes",
+            "description": "Changer de compte facilement",
+            "validateAccounts": "Valider les comptes",
+            "addAnAccount": "Ajouter un compte",
+            "use": "Utiliser",
+            "delete": "Supprimer",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Succès !",
+                    "description": "Bonjour {username} ! Vous pouvez maintenant changer de compte en utilisant le gestionnaire de comptes !"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Échec du changement",
+                    "description": "je ne sais pas, quelque chose s'est passé"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Validation des comptes",
+                    "description": "Patientez, nous validons vos comptes"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} est invalide",
+                    "description": "Le compte {account} est invalide. Nous l'avons supprimé de la liste."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Validation terminée",
+                    "description": "Tous les comptes invalides (le cas échéant) ont été supprimés"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Ajouter un compte",
+                    "description": "Ajouter un nouveau compte à la liste.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Connexion via webview (navigateur)",
+                            "open": "Ouvrir la webview",
+                            "check": "Vérifier les cookies",
+                            "failed": "Échec de la récupération du cookie, assurez-vous d'être connecté et réessayez."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Connexion via connexion rapide",
+                            "title": "Connectez-vous en utilisant la connexion rapide.",
+                            "checkbox": "Marquer comme compte VNG (Ne cochez pas si vous ne savez pas ce que vous faites)",
+                            "start": "Démarrer la connexion rapide",
+                            "creating": "Création du code...",
+                            "enter": "Entrez ce code dans le champ Connexion rapide :",
+                            "approval": "En attente d'approbation...",
+                            "cancelled": "Annulé.",
+                            "timeout": "Délai dépassé ou échec",
+                            "failedToGetCookies": "Échec de la récupération des cookies, assurez-vous d'être connecté et réessayez.",
+                            "robloxsecFailed": "Impossible de trouver le cookie .ROBLOSECURITY. Assurez-vous d'être connecté."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "Confirmer la suppression",
+                    "description": "Êtes-vous sûr de vouloir supprimer ce compte ? Cette action est irréversible.",
+                    "cancel": "Annuler",
+                    "confirm": "Confirmer"
                 }
             }
         },
@@ -535,12 +573,12 @@
                 "description": "Permet de montrer ou non votre activité via Discord RPC. Un redémarrage est recommandé."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "Anneaux Rouges Maléfiques",
+                "description": "Il ajoute n'importe quoi à ce stade ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "Mode verrouillé",
+                "description": "Configurer Roblox ne devrait pas être AU POINT d'être si sérieux 😭"
             },
             "donateCard": {
                 "title": "Faire un don",
@@ -548,14 +586,14 @@
                 "button": "Faire un don"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "Crédits",
+                "button": "Ouvrir",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
+                    "title": "Crédits",
+                    "development": "Développement",
                     "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "localization": "Localisation",
+                    "specialThanks": "Remerciements spéciaux (Premiers soutiens !)"
                 }
             }
         }
