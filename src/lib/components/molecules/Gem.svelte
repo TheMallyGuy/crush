@@ -188,15 +188,18 @@
     });
 
     let frame: number;
+    let lastFrameTime = 0;
 
-    function animate(): void {
-      illo.rotate.y += 0.01;
-      illo.updateRenderGraph();
-
+    function animate(timestamp: number): void {
       frame = requestAnimationFrame(animate);
+      const delta = timestamp - lastFrameTime;
+      if (delta < 33) return; // cap at ~30fps
+      lastFrameTime = timestamp;
+      illo.rotate.y += 0.01 * (delta / 16.67); // keep rotation speed consistent
+      illo.updateRenderGraph();
     }
 
-    animate();
+    requestAnimationFrame(animate);
 
     // cleanup
     return (): void => {

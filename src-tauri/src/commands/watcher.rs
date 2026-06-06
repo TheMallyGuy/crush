@@ -290,10 +290,19 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
     let mut was_running = false;
     let store = app.store("config.json").map_err(|e| e.to_string())?;
     let mut last_sleep_check = Instant::now() - Duration::from_secs(61);
+    // throttle expensive operations so they don't run every tick
+    let mut last_process_check = Instant::now() - Duration::from_millis(501);
+    let mut cached_running = false;
+    let mut last_log_dir_check = Instant::now() - Duration::from_secs(3);
     log::info!("watcher is now running");
 
     loop {
-        let running = is_roblox_running(&mut system);
+        // full process enumeration is expensive — only do it every 500ms
+        if last_process_check.elapsed() >= Duration::from_millis(500) {
+            last_process_check = Instant::now();
+            cached_running = is_roblox_running(&mut system);
+        }
+        let running = cached_running;
 
         if running && state.roblox_hwnd.is_none() {
             let roblox_pid = get_roblox_pid(&mut system);
@@ -329,8 +338,12 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
         was_running = running;
 
         if running {
-            if let Some(path) = get_latest_log(is_vng) {
-                maybe_switch_log_file(&app, &mut state, path, &store).await;
+            // directory listing is cheap but still unnecessary at 10/s — 2s is plenty
+            if last_log_dir_check.elapsed() >= Duration::from_secs(2) {
+                last_log_dir_check = Instant::now();
+                if let Some(path) = get_latest_log(is_vng) {
+                    maybe_switch_log_file(&app, &mut state, path, &store).await;
+                }
             }
 
             if state.current_file.is_some() {
@@ -362,7 +375,7 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             }
         }
 
-        tokio::time::sleep(Duration::from_millis(16)).await;
+        tokio::time::sleep(Duration::from_millis(100)).await;
     }
 }
 

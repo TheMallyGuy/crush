@@ -189,6 +189,26 @@ void main() {
 		const ro = new ResizeObserver(resize);
 		ro.observe(mount);
 
+		// initialise static uniforms once — only uTime/uMouse/uBurst change per frame
+		uniforms.uAttenuation.value = attenuation;
+		uniforms.uColor.value.set(color);
+		uniforms.uColorTwo.value.set(colorTwo);
+		uniforms.uLineThickness.value = lineThickness;
+		uniforms.uBaseRadius.value = baseRadius;
+		uniforms.uRadiusStep.value = radiusStep;
+		uniforms.uScaleRate.value = scaleRate;
+		uniforms.uRingCount.value = ringCount;
+		uniforms.uOpacity.value = opacity;
+		uniforms.uNoiseAmount.value = noiseAmount;
+		uniforms.uRotation.value = (rotation * Math.PI) / 180;
+		uniforms.uRingGap.value = ringGap;
+		uniforms.uFadeIn.value = fadeIn;
+		uniforms.uFadeOut.value = fadeOut;
+		uniforms.uMouseInfluence.value = followMouse ? mouseInfluence : 0;
+		uniforms.uHoverAmount.value = 1;
+		uniforms.uHoverScale.value = hoverScale;
+		uniforms.uParallax.value = parallax;
+
 		const mouse = [0, 0];
 		const smoothMouse = [0, 0];
 		let burst = 0;
@@ -215,25 +235,7 @@ void main() {
 			if (burst < 0.001) burst = 0;
 
 			uniforms.uTime.value = t * 0.001 * speed;
-			uniforms.uAttenuation.value = attenuation;
-			uniforms.uColor.value.set(color);
-			uniforms.uColorTwo.value.set(colorTwo);
-			uniforms.uLineThickness.value = lineThickness;
-			uniforms.uBaseRadius.value = baseRadius;
-			uniforms.uRadiusStep.value = radiusStep;
-			uniforms.uScaleRate.value = scaleRate;
-			uniforms.uRingCount.value = ringCount;
-			uniforms.uOpacity.value = opacity;
-			uniforms.uNoiseAmount.value = noiseAmount;
-			uniforms.uRotation.value = (rotation * Math.PI) / 180;
-			uniforms.uRingGap.value = ringGap;
-			uniforms.uFadeIn.value = fadeIn;
-			uniforms.uFadeOut.value = fadeOut;
 			uniforms.uMouse.value.set(smoothMouse[0], smoothMouse[1]);
-			uniforms.uMouseInfluence.value = followMouse ? mouseInfluence : 0;
-			uniforms.uHoverAmount.value = 1;
-			uniforms.uHoverScale.value = hoverScale;
-			uniforms.uParallax.value = parallax;
 			uniforms.uBurst.value = clickBurst ? burst : 0;
 
 			renderer.render(scene, camera);
