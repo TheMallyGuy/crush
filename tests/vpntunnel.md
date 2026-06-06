@@ -15,6 +15,8 @@ I compiled `swifttunnel.dll` as the SDK, added safe Rust FFI bindings for it in 
 ## Benchmarking
 
 For me (Vietnam) this works very stable, I average about 40~60ms on ping, highest ever recorded is 100-150ms when gaming with SwiftTunnel!
+## Issues i found so far
+There is some issue with loading assets, mainly because the servers have high amount of users who's playing roblox. They ratelimit so the game unable to load assets. Beside that everything turn out great
 
 ## Other stuff
 
