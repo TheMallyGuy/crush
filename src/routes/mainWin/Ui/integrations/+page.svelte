@@ -143,8 +143,8 @@
     on:close={() => {
         warningDialog = false
     }}
-    title="3rd party warning"
-    description="This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us."
+    title={$_('pages.integrations.dialogs.title')}
+    description={$_('pages.integrations.dialogs.description')}
 >
     <div slot="actions">
         <Button
@@ -155,7 +155,7 @@
                 goto('integrations/swift')
             }}
         >
-            Got it
+            {$_('pages.integrations.dialogs.confirm')}
         </Button>
     </div>
 </Dialog>
