@@ -15,14 +15,39 @@
     import Switch from '$lib/components/atoms/Switch.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import { goto } from '$app/navigation'
+    import Dialog from '$lib/components/molecules/Dialog.svelte'
 
-    const vngLogo = "/VNG.png"
+    const vngLogo = '/VNG.png'
 
-    let version: string
-    let forceReinstall: boolean
-    let dontUpdate: boolean
-    let vng: boolean
-    let parallel: number
+    let warningVng = $state(false)
+
+    let version: string = $state('')
+    let forceReinstall: boolean = $state(false)
+    let dontUpdate: boolean = $state(false)
+    let vng: boolean = $state(false)
+    let parallel: number = $state(5)
+
+    let resolveWarning: ((value: boolean | null) => void) | null = null
+
+    async function handleWarning() {
+        if (!vng) {
+            vng = false
+            return
+        }
+        warningVng = true
+
+        const ifContinue = await new Promise<boolean | null>((resolve) => {
+            resolveWarning = resolve
+        })
+
+        warningVng = false
+
+        if (ifContinue) {
+            handleChanges()
+        } else {
+            vng = false
+        }
+    }
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -48,6 +73,7 @@
         await loadConfig()
         console.log('loaded')
     })
+
     async function handleChanges() {
         const store = await load('config.json')
 
@@ -64,6 +90,30 @@
         await store.save()
     }
 </script>
+
+<Dialog
+    bind:open={warningVng}
+    on:close={() => resolveWarning?.(false)}
+    title="Are you sure to switch to VNG?"
+    description="Once you logged in VNG, you cant never go back to global."
+>
+    <div slot="actions">
+        <Button
+            variant="secondary"
+            size="sm"
+            on:click={() => resolveWarning?.(false)}
+        >
+            Cancel
+        </Button>
+        <Button
+            variant="danger"
+            size="sm"
+            on:click={() => resolveWarning?.(true)}
+        >
+            I understand what's im doing.
+        </Button>
+    </div>
+</Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
@@ -133,7 +183,7 @@
             <Switch
                 slot="action"
                 bind:checked={vng}
-                on:change={handleChanges}
+                on:change={handleWarning}
             />
         </SettingCard>
 
