@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import * as THREE from 'three';
+	import { WebGLRenderer, Scene, OrthographicCamera, Vector2, Color, ShaderMaterial, PlaneGeometry, Mesh } from 'three'
 
 	type Props = {
 		color?: string;
@@ -115,9 +115,9 @@ void main() {
 	onMount(() => {
 		if (!mount) return;
 
-		let renderer: THREE.WebGLRenderer;
+		let renderer: WebGLRenderer;
 		try {
-			renderer = new THREE.WebGLRenderer({ alpha: true });
+			renderer = new WebGLRenderer({ alpha: true });
 		} catch {
 			return;
 		}
@@ -134,16 +134,16 @@ void main() {
 		// Pass through all pointer events — content behind remains clickable
 		renderer.domElement.style.pointerEvents = 'none';
 
-		const scene = new THREE.Scene();
-		const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
+		const scene = new Scene();
+		const camera = new OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
 		camera.position.z = 1;
 
 		const uniforms = {
 			uTime: { value: 0 },
 			uAttenuation: { value: 0 },
-			uResolution: { value: new THREE.Vector2() },
-			uColor: { value: new THREE.Color() },
-			uColorTwo: { value: new THREE.Color() },
+			uResolution: { value: new Vector2() },
+			uColor: { value: new Color() },
+			uColorTwo: { value: new Color() },
 			uLineThickness: { value: 0 },
 			uBaseRadius: { value: 0 },
 			uRadiusStep: { value: 0 },
@@ -155,7 +155,7 @@ void main() {
 			uRingGap: { value: 1.6 },
 			uFadeIn: { value: 0.5 },
 			uFadeOut: { value: 0.75 },
-			uMouse: { value: new THREE.Vector2() },
+			uMouse: { value: new Vector2() },
 			uMouseInfluence: { value: 0 },
 			uHoverAmount: { value: 1 },
 			uHoverScale: { value: 1 },
@@ -163,13 +163,13 @@ void main() {
 			uBurst: { value: 0 }
 		};
 
-		const material = new THREE.ShaderMaterial({
+		const material = new ShaderMaterial({
 			vertexShader,
 			fragmentShader,
 			uniforms,
 			transparent: true
 		});
-		const quad = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+		const quad = new Mesh(new PlaneGeometry(1, 1), material);
 		scene.add(quad);
 
 		const resize = () => {
