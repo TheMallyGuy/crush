@@ -1,23 +1,23 @@
 {
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "Sıfırdan yazılmış bir Roblox önyükleyici",
+        "integrations": "Entegrasyonlar Rotasında",
         "installation": "Kurulum Rotasında",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "Fast Flags Rotasında",
         "mod": "Mod Rotasında",
         "appearance": "Görünüş Yolunda",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "Roblox Oynuyor",
                 "idle": "Oyunda değil",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "Oyunda",
+                "playingPrivate": "Oyunda, Özel sunucu",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "Genel bir sunucuya bağlanıldı!",
+                        "private": "Özel bir sunucuya bağlanıldı!"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\nKonum : {location}"
                 }
             }
         }
@@ -44,26 +44,26 @@
             "title": "Ezmek",
             "playRoblox": "Roblox oyna",
             "config": "Yapılandırma",
-            "discord": "Our Community"
+            "discord": "Topluluğumuz"
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Hazırlanıyor...",
+                "applyMods": "Değişiklikler uygulanıyor",
+                "launch": "Başlatılıyor"
             },
             "cancel": "İptal",
             "retry": "Tekrar dene"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "Sunucu Bilgileri",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "Bölge : {region}",
+                "waitRegion": "Bölge getiriliyor...",
+                "description": "Bu sunucu hakkında sunucu bilgileri",
+                "uptime": "Çalışma Süresi : Alınamadı",
+                "instanceId": "Sunucu Örneği Kimliği : {id}",
+                "inviteLink": "Davet linkini kopyala :"
             }
         },
         "appearance": {
@@ -71,7 +71,7 @@
             "description": "Roblox önyükleyicinin görünümünü ve hissini özelleştirin.",
             "bootstrapThemeCard": {
                 "title": "Önyükleyici Teması",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Varsayılan Crush teması veya özel bir XML tema arasında seçim yapın. Bloxstrap ve HTML desteklenir. Tüm Bloxstrap temalarının çalışmadığını unutmayın.",
                 "dropdown": {
                     "default": "Varsayılan (Ezilme)",
                     "custom": "Özel"
@@ -85,40 +85,70 @@
         },
         "integrations": {
             "integrations": "Entegrasyonlar",
-            "description": "Configure integrations outside Roblox.",
+            "description": "Roblox dışında entegrasyonları yapılandırın.",
+            "dialogs": {
+                "title": "3. Taraf Uyarısı",
+                "description": "Bu SwiftTunnel entegrasyonu resmi değildir. Varsayılan SDK'yı kullanarak, Crush ile kullanılmak üzere en son uygulamayla senkronize ettik. Lütfen SwiftTunnel hakkında bizimle şikayet etmeyin.",
+                "confirm": "Anladım!"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "SwiftTunnel'ı Crush içinde yapılandırın.",
+                "back": "Geri",
+                "notLoggedIn": "Giriş yapmamışsınız.",
+                "loginTimeout": "Giriş zaman aşımına uğradı. Lütfen tekrar deneyin.",
+                "loadingMessage": "Lütfen tarayıcınızda devam edin. 1 dakika sonra otomatik iptal edilir.",
+                "loginButton": "Tarayıcı ile Giriş",
+                "enableTunnelingCard": {
+                    "title": "Tünellemeyi Etkinleştir",
+                    "description": "Roblox'u VPN üzerinden yönlendirmek için tünellemeyi etkinleştirin"
+                },
+                "enableRoutingCard": {
+                    "title": "Roblox Yönlendirmeyi Etkinleştir",
+                    "description": "Tüm Roblox API isteklerini VPN üzerinden yönlendirin. Bu, bazı ülkelerde engellenen oyunlara erişmek için kullanılabilir."
+                },
+                "preferredRegionCard": {
+                    "title": "Tercih Edilen Bölge",
+                    "description": "Tercih edilen bölgenizi yapılandırın"
+                },
+                "serverList": {
+                    "title": "Sunucu Listesi",
+                    "empty": "Kullanılabilir sunucu yok."
+                }
+            },
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "Aktivite İzleyici",
+                "description": "Roblox'daki aktivitenizi izleyin. Bazı özellikler bunun etkin olmasını gerektirir."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Uyku düzeni",
+                "description": "Uyku düzenin bozuk"
             },
             "serverNotifierCard": {
                 "title": "Sunucu Konumu Bildirici",
-                "description": "Get notified when the client connects to a server."
+                "description": "İstemci bir sunucuya bağlandığında bildirim alın."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "İşlem Önceliği",
+                "description": "AŞIRI DENEYSEL. Roblox işlem önceliğini değiştirir. Performansı artırabilir."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Optimizatörü Etkinleştir",
+                "description": "Roblox'un kullanabileceği kaynakları sınırlayarak optimize edin. GitHub'daki 8damon/TASX-Roblox-Optimizer'dan ilham alınmıştır. Günümüzde her şey Rust'ta yeniden yazılmıştır."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "Tam Ekran Optimizasyonunu Devre Dışı Bırak",
+                "description": "Karanlık büyü kullanarak tam ekran optimizasyonunu devre dışı bırakın"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "Çökme işleyicisini kapat",
+                "description": "Roblox'un çökme işleyicisini kapatarak performans kazanın."
             },
             "rpcCard": {
                 "title": "Discord RPC (Ezme)",
                 "description": "Roblox Rich Varlığını Crush'ınkiyle değiştir.",
                 "option1": "İnsanların oyununuza katılmasına izin verin",
-                "option2": "Display your account when playing Roblox"
+                "option2": "Roblox oynarken hesabınızı görüntüleyin"
             },
             "gameHistoryCard": {
                 "title": "Oyun geçmişiniz",
@@ -126,20 +156,20 @@
                 "button": "Görüntüle"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "Pencere Manipülasyonu (Daha Önce Etkileşimli API)",
+                "description": "Desteklenen oyunların pencerenizi taşımasına, yeniden boyutlandırmasına, bildirim göndermesine ve donanımınızla etkileşime girmesine izin verin. Yalnızca pencere manipülasyonuna sahip oyunları destekler — tüm oyunlar çalışmaz. BloxstrapRPC ve Funkstrap'in çalışma şeklinden ilham alınmıştır.",
                 "button": "Açık"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "RoValra ile Daha İyi Eşleştirme",
+                "description": "Crush, yerleşik bir eşleştirme entegrasyonuna sahiptir. RoValra'nın Gizlilik Politikası geçerlidir.",
                 "button": "Açık"
             },
             "roValra": {
                 "description": "Yapılandırma",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "Crush'ın sizin için bir sunucuya katılmasına izin verin",
+                    "description": "Roblox eşleştirmesi yerine, en iyi sunucuyu bulmak için RoValra API'sini kullanacağız."
                 }
             },
             "gameHistory": {
@@ -157,149 +187,157 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "Pencere Manipülasyonu Ayarları",
+                "description": "Pencere Manipülasyonu'nun nasıl davranacağını yapılandırın.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "Etkinleştir",
+                    "description": "Pencere Manipülasyonu'nu etkinleştirip etkinleştirmeyeceğinizi seçin."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "Gelişmiş",
+                    "description": "Pencere Manipülasyonu'nu derinlemesine yapılandırın.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "Kapsamlar",
                         "minimizeCard": {
-                            "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "title": "Küçült",
+                            "description": "Pencere Manipülasyonu aracılığıyla küçültme kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "maximizeCard": {
-                            "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "title": "Büyüt",
+                            "description": "Pencere Manipülasyonu aracılığıyla büyütme kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "Odaklan",
+                            "description": "Pencere Manipülasyonu aracılığıyla odaklanma kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "Pencereyi Taşı",
+                            "description": "Pencere Manipülasyonu aracılığıyla pencere taşıma kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "Geri Yükle",
+                            "description": "Pencere Manipülasyonu aracılığıyla geri yükleme kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
-                            "description": "Whether or not to enable set window title control via Window Manipulation."
+                            "title": "Pencere başlığını ayarla",
+                            "description": "Pencere Manipülasyonu aracılığıyla pencere başlığı ayarlama kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
-                            "description": "Whether or not to enable borderless window control via Window Manipulation."
+                            "title": "Kenarlıksız yap",
+                            "description": "Pencere Manipülasyonu aracılığıyla kenarlıksız pencere kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "Şeffaflık Ayarları",
                         "enableCard": {
-                            "title": "Enable",
-                            "description": "Whether or not to enable transparency control via the Interactive API."
+                            "title": "Etkinleştir",
+                            "description": "Interaktif API üzerinden şeffaflık kontrolünün etkinleştirilip etkinleştirilmeyeceği."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "title": "Min şeffaflık",
+                            "description": "Pencerenizin ulaşabileceği minimum şeffaflık seviyesi."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "title": "Max şeffaflık",
+                            "description": "Pencerenizin ulaşabileceği maksimum şeffaflık seviyesi."
                         }
                     }
                 }
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "Genel Temel Ayarlar",
+            "description": "Roblox'un varsayılan ayarlarını yapılandırın.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS Limiti",
+                "description": "Roblox'un FPS limitini yapılandırın. Roblox en fazla 240 FPS için tasarlandığı için, daha yüksek değerler Roblox'u bozabilir."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "Grafik Kalitesi Seviyesi",
+                "description": "Roblox'un grafik kalitesini değiştirin"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "Azaltılmış Hareket",
+                "description": "Kullanıcı arayüzü hareketlerini azaltın"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "Tam Ekran",
+                "description": "Tam ekrana geçip geçmeyeceği brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "Otomatik oluşturulan ayarlar",
+                "description": "Roblox'un GBS dosyasından oluşturuldu. Dikkatli işleyin.",
+                "button": "Aç"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "Oluşturulan Genel Temel Ayarlar",
+                "description": "GBS dosyasına dayanarak otomatik oluşturuldu.",
+                "noInstallation": "Vay! Mevcut kurulum bulunamadı! Bu sayfayı kontrol etmeden en azından bir kez başlat butonuna tıklamalısınız.",
+                "back": "Geri"
             }
         },
         "installations": {
             "installations": "Kurulumlar",
-            "description": "Manage your Roblox installation.",
+            "description": "Roblox kurulumunuzu yönetin.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "VNG'ye geçmek istediğinizden emin misiniz?",
+                    "description": "Bir kez VNG'ye giriş yaptığınızda, asla global'e dönemezsiniz.",
+                    "cancel": "Hayır, beni geri götür",
+                    "confirm": "Ne yaptığımı anlıyorum."
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "Sürüm Yöneticisi",
+                "description": "Birden fazla Roblox sürümünü hızla yönetin",
+                "button": "Aç"
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "Paralel İndirme",
+                "description": "Tek seferde bir tane yerine birden fazla varlığı indirin. Varsayılan 4'tür."
             },
             "forceReinstallCard": {
                 "title": "Roblox'u Yeniden Yüklemeye Zorla",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "Roblox'u her başlattığınızda yeniden yükleyin."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Vietnam Roblox'u Kullan",
+                "description": "Bu, Roblox VNG indirmek için bir seçenektir, ne yaptığınızı bilmiyorsanız açmayın. Bu özellik sadece Vietnam kullanıcıları içindir. Hesabınız VNG hesabı olarak işaretlendikten sonra, globale geri dönemezsiniz."
             },
             "dontUpdateCard": {
                 "title": "Roblox'u güncelleme",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "Roblox güncelleme kontrolünü atlayın ve anında başlatın."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "Sürüm yöneticisi",
+                "description": "Roblox sürümlerinizi kolayca yönetin.",
+                "none": "Henüz hiçbir sürüm yüklemediniz!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "İşlemi Onayla",
+                        "description": "Bu sürümü silmek istediğinizden emin misiniz?",
+                        "cancel": "İptal",
+                        "confirm": "Onayla"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "Yeni bir sürüm ekle",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "Sürüm adı",
+                            "placeholder": "Yeni sürüm"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Sürüm hash'i"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "İptal",
+                        "confirm": "Onayla"
                     }
                 }
             }
         },
         "fastflag": {
             "fastflag": "Hızlı Bayraklar",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "Roblox Fast Flag'leri ve yapılandırmalarını ekleyin/kaldırın.",
+            "generalBack": "Fast Flag'lara geri dön",
             "selectScreeen": {
                 "title": "Lütfen bir eylem seçin.",
                 "editCard": {
@@ -308,7 +346,7 @@
                 },
                 "presetCard": {
                     "title": "Ön Ayar",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "Crush içinde yerleşik Özellik Bayrağı ön ayarlarını kullanın."
                 }
             },
             "editor": {
@@ -316,9 +354,9 @@
                     "texboxFlagName": "Bayrak ve İsim",
                     "texboxFlagValue": "Değer",
                     "buttonAdd": "Ekle",
-                    "search": "Search all fast flags...",
+                    "search": "Tüm hızlı bayrakları ara...",
                     "searchNotFound": "Aramanızla eşleşen bayrak bulunamadı.",
-                    "import": "Import JSON",
+                    "import": "JSON İçe Aktar",
                     "flagCol": {
                         "deleteNote": "İşareti Sil",
                         "name": "Bayrak ve İsim",
@@ -329,18 +367,18 @@
             },
             "preset": {
                 "preset": "Ön ayarlar",
-                "description": "Use our built-in fast flag presets.",
+                "description": "Yerleşik hızlı bayrak ön ayarlarımızı kullanın.",
                 "msaaCard": {
                     "title": "Yumuşatma Kalitesi (MSAA)",
                     "description": "Pürüzlü kenarları pürüzsüzleştirir. Daha yüksek değerler daha iyi görünür ancak performansı düşürebilir."
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "Voxelizer'ı Duraklat",
                     "description": "Performansı artırmak için vokselleştirmeyi durdurur."
                 },
                 "grassAnimationCard": {
                     "title": "Çim sallama animasyonu",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Çim hareketinin yoğunluğunu ayarlar. (0 azalma yoktur, 999 veya daha yüksek bir sayı çimi dondurur, 0 ve 1 hafifçe hareketi azaltır, 1'den büyük değerler hareketi güçlü şekilde azaltır, hareketsizliğe yaklaşır)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Doku kalite seviyesinin üzerine yaz",
@@ -348,12 +386,12 @@
                     "dropdownDefault": "Sistem"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
-                    "description": "May improve performance."
+                    "title": "Düşük Kaliteli Modelleri Etkinleştir (LOD)",
+                    "description": "Performansı artırabilir."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "title": "Gri Gökyüzü",
+                    "description": "Gökyüzünü griye çevirir. Performansı artırabilir."
                 }
             }
         },
@@ -362,7 +400,7 @@
             "tab": {
                 "modManagement": {
                     "title": "Mod Yönetimi",
-                    "description": "Manage your Roblox mods.",
+                    "description": "Roblox modlarınızı yönetin.",
                     "addModButton": "Bir Mod Ekle",
                     "noModsFound": "Burada hiç mod bulamadık, Yuppies.",
                     "noModsFoundCreateButton": "İlk modunuzu oluşturun",
@@ -372,27 +410,27 @@
                         "renameNote": "Mod'u Yeniden Adlandır",
                         "openFolderNote": "Mod Paketi Klasörünü Aç",
                         "deleteNote": "MODÜLÜ SİL",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "Frostrap'ın mod yöneticisinden ilham alan mod düzeni.",
                         "description": "Mod yüklemeyi etkinleştirin ve mod klasörü konumunu ayarlayın."
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "Yeni mod oluştur",
                             "textbox": {
-                                "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "title": "Mod adı",
+                                "placeholder": "Yeni modum"
                             }
                         },
                         "delete": {
-                            "title": "Confirm Action",
-                            "description": "Are you sure to delete this mod?"
+                            "title": "İşlemi Onayla",
+                            "description": "Bu modu silmek istediğinizden emin misiniz?"
                         },
                         "exists": {
-                            "title": "This name is already exists!",
-                            "description": "Please choose a diffrent name."
+                            "title": "Bu isim zaten var!",
+                            "description": "Lütfen farklı bir isim seçin."
                         },
                         "buttons": {
-                            "confirm": "Confirm",
+                            "confirm": "Onayla",
                             "cancel": "İptal"
                         }
                     }
@@ -409,105 +447,105 @@
                     },
                     "customFontCard": {
                         "title": "Özel Yazı Tipi",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "Roblox yazı tipini istediğiniz gibi değiştirin.",
                         "button": "Yazı tipini değiştir"
                     }
                 },
                 "communityMods": {
                     "title": "Topluluk Modları",
                     "description": "Topluluk tarafından oluşturulan modları keşfedin.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "Modlar Yükleniyor...",
+                    "notFound": "{itemsCount} mod bulunamadı.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "Tümü",
+                        "library": "Kütüphane {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "{name} Tarafından",
+                        "adapter": "Bağdaştırıcı : {library}",
+                        "download": "İndir"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Kısayollar oluştur",
+            "description": "Favori oyunlarınızı hemen oynamak için kolayca kısayollar oluşturun.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Bir kısayol oluştur",
+                "button": "Kısayol Oluştur",
+                "gameIdInput": "Oyun Kimliği",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Lütfen getirin...",
+                    "fetching": "Getiriliyor...",
+                    "notFound": "Oyun bulunamadı",
+                    "fetched": "Oyun bilgileri alındı! Artık sadece o kısayol oluştur butonuna basman lazım",
+                    "noThumb": "Küçük resim mevcut değil",
+                    "error": "Oyun getirilirken hata",
+                    "done": "Masaüstüne bak!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "Hesap Yönetimi",
+            "description": "Hesapları değiştirmek kolaylaştı",
+            "validateAccounts": "Hesapları doğrula",
+            "addAnAccount": "Hesap ekle",
+            "use": "Kullan",
+            "delete": "Sil",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Başarılı!",
+                    "description": "Merhaba {username}! Artık hesap yöneticisini kullanarak hesaplarınızı değiştirebilirsiniz!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Geçiş başarısız",
+                    "description": "idk bir şey oldu"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Hesaplar doğrulanıyor",
+                    "description": "Bekleyin, hesaplarınız doğrulanıyor"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} geçersiz",
+                    "description": "{account} hesabı geçersiz. Listeden kaldırdık."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Doğrulama Tamamlandı",
+                    "description": "Tüm geçersiz hesaplar (varsa) kaldırıldı"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Hesap ekle",
+                    "description": "Listeye yeni bir hesap ekleyin.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Web görünümü ile giriş yap (tarayıcı)",
+                            "open": "Web görünümünü aç",
+                            "check": "Çerezleri kontrol et",
+                            "failed": "Çerez alınamadı, giriş yaptığınızdan emin olun ve tekrar deneyin."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Hızlı giriş ile giriş yap",
+                            "title": "Hızlı giriş kullanarak oturum açın.",
+                            "checkbox": "VNG hesabı olarak işaretle (Ne yaptığını bilmiyorsanız işaretlemeyin)",
+                            "start": "Hızlı girişi başlat",
+                            "creating": "Kod oluşturuluyor...",
+                            "enter": "Bu kodu Hızlı Giriş alanına girin :",
+                            "approval": "Onay bekleniyor...",
+                            "cancelled": "İptal edildi.",
+                            "timeout": "Zaman aşımı veya başarısız",
+                            "failedToGetCookies": "Çerezler alınamadı, giriş yaptığınızdan emin olun ve tekrar deneyin.",
+                            "robloxsecFailed": ".ROBLOSECURITY çerezi bulunamadı. Giriş yaptığınızdan emin olun."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "Silmeyi Onayla",
+                    "description": "Bu hesabı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                    "cancel": "İptal",
+                    "confirm": "Onayla"
                 }
             }
         },
@@ -515,47 +553,47 @@
             "settings": "Ayarlar",
             "aboutCard": {
                 "title": "Hakkında",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "Bu Crush yapısı hakkında bilgi.",
+                "note": "Unutmayın! Crush kullanımı ücretsizdir. Eğer birisi bunu yeniden tasarlayıp satmaya çalışıyorsa, lütfen Discord sunucumuzda bize bildirin!",
                 "builtOn": "Üzerine inşa",
                 "commitHash": "İşlem karması:  {hash}",
                 "version": "Versiyon:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
-                "description": "Force the onboarding flow to run again.",
+                "title": "Crush Merhaba",
+                "description": "Yeniden başlatma akışının tekrar çalışmasını zorlayın.",
                 "button": "Sıfırla"
             },
             "languageCard": {
                 "title": "Dil",
-                "description": "Select your preferred language for Crush."
+                "description": "Crush için tercih ettiğiniz dili seçin."
             },
             "enableCrushRpcCard": {
                 "title": "Crush Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "Discord RPC ile aktivitenizin gösterilip gösterilmeyeceğini değiştirin. Yeniden başlatma önerilir."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "Kötü Kırmızı Halka",
+                "description": "Adam her şeyi ekliyor artık ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "Kilitli Mod",
+                "description": "Roblox'u yapılandırmak O KADAR da ciddi olamaz 😭"
             },
             "donateCard": {
                 "title": "Bağış yap",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "Crush'u seviyor musunuz? Mally'ye bağış yaparak çalışmalarını destekleyin!",
                 "button": "Bağış yap"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "Katkıda Bulunanlar",
+                "button": "Aç",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "title": "Katkıda Bulunanlar",
+                    "development": "Geliştirme",
+                    "inspiration": "İlham",
+                    "localization": "Yerelleştirme",
+                    "specialThanks": "Özel Teşekkürler (Erken Destekçiler!)"
                 }
             }
         }
