@@ -160,11 +160,12 @@ export async function saveFastFlags(
     await writeTextFile(clientSettings, content, { baseDir: BaseDirectory.AppData })
 }
 
-export async function loadFlag(app_type: AppType, version: string) {
+export async function loadFlag(app_type: AppType, version: string, vng?: boolean) {
     let path
 
     if (app_type === "player") {
-        path = await join(await appDataDir(), "Player", "Versions", version)
+        const folder = vng ? "PlayerVNG" : "Player"
+        path = await join(await appDataDir(), folder, "Versions", version)
     } else {
         path = await join(await appDataDir(), "Studio", "Versions", version)
     }

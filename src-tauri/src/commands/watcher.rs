@@ -334,7 +334,7 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             }
 
             if state.current_file.is_some() {
-                read_new_lines(&app, &mut state, &store).await;
+                read_new_lines(&app, &mut state, &store, is_vng).await;
             }
 
             if last_sleep_check.elapsed() >= Duration::from_secs(60) {
@@ -407,6 +407,7 @@ async fn read_new_lines(
     app: &AppHandle,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
+    is_vng: bool,
 ) {
     let Some(path) = state.current_file.as_ref() else {
         return;
@@ -439,7 +440,7 @@ async fn read_new_lines(
         match reader.read_line(&mut line) {
             Ok(0) => break,
             Ok(_) => {
-                if let Err(e) = handle_line(app, &line, state, store).await {
+                if let Err(e) = handle_line(app, &line, state, store, is_vng).await {
                     log::error!("handle_line: {}", e);
                     break;
                 }
@@ -469,6 +470,7 @@ async fn handle_line(
     line: &str,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
+    is_vng: bool,
 ) -> Result<(), String> {
     if let Some(caps) = re_join().captures(line) {
         let instance_id = caps
@@ -528,7 +530,7 @@ async fn handle_line(
     }
 
     if re_joined().is_match(line) {
-        on_joined(app, state, store).await?;
+        on_joined(app, state, store, is_vng).await?;
         return Ok(());
     }
 
@@ -573,6 +575,7 @@ async fn on_joined(
     app: &AppHandle,
     state: &mut WatcherState,
     store: &tauri_plugin_store::Store<tauri::Wry>,
+    is_vng: bool,
 ) -> Result<(), String> {
     let Some(place_id) = state.activity.place_id else {
         return Ok(());
@@ -614,6 +617,7 @@ async fn on_joined(
                 &["interactive", "scopes", "transparencyScopes", "enabled"],
             ),
             app,
+            is_vng,
         ) {
             log::warn!("failed to write game permission PNG: {}", e);
         }
@@ -1057,9 +1061,11 @@ fn write_game_permission_png(
     allow_title: bool,
     allow_transparency: bool,
     app: &AppHandle,
+    vng: bool,
 ) -> Result<(), String> {
     let data_dir = app.path().app_data_dir().map_err(|e| e.to_string())?;
-    let versions_dir = data_dir.join("Player").join("Versions");
+    let player_folder = if vng { "PlayerVNG" } else { "Player" };
+    let versions_dir = data_dir.join(player_folder).join("Versions");
 
     let version_dir = std::fs::read_dir(&versions_dir)
         .map_err(|e| format!("can't read versions dir {:?}: {}", versions_dir, e))?

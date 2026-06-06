@@ -5,8 +5,9 @@ import type { AppType ,Mod } from '$lib/types'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 import { exists } from '@tauri-apps/plugin-fs'
 
-function getAppFolder(appType: AppType): string {
-    return appType === 'studio' ? 'Studio' : 'Player'
+function getAppFolder(appType: AppType, vng?: boolean): string {
+    if (appType === 'studio') return 'Studio'
+    return vng ? 'PlayerVNG' : 'Player'
 }
 
 function getManifestStore(appType: AppType): string {
@@ -127,10 +128,12 @@ export async function removeMod(mod: Mod, robloxHash: string, appType: AppType =
 }
 
 export async function launchPlayer(hash: string, deeplink: string | null) {
+    const config = await load('config.json')
+    const useVng = (await config.get<{ vng?: boolean }>('installation'))?.vng === true
     const appData = await appDataDir()
     const playerLocation = await join(
         appData,
-        'Player',
+        getAppFolder('player', useVng),
         'Versions',
         hash,
         'RobloxPlayerBeta.exe'

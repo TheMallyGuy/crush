@@ -100,9 +100,14 @@ const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
 
 import type { ProgressEvent, ProgressCallback, Installation, Versions, InstallationEntry } from './types'
 
-async function reindexVersions(appType: AppType = 'player'): Promise<InstallationEntry[]> {
+function getAppFolder(appType: AppType, vng?: boolean): string {
+    if (appType === 'studio') return 'Studio'
+    return vng ? 'PlayerVNG' : 'Player'
+}
+
+async function reindexVersions(appType: AppType = 'player', vng?: boolean): Promise<InstallationEntry[]> {
     const dataDir = await appDataDir()
-    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const appFolder = getAppFolder(appType, vng)
     const versionsDir = await join(dataDir, appFolder, 'Versions')
     const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
 
@@ -248,11 +253,12 @@ async function extractIndividualZip(
 async function extractAll(
     versionHash: string,
     onProgress: ProgressCallback,
-    appType: AppType = 'player'
+    appType: AppType = 'player',
+    vng?: boolean
 ) {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
-    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const appFolder = getAppFolder(appType, vng)
     const installRoot = await join(dataDir, appFolder, 'Versions', versionHash)
     await ensureDir(installRoot)
 
@@ -299,9 +305,9 @@ async function resolveBestRegion(onProgress: ProgressCallback): Promise<string> 
     return bestRegion
 }
 
-async function writeAppSettings(versionHash: string, appType: AppType = 'player') {
+async function writeAppSettings(versionHash: string, appType: AppType = 'player', vng?: boolean) {
     const dataDir = await appDataDir()
-    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const appFolder = getAppFolder(appType, vng)
     const exeName =
         appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const xmlPath = await join(
@@ -355,19 +361,20 @@ async function getInstallationUrls(
 async function completeInstallation(
     onProgress: ProgressCallback,
     versionHash: string,
-    appType: AppType = 'player'
+    appType: AppType = 'player',
+    vng?: boolean
 ): Promise<void> {
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.extractingFiles'),
     })
-    await extractAll(versionHash, onProgress, appType)
+    await extractAll(versionHash, onProgress, appType, vng)
 
     onProgress({
         type: 'status',
         message: get(_)('typescript.downloader.xmlWriting'),
     })
-    await writeAppSettings(versionHash, appType)
+    await writeAppSettings(versionHash, appType, vng)
 }
 
 async function performFullInstallation(
@@ -392,18 +399,19 @@ async function performFullInstallation(
     const versionHash =
         assetsUrls[0].match(/(version-[^-]+)/)?.[1] ?? 'unknownversion'
 
-    await completeInstallation(onProgress, versionHash, appType)
+    await completeInstallation(onProgress, versionHash, appType, vng)
 
     return versionHash
 }
 
 async function checkInstallationExists(
     appType: AppType = 'player',
-    version?: string
+    version?: string,
+    vng?: boolean
 ): Promise<boolean> {
     if (!version || typeof version !== 'string') return false
     const dataDir = await appDataDir()
-    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const appFolder = getAppFolder(appType, vng)
     const exeName =
         appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const exePath = await join(dataDir, appFolder, 'Versions', version, exeName)
@@ -418,8 +426,10 @@ export async function downloadRoblox(
     const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
     const versionStore = await load(storeKey)
 
+    const useVngForIndex = (await config.get<Installation>('installation'))?.vng === true
+
     // reindex
-    const actualEntries = await reindexVersions(appType)
+    const actualEntries = await reindexVersions(appType, useVngForIndex)
     const actualVersions = actualEntries.map(e => e.versionHash)
 
     const storedEntries = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
@@ -456,7 +466,7 @@ async function handleLatestVersion(
 
     const versionHashes = entries.map(e => e.versionHash)
     const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
-    const isMissing = !(await checkInstallationExists(appType, currentlyUsing?.versionHash))
+    const isMissing = !(await checkInstallationExists(appType, currentlyUsing?.versionHash, useVng))
     const installationCfg = await store.get<Installation>('installation')
 
     const expectedChannel: 'global' | 'vng' = useVng ? 'vng' : 'global'
@@ -645,7 +655,7 @@ export async function getCurrentInstallation(appType: AppType = 'player'): Promi
 
 
     const dataDir = await appDataDir()
-    const appFolder = appType === 'studio' ? 'Studio' : 'Player'
+    const appFolder = getAppFolder(appType, latest.channel === 'vng')
     const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const installPath = await join(dataDir, appFolder, 'Versions', latest.versionHash)
     const exePath = await join(installPath, exeName)

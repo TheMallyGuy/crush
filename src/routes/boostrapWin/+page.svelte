@@ -153,7 +153,7 @@
 
             const integrations = await store.get<Integrations>('integrations')
 
-            await loadFlag(appType, version)
+            await loadFlag(appType, version, installation?.vng)
 
             if (appType === 'studio') {
                 await launchStudio(version)

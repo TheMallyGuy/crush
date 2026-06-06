@@ -93,11 +93,15 @@ async fn ping_url(client: &reqwest::Client, url: &'static str) -> (&'static str,
     let res = client.head(url).send().await;
     let duration = start.elapsed().as_millis();
 
-    log::info!("[BACKEND] {} returned in {}ms", url, duration);
-
     match res {
-        Ok(_) => (url, duration),
-        Err(_) => (url, u128::MAX),
+        Ok(_) => {
+            log::info!("[BACKEND] {} returned in {}ms", url, duration);
+            (url, duration)
+        }
+        Err(e) => {
+            log::warn!("[BACKEND] {} failed after {}ms: {}", url, duration, e);
+            (url, u128::MAX)
+        }
     }
 }
 
