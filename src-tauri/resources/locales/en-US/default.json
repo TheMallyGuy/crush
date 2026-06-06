@@ -249,6 +249,15 @@
         "installations": {
             "installations": "Installations",
             "description": "Manage your Roblox installation.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "Are you sure to switch to VNG?",
+                    "description": "Once you logged in VNG, you cant never go back to global.",
+
+                    "cancel" : "No, take me back",
+                    "confirm": "I understand what's im doing."
+                }
+            },
             "versionManagerCard": {
                 "title": "Versions Manager",
                 "description": "Manage multiple roblox versions with speed",

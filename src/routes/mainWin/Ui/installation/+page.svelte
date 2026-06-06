@@ -94,8 +94,8 @@
 <Dialog
     bind:open={warningVng}
     on:close={() => resolveWarning?.(false)}
-    title="Are you sure to switch to VNG?"
-    description="Once you logged in VNG, you cant never go back to global."
+    title={$_('pages.installations.dialogs.vngWarning.title')}
+    description={$_('pages.installations.dialogs.vngWarning.description')}
 >
     <div slot="actions">
         <Button
@@ -103,14 +103,14 @@
             size="sm"
             on:click={() => resolveWarning?.(false)}
         >
-            Cancel
+            {$_('pages.installations.dialogs.vngWarning.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
             on:click={() => resolveWarning?.(true)}
         >
-            I understand what's im doing.
+            {$_('pages.installations.dialogs.vngWarning.confirm')}
         </Button>
     </div>
 </Dialog>
