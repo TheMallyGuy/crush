@@ -1,3 +1,4 @@
+use crate::collector::{end_game_session, log_game, new_game_session};
 use crate::interactive::{
     find_windows_by_title, get_monitor_info, get_primary_screen_size, get_virtual_screen_size,
     get_window_rect, move_window, reset_layered, set_borderless, set_layered_transparency,
@@ -15,6 +16,7 @@ use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
+use sqlx::SqlitePool;
 use std::path::Path;
 use std::sync::Mutex;
 use std::sync::OnceLock;
@@ -550,6 +552,14 @@ async fn handle_line(
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
 
+        let pool = app.state::<SqlitePool>();
+
+        if let Some(pid) = state.activity.place_id {
+            if let Err(e) = end_game_session(pool.inner(), pid as i64).await {
+                log::warn!("collector new_game_session failed: {e}");
+            }
+        }
+
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
@@ -644,6 +654,18 @@ async fn on_joined(
 
     log::info!("joined game {}", place_id);
     save_game_history(state, store, place_id)?;
+
+    log::info!("saving collector info");
+    let pool = app.state::<SqlitePool>();
+
+    if let Some(pid) = state.activity.place_id {
+        if let Err(e) = log_game(pool.inner(), pid as i64).await {
+            log::warn!("collector log_game failed: {e}");
+        }
+        if let Err(e) = new_game_session(pool.inner(), pid as i64).await {
+            log::warn!("collector new_game_session failed: {e}");
+        }
+    }
 
     if let Some(id) = state.activity.instance_id.as_deref() {
         let location = state.pending_server_location.clone().unwrap_or_default();

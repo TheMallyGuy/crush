@@ -38,6 +38,7 @@ use crate::rpc::kill_rpc;
 use rpc::RpcState;
 use simple_i18n::I18n;
 
+pub mod collector;
 pub mod interactive;
 pub mod larp_focuser;
 pub mod priorites;
@@ -311,6 +312,9 @@ pub fn run() {
             setup_deep_links(app)?;
             spawn_discord_rpc(app.handle().clone());
             setup_tray(app)?;
+
+            let pool = tauri::async_runtime::block_on(collector::init(app.handle()));
+            app.manage(pool);
 
             // run auto update after startup
             // https://v2.tauri.app/plugin/updater/

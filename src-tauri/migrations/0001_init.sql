@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS games (
+  id INTEGER PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS sessions (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  game_id    INTEGER NOT NULL REFERENCES games(id),
+  started_at INTEGER NOT NULL,
+  ended_at   INTEGER,
+  duration   INTEGER
+);
