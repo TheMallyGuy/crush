@@ -55,7 +55,7 @@ class AppSettings {
         this.loaded = true
     }
 
-    private async save() {
+    async save() {
         const store = await load('config.json')
         await store.set('settings', {
             lockedIn: this.lockedInMode,

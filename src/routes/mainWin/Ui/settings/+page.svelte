@@ -29,6 +29,7 @@
     import Dialog from '$lib/components/molecules/Dialog.svelte'
     import Checkbox from '$lib/components/atoms/Checkbox.svelte'
     import { notify } from '$lib/notify'
+    import { goto } from '$app/navigation'
 
     const Arona = '/Arona.png'
 
@@ -42,6 +43,8 @@
     let hash: string = $state('Unknown hash')
     let buildtime: string = $state('Unknown Build time')
     let version: string = $state('Unknown Version')
+
+    let devMode = $state(false)
 
     const DEV = 'dev'
 
@@ -63,7 +66,7 @@
 
         if (buffer === DEV) {
             console.log('devloper mode enabled')
-
+            devMode = true
             notify.send({
                 title: 'Developer Mode enabled',
                 variant: 'success',
@@ -130,18 +133,25 @@
         const locked = settings.lockedInMode
         const redRinged = settings.redRings
 
+        void settings.discordRpcEnabled
+        void settings.robloxWarpped
+
         locale.set(lang)
 
-        if (wasLockedIn && !locked) {
-            window.location.reload()
-        }
+        ;(async () => {
+            await settings.save()
 
-        if (wasRedRings && !redRinged) {
-            window.location.reload()
-        }
+            if (wasLockedIn && !locked) {
+                window.location.reload()
+            }
 
-        wasLockedIn = locked
-        wasRedRings = redRinged
+            if (wasRedRings && !redRinged) {
+                window.location.reload()
+            }
+
+            wasLockedIn = locked
+            wasRedRings = redRinged
+        })()
     })
 
     onMount(async () => {
@@ -212,11 +222,11 @@
     on:close={() => {
         privacyAndDataDialog = false
     }}
-    title={$_("pages.settings.pirvacyCard.title")}
+    title={$_('pages.settings.pirvacyCard.title')}
 >
     <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
         <Checkbox bind:checked={settings.robloxWarpped}
-            >{$_("pages.settings.pirvacyCard.dialog.warpped")}</Checkbox   
+            >{$_('pages.settings.pirvacyCard.dialog.warpped')}</Checkbox
         >
     </div>
 </Dialog>
@@ -281,8 +291,8 @@
     </SettingCard>
 
     <SettingCard
-        title={$_("pages.settings.pirvacyCard.title")}
-        description={$_("pages.settings.pirvacyCard.description")}
+        title={$_('pages.settings.pirvacyCard.title')}
+        description={$_('pages.settings.pirvacyCard.description')}
         icon={Shield}
     >
         <Button
@@ -343,6 +353,18 @@
             >{$_('pages.settings.donateCard.button')}</Button
         >
     </ExpandableSettingCard>
+
+    {#if devMode}
+        <SettingCard title="Test page" icon={ScrollText} description="dev only">
+            <Button
+                slot="action"
+                variant="secondary"
+                on:click={() => {
+                    goto("./settings/dev")
+                }}>Open</Button
+            >
+        </SettingCard>
+    {/if}
 </div>
 
 <div class="justify-center w-full flex flex-row gap-3">
