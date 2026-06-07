@@ -585,6 +585,14 @@
                 "description": "喜欢粉碎吗？捐赠给马利以支持他的工作！",
                 "button": "捐献"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Credits",
                 "button": "Open",
@@ -593,7 +601,8 @@
                     "development": "Development",
                     "inspiration": "Inspiration",
                     "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "specialThanks": "Special Thanks (Early supporters!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

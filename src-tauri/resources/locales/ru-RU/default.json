@@ -585,6 +585,14 @@
                 "description": "Нравится Crush? Пожертвуйте Mally чтобы поддержать его работу!",
                 "button": "Пожертвовать"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Авторы",
                 "button": "Открыть",
@@ -593,7 +601,8 @@
                     "development": "Разработка",
                     "inspiration": "Вдохновение",
                     "localization": "Локализация",
-                    "specialThanks": "Особая благодарность (Ранние сторонники!)"
+                    "specialThanks": "Особая благодарность (Ранние сторонники!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

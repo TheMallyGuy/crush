@@ -585,6 +585,14 @@
                 "description": "Thích Crush? Hãy quyên góp cho Mally để ủng hộ công việc của anh ấy!",
                 "button": "Ủng hộ"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Lời cảm ơn",
                 "button": "Mở",
@@ -593,7 +601,8 @@
                     "development": "Phát triển",
                     "inspiration": "Cảm hứng",
                     "localization": "Bản địa hóa",
-                    "specialThanks": "Cảm ơn đặc biệt (Những người ủng hộ sớm!)"
+                    "specialThanks": "Cảm ơn đặc biệt (Những người ủng hộ sớm!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

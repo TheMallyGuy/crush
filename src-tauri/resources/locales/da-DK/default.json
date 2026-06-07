@@ -585,6 +585,14 @@
                 "description": "Elsker Crush? Doner til Mally for at støtte hans arbejde!",
                 "button": "Donér"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Kreditter",
                 "button": "Åbn",
@@ -593,7 +601,8 @@
                     "development": "Udvikling",
                     "inspiration": "Inspiration",
                     "localization": "Lokalisering",
-                    "specialThanks": "Speciel Tak (Tidlige Unterstüttere!)"
+                    "specialThanks": "Speciel Tak (Tidlige Unterstüttere!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

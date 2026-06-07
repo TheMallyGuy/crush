@@ -585,6 +585,14 @@
                 "description": "Crush'u seviyor musunuz? Mally'ye bağış yaparak çalışmalarını destekleyin!",
                 "button": "Bağış yap"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Katkıda Bulunanlar",
                 "button": "Aç",
@@ -593,7 +601,8 @@
                     "development": "Geliştirme",
                     "inspiration": "İlham",
                     "localization": "Yerelleştirme",
-                    "specialThanks": "Özel Teşekkürler (Erken Destekçiler!)"
+                    "specialThanks": "Özel Teşekkürler (Erken Destekçiler!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

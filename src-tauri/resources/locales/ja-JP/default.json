@@ -585,6 +585,14 @@
                 "description": "ラブクラッシュ? マリーに寄付して彼の仕事をサポートしましょう!",
                 "button": "寄付"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "クレジット",
                 "button": "開く",
@@ -593,7 +601,8 @@
                     "development": "開発",
                     "inspiration": "インスピレーション",
                     "localization": "ローカライズ",
-                    "specialThanks": "特別な感謝 (初期サポーター!)"
+                    "specialThanks": "特別な感謝 (初期サポーター!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

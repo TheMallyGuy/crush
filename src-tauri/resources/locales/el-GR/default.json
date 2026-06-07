@@ -585,6 +585,14 @@
                 "description": "Αγάπη Crush? Δωρεά στο Mally για να υποστηρίξει το έργο του!",
                 "button": "Δωρεά"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Credits",
                 "button": "Open",
@@ -593,7 +601,8 @@
                     "development": "Development",
                     "inspiration": "Inspiration",
                     "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "specialThanks": "Special Thanks (Early supporters!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }
