@@ -212,11 +212,11 @@
     on:close={() => {
         privacyAndDataDialog = false
     }}
-    title="Privacy & Data"
+    title={$_("pages.settings.pirvacyCard.title")}
 >
     <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
         <Checkbox bind:checked={settings.robloxWarpped}
-            >Record activity for Roblox:Warpped</Checkbox
+            >{$_("pages.settings.pirvacyCard.dialog.warpped")}</Checkbox   
         >
     </div>
 </Dialog>
@@ -281,8 +281,8 @@
     </SettingCard>
 
     <SettingCard
-        title="Privacy & Data"
-        description="Control how crush should use your information."
+        title={$_("pages.settings.pirvacyCard.title")}
+        description={$_("pages.settings.pirvacyCard.description")}
         icon={Shield}
     >
         <Button
