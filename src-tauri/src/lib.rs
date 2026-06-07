@@ -247,8 +247,8 @@ pub fn run() {
 
             let locale = app
                 .get_store("config.json")
-                .and_then(|store| store.get("language"))
-                .and_then(|v| v.as_str().map(|s| s.to_string()))
+                .and_then(|store| store.get("settings"))
+                .and_then(|v| v.get("language").and_then(|l| l.as_str().map(|s| s.to_string())))
                 .unwrap_or_else(|| "en-US".to_string());
 
             let path = app
