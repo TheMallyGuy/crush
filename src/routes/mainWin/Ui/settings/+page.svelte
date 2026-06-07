@@ -14,6 +14,7 @@
         Crosshair,
         Cuboid,
         ScrollText,
+        Shield,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -26,11 +27,14 @@
     import { Backlight } from '$lib/components/magic/backlight'
     import { SmoothCursor } from '$lib/components/magic/smooth-cursor'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
+    import Checkbox from '$lib/components/atoms/Checkbox.svelte'
 
     const Arona = '/Arona.png'
 
     let wasLockedIn = settings.lockedInMode
     let wasRedRings = settings.redRings
+
+    let privacyAndDataDialog = $state(false)
     let creditDialog = $state(false)
 
     let info: BuildInfo | undefined = $state()
@@ -147,19 +151,29 @@
 >
     <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
         <div>
-            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.development')}</p>
+            <p class="text-lx1 mb-1">
+                {$_('pages.settings.creditsCard.dialog.development')}
+            </p>
             <p class="text-stone-300">Mally - Lead Developer</p>
         </div>
         <div>
-            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.inspiration')}</p>
-            <p class="text-stone-300">Bloxstrap, Frostrap, Funkstrap, AppleBlox</p>
+            <p class="text-lx1 mb-1">
+                {$_('pages.settings.creditsCard.dialog.inspiration')}
+            </p>
+            <p class="text-stone-300">
+                Bloxstrap, Frostrap, Funkstrap, AppleBlox
+            </p>
         </div>
         <div>
-            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.localization')}</p>
+            <p class="text-lx1 mb-1">
+                {$_('pages.settings.creditsCard.dialog.localization')}
+            </p>
             <p class="text-stone-300">polover - Vietnamese</p>
         </div>
         <div>
-            <p class="text-lx1 mb-1">{$_('pages.settings.creditsCard.dialog.specialThanks')}</p>
+            <p class="text-lx1 mb-1">
+                {$_('pages.settings.creditsCard.dialog.specialThanks')}
+            </p>
             <div class="flex flex-col gap-1 text-stone-300">
                 <p>@miawuawua</p>
                 <p>@polover1682</p>
@@ -167,6 +181,19 @@
                 <p>@someonehelpme_12</p>
             </div>
         </div>
+    </div>
+    <div class="text-sm">Scroll down, there is more^^</div>
+</Dialog>
+
+<Dialog
+    open={privacyAndDataDialog}
+    on:close={() => {
+        privacyAndDataDialog = false
+    }}
+    title="Privacy & Data"
+>
+    <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
+        <Checkbox>Record activity for Roblox:Warpped</Checkbox>
     </div>
 </Dialog>
 
@@ -229,6 +256,20 @@
         <Switch slot="action" bind:checked={settings.redRings} />
     </SettingCard>
 
+    <SettingCard
+        title="Privacy & Data"
+        description="Control how crush should use your information."
+        icon={Shield}
+    >
+        <Button
+            slot="action"
+            variant="secondary"
+            on:click={() => {
+                privacyAndDataDialog = true
+            }}>{$_('pages.settings.creditsCard.button')}</Button
+        >
+    </SettingCard>
+
     <ExpandableSettingCard
         title={$_('pages.settings.aboutCard.title')}
         description={$_('pages.settings.aboutCard.description')}
@@ -256,7 +297,10 @@
         </div>
     </ExpandableSettingCard>
 
-    <SettingCard title={$_('pages.settings.creditsCard.title')} icon={ScrollText}>
+    <SettingCard
+        title={$_('pages.settings.creditsCard.title')}
+        icon={ScrollText}
+    >
         <Button
             slot="action"
             variant="secondary"
