@@ -28,6 +28,7 @@
     import { SmoothCursor } from '$lib/components/magic/smooth-cursor'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
     import Checkbox from '$lib/components/atoms/Checkbox.svelte'
+    import { notify } from '$lib/notify'
 
     const Arona = '/Arona.png'
 
@@ -41,6 +42,34 @@
     let hash: string = $state('Unknown hash')
     let buildtime: string = $state('Unknown Build time')
     let version: string = $state('Unknown Version')
+
+    const DEV = 'dev'
+
+    let buffer = ''
+
+    function handleGlobalKey(event: KeyboardEvent): void {
+        const target = event.target as HTMLElement
+        if (
+            target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable
+        ) {
+            return
+        }
+
+        buffer += event.key.toLowerCase()
+
+        buffer = buffer.slice(-DEV.length)
+
+        if (buffer === DEV) {
+            console.log('devloper mode enabled')
+
+            notify.send({
+                title: 'Developer Mode enabled',
+                variant: 'success',
+            })
+        }
+    }
 
     const LOCALE_NAMES: Record<string, string> = {
         'af-ZA': 'Afrikaans',
@@ -129,6 +158,8 @@
     })
 </script>
 
+<svelte:window on:keydown={handleGlobalKey} />
+
 {#if !settings.lockedInMode}
     <SmoothCursor />
 {/if}
@@ -184,7 +215,9 @@
     title="Privacy & Data"
 >
     <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
-        <Checkbox bind:checked={settings.robloxWarpped}>Record activity for Roblox:Warpped</Checkbox>
+        <Checkbox bind:checked={settings.robloxWarpped}
+            >Record activity for Roblox:Warpped</Checkbox
+        >
     </div>
 </Dialog>
 
