@@ -3,8 +3,23 @@
 // opt out anytime in settings
 
 use rusqlite::{params, Connection};
+use serde::{Deserialize, Serialize};
 use std::sync::{Arc, Mutex};
 use tauri::{AppHandle, Manager};
+
+#[derive(Serialize, Deserialize)]
+pub struct Game {
+    pub id: i64,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Session {
+    pub id: i64,
+    pub game_id: i64,
+    pub started_at: i64,
+    pub ended_at: Option<i64>,
+    pub duration: Option<i64>,
+}
 
 pub type DbConn = Arc<Mutex<Connection>>;
 
@@ -107,6 +122,46 @@ pub async fn new_game_session(db: &DbConn, game_id: i64) -> Result<i64, rusqlite
 
         log::info!("logged new game session");
         Ok(conn.last_insert_rowid())
+    })
+    .await
+    .unwrap()
+}
+
+pub async fn get_games(db: &DbConn) -> Result<Vec<Game>, rusqlite::Error> {
+    let db = Arc::clone(db);
+    tokio::task::spawn_blocking(move || {
+        let conn = db.lock().unwrap();
+        let mut stmt = conn.prepare("SELECT id FROM games ORDER BY id ASC")?;
+        let games = stmt
+            .query_map([], |row| Ok(Game { id: row.get(0)? }))?
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(games)
+    })
+    .await
+    .unwrap()
+}
+
+pub async fn get_sessions(db: &DbConn) -> Result<Vec<Session>, rusqlite::Error> {
+    let db = Arc::clone(db);
+    tokio::task::spawn_blocking(move || {
+        let conn = db.lock().unwrap();
+        let mut stmt = conn.prepare(
+            "SELECT id, game_id, started_at, ended_at, duration
+             FROM sessions
+             ORDER BY started_at DESC",
+        )?;
+        let sessions = stmt
+            .query_map([], |row| {
+                Ok(Session {
+                    id: row.get(0)?,
+                    game_id: row.get(1)?,
+                    started_at: row.get(2)?,
+                    ended_at: row.get(3)?,
+                    duration: row.get(4)?,
+                })
+            })?
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(sessions)
     })
     .await
     .unwrap()
