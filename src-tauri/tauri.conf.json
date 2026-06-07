@@ -50,9 +50,7 @@
             "./resources/icon.ico",
             "./open_game.bat",
 
-            "./libraries/swifttunnel.dll",
-            "./libraries/swifttunnel.def",
-            "./libraries/swifttunnel.exp"
+            "./libraries/swifttunnel.dll"
         ]
     },
     "plugins": {
