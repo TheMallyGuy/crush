@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Forbereder...",
+                "applyMods": "Anvender ændringer",
+                "launch": "Starter"
             },
             "cancel": "Annuller",
             "retry": "Prøv igen"
@@ -86,33 +86,63 @@
         "integrations": {
             "integrations": "Integrationer",
             "description": "Konfigurere integrationer uden for Roblox.",
+            "dialogs": {
+                "title": "3. parts advarsel",
+                "description": "Denne SwiftTunnel-integration er uofficiel. Selvom vi brugte standard SDK'en, forkløede vi den og synkroniserede med den nyeste app til brug med Crush. Venligst klag ikke til SwiftTunnel hos os.",
+                "confirm": "Fik det!"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "Konfigurer SwiftTunnel direkte i Crush.",
+                "back": "Tilbage",
+                "notLoggedIn": "Du er ikke logget ind.",
+                "loginTimeout": "Login udløb. Prøv venligst igen.",
+                "loadingMessage": "Venligst fortsæt i din browser. Annulleres automatisk efter 1 min.",
+                "loginButton": "Log ind via browser",
+                "enableTunnelingCard": {
+                    "title": "Aktiver Tunneling",
+                    "description": "Aktiver tunneling for at rute Roblox gennem VPN'en"
+                },
+                "enableRoutingCard": {
+                    "title": "Aktiver Roblox Routing",
+                    "description": "Rute alle Roblox API-anmodninger gennem VPN'en. Dette kan bruges til at omgå blokerede spil i nogle lande."
+                },
+                "preferredRegionCard": {
+                    "title": "Foretrukken Region",
+                    "description": "Konfigurer din foretrukne region"
+                },
+                "serverList": {
+                    "title": "Serverliste",
+                    "empty": "Ingen servere tilgængelige."
+                }
+            },
             "activityWatcherCard": {
                 "title": "Aktivitetsovervågning",
                 "description": "Se din aktivitet på Roblox. Nogle funktioner krævede dette for at være aktiveret."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Søvnplan",
+                "description": "Din søvnplan er forkert"
             },
             "serverNotifierCard": {
                 "title": "Meddelelse om serverplacering",
                 "description": "Få besked, når klienten forbinder til en server."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "Procesprioritet",
+                "description": "YDELIG EKSPERIMENTELT. Ændr Roblox procesprioritet. Kan forbedre ydeevnen."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Aktiver optimizer",
+                "description": "Optimer Roblox ved at begrænse de ressourcer, det kan bruge. Inspireret af, hvordan 8damon/TASX-Roblox-Optimizer på GitHub virker. Alt nu dage er omskrevet til Rust."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "Deaktiver fuldskærmoptimering",
+                "description": "Brug sort magi til at deaktivere fuldskærmoptimering"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "Luk crash-håndtering",
+                "description": "Dræb Roblox' crash-håndtering for at spare ydeevne."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
@@ -216,43 +246,51 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "Globale grundindstillinger",
+            "description": "Konfigurer Roblox' standardindstillinger.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS-grænse",
+                "description": "Konfigurer Roblox' FPS-grænse. Bemærk, at Roblox kun er bygget til maksimum 240 FPS; at gå højere kan bryde Roblox."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "Grafikkvalitetsniveau",
+                "description": "Ændr Roblox' grafikvalitet"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "Reduceret bevægelse",
+                "description": "Reducer brugergrænsefladens bevægelse"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "Fuldskærm",
+                "description": "Om man skal gå i fuldskærm brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "Autogenererede indstillinger",
+                "description": "Genereret fra Roblox' GBS-fil. Behandl med forsigtighed.",
+                "button": "Åbn"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "Genererede globale grundindstillinger",
+                "description": "Autogenereret baseret på GBS-filen.",
+                "noInstallation": "Wow! Nuværende installation ikke fundet! Du bør mindst klikke på start før du tjekker denne side.",
+                "back": "Tilbage"
             }
         },
         "installations": {
             "installations": "Anlæg",
             "description": "Administrer din Roblox-installation.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "Er du sikker på, at du vil skifte til VNG?",
+                    "description": "Når du er logget ind på VNG, kan du aldrig vende tilbage til global.",
+                    "cancel": "Nej, tag mig tilbage",
+                    "confirm": "Jeg forstår, hvad jeg gør."
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "Versionstyring",
+                "description": "Administrer flere Roblox-versioner med hastighed",
+                "button": "Åbn"
             },
             "parallelDownloadingCard": {
                 "title": "Parallel Downloading",
@@ -263,35 +301,35 @@
                 "description": "Geninstaller Roblox hver gang du starter det."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Brug vietnamesisk Roblox",
+                "description": "Dette er en mulighed for at downloade Roblox VNG, hvis du ikke ved, hvad du laver, så slå det ikke til. Denne funktion er kun til vietnamesiske brugere. Når din konto er markeret som VNG-konto, kan du ikke skifte tilbage til global."
             },
             "dontUpdateCard": {
                 "title": "Opdater ikke Roblox",
                 "description": "Spring Roblox opdatering kontrol og lancering med det samme."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "Versionstyring",
+                "description": "Administrer dine Roblox-versioner nemt.",
+                "none": "Du har ikke installeret nogen versioner endnu!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "Bekræft handling",
+                        "description": "Er du sikker på, at du vil slette denne version?",
+                        "cancel": "Annuller",
+                        "confirm": "Bekræft"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "Tilføj en ny version",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "Versionsnavn",
+                            "placeholder": "Ny version"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Versionshash"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "Annuller",
+                        "confirm": "Bekræft"
                     }
                 }
             }
@@ -318,7 +356,7 @@
                     "buttonAdd": "Tilføj",
                     "search": "Søg i alle hurtige flag...",
                     "searchNotFound": "Der blev ikke fundet nogen flag, der matcher din søgning.",
-                    "import": "Import JSON",
+                    "import": "Importer JSON",
                     "flagCol": {
                         "deleteNote": "Slet flag",
                         "name": "flagnavn",
@@ -348,7 +386,7 @@
                     "dropdownDefault": "Standard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "Aktivér mesh af lav kvalitet (LOD)",
                     "description": "Kan forbedre ydeevnen."
                 },
                 "graySkyCard": {
@@ -416,98 +454,98 @@
                 "communityMods": {
                     "title": "Netværksmodifikationer",
                     "description": "Udforsk modifikationer, der er oprettet af netværket.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "Indlæser Mods...",
+                    "notFound": "Ingen {itemsCount} mods fundet.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "Alle",
+                        "library": "Bibliotek {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "Af {name}",
+                        "adapter": "Adapter: {library}",
+                        "download": "Hent"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Opret genveje",
+            "description": "Opret nemt genveje til at spille dine yndlingsspil med det samme.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Opret en genvej",
+                "button": "Opret genvej",
+                "gameIdInput": "Spil-ID",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Venligst hent...",
+                    "fetching": "Henter...",
+                    "notFound": "Spil ikke fundet",
+                    "fetched": "Spiloplysninger hentet! Nu skal jeg bare trykke på knappen til at oprette genvej",
+                    "noThumb": "Ingen miniature tilgængelig",
+                    "error": "Fejl ved hentning af spil",
+                    "done": "Se på dit skrivebord!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "Kontoadministration",
+            "description": "Skift nemt mellem konti",
+            "validateAccounts": "Valider konti",
+            "addAnAccount": "Tilføj en konto",
+            "use": "Brug",
+            "delete": "Slet",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Succes!",
+                    "description": "Hej {username}! Du kan nu skifte mellem dine konti ved hjælp af kontoadministrationen!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Skift mislykkedes",
+                    "description": "ved ikke, noget skete"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Validerer konti",
+                    "description": "Hold fast, vi validerer dine konti"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} er ugyldig",
+                    "description": "Kontoen {account} er ugyldig. Vi har fjernet den fra listen."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Validering fuldført",
+                    "description": "Alle ugyldige konti (hvis nogen) er fjernet"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Tilføj en konto",
+                    "description": "Tilføj en ny konto til listen.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Log ind via webview (browser)",
+                            "open": "Åbn webview",
+                            "check": "Tjek for cookies",
+                            "failed": "Kunne ikke hente cookie, sørg for at du er logget ind, og prøv igen."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Log ind via hurtig tilmelding",
+                            "title": "Log ind ved hjælp af hurtig tilmelding.",
+                            "checkbox": "Marker som VNG-konto (Afmærk ikke dette, hvis du ikke ved, hvad du laver)",
+                            "start": "Start hurtig tilmelding",
+                            "creating": "Opretter kode...",
+                            "enter": "Indtast denne kode i feltet Hurtig tilmelding:",
+                            "approval": "Venter på godkendelse...",
+                            "cancelled": "Annulleret.",
+                            "timeout": "Udløbet eller mislykkedes",
+                            "failedToGetCookies": "Kunne ikke hente cookies, sørg for at du er logget ind, og prøv igen.",
+                            "robloxsecFailed": "Kunne ikke finde .ROBLOSECURITY cookie. Sørg for at du er logget ind."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "Bekræft sletning",
+                    "description": "Er du sikker på, at du vil slette denne konto? Denne handling kan ikke fortrydes.",
+                    "cancel": "Annuller",
+                    "confirm": "Bekræft"
                 }
             }
         },
@@ -535,12 +573,12 @@
                 "description": "Skift mellem om din aktivitet skal vises via Discord RPC. En genstart anbefales."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "Onde Røde Ringe",
+                "description": "Typen tilføjer bare ALT på nuværende tidspunkt ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "Låst tilstand",
+                "description": "Konfiguration af Roblox kan IKKE være SÅ alvorligt 😭"
             },
             "donateCard": {
                 "title": "Donér",
@@ -548,14 +586,14 @@
                 "button": "Donér"
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "Kreditter",
+                "button": "Åbn",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
+                    "title": "Kreditter",
+                    "development": "Udvikling",
                     "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "localization": "Lokalisering",
+                    "specialThanks": "Speciel Tak (Tidlige Unterstüttere!)"
                 }
             }
         }

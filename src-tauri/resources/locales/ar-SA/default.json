@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "جاري التحضير...",
+                "applyMods": "جاري تطبيق التعديلات",
+                "launch": "جاري الإطلاق"
             },
             "cancel": "إلغاء",
             "retry": "إعادة المحاولة"
@@ -86,33 +86,63 @@
         "integrations": {
             "integrations": "التكامل",
             "description": "تكوين التكاملات خارج روبلوكس.",
+            "dialogs": {
+                "title": "تحذير الطرف الثالث (3)",
+                "description": "تكامل SwiftTunnel هذا غير رسمي. على الرغم من أننا استخدمنا SDK الافتراضي وقمنا بتفرعه ومزامنتها مع أحدث تطبيق لاستخدامه مع Crush. يرجى عدم الشكوى من SwiftTunnel لنا.",
+                "confirm": "فهمت!"
+            },
+            "swiftTunnel": {
+                "title": "SwiftTunnel",
+                "description": "قم بتكوين SwiftTunnel مباشرة في Crush.",
+                "back": "رجوع",
+                "notLoggedIn": "أنت غير مسجل الدخول.",
+                "loginTimeout": "انتهت مهلة تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+                "loadingMessage": "يرجى المتابعة في متصفحك. يتم الإلغاء تلقائياً بعد 1 دقيقة.",
+                "loginButton": "تسجيل الدخول عبر المتصفح",
+                "enableTunnelingCard": {
+                    "title": "تمكين النفق",
+                    "description": "تمكين النفق لتوجيه Roblox عبر VPN"
+                },
+                "enableRoutingCard": {
+                    "title": "تمكين توجيه Roblox",
+                    "description": "توجيه جميع طلبات Roblox API عبر VPN. يمكن استخدام ذلك لتجاوز الألعاب المحظورة في بعض البلدان."
+                },
+                "preferredRegionCard": {
+                    "title": "المنطقة المفضلة",
+                    "description": "قم بتكوين منطقتك المفضلة"
+                },
+                "serverList": {
+                    "title": "قائمة الخوادم",
+                    "empty": "لا توجد خوادم متاحة."
+                }
+            },
             "activityWatcherCard": {
                 "title": "مشاهدة النشاط",
                 "description": "شاهد نشاطك على Roblox. بعض الميزات اقتضت تمكين ذلك."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "جدول النوم",
+                "description": "جدول نومك مضطرب"
             },
             "serverNotifierCard": {
                 "title": "مخطر موقع الخادم",
                 "description": "احصل على إشعار عندما يتصل العميل بخادم."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "أولوية العملية",
+                "description": "تجريبي للغاية. تغيير أولوية عملية Roblox. قد يعزز الأداء."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "تمكين المحسن",
+                "description": "تحسين Roblox عن طريق تقييد الموارد التي يمكنه استخدامها. مستوحى من كيفية عمل 8damon/TASX-Roblox-Optimizer على GitHub. كل شيء الآن يُعاد كتابته بلغة Rust."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "تعطيل تحسين ملء الشاشة",
+                "description": "استخدام السحر الأسود لتعطيل تحسين ملء الشاشة"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "إغلاق معالج الأعطال",
+                "description": "إنهاء معالج أعطال Roblox لتوفير الأداء."
             },
             "rpcCard": {
                 "title": "ديسكورد آر بي سي (كراش)",
@@ -216,43 +246,51 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "الإعدادات الأساسية العامة",
+            "description": "تكوين إعدادات Roblox الافتراضية.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "حد FPS",
+                "description": "ضبط حد FPS في Roblox. لاحظ أن Roblox مصمم لـ 240 FPS كحد أقصى، وتجاوز ذلك قد يكسر Roblox."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "مستوى جودة الرسومات",
+                "description": "تغيير جودة رسومات Roblox"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "تقليل الحركة",
+                "description": "تقليل حركة واجهة المستخدم"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "ملء الشاشة",
+                "description": "ما إذا كان سيتم الدخول في وضع ملء الشاشة"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "إعدادات تم إنشاؤها تلقائياً",
+                "description": "تم إنشاؤها من ملف GBS الخاص بـ Roblox. تعامل بحذر.",
+                "button": "فتح"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "إعدادات أساسية عامة تم إنشاؤها",
+                "description": "تم إنشاؤها تلقائياً بناءً على ملف GBS.",
+                "noInstallation": "واو! لم يتم العثور على التثبيت الحالي! يجب عليك على الأقل النقر على إطلاق قبل التحقق من هذه الصفحة.",
+                "back": "رجوع"
             }
         },
         "installations": {
             "installations": "[ترجمة المصطلح: Installations]",
             "description": "إدارة تثبيت Roblox الخاص بك.",
+            "dialogs": {
+                "vngWarning": {
+                    "title": "هل أنت متأكد من التبديل إلى VNG؟",
+                    "description": "بمجرد تسجيل الدخول إلى VNG، لا يمكنك أبدًا العودة إلى النسخة العالمية.",
+                    "cancel": "لا، أعدني",
+                    "confirm": "أفهم ما أفعله."
+                }
+            },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "مدير الإصدارات",
+                "description": "إدارة إصدارات Roblox متعددة بسرعة",
+                "button": "فتح"
             },
             "parallelDownloadingCard": {
                 "title": "تحميل متوازي",
@@ -263,35 +301,35 @@
                 "description": "إعادة تثبيت Roblox في كل مرة تقوم بتشغيله."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "استخدام Roblox الفيتنامي",
+                "description": "هذا خيار لتحميل Roblox VNG، إذا كنت لا تعرف ما تفعله، لا تفعّله. هذه الميزة للمستخدمين الفيتناميين فقط. بمجرد تصنيف حسابك كحساب VNG، لن تتمكن من التبديل مرة أخرى إلى العالمي."
             },
             "dontUpdateCard": {
                 "title": "لا تقم بتحديث Roblox",
                 "description": "تخطي التحقق من تحديث Roblox وإطلاقه على الفور."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "مدير الإصدارات",
+                "description": "إدارة إصدارات Roblox الخاصة بك بسهولة.",
+                "none": "لم تقم بتثبيت أي إصدارات بعد!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "تأكيد الإجراء",
+                        "description": "هل أنت متأكد من أنك تريد حذف هذا الإصدار؟",
+                        "cancel": "إلغاء",
+                        "confirm": "تأكيد"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "إضافة إصدار جديد",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "اسم الإصدار",
+                            "placeholder": "إصدار جديد"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "هاش الإصدار"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "إلغاء",
+                        "confirm": "تأكيد"
                     }
                 }
             }
@@ -318,7 +356,7 @@
                     "buttonAdd": "إضافة",
                     "search": "البحث في جميع الأعلام السريعة...",
                     "searchNotFound": "لم يتم العثور على علامات تطابق بحثك.",
-                    "import": "Import JSON",
+                    "import": "استيراد JSON",
                     "flagCol": {
                         "deleteNote": "حذف العلم.",
                         "name": "اسم مُعلّم",
@@ -348,7 +386,7 @@
                     "dropdownDefault": "الافتراضي"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "تمكين الشبكات منخفضة الجودة (LOD)",
                     "description": "قد يحسن الأداء."
                 },
                 "graySkyCard": {
@@ -416,98 +454,98 @@
                 "communityMods": {
                     "title": "مشرفو المجتمع",
                     "description": "استكشف التعديلات التي أنشأها المجتمع.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "جاري تحميل التعديلات...",
+                    "notFound": "لم يتم العثور على {itemsCount} تعديل.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "الكل",
+                        "library": "مكتبة {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "بواسطة {name}",
+                        "adapter": "المحول : {library}",
+                        "download": "تنزيل"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "إنشاء اختصارات",
+            "description": "يمكنك بسهولة إنشاء اختصارات للعب ألعابك المفضلة فورًا.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "إنشاء اختصار",
+                "button": "إنشاء اختصار",
+                "gameIdInput": "معرف اللعبة",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "يرجى الجلب...",
+                    "fetching": "جاري الجلب...",
+                    "notFound": "اللعبة غير موجودة",
+                    "fetched": "تم جلب معلومات اللعبة! الآن فقط اضغط على زر إنشاء الاختصار",
+                    "noThumb": "لا توجد صورة مصغرة متاحة",
+                    "error": "خطأ في جلب اللعبة",
+                    "done": "انظر إلى سطح مكتبك!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "إدارة الحسابات",
+            "description": "التبديل بين الحسابات أصبح سهلاً",
+            "validateAccounts": "التحقق من الحسابات",
+            "addAnAccount": "إضافة حساب",
+            "use": "استخدام",
+            "delete": "حذف",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "نجاح!",
+                    "description": "مرحباً {username}! يمكنك الآن التبديل بين حساباتك باستخدام مدير الحسابات!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "فشل التبديل",
+                    "description": "لا أعلم، حدث شيء ما"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "جاري التحقق من الحسابات",
+                    "description": "انتظر قليلاً، نحن نتحقق من حساباتك"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} غير صالح",
+                    "description": "الحساب {account} غير صالح. لقد أزلناه من القائمة."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "اكتمل التحقق",
+                    "description": "تمت إزالة جميع الحسابات غير الصالحة (إن وجدت)"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "إضافة حساب",
+                    "description": "إضافة حساب جديد إلى القائمة.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "تسجيل الدخول عبر عرض الويب (المتصفح)",
+                            "open": "فتح عرض الويب",
+                            "check": "التحقق من ملفات تعريف الارتباط",
+                            "failed": "فشل في الحصول على ملف تعريف الارتباط، تأكد من تسجيل الدخول وحاول مرة أخرى."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "تسجيل الدخول عبر تسجيل الدخول السريع",
+                            "title": "سجّل الدخول باستخدام تسجيل الدخول السريع.",
+                            "checkbox": "تحديد كحساب VNG (لا تحدد هذا إذا كنت لا تعرف ما تفعله)",
+                            "start": "بدء تسجيل الدخول السريع",
+                            "creating": "جاري إنشاء الرمز...",
+                            "enter": "أدخل هذا الرمز في حقل تسجيل الدخول السريع :",
+                            "approval": "في انتظار الموافقة...",
+                            "cancelled": "تم الإلغاء.",
+                            "timeout": "انتهت المهلة أو فشل",
+                            "failedToGetCookies": "فشل في الحصول على ملفات تعريف الارتباط، تأكد من تسجيل الدخول وحاول مرة أخرى.",
+                            "robloxsecFailed": "تعذر العثور على ملف تعريف الارتباط .ROBLOSECURITY. تأكد من تسجيل الدخول."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "تأكيد الحذف",
+                    "description": "هل أنت متأكد من أنك تريد حذف هذا الحساب؟ لا يمكن التراجع عن هذا الإجراء.",
+                    "cancel": "إلغاء",
+                    "confirm": "تأكيد"
                 }
             }
         },
@@ -535,12 +573,12 @@
                 "description": "تبديل ما إذا كنت تريد إظهار النشاط الخاص بك عبر ديسكورد RPC. يوصى بإعادة التشغيل."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "الحلقات الحمراء الشريرة",
+                "description": "الرجل يضيف أي شيء في هذه المرحلة ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "وضع مقفل",
+                "description": "تهيئة Roblox لا يمكن أن تكون بهذه الجدية 😭"
             },
             "donateCard": {
                 "title": "تَبرَّع ",
@@ -548,14 +586,14 @@
                 "button": "تَبرَّع "
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "الشكر والتقدير",
+                "button": "فتح",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)"
+                    "title": "الشكر والتقدير",
+                    "development": "التطوير",
+                    "inspiration": "الإلهام",
+                    "localization": "التعريب",
+                    "specialThanks": "شكر خاص (الداعمون الأوائل!)"
                 }
             }
         }
