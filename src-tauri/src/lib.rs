@@ -313,7 +313,7 @@ pub fn run() {
             spawn_discord_rpc(app.handle().clone());
             setup_tray(app)?;
 
-            let pool = tauri::async_runtime::block_on(collector::init(app.handle()));
+            let pool = collector::init(app.handle());
             app.manage(pool);
 
             // run auto update after startup

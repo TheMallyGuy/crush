@@ -73,7 +73,7 @@ tao = "0.35.3"
 cookie = "0.18.1"
 base64 = "0.22.1"
 tauri-plugin-cache = "0.1.6"
-sqlx = { version = "0.9.0", features = ["sqlite", "runtime-tokio", "macros"] }
+rusqlite = { version = "0.31", features = ["bundled-sqlcipher-vendored-openssl"] }
 
 
 [target.'cfg(windows)'.dependencies]

@@ -16,7 +16,7 @@ use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use sqlx::SqlitePool;
+use crate::collector::DbConn;
 use std::path::Path;
 use std::sync::Mutex;
 use std::sync::OnceLock;
@@ -552,7 +552,7 @@ async fn handle_line(
     if state.activity.in_game && re_leave().is_match(line) {
         log::info!("left game");
 
-        let pool = app.state::<SqlitePool>();
+        let pool = app.state::<DbConn>();
 
         if config_bool(store, "settings", &["robloxWarpped"]) {
             if let Some(pid) = state.activity.place_id {
@@ -660,7 +660,7 @@ async fn on_joined(
     save_game_history(state, store, place_id)?;
 
     log::info!("saving collector info");
-    let pool = app.state::<SqlitePool>();
+    let pool = app.state::<DbConn>();
     
     if config_bool(store, "settings", &["robloxWarpped"]) {
         if let Some(pid) = state.activity.place_id {
