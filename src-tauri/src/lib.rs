@@ -23,6 +23,7 @@ use commands::swifttunnel::{
     connect, start_browser_login, swift_auth_logout, swift_cancel_auth, swift_fetch_servers,
     swift_get_servers, swift_is_logged_in, swift_servers_ping,
 };
+use commands::warpped::{get_played_games, get_played_sessions};
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
 use std::sync::Mutex;
@@ -248,7 +249,10 @@ pub fn run() {
             let locale = app
                 .get_store("config.json")
                 .and_then(|store| store.get("settings"))
-                .and_then(|v| v.get("language").and_then(|l| l.as_str().map(|s| s.to_string())))
+                .and_then(|v| {
+                    v.get("language")
+                        .and_then(|l| l.as_str().map(|s| s.to_string()))
+                })
                 .unwrap_or_else(|| "en-US".to_string());
 
             let path = app
@@ -379,6 +383,8 @@ pub fn run() {
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
+            get_played_games,
+            get_played_sessions,
             start_browser_login,
             swift_is_logged_in,
             swift_cancel_auth,
