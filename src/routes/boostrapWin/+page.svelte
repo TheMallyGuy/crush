@@ -158,7 +158,7 @@
             if (appType === 'studio') {
                 await launchStudio(version)
             } else {
-                if (integrations?.swifttunnel) {
+                if (integrations?.swifttunnel?.enable) {
                     handleProgress({
                         type: 'status',
                         message: 'Connecting to swifttunnel servers...',
