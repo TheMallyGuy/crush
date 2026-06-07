@@ -97,31 +97,22 @@
     $effect(() => {
         if (!settings.loaded) return
 
-        const rpc = settings.discordRpcEnabled
         const lang = settings.currentLocale
         const locked = settings.lockedInMode
         const redRinged = settings.redRings
 
-        ;(async () => {
-            const store = await load('config.json')
-            await store.set('discordRpcEnabled', rpc)
-            await store.set('language', lang)
-            await store.set('lockedIn', locked)
-            await store.set('redRings', redRinged)
-            locale.set(lang)
-            await store.save()
+        locale.set(lang)
 
-            if (wasLockedIn && !locked) {
-                window.location.reload()
-            }
+        if (wasLockedIn && !locked) {
+            window.location.reload()
+        }
 
-            if (wasRedRings && !redRinged) {
-                window.location.reload()
-            }
+        if (wasRedRings && !redRinged) {
+            window.location.reload()
+        }
 
-            wasLockedIn = locked
-            wasRedRings = redRinged
-        })()
+        wasLockedIn = locked
+        wasRedRings = redRinged
     })
 
     onMount(async () => {
@@ -193,7 +184,7 @@
     title="Privacy & Data"
 >
     <div class="flex flex-col gap-4 overflow-y-auto max-h-80 scrollbar-none">
-        <Checkbox>Record activity for Roblox:Warpped</Checkbox>
+        <Checkbox bind:checked={settings.robloxWarpped}>Record activity for Roblox:Warpped</Checkbox>
     </div>
 </Dialog>
 

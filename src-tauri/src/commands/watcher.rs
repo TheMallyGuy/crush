@@ -554,10 +554,14 @@ async fn handle_line(
 
         let pool = app.state::<SqlitePool>();
 
-        if let Some(pid) = state.activity.place_id {
-            if let Err(e) = end_game_session(pool.inner(), pid as i64).await {
-                log::warn!("collector new_game_session failed: {e}");
+        if config_bool(store, "settings", &["robloxWarpped"]) {
+            if let Some(pid) = state.activity.place_id {
+                if let Err(e) = end_game_session(pool.inner(), pid as i64).await {
+                    log::warn!("collector new_game_session failed: {e}");
+                }
             }
+        } else {
+            log::info!("aborted logging warpped")
         }
 
         if state.window_started {
@@ -657,14 +661,18 @@ async fn on_joined(
 
     log::info!("saving collector info");
     let pool = app.state::<SqlitePool>();
-
-    if let Some(pid) = state.activity.place_id {
-        if let Err(e) = log_game(pool.inner(), pid as i64).await {
-            log::warn!("collector log_game failed: {e}");
+    
+    if config_bool(store, "settings", &["robloxWarpped"]) {
+        if let Some(pid) = state.activity.place_id {
+            if let Err(e) = log_game(pool.inner(), pid as i64).await {
+                log::warn!("collector log_game failed: {e}");
+            }
+            if let Err(e) = new_game_session(pool.inner(), pid as i64).await {
+                log::warn!("collector new_game_session failed: {e}");
+            }
         }
-        if let Err(e) = new_game_session(pool.inner(), pid as i64).await {
-            log::warn!("collector new_game_session failed: {e}");
-        }
+    } else {
+        log::info!("aborting logging warpped")
     }
 
     if let Some(id) = state.activity.instance_id.as_deref() {
@@ -1534,6 +1542,28 @@ pub fn integration_enabled(store: &tauri_plugin_store::Store<tauri::Wry>, path: 
         cur = cur.get(key).cloned().unwrap_or(Value::Null);
     }
     cur.as_bool().unwrap_or(false)
+}
+
+pub fn config_get(
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+    root: &str,
+    path: &[&str],
+) -> Option<Value> {
+    let mut cur = store.get(root)?;
+    for key in path {
+        cur = cur.get(key).cloned()?;
+    }
+    Some(cur)
+}
+
+pub fn config_bool(
+    store: &tauri_plugin_store::Store<tauri::Wry>,
+    root: &str,
+    path: &[&str],
+) -> bool {
+    config_get(store, root, path)
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false)
 }
 
 fn is_roblox_running(system: &mut System) -> bool {
