@@ -585,6 +585,14 @@
                 "description": "Crush가 마음에 드시나요? Mally에게 후원하여 그의 작업을 지원해 주세요!",
                 "button": "기부"
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "크레딧",
                 "button": "열기",
@@ -593,7 +601,8 @@
                     "development": "개발",
                     "inspiration": "영감",
                     "localization": "현지화",
-                    "specialThanks": "특별 감사의 말씀 (초기 후원자들!)"
+                    "specialThanks": "특별 감사의 말씀 (초기 후원자들!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

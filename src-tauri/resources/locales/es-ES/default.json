@@ -585,6 +585,14 @@
                 "description": "¿Te encanta Crush? ¡Dona a Mally para apoyar su trabajo!",
                 "button": "Donar "
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "Créditos",
                 "button": "Abrir",
@@ -593,7 +601,8 @@
                     "development": "Desarrollo",
                     "inspiration": "Inspiración",
                     "localization": "Localización",
-                    "specialThanks": "Agradecimientos Especiales (¡Primeros partidarios!)"
+                    "specialThanks": "Agradecimientos Especiales (¡Primeros partidarios!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

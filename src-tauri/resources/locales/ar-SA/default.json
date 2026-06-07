@@ -585,6 +585,14 @@
                 "description": "سحق الحب؟ تبرع لمالي لدعم عمله!",
                 "button": "تَبرَّع "
             },
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
+                }
+            },
             "creditsCard": {
                 "title": "الشكر والتقدير",
                 "button": "فتح",
@@ -593,7 +601,8 @@
                     "development": "التطوير",
                     "inspiration": "الإلهام",
                     "localization": "التعريب",
-                    "specialThanks": "شكر خاص (الداعمون الأوائل!)"
+                    "specialThanks": "شكر خاص (الداعمون الأوائل!)",
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }
