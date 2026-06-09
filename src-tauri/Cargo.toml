@@ -22,7 +22,7 @@ codegen-units = 1
 panic = "abort"
 
 [build-dependencies]
-vergen = { version = "10.0.0", features = ["build", "rustc"] }
+vergen = { version = "10.0.0", features = ["build", "cargo", "rustc", "si"] }
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
@@ -73,7 +73,9 @@ tao = "0.35.3"
 cookie = "0.18.1"
 base64 = "0.22.1"
 tauri-plugin-cache = "0.1.6"
-rusqlite = { version = "0.40", features = ["bundled-sqlcipher-vendored-openssl"] }
+rusqlite = { version = "0.40", features = [
+    "bundled-sqlcipher-vendored-openssl",
+] }
 
 
 [target.'cfg(windows)'.dependencies]

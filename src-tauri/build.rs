@@ -1,4 +1,6 @@
+use anyhow::Result;
 use vergen::{BuildBuilder, Emitter, RustcBuilder};
+
 // i shaw manifest my crush!
 const APP_MANIFEST: &str = r#"<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
   <dependency>
