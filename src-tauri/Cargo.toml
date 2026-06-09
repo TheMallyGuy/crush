@@ -22,7 +22,7 @@ codegen-units = 1
 panic = "abort"
 
 [build-dependencies]
-vergen = { version = "9.0.0", features = ["build", "rustc"] }
+vergen = { version = "10.0.0", features = ["build", "rustc"] }
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
