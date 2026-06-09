@@ -43,16 +43,13 @@ jobs:
         shell: bash
         run: |
           echo "resumeUrl=${{ github.event.inputs.resumeUrl }}"
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 9
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: 'pnpm'
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -61,12 +58,12 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install frontend deps
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build Tauri
-        env: 
+        env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: pnpm tauri build
+        run: bun tauri build
 
       - name: Create/Update Release
         uses: softprops/action-gh-release@v3
