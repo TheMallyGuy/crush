@@ -6,7 +6,8 @@
     "crushBoostrapChoiceWindow",
     "CrushMainWindow",
     "CrushHello",
-    "loginToRoblox"
+    "loginToRoblox",
+    "crushOverlay"
   ],
   "permissions": [
     "core:default",

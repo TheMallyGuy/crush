@@ -61,13 +61,14 @@ tokio = { version = "1.52.2", features = ["process", "full", "tracing"] }
 tokio-util = { version = "0.7", features = ["rt"] }
 filthy-rich = "1.0.5"
 regex = "1.12.3"
-reqwest = { version = "0.13.4", features = ["json"] }
+reqwest = { version = "0.13.4", features = ["json", "stream"] }
 sysinfo = "0.39.3"
 tauri-plugin-notification = "2"
 tauri-plugin-deep-link = "2"
 chrono = "0.4.45"
 windows-result = "0.4.1"
 tauri-plugin-clipboard-manager = "2"
+tauri-plugin-global-shortcut = "2"
 image = "0.25"
 tao = "0.35.3"
 cookie = "0.18.1"

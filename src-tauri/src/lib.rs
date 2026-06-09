@@ -3,6 +3,8 @@ use commands::account_operations::{
     clear_cookies, decrypt_cookie_data, encrypt_cookie_data, export_all_cookies, get_auth_ticket,
     get_csrf_token, quick_sign_create, quick_sign_poll, validate_roblox_cookie,
 };
+use commands::ai::{ask_ai, clear_ai_history, resize_overlay, set_overlay_interactive, ConversationHistory};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, ShortcutState};
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::crush;
@@ -59,6 +61,17 @@ fn greet(name: &str) -> String {
 
 fn register_plugins<R: tauri::Runtime>(builder: tauri::Builder<R>) -> tauri::Builder<R> {
     builder
+        .plugin(
+            tauri_plugin_global_shortcut::Builder::new()
+                .with_handler(|app, _shortcut, event| {
+                    if event.state() == ShortcutState::Pressed {
+                        if let Some(overlay) = app.get_webview_window("crushOverlay") {
+                            let _ = overlay.emit("ai:listen", ());
+                        }
+                    }
+                })
+                .build(),
+        )
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_notification::init())
         .plugin(
@@ -240,6 +253,7 @@ pub fn run() {
     builder
         .manage(RpcState::new())
         .manage(SdkState(Mutex::new(sdk)))
+        .manage(ConversationHistory(Mutex::new(Vec::new())))
         .setup(|app| {
             print_debug_info();
 
@@ -248,7 +262,10 @@ pub fn run() {
             let locale = app
                 .get_store("config.json")
                 .and_then(|store| store.get("settings"))
-                .and_then(|v| v.get("language").and_then(|l| l.as_str().map(|s| s.to_string())))
+                .and_then(|v| {
+                    v.get("language")
+                        .and_then(|l| l.as_str().map(|s| s.to_string()))
+                })
                 .unwrap_or_else(|| "en-US".to_string());
 
             let path = app
@@ -316,6 +333,26 @@ pub fn run() {
             let pool = collector::init(app.handle());
             app.manage(pool);
 
+            // Position the AI overlay as a full-width transparent strip at the top of the screen
+            if let Some(overlay) = app.get_webview_window("crushOverlay") {
+                if let Ok(Some(monitor)) = overlay.primary_monitor() {
+                    let w = monitor.size().width;
+                    let _ = overlay.set_size(tauri::Size::Physical(tauri::PhysicalSize {
+                        width: w,
+                        height: 280,
+                    }));
+                    let _ = overlay.set_position(tauri::Position::Physical(
+                        tauri::PhysicalPosition { x: 0, y: 0 },
+                    ));
+                }
+                let _ = overlay.set_ignore_cursor_events(true);
+            }
+
+            // Register Ctrl+K global hotkey to trigger voice input
+            if let Err(e) = app.global_shortcut().register("Ctrl+K") {
+                log::warn!("Failed to register Ctrl+K shortcut: {}", e);
+            }
+
             // run auto update after startup
             // https://v2.tauri.app/plugin/updater/
 
@@ -368,6 +405,10 @@ pub fn run() {
             close_crash_handler,
             get_gbs,
             write_gbs,
+            ask_ai,
+            clear_ai_history,
+            set_overlay_interactive,
+            resize_overlay,
             set_fullscreen_prop,
             read_fullscreen_prop,
             get_csrf_token,

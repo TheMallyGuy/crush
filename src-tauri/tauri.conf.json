@@ -20,13 +20,31 @@
                 "decorations": false,
                 "center": true,
                 "transparent": true
+            },
+            {
+                "label": "crushOverlay",
+                "url": "/mainWin/overlay/ai/",
+                "transparent": true,
+                "decorations": false,
+                "alwaysOnTop": true,
+                "skipTaskbar": true,
+                "resizable": false,
+                "closable": false,
+                "shadow": false,
+                "width": 1920,
+                "height": 280,
+                "x": 0,
+                "y": 0,
+                "focus": false
             }
         ],
         "security": {
             "csp": null,
             "assetProtocol": {
                 "enable": true,
-                "scope": ["$APPDATA/**"]
+                "scope": [
+                    "$APPDATA/**"
+                ]
             }
         }
     },
@@ -44,30 +62,30 @@
         "resources": [
             "./resources/**/*.png",
             "./resources/locales/**/*.json",
-
             "./resources/tortellini.jpg",
-
             "./resources/icon.ico",
             "./open_game.bat",
-
             "./libraries/swifttunnel.dll"
         ]
     },
     "plugins": {
         "deep-link": {
             "desktop": {
-                "schemes": ["roblox", "roblox-player"]
+                "schemes": [
+                    "roblox",
+                    "roblox-player"
+                ]
             }
         },
-        "cli" : {
+        "cli": {
             "description": "CLI part for using shortcuts",
             "args": [
                 {
-                    "short" : "l",
-                    "name" : "launch",
-                    "description" : "Launch the game with the specified place id",
-                    "takesValue" : true,
-                    "required" : false
+                    "short": "l",
+                    "name": "launch",
+                    "description": "Launch the game with the specified place id",
+                    "takesValue": true,
+                    "required": false
                 }
             ]
         },

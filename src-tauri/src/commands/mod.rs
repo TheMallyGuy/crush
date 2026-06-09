@@ -1,4 +1,5 @@
 pub mod account_operations;
+pub mod ai;
 pub mod archive;
 pub mod boostrapper_importer;
 pub mod crush;

@@ -60,6 +60,21 @@ select:focus {
     border-color: var(--color-sapphire) !important;
 }
 
+@keyframes ai-dance {
+    from { transform: scaleY(0.25); }
+    to   { transform: scaleY(1); }
+}
+@keyframes ai-spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes ai-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.25; }
+}
+@keyframes ai-blink {
+    50% { opacity: 0; }
+}
+
 @keyframes slide-in {
     from { transform: translateX(30px); opacity: 0; }
 }
