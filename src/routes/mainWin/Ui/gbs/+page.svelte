@@ -16,7 +16,7 @@
     let graphicQuaity: number = 0
     let fullscreen: boolean = false
     let reducedMotion: boolean = false
-    let currentInstallation
+    let currentInstallation: Awaited<ReturnType<typeof getCurrentInstallation>> | undefined
 
     let rawGBS: string = ''
     let gbs: Record<string, SettingValue> = {}
@@ -90,10 +90,10 @@
 
         // fuck types
 
-        fpsLimit = gbs.FramerateCap
-        graphicQuaity = gbs.SavedQualityLevel
-        fullscreen = gbs.Fullscreen
-        reducedMotion = gbs.ReducedMotion
+        fpsLimit = gbs.FramerateCap as number
+        graphicQuaity = gbs.SavedQualityLevel as number
+        fullscreen = gbs.Fullscreen as boolean
+        reducedMotion = gbs.ReducedMotion as boolean
 
         currentInstallation = await getCurrentInstallation('player')
         loaded = true // guard

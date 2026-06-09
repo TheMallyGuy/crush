@@ -9,7 +9,7 @@
     import { _ } from 'svelte-i18n'
 
     let image = $state(null as string | null)
-    let gameId = $state(null as string | null)
+    let gameId = $state('' as string)
     let status = $state($_('pages.shortcuts.creator.status.idle') as string)
 
     async function getGameUniverse(placeID: number): Promise<number | null> {
@@ -39,7 +39,7 @@
             const result = await res.json()
             return result?.data?.[0]?.imageUrl ?? null
         } catch (err) {
-            error('Error fetching thumbnail:', err)
+            error(`Error fetching thumbnail: ${err}`)
             return null
         }
     }
@@ -57,7 +57,7 @@
 
             return result?.data?.[0]?.name ?? null
         } catch (err) {
-            error('Error fetching game name:', err)
+            error(`Error fetching game name: ${err}`)
             return null
         }
     }

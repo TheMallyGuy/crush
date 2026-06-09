@@ -73,7 +73,7 @@
         await saveGBS()
     }
 
-    function getType(value: undefined) {
+    function getType(value: SettingValue) {
         if (value === null) return 'null'
         if (value === undefined) return 'undefined'
         if (Array.isArray(value)) return 'array'
@@ -114,11 +114,11 @@
                     {#if getType(value) === 'number' || getType(value) === 'string'}
                         <Textbox
                             value={String(gbs[key])}
-                            on:change={(e) => saveSetting(key, e.target.value)}
+                            on:change={(e) => saveSetting(key, (e.target as HTMLInputElement).value)}
                         />
                     {:else if getType(value) === 'boolean'}
                         <Switch
-                            checked={gbs[key]}
+                            checked={gbs[key] as boolean}
                             on:change={() => {
                                 gbs[key] = !gbs[key]
                                 saveSetting(key, String(gbs[key]))
