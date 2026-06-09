@@ -586,11 +586,11 @@
                 "button": "Ủng hộ"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "Quyền riêng tư và dữ liệu",
+                "description": "Kiểm soát cách Crush sử dụng thông tin của bạn.",
+                "button": "Mở",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Ghi lại các hoạt động của bạn cho Roblox: Warpped"
                 }
             },
             "creditsCard": {
@@ -602,7 +602,7 @@
                     "inspiration": "Cảm hứng",
                     "localization": "Bản địa hóa",
                     "specialThanks": "Cảm ơn đặc biệt (Những người ủng hộ sớm!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Hãy cuộn xuống, còn nữa đấy^^"
                 }
             }
         }
