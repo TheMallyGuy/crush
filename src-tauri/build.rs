@@ -1,5 +1,5 @@
 use anyhow::Result;
-use vergen::{BuildBuilder, Emitter, RustcBuilder};
+use vergen::{Build, Emitter, Rustc};
 
 // i shaw manifest my crush!
 const APP_MANIFEST: &str = r#"<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
@@ -24,7 +24,7 @@ const APP_MANIFEST: &str = r#"<assembly xmlns="urn:schemas-microsoft-com:asm.v1"
   </trustInfo>
 </assembly>"#;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<()> {
     let manifest_dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     let libraries_dir = manifest_dir.join("libraries");
     let dll_src = libraries_dir.join("swifttunnel.dll");
@@ -44,8 +44,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let _ = std::fs::copy(&dll_src, target_dir.join("swifttunnel.dll"));
 
-    let rustc = RustcBuilder::all_rustc()?;
-    let build = BuildBuilder::all_build()?;
+    let build = Build::all_build();
+    let rustc = Rustc::all_rustc();
 
     Emitter::default()
         .add_instructions(&build)?
