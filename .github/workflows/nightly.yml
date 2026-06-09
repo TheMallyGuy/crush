@@ -58,7 +58,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install frontend deps
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Build Tauri
         env:
