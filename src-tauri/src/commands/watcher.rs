@@ -1,9 +1,11 @@
+use crate::collector::DbConn;
 use crate::collector::{end_game_session, log_game, new_game_session};
 use crate::interactive::{
     find_windows_by_title, get_monitor_info, get_primary_screen_size, get_virtual_screen_size,
     get_window_rect, move_window, reset_layered, set_borderless, set_layered_transparency,
     set_window_color, set_window_title, LWA_ALPHA, LWA_COLORKEY,
 };
+use crate::island::*;
 use crate::larp_focuser::start_larping;
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc, apply_rpc_full, kill_rpc, start_rpc, RpcState};
@@ -16,7 +18,6 @@ use dirs_next::data_local_dir;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use crate::collector::DbConn;
 use std::path::Path;
 use std::sync::Mutex;
 use std::sync::OnceLock;
@@ -215,6 +216,19 @@ struct IconEntry {
 #[derive(Deserialize)]
 struct IconResponse {
     data: Vec<IconEntry>,
+}
+#[derive(Deserialize)]
+struct ThumbnailImage {
+    #[serde(rename = "imageUrl")]
+    image_url: Option<String>,
+}
+#[derive(Deserialize)]
+struct ThumbnailEntry {
+    thumbnails: Vec<ThumbnailImage>,
+}
+#[derive(Deserialize)]
+struct ThumbnailResponse {
+    data: Vec<ThumbnailEntry>,
 }
 
 // bloxstrap rpc types
@@ -665,7 +679,7 @@ async fn on_joined(
 
     log::info!("saving collector info");
     let pool = app.state::<DbConn>();
-    
+
     if config_bool(store, "settings", &["robloxWarpped"]) {
         if let Some(pid) = state.activity.place_id {
             if let Err(e) = log_game(pool.inner(), pid as i64).await {
@@ -1407,17 +1421,27 @@ async fn send_location_notification(
         } else {
             "rpc.rust.watcher.serverInfomation.titles.public"
         };
-        app.notification()
-            .builder()
-            .title(&i18n.t(title_key))
-            .body(&t!(
-                i18n,
-                "rpc.rust.watcher.serverInfomation.description",
-                ip = ip,
-                location = location
-            ))
-            .show()
-            .map_err(|e| e.to_string())?;
+
+        let title = i18n.t(title_key);
+        let description = t!(
+            i18n,
+            "rpc.rust.watcher.serverInfomation.description",
+            ip = ip,
+            location = location
+        );
+
+        let thumbnail = match state.activity.place_id {
+            Some(place_id) => fetch_game_thumbnail(place_id).await.unwrap_or_else(|e| {
+                log::warn!("failed to fetch game thumbnail: {}", e);
+                None
+            }),
+            None => None,
+        };
+
+        match thumbnail {
+            Some(image) => show_with_image(app, &title, Some(&description), image),
+            None => show(app, &title, Some(&description)),
+        }
     }
     Ok(())
 }
@@ -1744,4 +1768,37 @@ async fn fetch_place_info(place_id: u64) -> Result<Option<(String, String)>, Str
         .unwrap_or_default();
 
     Ok(Some((name, image_url)))
+}
+
+/// Fetch the wide promotional game thumbnail (not the square icon) for a place.
+/// Returns `None` if the universe has no completed thumbnail.
+async fn fetch_game_thumbnail(place_id: u64) -> Result<Option<String>, String> {
+    let universe_id = fetch_universe_id(place_id).await?;
+
+    let res = tokio::time::timeout(
+        Duration::from_secs(5),
+        get_client()
+            .get(format!(
+                "https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds={}&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false",
+                universe_id
+            ))
+            .send(),
+    )
+    .await
+    .map_err(|_| "thumbnails.roblox.com request timed out".to_string())?
+    .map_err(|e| e.to_string())?;
+
+    let thumbnails: ThumbnailResponse = tokio::time::timeout(Duration::from_secs(5), res.json())
+        .await
+        .map_err(|_| "thumbnails.roblox.com json parse timed out".to_string())?
+        .map_err(|e| e.to_string())?;
+
+    let image_url = thumbnails
+        .data
+        .into_iter()
+        .next()
+        .and_then(|entry| entry.thumbnails.into_iter().next())
+        .and_then(|thumb| thumb.image_url);
+
+    Ok(image_url)
 }
