@@ -20,6 +20,22 @@
                 "decorations": false,
                 "center": true,
                 "transparent": true
+            },
+            {
+                "label": "crushOverlay",
+                "url": "/mainWin/overlay/",
+                "transparent": true,
+                "decorations": false,
+                "alwaysOnTop": true,
+                "skipTaskbar": true,
+                "resizable": false,
+                "closable": false,
+                "shadow": false,
+                "width": 1920,
+                "height": 280,
+                "x": 0,
+                "y": 0,
+                "focus": false
             }
         ],
         "security": {

@@ -314,6 +314,21 @@ pub fn run() {
             spawn_discord_rpc(app.handle().clone());
             setup_tray(app)?;
 
+            // Position the overlay as a full-width transparent strip at the top of the screen
+            if let Some(overlay) = app.get_webview_window(island::OVERLAY_WINDOW_LABEL) {
+                if let Ok(Some(monitor)) = overlay.primary_monitor() {
+                    let w = monitor.size().width;
+                    let _ = overlay.set_size(tauri::Size::Physical(tauri::PhysicalSize {
+                        width: w,
+                        height: 280,
+                    }));
+                    let _ = overlay.set_position(tauri::Position::Physical(
+                        tauri::PhysicalPosition { x: 0, y: 0 },
+                    ));
+                }
+                let _ = overlay.set_ignore_cursor_events(true);
+            }
+
             let pool = collector::init(app.handle());
             app.manage(pool);
 
@@ -387,7 +402,8 @@ pub fn run() {
             swift_get_servers,
             swift_fetch_servers,
             connect,
-            swift_servers_ping
+            swift_servers_ping,
+            island::island_show
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
