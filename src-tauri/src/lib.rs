@@ -154,20 +154,69 @@ fn print_debug_info() {
     log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
 }
 
+#[cfg(windows)]
+fn show_fatal_dialog(msg: &str) {
+    use windows::core::HSTRING;
+    use windows::Win32::UI::WindowsAndMessaging::{
+        MessageBoxW, MB_ICONERROR, MB_OK, MB_SYSTEMMODAL,
+    };
+    let title = HSTRING::from("crush startup error");
+    let body = HSTRING::from(msg);
+    unsafe {
+        MessageBoxW(
+            None,
+            windows::core::PCWSTR(body.as_ptr()),
+            windows::core::PCWSTR(title.as_ptr()),
+            MB_OK | MB_ICONERROR | MB_SYSTEMMODAL,
+        );
+    }
+}
+
+#[cfg(windows)]
+fn ensure_native_libraries() {
+    use std::os::windows::ffi::OsStrExt;
+    use windows::core::PCWSTR;
+    use windows::Win32::System::LibraryLoader::{LoadLibraryW, SetDllDirectoryW};
+
+    let Ok(exe) = std::env::current_exe() else {
+        return;
+    };
+    let Some(exe_dir) = exe.parent() else {
+        return;
+    };
+    let lib_dir = exe_dir.join("libraries");
+
+    let mut wide: Vec<u16> = lib_dir.as_os_str().encode_wide().chain([0u16]).collect();
+    let _ = unsafe { SetDllDirectoryW(PCWSTR(wide.as_mut_ptr())) };
+
+    let dll = lib_dir.join("swifttunnel.dll");
+    let mut dll_wide: Vec<u16> = dll.as_os_str().encode_wide().chain([0u16]).collect();
+    if let Err(e) = unsafe { LoadLibraryW(PCWSTR(dll_wide.as_mut_ptr())) } {
+        log::error!("failed to load swifttunnel.dll from {}: {e}", dll.display());
+        show_fatal_dialog(&format!(
+            "crush couldn't load a required component (swifttunnel.dll).\n\n{e}\n\n\
+             Reinstalling crush, or installing the Microsoft Visual C++ Redistributable (x64), should fix this."
+        ));
+        std::process::exit(1);
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     #[cfg(windows)]
-    if let Ok(exe) = std::env::current_exe() {
-        if let Some(exe_dir) = exe.parent() {
-            use std::os::windows::ffi::OsStrExt;
-            use windows::Win32::System::LibraryLoader::SetDllDirectoryW;
-            let lib_dir = exe_dir.join("libraries");
-            let mut wide: Vec<u16> = lib_dir.as_os_str().encode_wide().chain([0u16]).collect();
-            let _ = unsafe { SetDllDirectoryW(windows::core::PCWSTR(wide.as_mut_ptr())) };
-        }
-    }
+    ensure_native_libraries();
 
-    let sdk = SwiftTunnel::init().expect("SwiftTunnel SDK init failed");
+    let sdk = match SwiftTunnel::init() {
+        Ok(sdk) => sdk,
+        Err(e) => {
+            log::error!("SwiftTunnel SDK init failed: {e}");
+            #[cfg(windows)]
+            show_fatal_dialog(&format!(
+                "crush failed to initialize the SwiftTunnel SDK.\n\n{e}\n\nReinstalling crush should fix this."
+            ));
+            std::process::exit(1);
+        }
+    };
 
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cache::init())
