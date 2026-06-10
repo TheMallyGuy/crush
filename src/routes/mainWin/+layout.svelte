@@ -13,6 +13,9 @@
     import './style.css'
     import './font.css'
     import MagicRings from '$lib/components/$lib/components/svelte-bits/MagicRings.svelte'
+    import { getCurrentWindow } from '@tauri-apps/api/window'
+
+    const isOverlay = getCurrentWindow().label === 'crushOverlay'
 
     onMount(async () => {
         if (!settings.loaded) {
@@ -21,7 +24,7 @@
     })
 
     $effect(() => {
-        if (settings.lockedInMode) {
+        if (!isOverlay && settings.lockedInMode) {
             document.body.classList.add('force-no-cursor')
         } else {
             document.body.classList.remove('force-no-cursor')
@@ -32,7 +35,7 @@
     })
 </script>
 
-{#if settings.lockedInMode}
+{#if !isOverlay && settings.lockedInMode}
     <TargetCursor
         targetSelector=".cursor-target"
         spinDuration={1.9}
@@ -42,7 +45,7 @@
     />
 {/if}
 
-{#if settings.redRings}
+{#if !isOverlay && settings.redRings}
     <div class="fixed inset-0 z-50 pointer-events-none">
         <MagicRings
             color="#ff0095"
@@ -70,12 +73,16 @@
     </div>
 {/if}
 
-<div class="flex flex-col h-screen">
-    <div class="flex flex-1 overflow-hidden">
-        <Topbar />
-        <slot />
+{#if isOverlay}
+    <slot />
+{:else}
+    <div class="flex flex-col h-screen">
+        <div class="flex flex-1 overflow-hidden">
+            <Topbar />
+            <slot />
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     :global(body.force-no-cursor),
