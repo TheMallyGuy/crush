@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "처음부터 작성된 로블록스 부트래퍼",
         "integrations": "통합 경로에서",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Roblox 라우팅 활성화",
                     "description": "모든 Roblox API 요청을 VPN을 통해 라우팅합니다. 일부 국가에서 차단된 게임을 우회하는 데 사용할 수 있습니다."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "선호 지역",

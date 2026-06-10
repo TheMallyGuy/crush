@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "Một trình khởi động Roblox được viết từ đầu",
         "integrations": "Đang trong lộ trình Tích hợp",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Bật định tuyến Roblox",
                     "description": "Định tuyến tất cả yêu cầu API Roblox qua VPN. Điều này có thể dùng để truy cập các trò chơi bị chặn ở một số quốc gia."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "Khu vực ưu tiên",

@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "En Roblox bootstrapper skrevet fra bunden",
         "integrations": "På Integrationsruten",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Aktiver Roblox Routing",
                     "description": "Rute alle Roblox API-anmodninger gennem VPN'en. Dette kan bruges til at omgå blokerede spil i nogle lande."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "Foretrukken Region",
