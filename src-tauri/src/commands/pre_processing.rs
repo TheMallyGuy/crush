@@ -19,7 +19,8 @@ pub fn parse_priority(name: &str) -> Option<PROCESS_CREATION_FLAGS> {
 #[tauri::command]
 pub async fn set_process_priority(priority: &str) -> Result<(), String> {
     log::info!("priority called");
-    let priority = parse_priority(priority).unwrap();
+    let priority = parse_priority(priority)
+        .ok_or_else(|| format!("Unknown priority class: {}", priority))?;
     let mut sys = System::new_all();
 
     sys.refresh_processes(ProcessesToUpdate::All, true);

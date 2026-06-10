@@ -349,7 +349,7 @@ async function getInstallationUrls(
         region: bestRegion,
         version: version || null,
         vng: vng === true,
-    }); ``
+    })
 
     if (!assetsUrls || assetsUrls.length === 0) {
         throw new Error('No download URLs found for the specified version/region.')

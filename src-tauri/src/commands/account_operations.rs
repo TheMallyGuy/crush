@@ -2,7 +2,7 @@ use windows_dpapi::{decrypt_data, encrypt_data, Scope};
 
 #[tauri::command]
 pub async fn clear_cookies(webview: tauri::Webview) -> Result<(), String> {
-    let _ = webview.clear_all_browsing_data().map_err(|e| e.to_string());
+    webview.clear_all_browsing_data().map_err(|e| e.to_string())?;
 
     Ok(())
 }

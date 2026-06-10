@@ -179,10 +179,12 @@ pub async fn get_download_urls(
     } else {
         base_url = match region_url {
             Some(url) => format!("{url}/vng"),
-            None => best_region()
-                .await
-                .unwrap_or("https://setup.rbxcdn.com/vng")
-                .to_string(),
+            None => {
+                let base = best_region()
+                    .await
+                    .unwrap_or("https://setup.rbxcdn.com");
+                format!("{}/vng", base)
+            }
         };
     }
 

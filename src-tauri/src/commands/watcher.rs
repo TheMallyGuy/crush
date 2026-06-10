@@ -64,6 +64,10 @@ fn re_bloxstrap_rpc() -> &'static Regex {
     static R: OnceLock<Regex> = OnceLock::new();
     R.get_or_init(|| Regex::new(r"\[BloxstrapRPC\] (.+)").unwrap())
 }
+fn re_private_server_access_code() -> &'static Regex {
+    static R: OnceLock<Regex> = OnceLock::new();
+    R.get_or_init(|| Regex::new(r#""accessCode":"([0-9a-f\-]{36})""#).unwrap())
+}
 
 // states
 
@@ -77,6 +81,7 @@ struct Activity {
     join_initiated: bool,
     is_private_server: bool,
     access_code: Option<String>,
+    session_id: Option<i64>,
 }
 
 struct WatcherState {
@@ -250,7 +255,7 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
     }
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
-    if integration_enabled(&store, &["EnableActivityTracking"]) {
+    if !integration_enabled(&store, &["EnableActivityTracking"]) {
         log::info!("watching logs is disabled, returning");
         return Ok(());
     }
@@ -518,8 +523,7 @@ async fn handle_line(
     if !state.activity.in_game && state.activity.place_id.is_none() {
         if line.contains("GameJoinUtil::joinGamePostPrivateServer") {
             state.activity.is_private_server = true;
-            let re = Regex::new(r#""accessCode":"([0-9a-f\-]{36})""#).unwrap(); // access code
-            if let Some(caps) = re.captures(line) {
+            if let Some(caps) = re_private_server_access_code().captures(line) {
                 state.activity.access_code = Some(caps[1].to_string());
             }
         }
@@ -555,9 +559,9 @@ async fn handle_line(
         let pool = app.state::<DbConn>();
 
         if config_bool(store, "settings", &["robloxWarpped"]) {
-            if let Some(pid) = state.activity.place_id {
-                if let Err(e) = end_game_session(pool.inner(), pid as i64).await {
-                    log::warn!("collector new_game_session failed: {e}");
+            if let Some(sid) = state.activity.session_id {
+                if let Err(e) = end_game_session(pool.inner(), sid).await {
+                    log::warn!("collector end_game_session failed: {e}");
                 }
             }
         } else {
@@ -667,8 +671,9 @@ async fn on_joined(
             if let Err(e) = log_game(pool.inner(), pid as i64).await {
                 log::warn!("collector log_game failed: {e}");
             }
-            if let Err(e) = new_game_session(pool.inner(), pid as i64).await {
-                log::warn!("collector new_game_session failed: {e}");
+            match new_game_session(pool.inner(), pid as i64).await {
+                Ok(sid) => state.activity.session_id = Some(sid),
+                Err(e) => log::warn!("collector new_game_session failed: {e}"),
             }
         }
     } else {
