@@ -768,6 +768,7 @@ async fn on_bloxstrap_rpc(
                         None,
                         None,
                         None,
+                        None,
                     ),
                 )
                 .await;
@@ -1430,16 +1431,27 @@ async fn send_location_notification(
             location = location
         );
 
-        let thumbnail = match state.activity.place_id {
-            Some(place_id) => fetch_game_thumbnail(place_id).await.unwrap_or_else(|e| {
-                log::warn!("failed to fetch game thumbnail: {}", e);
-                None
-            }),
+        let image = match state.activity.place_id {
+            Some(place_id) => {
+                let thumbnail = fetch_game_thumbnail(place_id).await.unwrap_or_else(|e| {
+                    log::warn!("failed to fetch game thumbnail: {}", e);
+                    None
+                });
+
+                // fall back to the square game icon if there's no thumbnail
+                match thumbnail {
+                    Some(url) => Some(url),
+                    None => fetch_game_icon(place_id).await.unwrap_or_else(|e| {
+                        log::warn!("failed to fetch game icon: {}", e);
+                        None
+                    }),
+                }
+            }
             None => None,
         };
 
-        match thumbnail {
-            Some(image) => show_with_image(app, &title, Some(&description), image),
+        match image {
+            Some(url) => show_with_image(app, &title, Some(&description), url),
             None => show(app, &title, Some(&description)),
         }
     }
@@ -1466,9 +1478,15 @@ async fn update_discord_rpc(
     let is_private = state.activity.is_private_server;
 
     tauri::async_runtime::spawn(async move {
-        let (name, _image) = match fetch_place_info(place_id).await {
+        let (name, image) = match fetch_place_info(place_id).await {
             Ok(Some(v)) => v,
             _ => ("Roblox".to_string(), String::new()),
+        };
+
+        let image_key = if image.is_empty() {
+            None
+        } else {
+            Some(image.as_str())
         };
 
         let buttons: Vec<(String, String)>;
@@ -1515,6 +1533,7 @@ async fn update_discord_rpc(
                 None,
                 None,
                 Some(buttons.clone()),
+                image_key,
             ),
         )
         .await;
@@ -1541,6 +1560,7 @@ async fn update_discord_rpc(
                     None,
                     None,
                     Some(buttons.clone()),
+                    image_key
                 ),
             )
             .await;
@@ -1799,6 +1819,37 @@ async fn fetch_game_thumbnail(place_id: u64) -> Result<Option<String>, String> {
         .next()
         .and_then(|entry| entry.thumbnails.into_iter().next())
         .and_then(|thumb| thumb.image_url);
+
+    Ok(image_url)
+}
+
+async fn fetch_game_icon(place_id: u64) -> Result<Option<String>, String> {
+    let universe_id = fetch_universe_id(place_id).await?;
+
+    let res = tokio::time::timeout(
+        Duration::from_secs(5),
+        get_client()
+            .get(format!(
+                "https://thumbnails.roblox.com/v1/games/icons?universeIds={}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+                universe_id
+            ))
+            .send(),
+    )
+    .await
+    .map_err(|_| "thumbnails.roblox.com request timed out".to_string())?
+    .map_err(|e| e.to_string())?;
+
+    let icons: IconResponse = tokio::time::timeout(Duration::from_secs(5), res.json())
+        .await
+        .map_err(|_| "thumbnails.roblox.com json parse timed out".to_string())?
+        .map_err(|e| e.to_string())?;
+
+    let image_url = icons
+        .data
+        .into_iter()
+        .next()
+        .map(|icon| icon.image_url)
+        .filter(|url| !url.is_empty());
 
     Ok(image_url)
 }

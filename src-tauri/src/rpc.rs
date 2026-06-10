@@ -67,6 +67,7 @@ pub async fn apply_rpc_full(
     activity_type: Option<ActivityType>,
     status_display_type: Option<StatusDisplayType>,
     buttons: Option<Vec<(String, String)>>,
+    img_key: Option<&str>
 ) -> Result<(), String> {
     if let Some(ref btns) = buttons {
         if btns.len() > 2 {
@@ -101,6 +102,9 @@ pub async fn apply_rpc_full(
             for (label, url) in btns {
                 builder = builder.add_button(label, url);
             }
+        }
+        if let Some(image_key) = img_key {
+            builder = builder.large_image(image_key)
         }
 
         tokio::time::timeout(

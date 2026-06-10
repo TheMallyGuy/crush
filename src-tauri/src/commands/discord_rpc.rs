@@ -42,6 +42,7 @@ pub async fn set_rpc(
             "View repo".to_string(),
             "https://github.com/TheMallyGuy/crush".to_string(),
         )]),
+        None,
     )
     .await;
 
@@ -64,6 +65,7 @@ pub async fn set_rpc(
                 "View repo".to_string(),
                 "https://github.com/TheMallyGuy/crush".to_string(),
             )]),
+            None,
         )
         .await
     } else {
