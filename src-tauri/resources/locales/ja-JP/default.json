@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "一から書かれた Roblox ブートストラッパー。",
         "integrations": "統合ルート",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Robloxルーティングを有効にする",
                     "description": "すべてのRoblox APIリクエストをVPN経由でルーティングします。これにより、一部の国でブロックされているゲームを回避できます。"
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "優先地域",
