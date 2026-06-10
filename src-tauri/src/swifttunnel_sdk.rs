@@ -6,6 +6,7 @@
 //!
 //! In your `build.rs`:
 //! ```rust
+//! #[allow(clippy::needless_doctest_main)]
 //! fn main() {
 //!     println!("cargo:rustc-link-search=native=libs");
 //!     println!("cargo:rustc-link-lib=dylib=swifttunnel");
@@ -201,6 +202,7 @@ pub struct ConnectOptions {
     pub enable_country_ban: bool,
 }
 
+#[allow(clippy::derivable_impls)]
 impl Default for ConnectOptions {
     fn default() -> Self {
         Self {

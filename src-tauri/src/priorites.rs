@@ -9,7 +9,7 @@ pub fn set_priority(pid: Pid, priority: PROCESS_CREATION_FLAGS) {
         let process = OpenProcess(PROCESS_SET_INFORMATION, false, pid.as_u32())
             .expect("Failed to open process");
 
-        let _ = SetPriorityClass(process, priority).expect("Failed to set priority");
+        SetPriorityClass(process, priority).expect("Failed to set priority");
 
         CloseHandle(process).unwrap()
     }

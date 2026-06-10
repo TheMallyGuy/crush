@@ -83,7 +83,7 @@ pub async fn connect(
     let sdk = state.0.lock().map_err(|e| e.to_string())?;
 
     let options = ConnectOptions {
-        region: region.into(),
+        region,
         apps: vec!["robloxplayerbeta.exe".into()],
         asset_urls: if dynamic_assets {
             vec!["assetdelivery.roblox.com".into(), "*.rbxcdn.com".into()]

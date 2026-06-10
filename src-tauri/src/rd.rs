@@ -166,27 +166,23 @@ pub async fn get_download_urls(
         raw_hash.strip_prefix("version-").unwrap_or(&raw_hash)
     );
 
-    let base_url: String;
-
-    if !vng {
-        base_url = match region_url {
+    let base_url: String = if !vng {
+        match region_url {
             Some(url) => url.to_string(),
             None => best_region()
                 .await
                 .unwrap_or("https://setup.rbxcdn.com")
                 .to_string(),
-        };
+        }
     } else {
-        base_url = match region_url {
+        match region_url {
             Some(url) => format!("{url}/vng"),
             None => {
-                let base = best_region()
-                    .await
-                    .unwrap_or("https://setup.rbxcdn.com");
+                let base = best_region().await.unwrap_or("https://setup.rbxcdn.com");
                 format!("{}/vng", base)
             }
-        };
-    }
+        }
+    };
 
     let urls: Vec<String> = if is_player {
         PLAYER_FILES

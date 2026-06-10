@@ -2,7 +2,9 @@ use windows_dpapi::{decrypt_data, encrypt_data, Scope};
 
 #[tauri::command]
 pub async fn clear_cookies(webview: tauri::Webview) -> Result<(), String> {
-    webview.clear_all_browsing_data().map_err(|e| e.to_string())?;
+    webview
+        .clear_all_browsing_data()
+        .map_err(|e| e.to_string())?;
 
     Ok(())
 }
@@ -66,7 +68,7 @@ pub async fn decrypt_cookie_data(encrypted: String) -> Result<String, String> {
     let decrypted_data = decrypt_data(&encrypted_bytes, Scope::User, None)
         .map_err(|e| format!("Failed to decrypt data: {}", e))?;
 
-    Ok(String::from_utf8(decrypted_data).map_err(|e| e.to_string())?)
+    String::from_utf8(decrypted_data).map_err(|e| e.to_string())
 }
 
 #[tauri::command]

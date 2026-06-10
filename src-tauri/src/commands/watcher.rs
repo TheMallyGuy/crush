@@ -333,16 +333,14 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             }
         }
         if let Some(hwnd) = state.roblox_hwnd {
-            if integration_enabled(&store, &["optimizer"]) {
-                if !state.larp_started {
-                    state.larp_started = true;
-                    let app_c = app.clone();
-                    let hwnd_val = hwnd.0 as usize;
-                    std::thread::spawn(move || {
-                        let hwnd = HWND(hwnd_val as *mut _);
-                        start_larping(hwnd, app_c);
-                    });
-                }
+            if integration_enabled(&store, &["optimizer"]) && !state.larp_started {
+                state.larp_started = true;
+                let app_c = app.clone();
+                let hwnd_val = hwnd.0 as usize;
+                std::thread::spawn(move || {
+                    let hwnd = HWND(hwnd_val as *mut _);
+                    start_larping(hwnd, app_c);
+                });
             }
         }
 
@@ -534,12 +532,13 @@ async fn handle_line(
         return Ok(());
     }
 
-    if !state.activity.in_game && state.activity.place_id.is_none() {
-        if line.contains("GameJoinUtil::joinGamePostPrivateServer") {
-            state.activity.is_private_server = true;
-            if let Some(caps) = re_private_server_access_code().captures(line) {
-                state.activity.access_code = Some(caps[1].to_string());
-            }
+    if !state.activity.in_game
+        && state.activity.place_id.is_none()
+        && line.contains("GameJoinUtil::joinGamePostPrivateServer")
+    {
+        state.activity.is_private_server = true;
+        if let Some(caps) = re_private_server_access_code().captures(line) {
+            state.activity.access_code = Some(caps[1].to_string());
         }
     }
 
@@ -1328,7 +1327,7 @@ async fn fetch_and_store_location(
 
 async fn sleep_schedule_inner(app: &AppHandle, in_game: bool, count: u64) -> Result<u64, String> {
     let hour = Local::now().hour();
-    let is_late = hour >= 23 || hour < 7; // 11 PM to 7 AM
+    let is_late = !(7..23).contains(&hour); // 11 PM to 7 AM
 
     if !is_late {
         return Ok(count);
@@ -1489,13 +1488,12 @@ async fn update_discord_rpc(
             Some(image.as_str())
         };
 
-        let buttons: Vec<(String, String)>;
-        if is_private {
-            buttons = vec![(
-                "View Game".to_string(),
-                format!("https://www.roblox.com/games/{}", place_id),
-            )];
-        } else {
+        let mut buttons: Vec<(String, String)> = vec![(
+            "View Game".to_string(),
+            format!("https://www.roblox.com/games/{}", place_id),
+        )];
+
+        if !is_private {
             buttons = vec![
                 (
                     "Join Server".to_string(),
@@ -1560,11 +1558,11 @@ async fn update_discord_rpc(
                     None,
                     None,
                     Some(buttons.clone()),
-                    image_key
+                    image_key,
                 ),
             )
             .await;
-        } else if let Err(_) = res {
+        } else if res.is_err() {
             log::error!("RPC apply timed out");
         }
     });

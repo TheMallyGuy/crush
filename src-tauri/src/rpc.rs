@@ -59,6 +59,7 @@ pub async fn apply_rpc(state: &RpcState, details: &str, state_text: &str) -> Res
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 pub async fn apply_rpc_full(
     state: &RpcState,
     name: Option<&str>,

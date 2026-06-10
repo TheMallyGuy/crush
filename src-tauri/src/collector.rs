@@ -67,7 +67,10 @@ pub fn init(app: &AppHandle) -> DbConn {
     let conn = Connection::open(&db_path).unwrap();
     conn.pragma_update(None, "key", &key).unwrap();
 
-    if conn.execute_batch("SELECT count(*) FROM sqlite_master;").is_err() {
+    if conn
+        .execute_batch("SELECT count(*) FROM sqlite_master;")
+        .is_err()
+    {
         drop(conn);
         let bak = db_path.with_extension("db.bak");
         if let Err(e) = std::fs::rename(&db_path, &bak) {

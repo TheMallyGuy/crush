@@ -312,6 +312,7 @@ pub fn run() {
                 std::process::exit(1);
             }
 
+            #[allow(clippy::single_match)]
             match app.cli().matches() {
                 // https://v2.tauri.app/plugin/cli/
 
