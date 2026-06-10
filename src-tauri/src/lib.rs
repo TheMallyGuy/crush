@@ -30,7 +30,6 @@ use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
 use tauri_plugin_deep_link::DeepLinkExt;
 use tauri_plugin_dialog::DialogExt;
-use tauri_plugin_notification::NotificationExt;
 use tauri_plugin_store::StoreExt;
 use tauri_plugin_updater::UpdaterExt;
 mod commands;
@@ -119,8 +118,8 @@ async fn update(app: tauri::AppHandle) -> tauri_plugin_updater::Result<()> {
         let mut downloaded = 0u64;
         let mut last_notified_percent = 0u64;
 
-        let app_download = app.clone(); // for download closure
-        let app_finish = app.clone(); // for finish closure
+        let app_download = app.clone();
+        let app_finish = app.clone();
 
         update
             .download_and_install(
@@ -132,34 +131,15 @@ async fn update(app: tauri::AppHandle) -> tauri_plugin_updater::Result<()> {
                         let percent = (downloaded * 100) / total;
                         if percent >= last_notified_percent + 30 {
                             last_notified_percent = percent;
-                            app_download
-                                .notification()
-                                .builder()
-                                .title("Auto updater")
-                                .body(format!("Downloading... {}%", percent))
-                                .show()
-                                .unwrap();
+                            let msg = format!("{percent}% done");
+                            island::show(&app_download, "Updating", Some(&msg))
                         }
                     }
                 },
-                move || {
-                    app_finish
-                        .notification()
-                        .builder()
-                        .title("Auto updater")
-                        .body("Download finished!")
-                        .show()
-                        .unwrap();
-                },
+                move || island::show(&app_finish, "Update finished.", None),
             )
             .await?;
 
-        app.notification()
-            .builder()
-            .title("Auto updater")
-            .body("Update installed! The new update will take effect after restart.")
-            .show()
-            .unwrap();
         app.restart();
     }
 
@@ -249,7 +229,10 @@ pub fn run() {
             let locale = app
                 .get_store("config.json")
                 .and_then(|store| store.get("settings"))
-                .and_then(|v| v.get("language").and_then(|l| l.as_str().map(|s| s.to_string())))
+                .and_then(|v| {
+                    v.get("language")
+                        .and_then(|l| l.as_str().map(|s| s.to_string()))
+                })
                 .unwrap_or_else(|| "en-US".to_string());
 
             let path = app
@@ -322,9 +305,11 @@ pub fn run() {
                         width: w,
                         height: 280,
                     }));
-                    let _ = overlay.set_position(tauri::Position::Physical(
-                        tauri::PhysicalPosition { x: 0, y: 0 },
-                    ));
+                    let _ =
+                        overlay.set_position(tauri::Position::Physical(tauri::PhysicalPosition {
+                            x: 0,
+                            y: 0,
+                        }));
                 }
                 let _ = overlay.set_ignore_cursor_events(true);
             }

@@ -196,6 +196,9 @@ pub struct ConnectOptions {
     pub asset_urls: Vec<String>,
     /// Number of far-region relays in the asset pool (0 = default of 3).
     pub asset_relay_count: usize,
+    /// Country-ban bypass: routes all bootstrap IPs through relay, starts
+    /// GoodbyeDPI helper, and disables SNI learning. Implies enable_api_tunneling.
+    pub enable_country_ban: bool,
 }
 
 impl Default for ConnectOptions {
@@ -211,6 +214,7 @@ impl Default for ConnectOptions {
             asset_relay_server: None,
             asset_urls: Vec::new(),
             asset_relay_count: 0,
+            enable_country_ban: false,
         }
     }
 }
@@ -277,8 +281,10 @@ impl ConnectOptions {
 
         let asset_relay_count = format!(",\"asset_relay_count\":{}", self.asset_relay_count);
 
+        let country_ban = format!(",\"enable_country_ban\":{}", self.enable_country_ban);
+
         format!(
-            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}{}{}{}}}",
+            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}{}{}{}{}}}",
             escape_json_str(&self.region),
             apps,
             ar,
@@ -289,6 +295,7 @@ impl ConnectOptions {
             asset_relay,
             asset_urls,
             asset_relay_count,
+            country_ban,
         )
     }
 }

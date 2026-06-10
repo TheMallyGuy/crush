@@ -81,6 +81,7 @@ export type Swifttunnel = {
     enableRouting: boolean
     perferedRegion: string
     assetsRouting: boolean
+    enableCountryBan: boolean
 }
 
 export type BuildInfo = {

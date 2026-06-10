@@ -77,6 +77,7 @@ pub async fn connect(
     region: String,
     routing: bool,
     dynamic_assets: bool,
+    country_ban: bool,
     state: tauri::State<'_, SdkState>,
 ) -> Result<(), String> {
     let sdk = state.0.lock().map_err(|e| e.to_string())?;
@@ -89,7 +90,8 @@ pub async fn connect(
         } else {
             vec![]
         },
-        enable_api_tunneling: routing,
+        enable_api_tunneling: routing || country_ban,
+        enable_country_ban: country_ban,
         ..Default::default()
     };
 
