@@ -37,7 +37,7 @@
 <div
     in:islandIn
     out:islandOut
-    class="origin-top cursor-default overflow-hidden rounded-[22px] border border-white/[0.07]
+    class="origin-top overflow-hidden rounded-[22px] border border-white/[0.07]
            bg-[#0e0e0e]/95 shadow-[0_12px_40px_-4px_rgba(0,0,0,0.9),0_0_0_0.5px_rgba(255,255,255,0.04)]
            backdrop-blur-2xl
            {isRich ? 'w-77.5' : 'w-67.5'}"
