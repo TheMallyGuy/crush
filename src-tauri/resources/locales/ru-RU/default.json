@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "Роблокс bootstrapper написанный с нуля",
         "integrations": "В Маршруте Интеграций",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Включить маршрутизацию Roblox",
                     "description": "Направляйте все API-запросы Roblox через VPN. Это можно использовать для обхода блокировок игр в некоторых странах."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "Предпочтительный регион",

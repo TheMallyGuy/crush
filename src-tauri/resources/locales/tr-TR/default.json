@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "Sıfırdan yazılmış bir Roblox önyükleyici",
         "integrations": "Entegrasyonlar Rotasında",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "Roblox Yönlendirmeyi Etkinleştir",
                     "description": "Tüm Roblox API isteklerini VPN üzerinden yönlendirin. Bu, bazı ülkelerde engellenen oyunlara erişmek için kullanılabilir."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "Tercih Edilen Bölge",

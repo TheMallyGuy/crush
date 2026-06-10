@@ -1,4 +1,4 @@
-{
+﻿{
     "rpc": {
         "general": "روبلوكس التمهيد مكتوب من الصفر",
         "integrations": "في طريق التكاملات",
@@ -106,6 +106,10 @@
                 "enableRoutingCard": {
                     "title": "تمكين توجيه Roblox",
                     "description": "توجيه جميع طلبات Roblox API عبر VPN. يمكن استخدام ذلك لتجاوز الألعاب المحظورة في بعض البلدان."
+                },
+                "enableCountryBanCard": {
+                    "title": "Bypass Country Ban",
+                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
                 "preferredRegionCard": {
                     "title": "المنطقة المفضلة",
