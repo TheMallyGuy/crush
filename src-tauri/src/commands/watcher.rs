@@ -255,7 +255,7 @@ pub fn watch_logs(app: AppHandle, is_vng: Option<bool>) -> Result<(), String> {
     }
 
     let store = app.store("config.json").map_err(|e| e.to_string())?;
-    if !integration_enabled(&store, &["EnableActivityTracking"]) {
+    if !integration_enabled(&store, &["activityWatching"]) {
         log::info!("watching logs is disabled, returning");
         return Ok(());
     }
@@ -1275,7 +1275,7 @@ async fn fetch_and_store_location(
     let res = tokio::time::timeout(
         Duration::from_secs(5),
         get_client()
-            .get(format!("https://ipinfo.io/{}/json", ip))
+            .get(format!("https://get.geojs.io/v1/ip/geo/{}.json", ip))
             .send(),
     )
     .await;
@@ -1283,12 +1283,12 @@ async fn fetch_and_store_location(
     let response = match res {
         Ok(Ok(r)) => r,
         Ok(Err(e)) => return Err(e.to_string()),
-        Err(_) => return Err("ipinfo.io request timed out".to_string()),
+        Err(_) => return Err("geojs.io request timed out".to_string()),
     };
 
     let info: IpInfo = tokio::time::timeout(Duration::from_secs(5), response.json())
         .await
-        .map_err(|_| "ipinfo.io json parse timed out".to_string())?
+        .map_err(|_| "geojs.io json parse timed out".to_string())?
         .map_err(|e| e.to_string())?;
 
     state.pending_server_ip = Some(ip.to_string());

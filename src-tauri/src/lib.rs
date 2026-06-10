@@ -40,6 +40,7 @@ use simple_i18n::I18n;
 
 pub mod collector;
 pub mod interactive;
+pub mod island;
 pub mod larp_focuser;
 pub mod priorites;
 pub mod rd;
