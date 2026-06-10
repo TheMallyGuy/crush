@@ -128,13 +128,19 @@
             optimizer: optimizer,
         }
 
-        await invoke('set_fullscreen_prop', {
-            disable: fullscreenOpts,
-            rblxExe: exePath,
-        })
-
         await store.set('integrations', newIntegrations)
         await store.save()
+
+        if (exe?.exists) {
+            try {
+                await invoke('set_fullscreen_prop', {
+                    disable: fullscreenOpts,
+                    rblxExe: exePath,
+                })
+            } catch (e) {
+                console.error('Failed to set fullscreen prop', e)
+            }
+        }
     }
 </script>
 
