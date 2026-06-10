@@ -288,7 +288,15 @@ pub fn run() {
                 .path()
                 .resolve("resources/locales", tauri::path::BaseDirectory::Resource)?;
 
-            let i18n = I18n::new(path, &locale).unwrap();
+            let i18n = I18n::new(&path, &locale)
+                .or_else(|e| {
+                    log::error!("failed to load locale '{locale}': {e}; falling back to en-US");
+                    I18n::new(&path, "en-US")
+                })
+                .unwrap_or_else(|e| {
+                    log::error!("failed to load fallback locale: {e}; using empty catalog");
+                    I18n::empty("en-US")
+                });
 
             app.manage(i18n);
 

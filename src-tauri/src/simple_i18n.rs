@@ -34,6 +34,17 @@ impl I18n {
         })))
     }
 
+    pub fn empty(default_locale: &str) -> Self {
+        let mut translations = HashMap::new();
+        translations.insert(default_locale.to_string(), HashMap::new());
+        Self(Arc::new(Inner {
+            translations: RwLock::new(translations),
+            locale: RwLock::new(default_locale.to_string()),
+            fallback: default_locale.to_string(),
+            dir: PathBuf::new(),
+        }))
+    }
+
     pub fn set_locale(&self, locale: &str) -> Result<(), String> {
         if !self.0.translations.read().unwrap().contains_key(locale) {
             let flat = Self::load_file(&self.0.dir, locale)?;
@@ -106,7 +117,10 @@ impl I18n {
         let path = dir.join(locale).join("default.json");
         let raw = fs::read_to_string(&path)
             .map_err(|e| format!("Cannot read {}: {e}", path.display()))?;
-        let json: serde_json::Value = serde_json::from_str(&raw)
+        // Many of the translation files are saved with a UTF-8 BOM, which
+        // serde_json rejects ("expected value at line 1 column 1"). Strip it.
+        let raw = raw.strip_prefix('\u{feff}').unwrap_or(&raw);
+        let json: serde_json::Value = serde_json::from_str(raw)
             .map_err(|e| format!("Invalid JSON in {}: {e}", path.display()))?;
         let mut flat = HashMap::new();
         Self::flatten_json(&json, "", &mut flat);
