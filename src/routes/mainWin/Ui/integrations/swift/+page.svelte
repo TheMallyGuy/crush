@@ -33,6 +33,7 @@
     let isInAuthSwift = $state(false)
     let enableSwifttunnel = $state(false)
     let enableRouting = $state(true)
+    let closeWhenTuff = $state(false)
     let perferedRegion = $state('Singapore')
     let assetsRouting = $state(false)
     let enableCountryBan = $state(false)
@@ -100,7 +101,11 @@
                 perferedRegion =
                     integrations.swifttunnel?.perferedRegion ?? 'singapore'
                 assetsRouting = integrations.swifttunnel?.assetsRouting ?? false
-                enableCountryBan = integrations.swifttunnel?.enableCountryBan ?? false
+                closeWhenTuff =
+                    integrations.swifttunnel?.disconnectWhenRobloxClosed ??
+                    false
+                enableCountryBan =
+                    integrations.swifttunnel?.enableCountryBan ?? false
             }
         } catch (e) {
             console.error('Failed to load settings', e)
@@ -116,6 +121,7 @@
                 swifttunnel: {
                     enable: enableSwifttunnel,
                     enableRouting: enableRouting,
+                    disconnectWhenRobloxClosed: closeWhenTuff,
                     perferedRegion: perferedRegion,
                     assetsRouting: assetsRouting,
                     enableCountryBan: enableCountryBan,
@@ -227,6 +233,18 @@
                 slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={enableRouting}
+                on:change={saveSettings}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title="Disconnect on Roblox is closed"
+            description="Option to kill SwiftTunnel when roblox is closed"
+        >
+            <Switch
+                slot="action"
+                disabled={!enableSwifttunnel}
+                bind:checked={closeWhenTuff}
                 on:change={saveSettings}
             />
         </SettingCard>

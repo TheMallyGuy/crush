@@ -79,6 +79,7 @@ export type Integrations = {
 export type Swifttunnel = {
     enable: boolean
     enableRouting: boolean
+    disconnectWhenRobloxClosed: boolean
     perferedRegion: string
     assetsRouting: boolean
     enableCountryBan: boolean
