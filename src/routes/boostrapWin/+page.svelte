@@ -170,6 +170,7 @@
                             routing: integrations.swifttunnel.enableRouting,
                             dynamicAssets: integrations.swifttunnel.assetsRouting,
                             countryBan: integrations.swifttunnel.enableCountryBan ?? false,
+                            partialCountryBan: integrations.swifttunnel.enablePartialCountryBan ?? false,
                         })
                     } catch (e) {
                         // do nothing lmao

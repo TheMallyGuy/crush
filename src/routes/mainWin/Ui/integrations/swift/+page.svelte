@@ -37,6 +37,7 @@
     let perferedRegion = $state('Singapore')
     let assetsRouting = $state(false)
     let enableCountryBan = $state(false)
+    let enablePartialCountryBan = $state(false)
 
     let perferedRegionItems = $state<DropdownOption[]>([])
 
@@ -106,6 +107,8 @@
                     false
                 enableCountryBan =
                     integrations.swifttunnel?.enableCountryBan ?? false
+                enablePartialCountryBan =
+                    integrations.swifttunnel?.enablePartialCountryBan ?? false
             }
         } catch (e) {
             console.error('Failed to load settings', e)
@@ -125,6 +128,7 @@
                     perferedRegion: perferedRegion,
                     assetsRouting: assetsRouting,
                     enableCountryBan: enableCountryBan,
+                    enablePartialCountryBan: enablePartialCountryBan,
                 },
             }
             await store.set('integrations', newInte)
@@ -281,6 +285,22 @@
                 slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={enableCountryBan}
+                on:change={saveSettings}
+            />
+        </SettingCard>
+
+        <SettingCard
+            title={$_(
+                'pages.integrations.swiftTunnel.enablePartialCountryBanCard.title'
+            )}
+            description={$_(
+                'pages.integrations.swiftTunnel.enablePartialCountryBanCard.description'
+            )}
+        >
+            <Switch
+                slot="action"
+                disabled={!enableSwifttunnel}
+                bind:checked={enablePartialCountryBan}
                 on:change={saveSettings}
             />
         </SettingCard>
