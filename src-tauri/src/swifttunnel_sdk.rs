@@ -200,6 +200,10 @@ pub struct ConnectOptions {
     /// Country-ban bypass: routes all bootstrap IPs through relay, starts
     /// GoodbyeDPI helper, and disables SNI learning. Implies enable_api_tunneling.
     pub enable_country_ban: bool,
+    /// Partial country-ban bypass: API tunneling (TCP) without UDP relay.
+    /// Routes control-plane traffic through the relay but lets UDP game traffic
+    /// go direct. Implies enable_api_tunneling.
+    pub enable_partial_country_ban: bool,
 }
 
 #[allow(clippy::derivable_impls)]
@@ -217,6 +221,7 @@ impl Default for ConnectOptions {
             asset_urls: Vec::new(),
             asset_relay_count: 0,
             enable_country_ban: false,
+            enable_partial_country_ban: false,
         }
     }
 }
@@ -285,8 +290,10 @@ impl ConnectOptions {
 
         let country_ban = format!(",\"enable_country_ban\":{}", self.enable_country_ban);
 
+        let partial_country_ban = format!(",\"enable_partial_country_ban\":{}", self.enable_partial_country_ban);
+
         format!(
-            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}{}{}{}{}}}",
+            "{{\"region\":\"{}\",\"apps\":[{}]{}{}{}{}{}{}{}{}{}{}}}",
             escape_json_str(&self.region),
             apps,
             ar,
@@ -298,6 +305,7 @@ impl ConnectOptions {
             asset_urls,
             asset_relay_count,
             country_ban,
+            partial_country_ban,
         )
     }
 }
