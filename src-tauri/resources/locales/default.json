@@ -103,6 +103,14 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
@@ -589,12 +597,12 @@
                 "description": "Love Crush? Donate to Mally to support his work!",
                 "button": "Donate"
             },
-            "pirvacyCard" : {
-                "title" : "Privacy & Data",
-                "description" : "Control how crush should use your information.",
-                "button" : "Open",
-                "dialog" : {
-                    "warpped" : "Record your activities for Roblox:Warpped"
+            "pirvacyCard": {
+                "title": "Privacy & Data",
+                "description": "Control how crush should use your information.",
+                "button": "Open",
+                "dialog": {
+                    "warpped": "Record your activities for Roblox:Warpped"
                 }
             },
             "creditsCard": {
@@ -606,7 +614,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown" : "Please scroll down, there is more^^"
+                    "scrollDown": "Please scroll down, there is more^^"
                 }
             }
         }

@@ -238,8 +238,12 @@
         </SettingCard>
 
         <SettingCard
-            title="Disconnect on Roblox is closed"
-            description="Option to kill SwiftTunnel when roblox is closed"
+            title={$_(
+                'pages.integrations.swiftTunnel.disconnectWhenRobloxIsClosed.title'
+            )}
+            description={$_(
+                'pages.integrations.swiftTunnel.disconnectWhenRobloxIsClosed.description'
+            )}
         >
             <Switch
                 slot="action"
@@ -250,8 +254,12 @@
         </SettingCard>
 
         <SettingCard
-            title="Route assets to multiple relays"
-            description="This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+            title={$_(
+                'pages.integrations.swiftTunnel.multipleAssetsThoughRelays.title'
+            )}
+            description={$_(
+                'pages.integrations.swiftTunnel.multipleAssetsThoughRelays.description'
+            )}
         >
             <Switch
                 slot="action"
