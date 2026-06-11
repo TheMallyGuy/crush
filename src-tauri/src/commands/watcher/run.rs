@@ -6,6 +6,7 @@ use super::state::WatcherState;
 use super::window::send_bloxstrap_command;
 use crate::larp_focuser::start_larping;
 use crate::rpc::{kill_rpc, RpcState};
+use crate::SdkState;
 use serde_json::Value;
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
@@ -103,6 +104,15 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             if state.window_started {
                 if let Some(hwnd) = state.roblox_hwnd {
                     send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
+                }
+            }
+            if integration_enabled(&store, &["swifttunnel", "disconnectWhenRobloxClosed"]) {
+                if let Ok(sdk) = app.state::<SdkState>().0.lock() {
+                    if let Err(e) = sdk.disconnect() {
+                        log::warn!("failed to disconnect swifttunnel on roblox close: {}", e);
+                    } else {
+                        log::info!("swifttunnel disconnected because roblox closed");
+                    }
                 }
             }
             state.reset_fully();
