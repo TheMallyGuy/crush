@@ -111,6 +111,10 @@
                     "title": "Bypass Country Ban",
                     "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
                 },
+                "enablePartialCountryBanCard": {
+                    "title": "Bypass Partial Ban",
+                    "description": "Relays only Roblox control-plane traffic so blocked games appear and join. Gameplay UDP stays direct so you keep your real in-game ping. Use this if only specific games are blocked in your country (e.g. Vietnam)."
+                },
                 "preferredRegionCard": {
                     "title": "المنطقة المفضلة",
                     "description": "قم بتكوين منطقتك المفضلة"
