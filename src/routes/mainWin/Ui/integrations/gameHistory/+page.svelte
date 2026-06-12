@@ -188,11 +188,11 @@
                 description={$_('pages.integrations.gameHistory.gameHistoryCard.lastPlayed', { values : { time: game.timestamp.toLocaleString() }})}
                 image={game.imageUrl ?? undefined}
             >
-                <Button variant="primary" on:click={() => playGame(game.placeId, game.instanceId)}>
+                <Button variant="primary" onclick={() => playGame(game.placeId, game.instanceId)}>
                     <Play class="mr-2" size={16} />
                     {$_('pages.integrations.gameHistory.gameHistoryCard.play')}
                 </Button>
-                <Button variant="secondary" on:click={() => navigator.clipboard.writeText(game.deeplink)}>
+                <Button variant="secondary" onclick={() => navigator.clipboard.writeText(game.deeplink)}>
                     <Link class="mr-2" size={16} />
                     {$_('pages.integrations.gameHistory.gameHistoryCard.deeplink')}
                 </Button>

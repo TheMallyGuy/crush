@@ -124,33 +124,35 @@
 
 <Dialog
     bind:open={deleteDialog}
-    on:close={() => resolveDelete?.(false)}
+    onclose={() => resolveDelete?.(false)}
     title={$_('pages.installations.versionManager.dialogs.delete.title')}
     description={$_(
         'pages.installations.versionManager.dialogs.delete.description'
     )}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveDelete?.(false)}
+            onclick={() => resolveDelete?.(false)}
         >
             {$_('pages.installations.versionManager.dialogs.delete.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
-            on:click={() => resolveDelete?.(true)}
+            onclick={() => resolveDelete?.(true)}
         >
             {$_('pages.installations.versionManager.dialogs.delete.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <Dialog
     bind:open={createDialog}
-    on:close={() => resolveCreate?.(null)}
+    onclose={() => resolveCreate?.(null)}
     title={$_('pages.installations.versionManager.dialogs.new.title')}
 >
     <Textbox
@@ -169,22 +171,24 @@
         bind:value={versionHash}
     />
 
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveCreate?.(null)}
+            onclick={() => resolveCreate?.(null)}
         >
             {$_('pages.installations.versionManager.dialogs.new.cancel')}
         </Button>
         <Button
             variant="primary"
             size="sm"
-            on:click={() => resolveCreate?.(versionName)}
+            onclick={() => resolveCreate?.(versionName)}
         >
             {$_('pages.installations.versionManager.dialogs.new.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-8">
@@ -205,7 +209,7 @@
         </div>
     </div>
 
-    <Button variant="primary" size="md" on:click={handleNewVersion}>
+    <Button variant="primary" size="md" onclick={handleNewVersion}>
         <Plus class="size-4 mr-2" />
     </Button>
 
@@ -219,7 +223,8 @@
                 </p>
             </div>
         {:else}
-            <SortableList {items} let:item>
+            <SortableList {items}>
+                {#snippet children(item)}
                 <div class="flex items-center justify-between w-full pr-2">
                     <div class="flex flex-col gap-0.5">
                         <span class="text-sm font-medium text-stone-100">
@@ -246,7 +251,7 @@
                         <Button
                             size="sm"
                             variant="ghost"
-                            on:click={() => {
+                            onclick={() => {
                                 makePrimary(item.id)
                             }}
                         >
@@ -255,7 +260,7 @@
                         <Button
                             size="sm"
                             variant="ghost"
-                            on:click={() => {
+                            onclick={() => {
                                 deleteId = item.id
                                 popVersion()
                             }}
@@ -264,6 +269,7 @@
                         </Button>
                     </div>
                 </div>
+                {/snippet}
             </SortableList>
         {/if}
     </div>

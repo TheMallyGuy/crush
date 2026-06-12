@@ -30,9 +30,9 @@
     <div
         class="flex gap-2"
     >
-        <ClickableCard icon={Archive} title={$_("pages.mod.tab.modManagement.title")} description={$_("pages.mod.tab.modManagement.description")} size="sm" on:click={handleModManagementClick}></ClickableCard>
-        <ClickableCard icon={Hammer} title={$_("pages.mod.tab.prebuiltMods.title")} description={$_("pages.mod.tab.prebuiltMods.description")} size="sm" on:click={handlePrebuiltModsClick}></ClickableCard>
-        <ClickableCard icon={HouseHeart} title={$_("pages.mod.tab.communityMods.title")} description={$_("pages.mod.tab.communityMods.description")} size="sm" on:click={handleCommunityModsClick}></ClickableCard>
+        <ClickableCard icon={Archive} title={$_("pages.mod.tab.modManagement.title")} description={$_("pages.mod.tab.modManagement.description")} size="sm" onclick={handleModManagementClick}></ClickableCard>
+        <ClickableCard icon={Hammer} title={$_("pages.mod.tab.prebuiltMods.title")} description={$_("pages.mod.tab.prebuiltMods.description")} size="sm" onclick={handlePrebuiltModsClick}></ClickableCard>
+        <ClickableCard icon={HouseHeart} title={$_("pages.mod.tab.communityMods.title")} description={$_("pages.mod.tab.communityMods.description")} size="sm" onclick={handleCommunityModsClick}></ClickableCard>
     </div>
 
     <slot />

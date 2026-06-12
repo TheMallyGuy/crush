@@ -26,7 +26,7 @@
     <h1 class="text-[50px] text-center leading-tight">
         you just discovered a super super super rare error
     </h1>
-    <button class="px-4 py-2 bg-[#121417]" on:click={openchoicewin}>
+    <button class="px-4 py-2 bg-[#121417]" onclick={openchoicewin}>
         go back to choice menu
     </button>
 </div>

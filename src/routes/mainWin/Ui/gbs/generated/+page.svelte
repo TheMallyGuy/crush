@@ -110,22 +110,24 @@
     <div class="grid grid-cols-3 gap-3">
         {#each Object.entries(gbs) as [key, value]}
             <SettingCard title={key}>
-                <p slot="footer">
+                {#snippet footer()}
+                <p>
                     {#if getType(value) === 'number' || getType(value) === 'string'}
                         <Textbox
                             value={String(gbs[key])}
-                            on:change={(e) => saveSetting(key, (e.target as HTMLInputElement).value)}
+                            onchange={(v) => saveSetting(key, String(v))}
                         />
                     {:else if getType(value) === 'boolean'}
                         <Switch
                             checked={gbs[key] as boolean}
-                            on:change={() => {
+                            onchange={() => {
                                 gbs[key] = !gbs[key]
                                 saveSetting(key, String(gbs[key]))
                             }}
                         />
                     {/if}
                 </p>
+                {/snippet}
             </SettingCard>
         {/each}
     </div>

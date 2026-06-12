@@ -207,17 +207,18 @@
             description={$_('pages.appearance.bootstrapThemeCard.description')}
             isOpen={themeType === 'custom'}
         >
-            <div slot="icon">
+            {#snippet iconSlot()}
                 <Brush />
-            </div>
+            {/snippet}
 
-            <div slot="action">
+            {#snippet action()}
+            <div>
                 {#if themeType === 'custom'}
                     <Button
                         variant="ghost"
                         size="sm"
                         class="h-8 w-8 !p-0"
-                        on:click={(e) => {
+                        onclick={(e) => {
                             e.stopPropagation()
                             themeType = 'default'
                         }}
@@ -226,6 +227,7 @@
                     </Button>
                 {/if}
             </div>
+            {/snippet}
 
             <div class="flex flex-col gap-4">
                 <div class="flex items-center justify-between gap-3">
@@ -233,7 +235,7 @@
 
                     {#if themeType === 'custom'}
                         <button
-                            on:click={pick}
+                            onclick={pick}
                             class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />
@@ -262,7 +264,7 @@
                                             : 'border-stone-800'}  transition-all"
                                     >
                                         <button
-                                            on:click={() => selectTheme(theme)}
+                                            onclick={() => selectTheme(theme)}
                                             class="flex items-center gap-3 flex-grow text-left"
                                         >
                                             <div
@@ -289,7 +291,7 @@
                                                 </div>
                                             {/if}
                                             <button
-                                                on:click={() => delTheme(theme)}
+                                                onclick={() => delTheme(theme)}
                                                 class="p-1.5 text-stone-600 hover:text-red-400 hover:bg-red-400/10 transition-all opacity-0 group-hover:opacity-100"
                                             >
                                                 <Trash2 size={14} />
@@ -364,17 +366,18 @@
             description={$_('pages.appearance.backgroundCard.description')}
             isOpen={bgType !== 'default'}
         >
-            <div slot="icon">
+            {#snippet iconSlot()}
                 <ImageIcon />
-            </div>
+            {/snippet}
 
-            <div slot="action">
+            {#snippet action()}
+            <div>
                 {#if bgType !== 'default'}
                     <Button
                         variant="ghost"
                         size="sm"
                         class="h-8 w-8 !p-0"
-                        on:click={(e) => {
+                        onclick={(e) => {
                             e.stopPropagation()
                             bgType = 'default'
                         }}
@@ -383,6 +386,7 @@
                     </Button>
                 {/if}
             </div>
+            {/snippet}
 
             <div class="flex flex-col gap-4">
                 <Dropdown bind:value={bgType} options={backgroundTypeOptions} />
@@ -392,7 +396,7 @@
                         <input
                             type="color"
                             value={bgColor}
-                            on:input={(e) =>
+                            oninput={(e) =>
                                 onColorInput(e.currentTarget.value)}
                             class="h-10 w-16 cursor-pointer bg-transparent border border-stone-800 p-1"
                             aria-label={$_(
@@ -404,7 +408,7 @@
                             fullWidth={false}
                             containerClass="w-32"
                             class="font-mono"
-                            on:input={(e) => onColorInput(e.detail)}
+                            oninput={(v) => onColorInput(String(v))}
                         />
                     </div>
                 {/if}
@@ -412,7 +416,7 @@
                 {#if bgType === 'image'}
                     <div class="flex flex-col gap-3">
                         <button
-                            on:click={pickBackgroundImage}
+                            onclick={pickBackgroundImage}
                             class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
                         >
                             <Plus size={14} />

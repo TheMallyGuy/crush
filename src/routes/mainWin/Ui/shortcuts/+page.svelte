@@ -171,7 +171,7 @@
                     {status}
                 </p>
 
-                <Button class="" on:click={createShortCut}
+                <Button class="" onclick={createShortCut}
                     >{$_('pages.shortcuts.creator.button')}</Button
                 >
             </div>

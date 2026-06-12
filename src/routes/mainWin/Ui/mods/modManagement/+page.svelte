@@ -95,39 +95,41 @@
         await openModFolder(name)
     }
 
-    async function handleSortChange(e: CustomEvent<Mod[]>) {
-        items = e.detail
+    async function handleSortChange(newItems: Mod[]) {
+        items = newItems
         await saveModsOrder(items)
     }
 </script>
 
 <Dialog
     bind:open={deleteDialog}
-    on:close={() => resolveDelete?.(false)}
+    onclose={() => resolveDelete?.(false)}
     title={$_('pages.mod.tab.modManagement.dialogs.delete.title')}
     description={$_('pages.mod.tab.modManagement.dialogs.delete.description')}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveDelete?.(false)}
+            onclick={() => resolveDelete?.(false)}
         >
             {$_('pages.mod.tab.modManagement.dialogs.buttons.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
-            on:click={() => resolveDelete?.(true)}
+            onclick={() => resolveDelete?.(true)}
         >
             {$_('pages.mod.tab.modManagement.dialogs.buttons.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <Dialog
     bind:open={createDialog}
-    on:close={() => resolveCreate?.(null)}
+    onclose={() => resolveCreate?.(null)}
     title={$_('pages.mod.tab.modManagement.dialogs.create.title')}
 >
     <Textbox
@@ -138,44 +140,48 @@
         bind:value={modName}
     />
 
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveCreate?.(null)}
+            onclick={() => resolveCreate?.(null)}
         >
             {$_('pages.mod.tab.modManagement.dialogs.buttons.cancel')}
         </Button>
         <Button
             variant="primary"
             size="sm"
-            on:click={() => resolveCreate?.(modName)}
+            onclick={() => resolveCreate?.(modName)}
         >
             {$_('pages.mod.tab.modManagement.dialogs.buttons.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <Dialog
     bind:open={existDialog}
-    on:close={() => (existDialog = false)}
+    onclose={() => (existDialog = false)}
     title={$_('pages.mod.tab.modManagement.dialogs.exists.title')}
     description={$_('pages.mod.tab.modManagement.dialogs.exists.description')}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => (existDialog = false)}
+            onclick={() => (existDialog = false)}
         >
             OK
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
-        <Button variant="primary" size="md" on:click={handleNewMod}>
+        <Button variant="primary" size="md" onclick={handleNewMod}>
             <Plus class="size-4 mr-2" />
             {$_('pages.mod.tab.modManagement.addModButton')}
         </Button>
@@ -190,7 +196,7 @@
                     {$_('pages.mod.tab.modManagement.noModsFound')}
                 </p>
                 <button
-                    on:click={handleNewMod}
+                    onclick={handleNewMod}
                     class="text-blue-500 hover:underline text-sm mt-2"
                     >{$_(
                         'pages.mod.tab.modManagement.noModsFoundCreateButton'
@@ -198,11 +204,12 @@
                 >
             </div>
         {:else}
-            <SortableList {items} on:change={handleSortChange} let:item>
+            <SortableList {items} onchange={handleSortChange}>
+                {#snippet children(item)}
                 <div class="flex items-center justify-between w-full pr-2">
                     <div class="flex items-center gap-4">
                         <button
-                            on:click={() => handleToggle(item.id)}
+                            onclick={() => handleToggle(item.id)}
                             class="p-2 transition-colors {item.enabled
                                 ? 'bg-blue-600/20 text-blue-400 hover:bg-blue-600/30'
                                 : 'bg-stone-800 text-stone-500 hover:bg-stone-700'}"
@@ -233,7 +240,7 @@
                         <Button
                             size="sm"
                             variant="ghost"
-                            on:click={() => handleRename(item.id, item.name)}
+                            onclick={() => handleRename(item.id, item.name)}
                             title={$_(
                                 'pages.mod.tab.modManagement.modCards.renameNote'
                             )}
@@ -243,7 +250,7 @@
                         <Button
                             size="sm"
                             variant="ghost"
-                            on:click={() => handleOpenFolder(item.name)}
+                            onclick={() => handleOpenFolder(item.name)}
                             title={$_(
                                 'pages.mod.tab.modManagement.modCards.openFolderNote'
                             )}
@@ -253,7 +260,7 @@
                         <Button
                             size="sm"
                             variant="ghost"
-                            on:click={() => handleDelete(item.id, item.name)}
+                            onclick={() => handleDelete(item.id, item.name)}
                             title={$_(
                                 'pages.mod.tab.modManagement.modCards.deleteNote'
                             )}
@@ -263,6 +270,7 @@
                         </Button>
                     </div>
                 </div>
+                {/snippet}
             </SortableList>
         {/if}
     </div>

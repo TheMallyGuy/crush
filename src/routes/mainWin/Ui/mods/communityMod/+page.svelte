@@ -110,7 +110,7 @@
                     {activeFilter === f.key
                     ? 'bg-sapphire text-white'
                     : 'bg-stone-800 text-stone-400 hover:bg-stone-700 hover:text-stone-200'}"
-                on:click={() => (activeFilter = f.key)}
+                onclick={() => (activeFilter = f.key)}
             >
                 {f.label}
             </button>
@@ -124,7 +124,7 @@
                     {activeFilter === lib
                     ? 'bg-sapphire text-white'
                     : 'bg-stone-800 text-stone-400 hover:bg-stone-700 hover:text-stone-200'}"
-                on:click={() => (activeFilter = lib)}
+                onclick={() => (activeFilter = lib)}
             >
                 {lib}
             </button>
@@ -158,7 +158,7 @@
                     adapter={mod.adapter}
                     thumbnail={mod.thumbnail}
                     downloading={downloading[mod.id] ?? false}
-                    on:click={() => handleDownload(mod)}
+                    onclick={() => handleDownload(mod)}
                 />
             {/each}
         </div>

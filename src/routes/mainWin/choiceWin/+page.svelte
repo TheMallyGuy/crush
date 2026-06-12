@@ -129,7 +129,7 @@
                     class="w-full h-full flex border border-stone-800 hover:border-stone-700 transition-all"
                 >
                     <button
-                        on:click={handlePlayClick}
+                        onclick={handlePlayClick}
                         class="flex-1 h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 p-4 flex flex-col items-center justify-center gap-2 transition-all text-card-foreground overflow-hidden"
                     >
                         {#if playVariant === 'default'}
@@ -149,7 +149,7 @@
                     <div class="w-px h-full bg-stone-800 shrink-0"></div>
 
                     <button
-                        on:click={() => (showVariantMenu = !showVariantMenu)}
+                        onclick={() => (showVariantMenu = !showVariantMenu)}
                         class="h-full px-2.5 bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] flex items-center justify-center text-muted-foreground hover:text-accent-foreground transition-all overflow-hidden"
                     >
                         <ChevronDown
@@ -168,7 +168,7 @@
                             class="absolute top-full right-0 mt-1 z-50 bg-stone-900 border border-stone-800 p-1 flex flex-col gap-0.5 min-w-35"
                         >
                             <button
-                                on:click={() => {
+                                onclick={() => {
                                     playVariant = 'default'
                                     showVariantMenu = false
                                 }}
@@ -187,7 +187,7 @@
                                 {/if}
                             </button>
                             <button
-                                on:click={() => {
+                                onclick={() => {
                                     playVariant = 'v2'
                                     showVariantMenu = false
                                 }}
@@ -214,7 +214,7 @@
         <div class="flex flex-col gap-2 w-1/2 h-24">
             <BlurFade delay={0.4} class="flex-1 flex">
                 <button
-                    on:click={openmainwin}
+                    onclick={openmainwin}
                     class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 px-4 flex items-center justify-center gap-3 transition-all hover:border-stone-700 text-stone-200 text-sm overflow-hidden shadow-sm"
                 >
                     <Wrench class="size-4 shrink-0" />
@@ -226,7 +226,7 @@
 
             <BlurFade delay={0.6} class="flex-1 flex">
                 <button
-                    on:click={openDiscordServer}
+                    onclick={openDiscordServer}
                     class="w-full h-full bg-stone-900/60 hover:bg-stone-800 active:scale-[0.98] disabled:opacity-50 px-4 flex items-center justify-center gap-3 transition-all hover:border-stone-700 text-stone-200 text-sm overflow-hidden shadow-sm"
                 >
                     <MessageCircleHeart class="size-4 shrink-0" />

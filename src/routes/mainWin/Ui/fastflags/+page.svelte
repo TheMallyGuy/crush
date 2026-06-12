@@ -147,7 +147,7 @@
                 'pages.fastflag.selectScreeen.editCard.description'
             )}
             icon={SquarePen}
-            on:click={handleEditorClick}
+            onclick={handleEditorClick}
         ></ClickableCard>
 
         <div>
@@ -163,15 +163,16 @@
             title={$_('pages.fastflag.preset.msaaCard.title')}
             description={$_('pages.fastflag.preset.msaaCard.description')}
         >
+            {#snippet action()}
             <Dropdown
-                slot="action"
                 value={msaaValue}
                 options={msaaItems}
-                on:change={(e) => {
-                    msaaValue = e.detail
+                onchange={(e) => {
+                    msaaValue = e
                     save()
                 }}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -180,14 +181,15 @@
                 'pages.fastflag.preset.pauseVoxelizerCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 checked={pauseVoxelizer}
-                on:change={(e) => {
-                    pauseVoxelizer = e.detail
+                onchange={(e) => {
+                    pauseVoxelizer = e
                     save()
                 }}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -196,19 +198,21 @@
                 'pages.fastflag.preset.grassAnimationCard.description'
             )}
         >
-            <div slot="action" class="w-50">
+            {#snippet action()}
+            <div class="w-50">
                 <Textbox
                     value={wavingGrass}
-                    on:change={(e) => {
-                        wavingGrass = e.detail
+                    onchange={(e) => {
+                        wavingGrass = String(e)
                         save()
                     }}
-                    on:enter={(e) => {
-                        wavingGrass = e.detail
+                    onenter={(e) => {
+                        wavingGrass = String(e)
                         save()
                     }}
                 />
             </div>
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -219,15 +223,16 @@
                 'pages.fastflag.preset.overwriteTextureQualityCard.description'
             )}
         >
+            {#snippet action()}
             <Dropdown
-                slot="action"
                 value={textureQuality}
                 options={textureQualityItems}
-                on:change={(e) => {
-                    textureQuality = e.detail
+                onchange={(e) => {
+                    textureQuality = e
                     save()
                 }}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -236,28 +241,30 @@
                 'pages.fastflag.preset.lowMeshQualityCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 checked={lowMeshQuality}
-                on:change={(e) => {
-                    lowMeshQuality = e.detail
+                onchange={(e) => {
+                    lowMeshQuality = e
                     save()
                 }}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
             title={$_('pages.fastflag.preset.graySkyCard.title')}
             description={$_('pages.fastflag.preset.graySkyCard.description')}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 checked={graySky}
-                on:change={(e) => {
-                    graySky = e.detail
+                onchange={(e) => {
+                    graySky = e
                     save()
                 }}
             />
+            {/snippet}
         </SettingCard>
     </div>
 </div>

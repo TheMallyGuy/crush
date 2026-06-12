@@ -65,12 +65,16 @@
 
 <div class="flex flex-col gap-3">
     <SettingCard title={$_("pages.mod.tab.prebuiltMods.cursorCard.title")} description={$_("pages.mod.tab.prebuiltMods.cursorCard.description")} icon={MousePointer2}>
-        <Dropdown slot="action" options={cursorOptions} bind:value={cursorValue} on:change={handleCustomCursor} />
+        {#snippet action()}
+        <Dropdown options={cursorOptions} bind:value={cursorValue} onchange={handleCustomCursor} />
+        {/snippet}
     </SettingCard>
 
     <SettingCard title={$_("pages.mod.tab.prebuiltMods.customFontCard.title")} description={$_("pages.mod.tab.prebuiltMods.customFontCard.description")} icon={ALargeSmall}>
-        <Button slot="action" variant='secondary' on:click={handleCustomFont}>
+        {#snippet action()}
+        <Button variant='secondary' onclick={handleCustomFont}>
             {$_("pages.mod.tab.prebuiltMods.customFontCard.button")}
         </Button>
+        {/snippet}
     </SettingCard>
 </div>

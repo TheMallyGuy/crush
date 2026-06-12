@@ -146,17 +146,18 @@
 
 <Dialog
     bind:open={warningDialog}
-    on:close={() => {
+    onclose={() => {
         warningDialog = false
     }}
     title={$_('pages.integrations.dialogs.title')}
     description={$_('pages.integrations.dialogs.description')}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => {
+            onclick={() => {
                 warningDialog = false
                 goto('integrations/swift')
             }}
@@ -164,6 +165,7 @@
             {$_('pages.integrations.dialogs.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-8">
@@ -186,11 +188,12 @@
             )}
             icon={View}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={activityWatching}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         {#if isLateNightGamer}
@@ -201,12 +204,13 @@
                 )}
                 icon={BedSingle}
             >
+                {#snippet action()}
                 <Switch
-                    slot="action"
                     disabled={!activityWatching}
                     bind:checked={sleepSchedule}
-                    on:change={handleChanges}
+                    onchange={handleChanges}
                 />
+                {/snippet}
             </SettingCard>
         {/if}
 
@@ -217,12 +221,13 @@
             )}
             icon={Bell}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!activityWatching}
                 bind:checked={serverLocationNotifier}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -232,12 +237,13 @@
             )}
             icon={Cpu}
         >
+            {#snippet action()}
             <Dropdown
-                slot="action"
                 options={processPriorityItems}
                 bind:value={processPriority}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -245,11 +251,12 @@
             description={$_('pages.integrations.optimizerCard.description')}
             icon={Sparkles}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
-                on:change={handleChanges}
+                onchange={handleChanges}
                 bind:checked={optimizer}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -258,13 +265,14 @@
             icon={swifty}
             doTheGrayThing={true}
         >
+            {#snippet action()}
             <Button
-                slot="action"
-                on:click={() => (warningDialog = true)}
+                onclick={() => (warningDialog = true)}
                 variant="secondary"
             >
                 Open</Button
             >
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -276,11 +284,12 @@
             )}
             icon={Expand}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={fullscreenOpts}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -290,11 +299,12 @@
             )}
             icon={Bomb}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={crashHandler}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <ExpandableSettingCard
@@ -302,18 +312,19 @@
             description={$_('pages.integrations.rpcCard.description')}
             icon={Plug}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!activityWatching}
                 bind:checked={discordRpc}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
 
             <div class="flex gap-3">
                 <p>{$_('pages.integrations.rpcCard.option1')}</p>
                 <Switch
                     bind:checked={letJoin}
-                    on:change={handleChanges}
+                    onchange={handleChanges}
                     disabled={!activityWatching}
                 />
             </div>
@@ -322,7 +333,7 @@
                 <p>{$_('pages.integrations.rpcCard.option2')}</p>
                 <Switch
                     bind:checked={displayAccount}
-                    on:change={handleChanges}
+                    onchange={handleChanges}
                     disabled={!activityWatching}
                 />
             </div>
@@ -335,14 +346,15 @@
             )}
             icon={CodeXml}
         >
+            {#snippet action()}
             <Button
-                slot="action"
                 variant="secondary"
                 disabled={!activityWatching}
-                on:click={() => goto('integrations/interactiveSettings')}
+                onclick={() => goto('integrations/interactiveSettings')}
             >
                 {$_('pages.integrations.windowManipulationCard.button')}
             </Button>
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -350,14 +362,15 @@
             description={$_('pages.integrations.gameHistoryCard.description')}
             icon={History}
         >
+            {#snippet action()}
             <Button
-                slot="action"
                 disabled={!activityWatching}
                 variant="secondary"
-                on:click={() => goto('integrations/gameHistory')}
+                onclick={() => goto('integrations/gameHistory')}
             >
                 {$_('pages.integrations.gameHistoryCard.button')}
             </Button>
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -366,13 +379,14 @@
             icon={roValaraLogo}
             doTheGrayThing={true}
         >
+            {#snippet action()}
             <Button
-                slot="action"
                 variant="secondary"
-                on:click={() => goto('integrations/roValra')}
+                onclick={() => goto('integrations/roValra')}
             >
                 {$_('pages.integrations.roValraCard.button')}
             </Button>
+            {/snippet}
         </SettingCard>
     </div>
 </div>

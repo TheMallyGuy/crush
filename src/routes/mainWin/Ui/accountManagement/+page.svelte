@@ -412,31 +412,33 @@
 
 <Dialog
     bind:open={deleteDialog}
-    on:close={() => resolveDelete?.(false)}
+    onclose={() => resolveDelete?.(false)}
     title={$_('pages.accountManagement.dialogs.delete.title')}
     description={$_('pages.accountManagement.dialogs.delete.description')}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveDelete?.(false)}
+            onclick={() => resolveDelete?.(false)}
         >
             {$_('pages.accountManagement.dialogs.delete.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
-            on:click={() => resolveDelete?.(true)}
+            onclick={() => resolveDelete?.(true)}
         >
             {$_('pages.accountManagement.dialogs.delete.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <Dialog
     bind:open={addDialog}
-    on:close={() => (addDialog = false)}
+    onclose={() => (addDialog = false)}
     title={$_('pages.accountManagement.dialogs.add.title')}
     description={$_('pages.accountManagement.dialogs.add.description')}
 >
@@ -446,7 +448,7 @@
                 <Button
                     variant="primary"
                     size="sm"
-                    on:click={checkWebviewCookie}
+                    onclick={checkWebviewCookie}
                     >{$_(
                         'pages.accountManagement.dialogs.add.tabs.webview.check'
                     )}</Button
@@ -457,7 +459,7 @@
                     variant="primary"
                     size="sm"
                     class="flex w-max justify-between"
-                    on:click={openWebview}
+                    onclick={openWebview}
                     >{$_(
                         'pages.accountManagement.dialogs.add.tabs.webview.open'
                     )}</Button
@@ -467,7 +469,7 @@
                     variant="primary"
                     size="sm"
                     class="flex w-max justify-between"
-                    on:click={openWebview}
+                    onclick={openWebview}
                     >{$_(
                         'pages.accountManagement.dialogs.add.tabs.webview.open'
                     )}</Button
@@ -499,7 +501,7 @@
                         variant="primary"
                         size="sm"
                         disabled={quickSignPolling}
-                        on:click={startQuickSignIn}
+                        onclick={startQuickSignIn}
                     >
                         {$_(
                             'pages.accountManagement.dialogs.add.tabs.quickSignIn.start'
@@ -509,13 +511,15 @@
             </div>
         {/if}
     </Tabs>
-    <div slot="actions" class="flex items-center justify-end gap-2">
+    {#snippet actions()}
+    <div class="flex items-center justify-end gap-2">
         <Checkbox bind:checked={vngAccount}
             >{$_(
                 'pages.accountManagement.dialogs.add.tabs.quickSignIn.checkbox'
             )}</Checkbox
         >
     </div>
+    {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-5">
@@ -531,17 +535,18 @@
     </div>
 
     <div class="flex items-center justify-between">
-        <Button variant="primary" size="md" on:click={() => (addDialog = true)}>
+        <Button variant="primary" size="md" onclick={() => (addDialog = true)}>
             <Plus class="size-4 mr-2" />
             {$_('pages.accountManagement.addAnAccount')}
         </Button>
-        <Button variant="secondary" size="md" on:click={validateAccounts}>
+        <Button variant="secondary" size="md" onclick={validateAccounts}>
             <RefreshCw class="size-4 mr-2" />
             {$_('pages.accountManagement.validateAccounts')}
         </Button>
     </div>
 
-    <SortableList items={accountsData ?? []} let:item>
+    <SortableList items={accountsData ?? []}>
+        {#snippet children(item)}
         <div class="flex items-center justify-between w-full pr-2">
             <div class="flex flex-col gap-0.5">
                 <span class="text-sm font-medium text-stone-100">
@@ -561,14 +566,15 @@
                 <Button
                     variant="secondary"
                     size="sm"
-                    on:click={() => useAccount(item.id)}>{$_("pages.accountManagement.use")}</Button
+                    onclick={() => useAccount(item.id)}>{$_("pages.accountManagement.use")}</Button
                 >
                 <Button
                     variant="danger"
                     size="sm"
-                    on:click={() => deleteAccount(item.id)}>{$_("pages.accountManagement.delete")}</Button
+                    onclick={() => deleteAccount(item.id)}>{$_("pages.accountManagement.delete")}</Button
                 >
             </div>
         </div>
+        {/snippet}
     </SortableList>
 </div>

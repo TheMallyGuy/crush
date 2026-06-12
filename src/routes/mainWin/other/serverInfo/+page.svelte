@@ -99,7 +99,7 @@
             <p class="flex items-center gap-2">
                 {$_('pages.serverInfomationPage.infomationCard.inviteLink')}d <Button
                     variant="secondary"
-                    on:click={async () => {
+                    onclick={async () => {
                         await copyToClipboard(serverInviteLink)
                     }}>Copy to clipboard</Button
                 >

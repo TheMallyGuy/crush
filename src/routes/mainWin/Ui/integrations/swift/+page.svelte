@@ -220,11 +220,12 @@
                 'pages.integrations.swiftTunnel.enableTunnelingCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={enableSwifttunnel}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -233,12 +234,13 @@
                 'pages.integrations.swiftTunnel.enableRoutingCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={enableRouting}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -249,12 +251,13 @@
                 'pages.integrations.swiftTunnel.disconnectWhenRobloxIsClosed.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={closeWhenTuff}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -265,12 +268,13 @@
                 'pages.integrations.swiftTunnel.multipleAssetsThoughRelays.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={assetsRouting}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -281,12 +285,13 @@
                 'pages.integrations.swiftTunnel.enableCountryBanCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={enableCountryBan}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -297,12 +302,13 @@
                 'pages.integrations.swiftTunnel.enablePartialCountryBanCard.description'
             )}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 disabled={!enableSwifttunnel}
                 bind:checked={enablePartialCountryBan}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -313,12 +319,13 @@
                 'pages.integrations.swiftTunnel.preferredRegionCard.description'
             )}
         >
+            {#snippet action()}
             <Dropdown
-                slot="action"
                 options={perferedRegionItems}
                 bind:value={perferedRegion}
-                on:change={saveSettings}
+                onchange={saveSettings}
             />
+            {/snippet}
         </SettingCard>
 
         <div class="flex flex-col gap-3">

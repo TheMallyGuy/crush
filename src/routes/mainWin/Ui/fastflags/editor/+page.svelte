@@ -29,34 +29,29 @@
         })
     })
 
-    async function handleDelete(event: CustomEvent<string>) {
+    async function handleDelete(name: string) {
         const latestFlags = await getFastFlags(appType)
-        const { [event.detail]: _, ...rest } = latestFlags
+        const { [name]: _, ...rest } = latestFlags
         flags = rest
         await saveFastFlags(flags, appType)
     }
 
-    async function handleAdd(
-        event: CustomEvent<{ name: string; value: string }>
-    ) {
-        const { name, value } = event.detail
+    async function handleAdd(payload: { name: string; value: string }) {
+        const { name, value } = payload
         const latestFlags = await getFastFlags(appType)
         if (name in latestFlags) return
         flags = { ...latestFlags, [name]: value }
         await saveFastFlags(flags, appType)
     }
 
-    async function handleUpdate(
-        event: CustomEvent<{ name: string; value: string }>
-    ) {
-        const { name, value } = event.detail
+    async function handleUpdate(payload: { name: string; value: string }) {
+        const { name, value } = payload
         const latestFlags = await getFastFlags(appType)
         flags = { ...latestFlags, [name]: value }
         await saveFastFlags(flags, appType)
     }
 
-    function handleSearch(event: CustomEvent<string>) {
-        const query = event.detail
+    function handleSearch(query: string) {
         console.log(`Searching for: ${query}`)
     }
 </script>
@@ -79,13 +74,13 @@
     </div>
     <FastFlagTable
         {flags}
-        on:delete={handleDelete}
-        on:add={handleAdd}
-        on:update={handleUpdate}
-        on:search={handleSearch}
-        on:import={async (e) => {
+        ondelete={handleDelete}
+        onadd={handleAdd}
+        onupdate={handleUpdate}
+        onsearch={handleSearch}
+        onimport={async (imported) => {
             const latestFlags = await getFastFlags(appType)
-            flags = { ...latestFlags, ...e.detail }
+            flags = { ...latestFlags, ...imported }
             await saveFastFlags(flags, appType)
         }}
     />

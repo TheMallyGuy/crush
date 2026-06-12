@@ -49,13 +49,13 @@
 
         <div class="flex justify-end gap-3 pt-6">
             {#if !$isFirst}
-                <Button on:click={back} variant="secondary">Back</Button>
+                <Button onclick={back} variant="secondary">Back</Button>
             {/if}
 
             {#if !$isLast}
-                <Button on:click={next}>Next</Button>
+                <Button onclick={next}>Next</Button>
             {:else}
-                <Button on:click={imBadAtNamingHandlerFunctions}>Finish</Button>
+                <Button onclick={imBadAtNamingHandlerFunctions}>Finish</Button>
             {/if}
         </div>
     </div>

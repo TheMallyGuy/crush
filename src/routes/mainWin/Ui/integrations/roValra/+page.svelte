@@ -72,10 +72,11 @@
             'pages.integrations.roValra.joinServerForYouCard.description'
         )}
     >
+        {#snippet action()}
         <Switch
             bind:checked={joinServerForYouValue}
-            slot="action"
-            on:change={handleChanges}
+            onchange={handleChanges}
         />
+        {/snippet}
     </SettingCard>
 </div>

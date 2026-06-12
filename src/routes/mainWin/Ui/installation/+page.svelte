@@ -93,26 +93,28 @@
 
 <Dialog
     bind:open={warningVng}
-    on:close={() => resolveWarning?.(false)}
+    onclose={() => resolveWarning?.(false)}
     title={$_('pages.installations.dialogs.vngWarning.title')}
     description={$_('pages.installations.dialogs.vngWarning.description')}
 >
-    <div slot="actions">
+    {#snippet actions()}
+    <div>
         <Button
             variant="secondary"
             size="sm"
-            on:click={() => resolveWarning?.(false)}
+            onclick={() => resolveWarning?.(false)}
         >
             {$_('pages.installations.dialogs.vngWarning.cancel')}
         </Button>
         <Button
             variant="danger"
             size="sm"
-            on:click={() => resolveWarning?.(true)}
+            onclick={() => resolveWarning?.(true)}
         >
             {$_('pages.installations.dialogs.vngWarning.confirm')}
         </Button>
     </div>
+    {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-8">
@@ -135,15 +137,16 @@
             )}
             icon={Rocket}
         >
+            {#snippet action()}
             <Button
-                slot="action"
                 variant="secondary"
-                on:click={() => {
+                onclick={() => {
                     goto('./installation/versionManager')
                 }}
             >
                 {$_('pages.installations.versionManagerCard.button')}
             </Button>
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -153,12 +156,13 @@
             )}
             icon={Folders}
         >
+            {#snippet action()}
             <Textbox
-                slot="action"
                 class="w-30 h-8 text-sm"
                 bind:value={parallel}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -168,11 +172,12 @@
             )}
             icon={HardDriveDownload}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={forceReinstall}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -180,11 +185,12 @@
             description={$_('pages.installations.useVNGCard.description')}
             icon={vngLogo}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={vng}
-                on:change={handleWarning}
+                onchange={handleWarning}
             />
+            {/snippet}
         </SettingCard>
 
         <SettingCard
@@ -192,11 +198,12 @@
             description={$_('pages.installations.dontUpdateCard.description')}
             icon={CircleFadingArrowUp}
         >
+            {#snippet action()}
             <Switch
-                slot="action"
                 bind:checked={dontUpdate}
-                on:change={handleChanges}
+                onchange={handleChanges}
             />
+            {/snippet}
         </SettingCard>
     </div>
 </div>

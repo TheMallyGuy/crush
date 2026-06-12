@@ -471,14 +471,14 @@
                                 <button
                                     class="w-5 h-5 flex items-center justify-center text-xs hover:bg-white/20 rounded-sm transition-colors"
                                     style="color:{rootFg}"
-                                    on:click={() => getCurrentWindow().minimize()}
+                                    onclick={() => getCurrentWindow().minimize()}
                                 >─</button>
                             {/if}
                             {#if el.props.ShowClose !== 'False'}
                                 <button
                                     class="w-5 h-5 flex items-center justify-center text-xs hover:bg-red-500 hover:text-white rounded-sm transition-colors"
                                     style="color:{rootFg}"
-                                    on:click={cancel}
+                                    onclick={cancel}
                                 >✕</button>
                             {/if}
                         </div>
@@ -550,7 +550,7 @@
                 {:else if el.type === 'Button'}
                     <button
                         id={el.name}
-                        on:click={el.name === 'CancelButton' || el.props.Content === 'Cancel' ? cancel : undefined}
+                        onclick={el.name === 'CancelButton' || el.props.Content === 'Cancel' ? cancel : undefined}
                         class="absolute cursor-pointer focus:outline-none {el.props.class || el.props.Class || ''}"
                         style="
                             {buildStyle(el, 2)}
@@ -673,14 +673,14 @@
             <div class="w-full max-w-sm flex gap-3">
                 {#if error}
                     <button
-                        on:click={runBootstrap}
+                        onclick={runBootstrap}
                         class="flex-1 bg-stone-200 hover:bg-white text-stone-950 active:scale-[0.98] p-4 flex items-center justify-center gap-3 transition-all font-medium"
                     >
                         {$_('pages.boostrapWin.retry')}
                     </button>
                 {/if}
                 <button
-                    on:click={cancel}
+                    onclick={cancel}
                     class="{error
                         ? 'flex-1'
                         : 'w-full'} bg-stone-900 hover:bg-stone-800 active:scale-[0.98] p-4 flex items-center justify-center gap-3 transition-all border border-stone-800 hover:border-stone-700 text-stone-200"

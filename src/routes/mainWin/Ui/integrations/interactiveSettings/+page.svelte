@@ -99,7 +99,7 @@
         title={$_("pages.integrations.windowManipulation.enableCard.title")}
         description={$_("pages.integrations.windowManipulation.enableCard.description")}
     >
-        <Switch slot="action" bind:checked={interactAPIValue} on:change={handleChanges} />
+        {#snippet action()}<Switch bind:checked={interactAPIValue} onchange={handleChanges} />{/snippet}
     </SettingCard>
 
     <div class="flex flex-col gap-3">
@@ -119,28 +119,28 @@
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.minimizeCard.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.minimizeCard.description")}
             >
-                <Switch slot="action" bind:checked={mimimizeValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={mimimizeValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
 
             <SettingCard
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.maximizeCard.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.maximizeCard.description")}
             >
-                <Switch slot="action" bind:checked={maximizeValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={maximizeValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
 
             <SettingCard
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.focusCard.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.focusCard.description")}
             >
-                <Switch slot="action" bind:checked={focusValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={focusValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
 
             <SettingCard
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.moveWindowCard.description")}
             >
-                <Switch slot="action" bind:checked={moveWindowValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={moveWindowValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
 
 
@@ -148,14 +148,14 @@
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.setWindowTitleCard.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.setWindowTitleCard.description")}
             >
-                <Switch slot="action" bind:checked={windowTitleValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={windowTitleValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
 
             <SettingCard
                 title={$_("pages.integrations.windowManipulation.advanced.scopes.setBorderless.title")}
                 description={$_("pages.integrations.windowManipulation.advanced.scopes.setBorderless.description")}
             >
-                <Switch slot="action" bind:checked={borderlessValue} disabled={!interactAPIValue} on:change={handleChanges}/>
+                {#snippet action()}<Switch bind:checked={borderlessValue} disabled={!interactAPIValue} onchange={handleChanges}/>{/snippet}
             </SettingCard>
         </div>
 

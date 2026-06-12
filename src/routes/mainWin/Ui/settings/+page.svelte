@@ -167,7 +167,7 @@
     })
 </script>
 
-<svelte:window on:keydown={handleGlobalKey} />
+<svelte:window onkeydown={handleGlobalKey} />
 
 {#if !settings.lockedInMode}
     <SmoothCursor />
@@ -175,7 +175,7 @@
 
 <Dialog
     open={creditDialog}
-    on:close={() => {
+    onclose={() => {
         creditDialog = false
     }}
     title={$_('pages.settings.creditsCard.dialog.title')}
@@ -219,7 +219,7 @@
 
 <Dialog
     open={privacyAndDataDialog}
-    on:close={() => {
+    onclose={() => {
         privacyAndDataDialog = false
     }}
     title={$_('pages.settings.pirvacyCard.title')}
@@ -245,11 +245,12 @@
         description={$_('pages.settings.languageCard.description')}
         icon={Languages}
     >
+        {#snippet action()}
         <Dropdown
-            slot="action"
             bind:value={settings.currentLocale}
             options={$dropdownOptions}
         />
+        {/snippet}
     </SettingCard>
 
     <SettingCard
@@ -257,13 +258,14 @@
         description={$_('pages.settings.onBoardCard.description')}
         icon={BookHeart}
     >
+        {#snippet action()}
         <Button
-            slot="action"
             variant="danger"
-            on:click={handleResetCrushOnboarding}
+            onclick={handleResetCrushOnboarding}
         >
             {$_('pages.settings.onBoardCard.button')}
         </Button>
+        {/snippet}
     </SettingCard>
 
     <SettingCard
@@ -271,7 +273,9 @@
         description={$_('pages.settings.enableCrushRpcCard.description')}
         icon={AudioWaveform}
     >
-        <Switch slot="action" bind:checked={settings.discordRpcEnabled} />
+        {#snippet action()}
+        <Switch bind:checked={settings.discordRpcEnabled} />
+        {/snippet}
     </SettingCard>
 
     <SettingCard
@@ -279,7 +283,9 @@
         description={$_('pages.settings.lockedInCard.description')}
         icon={Crosshair}
     >
-        <Switch slot="action" bind:checked={settings.lockedInMode} />
+        {#snippet action()}
+        <Switch bind:checked={settings.lockedInMode} />
+        {/snippet}
     </SettingCard>
 
     <SettingCard
@@ -287,7 +293,9 @@
         description={$_('pages.settings.redRingsCard.description')}
         icon={Cuboid}
     >
-        <Switch slot="action" bind:checked={settings.redRings} />
+        {#snippet action()}
+        <Switch bind:checked={settings.redRings} />
+        {/snippet}
     </SettingCard>
 
     <SettingCard
@@ -295,13 +303,14 @@
         description={$_('pages.settings.pirvacyCard.description')}
         icon={Shield}
     >
+        {#snippet action()}
         <Button
-            slot="action"
             variant="secondary"
-            on:click={() => {
+            onclick={() => {
                 privacyAndDataDialog = true
             }}>{$_('pages.settings.creditsCard.button')}</Button
         >
+        {/snippet}
     </SettingCard>
 
     <ExpandableSettingCard
@@ -335,13 +344,14 @@
         title={$_('pages.settings.creditsCard.title')}
         icon={ScrollText}
     >
+        {#snippet action()}
         <Button
-            slot="action"
             variant="secondary"
-            on:click={() => {
+            onclick={() => {
                 creditDialog = true
             }}>{$_('pages.settings.creditsCard.button')}</Button
         >
+        {/snippet}
     </SettingCard>
 
     <ExpandableSettingCard
@@ -349,20 +359,21 @@
         description={$_('pages.settings.donateCard.description')}
         icon={Arona}
     >
-        <Button variant="secondary" on:click={handleDonate}
+        <Button variant="secondary" onclick={handleDonate}
             >{$_('pages.settings.donateCard.button')}</Button
         >
     </ExpandableSettingCard>
 
     {#if devMode}
         <SettingCard title="Test page" icon={ScrollText} description="dev only">
+            {#snippet action()}
             <Button
-                slot="action"
                 variant="secondary"
-                on:click={() => {
+                onclick={() => {
                     goto('./settings/dev')
                 }}>Open</Button
             >
+            {/snippet}
         </SettingCard>
     {/if}
 </div>

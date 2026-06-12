@@ -19,7 +19,7 @@
                 title={n.title}
                 description={n.description}
                 image={n.image}
-                on:dismiss={() => island.dismiss(n.id)}
+                ondismiss={() => island.dismiss(n.id)}
             />
         </div>
     {/each}
