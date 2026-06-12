@@ -103,13 +103,21 @@
                     "title": "Activer le tunneling",
                     "description": "Activer le tunneling pour router Roblox via le VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Activer le routage Roblox",
                     "description": "Router toutes les requêtes API Roblox via le VPN. Cela peut permettre de contourner les jeux bloqués dans certains pays."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "Contourner le blocage par pays",
+                    "description": "Achemine tout le trafic de démarrage de Roblox via le relais et active le contournement DPI. Utilisez ceci si Roblox est bloqué dans votre pays. Implique le routage Roblox."
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -594,11 +602,11 @@
                 "button": "Faire un don"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "Confidentialité et données",
+                "description": "Contrôlez comment Crush doit utiliser vos informations.",
+                "button": "Ouvrir",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Enregistrez vos activités pour Roblox : Warpped"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localisation",
                     "specialThanks": "Remerciements spéciaux (Premiers soutiens !)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Veuillez faire défiler vers le bas, il y a plus^^"
                 }
             }
         }

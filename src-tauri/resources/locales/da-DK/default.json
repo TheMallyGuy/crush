@@ -103,6 +103,14 @@
                     "title": "Aktiver Tunneling",
                     "description": "Aktiver tunneling for at rute Roblox gennem VPN'en"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Aktiver Roblox Routing",
                     "description": "Rute alle Roblox API-anmodninger gennem VPN'en. Dette kan bruges til at omgå blokerede spil i nogle lande."

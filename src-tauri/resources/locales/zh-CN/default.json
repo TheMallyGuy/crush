@@ -17,7 +17,7 @@
                         "public": "已连接到公共服务器！",
                         "private": "已连接到私人服务器！"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP : {ip}\n位置 : {location}"
                 }
             }
         }
@@ -58,11 +58,11 @@
         "serverInfomationPage": {
             "title": "服务器信息",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
+                "serverRegion": "区域 : {region}",
                 "waitRegion": "正在获取区域...",
                 "description": "服务器关于此服务器的信息",
                 "uptime": "运行时间: 未获取",
-                "instanceId": "Server Instance ID : {id}",
+                "instanceId": "服务器实例 ID : {id}",
                 "inviteLink": "复制邀请链接："
             }
         },
@@ -103,13 +103,21 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "绕过国家封锁",
+                    "description": "将所有 Roblox 启动流量通过中继路由并激活 DPI 绕过。如果你所在国家封锁了 Roblox，请使用此功能。这意味着启用 Roblox 路由。"
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -120,8 +128,8 @@
                     "description": "Configure your preferred region"
                 },
                 "serverList": {
-                    "title": "Server List",
-                    "empty": "No servers available."
+                    "title": "服务器列表",
+                    "empty": "没有可用的服务器。"
                 }
             },
             "activityWatcherCard": {
@@ -129,28 +137,28 @@
                 "description": "在Roblox上观看您的活动。某些功能需要启用此功能。"
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "睡眠时间表",
+                "description": "您的睡眠时间表一团糟"
             },
             "serverNotifierCard": {
                 "title": "服务器位置通知程序",
                 "description": "当客户端连接到服务器时收到通知。"
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "进程优先级",
+                "description": "极度实验性。更改 Roblox 进程优先级。可能提升性能。"
             },
             "optimizerCard": {
                 "title": "Enable optimizer",
                 "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "禁用全屏优化",
+                "description": "使用黑魔法禁用全屏优化"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "关闭崩溃处理程序",
+                "description": "终止 Roblox 的崩溃处理程序以节省性能。"
             },
             "rpcCard": {
                 "title": "Discord RPC （粉碎）",
@@ -254,34 +262,34 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "全局基本设置",
+            "description": "配置 Roblox 的默认设置。",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS 限制",
+                "description": "配置 Roblox 的 FPS 限制。请注意 Roblox 最高仅支持 240 FPS，设置更高可能会导致 Roblox 出错。"
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "图形质量等级",
+                "description": "更改 Roblox 的图形质量"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "减少动画",
+                "description": "减少 UI 的动画"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "全屏",
+                "description": "是否进入全屏模式"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "自动生成的设置",
+                "description": "从 Roblox 的 GBS 文件生成。请谨慎处理。",
+                "button": "打开"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "生成的全局基本设置",
+                "description": "基于 GBS 文件自动生成。",
+                "noInstallation": "哇！未找到当前安装！您至少应该点击启动一次后再查看此页面。",
+                "back": "返回"
             }
         },
         "installations": {
@@ -289,16 +297,16 @@
             "description": "管理您的 Roblox 安装。",
             "dialogs": {
                 "vngWarning": {
-                    "title": "Are you sure to switch to VNG?",
-                    "description": "Once you logged in VNG, you cant never go back to global.",
-                    "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "title": "你确定要切换到 VNG 吗？",
+                    "description": "一旦登录 VNG，你将无法再返回全球版。",
+                    "cancel": "不，带我回去",
+                    "confirm": "我明白我在做什么。"
                 }
             },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "版本管理器",
+                "description": "快速管理多个 Roblox 版本",
+                "button": "打开"
             },
             "parallelDownloadingCard": {
                 "title": "并行下载",
@@ -309,7 +317,7 @@
                 "description": "每次你启动Rohlox都会重新安装。"
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
+                "title": "使用越南版 Roblox",
                 "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
             },
             "dontUpdateCard": {
@@ -317,27 +325,27 @@
                 "description": "跳过 Roblox 更新检查并立即启动。"
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "版本管理器",
+                "description": "轻松管理您的 Roblox 版本。",
+                "none": "您还没有安装任何版本！",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "确认操作",
+                        "description": "您确定要删除此版本吗？",
+                        "cancel": "取消",
+                        "confirm": "确认"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "添加新版本",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "版本名称",
+                            "placeholder": "新版本"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "版本哈希"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "取消",
+                        "confirm": "确认"
                     }
                 }
             }
@@ -364,7 +372,7 @@
                     "buttonAdd": "新增",
                     "search": "搜索所有快速标志...",
                     "searchNotFound": "未找到与您的搜索匹配的标记。",
-                    "import": "Import JSON",
+                    "import": "导入 JSON",
                     "flagCol": {
                         "deleteNote": "删除标签...",
                         "name": "标志和名称",
@@ -594,11 +602,11 @@
                 "button": "捐献"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "隐私与数据",
+                "description": "控制 Crush 如何使用你的信息。",
+                "button": "打开",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "记录你在 Roblox:Warpped 中的活动"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "请向下滚动，还有更多内容^^"
                 }
             }
         }

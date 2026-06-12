@@ -103,6 +103,14 @@
                     "title": "تمكين النفق",
                     "description": "تمكين النفق لتوجيه Roblox عبر VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "تمكين توجيه Roblox",
                     "description": "توجيه جميع طلبات Roblox API عبر VPN. يمكن استخدام ذلك لتجاوز الألعاب المحظورة في بعض البلدان."

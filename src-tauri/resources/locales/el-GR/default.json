@@ -50,7 +50,7 @@
             "steps": {
                 "prep": "Preparing...",
                 "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "launch": "Εκκίνηση"
             },
             "cancel": "Άκυρο",
             "retry": "Επανάληψη"
@@ -103,13 +103,21 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "Παρέλαση Αποκλεισμού Χώρας",
+                    "description": "Διαδρομή όλης της κίνησης εκκίνησης Roblox μέσω του ρελέ και ενεργοποίηση παράκαμψης DPI. Χρησιμοποιήστε αυτό αν το Roblox είναι μπλοκαρισμένο στη χώρα σας. Υπονοεί δρομολόγηση Roblox."
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -290,9 +298,9 @@
             "dialogs": {
                 "vngWarning": {
                     "title": "Are you sure to switch to VNG?",
-                    "description": "Once you logged in VNG, you cant never go back to global.",
-                    "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "description": "Μόλις συνδεθείτε στο VNG, δεν μπορείτε ποτέ να επιστρέψετε στην παγκόσμια έκδοση.",
+                    "cancel": "Όχι, φέρε με πίσω",
+                    "confirm": "Καταλαβαίνω τι κάνω."
                 }
             },
             "versionManagerCard": {
@@ -310,7 +318,7 @@
             },
             "useVNGCard": {
                 "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "description": "Αυτή είναι μια επιλογή για λήψη του Roblox VNG, αν δεν γνωρίζετε τι κάνετε, μην την ενεργοποιήσετε. Αυτή η λειτουργία είναι μόνο για χρήστες βιετναμέζικης προέλευσης. Μόλις ο λογαριασμός σας σημειωθεί ως λογαριασμός VNG, δεν θα μπορείτε να επιστρέψετε στην παγκόσμια έκδοση."
             },
             "dontUpdateCard": {
                 "title": "Μην ενημερώνετε το Roblox",
@@ -477,74 +485,74 @@
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Δημιουργία συντομεύσεων",
+            "description": "Δημιουργήστε εύκολα συντομεύσεις για να παίζετε άμεσα τα αγαπητά σας παιχνίδια.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Δημιουργία συντομεύσης",
+                "button": "Δημιουργία συντομεύσης",
+                "gameIdInput": "ID παιχνιδιού",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Παρακαλώ ανακτήστε...",
+                    "fetching": "Ανάκτηση...",
+                    "notFound": "Το παιχνίδι δεν βρέθηκε",
+                    "fetched": "Ανακτήθηκαν οι πληροφορίες του παιχνιδιού! Τώρα απλώς πατήστε το κουμπί δημιουργίας συντομεύσης",
+                    "noThumb": "Δεν υπάρχει διαθέσιμη μικρογραφία",
+                    "error": "Σφάλμα κατά την ανάκτηση του παιχνιδιού",
+                    "done": "Ρίξτε μια ματιά στην επιφάνεια εργασίας σας!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
+            "accountManagement": "Διαχείριση λογαριασμών",
+            "description": "Εναλλαγή μεταξύ λογαριασμών γίνεται εύκολα",
+            "validateAccounts": "Επαλήθευση λογαριασμών",
+            "addAnAccount": "Προσθήκη λογαριασμού",
             "use": "Use",
             "delete": "Delete",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Επιτυχία!",
+                    "description": "Γεια σας {username}! Μπορείτε τώρα να αλλάζετε λογαριασμούς χρησιμοποιώντας τη διαχείριση λογαριασμών!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Η εναλλαγή απέτυχε",
+                    "description": "δεν ξέρω, συνέβη κάτι"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Επαλήθευση λογαριασμών",
+                    "description": "Περιμένετε, επαληθεύουμε τους λογαριασμούς σας"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} είναι μη έγκυρος",
+                    "description": "Ο λογαριασμός {account} είναι μη έγκυρος. Τον αφαίρεσαμε από τη λίστα."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Επαλήθευση ολοκληρώθηκε",
+                    "description": "Όλοι οι μη έγκυροι λογαριασμοί (αν υπήρχαν) έχουν αφαιρεθεί"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Προσθήκη λογαριασμού",
+                    "description": "Προσθέστε έναν νέο λογαριασμό στη λίστα.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Σύνδεση μέσω webview (περιηγητή)",
+                            "open": "Άνοιγμα webview",
+                            "check": "Έλεγχος για cookies",
+                            "failed": "Αποτυχία λήψης cookie, βεβαιωθείτε ότι είστε συνδεδεμένοι και προσπαθήστε ξανά."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
+                            "tab": "Σύνδεση μέσω γρήγορης σύνδεσης",
+                            "title": "Συνδεθείτε χρησιμοποιώντας την γρήγορη σύνδεση.",
+                            "checkbox": "Σημειώστε ως λογαριασμό VNG (Μην επιλέξετε αυτό αν δεν γνωρίζετε τι κάνετε)",
+                            "start": "Ξεκινήστε γρήγορη σύνδεση",
+                            "creating": "Δημιουργία κωδικού...",
+                            "enter": "Εισάγετε αυτόν τον κωδικό στο πεδίο γρήγορης σύνδεσης :",
+                            "approval": "Αναμονή έγκρισης...",
+                            "cancelled": "Ακυρώθηκε.",
+                            "timeout": "Χρονικό όριο ή αποτυχία",
+                            "failedToGetCookies": "Αποτυχία λήψης cookies, βεβαιωθείτε ότι είστε συνδεδεμένοι και προσπαθήστε ξανά.",
                             "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
                         }
                     }
@@ -594,11 +602,11 @@
                 "button": "Δωρεά"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "Ιδιωτικότητα και Δεδομένα",
+                "description": "Ελέγξτε πώς το Crush πρέπει να χρησιμοποιεί τις πληροφορίες σας.",
+                "button": "Άνοιγμα",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Καταγράψτε τις δραστηριότητες σας για το Roblox:Warpped"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Παρακαλώ κάντε κύλιση προς τα κάτω, υπάρχει ακόμα^^"
                 }
             }
         }

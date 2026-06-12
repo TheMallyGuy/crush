@@ -103,6 +103,14 @@
                     "title": "トンネリングを有効にする",
                     "description": "トンネリングを有効にしてRobloxをVPN経由でルーティングする"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Robloxルーティングを有効にする",
                     "description": "すべてのRoblox APIリクエストをVPN経由でルーティングします。これにより、一部の国でブロックされているゲームを回避できます。"

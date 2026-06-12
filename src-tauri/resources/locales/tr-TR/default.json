@@ -103,6 +103,14 @@
                     "title": "Tünellemeyi Etkinleştir",
                     "description": "Roblox'u VPN üzerinden yönlendirmek için tünellemeyi etkinleştirin"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Roblox Yönlendirmeyi Etkinleştir",
                     "description": "Tüm Roblox API isteklerini VPN üzerinden yönlendirin. Bu, bazı ülkelerde engellenen oyunlara erişmek için kullanılabilir."

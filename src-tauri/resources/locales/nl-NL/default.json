@@ -103,13 +103,21 @@
                     "title": "Tunneling inschakelen",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "Landban omzeilen",
+                    "description": "Stuurt alle Roblox-bootstrapverkeer via de relay en activeert DPI-omzeiling. Gebruik dit als Roblox in jouw land geblokkeerd is. Impliceert Roblox-routing."
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -290,9 +298,9 @@
             "dialogs": {
                 "vngWarning": {
                     "title": "Are you sure to switch to VNG?",
-                    "description": "Once you logged in VNG, you cant never go back to global.",
-                    "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "description": "Zodra je bent ingelogd bij VNG, kun je nooit meer terug naar global.",
+                    "cancel": "Nee, breng me terug",
+                    "confirm": "Ik begrijp wat ik doe."
                 }
             },
             "versionManagerCard": {
@@ -594,11 +602,11 @@
                 "button": "Schenken"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
+                "title": "Privacy & Gegevens",
+                "description": "Reguleer hoe Crush jouw informatie moet gebruiken.",
                 "button": "Open",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Registreer je activiteiten voor Roblox:Warpped"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiratie",
                     "localization": "Lokalisatie",
                     "specialThanks": "Bedankt (vroegtijdige supporters)!",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Scroll alsjeblieft naar beneden, er is meer^^"
                 }
             }
         }
