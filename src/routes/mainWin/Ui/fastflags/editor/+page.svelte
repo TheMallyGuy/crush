@@ -13,8 +13,8 @@
     import type { AppType } from '$lib/types'
     import Button from '$lib/components/atoms/Button.svelte'
 
-    let flags: Record<string, string> = {}
-    let appType: AppType = 'player'
+    let flags: Record<string, string> = $state({})
+    let appType: AppType = $state('player')
 
     onMount(async () => {
         appType = (get(launchAppType) as AppType) || 'player'

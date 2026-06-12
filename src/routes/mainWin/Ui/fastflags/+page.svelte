@@ -23,17 +23,17 @@
     import { RefreshCw, Save, SquarePen } from '@lucide/svelte'
     import ClickableCard from '$lib/components/molecules/ClickableCard.svelte'
 
-    let flags: Record<string, string> = {}
-    let version = ''
-    let appType: AppType = 'player'
-    let loaded = false
+    let flags: Record<string, string> = $state({})
+    let version = $state('')
+    let appType: AppType = $state('player')
+    let loaded = $state(false)
 
-    let msaaValue: string = '0'
-    let textureQuality: string = '-1'
-    let pauseVoxelizer: boolean = false
-    let wavingGrass: string = '0'
-    let lowMeshQuality: boolean = false
-    let graySky: boolean = false
+    let msaaValue: string = $state('0')
+    let textureQuality: string = $state('-1')
+    let pauseVoxelizer: boolean = $state(false)
+    let wavingGrass: string = $state('0')
+    let lowMeshQuality: boolean = $state(false)
+    let graySky: boolean = $state(false)
     const MSAA_KEY = 'FIntDebugForceMSAASamples'
     const TEXTURE_KEY = 'DFIntTextureQualityOverride'
     const VOXELIZER_KEY = 'DFFlagDebugPauseVoxelizer'
