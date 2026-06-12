@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Előkészítés...",
+                "applyMods": "Módosítások alkalmazása",
+                "launch": "Indítás"
             },
             "cancel": "Mégse",
             "retry": "Újrapróbálkozás"
@@ -87,21 +87,29 @@
             "integrations": "Integráció",
             "description": "Configure integrations outside Roblox.",
             "dialogs": {
-                "title": "3rd party warning",
-                "description": "This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us.",
-                "confirm": "Got it!"
+                "title": "Harmadik féltől származó figyelmeztetés",
+                "description": "Ez a SwiftTunnel integráció nem hivatalos. Bár az alap SDK-t használtuk, forkoltuk és szinkronizáltuk a legújabb alkalmazással a Crushhoz. Kérjük, ne panaszoljon nekünk a SwiftTunnel miatt.",
+                "confirm": "Értem!"
             },
             "swiftTunnel": {
                 "title": "SwiftTunnel",
-                "description": "Configure SwiftTunnel right in crush.",
-                "back": "Back",
-                "notLoggedIn": "You're not logged in.",
-                "loginTimeout": "Login timed out. Please try again.",
-                "loadingMessage": "Please continue in your browser. Auto-cancels after 1 min.",
-                "loginButton": "Login via browser",
+                "description": "Állítsa be a SwiftTunnel-t közvetlenül a Crushban.",
+                "back": "Vissza",
+                "notLoggedIn": "Nem bejelentkezett.",
+                "loginTimeout": "A bejelentkezés időtúllépésbe fulladt. Kérjük, próbálja újra.",
+                "loadingMessage": "Kérjük, folytassa a böngészőben. Automatikusan megszakad 1 perc után.",
+                "loginButton": "Bejelentkezés böngészőben",
                 "enableTunnelingCard": {
-                    "title": "Enable Tunneling",
+                    "title": "Alagút engedélyezése",
                     "description": "Enable tunneling to route Roblox through the VPN"
+                },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
                 },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
@@ -129,8 +137,8 @@
                 "description": "Watch your activity on Roblox. Some feature required this to be enabled."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Alvási rend",
+                "description": "Az alvási rended szét van baszva"
             },
             "serverNotifierCard": {
                 "title": "Kiszolgáló helyének értesítője",
@@ -141,8 +149,8 @@
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Optimalizáló engedélyezése",
+                "description": "A Roblox optimalizálása az erőforrások használatának korlátozásával. Az 8damon/TASX-Roblox-Optimizer GitHub-on működése alapján. Ma már mindent átírtak Rust-ban."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
@@ -309,8 +317,8 @@
                 "description": "Reinstall Roblox every time you launch it."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Vietnami Roblox használata",
+                "description": "Ez egy opció a Roblox VNG letöltéséhez, ha nem tudod, mit csinálsz, ne kapcsold be. Ez a funkció csak vietnami felhasználóknak szólnak. Ha a fiókodat VNG fiókként jelölik meg, nem tudsz visszaállni a globális verzióra."
             },
             "dontUpdateCard": {
                 "title": "Ne frissítse a Robloxot",
@@ -334,10 +342,10 @@
                             "placeholder": "New version"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Verzió hash"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "Mégse",
+                        "confirm": "Megerősítés"
                     }
                 }
             }
@@ -394,7 +402,7 @@
                     "dropdownDefault": "Alapértelmezett"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "Alacsony minőségű hálók engedélyezése (LOD)",
                     "description": "May improve performance."
                 },
                 "graySkyCard": {
@@ -462,98 +470,98 @@
                 "communityMods": {
                     "title": "Közösségi módok",
                     "description": "Fedezd fel a közösség által létrehozott módosításokat.",
-                    "loading": "Loading Mods...",
-                    "notFound": "No {itemsCount} mods found.",
+                    "loading": "Modok betöltése...",
+                    "notFound": "Nincs {itemsCount} mod találat.",
                     "pills": {
-                        "all": "All",
-                        "library": "Library {libraryName}"
+                        "all": "Mind",
+                        "library": "Könyvtár {libraryName}"
                     },
                     "itemCard": {
-                        "by": "By {name}",
-                        "adapter": "Adapter : {library}",
-                        "download": "Download"
+                        "by": "{name} által",
+                        "adapter": "Adapter: {library}",
+                        "download": "Letöltés"
                     }
                 }
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Parancsikonek létrehozása",
+            "description": "Könnyedén hozz létre parancsikoneket a kedvenc játékok azonnali indításához.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Parancsikon létrehozása",
+                "button": "Parancsikon létrehozása",
+                "gameIdInput": "Játék azonosító",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Kérjük, töltsd le...",
+                    "fetching": "Letöltés...",
+                    "notFound": "Játék nem található",
+                    "fetched": "Játékinformációk letöltve! Most csak nyomsd meg a parancsikon létrehozása gombot",
+                    "noThumb": "Nincs elérhető miniatűr",
+                    "error": "Hiba a játék letöltésekor",
+                    "done": "Nézd meg az asztalod!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
-            "use": "Use",
-            "delete": "Delete",
+            "accountManagement": "Fiókkezelés",
+            "description": "Fiókok közötti váltás egyszerűen",
+            "validateAccounts": "Fiókok ellenőrzése",
+            "addAnAccount": "Fiók hozzáadása",
+            "use": "Használat",
+            "delete": "Törlés",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Siker!",
+                    "description": "Helló {username}! Mostantól a fiókkezelővel válthatod a fiókokat!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Váltás sikertelen",
+                    "description": "nhy, valami történt"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Fiókok ellenőrzése",
+                    "description": "Várj egy kicsit, ellenőrizzük a fiókokat"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} érvénytelen",
+                    "description": "A(z) {account} fiók érvénytelen. Eltávolítottuk a listáról."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Ellenőrzés befejezve",
+                    "description": "Az összes érvénytelen fiók (ha volt) eltávolítva lett"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Fiók hozzáadása",
+                    "description": "Új fiók hozzáadása a listához.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Bejelentkezés webview-ban (böngésző)",
+                            "open": "Webview megnyitása",
+                            "check": "Cookie-k ellenőrzése",
+                            "failed": "Nem sikerült lekérni a cookie-t, győződj meg róla, hogy be vagy jelentkezve, és próbáld újra."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Bejelentkezés gyors bejelentkezéssel",
+                            "title": "Jelentkezz be a gyors bejelentkezés használatával.",
+                            "checkbox": "Jelölj VNG fiókként (Ne pipáld be, ha nem tudod, mit csinálsz)",
+                            "start": "Gyors bejelentkezés indítása",
+                            "creating": "Kód létrehozása...",
+                            "enter": "Írja be ezt a kódot a Gyors bejelentkezés mezőbe :",
+                            "approval": "Várakozás jóváhagyásra...",
+                            "cancelled": "Mégse.",
+                            "timeout": "Időtúllépés vagy hiba",
+                            "failedToGetCookies": "Nem sikerült lekérni a cookie-kat, győződjön meg arról, hogy be van jelentkezve, és próbálja újra.",
+                            "robloxsecFailed": "Nem található a .ROBLOSECURITY cookie. Győződjön meg arról, hogy be van jelentkezve."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
-                    "description": "Are you sure you want to delete this account? This action cannot be undone.",
-                    "cancel": "Cancel",
-                    "confirm": "Confirm"
+                    "title": "Törlés megerősítése",
+                    "description": "Biztosan törli ezt a fiókot? Ez a művelet nem vonható vissza.",
+                    "cancel": "Mégse",
+                    "confirm": "Megerősítés"
                 }
             }
         },
@@ -581,12 +589,12 @@
                 "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
             },
             "redRingsCard": {
-                "title": "Evil Red Rings",
-                "description": "Dude be adding ANYTHING atp ✌️"
+                "title": "Gonosz Piros Gyűrűk",
+                "description": "A srác bármit hozzáad most ✌️"
             },
             "lockedInCard": {
-                "title": "Locked in mode",
-                "description": "Configuring roblox cannot be THAT serious 😭"
+                "title": "Zárt mód",
+                "description": "A Roblox konfigurálása nem lehet ennyire komoly 😭"
             },
             "donateCard": {
                 "title": "Adományozás",
@@ -602,14 +610,14 @@
                 }
             },
             "creditsCard": {
-                "title": "Credits",
-                "button": "Open",
+                "title": "Készítők",
+                "button": "Megnyitás",
                 "dialog": {
-                    "title": "Credits",
-                    "development": "Development",
-                    "inspiration": "Inspiration",
-                    "localization": "Localization",
-                    "specialThanks": "Special Thanks (Early supporters!)",
+                    "title": "Készítők",
+                    "development": "Fejlesztés",
+                    "inspiration": "Inspiráció",
+                    "localization": "Honosítás",
+                    "specialThanks": "Külön köszönet (Korai támogatók!)",
                     "scrollDown": "Please scroll down, there is more^^"
                 }
             }

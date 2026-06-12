@@ -103,13 +103,21 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "Kierrä maan estäminen",
+                    "description": "Ohjaa kaikki Robloxin bootstrap-liikenne välityspalvelimen kautta ja aktivoi DPI-kierto. Käytä tätä, jos Roblox on estetty maassasi. Sisältää Roblox-reitityksen."
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -290,9 +298,9 @@
             "dialogs": {
                 "vngWarning": {
                     "title": "Are you sure to switch to VNG?",
-                    "description": "Once you logged in VNG, you cant never go back to global.",
-                    "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "description": "Kun olet kirjautunut VNG:ään, et voi enää palata globaaliin.",
+                    "cancel": "Ei, vie minut takaisin",
+                    "confirm": "Ymmärrän, mitä teen."
                 }
             },
             "versionManagerCard": {
@@ -594,11 +602,11 @@
                 "button": "Lahjoita"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "Tietosuoja ja data",
+                "description": "Hallitse, miten Crush käyttää tietojasi.",
+                "button": "Avaa",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Tallenna aktiviteettisi Roblox:Warppedille"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Kerro alaspäin, on lisää^^"
                 }
             }
         }

@@ -10,14 +10,14 @@
             "watcher": {
                 "general": "Playing Roblox",
                 "idle": "不屬於",
-                "playing": "In a game",
-                "playingPrivate": "In a game, Private server",
+                "playing": "在遊戲中",
+                "playingPrivate": "在遊戲中，私人伺服器",
                 "serverInfomation": {
                     "titles": {
-                        "public": "Connected to a public server!",
-                        "private": "Connected to a private server!"
+                        "public": "已連線至公共伺服器！",
+                        "private": "已連線至私人伺服器！"
                     },
-                    "description": "IP : {ip}\nLocation : {location}"
+                    "description": "IP：{ip}\\n位置：{location}"
                 }
             }
         }
@@ -56,14 +56,14 @@
             "retry": "重試(&R)"
         },
         "serverInfomationPage": {
-            "title": "Server Information",
+            "title": "伺服器資訊",
             "infomationCard": {
-                "serverRegion": "Region : {region}",
-                "waitRegion": "Fetching region...",
-                "description": "Server information about this server",
-                "uptime": "Uptime : Not fetched",
-                "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "serverRegion": "地區：{region}",
+                "waitRegion": "正在獲取地區...",
+                "description": "關於此伺服器的伺服器資訊",
+                "uptime": "運作時間：未獲取",
+                "instanceId": "伺服器實例 ID：{id}",
+                "inviteLink": "複製邀請連結："
             }
         },
         "appearance": {
@@ -71,7 +71,7 @@
             "description": "自訂Roblox bootstrapper的外觀和感覺。",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper主題",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "在預設 Crush 主題或自訂 XML 主題之間選擇。支援 Bloxstrap 和 HTML。請注意並非所有 Bloxstrap 主題都能運作。",
                 "dropdown": {
                     "default": "預設（粉碎）",
                     "custom": "自訂"
@@ -103,13 +103,21 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "繞過國家封鎖",
+                    "description": "將所有 Roblox 啟動流量透過中繼站傳輸並啟用 DPI 繞過。如果您所在國家封鎖了 Roblox，請使用此選項。這意味著啟用 Roblox 路由。"
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -117,16 +125,16 @@
                 },
                 "preferredRegionCard": {
                     "title": "Preferred Region",
-                    "description": "Configure your preferred region"
+                    "description": "設定您偏好的地區"
                 },
                 "serverList": {
-                    "title": "Server List",
-                    "empty": "No servers available."
+                    "title": "伺服器列表",
+                    "empty": "無可用伺服器。"
                 }
             },
             "activityWatcherCard": {
-                "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "title": "活動監視器",
+                "description": "監視您在 Roblox 上的活動。某些功能需要啟用此項。"
             },
             "sleepScheduleCard": {
                 "title": "Sleep schedule",
@@ -243,11 +251,11 @@
                         },
                         "minTransparency": {
                             "title": "Min transparency",
-                            "description": "The minimum transparency level your window can reach."
+                            "description": "您的視窗可達到的最低透明度。"
                         },
                         "maxTransparency": {
                             "title": "Max transparency",
-                            "description": "The maximum transparency level your window can reach."
+                            "description": "您的視窗可達到的最高透明度。"
                         }
                     }
                 }
@@ -286,13 +294,13 @@
         },
         "installations": {
             "installations": "安裝",
-            "description": "Manage your Roblox installation.",
+            "description": "管理您的 Roblox 安裝。",
             "dialogs": {
                 "vngWarning": {
-                    "title": "Are you sure to switch to VNG?",
-                    "description": "Once you logged in VNG, you cant never go back to global.",
-                    "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "title": "確定要切換到 VNG 嗎？",
+                    "description": "一旦登入 VNG，就無法再返回全球版。",
+                    "cancel": "不，帶我回去",
+                    "confirm": "我明白我在做什麼。"
                 }
             },
             "versionManagerCard": {
@@ -301,12 +309,12 @@
                 "button": "Open"
             },
             "parallelDownloadingCard": {
-                "title": "Parallel Downloading",
-                "description": "Download multiple assets instead of one at a time. Default is 4."
+                "title": "平行下載",
+                "description": "同時下載多個資源而非逐一下載。預設為 4。"
             },
             "forceReinstallCard": {
                 "title": "強制重新安裝Roblox",
-                "description": "Reinstall Roblox every time you launch it."
+                "description": "每次啟動時重新安裝 Roblox。"
             },
             "useVNGCard": {
                 "title": "Use Vietnamese Roblox",
@@ -314,7 +322,7 @@
             },
             "dontUpdateCard": {
                 "title": "不要更新Roblox",
-                "description": "Skip the Roblox update check and launch instantly."
+                "description": "跳過 Roblox 更新檢查並立即啟動。"
             },
             "versionManager": {
                 "title": "Versions manager",
@@ -344,8 +352,8 @@
         },
         "fastflag": {
             "fastflag": "快速標記",
-            "description": "Add/Remove Roblox Fast Flags and configurations.",
-            "generalBack": "Back to Fast Flags",
+            "description": "新增/移除 Roblox Fast Flags 和配置。",
+            "generalBack": "返回 Fast Flags",
             "selectScreeen": {
                 "title": "請選擇一個動作。",
                 "editCard": {
@@ -354,7 +362,7 @@
                 },
                 "presetCard": {
                     "title": "預置",
-                    "description": "Use Feature Flag presets built into Crush."
+                    "description": "使用內建於 Crush 的功能旗標預設值。"
                 }
             },
             "editor": {
@@ -362,7 +370,7 @@
                     "texboxFlagName": "標記名稱",
                     "texboxFlagValue": "數值",
                     "buttonAdd": "新增",
-                    "search": "Search all fast flags...",
+                    "search": "搜尋所有快速旗標...",
                     "searchNotFound": "找不到符合搜尋條件的旗標。",
                     "import": "Import JSON",
                     "flagCol": {
@@ -375,18 +383,18 @@
             },
             "preset": {
                 "preset": "預置",
-                "description": "Use our built-in fast flag presets.",
+                "description": "使用我們內建的快速旗標預設值。",
                 "msaaCard": {
                     "title": "抗鋸齒品質(MSAA)",
                     "description": "平滑鋸齒邊緣。較高的值看起來更好，但可能會降低性能。"
                 },
                 "pauseVoxelizerCard": {
-                    "title": "Pause Voxelizer",
+                    "title": "暫停 Voxelizer",
                     "description": "停止體素化以提高性能."
                 },
                 "grassAnimationCard": {
                     "title": "草地揮舞動畫",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "調整草叢移動的強度。（0 表示無減少，999 或任何更高數字將凍結草叢，0 和 1 略微減少移動，大於 1 的值強烈減少移動，接近靜止）"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "覆蓋紋理質量級別",
@@ -395,11 +403,11 @@
                 },
                 "lowMeshQualityCard": {
                     "title": "Enable Low Quality Meshes (LOD)",
-                    "description": "May improve performance."
+                    "description": "可能會提升效能。"
                 },
                 "graySkyCard": {
                     "title": "Gray Sky",
-                    "description": "Changes the sky to gray. May improve performance."
+                    "description": "將天空變為灰色。可能會提升效能。"
                 }
             }
         },
@@ -408,7 +416,7 @@
             "tab": {
                 "modManagement": {
                     "title": "改裝配件管理",
-                    "description": "Manage your Roblox mods.",
+                    "description": "管理您的 Roblox 模組。",
                     "addModButton": "新增改裝配件",
                     "noModsFound": "我們在這裡找不到改裝配件，雅皮士。",
                     "noModsFoundCreateButton": "建立你的第一個改裝配件",
@@ -418,15 +426,15 @@
                         "renameNote": "重新命名改裝配件",
                         "openFolderNote": "開啟改裝配件資料夾",
                         "deleteNote": "刪除改裝配件",
-                        "layoutNote": "Mod layout inspired by Frostrap's mod manager.",
+                        "layoutNote": "模組版面靈感來自 Frostrap 的模組管理器。",
                         "description": "啟用MOD載入並設定MOD資料夾位置。"
                     },
                     "dialogs": {
                         "create": {
-                            "title": "Create a new mod",
+                            "title": "建立新模組",
                             "textbox": {
-                                "title": "Mod name",
-                                "placeholder": "My new mod"
+                                "title": "模組名稱",
+                                "placeholder": "我的新模組"
                             }
                         },
                         "delete": {
@@ -455,7 +463,7 @@
                     },
                     "customFontCard": {
                         "title": "自訂字體",
-                        "description": "Change your Roblox font to whatever you like.",
+                        "description": "將您的 Roblox 字型更改為您喜歡的任何字型。",
                         "button": "變更字型..."
                     }
                 },
@@ -561,24 +569,24 @@
             "settings": "設定",
             "aboutCard": {
                 "title": "關於",
-                "description": "Information about this Crush build.",
-                "note": "Remember! Crush is free to use. If anyone tries to reskin and sell it, please let us know in our Discord server!",
+                "description": "關於此 Crush 版本的資訊。",
+                "note": "請記住！Crush 免費使用。若有人嘗試重新包裝並販售，請在我們的 Discord 伺服器告訴我們！",
                 "builtOn": "建置時間",
                 "commitHash": "提交哈希： # # #",
                 "version": "版本："
             },
             "onBoardCard": {
                 "title": "粉碎你好",
-                "description": "Force the onboarding flow to run again.",
+                "description": "強制重新執行引導流程。",
                 "button": "重新設定"
             },
             "languageCard": {
                 "title": "語言",
-                "description": "Select your preferred language for Crush."
+                "description": "選擇 Crush 的偏好語言。"
             },
             "enableCrushRpcCard": {
                 "title": "粉碎Discord RPC",
-                "description": "Toggle whether to show your activity via Discord RPC. A restart is recommended."
+                "description": "切換是否透過 Discord RPC 顯示您的活動。建議重新啟動。"
             },
             "redRingsCard": {
                 "title": "Evil Red Rings",
@@ -590,15 +598,15 @@
             },
             "donateCard": {
                 "title": "捐贈",
-                "description": "Love Crush? Donate to Mally to support his work!",
+                "description": "喜歡 Crush 嗎？捐贈給 Mally 以支持他的工作！",
                 "button": "捐贈"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "隱私與資料",
+                "description": "控制 Crush 如何使用您的資訊。",
+                "button": "開啟",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "記錄您在 Roblox:Warpped 中的活動"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "請往下捲動，還有更多內容^^"
                 }
             }
         }

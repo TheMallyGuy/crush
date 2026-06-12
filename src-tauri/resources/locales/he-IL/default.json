@@ -1,14 +1,14 @@
 ﻿{
     "rpc": {
-        "general": "A Roblox bootstrapper written from scratch",
-        "integrations": "In Integrations Route",
+        "general": "בוטסטרפר של Roblox שנכתב מאפס",
+        "integrations": "בנתיב אינטגרציות",
         "installation": "במסלול ההתקנות",
-        "fastflag": "In Fast Flags Route",
+        "fastflag": "בנתיב Fast Flags",
         "mod": "במסלול Mod",
         "appearance": "במסלול המראה",
         "rust": {
             "watcher": {
-                "general": "Playing Roblox",
+                "general": "משחק ב-Roblox",
                 "idle": "לא במשחק",
                 "playing": "In a game",
                 "playingPrivate": "In a game, Private server",
@@ -85,7 +85,7 @@
         },
         "integrations": {
             "integrations": "אינטגרציות",
-            "description": "Configure integrations outside Roblox.",
+            "description": "הגדר אינטגרציות מחוץ ל-Roblox.",
             "dialogs": {
                 "title": "3rd party warning",
                 "description": "This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us.",
@@ -102,6 +102,14 @@
                 "enableTunnelingCard": {
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
+                },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
                 },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
@@ -134,7 +142,7 @@
             },
             "serverNotifierCard": {
                 "title": "הודעה על מיקום השרת",
-                "description": "Get notified when the client connects to a server."
+                "description": "קבל התראה כאשר הלקוח מתחבר לשרת."
             },
             "processPriorityCard": {
                 "title": "Process Priority",
@@ -156,7 +164,7 @@
                 "title": "Discord RPC (Crush)",
                 "description": "החלף את הנוכחות העשירה של Roblox עם זו של Crush.",
                 "option1": "אפשר לאנשים להצטרף למשחק שלך",
-                "option2": "Display your account when playing Roblox"
+                "option2": "הצג את חשבונך בעת משחק ב-Roblox"
             },
             "gameHistoryCard": {
                 "title": "היסטוריית המשחקים שלכם",
@@ -164,20 +172,20 @@
                 "button": "להציג"
             },
             "windowManipulationCard": {
-                "title": "Window Manipulation (Previously Interactive API)",
-                "description": "Let supported games move your window, resize, notify, and interact with your hardware. Only supports games with window manipulation — not all games work. Inspired by the way BloxstrapRPC & Funkstrap work.",
+                "title": "מניפולציית חלונות (לשעבר API אינטראקטיבי)",
+                "description": "אפשר למשחקים נתמכים להזיז את החלון שלך, לשנות גודל, להתריע ולקיים אינטראקציה עם החומרה שלך. תומך רק במשחקים עם מניפולציית חלונות — לא כל המשחקים עובדים. בהשראת הדרך שבה BloxstrapRPC ו-Funkstrap עובדים.",
                 "button": "פתיחה"
             },
             "roValraCard": {
-                "title": "Better Matchmaking with RoValra",
-                "description": "Crush has a built-in matchmaking integration. RoValra's Privacy Policy applies.",
+                "title": "שידוך משופר עם RoValra",
+                "description": "ל-Crush יש אינטגרציית שידוך מובנית. מדיניות הפרטיות של RoValra חלה.",
                 "button": "פתיחה"
             },
             "roValra": {
                 "description": "הגדרות",
                 "joinServerForYouCard": {
-                    "title": "Let Crush join a server for you",
-                    "description": "Instead of Roblox matchmaking, we'll use the RoValra API to find the best server."
+                    "title": "תן ל-Crush להצטרף לשרת עבורך",
+                    "description": "במקום שידוך של Roblox, נשתמש ב-API של RoValra כדי למצוא את השרת הטוב ביותר."
                 }
             },
             "gameHistory": {
@@ -195,58 +203,58 @@
                 }
             },
             "windowManipulation": {
-                "title": "Window Manipulation Settings",
-                "description": "Configure how Window Manipulation should behave.",
+                "title": "הגדרות מניפולציית חלונות",
+                "description": "הגדר כיצד מניפולציית חלונות צריכה להתנהג.",
                 "enableCard": {
-                    "title": "Enable",
-                    "description": "Choose whether or not to enable Window Manipulation."
+                    "title": "הפעל",
+                    "description": "בחר אם להפעיל מניפולציית חלונות."
                 },
                 "advanced": {
-                    "title": "Advanced",
-                    "description": "Deeply configure Window Manipulation.",
+                    "title": "מתקדם",
+                    "description": "הגדר לעומק מניפולציית חלונות.",
                     "scopes": {
-                        "title": "Scopes",
+                        "title": "תחומים",
                         "minimizeCard": {
-                            "title": "Minimize",
-                            "description": "Whether or not to enable minimize control via Window Manipulation."
+                            "title": "מזער",
+                            "description": "האם להפעיל שליטה במזעור דרך מניפולציית חלונות."
                         },
                         "maximizeCard": {
-                            "title": "Maximize",
-                            "description": "Whether or not to enable maximize control via Window Manipulation."
+                            "title": "הגדל",
+                            "description": "האם להפעיל שליטה בהגדלה דרך מניפולציית חלונות."
                         },
                         "focusCard": {
-                            "title": "Focus",
-                            "description": "Whether or not to enable focus control via Window Manipulation."
+                            "title": "מיקוד",
+                            "description": "האם להפעיל שליטה במיקוד דרך מניפולציית חלונות."
                         },
                         "moveWindowCard": {
-                            "title": "Move Window",
-                            "description": "Whether or not to enable move window control via Window Manipulation."
+                            "title": "הזז חלון",
+                            "description": "האם להפעיל שליטה בהזזת חלון דרך מניפולציית חלונות."
                         },
                         "restoreCard": {
-                            "title": "Restore",
-                            "description": "Whether or not to enable restore control via Window Manipulation."
+                            "title": "שחזר",
+                            "description": "האם להפעיל שליטה בשחזור דרך מניפולציית חלונות."
                         },
                         "setWindowTitleCard": {
-                            "title": "Set window title",
+                            "title": "הגדר כותרת חלון",
                             "description": "Whether or not to enable set window title control via Window Manipulation."
                         },
                         "setBorderless": {
-                            "title": "Set borderless",
+                            "title": "הגדר ללא מסגרת",
                             "description": "Whether or not to enable borderless window control via Window Manipulation."
                         }
                     },
                     "transparencySettings": {
-                        "title": "Transparency Settings",
+                        "title": "הגדרות שקיפות",
                         "enableCard": {
-                            "title": "Enable",
+                            "title": "הפעל",
                             "description": "Whether or not to enable transparency control via the Interactive API."
                         },
                         "minTransparency": {
-                            "title": "Min transparency",
+                            "title": "שקיפות מינימלית",
                             "description": "The minimum transparency level your window can reach."
                         },
                         "maxTransparency": {
-                            "title": "Max transparency",
+                            "title": "שקיפות מקסימלית",
                             "description": "The maximum transparency level your window can reach."
                         }
                     }
@@ -353,7 +361,7 @@
                     "description": "ערוך דגלי תכונות"
                 },
                 "presetCard": {
-                    "title": "Preset",
+                    "title": "מוגדר מראש",
                     "description": "Use Feature Flag presets built into Crush."
                 }
             },
@@ -398,7 +406,7 @@
                     "description": "May improve performance."
                 },
                 "graySkyCard": {
-                    "title": "Gray Sky",
+                    "title": "שמיים אפורים",
                     "description": "Changes the sky to gray. May improve performance."
                 }
             }
@@ -568,7 +576,7 @@
                 "version": "גרסה:"
             },
             "onBoardCard": {
-                "title": "Crush Hello",
+                "title": "שלום Crush",
                 "description": "Force the onboarding flow to run again.",
                 "button": "אפס"
             },

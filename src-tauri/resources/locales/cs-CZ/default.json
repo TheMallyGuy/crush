@@ -103,13 +103,21 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
                 },
                 "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
+                    "title": "Obcházet zemi ban",
+                    "description": "Směruje veškerý bootstrappingový provoz Robloxu přes relé a aktivuje obejití DPI. Použijte toto, pokud je Roblox ve vaší zemi zablokován. Zahrnuje směrování Robloxu."
                 },
                 "enablePartialCountryBanCard": {
                     "title": "Bypass Partial Ban",
@@ -292,7 +300,7 @@
                     "title": "Are you sure to switch to VNG?",
                     "description": "Once you logged in VNG, you cant never go back to global.",
                     "cancel": "No, take me back",
-                    "confirm": "I understand what's im doing."
+                    "confirm": "Rozumím, co dělám."
                 }
             },
             "versionManagerCard": {
@@ -310,7 +318,7 @@
             },
             "useVNGCard": {
                 "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "description": "Toto je možnost stáhnout Roblox VNG, pokud nevíte, co děláte, nezapínejte to. Tato funkce je jen pro uživatele z Vietnamu. Jakmile je váš účet označen jako VNG účet, nebudete moct přepnout zpět na globální."
             },
             "dontUpdateCard": {
                 "title": "Neaktualizovat Roblox",
@@ -478,79 +486,79 @@
         },
         "shortcuts": {
             "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "description": "Snadno vytvořte zkratky pro okamžité hraní vašich oblíbených her.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Vytvořit zkratku",
+                "button": "Vytvořit zkratku",
+                "gameIdInput": "ID hry",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Prosím, načtěte...",
+                    "fetching": "Načítání...",
+                    "notFound": "Hra nenalezena",
+                    "fetched": "Načteny informace o hře! Teď jen stiskněte tlačítko pro vytvoření zkratky",
+                    "noThumb": "Náhled není k dispozici",
+                    "error": "Chyba při načítání hry",
+                    "done": "Podívejte se na plochu!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
+            "accountManagement": "Správa účtů",
+            "description": "Přepínání mezi účty je snadné",
+            "validateAccounts": "Ověřit účty",
+            "addAnAccount": "Přidat účet",
             "use": "Use",
             "delete": "Delete",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Úspěch!",
+                    "description": "Ahoj {username}! Nyní můžete přepínat své účty pomocí správce účtů!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Přepnutí selhalo",
+                    "description": "nevím, něco se stalo"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Ověřování účtů",
+                    "description": "Chvíli strpení, ověřujeme vaše účty"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} je neplatný",
+                    "description": "Účet {account} je neplatný. Odebrali jsme ho ze seznamu."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Ověření dokončeno",
+                    "description": "Všechny neplatné účty (pokud byly) byly odebrány"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Přidat účet",
+                    "description": "Přidat nový účet do seznamu.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Přihlášení přes webview (prohlížeč)",
+                            "open": "Otevřít webview",
+                            "check": "Zkontrolovat cookies",
+                            "failed": "Nepodařilo se získat cookie, ujistěte se, že jste přihlášeni, a zkuste to znovu."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Přihlášení přes rychlé přihlášení",
+                            "title": "Přihlaste se pomocí rychlého přihlášení.",
+                            "checkbox": "Označit jako VNG účet (nezaškrtávejte, pokud nevíte, co děláte)",
+                            "start": "Spustit rychlé přihlášení",
+                            "creating": "Vytváření kódu...",
+                            "enter": "Zadejte tento kód do pole Rychlé přihlášení:",
+                            "approval": "Čekání na schválení...",
+                            "cancelled": "Zrušeno.",
+                            "timeout": "Vypršel časový limit nebo selhalo",
+                            "failedToGetCookies": "Nepodařilo se získat cookies, ujistěte se, že jste přihlášeni, a zkuste to znovu.",
+                            "robloxsecFailed": "Nepodařilo se najít cookie .ROBLOSECURITY. Ujistěte se, že jste přihlášeni."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
+                    "title": "Potvrdit smazání",
                     "description": "Are you sure you want to delete this account? This action cannot be undone.",
                     "cancel": "Cancel",
                     "confirm": "Confirm"
@@ -594,11 +602,11 @@
                 "button": "Přispět"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
-                "description": "Control how crush should use your information.",
-                "button": "Open",
+                "title": "Soukromí a data",
+                "description": "Řízení toho, jak Crush používá vaše informace.",
+                "button": "Otevřít",
                 "dialog": {
-                    "warpped": "Record your activities for Roblox:Warpped"
+                    "warpped": "Zaznamenávejte své aktivity pro Roblox:Warpped"
                 }
             },
             "creditsCard": {
@@ -610,7 +618,7 @@
                     "inspiration": "Inspiration",
                     "localization": "Localization",
                     "specialThanks": "Special Thanks (Early supporters!)",
-                    "scrollDown": "Please scroll down, there is more^^"
+                    "scrollDown": "Prosím, posuňte se dolů, je tam více^^"
                 }
             }
         }

@@ -48,9 +48,9 @@
         },
         "boostrapWin": {
             "steps": {
-                "prep": "Preparing...",
-                "applyMods": "Applying modifications",
-                "launch": "Launching"
+                "prep": "Vorbereiten...",
+                "applyMods": "Modifikationen anwenden",
+                "launch": "Starten"
             },
             "cancel": "Abbrechen",
             "retry": "Erneut versuchen"
@@ -103,6 +103,14 @@
                     "title": "Enable Tunneling",
                     "description": "Enable tunneling to route Roblox through the VPN"
                 },
+                "disconnectWhenRobloxIsClosed": {
+                    "title": "Disconnect on Roblox is closed",
+                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                },
+                "multipleAssetsThoughRelays": {
+                    "title": "Route assets to multiple relays",
+                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                },
                 "enableRoutingCard": {
                     "title": "Enable Roblox Routing",
                     "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
@@ -129,28 +137,28 @@
                 "description": "Beobachten Sie Ihre Aktivität auf Roblox. Einige Funktionen erforderten dies, um aktiviert zu sein."
             },
             "sleepScheduleCard": {
-                "title": "Sleep schedule",
-                "description": "Your sleep schedule is fucked"
+                "title": "Schlafplan",
+                "description": "Ihr Schlafplan ist im Arsch"
             },
             "serverNotifierCard": {
                 "title": "Benachrichtigung zum Serverstandort",
                 "description": "Wird benachrichtigt, wenn sich der Client mit einem Server verbindet."
             },
             "processPriorityCard": {
-                "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "title": "Prozesspriorität",
+                "description": "EXTREM EXPERIMENTELL. Roblox-Prozesspriorität ändern. Kann die Leistung verbessern."
             },
             "optimizerCard": {
                 "title": "Enable optimizer",
                 "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
-                "title": "Disable Fullscreen optimization",
-                "description": "Use dark magic to disable fullscreen optimization"
+                "title": "Vollbildoptimierung deaktivieren",
+                "description": "Dunkle Magie nutzen, um Vollbildoptimierung zu deaktivieren"
             },
             "closeCrashHandlerCard": {
-                "title": "Close crash handler",
-                "description": "Kill Roblox's crash handler to save performance."
+                "title": "Crash-Handler schließen",
+                "description": "Roblox-Crash-Handler beenden, um Leistung zu sparen."
             },
             "rpcCard": {
                 "title": "Discord RPC (Crush)",
@@ -254,34 +262,34 @@
             }
         },
         "gbs": {
-            "gbs": "Global Basic Settings",
-            "description": "Configure Roblox's default settings.",
+            "gbs": "Globale Grundeinstellungen",
+            "description": "Roblox-Standardeinstellungen konfigurieren.",
             "fpsLimitCard": {
-                "title": "FPS Limit",
-                "description": "Configure roblox's fps limit. Notice that Roblox only built for 240 fps max, going higher might break Roblox."
+                "title": "FPS-Limit",
+                "description": "Roblox-FPS-Limit konfigurieren. Beachten Sie, dass Roblox nur für maximal 240 FPS ausgelegt ist; höhere Werte könnten Roblox beschädigen."
             },
             "graphicsQualityLevel": {
-                "title": "Graphics Quality Level",
-                "description": "Change roblox's graphics quality"
+                "title": "Grafikqualitätsstufe",
+                "description": "Roblox-Grafikqualität ändern"
             },
             "reducedMotionCard": {
-                "title": "Reduced Motion",
-                "description": "Reduce the Ui's motion"
+                "title": "Reduzierte Bewegung",
+                "description": "UI-Bewegung reduzieren"
             },
             "fullscreenCard": {
-                "title": "Fullscreen",
-                "description": "Whether or not go fullscreen brrrr"
+                "title": "Vollbild",
+                "description": "Ob Vollbild aktiviert werden soll brrrr"
             },
             "autoGeneratedGbsCard": {
-                "title": "Auto generated settings",
-                "description": "Generated from roblox's GBS file. Process with caution.",
-                "button": "Open"
+                "title": "Automatisch generierte Einstellungen",
+                "description": "Generiert aus Roblox' GBS-Datei. Mit Vorsicht bearbeiten.",
+                "button": "Öffnen"
             },
             "autoGeneratedGbs": {
-                "title": "Generated Global Basic Settings",
-                "description": "Auto generated based on the GBS file.",
-                "noInstallation": "Woah! Current installation not found! You should at least click launch before checking this page out.",
-                "back": "Back"
+                "title": "Generierte globale Grundeinstellungen",
+                "description": "Automatisch basierend auf der GBS-Datei generiert.",
+                "noInstallation": "Whoa! Aktuelle Installation nicht gefunden! Sie sollten zumindest einmal auf Starten klicken, bevor Sie diese Seite aufrufen.",
+                "back": "Zurück"
             }
         },
         "installations": {
@@ -296,9 +304,9 @@
                 }
             },
             "versionManagerCard": {
-                "title": "Versions Manager",
-                "description": "Manage multiple roblox versions with speed",
-                "button": "Open"
+                "title": "Versionsmanager",
+                "description": "Mehrere Roblox-Versionen schnell verwalten",
+                "button": "Öffnen"
             },
             "parallelDownloadingCard": {
                 "title": "Paralleles Herunterladen",
@@ -309,35 +317,35 @@
                 "description": "Starte Roblox bei jedem Start neu."
             },
             "useVNGCard": {
-                "title": "Use Vietnamese Roblox",
-                "description": "This is an option to download Roblox VNG, if you dont know what are you doing, don't turn this on. This feature only for Vietnamese users. Once your account is flagged as VNG account, you wont able to switch back to global."
+                "title": "Vietnamesisches Roblox verwenden",
+                "description": "Dies ist eine Option zum Herunterladen von Roblox VNG. Wenn Sie nicht wissen, was Sie tun, aktivieren Sie dies nicht. Diese Funktion ist nur für vietnamesische Nutzer. Sobald Ihr Konto als VNG-Konto markiert ist, können Sie nicht mehr zur globalen Version wechseln."
             },
             "dontUpdateCard": {
                 "title": "Roblox nicht aktualisieren",
                 "description": "Überspringen Sie die Roblox-Updateprüfung und starten Sie sofort."
             },
             "versionManager": {
-                "title": "Versions manager",
-                "description": "Easily manage your roblox versions.",
-                "none": "You didnt install any versions yet!",
+                "title": "Versionsmanager",
+                "description": "Verwalten Sie Ihre Roblox-Versionen einfach.",
+                "none": "Sie haben noch keine Versionen installiert!",
                 "dialogs": {
                     "delete": {
-                        "title": "Confirm Action",
-                        "description": "Are you sure you want to delete this version?",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "title": "Aktion bestätigen",
+                        "description": "Sind Sie sicher, dass Sie diese Version löschen möchten?",
+                        "cancel": "Abbrechen",
+                        "confirm": "Bestätigen"
                     },
                     "new": {
-                        "title": "Add a new version",
+                        "title": "Neue Version hinzufügen",
                         "textbox1": {
-                            "title": "Version name",
-                            "placeholder": "New version"
+                            "title": "Versionsname",
+                            "placeholder": "Neue Version"
                         },
                         "texbox2": {
-                            "title": "Version hash"
+                            "title": "Versionshash"
                         },
-                        "cancel": "Cancel",
-                        "confirm": "Confirm"
+                        "cancel": "Abbrechen",
+                        "confirm": "Bestätigen"
                     }
                 }
             }
@@ -364,7 +372,7 @@
                     "buttonAdd": "Hinzufügen",
                     "search": "Alle Schnellflaggen durchsuchen...",
                     "searchNotFound": "Es wurden keine Flaggen gefunden, die Ihrer Suche entsprechen.",
-                    "import": "Import JSON",
+                    "import": "JSON importieren",
                     "flagCol": {
                         "deleteNote": "Kennzeichen löschen",
                         "name": "flaggenname",
@@ -394,7 +402,7 @@
                     "dropdownDefault": "Standard"
                 },
                 "lowMeshQualityCard": {
-                    "title": "Enable Low Quality Meshes (LOD)",
+                    "title": "Netze mit niedriger Qualität (LOD) aktivieren",
                     "description": "Kann die Leistung verbessern."
                 },
                 "graySkyCard": {
@@ -477,80 +485,80 @@
             }
         },
         "shortcuts": {
-            "shortcuts": "Create shortcuts",
-            "description": "Easily create shortcuts to instantly play your favourite games.",
+            "shortcuts": "Verknüpfungen erstellen",
+            "description": "Erstellen Sie ganz einfach Verknüpfungen, um Ihre Lieblingsspiele sofort zu spielen.",
             "creator": {
-                "title": "Create a shortcut",
-                "button": "Create Shortcut",
-                "gameIdInput": "Game ID",
+                "title": "Verknüpfung erstellen",
+                "button": "Verknüpfung erstellen",
+                "gameIdInput": "Spiel-ID",
                 "status": {
-                    "idle": "Please fetch...",
-                    "fetching": "Fetching...",
-                    "notFound": "Game not found",
-                    "fetched": "Fetched Game Information! Now jusssttt gonna press that create shortcut button",
-                    "noThumb": "No thumbnail available",
-                    "error": "Error fetching game",
-                    "done": "Look at your desktop!"
+                    "idle": "Bitte abrufen...",
+                    "fetching": "Abrufen...",
+                    "notFound": "Spiel nicht gefunden",
+                    "fetched": "Spieldaten abgerufen! Jetzt nur noch auf den Button „Verknüpfung erstellen“ drücken",
+                    "noThumb": "Kein Vorschaubild verfügbar",
+                    "error": "Fehler beim Abrufen des Spiels",
+                    "done": "Schauen Sie auf Ihren Desktop!"
                 }
             }
         },
         "accountManagement": {
-            "accountManagement": "Account Management",
-            "description": "Swtich between accounts made easy",
-            "validateAccounts": "Validate accounts",
-            "addAnAccount": "Add an account",
+            "accountManagement": "Kontoverwaltung",
+            "description": "Einfaches Wechseln zwischen Konten",
+            "validateAccounts": "Konten validieren",
+            "addAnAccount": "Konto hinzufügen",
             "use": "Use",
             "delete": "Delete",
             "notifiers": {
                 "addAccountSuccess": {
-                    "title": "Success!",
-                    "description": "Hello {username}! You can now swap your accounts using the account manager!"
+                    "title": "Erfolg!",
+                    "description": "Hallo {username}! Sie können jetzt Ihre Konten über die Kontoverwaltung wechseln!"
                 },
                 "launchError": {
-                    "title": "Switch failed",
-                    "description": "idk something happened"
+                    "title": "Wechsel fehlgeschlagen",
+                    "description": "Keine Ahnung, da ist was schiefgelaufen"
                 },
                 "validateAccounts": {
-                    "title": "Validating accounts",
-                    "description": "Hang tight, we're validating your accounts"
+                    "title": "Konten werden validiert",
+                    "description": "Geduld, wir validieren Ihre Konten"
                 },
                 "validateAccountsInvaild": {
-                    "title": "{account} is invaild",
-                    "description": "The account {account} is invaild. We've removed it from the list."
+                    "title": "{account} ist ungültig",
+                    "description": "Das Konto {account} ist ungültig. Wir haben es aus der Liste entfernt."
                 },
                 "validateAccountsSucess": {
-                    "title": "Validate Complete",
-                    "description": "All invaild accounts (if present) have been removed"
+                    "title": "Validierung abgeschlossen",
+                    "description": "Alle ungültigen Konten (falls vorhanden) wurden entfernt"
                 }
             },
             "dialogs": {
                 "add": {
-                    "title": "Add an account",
-                    "description": "Add a new account to the list.",
+                    "title": "Konto hinzufügen",
+                    "description": "Ein neues Konto zur Liste hinzufügen.",
                     "tabs": {
                         "webview": {
-                            "tab": "Login via webview (browser)",
-                            "open": "Open webview",
-                            "check": "Check for cookies",
-                            "failed": "Failed to get cookie, make sure you are logged in and try again."
+                            "tab": "Anmeldung über Webview (Browser)",
+                            "open": "Webview öffnen",
+                            "check": "Nach Cookies suchen",
+                            "failed": "Cookie konnte nicht abgerufen werden. Stellen Sie sicher, dass Sie angemeldet sind, und versuchen Sie es erneut."
                         },
                         "quickSignIn": {
-                            "tab": "Login via quick sign in",
-                            "title": "Sign in using quick sign in.",
-                            "checkbox": "Mark as an VNG account (Do not check this if you dont know what you're doing)",
-                            "start": "Start quick sign in",
-                            "creating": "Creating code...",
-                            "enter": "Enter this code in the Quick Sign In field :",
-                            "approval": "Waiting for approval...",
-                            "cancelled": "Cancelled.",
-                            "timeout": "Timed out or failed",
-                            "failedToGetCookies": "Failed to get cookies, make sure you are logged in and try again.",
-                            "robloxsecFailed": "Could not find .ROBLOSECURITY cookie. Make sure you are logged in."
+                            "tab": "Anmeldung über Quick Sign-In",
+                            "title": "Anmeldung über Quick Sign-In.",
+                            "checkbox": "Als VNG-Konto markieren (Nicht aktivieren, wenn Sie nicht wissen, was Sie tun)",
+                            "start": "Quick Sign-In starten",
+                            "creating": "Code wird erstellt...",
+                            "enter": "Geben Sie diesen Code im Quick Sign-In-Feld ein:",
+                            "approval": "Warten auf Genehmigung...",
+                            "cancelled": "Abgebrochen.",
+                            "timeout": "Zeitüberschreitung oder fehlgeschlagen",
+                            "failedToGetCookies": "Cookies konnten nicht abgerufen werden. Stellen Sie sicher, dass Sie angemeldet sind, und versuchen Sie es erneut.",
+                            "robloxsecFailed": ".ROBLOSECURITY-Cookie nicht gefunden. Stellen Sie sicher, dass Sie angemeldet sind."
                         }
                     }
                 },
                 "delete": {
-                    "title": "Confirm Deletion",
+                    "title": "Löschung bestätigen",
                     "description": "Are you sure you want to delete this account? This action cannot be undone.",
                     "cancel": "Cancel",
                     "confirm": "Confirm"
