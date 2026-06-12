@@ -1,20 +1,34 @@
 <script lang="ts">
-    export let title = ''
-    export let description = ''
-    export let image = ''
-    export let disabled = false
+    import type { Snippet } from 'svelte'
 
-    let className = ''
-    export { className as class }
+    interface Props {
+        title?: string
+        description?: string
+        image?: string
+        disabled?: boolean
+        class?: string
+        children?: Snippet
+        [key: string]: unknown
+    }
+
+    let {
+        title = '',
+        description = '',
+        image = '',
+        disabled = false,
+        class: className = '',
+        children,
+        ...rest
+    }: Props = $props()
 </script>
 
 <div
     class="group relative flex w-full flex-row overflow-hidden transition-all duration-150
     {!disabled
         ? 'hover:bg-stone-900/50 hover:border-stone-700/40'
-        : 'opacity-50'} 
+        : 'opacity-50'}
     {className}"
-    {...$$restProps}
+    {...rest}
 >
     {#if image}
         <div
@@ -33,26 +47,25 @@
 
     <div class="flex flex-1 flex-col gap-4 p-5">
         <div class="flex flex-col gap-1.5">
-            {#if title || $$slots.title}
+            {#if title}
                 <h3
                     class="text-lg font-bold tracking-tight text-stone-100 transition-colors duration-150 group-hover:text-white"
                 >
-                    <slot name="title">{title}</slot>
+                    {title}
                 </h3>
             {/if}
 
-            {#if description || $$slots.description}
+            {#if description}
                 <p
                     class="text-sm font-medium leading-relaxed text-stone-300 transition-colors duration-150 group-hover:text-stone-200"
                 >
-                    <slot name="description">{description}</slot>
+                    {description}
                 </p>
             {/if}
         </div>
 
-        <!-- Default slot for buttons - no need for slot="action" anymore -->
         <div class="mt-auto flex flex-wrap items-center gap-3 pt-2">
-            <slot />
+            {@render children?.()}
         </div>
     </div>
 </div>

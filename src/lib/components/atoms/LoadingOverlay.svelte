@@ -1,12 +1,21 @@
 <script lang="ts">
     import { fade } from 'svelte/transition'
 
-    export let visible = true
-    export let message = ''
-    export let blur = true
+    interface Props {
+        visible?: boolean
+        message?: string
+        blur?: boolean
+        class?: string
+        [key: string]: unknown
+    }
 
-    let className = ''
-    export { className as class }
+    let {
+        visible = true,
+        message = '',
+        blur = true,
+        class: className = '',
+        ...rest
+    }: Props = $props()
 </script>
 
 {#if visible}
@@ -15,7 +24,7 @@
         class="absolute inset-0 z-50 flex flex-col items-center justify-center gap-3
       bg-obsidian/60 {blur ? 'backdrop-blur-sm' : ''}
       border border-stone-800/20 {className}"
-        {...$$restProps}
+        {...rest}
     >
         <div class="relative flex items-center justify-center w-8 h-8">
             <svg class="absolute" width="32" height="32" viewBox="0 0 32 32">

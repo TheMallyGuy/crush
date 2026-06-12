@@ -1,32 +1,41 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import { Search, Plus, Trash2, Upload } from '@lucide/svelte'
     import { _ } from 'svelte-i18n'
     import { detectType, validateValue } from '$lib/fastflag/flagTypes'
     import type { FlagType } from '$lib/types'
 
-    export let flags: Record<string, string> = {}
+    interface Props {
+        flags?: Record<string, string>
+        ondelete?: (name: string) => void
+        onupdate?: (payload: { name: string; value: string }) => void
+        onadd?: (payload: { name: string; value: string }) => void
+        onsearch?: (query: string) => void
+        onimport?: (flags: Record<string, string>) => void
+    }
 
-    let searchQuery = ''
-    let newFlagName = ''
-    let newFlagValue = ''
-    let addError = ''
-    let jsonFileInput: HTMLInputElement
+    let {
+        flags = {},
+        ondelete,
+        onupdate,
+        onadd,
+        onsearch,
+        onimport,
+    }: Props = $props()
 
-    const dispatch = createEventDispatcher<{
-        delete: string
-        update: { name: string; value: string }
-        add: { name: string; value: string }
-        search: string
-        import: Record<string, string>
-    }>()
+    let searchQuery = $state('')
+    let newFlagName = $state('')
+    let newFlagValue = $state('')
+    let addError = $state('')
+    let jsonFileInput: HTMLInputElement | undefined = $state()
 
-    $: entries = Object.entries(flags)
-    $: filteredFlags = entries.filter(
-        ([name, value]) =>
-            name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            value.toLowerCase().includes(searchQuery.toLowerCase())
+    let entries = $derived(Object.entries(flags))
+    let filteredFlags = $derived(
+        entries.filter(
+            ([name, value]) =>
+                name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                value.toLowerCase().includes(searchQuery.toLowerCase())
+        )
     )
 
     const typeBadge: Record<FlagType, string> = {
@@ -36,19 +45,19 @@
     }
 
     function handleSearch() {
-        dispatch('search', searchQuery)
+        onsearch?.(searchQuery)
     }
 
     function handleDelete(name: string) {
-        dispatch('delete', name)
+        ondelete?.(name)
     }
 
     function handleUpdate(name: string, raw: string) {
-        dispatch('update', { name, value: raw })
+        onupdate?.({ name, value: raw })
     }
 
     function handleAdd() {
-        dispatch('add', {
+        onadd?.({
             name: newFlagName.trim(),
             value: newFlagValue.trim(),
         })
@@ -61,7 +70,7 @@
     }
 
     function handleImportClick() {
-        jsonFileInput.click()
+        jsonFileInput?.click()
     }
 
     function handleFileChange(e: Event) {
@@ -81,7 +90,7 @@
                     imported[k] = String(v)
                 }
                 console.log(imported)
-                dispatch('import', imported)
+                onimport?.(imported)
             } catch {
                 addError = 'Invalid JSON file.'
             }
@@ -90,9 +99,9 @@
         ;(e.target as HTMLInputElement).value = ''
     }
 
-    $: newValueType = newFlagValue.trim()
-        ? detectType(newFlagValue.trim())
-        : null
+    let newValueType = $derived(
+        newFlagValue.trim() ? detectType(newFlagValue.trim()) : null
+    )
 </script>
 
 <div class="flex flex-col gap-4 w-full">
@@ -102,7 +111,7 @@
             type="text"
             bind:value={newFlagName}
             placeholder={$_('pages.fastflag.editor.flagTable.flagCol.name')}
-            on:keydown={(e) => e.key === 'Enter' && handleAdd()}
+            onkeydown={(e) => e.key === 'Enter' && handleAdd()}
             class="flex-[2] cursor-target min-w-0 bg-stone-900/50 border border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150"
         />
         <div class="flex-[1] min-w-0 relative">
@@ -112,7 +121,7 @@
                 placeholder={$_(
                     'pages.fastflag.editor.flagTable.flagCol.value'
                 )}
-                on:keydown={(e) => e.key === 'Enter' && handleAdd()}
+                onkeydown={(e) => e.key === 'Enter' && handleAdd()}
                 class="w-full bg-stone-900/50 border cursor-target border-stone-800/40 px-3 py-2 text-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40 outline-none transition-all duration-150 {newValueType
                     ? 'pr-14'
                     : ''}"
@@ -131,7 +140,7 @@
             variant="primary"
             size="sm"
             class="shrink-0"
-            on:click={handleAdd}
+            onclick={handleAdd}
             disabled={!newFlagName || !newFlagValue}
         >
             <Plus class="h-4 w-4 mr-1" />
@@ -147,10 +156,10 @@
             accept=".json,application/json"
             class="hidden"
             bind:this={jsonFileInput}
-            on:change={handleFileChange}
+            onchange={handleFileChange}
         />
         <button
-            on:click={handleImportClick}
+            onclick={handleImportClick}
             class="flex items-center cursor-target gap-1.5 px-3 py-2 text-sm font-semibold text-stone-400 hover:text-stone-200 bg-stone-900/0 hover:bg-stone-800/60 border border-stone-800/40 hover:border-stone-700/60 transition-all duration-150 shrink-0"
             title="Import flags from a JSON file"
         >
@@ -175,7 +184,7 @@
             <input
                 type="text"
                 bind:value={searchQuery}
-                on:input={handleSearch}
+                oninput={handleSearch}
                 placeholder={$_('pages.fastflag.editor.flagTable.search')}
                 class="block w-full pl-12 pr-4 py-3 border border-stone-800/20 bg-anthracite/40 backdrop-blur-sm text-stone-200 placeholder-stone-600 focus:ring-2 focus:ring-sapphire/10 focus:border-stone-700/60 transition-all duration-150 outline-none text-sm"
             />
@@ -225,7 +234,7 @@
                                 {#if type === 'bool'}
                                     <select
                                         {value}
-                                        on:change={(e) =>
+                                        onchange={(e) =>
                                             handleUpdate(
                                                 name,
                                                 e.currentTarget.value
@@ -241,12 +250,12 @@
                                             ? 'number'
                                             : 'text'}
                                         {value}
-                                        on:change={(e) =>
+                                        onchange={(e) =>
                                             handleUpdate(
                                                 name,
                                                 e.currentTarget.value
                                             )}
-                                        on:keydown={handleKeyDown}
+                                        onkeydown={handleKeyDown}
                                         class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-stone-700 focus:bg-stone-800 focus:border-sapphire/40 px-3 py-1.5 font-mono text-[13px] {type ===
                                         'int'
                                             ? 'text-yellow-400'
@@ -257,7 +266,7 @@
                             <div class="w-12 flex justify-end">
                                 <button
                                     class="p-2 text-stone-600 hover:text-red-400 hover:bg-red-400/10 transition-all duration-150 opacity-0 group-hover:opacity-100 focus:opacity-100"
-                                    on:click={() => handleDelete(name)}
+                                    onclick={() => handleDelete(name)}
                                     title={$_(
                                         'pages.fastflag.editor.flagTable.flagCol.deleteNote'
                                     )}

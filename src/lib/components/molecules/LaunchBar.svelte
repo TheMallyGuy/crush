@@ -27,7 +27,7 @@
         variant="primary"
         size="sm"
         class=" px-4 h-9"
-        on:click={launchBoostrap}
+        onclick={launchBoostrap}
     >
         {$_('elements.launchBar')}
     </Button>

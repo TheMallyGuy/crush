@@ -1,20 +1,26 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    interface Props {
+        checked?: boolean
+        disabled?: boolean
+        id?: string
+        label?: string
+        class?: string
+        onchange?: (checked: boolean) => void
+    }
 
-    export let checked = false
-    export let disabled = false
-    export let id: string | undefined = undefined
-    export let label: string = 'Toggle'
-
-    let className = ''
-    export { className as class }
-
-    const dispatch = createEventDispatcher()
+    let {
+        checked = $bindable(false),
+        disabled = false,
+        id = undefined,
+        label = 'Toggle',
+        class: className = '',
+        onchange,
+    }: Props = $props()
 
     function toggle() {
         if (!disabled) {
             checked = !checked
-            dispatch('change', checked)
+            onchange?.(checked)
         }
     }
 </script>
@@ -26,7 +32,7 @@
     aria-label={label}
     {disabled}
     {id}
-    on:click={toggle}
+    onclick={toggle}
     class="relative cursor-target inline-flex h-6 w-11 shrink-0 cursor-pointer items-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian disabled:cursor-not-allowed disabled:opacity-40
     {checked
         ? 'bg-sapphire'

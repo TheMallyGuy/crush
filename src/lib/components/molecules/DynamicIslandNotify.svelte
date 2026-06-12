@@ -1,14 +1,16 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import { backOut, cubicIn } from 'svelte/easing'
 
-    export let title: string
-    export let description: string = ''
-    export let image: string | undefined = undefined
+    interface Props {
+        title: string
+        description?: string
+        image?: string
+        ondismiss?: () => void
+    }
 
-    const dispatch = createEventDispatcher()
+    let { title, description = '', image = undefined, ondismiss }: Props = $props()
 
-    const isRich = !!image
+    let isRich = $derived(!!image)
 
     function islandIn(node: HTMLElement) {
         return {
@@ -33,15 +35,18 @@
     }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
 <div
     in:islandIn
     out:islandOut
+    role="button"
+    tabindex="0"
+    aria-label="Dismiss"
     class="origin-top overflow-hidden rounded-[22px] border border-white/[0.07]
            bg-[#0e0e0e]/95 shadow-[0_12px_40px_-4px_rgba(0,0,0,0.9),0_0_0_0.5px_rgba(255,255,255,0.04)]
            backdrop-blur-2xl
            {isRich ? 'w-77.5' : 'w-67.5'}"
-    on:click={() => dispatch('dismiss')}
+    onclick={() => ondismiss?.()}
+    onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && ondismiss?.()}
 >
     {#if isRich}
         <div class="flex items-center gap-3 px-3 py-3">

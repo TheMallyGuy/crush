@@ -1,41 +1,58 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Snippet } from 'svelte'
 
-    export let value: string | number = ''
-    export let type:
-        | 'text'
-        | 'password'
-        | 'number'
-        | 'email'
-        | 'tel'
-        | 'url' = 'text'
-    export let placeholder = ''
-    export let label = ''
-    export let error = ''
-    export let disabled = false
-    export let id: string | undefined = undefined
-    export let fullWidth = true
-    export let containerClass = ''
+    interface Props {
+        value?: string | number
+        type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'url'
+        placeholder?: string
+        label?: string
+        error?: string
+        disabled?: boolean
+        id?: string
+        fullWidth?: boolean
+        containerClass?: string
+        class?: string
+        oninput?: (value: string | number) => void
+        onchange?: (value: string | number) => void
+        onenter?: (value: string | number) => void
+        icon?: Snippet
+        action?: Snippet
+        [key: string]: unknown
+    }
 
-    let className = ''
-    export { className as class }
-
-    const dispatch = createEventDispatcher()
+    let {
+        value = $bindable(''),
+        type = 'text',
+        placeholder = '',
+        label = '',
+        error = '',
+        disabled = false,
+        id = undefined,
+        fullWidth = true,
+        containerClass = '',
+        class: className = '',
+        oninput,
+        onchange,
+        onenter,
+        icon,
+        action,
+        ...rest
+    }: Props = $props()
 
     function handleInput(event: Event) {
         const target = event.target as HTMLInputElement
         const newValue = type === 'number' ? Number(target.value) : target.value
         value = newValue
-        dispatch('input', newValue)
+        oninput?.(newValue)
     }
 
-    function handleChange(event: Event) {
-        dispatch('change', value)
+    function handleChange() {
+        onchange?.(value)
     }
 
     function handleKeyDown(event: KeyboardEvent) {
         if (event.key === 'Enter') {
-            dispatch('enter', value)
+            onenter?.(value)
         }
     }
 </script>
@@ -53,11 +70,11 @@
     {/if}
 
     <div class="relative w-full">
-        {#if $$slots.icon}
+        {#if icon}
             <div
                 class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-500"
             >
-                <slot name="icon" />
+                {@render icon()}
             </div>
         {/if}
 
@@ -67,11 +84,11 @@
             {placeholder}
             {disabled}
             {value}
-            on:input={handleInput}
-            on:change={handleChange}
-            on:keydown={handleKeyDown}
+            oninput={handleInput}
+            onchange={handleChange}
+            onkeydown={handleKeyDown}
             class="block w-full transition-all duration-150 outline-none text-sm border cursor-target
-                {$$slots.icon ? 'pl-11' : 'px-4'}
+                {icon ? 'pl-11' : 'px-4'}
                 py-2.5
                 {disabled
                 ? 'bg-stone-900/30 border-stone-800/20 text-stone-600 cursor-not-allowed'
@@ -80,12 +97,12 @@
                 ? 'border-red-500/40 focus:ring-2 focus:ring-red-500/10 focus:border-red-500/60'
                 : 'focus:ring-2 focus:ring-sapphire/20 focus:border-sapphire/40'}
                 {className}"
-            {...$$restProps}
+            {...rest}
         />
 
-        {#if $$slots.action}
+        {#if action}
             <div class="absolute inset-y-0 right-0 flex items-center pr-1.5">
-                <slot name="action" />
+                {@render action()}
             </div>
         {/if}
     </div>

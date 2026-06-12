@@ -3,20 +3,34 @@
     import { Download } from '@lucide/svelte'
     import Button from '$lib/components/atoms/Button.svelte'
 
-    export let name = ''
-    export let author = ''
-    export let category = ''
-    export let thumbnail = ''
-    export let downloading = false
-    export let adapter = ''
+    interface Props {
+        name?: string
+        author?: string
+        category?: string
+        thumbnail?: string
+        downloading?: boolean
+        adapter?: string
+        class?: string
+        onclick?: (event: MouseEvent) => void
+        [key: string]: unknown
+    }
 
-    let className = ''
-    export { className as class }
+    let {
+        name = '',
+        author = '',
+        category = '',
+        thumbnail = '',
+        downloading = false,
+        adapter = '',
+        class: className = '',
+        onclick,
+        ...rest
+    }: Props = $props()
 </script>
 
 <div
     class="group relative flex w-full flex-col overflow-hidden bg-anthracite border border-stone-800/30 transition-all duration-150 hover:border-stone-700/50 {className}"
-    {...$$restProps}
+    {...rest}
 >
     <div class="relative h-44 w-full shrink-0 overflow-hidden bg-stone-900">
         {#if thumbnail}
@@ -26,7 +40,7 @@
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
         {:else}
-            <div class="h-full w-full bg-stone-800/60" />
+            <div class="h-full w-full bg-stone-800/60"></div>
         {/if}
     </div>
 
@@ -56,7 +70,7 @@
                 size="sm"
                 disabled={downloading}
                 class="flex-1 gap-1.5"
-                on:click
+                {onclick}
             >
                 <Download size={13} />
                 {downloading ? '...' : 'Download'}

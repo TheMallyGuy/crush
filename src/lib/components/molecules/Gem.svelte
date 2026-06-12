@@ -3,7 +3,7 @@
 <script lang="ts">
   import Zdog from 'zdog';
 
-  export let className: string = '';
+  let { className = '' }: { className?: string } = $props();
 
   const TAU = Zdog.TAU;
   const SIDES = 8;

@@ -1,20 +1,20 @@
 <script lang="ts">
     import { Check, Circle } from '@lucide/svelte'
 
-    export let steps: { label: string; description?: string }[] = []
-    export let currentStep = 0
-
-
-    function getStepState(index: number) {
-        if (index < currentStep) return 'completed'
-        if (index === currentStep) return 'active'
-        return 'upcoming'
+    interface Props {
+        steps?: { label: string; description?: string }[]
+        currentStep?: number
     }
-    $: stepStates = steps.map((_, i) => {
-        if (i < currentStep) return 'completed'
-        if (i === currentStep) return 'active'
-        return 'upcoming'
-    })
+
+    let { steps = [], currentStep = 0 }: Props = $props()
+
+    let stepStates = $derived(
+        steps.map((_, i) => {
+            if (i < currentStep) return 'completed'
+            if (i === currentStep) return 'active'
+            return 'upcoming'
+        })
+    )
 </script>
 
 <aside

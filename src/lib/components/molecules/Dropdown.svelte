@@ -1,17 +1,27 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
-    export let value: string = ''
-    export let options: { value: string; label: string }[] = []
-    export let placeholder: string = 'Select an option'
-    let isOpen = false
-    const dispatch = createEventDispatcher()
+    interface Props {
+        value?: string
+        options?: { value: string; label: string }[]
+        placeholder?: string
+        onchange?: (value: string) => void
+    }
+
+    let {
+        value = $bindable(''),
+        options = [],
+        placeholder = 'Select an option',
+        onchange,
+    }: Props = $props()
+
+    let isOpen = $state(false)
+
     function toggle() {
         isOpen = !isOpen
     }
     function select(option: { value: string; label: string }) {
         value = option.value
         isOpen = false
-        dispatch('change', value)
+        onchange?.(value)
     }
     function handleClickOutside(event: MouseEvent) {
         const target = event.target as HTMLElement
@@ -20,7 +30,8 @@
         }
     }
 </script>
-<svelte:window on:click={handleClickOutside} />
+
+<svelte:window onclick={handleClickOutside} />
 
 <style>
     .scrollbar-hide {
@@ -34,7 +45,10 @@
 <div class="dropdown-container relative w-full max-w-50">
     <button
         type="button"
-        on:click|stopPropagation={toggle}
+        onclick={(e) => {
+            e.stopPropagation()
+            toggle()
+        }}
         class="flex w-full items-center justify-between border border-stone-800/40 bg-stone-900/40 backdrop-blur-sm px-4 py-2 text-sm text-stone-200 transition-all duration-150 hover:border-stone-700/60 focus:outline-none focus:ring-2 focus:ring-sapphire/20 cursor-target"
     >
         <span class="font-medium"
@@ -66,7 +80,7 @@
             {#each options as option}
                 <button
                     type="button"
-                    on:click={() => select(option)}
+                    onclick={() => select(option)}
                     class="cursor-target w-full px-4 py-2.5 text-left text-sm text-stone-400 transition-colors duration-150 hover:bg-stone-800/50 hover:text-stone-100 {value ===
                     option.value
                         ? 'bg-stone-800/80 text-sapphire font-semibold'

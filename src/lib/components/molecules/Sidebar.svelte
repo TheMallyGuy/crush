@@ -85,6 +85,7 @@
             {@const isActive = $page.url.pathname.startsWith(
                 item.activePrefix ?? item.href
             )}
+            {@const ItemIcon = item.icon}
 
             <a
                 href={item.href}
@@ -97,7 +98,7 @@
                     ></div>
                 {/if}
 
-                <svelte:component this={item.icon} size={18} class="shrink-0" />
+                <ItemIcon size={18} class="shrink-0" />
                 <span class="hidden sm:block text-[14px] font-medium truncate"
                     >{item.name}</span
                 >
@@ -110,6 +111,7 @@
     <nav class="flex flex-col gap-1 pt-4 overflow-hidden">
         {#each footerNav as item}
             {@const isActive = $page.url.pathname === item.href}
+            {@const ItemIcon = item.icon}
 
             <a
                 href={item.href}
@@ -122,7 +124,7 @@
                     ></div>
                 {/if}
 
-                <svelte:component this={item.icon} size={18} class="shrink-0" />
+                <ItemIcon size={18} class="shrink-0" />
                 <span class="hidden sm:block text-[14px] font-medium truncate"
                     >{item.name}</span
                 >

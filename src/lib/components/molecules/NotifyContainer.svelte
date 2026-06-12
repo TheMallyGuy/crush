@@ -11,7 +11,7 @@
                 variant={n.variant}
                 title={n.title}
                 description={n.description}
-                on:dismiss={() => notify.dismiss(n.id)}
+                ondismiss={() => notify.dismiss(n.id)}
             />
         </div>
     {/each}

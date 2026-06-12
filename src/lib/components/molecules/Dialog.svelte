@@ -1,19 +1,32 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Snippet } from 'svelte'
     import { fly, fade } from 'svelte/transition'
     import { X } from '@lucide/svelte'
 
-    const dispatch = createEventDispatcher()
+    interface Props {
+        open?: boolean
+        title?: string
+        description?: string
+        class?: string
+        onclose?: () => void
+        children?: Snippet
+        actions?: Snippet
+        descriptionSlot?: Snippet
+    }
 
-    export let open = false
-    export let title = ''
-    export let description = ''
-
-    let className = ''
-    export { className as class }
+    let {
+        open = $bindable(false),
+        title = '',
+        description = '',
+        class: className = '',
+        onclose,
+        children,
+        actions,
+        descriptionSlot,
+    }: Props = $props()
 
     function close() {
-        dispatch('close')
+        onclose?.()
     }
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -23,7 +36,7 @@
     }
 </script>
 
-<svelte:window on:keydown={handleKeyDown} />
+<svelte:window onkeydown={handleKeyDown} />
 
 {#if open}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -31,7 +44,9 @@
     <div
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md"
         transition:fade={{ duration: 150 }}
-        on:click|self={close}
+        onclick={(e) => {
+            if (e.target === e.currentTarget) close()
+        }}
     >
         <div
             class="w-full max-w-md bg-anthracite/80 backdrop-blur-xl border border-stone-800/40 p-6 relative overflow-hidden flex flex-col {className}"
@@ -42,7 +57,7 @@
                     {title}
                 </h3>
                 <button
-                    on:click={close}
+                    onclick={close}
                     class="p-1 text-stone-500 hover:text-stone-300 hover:bg-stone-800/50 transition-all duration-150 active:scale-95 cursor-target"
                 >
                     <X size={20} />
@@ -55,16 +70,16 @@
                 {#if description}
                     {description}
                 {:else}
-                    <slot name="description" />
+                    {@render descriptionSlot?.()}
                 {/if}
             </div>
 
             <div class="flex flex-col gap-4 mb-6">
-                <slot />
+                {@render children?.()}
             </div>
 
             <div class="flex items-center justify-end gap-3 mt-auto">
-                <slot name="actions" />
+                {@render actions?.()}
             </div>
         </div>
     </div>

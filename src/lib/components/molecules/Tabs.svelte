@@ -1,14 +1,24 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Component, Snippet } from 'svelte'
     import { spring } from 'svelte/motion'
+    import { tick } from 'svelte'
 
-    const dispatch = createEventDispatcher<{ change: string }>()
+    interface Props {
+        tabs?: { label: string; value: string; icon?: Component }[]
+        activeTab?: string
+        onchange?: (value: string) => void
+        children?: Snippet<[string]>
+    }
 
-    export let tabs: { label: string; value: string; icon?: any }[] = []
-    export let activeTab: string = tabs[0]?.value || ''
+    let {
+        tabs = [],
+        activeTab = $bindable(tabs[0]?.value || ''),
+        onchange,
+        children,
+    }: Props = $props()
 
-    let tabElements: HTMLButtonElement[] = []
-    let containerEl: HTMLDivElement
+    let tabElements: HTMLButtonElement[] = $state([])
+    let containerEl: HTMLDivElement | undefined = $state()
 
     const pillStyle = spring(
         { x: 0, width: 0 },
@@ -30,16 +40,17 @@
     function selectTab(value: string, index: number) {
         activeTab = value
         updatePill(index)
-        dispatch('change', value)
+        onchange?.(value)
     }
 
-    import { tick } from 'svelte'
-    $: if (tabElements.length && containerEl) {
-        tick().then(() => {
-            const idx = tabs.findIndex(t => t.value === activeTab)
-            if (idx !== -1) updatePill(idx)
-        })
-    }
+    $effect(() => {
+        if (tabElements.length && containerEl) {
+            tick().then(() => {
+                const idx = tabs.findIndex((t) => t.value === activeTab)
+                if (idx !== -1) updatePill(idx)
+            })
+        }
+    })
 </script>
 
 <div class="flex flex-col gap-6 w-full">
@@ -65,11 +76,11 @@
                     {activeTab === tab.value
                         ? 'text-white'
                         : 'text-stone-400 hover:text-stone-200 hover:bg-white/5'}"
-                on:click={() => selectTab(tab.value, i)}
+                onclick={() => selectTab(tab.value, i)}
             >
                 {#if tab.icon}
-                    <svelte:component
-                        this={tab.icon}
+                    {@const TabIcon = tab.icon}
+                    <TabIcon
                         size={16}
                         class="shrink-0 transition-transform duration-200
                             {activeTab === tab.value
@@ -88,6 +99,6 @@
     </div>
 
     <div class="w-full">
-        <slot {activeTab} />
+        {@render children?.(activeTab)}
     </div>
 </div>

@@ -1,70 +1,88 @@
 <script lang="ts">
-  import type { Component } from 'svelte'
-  import { ChevronDown } from '@lucide/svelte'
-  import { slide } from 'svelte/transition'
+    import type { Component, Snippet } from 'svelte'
+    import { ChevronDown } from '@lucide/svelte'
+    import { slide } from 'svelte/transition'
 
-  export let title = ''
-  export let description = ''
-  export let icon: Component | string | null = null
-  export let isOpen = false
-  let className = ''
-  export { className as class }
+    interface Props {
+        title?: string
+        description?: string
+        icon?: Component | string | null
+        isOpen?: boolean
+        class?: string
+        iconSlot?: Snippet
+        action?: Snippet
+        footer?: Snippet
+        children?: Snippet
+    }
 
-  function toggle() {
-    isOpen = !isOpen
-  }
+    let {
+        title = '',
+        description = '',
+        icon = null,
+        isOpen = $bindable(false),
+        class: className = '',
+        iconSlot,
+        action,
+        footer,
+        children,
+    }: Props = $props()
+
+    function toggle() {
+        isOpen = !isOpen
+    }
 </script>
 
 <div
     class="group relative flex w-full flex-col p-3 transition-all duration-150 {className}"
 >
-  <button
-    type="button"
-    class="flex items-center justify-between gap-5 text-left cursor-pointer w-full focus:outline-none"
-    on:click={toggle}
-  >
-    <div class="flex items-center gap-5">
-      {#if icon || $$slots.icon}
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 transition-colors duration-150 overflow-hidden">
-          <slot name="icon">
-            {#if typeof icon === 'string'}
-              <img src={icon} alt="" class="w-full h-full object-cover" />
-            {:else if icon}
-              <svelte:component this={icon} size={24} />
+    <button
+        type="button"
+        class="flex items-center justify-between gap-5 text-left cursor-pointer w-full focus:outline-none"
+        onclick={toggle}
+    >
+        <div class="flex items-center gap-5">
+            {#if icon || iconSlot}
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center text-stone-400 transition-colors duration-150 overflow-hidden">
+                    {#if iconSlot}
+                        {@render iconSlot()}
+                    {:else if typeof icon === 'string'}
+                        <img src={icon} alt="" class="w-full h-full object-cover" />
+                    {:else if icon}
+                        {@const IconComp = icon}
+                        <IconComp size={24} />
+                    {/if}
+                </div>
             {/if}
-          </slot>
+            <div class="flex flex-col gap-0.5">
+                {#if title}
+                    <h3 class="text-base font-semibold tracking-tight text-stone-100">
+                        {title}
+                    </h3>
+                {/if}
+                {#if description}
+                    <p class="text-sm font-medium text-stone-300">
+                        {description}
+                    </p>
+                {/if}
+            </div>
         </div>
-      {/if}
-      <div class="flex flex-col gap-0.5">
-        {#if title || $$slots.title}
-          <h3 class="text-base font-semibold tracking-tight text-stone-100">
-            <slot name="title">{title}</slot>
-          </h3>
-        {/if}
-        {#if description || $$slots.description}
-          <p class="text-sm font-medium text-stone-300">
-            <slot name="description">{description}</slot>
-          </p>
-        {/if}
-      </div>
-    </div>
-    <div class="flex items-center gap-3">
-      <slot name="action" />
-      <div class="text-stone-500 transition-transform duration-200 {isOpen ? 'rotate-180' : ''}">
-        <ChevronDown size={20} />
-      </div>
-    </div>
-  </button>
-  {#if isOpen}
-    <div transition:slide={{ duration: 200 }}>
-      <div class="mt-5 flex flex-col gap-4">
-        <slot />
-        {#if $$slots.footer}
-          <div class="flex flex-col gap-4">
-            <slot name="footer" />
-          </div>
-        {/if}
-      </div>
-    </div>
-  {/if}
+        <div class="flex items-center gap-3">
+            {@render action?.()}
+            <div class="text-stone-500 transition-transform duration-200 {isOpen ? 'rotate-180' : ''}">
+                <ChevronDown size={20} />
+            </div>
+        </div>
+    </button>
+    {#if isOpen}
+        <div transition:slide={{ duration: 200 }}>
+            <div class="mt-5 flex flex-col gap-4">
+                {@render children?.()}
+                {#if footer}
+                    <div class="flex flex-col gap-4">
+                        {@render footer()}
+                    </div>
+                {/if}
+            </div>
+        </div>
+    {/if}
 </div>

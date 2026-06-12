@@ -1,13 +1,27 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Snippet } from 'svelte'
 
-    export let type: 'button' | 'submit' | 'reset' = 'button'
-    export let variant: 'primary' | 'secondary' | 'danger' | 'ghost' = 'primary'
-    export let size: 'sm' | 'md' | 'lg' = 'md'
-    export let disabled = false
+    interface Props {
+        type?: 'button' | 'submit' | 'reset'
+        variant?: 'primary' | 'secondary' | 'danger' | 'ghost'
+        size?: 'sm' | 'md' | 'lg'
+        disabled?: boolean
+        class?: string
+        onclick?: (event: MouseEvent) => void
+        children?: Snippet
+        [key: string]: unknown
+    }
 
-    let className = ''
-    export { className as class }
+    let {
+        type = 'button',
+        variant = 'primary',
+        size = 'md',
+        disabled = false,
+        class: className = '',
+        onclick,
+        children,
+        ...rest
+    }: Props = $props()
 
     const variants = {
         primary: 'bg-sapphire text-white hover:bg-sapphire-light shadow-sapphire/20',
@@ -26,9 +40,9 @@
 <button
     {type}
     {disabled}
-    on:click
+    {onclick}
     class="inline-flex cursor-target items-center justify-center font-semibold duration-150 active:opacity-10 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 {variants[variant]} {sizes[size]} {className}"
-    {...$$restProps}
+    {...rest}
 >
-    <slot />
+    {@render children?.()}
 </button>

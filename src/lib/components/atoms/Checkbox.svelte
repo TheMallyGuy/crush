@@ -1,17 +1,29 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Snippet } from 'svelte'
 
-    const dispatch = createEventDispatcher()
+    interface Props {
+        checked?: boolean
+        indeterminate?: boolean
+        disabled?: boolean
+        id?: string
+        label?: string
+        size?: 'sm' | 'md' | 'lg'
+        class?: string
+        onchange?: (state: { checked: boolean; indeterminate: boolean }) => void
+        children?: Snippet
+    }
 
-    export let checked = false
-    export let indeterminate = false
-    export let disabled = false
-    export let id: string | undefined = undefined
-    export let label: string = ''
-    export let size: 'sm' | 'md' | 'lg' = 'md'
-
-    let className = ''
-    export { className as class }
+    let {
+        checked = $bindable(false),
+        indeterminate = $bindable(false),
+        disabled = false,
+        id = undefined,
+        label = '',
+        size = 'md',
+        class: className = '',
+        onchange,
+        children,
+    }: Props = $props()
 
     function toggle() {
         if (!disabled) {
@@ -21,7 +33,7 @@
             } else {
                 checked = !checked
             }
-            dispatch('change', { checked, indeterminate })
+            onchange?.({ checked, indeterminate })
         }
     }
 
@@ -44,7 +56,7 @@
         lg: 'text-[15px]',
     }
 
-    $: isActive = checked || indeterminate
+    let isActive = $derived(checked || indeterminate)
 </script>
 
 <label
@@ -59,8 +71,8 @@
         aria-disabled={disabled}
         tabindex={disabled ? -1 : 0}
         {id}
-        on:click={toggle}
-        on:keydown={handleKeydown}
+        onclick={toggle}
+        onkeydown={handleKeydown}
         class="relative flex items-center justify-center shrink-0 border-[1.5px] transition-all duration-150
             focus:outline-none focus:ring-2 focus:ring-sapphire/50 focus:ring-offset-2 focus:ring-offset-obsidian cursor-target
             {sizes[size].box}
@@ -100,9 +112,9 @@
         {/if}
     </div>
 
-    {#if label || $$slots.default}
+    {#if label || children}
         <span class="font-medium text-stone-100 leading-none {labelSizes[size]}">
-            <slot>{label}</slot>
+            {#if children}{@render children()}{:else}{label}{/if}
         </span>
     {/if}
 </label>

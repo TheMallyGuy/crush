@@ -19,7 +19,7 @@
 
     <div class="flex h-full">
         <button
-            on:click={minimize}
+            onclick={minimize}
             class="inline-flex items-center justify-center w-11 h-full hover:bg-zinc-800 transition-colors"
             title="Minimize"
         >
@@ -27,7 +27,7 @@
         </button>
 
         <button
-            on:click={close}
+            onclick={close}
             class="inline-flex items-center justify-center w-11 h-full hover:bg-red-600 transition-colors"
             title="Close"
         >

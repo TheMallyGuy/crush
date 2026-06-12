@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import type { Snippet } from 'svelte'
     import { flip } from 'svelte/animate'
     import {
         dndzone,
@@ -8,8 +8,13 @@
     import Card from '$lib/components/molecules/Card.svelte'
     import { GripVertical } from '@lucide/svelte'
 
-    const dispatch = createEventDispatcher()
-    export let items: any[] = []
+    interface Props {
+        items?: any[]
+        onchange?: (items: any[]) => void
+        children?: Snippet<[any]>
+    }
+
+    let { items = $bindable([]), onchange, children }: Props = $props()
 
     const flipDurationMs = 150
 
@@ -18,7 +23,7 @@
     }
     function handleDndFinalize(e: CustomEvent<{ items: any[] }>) {
         items = e.detail.items
-        dispatch('change', items)
+        onchange?.(items)
     }
 </script>
 
@@ -31,8 +36,8 @@
         morphDisabled: true,
         dropAnimationDisabled: true,
     }}
-    on:consider={handleDndConsider}
-    on:finalize={handleDndFinalize}
+    onconsider={handleDndConsider}
+    onfinalize={handleDndFinalize}
 >
     {#each items as item (item.id)}
         <div
@@ -47,11 +52,13 @@
                     <GripVertical size={18} />
                 </div>
                 <div class="grow">
-                    <slot {item}>
+                    {#if children}
+                        {@render children(item)}
+                    {:else}
                         <span class="text-stone-200 font-medium"
                             >{item.label || item.id}</span
                         >
-                    </slot>
+                    {/if}
                 </div>
             </Card>
         </div>
