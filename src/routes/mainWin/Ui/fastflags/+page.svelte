@@ -167,7 +167,12 @@
             </p>
         </div>
 
-        <SettingCard title="Disable fflags" description="Disable fastflag.">
+        <SettingCard
+            title={$_('pages.fastflag.preset.disableFastFlag.title')}
+            description={$_(
+                'pages.fastflag.preset.disableFastFlag.description'
+            )}
+        >
             {#snippet action()}
                 <Switch
                     checked={useFastFlag}

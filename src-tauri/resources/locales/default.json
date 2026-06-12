@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Presets",
                 "description": "Use our built-in fast flag presets.",
+                "disableFastflag" : {
+                    "title" : "Disable Fastflag",
+                    "description" : "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Anti-Aliasing Quality (MSAA)",
                     "description": "Smooths jagged edges. Higher values look better but may reduce performance."
