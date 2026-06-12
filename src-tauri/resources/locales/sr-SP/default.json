@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Predefinisana podešavanja",
                 "description": "Use our built-in fast flag presets.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Kvalitet protiv lizinga (MSAA)",
                     "description": "Izglađuje nazubljene ivice. Više vrednosti izgledaju bolje, ali mogu smanjiti performanse."

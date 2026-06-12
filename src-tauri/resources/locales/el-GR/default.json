@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Προκαθορισμένες ρυθμίσεις",
                 "description": "Χρησιμοποιήστε τις ενσωματωμένες γρήγορες προεπιλογές σημαίας.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Ποιότητα Anti-Aliasing (MSAA)",
                     "description": "Λειαίνει τις οδοντωτές άκρες. Οι υψηλότερες τιμές φαίνονται καλύτερες, αλλά μπορεί να μειώσουν την απόδοση."

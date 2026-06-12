@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "מוגדר מראש",
                 "description": "Use our built-in fast flag presets.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "איכות נוגדת עליות (MSAA)",
                     "description": "מחליק קצוות משוננים. ערכים גבוהים יותר נראים טוב יותר אך עשויים להפחית את הביצועים."

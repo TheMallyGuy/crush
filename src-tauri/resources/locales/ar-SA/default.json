@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "الإعدادات المسبقة",
                 "description": "استخدم علمنا السريع المدمج مسبقا.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "جودة مقاومة التشويش (MSAA)",
                     "description": "ينعم الحواف المسننة. القيم الأعلى تبدو أفضل ولكنها قد تقلل من الأداء."

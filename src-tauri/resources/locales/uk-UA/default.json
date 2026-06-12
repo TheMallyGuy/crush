@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Пресети",
                 "description": "Використовуйте наші вбудовані пресети швидкого прапорця.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Якість згладжування (MSAA)",
                     "description": "Згладжує зубчасті краї. Вищі значення виглядають краще, але можуть знизити продуктивність."

@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "預置",
                 "description": "使用我們內建的快速旗標預設值。",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "抗鋸齒品質(MSAA)",
                     "description": "平滑鋸齒邊緣。較高的值看起來更好，但可能會降低性能。"

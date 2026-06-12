@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Presetări",
                 "description": "Folosește presetările noastre rapide încorporate.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Calitate anti-aliasing (MSAA)",
                     "description": "Netezește marginile. Valorile mai mari arată mai bine, dar reduc performanța."

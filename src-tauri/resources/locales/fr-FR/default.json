@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Préréglages",
                 "description": "Utilisez nos presets d'indicateur rapide intégrés.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Qualité anti-aliasing (MSAA)",
                     "description": "Lisse les bords dentelés. Les valeurs plus élevées sont plus belles, mais peuvent réduire les performances."

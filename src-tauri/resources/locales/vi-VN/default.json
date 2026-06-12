@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Có sẵn",
                 "description": "Sử dụng các thiết lập Fast Flag có sẵn của chúng tôi.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Chất lượng khử răng cưa (MSAA)",
                     "description": "Làm mịn các cạnh lởm chởm. Các giá trị cao hơn trông đẹp hơn nhưng có thể làm giảm hiệu suất."

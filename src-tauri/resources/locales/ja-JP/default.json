@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "プリセット",
                 "description": "組み込みの高速フラグプリセットを使用します。",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "アンチエイリアシングの品質",
                     "description": "ギザギザのエッジを滑らかにします。値が高いほど見栄えは良くなりますが、パフォーマンスが低下する可能性があります。"
