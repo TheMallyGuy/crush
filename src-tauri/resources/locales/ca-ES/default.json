@@ -81,6 +81,18 @@
                     "noThemes": "Encara no s'ha importat cap tema personalitzat.",
                     "missingAssets": "Falten actius del tema"
                 }
+            },
+            "backgroundCard": {
+                "title": "Background",
+                "description": "Replace the default black background with a solid color or your own image.",
+                "dropdown": {
+                    "default": "Default (Black)",
+                    "color": "Solid Color",
+                    "image": "Image"
+                },
+                "colorLabel": "Background color",
+                "noImage": "No image selected yet.",
+                "chooseImage": "Choose Image"
             }
         },
         "integrations": {
