@@ -137,7 +137,6 @@
         void settings.robloxWarpped
 
         locale.set(lang)
-
         ;(async () => {
             await settings.save()
 
@@ -187,13 +186,14 @@
                 {$_('pages.settings.creditsCard.dialog.development')}
             </p>
             <p class="text-stone-300">Mally - Lead Developer</p>
+            <p class="text-stone-300">Damon - Original Roblox optimizer's logic</p>
         </div>
         <div>
             <p class="text-lx1 mb-1">
                 {$_('pages.settings.creditsCard.dialog.inspiration')}
             </p>
             <p class="text-stone-300">
-                Bloxstrap, Frostrap, Funkstrap, AppleBlox
+                Bloxstrap, Frostrap, Funkstrap, AppleBlox, Voidstrap
             </p>
         </div>
         <div>
@@ -360,7 +360,7 @@
                 slot="action"
                 variant="secondary"
                 on:click={() => {
-                    goto("./settings/dev")
+                    goto('./settings/dev')
                 }}>Open</Button
             >
         </SettingCard>
