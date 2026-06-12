@@ -385,6 +385,8 @@ async function performFullInstallation(
 ): Promise<string> {
     info(`performing full installation, version: ${version}, vng: ${vng}`)
 
+    invoke("kill_roblox_if_open")
+
     const store = await load('config.json')
     const installation = await store.get<Installation>('installation')
     const assetsUrls = await getInstallationUrls(onProgress, appType, vng, version)

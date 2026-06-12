@@ -8,6 +8,7 @@ pub mod gbs_operations;
 pub mod launch_roblox;
 pub mod mods;
 pub mod pre_processing;
+pub mod process_roblox;
 pub mod properity;
 pub mod rename;
 pub mod roblox_deployment;

@@ -12,6 +12,7 @@ use commands::gbs_operations::{get_gbs, write_gbs};
 use commands::launch_roblox::launch;
 use commands::mods::apply_mod;
 use commands::pre_processing::{close_crash_handler, set_process_priority};
+use commands::process_roblox::kill_roblox_if_open;
 use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
 use commands::rename::rename;
 use commands::roblox_deployment::{
@@ -445,6 +446,7 @@ pub fn run() {
             swift_get_servers,
             swift_fetch_servers,
             connect,
+            kill_roblox_if_open,
             swift_servers_ping,
             island::island_show
         ])
