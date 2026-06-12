@@ -9,7 +9,7 @@
 
 import type { AppType } from "$lib/downloadRoblox";
 import { appDataDir, join } from "@tauri-apps/api/path";
-import { BaseDirectory, exists, mkdir, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { BaseDirectory, exists, mkdir, readTextFile, remove, writeTextFile } from "@tauri-apps/plugin-fs";
 import { info } from "@tauri-apps/plugin-log";
 import { load, Store } from "@tauri-apps/plugin-store";
 import { store } from "@tauri-store/svelte";
@@ -160,7 +160,7 @@ export async function saveFastFlags(
     await writeTextFile(clientSettings, content, { baseDir: BaseDirectory.AppData })
 }
 
-export async function loadFlag(app_type: AppType, version: string, vng?: boolean) {
+export async function loadFlag(app_type: AppType, version: string, disable: boolean, vng?: boolean) {
     let path
 
     if (app_type === "player") {
@@ -182,5 +182,9 @@ export async function loadFlag(app_type: AppType, version: string, vng?: boolean
         await mkdir(clientSettingDir, { recursive: true })
     }
 
-    await writeTextFile(clientSettingPath, raw)
+    if (!disable) {
+        await writeTextFile(clientSettingPath, raw)
+    } else {
+        await remove(clientSettingPath)
+    }
 }

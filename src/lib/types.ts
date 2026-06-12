@@ -123,6 +123,7 @@ export type Installation = {
 }
 
 export type Config = {
+    useFlag: boolean
     installation: Installation
     FirstLaunch: string
     bestRegion: string

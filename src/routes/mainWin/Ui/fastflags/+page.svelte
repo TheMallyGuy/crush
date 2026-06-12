@@ -15,16 +15,15 @@
     import { get } from 'svelte/store'
     import { launchAppType } from '$lib/stores/launchAppType'
     import type { AppType } from '$lib/types'
-    import Button from '$lib/components/atoms/Button.svelte'
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
     import { RefreshCw, Save, SquarePen } from '@lucide/svelte'
     import ClickableCard from '$lib/components/molecules/ClickableCard.svelte'
+    import { load, type Store } from '@tauri-apps/plugin-store'
 
     let flags: Record<string, string> = $state({})
-    let version = $state('')
     let appType: AppType = $state('player')
     let loaded = $state(false)
 
@@ -33,7 +32,10 @@
     let pauseVoxelizer: boolean = $state(false)
     let wavingGrass: string = $state('0')
     let lowMeshQuality: boolean = $state(false)
+    let useFastFlag: boolean = $state(true)
     let graySky: boolean = $state(false)
+    let config: Store | undefined
+
     const MSAA_KEY = 'FIntDebugForceMSAASamples'
     const TEXTURE_KEY = 'DFIntTextureQualityOverride'
     const VOXELIZER_KEY = 'DFFlagDebugPauseVoxelizer'
@@ -70,6 +72,8 @@
 
     async function loadState() {
         loaded = false
+        config = await load('config')
+        useFastFlag = (await config.get('useFlag')) ?? true
         appType = (get(launchAppType) as AppType) || 'player'
 
         flags = await getFastFlags(appType)
@@ -128,7 +132,11 @@
                 }
 
                 flags = newFlags
+                if (!config) {
+                    throw new Error('Config store is not loaded')
+                }
                 await saveFastFlags(flags, appType)
+                await config.set('useFlag', useFastFlag)
                 console.log('[Preset] Save successful')
             } catch (e) {
                 console.error('[Preset] Save failed:', e)
@@ -159,19 +167,31 @@
             </p>
         </div>
 
+        <SettingCard title="Disable fflags" description="Disable fastflag.">
+            {#snippet action()}
+                <Switch
+                    checked={useFastFlag}
+                    onchange={(e) => {
+                        useFastFlag = e
+                        save()
+                    }}
+                />
+            {/snippet}
+        </SettingCard>
+
         <SettingCard
             title={$_('pages.fastflag.preset.msaaCard.title')}
             description={$_('pages.fastflag.preset.msaaCard.description')}
         >
             {#snippet action()}
-            <Dropdown
-                value={msaaValue}
-                options={msaaItems}
-                onchange={(e) => {
-                    msaaValue = e
-                    save()
-                }}
-            />
+                <Dropdown
+                    value={msaaValue}
+                    options={msaaItems}
+                    onchange={(e) => {
+                        msaaValue = e
+                        save()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -182,13 +202,13 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                checked={pauseVoxelizer}
-                onchange={(e) => {
-                    pauseVoxelizer = e
-                    save()
-                }}
-            />
+                <Switch
+                    checked={pauseVoxelizer}
+                    onchange={(e) => {
+                        pauseVoxelizer = e
+                        save()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -199,19 +219,19 @@
             )}
         >
             {#snippet action()}
-            <div class="w-50">
-                <Textbox
-                    value={wavingGrass}
-                    onchange={(e) => {
-                        wavingGrass = String(e)
-                        save()
-                    }}
-                    onenter={(e) => {
-                        wavingGrass = String(e)
-                        save()
-                    }}
-                />
-            </div>
+                <div class="w-50">
+                    <Textbox
+                        value={wavingGrass}
+                        onchange={(e) => {
+                            wavingGrass = String(e)
+                            save()
+                        }}
+                        onenter={(e) => {
+                            wavingGrass = String(e)
+                            save()
+                        }}
+                    />
+                </div>
             {/snippet}
         </SettingCard>
 
@@ -224,14 +244,14 @@
             )}
         >
             {#snippet action()}
-            <Dropdown
-                value={textureQuality}
-                options={textureQualityItems}
-                onchange={(e) => {
-                    textureQuality = e
-                    save()
-                }}
-            />
+                <Dropdown
+                    value={textureQuality}
+                    options={textureQualityItems}
+                    onchange={(e) => {
+                        textureQuality = e
+                        save()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -242,13 +262,13 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                checked={lowMeshQuality}
-                onchange={(e) => {
-                    lowMeshQuality = e
-                    save()
-                }}
-            />
+                <Switch
+                    checked={lowMeshQuality}
+                    onchange={(e) => {
+                        lowMeshQuality = e
+                        save()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -257,13 +277,13 @@
             description={$_('pages.fastflag.preset.graySkyCard.description')}
         >
             {#snippet action()}
-            <Switch
-                checked={graySky}
-                onchange={(e) => {
-                    graySky = e
-                    save()
-                }}
-            />
+                <Switch
+                    checked={graySky}
+                    onchange={(e) => {
+                        graySky = e
+                        save()
+                    }}
+                />
             {/snippet}
         </SettingCard>
     </div>
