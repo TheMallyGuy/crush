@@ -114,7 +114,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-between bg-obsidian h-screen w-screen flex-1 p-3 py-8 gap-5 text-white"
+    class="flex flex-col items-center justify-between h-screen w-screen flex-1 p-3 py-8 gap-5 text-white"
 >
     <div>
         <h1 class="text-4xl tracking-tight text-foreground font-medium">
@@ -126,7 +126,7 @@
         <div class="relative w-1/2 h-24">
             <BlurFade delay={0.2} class="h-full flex">
                 <div
-                    class="w-full h-full flex border border-stone-800 bg-obsidian hover:border-stone-700 transition-all"
+                    class="w-full h-full flex border border-stone-800 hover:border-stone-700 transition-all"
                 >
                     <button
                         on:click={handlePlayClick}

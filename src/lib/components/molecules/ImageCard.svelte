@@ -43,7 +43,7 @@
 
             {#if description || $$slots.description}
                 <p
-                    class="text-sm font-medium leading-relaxed text-stone-500 transition-colors duration-150 group-hover:text-stone-400"
+                    class="text-sm font-medium leading-relaxed text-stone-300 transition-colors duration-150 group-hover:text-stone-200"
                 >
                     <slot name="description">{description}</slot>
                 </p>

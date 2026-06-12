@@ -50,7 +50,7 @@
             </div>
 
             <div
-                class="text-stone-500 font-medium text-sm leading-relaxed mb-4"
+                class="text-stone-300 font-medium text-sm leading-relaxed mb-4"
             >
                 {#if description}
                     {description}

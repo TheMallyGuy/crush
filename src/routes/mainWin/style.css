@@ -49,14 +49,15 @@ input[type="password"],
 input[type="email"],
 textarea,
 select {
-    background-color: #141414 !important;
+    background-color: rgba(20, 20, 20, 0.55) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(2px);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    background-color: #1e1e1e !important;
+    background-color: rgba(30, 30, 30, 0.7) !important;
     border-color: var(--color-sapphire) !important;
 }
 

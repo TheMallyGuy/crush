@@ -42,7 +42,7 @@
             </h3>
         {/if}
         {#if description || $$slots.description}
-            <p class="font-medium text-stone-500 leading-relaxed group-hover:text-stone-400 transition-colors duration-150
+            <p class="font-medium text-stone-300 leading-relaxed group-hover:text-stone-200 transition-colors duration-150
             {size === 'sm' ? 'text-xs' : 'text-sm'}">
                 <slot name="description">{description}</slot>
             </p>

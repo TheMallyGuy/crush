@@ -22,7 +22,7 @@
     }
 </script>
 
-<div class="p-4 px-8 flex items-center bg-obsidian">
+<div class="p-4 px-8 flex items-center">
     <Button
         variant="primary"
         size="sm"

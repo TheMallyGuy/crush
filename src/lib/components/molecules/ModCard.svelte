@@ -34,7 +34,7 @@
         <div class="flex flex-col gap-0.5">
             <p class="truncate text-sm font-bold text-stone-100">{name}</p>
             {#if author || category}
-                <p class="truncate text-xs font-medium text-stone-500">
+                <p class="truncate text-xs font-medium text-stone-400">
                     {#if author}{$_('pages.mod.tab.communityMods.itemCard.by', {
                             values: { name: author },
                         })}
@@ -42,7 +42,7 @@
                         |
                     {/if}{category}
                 </p>
-                <p class="truncate text-xs font-medium text-stone-500">
+                <p class="truncate text-xs font-medium text-stone-400">
                     {$_('pages.mod.tab.communityMods.itemCard.adapter', {
                         values: { library: adapter },
                     })}

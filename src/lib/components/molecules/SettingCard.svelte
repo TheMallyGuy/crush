@@ -50,7 +50,7 @@
                     </h3>
                 {/if}
                 {#if description || $$slots.description}
-                    <p class="text-sm font-medium text-stone-500">
+                    <p class="text-sm font-medium text-stone-300">
                         <slot name="description">{description}</slot>
                     </p>
                 {/if}
