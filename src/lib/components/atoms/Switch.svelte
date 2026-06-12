@@ -9,7 +9,7 @@
     }
 
     let {
-        checked = $bindable(false),
+        checked = $bindable(),
         disabled = false,
         id = undefined,
         label = 'Toggle',

@@ -14,8 +14,8 @@
     }
 
     let {
-        checked = $bindable(false),
-        indeterminate = $bindable(false),
+        checked = $bindable(),
+        indeterminate = $bindable(),
         disabled = false,
         id = undefined,
         label = '',
@@ -33,7 +33,7 @@
             } else {
                 checked = !checked
             }
-            onchange?.({ checked, indeterminate })
+            onchange?.({ checked: checked ?? false, indeterminate: indeterminate ?? false })
         }
     }
 

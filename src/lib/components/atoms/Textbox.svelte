@@ -21,7 +21,7 @@
     }
 
     let {
-        value = $bindable(''),
+        value = $bindable(),
         type = 'text',
         placeholder = '',
         label = '',
@@ -47,12 +47,12 @@
     }
 
     function handleChange() {
-        onchange?.(value)
+        onchange?.(value ?? '')
     }
 
     function handleKeyDown(event: KeyboardEvent) {
         if (event.key === 'Enter') {
-            onenter?.(value)
+            onenter?.(value ?? '')
         }
     }
 </script>

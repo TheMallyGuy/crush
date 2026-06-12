@@ -7,7 +7,7 @@
     }
 
     let {
-        value = $bindable(''),
+        value = $bindable(),
         options = [],
         placeholder = 'Select an option',
         onchange,
