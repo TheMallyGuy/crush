@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Förval",
                 "description": "Använd våra inbyggda snabbflaggsförinställningar.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Anti-Aliasing Kvalitet (MSAA)",
                     "description": "Jämnar ut ojämna kanter. Högre värden ser bättre ut men kan minska prestandan."

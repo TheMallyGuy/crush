@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Přednastavení",
                 "description": "Použijte naše vestavěné rychlé předvolby vlajky.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Kvalita proti aliasování (MSAA)",
                     "description": "Vyhlazuje zubaté okraje. Vyšší hodnoty vypadají lépe, ale mohou snížit výkon."

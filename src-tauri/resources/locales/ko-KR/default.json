@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "사전 설정",
                 "description": "내장된 Fast Flag 프리셋을 사용합니다.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "안티앨리어싱 품질 (MSAA)",
                     "description": "들쭉날쭉한 가장자리를 부드럽게 합니다. 높은 값이 더 좋아 보이지만 성능이 저하될 수 있습니다."

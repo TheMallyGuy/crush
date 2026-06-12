@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Predefinições",
                 "description": "Use nossas predefinições de bandeira rápida embutidas.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Qualidade do Anti-Aliasing",
                     "description": "Suaviza bordas irregulares. Valores mais altos parecem melhores, mas podem reduzir o desempenho."

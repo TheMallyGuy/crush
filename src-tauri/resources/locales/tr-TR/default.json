@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Ön ayarlar",
                 "description": "Yerleşik hızlı bayrak ön ayarlarımızı kullanın.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Yumuşatma Kalitesi (MSAA)",
                     "description": "Pürüzlü kenarları pürüzsüzleştirir. Daha yüksek değerler daha iyi görünür ancak performansı düşürebilir."

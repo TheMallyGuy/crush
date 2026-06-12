@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Пресеты",
                 "description": "Воспользуйтесь встроенными настройками быстрого флага.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Качество сглаживания (MSAA)",
                     "description": "Сглаживает зубчатые края. Более высокие значения выглядят лучше, но могут снизить производительность."

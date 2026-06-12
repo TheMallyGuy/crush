@@ -396,6 +396,10 @@
             "preset": {
                 "preset": "Preimpostazioni",
                 "description": "Usa le nostre preimpostazioni per bandiere veloci integrate.",
+                "disableFastflag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
+                },
                 "msaaCard": {
                     "title": "Qualità dell'anti-aliasing",
                     "description": "Leviga i bordi frastagliati. I valori più alti hanno un aspetto migliore ma possono ridurre le prestazioni."
