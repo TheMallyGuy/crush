@@ -7009,7 +7009,6 @@ dependencies = [
  "bon",
  "rustc_version",
  "rustversion",
- "sysinfo",
  "time",
  "vergen-lib",
 ]
