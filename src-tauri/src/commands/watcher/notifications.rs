@@ -146,7 +146,7 @@ pub(super) async fn sleep_schedule_inner(
             notify("Hiya...", "Sleep now?")?;
         } else if count == 2 {
             notify("Last warning", "This is the last one, go to sleep or else")?;
-        } else if !in_game {
+        } else if count == 3 && !in_game {
             notify("Good night", "Now go to bed and have sweet dreams")?;
         }
 
