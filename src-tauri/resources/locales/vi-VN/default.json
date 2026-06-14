@@ -83,16 +83,16 @@
                 }
             },
             "backgroundCard": {
-                "title": "Background",
+                "title": "Nền",
                 "description": "Replace the default black background with a solid color or your own image.",
                 "dropdown": {
-                    "default": "Default (Black)",
+                    "default": "Mặc định (Đen)",
                     "color": "Solid Color",
-                    "image": "Image"
+                    "image": "Hình ảnh"
                 },
-                "colorLabel": "Background color",
-                "noImage": "No image selected yet.",
-                "chooseImage": "Choose Image"
+                "colorLabel": "Màu nền",
+                "noImage": "Chưa có hình ảnh được chọn.",
+                "chooseImage": "Chọn hình ảnh"
             }
         },
         "integrations": {
@@ -116,12 +116,12 @@
                     "description": "Bật tunneling để định tuyến Roblox qua VPN"
                 },
                 "disconnectWhenRobloxIsClosed": {
-                    "title": "Disconnect on Roblox is closed",
-                    "description": "Option to kill SwiftTunnel when roblox is closed"
+                    "title": "Ngắt kết nối khi Roblox đóng",
+                    "description": "Tùy chọn kết thúc SwiftTunnel khi Roblox đã đóng"
                 },
                 "multipleAssetsThoughRelays": {
-                    "title": "Route assets to multiple relays",
-                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
+                    "title": "Tuyến đường tài nguyên đến nhiều lưu luợng",
+                    "description": "Tuyến đường này phân bổ tài nguyên đến nhiều máy chủ lưu lượng, cải thiện tốc độ tải tài nguyên. Có thể gây lỗi xác thực, nên khởi chạy từ web để tránh lỗi đăng nhập."
                 },
                 "enableRoutingCard": {
                     "title": "Bật định tuyến Roblox",
@@ -132,8 +132,8 @@
                     "description": "Chuyển hướng toàn bộ lưu lượng khi khởi động Roblox qua máy chủ chuyển tiếp và kích hoạt bỏ qua DPI. Sử dụng tùy chọn này nếu Roblox bị chặn ở quốc gia của bạn. Ngụ ý định tuyến Roblox."
                 },
                 "enablePartialCountryBanCard": {
-                    "title": "Bypass Partial Ban",
-                    "description": "Relays only Roblox control-plane traffic so blocked games appear and join. Gameplay UDP stays direct so you keep your real in-game ping. Use this if only specific games are blocked in your country (e.g. Vietnam)."
+                    "title": "Bỏ qua lệnh cấm một phần",
+                    "description": "Chỉ chuyển tiếp lưu lượng của Roblox để các trò chơi bị chặn vẫn có thể hiển thị và tham gia. Kết nối UDP trong game không thay đổi nên bạn vẫn giữ nguyên ping thực trong game. Sử dụng chức năng này nếu một số trò chơi cụ thể bị chặn ở quốc gia của bạn (Ví dụ: Việt Nam)."
                 },
                 "preferredRegionCard": {
                     "title": "Khu vực ưu tiên",
@@ -397,8 +397,8 @@
                 "preset": "Có sẵn",
                 "description": "Sử dụng các thiết lập Fast Flag có sẵn của chúng tôi.",
                 "disableFastflag": {
-                    "title": "Disable Fastflag",
-                    "description": "Disable Fastflag."
+                    "title": "Tắt FastFlag",
+                    "description": "Vô hiệu tất cả FastFlag."
                 },
                 "msaaCard": {
                     "title": "Chất lượng khử răng cưa (MSAA)",
