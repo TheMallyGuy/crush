@@ -83,16 +83,16 @@
                 }
             },
             "backgroundCard": {
-                "title": "Background",
+                "title": "Фон",
                 "description": "Replace the default black background with a solid color or your own image.",
                 "dropdown": {
                     "default": "Default (Black)",
-                    "color": "Solid Color",
-                    "image": "Image"
+                    "color": "Сплошной цвет",
+                    "image": "Изображение"
                 },
-                "colorLabel": "Background color",
-                "noImage": "No image selected yet.",
-                "chooseImage": "Choose Image"
+                "colorLabel": "Цвет фона",
+                "noImage": "Изображение не выбрано.",
+                "chooseImage": "Выбрать изображение"
             }
         },
         "integrations": {
@@ -618,9 +618,9 @@
                 "button": "Пожертвовать"
             },
             "pirvacyCard": {
-                "title": "Privacy & Data",
+                "title": "Безопасность и данные",
                 "description": "Control how crush should use your information.",
-                "button": "Open",
+                "button": "Открыть",
                 "dialog": {
                     "warpped": "Record your activities for Roblox:Warpped"
                 }
@@ -635,6 +635,61 @@
                     "localization": "Локализация",
                     "specialThanks": "Особая благодарность (Ранние сторонники!)",
                     "scrollDown": "Please scroll down, there is more^^"
+                }
+            },
+            "cloudSyncCard": {
+                "title": "Cloud Sync",
+                "description": "Sync your crush config to the cloud.",
+                "button": "Открыть"
+            },
+            "cloudSync": {
+                "cloudSync": "Cloud sync",
+                "description": "Sync your config to the cloud, sync to your devices with ease",
+                "back": "Назад",
+                "notLoggedIn": "Вы не вошли в аккаунт.",
+                "loginWithBroswer": "Войти через браузер",
+                "spinner": "Продолжите в браузере",
+                "notifies": {
+                    "success": "Synced to cloud",
+                    "failed": "Sync to cloud failed",
+                    "syncFromSuccess": "Synced from cloud",
+                    "syncFromFailed": "Sync from cloud failed",
+                    "wrongPassword": "Неверный пароль",
+                    "wrongPasswordDescription": "Your config was encrypted with a different password. Nothing was changed."
+                },
+                "encryptionPasswordsCard": {
+                    "title": "Encryption password",
+                    "description": "Set a password to end-to-end encrypt your config before it syncs.",
+                    "descriptionAlt": "Your config is end-to-end encrypted. The password stays on this device.",
+                    "noEncryption": "Set an encryption password to enable syncing.",
+                    "setPasswords": "Установить пароль",
+                    "changePasswords": "Изменить",
+                    "dialog": {
+                        "title": "Encryption password",
+                        "description": "Your config is encrypted with this password before it's uploaded. It never leaves this device. If you lose it, your synced config can't be recovered.",
+                        "placeholder": "Введите пароль",
+                        "cancel": "Отменить",
+                        "save": "сохранить"
+                    }
+                },
+                "syncFromCloud": {
+                    "title": "Sync from cloud",
+                    "description": "Sync your config from the cloud",
+                    "button": "Sync"
+                },
+                "syncToCloud": {
+                    "title": "Sync to cloud",
+                    "description": "Sync your config to the cloud",
+                    "button": "Sync"
+                },
+                "autoSync": {
+                    "title": "Auto sync",
+                    "description": "Automatically sync your config to your device"
+                },
+                "errors": {
+                    "noPassword": "Set an encryption password first",
+                    "pollFailed": "Poll failed: {status}",
+                    "loginTimedOut": "Login timed out"
                 }
             }
         }

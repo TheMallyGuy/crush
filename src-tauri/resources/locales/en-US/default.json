@@ -71,7 +71,7 @@
             "description": "Customize the look and feel of the Roblox bootstrapper.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all Bloxstrap themes work.",
                 "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
@@ -146,7 +146,7 @@
             },
             "activityWatcherCard": {
                 "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
+                "description": "Watch your activity on Roblox. Some features require this to be enabled."
             },
             "sleepScheduleCard": {
                 "title": "Sleep schedule",
@@ -410,7 +410,7 @@
                 },
                 "grassAnimationCard": {
                     "title": "Grass waving animation",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction; 999 or any higher number will freeze the grass. 0 & 1 slightly reduce motion, and values greater than 1 strongly reduce motion, approaching stillness.)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Overwrite texture quality level",
