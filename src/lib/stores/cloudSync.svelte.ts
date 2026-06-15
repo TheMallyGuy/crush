@@ -1,13 +1,25 @@
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { fetch } from '@tauri-apps/plugin-http'
 import { load, Store } from '@tauri-apps/plugin-store'
-import type { CloudConfig } from '$lib/types'
+import type {
+    CloudConfig,
+    CloudUniversalConfig,
+    Installation,
+    Integrations,
+} from '$lib/types'
 import { notify } from '$lib/notify'
 import {
     encryptConfig,
     decryptConfig,
     WrongPasswordError,
 } from '$lib/crypto/configCrypto'
+import {
+    crushToUniversal,
+    universalToCrush,
+    mergeUniversal,
+    type CrushSnapshot,
+} from '$lib/cloud/universal'
+import { getFastFlags, saveFastFlags } from '$lib/fastflag/fastflagManagement'
 
 const BASE = 'https://cloud-config.mally.qzz.io'
 const POLL_INTERVAL = 2000
@@ -149,18 +161,54 @@ class CloudSync {
     }
 
 
-    async #buildSyncPayload(): Promise<string> {
+    async #readSnapshot(): Promise<CrushSnapshot> {
         const store = await this.#getStore()
-        const data = Object.fromEntries(await store.entries())
-
-        const cloudConfig = data.cloudConfig as CloudConfig | undefined
-        if (cloudConfig) {
-            const { authToken, lastSyncHash, syncPassword, ...rest } =
-                cloudConfig
-            data.cloudConfig = rest
+        return {
+            useFlag: (await store.get('useFlag')) as boolean | undefined,
+            bestRegion: (await store.get('bestRegion')) as string | undefined,
+            installation: (await store.get('installation')) as
+                | Installation
+                | undefined,
+            integrations: (await store.get('integrations')) as
+                | Integrations
+                | undefined,
+            lockedIn: (await store.get('lockedIn')) as boolean | undefined,
+            redRings: (await store.get('redRings')) as boolean | undefined,
+            fastFlags: await getFastFlags('player'),
         }
+    }
 
-        return JSON.stringify(data)
+    async #applySnapshot(s: CrushSnapshot) {
+        const store = await this.#getStore()
+        if (s.useFlag !== undefined) await store.set('useFlag', s.useFlag)
+        if (s.bestRegion !== undefined)
+            await store.set('bestRegion', s.bestRegion)
+        if (s.installation) await store.set('installation', s.installation)
+        if (s.integrations) await store.set('integrations', s.integrations)
+        if (s.lockedIn !== undefined) await store.set('lockedIn', s.lockedIn)
+        if (s.redRings !== undefined) await store.set('redRings', s.redRings)
+        await store.save()
+        if (s.fastFlags) await saveFastFlags(s.fastFlags, 'player')
+    }
+
+
+    async #contribution(): Promise<CloudUniversalConfig> {
+        return crushToUniversal(await this.#readSnapshot())
+    }
+
+
+    async #fetchUniversal(
+        password: string
+    ): Promise<CloudUniversalConfig | null> {
+        const res = await fetch(`${BASE}/config/sync`, {
+            headers: { Authorization: `Bearer ${this.token}` },
+        })
+        if (!res.ok) return null // 500 = nothing stored yet
+        const text = await res.text()
+        if (!text.trim()) return null
+        return JSON.parse(
+            await decryptConfig(text, password)
+        ) as CloudUniversalConfig
     }
 
     async #hash(text: string): Promise<string> {
@@ -185,11 +233,18 @@ class CloudSync {
         if (!res.ok) throw new Error(`sync failed: ${res.status}`)
     }
 
+    async #pushContribution(password: string, contribution: CloudUniversalConfig) {
+        const existing = await this.#fetchUniversal(password)
+        const merged = mergeUniversal(existing, contribution)
+        await this.#postSync(await encryptConfig(JSON.stringify(merged), password))
+    }
+
     async autoSyncIfChanged() {
         if (!this.isLoggedIn || !this.autoSync || this.isSyncing) return
         if (!this.#password) return
-        const payload = await this.#buildSyncPayload()
-        const hash = await this.#hash(payload)
+
+        const contribution = await this.#contribution()
+        const hash = await this.#hash(JSON.stringify(contribution))
 
         const store = await this.#getStore()
         const cloudConfig = (await store.get('cloudConfig')) as
@@ -199,7 +254,7 @@ class CloudSync {
 
         this.isSyncing = true
         try {
-            await this.#postSync(await encryptConfig(payload, this.#password))
+            await this.#pushContribution(this.#password, contribution)
             await this.#patchCloudConfig({ lastSyncHash: hash })
         } catch (e) {
             console.error('auto sync failed', e)
@@ -213,9 +268,11 @@ class CloudSync {
         this.isSyncing = true
         try {
             const password = this.#requirePassword()
-            const payload = await this.#buildSyncPayload()
-            await this.#postSync(await encryptConfig(payload, password))
-            await this.#patchCloudConfig({ lastSyncHash: await this.#hash(payload) })
+            const contribution = await this.#contribution()
+            await this.#pushContribution(password, contribution)
+            await this.#patchCloudConfig({
+                lastSyncHash: await this.#hash(JSON.stringify(contribution)),
+            })
 
             notify.send({ title: 'Synced to cloud', variant: 'success' })
         } catch (e) {
@@ -239,32 +296,25 @@ class CloudSync {
             })
             if (!res.ok) throw new Error(`sync failed: ${res.status}`)
 
-            const plaintext = await decryptConfig(await res.text(), password)
-            const pulled = JSON.parse(plaintext) as Record<string, unknown>
-            const store = await this.#getStore()
 
+            const universal = JSON.parse(
+                await decryptConfig(await res.text(), password)
+            ) as CloudUniversalConfig
 
-            const localCloud = (await store.get('cloudConfig')) as
-                | CloudConfig
-                | undefined
-            pulled.cloudConfig = {
-                ...(pulled.cloudConfig as CloudConfig | undefined),
-                authToken: localCloud?.authToken ?? this.token,
-                syncPassword: localCloud?.syncPassword ?? this.#password,
+            if (universal.schemaVersion !== 1) {
+                throw new Error(
+                    `unsupported cloud schema version: ${universal.schemaVersion}`
+                )
             }
 
-            for (const [key, value] of Object.entries(pulled)) {
-                await store.set(key, value)
-            }
-            await store.save()
 
-            this.autoSync =
-                (pulled.cloudConfig as CloudConfig).automaticallyCloud ??
-                this.autoSync
-
+            const current = await this.#readSnapshot()
+            await this.#applySnapshot(universalToCrush(universal, current))
 
             await this.#patchCloudConfig({
-                lastSyncHash: await this.#hash(await this.#buildSyncPayload()),
+                lastSyncHash: await this.#hash(
+                    JSON.stringify(await this.#contribution())
+                ),
             })
 
             notify.send({ title: 'Synced from cloud', variant: 'success' })
