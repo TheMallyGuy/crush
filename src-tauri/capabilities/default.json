@@ -26,6 +26,9 @@
       "allow": [
         {
           "url": "https://discord.gg/EwhG5y5Yw9"
+        },
+        {
+          "url": "https://cloud-config.mally.qzz.io/"
         }
       ]
     },
@@ -45,6 +48,9 @@
     {
       "identifier": "http:default",
       "allow": [
+        {
+          "url": "https://cloud-config.mally.qzz.io/*"
+        },
         {
           "url": "https://setup-ak.rbxcdn.com"
         },

@@ -15,6 +15,7 @@
         Cuboid,
         ScrollText,
         Shield,
+        Cloud,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -186,7 +187,9 @@
                 {$_('pages.settings.creditsCard.dialog.development')}
             </p>
             <p class="text-stone-300">Mally - Lead Developer</p>
-            <p class="text-stone-300">Damon - Original Roblox optimizer's logic</p>
+            <p class="text-stone-300">
+                Damon - Original Roblox optimizer's logic
+            </p>
         </div>
         <div>
             <p class="text-lx1 mb-1">
@@ -246,10 +249,27 @@
         icon={Languages}
     >
         {#snippet action()}
-        <Dropdown
-            bind:value={settings.currentLocale}
-            options={$dropdownOptions}
-        />
+            <Dropdown
+                bind:value={settings.currentLocale}
+                options={$dropdownOptions}
+            />
+        {/snippet}
+    </SettingCard>
+
+    <SettingCard
+        title="Cloud config"
+        description="Sync your crush config to the cloud."
+        icon={Cloud}
+    >
+        {#snippet action()}
+            <Button
+                variant="secondary"
+                onclick={() => {
+                    goto('./settings/cloud')
+                }}
+            >
+                Open
+            </Button>
         {/snippet}
     </SettingCard>
 
@@ -259,12 +279,9 @@
         icon={BookHeart}
     >
         {#snippet action()}
-        <Button
-            variant="danger"
-            onclick={handleResetCrushOnboarding}
-        >
-            {$_('pages.settings.onBoardCard.button')}
-        </Button>
+            <Button variant="danger" onclick={handleResetCrushOnboarding}>
+                {$_('pages.settings.onBoardCard.button')}
+            </Button>
         {/snippet}
     </SettingCard>
 
@@ -274,7 +291,7 @@
         icon={AudioWaveform}
     >
         {#snippet action()}
-        <Switch bind:checked={settings.discordRpcEnabled} />
+            <Switch bind:checked={settings.discordRpcEnabled} />
         {/snippet}
     </SettingCard>
 
@@ -284,7 +301,7 @@
         icon={Crosshair}
     >
         {#snippet action()}
-        <Switch bind:checked={settings.lockedInMode} />
+            <Switch bind:checked={settings.lockedInMode} />
         {/snippet}
     </SettingCard>
 
@@ -294,7 +311,7 @@
         icon={Cuboid}
     >
         {#snippet action()}
-        <Switch bind:checked={settings.redRings} />
+            <Switch bind:checked={settings.redRings} />
         {/snippet}
     </SettingCard>
 
@@ -304,12 +321,12 @@
         icon={Shield}
     >
         {#snippet action()}
-        <Button
-            variant="secondary"
-            onclick={() => {
-                privacyAndDataDialog = true
-            }}>{$_('pages.settings.creditsCard.button')}</Button
-        >
+            <Button
+                variant="secondary"
+                onclick={() => {
+                    privacyAndDataDialog = true
+                }}>{$_('pages.settings.creditsCard.button')}</Button
+            >
         {/snippet}
     </SettingCard>
 
@@ -345,12 +362,12 @@
         icon={ScrollText}
     >
         {#snippet action()}
-        <Button
-            variant="secondary"
-            onclick={() => {
-                creditDialog = true
-            }}>{$_('pages.settings.creditsCard.button')}</Button
-        >
+            <Button
+                variant="secondary"
+                onclick={() => {
+                    creditDialog = true
+                }}>{$_('pages.settings.creditsCard.button')}</Button
+            >
         {/snippet}
     </SettingCard>
 
@@ -367,12 +384,12 @@
     {#if devMode}
         <SettingCard title="Test page" icon={ScrollText} description="dev only">
             {#snippet action()}
-            <Button
-                variant="secondary"
-                onclick={() => {
-                    goto('./settings/dev')
-                }}>Open</Button
-            >
+                <Button
+                    variant="secondary"
+                    onclick={() => {
+                        goto('./settings/dev')
+                    }}>Open</Button
+                >
             {/snippet}
         </SettingCard>
     {/if}

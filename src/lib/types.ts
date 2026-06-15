@@ -114,6 +114,13 @@ export type InstallationEntry = {
     channel: 'global' | 'vng'
 }
 
+export type CloudConfig = {
+    authToken?: string
+    automaticallyCloud: boolean
+    lastSyncHash?: string
+    syncPassword?: string
+}
+
 export type Installation = {
     version: string,
     forceReinstall: boolean,
@@ -128,6 +135,7 @@ export type Config = {
     FirstLaunch: string
     bestRegion: string
     integrations: Integrations
+    cloudConfig: CloudConfig
     lockedIn?: boolean
     redRings?: boolean
 }
