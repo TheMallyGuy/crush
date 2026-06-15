@@ -21,7 +21,7 @@ import {
 } from '$lib/cloud/universal'
 import { getFastFlags, saveFastFlags } from '$lib/fastflag/fastflagManagement'
 
-const BASE = 'https://cloud-config.mally.qzz.io'
+const BASE = 'https://cloud-config.mally.qzz.io/v1'
 const POLL_INTERVAL = 2000
 const LOGIN_TIMEOUT = 5 * 60_000
 const AUTO_SYNC_INTERVAL = 60_000
