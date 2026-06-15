@@ -636,6 +636,61 @@
                     "specialThanks": "Special Thanks (Early supporters!)",
                     "scrollDown": "Kerro alaspäin, on lisää^^"
                 }
+            },
+            "cloudSyncCard": {
+                "title": "Cloud Sync",
+                "description": "Sync your crush config to the cloud.",
+                "button": "Open"
+            },
+            "cloudSync": {
+                "cloudSync": "Cloud sync",
+                "description": "Sync your config to the cloud, sync to your devices with ease",
+                "back": "Back",
+                "notLoggedIn": "You're not logged in.",
+                "loginWithBroswer": "Login in broswer",
+                "spinner": "Continue in your broswer",
+                "notifies": {
+                    "success": "Synced to cloud",
+                    "failed": "Sync to cloud failed",
+                    "syncFromSuccess": "Synced from cloud",
+                    "syncFromFailed": "Sync from cloud failed",
+                    "wrongPassword": "Wrong password",
+                    "wrongPasswordDescription": "Your config was encrypted with a different password. Nothing was changed."
+                },
+                "encryptionPasswordsCard": {
+                    "title": "Encryption password",
+                    "description": "Set a password to end-to-end encrypt your config before it syncs.",
+                    "descriptionAlt": "Your config is end-to-end encrypted. The password stays on this device.",
+                    "noEncryption": "Set an encryption password to enable syncing.",
+                    "setPasswords": "Set password",
+                    "changePasswords": "Change",
+                    "dialog": {
+                        "title": "Encryption password",
+                        "description": "Your config is encrypted with this password before it's uploaded. It never leaves this device. If you lose it, your synced config can't be recovered.",
+                        "placeholder": "Enter a password",
+                        "cancel": "Cancel",
+                        "save": "save"
+                    }
+                },
+                "syncFromCloud": {
+                    "title": "Sync from cloud",
+                    "description": "Sync your config from the cloud",
+                    "button": "Sync"
+                },
+                "syncToCloud": {
+                    "title": "Sync to cloud",
+                    "description": "Sync your config to the cloud",
+                    "button": "Sync"
+                },
+                "autoSync": {
+                    "title": "Auto sync",
+                    "description": "Automatically sync your config to your device"
+                },
+                "errors": {
+                    "noPassword": "Set an encryption password first",
+                    "pollFailed": "Poll failed: {status}",
+                    "loginTimedOut": "Login timed out"
+                }
             }
         }
     }
