@@ -114,6 +114,132 @@ export type InstallationEntry = {
     channel: 'global' | 'vng'
 }
 
+export type CloudConfig = {
+    authToken?: string
+    automaticallyCloud: boolean
+    lastSyncHash?: string
+    syncPassword?: string
+}
+
+/**
+ * Universal, bootstrapper-agnostic cloud config schema.
+ * 
+ * This part is wrote by claude.ai
+ * 
+ * Every Roblox bootstrapper (Crush, Bloxstrap, Froststrap, Funkstrap, Voidstrap,
+ * AppleBlox, ...) maps its own config to and from this shape, so they can all
+ * share a single cloud blob without overwriting each other's data.
+ *
+ * Rules for consumers:
+ *  - Every field is OPTIONAL. Only write the fields you actually understand.
+ *  - When writing back, MERGE onto the existing cloud object — never replace it
+ *    wholesale, or you'll wipe settings owned by other bootstrappers.
+ *  - Preserve unknown keys and the entire `vendor` map of apps that aren't you.
+ *  - Check `schemaVersion` before reading; ignore versions you don't support.
+ */
+export type CloudUniversalConfig = {
+    /** Schema version. Bump only on breaking changes. */
+    schemaVersion: 1
+
+    /** When this blob was last written, ISO-8601. Used for conflict resolution. */
+    updatedAt?: string
+
+    /**
+     * Roblox FastFlag overrides (FFlag/DFFlag/FInt/...). The single most
+     * portable piece of data — identical meaning across every bootstrapper.
+     */
+    fastFlags?: Record<string, string | number | boolean>
+
+    integrations?: {
+        /** Discord Rich Presence. */
+        discordRichPresence?: {
+            enabled?: boolean
+            /** Show the logged-in Roblox account (ShowAccountOnRichPresence / displayAccount). */
+            showAccount?: boolean
+            /** Allow others to join via RPC (!HideRPCButtons / letJoin). */
+            allowJoining?: boolean
+            /** Show current server details (ShowServerDetails). */
+            showServerDetails?: boolean
+        }
+
+        /** Activity / play-session tracking (EnableActivityTracking / activityWatching). */
+        activityTracking?: {
+            enabled?: boolean
+        }
+
+        /** Roblox crash handler behaviour. */
+        crashHandler?: {
+            /** Auto-close the crash handler (AutoCloseCrashHandler / closeCrashHandler). */
+            autoClose?: boolean
+            /** Disable the crash handler entirely (DisableCrash). */
+            disable?: boolean
+        }
+
+        /** Update behaviour. */
+        updates?: {
+            checkForUpdates?: boolean
+            backgroundUpdates?: boolean
+            /** Keep Roblox itself updated (UpdateRoblox). */
+            updateRoblox?: boolean
+        }
+
+        /** Server selection / matchmaking. */
+        matchmaking?: {
+            /** Region-biased matchmaking (EnableBetterMatchmaking). */
+            betterMatchmaking?: boolean
+            /** Notify which region a server is in (serverLocationNotifier). */
+            serverRegionNotifier?: boolean
+        }
+
+        /** Priority class for the Roblox process. */
+        processPriority?:
+            | 'below_normal'
+            | 'normal'
+            | 'above_normal'
+            | 'high'
+            | 'realtime'
+
+        /** Window control / interaction permissions (funkstrap-style controls / crush interactive). */
+        windowControl?: {
+            enabled?: boolean
+            allowMove?: boolean
+            allowTitleChange?: boolean
+            allowTransparency?: boolean
+        }
+    }
+
+    /**
+     * Roblox install / channel PREFERENCES (not device state). Installed paths,
+     * the active install on this machine, and transient flags like
+     * "force reinstall" are device-local and must NOT go here — keep those in
+     * `vendor` or out of the cloud entirely.
+     */
+    installation?: {
+        /** Pinned Roblox version GUID, or omit to follow the latest. */
+        version?: string
+        /** Don't auto-update Roblox past the pinned version (crush dontUpdate). */
+        pinVersion?: boolean
+        /** Use the VNG (Vietnam) Roblox channel (crush vng). */
+        vngChannel?: boolean
+        /** How many Roblox instances may run in parallel (crush parallel). */
+        parallel?: number
+    }
+
+    /** Preferred / best server region the launcher should target (crush bestRegion). */
+    bestRegion?: string
+
+    /** Whether FastFlag overrides are applied at all (crush useFlag). */
+    fastFlagsEnabled?: boolean
+
+    /**
+     * Per-bootstrapper private settings that don't map to the universal shape.
+     * Keyed by a stable lowercase bootstrapper id (e.g. "crush", "bloxstrap").
+     * A bootstrapper owns only its own key and MUST leave the others untouched.
+     */
+    vendor?: Record<string, unknown>
+}
+
+
 export type Installation = {
     version: string,
     forceReinstall: boolean,
@@ -128,6 +254,7 @@ export type Config = {
     FirstLaunch: string
     bestRegion: string
     integrations: Integrations
+    cloudConfig: CloudConfig
     lockedIn?: boolean
     redRings?: boolean
 }
