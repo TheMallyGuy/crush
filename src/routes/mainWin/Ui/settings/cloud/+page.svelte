@@ -33,23 +33,30 @@
 <Dialog
     open={passwordDialog}
     onclose={() => (passwordDialog = false)}
-    title="Encryption password"
-    description="Your config is encrypted with this password before it's uploaded. It never leaves this device. If you lose it, your synced config can't be recovered."
+    title={$_('pages.settings.cloudSync.encryptionPasswordsCard.dialog.title')}
+    description={$_(
+        'pages.settings.cloudSync.encryptionPasswordsCard.dialog.description'
+    )}
 >
     <div class="flex flex-col gap-4">
         <Textbox
             type="password"
-            placeholder="Enter a password"
+            placeholder={$_(
+                'pages.settings.cloudSync.encryptionPasswordsCard.dialog.placeholder'
+            )}
             bind:value={passwordInput}
             onenter={savePassword}
         />
         <div class="flex justify-end gap-2">
-            <Button
-                variant="secondary"
-                onclick={() => (passwordDialog = false)}>Cancel</Button
+            <Button variant="secondary" onclick={() => (passwordDialog = false)}
+                >{$_(
+                    'pages.settings.cloudSync.encryptionPasswordsCard.dialog.cancel'
+                )}</Button
             >
             <Button onclick={savePassword} disabled={!passwordInput}>
-                Save
+                {$_(
+                    'pages.settings.cloudSync.encryptionPasswordsCard.dialog.save'
+                )}
             </Button>
         </div>
     </div>
@@ -59,21 +66,21 @@
     <LoadingOverlay
         visible={cloud.isInAuth}
         blur={false}
-        message="Continue in your broswer"
+        message={$_('pages.settings.cloudSync.spinner')}
     />
 
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                Cloud config
+                {$_('pages.settings.cloudSync.cloudSync')}
             </h1>
             <p class="text-stone-400 mt-1">
-                Sync your config to the cloud, sync to your devices with ease
+                {$_('pages.settings.cloudSync.description')}
             </p>
         </div>
         <div class="flex items-center gap-2">
             <Button variant="secondary" onclick={() => goto('../settings')}>
-                Back
+                {$_('pages.settings.cloudSync.back')}
             </Button>
         </div>
     </div>
@@ -82,64 +89,82 @@
         <div
             class="flex flex-col gap-3 items-center justify-center py-32 text-stone-400 border border-dashed border-stone-800 rounded-lg"
         >
-            You're not logged in.
+            {$_('pages.settings.cloudSync.notLoggedIn')}
             {#if cloud.authError}
                 <p class="text-red-400 text-sm">{cloud.authError}</p>
             {/if}
             <Button onclick={() => cloud.login()} disabled={cloud.isInAuth}>
-                Login in broswer
+                {$_('pages.settings.cloudSync.loginWithBroswer')}
             </Button>
         </div>
     {:else}
         <SettingCard
-            title="Encryption password"
+            title={$_(
+                'pages.settings.cloudSync.encryptionPasswordsCard.changePasswords'
+            )}
             description={cloud.hasPassword
-                ? 'Your config is end-to-end encrypted. The password stays on this device.'
-                : 'Set a password to end-to-end encrypt your config before it syncs.'}
+                ? $_(
+                      'pages.settings.cloudSync.encryptionPasswordsCard.descriptionAlt'
+                  )
+                : $_(
+                      'pages.settings.cloudSync.encryptionPasswordsCard.description'
+                  )}
         >
             {#snippet action()}
                 <Button variant="secondary" onclick={openPasswordDialog}>
-                    {cloud.hasPassword ? 'Change' : 'Set password'}
+                    {cloud.hasPassword
+                        ? $_(
+                              'pages.settings.cloudSync.encryptionPasswordsCard.changePasswords'
+                          )
+                        : $_(
+                              'pages.settings.cloudSync.encryptionPasswordsCard.setPasswords'
+                          )}
                 </Button>
             {/snippet}
         </SettingCard>
 
         {#if !cloud.hasPassword}
             <p class="text-amber-400/90 text-sm -mt-2">
-                Set an encryption password to enable syncing.
+                {$_(
+                    'pages.settings.cloudSync.encryptionPasswordsCard.noEncryption'
+                )}
             </p>
         {/if}
 
         <SettingCard
-            title="Sync from cloud"
-            description="Sync your config from the cloud"
+            title={$_('pages.settings.cloudSync.syncFromCloud.title')}
+            description={$_(
+                'pages.settings.cloudSync.syncFromCloud.description'
+            )}
         >
             {#snippet action()}
                 <Button
                     onclick={() => cloud.syncFromCloud()}
                     disabled={cloud.isSyncing || !cloud.hasPassword}
-                    >Sync</Button
+                    >{$_(
+                        'pages.settings.cloudSync.syncFromCloud.button'
+                    )}</Button
                 >
             {/snippet}
         </SettingCard>
 
         <SettingCard
-            title="Sync to cloud"
-            description="Sync your config to the cloud"
+            title={$_('pages.settings.cloudSync.syncToCloud.title')}
+            description={$_('pages.settings.cloudSync.syncToCloud.description')}
         >
             {#snippet action()}
                 <Button
                     variant="danger"
                     onclick={() => cloud.syncToCloud()}
                     disabled={cloud.isSyncing || !cloud.hasPassword}
-                    >Sync</Button
+                    >{$_('pages.settings.cloudSync.syncToCloud.button')}</Button
                 >
             {/snippet}
         </SettingCard>
 
         <SettingCard
-            title="Auto sync"
-            description="Automatically sync your config to your device"
+            title={$_('pages.settings.cloudSync.autoSync.title')}
+            description={$_('pages.settings.cloudSync.autoSync.description')}
         >
             {#snippet action()}
                 <Switch

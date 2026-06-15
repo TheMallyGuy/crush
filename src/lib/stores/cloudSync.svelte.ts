@@ -20,11 +20,18 @@ import {
     type CrushSnapshot,
 } from '$lib/cloud/universal'
 import { getFastFlags, saveFastFlags } from '$lib/fastflag/fastflagManagement'
+import { _ } from 'svelte-i18n'
+import { get } from 'svelte/store'
 
 const BASE = 'https://cloud-config.mally.qzz.io/v1'
 const POLL_INTERVAL = 2000
 const LOGIN_TIMEOUT = 5 * 60_000
 const AUTO_SYNC_INTERVAL = 60_000
+
+const NS = 'pages.settings.cloudSync'
+type Values = Record<string, string | number | boolean | Date | null | undefined>
+const t = (key: string, values?: Values) =>
+    values ? get(_)(key, { values }) : get(_)(key)
 
 // this was hard to make
 
@@ -87,7 +94,7 @@ class CloudSync {
 
     #requirePassword(): string {
         if (!this.#password) {
-            throw new Error('set an encryption password first')
+            throw new Error(t(`${NS}.errors.noPassword`))
         }
         return this.#password
     }
@@ -139,14 +146,16 @@ class CloudSync {
                 }
 
                 if (res.status !== 204) {
-                    this.authError = `poll failed: ${res.status}`
+                    this.authError = t(`${NS}.errors.pollFailed`, {
+                        status: res.status,
+                    })
                     return
                 }
 
                 await new Promise((r) => setTimeout(r, POLL_INTERVAL))
             }
 
-            this.authError = 'login timed out'
+            this.authError = t(`${NS}.errors.loginTimedOut`)
         } catch (e) {
             console.error('auth error', e)
             this.authError = e instanceof Error ? e.message : String(e)
@@ -274,10 +283,13 @@ class CloudSync {
                 lastSyncHash: await this.#hash(JSON.stringify(contribution)),
             })
 
-            notify.send({ title: 'Synced to cloud', variant: 'success' })
+            notify.send({
+                title: t(`${NS}.notifies.success`),
+                variant: 'success',
+            })
         } catch (e) {
             notify.send({
-                title: 'Sync to cloud failed',
+                title: t(`${NS}.notifies.failed`),
                 description: e instanceof Error ? e.message : String(e),
                 variant: 'danger',
             })
@@ -317,18 +329,20 @@ class CloudSync {
                 ),
             })
 
-            notify.send({ title: 'Synced from cloud', variant: 'success' })
+            notify.send({
+                title: t(`${NS}.notifies.syncFromSuccess`),
+                variant: 'success',
+            })
         } catch (e) {
             if (e instanceof WrongPasswordError) {
                 notify.send({
-                    title: 'Wrong password',
-                    description:
-                        'Your config was encrypted with a different password. Nothing was changed.',
+                    title: t(`${NS}.notifies.wrongPassword`),
+                    description: t(`${NS}.notifies.wrongPasswordDescription`),
                     variant: 'warning',
                 })
             } else {
                 notify.send({
-                    title: 'Sync from cloud failed',
+                    title: t(`${NS}.notifies.syncFromFailed`),
                     description: e instanceof Error ? e.message : String(e),
                     variant: 'danger',
                 })

@@ -257,8 +257,8 @@
     </SettingCard>
 
     <SettingCard
-        title="Cloud config"
-        description="Sync your crush config to the cloud."
+        title={$_('pages.settings.cloudSyncCard.title')}
+        description={$_('pages.settings.cloudSyncCard.description')}
         icon={Cloud}
     >
         {#snippet action()}
@@ -268,7 +268,7 @@
                     goto('./settings/cloud')
                 }}
             >
-                Open
+                {$_('pages.settings.cloudSyncCard.button')}
             </Button>
         {/snippet}
     </SettingCard>
