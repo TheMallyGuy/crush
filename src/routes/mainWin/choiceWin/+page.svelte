@@ -111,14 +111,18 @@
         firstLaunchValue = await checkLaunch()
     })
     import BlurFade from '$lib/components/magic/blur-fade/blur-fade.svelte'
+    import Text from '$lib/components/molecules/Text.svelte'
 </script>
 
 <div
     class="flex flex-col items-center justify-between h-screen w-screen flex-1 p-3 py-8 gap-5 text-white"
 >
     <div>
-        <h1 class="text-4xl tracking-tight text-foreground font-medium">
+        <h1
+            class="text-4xl tracking-tight text-foreground font-medium text-center"
+        >
             <BlurFade delay={0}>Crush</BlurFade>
+            <BlurFade delay={0.1}><Text /></BlurFade>
         </h1>
     </div>
 
