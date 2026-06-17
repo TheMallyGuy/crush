@@ -1,5 +1,6 @@
 <script lang="ts">
     import { fade } from 'svelte/transition'
+    import Text from '../molecules/Text.svelte'
 
     interface Props {
         visible?: boolean
@@ -63,6 +64,7 @@
             <p class="text-xs font-medium tracking-wide text-stone-500">
                 {message}
             </p>
+            <Text />
         {/if}
     </div>
 {/if}

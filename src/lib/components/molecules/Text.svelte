@@ -3,6 +3,7 @@
     import { _ } from 'svelte-i18n'
 
     let text = $state('')
+    let props = $props()
 
     onMount(() => {
         const items = $_('pages.choiceWin.funFacts.items', {
@@ -16,4 +17,4 @@
     })
 </script>
 
-<p class="text-sm text-gray-600">{text}</p>
+<p class="text-sm text-gray-600 {props.class}">{text}</p>
