@@ -22,7 +22,7 @@ use commands::roblox_deployment::{
 use commands::shortcuts::new_shorcut;
 use commands::swifttunnel::{
     connect, start_browser_login, swift_auth_logout, swift_cancel_auth, swift_fetch_servers,
-    swift_get_servers, swift_is_logged_in, swift_servers_ping,
+    swift_get_servers, swift_is_logged_in, swift_servers_ping, swift_startup_prepare,
 };
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, kill_window};
@@ -445,6 +445,7 @@ pub fn run() {
             swift_auth_logout,
             swift_get_servers,
             swift_fetch_servers,
+            swift_startup_prepare,
             connect,
             kill_roblox_if_open,
             swift_servers_ping,

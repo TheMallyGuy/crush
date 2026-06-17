@@ -70,6 +70,8 @@ extern "C" {
     fn swifttunnel_servers_get_json() -> *mut c_char;
     fn swifttunnel_servers_ping(region: *const c_char) -> i32;
 
+    fn swifttunnel_startup_prepare() -> i32;
+
     fn swifttunnel_connect(region: *const c_char, apps_json: *const c_char) -> i32;
     fn swifttunnel_connect_ex(options_json: *const c_char) -> i32;
     fn swifttunnel_disconnect() -> i32;
@@ -473,6 +475,18 @@ impl SwiftTunnel {
     }
 
     // ── Connection ────────────────────────────────────────────────────────────
+
+    /// Run startup preparation: clears leftover WinpkFilter bindings and
+    /// checks driver availability. Returns `Ok(true)` if driver is ready,
+    /// `Ok(false)` if unavailable, `Err` if the call itself failed.
+    pub fn startup_prepare(&self) -> Result<bool> {
+        let rc = unsafe { swifttunnel_startup_prepare() };
+        match rc {
+            1 => Ok(true),
+            0 => Ok(false),
+            _ => Err(self.last_error_or("startup prepare failed")),
+        }
+    }
 
     /// Connect using full options (preferred).
     pub fn connect_ex(&self, opts: ConnectOptions) -> Result<()> {

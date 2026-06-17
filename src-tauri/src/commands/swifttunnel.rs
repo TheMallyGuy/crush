@@ -73,6 +73,12 @@ pub async fn swift_servers_ping(
 }
 
 #[tauri::command]
+pub async fn swift_startup_prepare(state: tauri::State<'_, SdkState>) -> Result<bool, String> {
+    let sdk = state.0.lock().map_err(|e| e.to_string())?;
+    sdk.startup_prepare().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
 pub async fn connect(
     region: String,
     routing: bool,
