@@ -70,19 +70,18 @@
                 type: 'region',
             })
 
-            const countriesMap = new Map<string, string>()
+            const regionsMap = new Map<string, string>()
 
             serverList.forEach((item) => {
-                const fullName =
-                    regionNames.of(item.country_code.toUpperCase()) ??
-                    item.country_code
-
-                if (!countriesMap.has(fullName)) {
-                    countriesMap.set(fullName.toLowerCase(), fullName)
+                if (!regionsMap.has(item.region)) {
+                    const fullName =
+                        regionNames.of(item.country_code.toUpperCase()) ??
+                        item.country_code
+                    regionsMap.set(item.region, fullName)
                 }
             })
 
-            perferedRegionItems = Array.from(countriesMap.entries()).map(
+            perferedRegionItems = Array.from(regionsMap.entries()).map(
                 ([value, label]) => ({ label, value })
             )
 
