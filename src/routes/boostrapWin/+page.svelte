@@ -167,14 +167,14 @@
                 if (integrations?.swifttunnel?.enable) {
                     handleProgress({
                         type: 'status',
-                        message: 'Preparing SwiftTunnel...',
+                        message: $_("pages.boostrapWin.steps.swifttunnel.prepare"),
                     })
 
                     await invoke('swift_startup_prepare').catch(() => {})
 
                     handleProgress({
                         type: 'status',
-                        message: 'Connecting to swifttunnel servers...',
+                        message: $_("pages.boostrapWin.steps.swifttunnel.connect"),
                     })
 
                     try {

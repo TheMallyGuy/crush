@@ -101,6 +101,10 @@
         "boostrapWin": {
             "steps": {
                 "prep": "Preparing...",
+                "swifttunnel": {
+                    "connect": "Connecting to SwiftTunnel servers...",
+                    "prepare": "Preparing for SwiftTunnel..."
+                },
                 "applyMods": "Applying modifications",
                 "launch": "Launching"
             },
