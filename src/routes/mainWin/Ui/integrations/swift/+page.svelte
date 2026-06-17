@@ -221,10 +221,10 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={enableSwifttunnel}
-                onchange={saveSettings}
-            />
+                <Switch
+                    bind:checked={enableSwifttunnel}
+                    onchange={saveSettings}
+                />
             {/snippet}
         </SettingCard>
 
@@ -235,11 +235,11 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                disabled={!enableSwifttunnel}
-                bind:checked={enableRouting}
-                onchange={saveSettings}
-            />
+                <Switch
+                    disabled={!enableSwifttunnel}
+                    bind:checked={enableRouting}
+                    onchange={saveSettings}
+                />
             {/snippet}
         </SettingCard>
 
@@ -252,11 +252,11 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                disabled={!enableSwifttunnel}
-                bind:checked={closeWhenTuff}
-                onchange={saveSettings}
-            />
+                <Switch
+                    disabled={!enableSwifttunnel}
+                    bind:checked={closeWhenTuff}
+                    onchange={saveSettings}
+                />
             {/snippet}
         </SettingCard>
 
@@ -269,11 +269,11 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                disabled={!enableSwifttunnel}
-                bind:checked={assetsRouting}
-                onchange={saveSettings}
-            />
+                <Switch
+                    disabled={!enableSwifttunnel}
+                    bind:checked={assetsRouting}
+                    onchange={saveSettings}
+                />
             {/snippet}
         </SettingCard>
 
@@ -286,11 +286,16 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                disabled={!enableSwifttunnel}
-                bind:checked={enableCountryBan}
-                onchange={saveSettings}
-            />
+                <Switch
+                    disabled={!enableSwifttunnel}
+                    bind:checked={enableCountryBan}
+                    onchange={() => {
+                        if (!enableCountryBan && !enablePartialCountryBan)
+                            enableCountryBan = true
+                        if (enableCountryBan) enablePartialCountryBan = false
+                        saveSettings()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -303,11 +308,16 @@
             )}
         >
             {#snippet action()}
-            <Switch
-                disabled={!enableSwifttunnel}
-                bind:checked={enablePartialCountryBan}
-                onchange={saveSettings}
-            />
+                <Switch
+                    disabled={!enableSwifttunnel}
+                    bind:checked={enablePartialCountryBan}
+                    onchange={() => {
+                        if (!enablePartialCountryBan && !enableCountryBan)
+                            enablePartialCountryBan = true
+                        if (enablePartialCountryBan) enableCountryBan = false
+                        saveSettings()
+                    }}
+                />
             {/snippet}
         </SettingCard>
 
@@ -320,11 +330,11 @@
             )}
         >
             {#snippet action()}
-            <Dropdown
-                options={perferedRegionItems}
-                bind:value={perferedRegion}
-                onchange={saveSettings}
-            />
+                <Dropdown
+                    options={perferedRegionItems}
+                    bind:value={perferedRegion}
+                    onchange={saveSettings}
+                />
             {/snippet}
         </SettingCard>
 
