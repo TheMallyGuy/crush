@@ -167,6 +167,13 @@
                 if (integrations?.swifttunnel?.enable) {
                     handleProgress({
                         type: 'status',
+                        message: 'Preparing SwiftTunnel...',
+                    })
+
+                    await invoke('swift_startup_prepare').catch(() => {})
+
+                    handleProgress({
+                        type: 'status',
                         message: 'Connecting to swifttunnel servers...',
                     })
 
