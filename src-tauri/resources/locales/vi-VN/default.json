@@ -46,51 +46,65 @@
             "config": "Cấu hình",
             "discord": "Cộng đồng chúng tôi",
             "funFacts": {
-                "fallback": "This suppose to display fun facts, but something broke down...",
+                "fallback": "Trang này đáng lẽ ra phải hiển thị những thông tin thú vị, nhưng có vẻ như đã bị lỗi...",
                 "items": [
-                    "Hello",
-                    "Have you ever tried getting your crush like you?",
-                    "roblox vn community rn:",
-                    "we are all slandering vng",
-                    "leventgameing is the GOAT",
-                    "Loading malware....",
-                    "Deleting system32....",
-                    "I suppose",
-                    "Are you reading this yes?",
-                    "Say hi to the new miawuawua",
-                    "I have a crush but she didnt know it yet",
-                    "What's a high tier app look like to a low tier boostraper?",
-                    "Let's make crush mainstream",
+                    "Xin chào",
+                    "Bạn từng thử để crush thích bạn?",
+                    "cộng đồng roblox vn bây giờ:",
+                    "chúng ta vu khống vng",
+                    "leventgaming là GOAT",
+                    "Đang tải malware...",
+                    "Đang xoá system32",
+                    "Đáng lẽ ra mình",
+                    "Bạn đang đọc cái này?",
+                    "Nói xin chào đến miawuawua mới",
+                    "Tôi có crush nhưng cô ấy vẫn chưa biết",
+                    "Một ứng dụng xếp hạng cao trông như thế nào với bootstraper xếp hạng thấp?",
+                    "Cùng nhau làm crush mainstream",
                     "meow",
-                    "100 cp fans vs happiness",
-                    "Everything but adding Server region selection to crush",
-                    "\"I have crush, you are not\"",
-                    "i am really sorry about that",
-                    "binary (10010100101) non-binary (HelloWorld\"(Print)\")",
-                    "im adding an injector next week",
-                    "successfully installed c++ on your machine",
+                    "100 cp fans với hạnh phúc",
+                    "Tất cả nhưng thêm lựa chọn vùng máy chủ vào crush",
+                    "\"Mình có crush, bạn chưa có\"",
+                    "tôi rất xin lỗi về điều đó",
+                    "nhị phân (10010100101) phi nhị phân (HelloWorld\"(Print)\")",
+                    "mình sẽ thêm injector vào tuần sau",
+                    "cài đặt thành công c++ vào máy bạn",
+                    "bạn biết không? mình cũng đã cài c# vào máy bạn",
+                    "Việc có một người ngốc nghếch bên cạnh đã chứng minh là giúp kéo dài tuổi thọ của một người. Cảm ơn vì đã ở đây!",
                     "🐘",
                     "ily",
-                    "me updating 100 billons updates to crush",
-                    "Mally isn't Mally, he IS someone before...",
-                    "Join our community server!",
-                    "I've detected your homework folder over 10 TB, whats going on there?",
-                    "Big thanks for bratic for promoting crush",
+                    "tôi cập nhật 100 tỷ bản cập nhật cho crush",
+                    "Mally không phải Mally, anh ấy là người trước đây...",
+                    "Tham gia máy chủ cộng đồng",
+                    "Mình đã phát hiện thư mục bài tập về nhà hơn 10TB, có gì trong đó vậy?",
+                    "Lời cảm ơn lớn đến bratic vì quảng bá crush",
                     "ouh shii 👀👀",
-                    "This is a fun fact",
-                    "Make lil crushies with your crush gng 💔🥀",
-                    "Crush started its development on March, 14 2026, 10 days after Mally's birthday!",
-                    "Shoutout to alexdahumbleone",
-                    "BRO BE HATING ON ANYTHING 😭😭",
-                    "Also try out Bloxstrap",
-                    "Also try out Froststrap",
-                    "Also try out Fishstrap"
+                    "Bạn rất đáng yêu",
+                    "Đây là sự thật thú vị",
+                    "Tạo mối tình với crush của bạn gng 💔🥀",
+                    "Crush bắt đầu phát triển vào ngày 14 tháng 4 năm 2026, 10 ngày sau khi sinh nhật của Mally",
+                    "Xin gửi lời chào đến alexdahumbleone",
+                    "cập nhật vô hạn ahh",
+                    "stop larping python in your bio that is not tuff",
+                    ">hãy là tôi",
+                    "\"gian lận cấp nhân sử dụng python\" 😭😭😭😭",
+                    "Thứ gì đó sẽ đến trong 3 ngày",
+                    "Đây là crush!",
+                    "Chào các game thủ",
+                    "ANH BẠN GHÉT MỌI THỨ 😭😭",
+                    "Hãy thử Bloxstrap",
+                    "Hãy thử Froststrap",
+                    "Hãy thử Fishstrap"
                 ]
             }
         },
         "boostrapWin": {
             "steps": {
                 "prep": "Đang chuẩn bị...",
+                "swifttunnel": {
+                    "connect": "Đang kết nối đến máy chủ SwiftTunnel...",
+                    "prepare": "Đang chuẩn bị SwiftTunnel..."
+                },
                 "applyMods": "Đang áp dụng những chỉnh sửa",
                 "launch": "Đang khởi chạy"
             },
@@ -126,10 +140,10 @@
             },
             "backgroundCard": {
                 "title": "Nền",
-                "description": "Replace the default black background with a solid color or your own image.",
+                "description": "Thay thế nền đen mặc định bằng một màu đơn sắc hoặc hình ảnh riêng của bạn.",
                 "dropdown": {
                     "default": "Mặc định (Đen)",
-                    "color": "Solid Color",
+                    "color": "Màu đơn",
                     "image": "Hình ảnh"
                 },
                 "colorLabel": "Màu nền",
@@ -680,58 +694,58 @@
                 }
             },
             "cloudSyncCard": {
-                "title": "Cloud Sync",
-                "description": "Sync your crush config to the cloud.",
-                "button": "Open"
+                "title": "Đồng bộ đám mây",
+                "description": "Đồng bộ thiết lập crush của bạn lên đám mây.",
+                "button": "Mở"
             },
             "cloudSync": {
-                "cloudSync": "Cloud sync",
-                "description": "Sync your config to the cloud, sync to your devices with ease",
-                "back": "Back",
-                "notLoggedIn": "You're not logged in.",
-                "loginWithBroswer": "Login in broswer",
-                "spinner": "Continue in your broswer",
+                "cloudSync": "Đồng bộ đám mây",
+                "description": "Đồng bộ thiết lập của bạn lên đám mây, đồng bộ với các thiết bị của bạn một cách dễ dàng.",
+                "back": "Quay lại",
+                "notLoggedIn": "Bạn chưa đăng nhập",
+                "loginWithBroswer": "Đăng nhập trong trình duyệt",
+                "spinner": "Tiếp tục trong trình duyệt của bạn",
                 "notifies": {
-                    "success": "Synced to cloud",
-                    "failed": "Sync to cloud failed",
-                    "syncFromSuccess": "Synced from cloud",
-                    "syncFromFailed": "Sync from cloud failed",
-                    "wrongPassword": "Wrong password",
-                    "wrongPasswordDescription": "Your config was encrypted with a different password. Nothing was changed."
+                    "success": "Đã đồng bộ lên đám mây",
+                    "failed": "Đồng bộ lên đám mây thất bại",
+                    "syncFromSuccess": "Đã đồng bộ từ đám mây",
+                    "syncFromFailed": "Đồng bộ từ đám mây thất bại",
+                    "wrongPassword": "Mật khẩu sai",
+                    "wrongPasswordDescription": "Thiết lập của bạn đã được mã hoá với một mật khẩu khác. Không có gì thay đổi cả."
                 },
                 "encryptionPasswordsCard": {
-                    "title": "Encryption password",
-                    "description": "Set a password to end-to-end encrypt your config before it syncs.",
-                    "descriptionAlt": "Your config is end-to-end encrypted. The password stays on this device.",
-                    "noEncryption": "Set an encryption password to enable syncing.",
-                    "setPasswords": "Set password",
-                    "changePasswords": "Change",
+                    "title": "Mật khẩu mã hoá",
+                    "description": "Đặt mật khẩu để thiết lập của bạn được mã hoá đầu cuối trước khi đồng bộ.",
+                    "descriptionAlt": "Thiết lập của bạn được mã hoá đầu cuối. Mật khẩu được ở trong thiết bị này.",
+                    "noEncryption": "Đặt một mật khẩu mã hoá để bật đồng bộ",
+                    "setPasswords": "Đặt mật khẩu",
+                    "changePasswords": "Thay đổi",
                     "dialog": {
-                        "title": "Encryption password",
-                        "description": "Your config is encrypted with this password before it's uploaded. It never leaves this device. If you lose it, your synced config can't be recovered.",
-                        "placeholder": "Enter a password",
-                        "cancel": "Cancel",
-                        "save": "save"
+                        "title": "Mật khẩu mã hoá",
+                        "description": "Thiết lập của bạn được mã hoá với mật khẩu này trước khi được tải lên. Nó không bao giờ rời khỏi thiết bị này. Nếu bạn làm mất nó, thiết lập của bạn đã được đồng bộ không thể khôi phục.",
+                        "placeholder": "Nhập mật khẩu",
+                        "cancel": "Hủy",
+                        "save": "lưu"
                     }
                 },
                 "syncFromCloud": {
-                    "title": "Sync from cloud",
-                    "description": "Sync your config from the cloud",
-                    "button": "Sync"
+                    "title": "Đồng bộ từ đám mây",
+                    "description": "Đồng bộ thiết lập của bạn từ đám mây",
+                    "button": "Đồng bộ"
                 },
                 "syncToCloud": {
-                    "title": "Sync to cloud",
-                    "description": "Sync your config to the cloud",
-                    "button": "Sync"
+                    "title": "Đồng bộ lên đám mây",
+                    "description": "Đồng bộ thiết lập của bạn lên đám mây",
+                    "button": "Đồng bộ"
                 },
                 "autoSync": {
-                    "title": "Auto sync",
-                    "description": "Automatically sync your config to your device"
+                    "title": "Tự động đồng bộ",
+                    "description": "Tự động đồng bộ thiết lập của bạn đến thiết bị của bạn"
                 },
                 "errors": {
-                    "noPassword": "Set an encryption password first",
-                    "pollFailed": "Poll failed: {status}",
-                    "loginTimedOut": "Login timed out"
+                    "noPassword": "Đặt mật khẩu mã hoá trước",
+                    "pollFailed": "Cuộc thăm dò thất bại: {status}",
+                    "loginTimedOut": "Đăng nhập đã hết thời gian"
                 }
             }
         }
