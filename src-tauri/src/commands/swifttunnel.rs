@@ -89,9 +89,21 @@ pub async fn connect(
 ) -> Result<(), String> {
     let sdk = state.0.lock().map_err(|e| e.to_string())?;
 
+    let mut apps: Vec<String> = vec![
+        "robloxplayerbeta.exe".into(),
+        "robloxplayer.exe".into(),
+        "robloxapp.exe".into(),
+        "robloxplayerlauncher.exe".into(),
+    ];
+    // Country ban bypass: also tunnel third-party strappers so their
+    // launch-time clientsettings/update fetches aren't blocked.
+    if country_ban {
+        apps.extend(["bloxstrap.exe", "fishstrap.exe", "froststrap.exe", "bubblestrap.exe"].map(String::from));
+    }
+
     let options = ConnectOptions {
         region,
-        apps: vec!["robloxplayerbeta.exe".into()],
+        apps,
         asset_urls: if dynamic_assets {
             vec!["assetdelivery.roblox.com".into(), "*.rbxcdn.com".into()]
         } else {
