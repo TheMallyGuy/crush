@@ -3,11 +3,11 @@
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import type { ServerInfoFromBackend } from '$lib/types'
     import { listen } from '@tauri-apps/api/event'
-    import { getMessageFormatter } from 'svelte-i18n'
     import { writeText } from '@tauri-apps/plugin-clipboard-manager'
     import { fetch } from '@tauri-apps/plugin-http'
     import { _ } from 'svelte-i18n'
-    import { info } from '@tauri-apps/plugin-log'
+    import { invoke } from '@tauri-apps/api/core'
+    import { onMount } from 'svelte'
 
     let serverInstanceId: string = 'Unknown'
     let gameId: number = 1234
@@ -30,51 +30,48 @@
         universeId: number
     ): Promise<{ name: string; imageUrl: string | null }> {
         const [nameRes, iconRes] = await Promise.all([
-            await fetch(
-                `https://games.roblox.com/v1/games?universeIds=${universeId}`
-            )
+            fetch(`https://games.roblox.com/v1/games?universeIds=${universeId}`)
                 .then((r) => r.json())
                 .catch(() => null),
-            await fetch(
+            fetch(
                 `https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeId}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`
             )
                 .then((r) => r.json())
                 .catch(() => null),
         ])
 
-        const details = {
+        return {
             name: nameRes?.data?.[0]?.name ?? 'Unknown Game',
             imageUrl: iconRes?.data?.[0]?.imageUrl ?? null,
         }
-
-        return details
     }
 
     async function copyToClipboard(url: any) {
         await writeText(url)
     }
 
-    listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
-        serverInstanceId = event.payload.server_id
-        gameId = event.payload.game_id
-        gameRegion = event.payload.region_info
-
+    async function applyServerInfo(info: ServerInfoFromBackend) {
+        serverInstanceId = info.server_id
+        gameId = info.game_id
+        gameRegion = info.region_info
         serverInviteLink = `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
 
         const universeData = await getUniverse(gameId)
-
         if (!universeData) {
             gameName = 'Unknown Game'
             return
         }
-
         const details = await getGameDetails(gameId, universeData.universeId)
-
         gameName = details.name
+    }
 
-        console.log(`instance id : ${event.payload.server_id}`)
-        console.log(`game id : ${event.payload.game_id}`)
-        console.log(`region : ${event.payload.region_info}`)
+    onMount(async () => {
+        const stored = await invoke<ServerInfoFromBackend | null>('get_server_info')
+        if (stored) await applyServerInfo(stored)
+
+        listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
+            await applyServerInfo(event.payload)
+        })
     })
 </script>
 

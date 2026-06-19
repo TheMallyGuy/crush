@@ -9,7 +9,7 @@ mod png;
 mod process;
 mod run;
 mod state;
-mod types;
+pub mod types;
 mod window;
 
 pub use run::watch_logs;

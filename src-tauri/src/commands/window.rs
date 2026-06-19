@@ -1,3 +1,4 @@
+use crate::commands::watcher::types::{EmitServerInfomation, ServerInfoState};
 use tauri::{command, AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 #[allow(clippy::too_many_arguments)]
@@ -35,6 +36,11 @@ pub async fn create_or_focus_window(
     let _window = builder.build().map_err(|e| e.to_string())?;
 
     Ok(())
+}
+
+#[command]
+pub fn get_server_info(app: AppHandle) -> Option<EmitServerInfomation> {
+    app.state::<ServerInfoState>().inner().0.lock().ok()?.clone()
 }
 
 #[command]

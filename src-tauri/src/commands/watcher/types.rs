@@ -71,8 +71,10 @@ pub(super) struct BloxstrapRpcMessage {
 // emit data type
 
 #[derive(Serialize, Deserialize, Clone)]
-pub(super) struct EmitServerInfomation {
-    pub(super) server_id: String,
-    pub(super) game_id: u64,
-    pub(super) region_info: String,
+pub struct EmitServerInfomation {
+    pub server_id: String,
+    pub game_id: u64,
+    pub region_info: String,
 }
+
+pub struct ServerInfoState(pub std::sync::Mutex<Option<EmitServerInfomation>>);

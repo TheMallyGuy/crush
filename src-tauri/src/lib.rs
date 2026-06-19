@@ -26,7 +26,8 @@ use commands::swifttunnel::{
     swift_get_servers, swift_is_logged_in, swift_servers_ping, swift_startup_prepare,
 };
 use commands::watcher::watch_logs;
-use commands::window::{create_or_focus_window, kill_window};
+use commands::watcher::types::ServerInfoState;
+use commands::window::{create_or_focus_window, get_server_info, kill_window};
 use std::sync::Mutex;
 use tauri::{Emitter, Manager};
 use tauri_plugin_cli::CliExt;
@@ -272,6 +273,7 @@ pub fn run() {
     builder
         .manage(RpcState::new())
         .manage(SdkState(Mutex::new(sdk)))
+        .manage(ServerInfoState(Mutex::new(None)))
         .setup(|app| {
             print_debug_info();
 
@@ -409,6 +411,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             kill_window,
+            get_server_info,
             get_download_deployment_urls,
             get_best_region,
             create_or_focus_window,

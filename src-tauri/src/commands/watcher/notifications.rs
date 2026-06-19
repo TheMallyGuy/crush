@@ -1,7 +1,7 @@
 use super::api::{fetch_game_icon, fetch_game_thumbnail, fetch_place_info};
 use super::config::integration_enabled;
 use super::state::WatcherState;
-use super::types::{EmitServerInfomation, IpInfo};
+use super::types::{EmitServerInfomation, IpInfo, ServerInfoState};
 use crate::island::{show, show_with_image};
 use crate::rd::get_client;
 use crate::rpc::{apply_rpc_full, start_rpc, RpcState};
@@ -26,6 +26,9 @@ pub(super) fn emit_server_info(
         game_id,
         region_info: region_info.to_string(),
     };
+    if let Ok(mut guard) = app.state::<ServerInfoState>().0.lock() {
+        *guard = Some(payload.clone());
+    }
     app.emit("serverInfomation", payload).unwrap();
 }
 
