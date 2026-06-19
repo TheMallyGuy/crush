@@ -2,7 +2,7 @@ use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::TrayIconId;
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
-use tauri::{AppHandle, Manager, WebviewUrl};
+use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 pub struct TrayState {
     pub id: TrayIconId,
@@ -73,15 +73,22 @@ pub fn setup_tray(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
             "serverinfo" => {
                 let app = app.clone();
                 tauri::async_runtime::spawn(async move {
-                    if let Some(window) = app.get_webview_window("CrushHello") {
+                    if let Some(window) = app.get_webview_window("serverInfoWindow") {
                         let _ = window.show();
                         let _ = window.set_focus();
                     } else {
-                        let _webview_url = WebviewUrl::App(
+                        let url = WebviewUrl::App(
                             "mainWin/other/serverInfo"
                                 .parse()
                                 .expect("Failed to parse URL"),
                         );
+                        let _ = WebviewWindowBuilder::new(&app, "serverInfoWindow", url)
+                            .title("Server Information")
+                            .inner_size(520.0, 400.0)
+                            .min_inner_size(400.0, 300.0)
+                            .center()
+                            .decorations(false)
+                            .build();
                     }
                 });
             }
