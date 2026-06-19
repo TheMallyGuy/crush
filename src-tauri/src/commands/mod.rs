@@ -6,6 +6,7 @@ pub mod discord_rpc;
 pub mod fs;
 pub mod gbs_operations;
 pub mod launch_roblox;
+pub mod local_app_settings;
 pub mod mods;
 pub mod pre_processing;
 pub mod process_roblox;

@@ -74,6 +74,8 @@ export type Integrations = {
     crushRpc?: boolean;
     interactive?: interactiveAPI
     swifttunnel?: Swifttunnel
+    disableSystemTray?: boolean
+    disableLaunchAtStartUp?: boolean
 }
 
 export type Swifttunnel = {
@@ -193,11 +195,11 @@ export type CloudUniversalConfig = {
 
         /** Priority class for the Roblox process. */
         processPriority?:
-            | 'below_normal'
-            | 'normal'
-            | 'above_normal'
-            | 'high'
-            | 'realtime'
+        | 'below_normal'
+        | 'normal'
+        | 'above_normal'
+        | 'high'
+        | 'realtime'
 
         /** Window control / interaction permissions (funkstrap-style controls / crush interactive). */
         windowControl?: {

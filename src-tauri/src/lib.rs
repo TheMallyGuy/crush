@@ -5,6 +5,7 @@ use commands::account_operations::{
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
+use commands::local_app_settings::{get_local_app, write_local_app};
 use commands::crush::crush;
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
@@ -449,6 +450,8 @@ pub fn run() {
             connect,
             kill_roblox_if_open,
             swift_servers_ping,
+            get_local_app,
+            write_local_app,
             island::island_show
         ])
         .run(tauri::generate_context!())

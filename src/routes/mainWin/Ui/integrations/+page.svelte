@@ -13,6 +13,9 @@
         Expand,
         BedSingle,
         Sparkles,
+        ArrowDownFromLine,
+        ArrowDownToDot,
+        ListStart,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
@@ -24,6 +27,10 @@
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import { getCurrentInstallation } from '$lib/downloadRoblox'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
+    import {
+        setLaunchAtStartup,
+        setMinimizeToTray,
+    } from '$lib/localAppJsonHelper'
 
     let processPriorityItems = [
         { value: 'BELOW_NORMAL_PRIORITY_CLASS', label: 'BELOW_NORMAL' },
@@ -39,6 +46,8 @@
     let crashHandler = false
     let discordRpc = false
     let letJoin = false
+    let disableSystemTray = false
+    let disableLaunchAtStartUp = false
     let displayAccount = false
     let serverLocationNotifier = false
     let optimizer: boolean
@@ -75,6 +84,9 @@
                 savedIntegrations.priority ?? 'NORMAL_PRIORITY_CLASS'
             isLateNightGamer = savedIntegrations.sleepSchedule?.visible ?? false
             sleepSchedule = savedIntegrations.sleepSchedule?.enabled ?? true
+            disableSystemTray = savedIntegrations.disableSystemTray ?? false
+            disableLaunchAtStartUp =
+                savedIntegrations.disableLaunchAtStartUp ?? false
 
             if (savedRpc) {
                 discordRpc = savedRpc.enable
@@ -123,6 +135,8 @@
             priority: processPriority ?? 'NORMAL_PRIORITY_CLASS',
             discordRpc: { enable: discordRpc, letJoin, displayAccount },
             serverLocationNotifier,
+            disableSystemTray: disableSystemTray ?? false,
+            disableLaunchAtStartUp: disableLaunchAtStartUp ?? false,
             roValra: current?.roValra ?? { joinServerForYouValue: false },
             activityWatching: activityWatching,
             optimizer: optimizer,
@@ -133,6 +147,8 @@
 
         if (exe?.exists) {
             try {
+                setMinimizeToTray(!disableSystemTray)
+                setLaunchAtStartup(!disableLaunchAtStartUp)
                 await invoke('set_fullscreen_prop', {
                     disable: fullscreenOpts,
                     rblxExe: exePath,
@@ -153,18 +169,18 @@
     description={$_('pages.integrations.dialogs.description')}
 >
     {#snippet actions()}
-    <div>
-        <Button
-            variant="secondary"
-            size="sm"
-            onclick={() => {
-                warningDialog = false
-                goto('integrations/swift')
-            }}
-        >
-            {$_('pages.integrations.dialogs.confirm')}
-        </Button>
-    </div>
+        <div>
+            <Button
+                variant="secondary"
+                size="sm"
+                onclick={() => {
+                    warningDialog = false
+                    goto('integrations/swift')
+                }}
+            >
+                {$_('pages.integrations.dialogs.confirm')}
+            </Button>
+        </div>
     {/snippet}
 </Dialog>
 
@@ -189,10 +205,10 @@
             icon={View}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={activityWatching}
-                onchange={handleChanges}
-            />
+                <Switch
+                    bind:checked={activityWatching}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
@@ -205,11 +221,11 @@
                 icon={BedSingle}
             >
                 {#snippet action()}
-                <Switch
-                    disabled={!activityWatching}
-                    bind:checked={sleepSchedule}
-                    onchange={handleChanges}
-                />
+                    <Switch
+                        disabled={!activityWatching}
+                        bind:checked={sleepSchedule}
+                        onchange={handleChanges}
+                    />
                 {/snippet}
             </SettingCard>
         {/if}
@@ -222,11 +238,11 @@
             icon={Bell}
         >
             {#snippet action()}
-            <Switch
-                disabled={!activityWatching}
-                bind:checked={serverLocationNotifier}
-                onchange={handleChanges}
-            />
+                <Switch
+                    disabled={!activityWatching}
+                    bind:checked={serverLocationNotifier}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
@@ -238,11 +254,37 @@
             icon={Cpu}
         >
             {#snippet action()}
-            <Dropdown
-                options={processPriorityItems}
-                bind:value={processPriority}
-                onchange={handleChanges}
-            />
+                <Dropdown
+                    options={processPriorityItems}
+                    bind:value={processPriority}
+                    onchange={handleChanges}
+                />
+            {/snippet}
+        </SettingCard>
+
+        <SettingCard
+            title="Disable system tray"
+            description="Roblox is watching."
+            icon={ArrowDownToDot}
+        >
+            {#snippet action()}
+                <Switch
+                    bind:checked={disableSystemTray}
+                    onchange={handleChanges}
+                />
+            {/snippet}
+        </SettingCard>
+
+        <SettingCard
+            title="Disable launch Roblox at startup"
+            description="Don't launch Roblox when you turn on your computer."
+            icon={ListStart}
+        >
+            {#snippet action()}
+                <Switch
+                    bind:checked={disableLaunchAtStartUp}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
@@ -252,10 +294,7 @@
             icon={Sparkles}
         >
             {#snippet action()}
-            <Switch
-                onchange={handleChanges}
-                bind:checked={optimizer}
-            />
+                <Switch onchange={handleChanges} bind:checked={optimizer} />
             {/snippet}
         </SettingCard>
 
@@ -266,12 +305,12 @@
             doTheGrayThing={true}
         >
             {#snippet action()}
-            <Button
-                onclick={() => (warningDialog = true)}
-                variant="secondary"
-            >
-                Open</Button
-            >
+                <Button
+                    onclick={() => (warningDialog = true)}
+                    variant="secondary"
+                >
+                    Open</Button
+                >
             {/snippet}
         </SettingCard>
 
@@ -285,10 +324,10 @@
             icon={Expand}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={fullscreenOpts}
-                onchange={handleChanges}
-            />
+                <Switch
+                    bind:checked={fullscreenOpts}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
@@ -300,10 +339,7 @@
             icon={Bomb}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={crashHandler}
-                onchange={handleChanges}
-            />
+                <Switch bind:checked={crashHandler} onchange={handleChanges} />
             {/snippet}
         </SettingCard>
 
@@ -313,11 +349,11 @@
             icon={Plug}
         >
             {#snippet action()}
-            <Switch
-                disabled={!activityWatching}
-                bind:checked={discordRpc}
-                onchange={handleChanges}
-            />
+                <Switch
+                    disabled={!activityWatching}
+                    bind:checked={discordRpc}
+                    onchange={handleChanges}
+                />
             {/snippet}
 
             <div class="flex gap-3">
@@ -347,13 +383,13 @@
             icon={CodeXml}
         >
             {#snippet action()}
-            <Button
-                variant="secondary"
-                disabled={!activityWatching}
-                onclick={() => goto('integrations/interactiveSettings')}
-            >
-                {$_('pages.integrations.windowManipulationCard.button')}
-            </Button>
+                <Button
+                    variant="secondary"
+                    disabled={!activityWatching}
+                    onclick={() => goto('integrations/interactiveSettings')}
+                >
+                    {$_('pages.integrations.windowManipulationCard.button')}
+                </Button>
             {/snippet}
         </SettingCard>
 
@@ -363,13 +399,13 @@
             icon={History}
         >
             {#snippet action()}
-            <Button
-                disabled={!activityWatching}
-                variant="secondary"
-                onclick={() => goto('integrations/gameHistory')}
-            >
-                {$_('pages.integrations.gameHistoryCard.button')}
-            </Button>
+                <Button
+                    disabled={!activityWatching}
+                    variant="secondary"
+                    onclick={() => goto('integrations/gameHistory')}
+                >
+                    {$_('pages.integrations.gameHistoryCard.button')}
+                </Button>
             {/snippet}
         </SettingCard>
 
@@ -380,12 +416,12 @@
             doTheGrayThing={true}
         >
             {#snippet action()}
-            <Button
-                variant="secondary"
-                onclick={() => goto('integrations/roValra')}
-            >
-                {$_('pages.integrations.roValraCard.button')}
-            </Button>
+                <Button
+                    variant="secondary"
+                    onclick={() => goto('integrations/roValra')}
+                >
+                    {$_('pages.integrations.roValraCard.button')}
+                </Button>
             {/snippet}
         </SettingCard>
     </div>
