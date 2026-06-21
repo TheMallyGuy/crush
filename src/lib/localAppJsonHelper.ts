@@ -3,24 +3,32 @@
 import { invoke } from "@tauri-apps/api/core";
 
 export async function setMinimizeToTray(value: boolean) {
-    const storage = JSON.parse(await invoke("get_local_app", { vng: false }));
+    const rootJson = JSON.parse(await invoke("get_local_app", { vng: false }));
 
-    storage.MinimizeToTray = value;
+    const appConfig = JSON.parse(rootJson.AppConfiguration);
+
+    appConfig.MinimizeToTray = value;
+
+    rootJson.AppConfiguration = JSON.stringify(appConfig);
 
     await invoke("write_local_app", {
-        content: JSON.stringify(storage),
+        content: JSON.stringify(rootJson),
         vng: false
     });
 }
 
 
 export async function setLaunchAtStartup(value: boolean) {
-    const storage = JSON.parse(await invoke("get_local_app", { vng: false }));
+    const rootJson = JSON.parse(await invoke("get_local_app", { vng: false }));
 
-    storage.LaunchAtStartup = value;
+    const appConfig = JSON.parse(rootJson.AppConfiguration);
+
+    appConfig.LaunchAtStartup = value;
+
+    rootJson.AppConfiguration = JSON.stringify(appConfig);
 
     await invoke("write_local_app", {
-        content: JSON.stringify(storage),
+        content: JSON.stringify(rootJson),
         vng: false
     });
 }
