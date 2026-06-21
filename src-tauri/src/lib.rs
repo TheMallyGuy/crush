@@ -134,8 +134,8 @@ async fn update(app: tauri::AppHandle) -> tauri_plugin_updater::Result<()> {
                         let percent = (downloaded * 100) / total;
                         if percent >= last_notified_percent + 30 {
                             last_notified_percent = percent;
-                            let msg = format!("{percent}% done");
-                            island::show(&app_download, "Updating", Some(&msg))
+                            let msg = format!("{percent}% done (wait a bit)");
+                            island::show(&app_download, "Updating!", Some(&msg))
                         }
                     }
                 },
