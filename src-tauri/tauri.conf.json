@@ -86,6 +86,13 @@
                     "description" : "Launch the game with the specified place id",
                     "takesValue" : true,
                     "required" : false
+                },
+                {
+                    "short" : "d",
+                    "name" : "deeplink",
+                    "description" : "Use deeplink.",
+                    "takesValue": true,
+                    "required" : false
                 }
             ]
         },

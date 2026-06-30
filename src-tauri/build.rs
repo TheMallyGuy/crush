@@ -1,29 +1,6 @@
 use anyhow::Result;
 use vergen::{Build, Emitter, Rustc};
 
-// i shaw manifest my crush!
-const APP_MANIFEST: &str = r#"<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-  <dependency>
-    <dependentAssembly>
-      <assemblyIdentity
-        type="win32"
-        name="Microsoft.Windows.Common-Controls"
-        version="6.0.0.0"
-        processorArchitecture="*"
-        publicKeyToken="6595b64144ccf1df"
-        language="*"
-      />
-    </dependentAssembly>
-  </dependency>
-  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
-    <security>
-      <requestedPrivileges>
-        <requestedExecutionLevel level="requireAdministrator" uiAccess="false"/>
-      </requestedPrivileges>
-    </security>
-  </trustInfo>
-</assembly>"#;
-
 fn main() -> Result<()> {
     let manifest_dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     let libraries_dir = manifest_dir.join("libraries");
@@ -52,9 +29,7 @@ fn main() -> Result<()> {
         .add_instructions(&rustc)?
         .emit()?;
 
-    let attrs = tauri_build::Attributes::new()
-        .windows_attributes(tauri_build::WindowsAttributes::new().app_manifest(APP_MANIFEST));
-    tauri_build::try_build(attrs).expect("Failed to run tauri-build");
+    tauri_build::build();
 
     Ok(())
 }

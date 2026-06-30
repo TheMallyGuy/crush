@@ -14,7 +14,6 @@
     import { afterNavigate } from '$app/navigation'
     import { themeStore, resolveAsset } from '$lib/theme/themeStore'
     import { invoke } from '@tauri-apps/api/core'
-    import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { goto } from '$app/navigation'
     import { load } from '@tauri-apps/plugin-store'
@@ -167,14 +166,31 @@
                 if (integrations?.swifttunnel?.enable) {
                     handleProgress({
                         type: 'status',
-                        message: $_("pages.boostrapWin.steps.swifttunnel.prepare"),
+                        message: $_(
+                            'pages.boostrapWin.steps.swifttunnel.prepare'
+                        ),
                     })
+
+                    let is_admin = await invoke('check_elevated')
+
+                    console.log(`${is_admin}`)
+
+                    if (!is_admin) {
+                        // Relaunch elevated with the same deeplink, then bail out of this
+                        // un-elevated instance — the elevated one takes over from here.
+                        await invoke('relaunch_with_admins_perms', {
+                            deeplink: url || null,
+                        })
+                        return
+                    }
 
                     await invoke('swift_startup_prepare').catch(() => {})
 
                     handleProgress({
                         type: 'status',
-                        message: $_("pages.boostrapWin.steps.swifttunnel.connect"),
+                        message: $_(
+                            'pages.boostrapWin.steps.swifttunnel.connect'
+                        ),
                     })
 
                     try {

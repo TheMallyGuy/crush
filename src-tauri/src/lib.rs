@@ -5,12 +5,12 @@ use commands::account_operations::{
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
-use commands::local_app_settings::{get_local_app, write_local_app};
-use commands::crush::crush;
+use commands::crush::{check_elevated, crush, relaunch_with_admins_perms};
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::gbs_operations::{get_gbs, write_gbs};
 use commands::launch_roblox::launch;
+use commands::local_app_settings::{get_local_app, write_local_app};
 use commands::mods::apply_mod;
 use commands::pre_processing::{close_crash_handler, set_process_priority};
 use commands::process_roblox::kill_roblox_if_open;
@@ -25,8 +25,8 @@ use commands::swifttunnel::{
     connect, start_browser_login, swift_auth_logout, swift_cancel_auth, swift_fetch_servers,
     swift_get_servers, swift_is_logged_in, swift_servers_ping, swift_startup_prepare,
 };
-use commands::watcher::watch_logs;
 use commands::watcher::types::ServerInfoState;
+use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, get_server_info, kill_window};
 use std::sync::Mutex;
 use tauri::{Emitter, Manager};
@@ -325,6 +325,24 @@ pub fn run() {
                 // `subcommand` is `Option<Box<SubcommandMatches>>` where `SubcommandMatches` is a struct with { name, matches }.
                 Ok(matches) => {
                     log::info!("app launched with args: {:?}", matches.args);
+                    if matches.args.contains_key("deeplink") {
+                        let deeplink = matches
+                            .args
+                            .get("deeplink")
+                            .and_then(|arg| arg.value.as_str())
+                            .map(|s| s.to_string())
+                            .unwrap_or_default();
+                        let app_handle = app.handle().clone();
+
+                        if deeplink.is_empty() {
+                            log::info!(
+                                "maybe didnt input deeplink, but cli still picking up arg, ingoring"
+                            ); // tauri be weird sometimes
+                        } else {
+                            handle_received_url(&app_handle, deeplink);
+                        }
+                    }
+
                     if matches.args.contains_key("launch") {
                         let game_id = matches
                             .args
@@ -451,6 +469,8 @@ pub fn run() {
             swift_fetch_servers,
             swift_startup_prepare,
             connect,
+            relaunch_with_admins_perms,
+            check_elevated,
             kill_roblox_if_open,
             swift_servers_ping,
             get_local_app,

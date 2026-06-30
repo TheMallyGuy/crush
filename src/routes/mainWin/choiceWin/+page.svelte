@@ -15,6 +15,8 @@
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { info } from '@tauri-apps/plugin-log'
     import { launchAppType } from '$lib/stores/launchAppType'
+    import BlurFade from '$lib/components/magic/blur-fade/blur-fade.svelte'
+    import Text from '$lib/components/molecules/Text.svelte'
 
     let firstLaunchValue: boolean | undefined
     let showVariantMenu = false
@@ -110,8 +112,6 @@
         })
         firstLaunchValue = await checkLaunch()
     })
-    import BlurFade from '$lib/components/magic/blur-fade/blur-fade.svelte'
-    import Text from '$lib/components/molecules/Text.svelte'
 </script>
 
 <div
