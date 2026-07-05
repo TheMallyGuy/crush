@@ -1,4 +1,3 @@
-use crate::swifttunnel_sdk::SwiftTunnel;
 use commands::account_operations::{
     clear_cookies, decrypt_cookie_data, encrypt_cookie_data, export_all_cookies, get_auth_ticket,
     get_csrf_token, quick_sign_create, quick_sign_poll, validate_roblox_cookie,
@@ -45,12 +44,10 @@ pub mod priorites;
 pub mod rd;
 pub mod rpc;
 pub mod simple_i18n;
-pub mod swifttunnel_sdk;
 pub mod tray; // nice name choice buddy
 
 use crate::tray::setup_tray;
 
-pub struct SdkState(pub Mutex<SwiftTunnel>);
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -154,70 +151,9 @@ fn print_debug_info() {
     log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
 }
 
-#[cfg(windows)]
-fn show_fatal_dialog(msg: &str) {
-    use windows::core::HSTRING;
-    use windows::Win32::UI::WindowsAndMessaging::{
-        MessageBoxW, MB_ICONERROR, MB_OK, MB_SYSTEMMODAL,
-    };
-    let title = HSTRING::from("crush startup error");
-    let body = HSTRING::from(msg);
-    unsafe {
-        MessageBoxW(
-            None,
-            windows::core::PCWSTR(body.as_ptr()),
-            windows::core::PCWSTR(title.as_ptr()),
-            MB_OK | MB_ICONERROR | MB_SYSTEMMODAL,
-        );
-    }
-}
-
-#[cfg(windows)]
-fn ensure_native_libraries() {
-    use std::os::windows::ffi::OsStrExt;
-    use windows::core::PCWSTR;
-    use windows::Win32::System::LibraryLoader::{LoadLibraryW, SetDllDirectoryW};
-
-    let Ok(exe) = std::env::current_exe() else {
-        return;
-    };
-    let Some(exe_dir) = exe.parent() else {
-        return;
-    };
-    let lib_dir = exe_dir.join("libraries");
-
-    let mut wide: Vec<u16> = lib_dir.as_os_str().encode_wide().chain([0u16]).collect();
-    let _ = unsafe { SetDllDirectoryW(PCWSTR(wide.as_mut_ptr())) };
-
-    let dll = lib_dir.join("swifttunnel.dll");
-    let mut dll_wide: Vec<u16> = dll.as_os_str().encode_wide().chain([0u16]).collect();
-    if let Err(e) = unsafe { LoadLibraryW(PCWSTR(dll_wide.as_mut_ptr())) } {
-        log::error!("failed to load swifttunnel.dll from {}: {e}", dll.display());
-        show_fatal_dialog(&format!(
-            "crush couldn't load a required component (swifttunnel.dll).\n\n{e}\n\n\
-             Reinstalling crush, or installing the Microsoft Visual C++ Redistributable (x64), should fix this."
-        ));
-        std::process::exit(1);
-    }
-}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    #[cfg(windows)]
-    ensure_native_libraries();
-
-    let sdk = match SwiftTunnel::init() {
-        Ok(sdk) => sdk,
-        Err(e) => {
-            log::error!("SwiftTunnel SDK init failed: {e}");
-            #[cfg(windows)]
-            show_fatal_dialog(&format!(
-                "crush failed to initialize the SwiftTunnel SDK.\n\n{e}\n\nReinstalling crush should fix this."
-            ));
-            std::process::exit(1);
-        }
-    };
-
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cache::init())
         .plugin(tauri_plugin_cli::init())
@@ -269,7 +205,6 @@ pub fn run() {
 
     builder
         .manage(RpcState::new())
-        .manage(SdkState(Mutex::new(sdk)))
         .manage(ServerInfoState(Mutex::new(None)))
         .setup(|app| {
             print_debug_info();
@@ -458,8 +393,6 @@ pub fn run() {
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
-            start_browser_login,
-            connect,
             relaunch_with_admins_perms,
             check_elevated,
             kill_roblox_if_open,
