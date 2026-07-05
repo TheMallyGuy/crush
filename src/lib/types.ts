@@ -73,20 +73,10 @@ export type Integrations = {
     gameCache?: Record<string, GameCache>;
     crushRpc?: boolean;
     interactive?: interactiveAPI
-    swifttunnel?: Swifttunnel
     disableSystemTray?: boolean
     disableLaunchAtStartUp?: boolean
 }
 
-export type Swifttunnel = {
-    enable: boolean
-    enableRouting: boolean
-    disconnectWhenRobloxClosed: boolean
-    perferedRegion: string
-    assetsRouting: boolean
-    enableCountryBan: boolean
-    enablePartialCountryBan: boolean
-}
 
 export type BuildInfo = {
     hash: string,

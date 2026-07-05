@@ -21,10 +21,7 @@ use commands::roblox_deployment::{
     get_latest_version_studio,
 };
 use commands::shortcuts::new_shorcut;
-use commands::swifttunnel::{
-    connect, start_browser_login, swift_auth_logout, swift_cancel_auth, swift_fetch_servers,
-    swift_get_servers, swift_is_logged_in, swift_servers_ping, swift_startup_prepare,
-};
+
 use commands::watcher::types::ServerInfoState;
 use commands::watcher::watch_logs;
 use commands::window::{create_or_focus_window, get_server_info, kill_window};
@@ -462,17 +459,10 @@ pub fn run() {
             quick_sign_create,
             validate_roblox_cookie,
             start_browser_login,
-            swift_is_logged_in,
-            swift_cancel_auth,
-            swift_auth_logout,
-            swift_get_servers,
-            swift_fetch_servers,
-            swift_startup_prepare,
             connect,
             relaunch_with_admins_perms,
             check_elevated,
             kill_roblox_if_open,
-            swift_servers_ping,
             get_local_app,
             write_local_app,
             island::island_show

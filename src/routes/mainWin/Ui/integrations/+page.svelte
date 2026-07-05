@@ -66,7 +66,6 @@
     let exePath: string
 
     const roValaraLogo = '/Rovalra.png'
-    const swifty = '/swifty.png'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -159,30 +158,6 @@
         }
     }
 </script>
-
-<Dialog
-    bind:open={warningDialog}
-    onclose={() => {
-        warningDialog = false
-    }}
-    title={$_('pages.integrations.dialogs.title')}
-    description={$_('pages.integrations.dialogs.description')}
->
-    {#snippet actions()}
-        <div>
-            <Button
-                variant="secondary"
-                size="sm"
-                onclick={() => {
-                    warningDialog = false
-                    goto('integrations/swift')
-                }}
-            >
-                {$_('pages.integrations.dialogs.confirm')}
-            </Button>
-        </div>
-    {/snippet}
-</Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
@@ -295,22 +270,6 @@
         >
             {#snippet action()}
                 <Switch onchange={handleChanges} bind:checked={optimizer} />
-            {/snippet}
-        </SettingCard>
-
-        <SettingCard
-            title="SwiftTunnel"
-            description="Crush have swifttunell.ddl meaning crush have ablities to replicate swifttunnel!"
-            icon={swifty}
-            doTheGrayThing={true}
-        >
-            {#snippet action()}
-                <Button
-                    onclick={() => (warningDialog = true)}
-                    variant="secondary"
-                >
-                    Open</Button
-                >
             {/snippet}
         </SettingCard>
 

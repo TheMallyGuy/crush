@@ -14,6 +14,5 @@ pub mod properity;
 pub mod rename;
 pub mod roblox_deployment;
 pub mod shortcuts;
-pub mod swifttunnel;
 pub mod watcher;
 pub mod window;

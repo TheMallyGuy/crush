@@ -66,7 +66,6 @@
             "./resources/icon.ico",
             "./open_game.bat",
 
-            "./libraries/swifttunnel.dll",
             "./libraries/vcruntime140.dll",
             "./libraries/vcruntime140_1.dll"
         ]

@@ -163,59 +163,10 @@
             if (appType === 'studio') {
                 await launchStudio(version)
             } else {
-                if (integrations?.swifttunnel?.enable) {
-                    handleProgress({
-                        type: 'status',
-                        message: $_(
-                            'pages.boostrapWin.steps.swifttunnel.prepare'
-                        ),
-                    })
-
-                    let is_admin = await invoke('check_elevated')
-
-                    console.log(`${is_admin}`)
-
-                    if (!is_admin) {
-                        // Relaunch elevated with the same deeplink, then bail out of this
-                        // un-elevated instance — the elevated one takes over from here.
-                        await invoke('relaunch_with_admins_perms', {
-                            deeplink: url || null,
-                        })
-                        return
-                    }
-
-                    await invoke('swift_startup_prepare').catch(() => {})
-
-                    handleProgress({
-                        type: 'status',
-                        message: $_(
-                            'pages.boostrapWin.steps.swifttunnel.connect'
-                        ),
-                    })
-
-                    try {
-                        await invoke('connect', {
-                            region: integrations.swifttunnel.perferedRegion,
-                            routing: integrations.swifttunnel.enableRouting,
-                            dynamicAssets:
-                                integrations.swifttunnel.assetsRouting,
-                            countryBan:
-                                integrations.swifttunnel.enableCountryBan ??
-                                false,
-                            partialCountryBan:
-                                integrations.swifttunnel
-                                    .enablePartialCountryBan ?? false,
-                        })
-                    } catch (e) {
-                        // do nothing lmao
-                        info(`${e}`)
-                    }
-
-                    handleProgress({
-                        type: 'status',
-                        message: $_('pages.boostrapWin.steps.launch'),
-                    })
-                }
+                handleProgress({
+                    type: 'status',
+                    message: $_('pages.boostrapWin.steps.launch'),
+                })
 
                 await performLaunch(version, url, integrations)
                 await sleep(1000)
