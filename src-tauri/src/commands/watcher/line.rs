@@ -2,8 +2,8 @@ use super::api::fetch_universe_id;
 use super::bloxstrap::on_bloxstrap_rpc;
 use super::config::{config_bool, integration_enabled};
 use super::notifications::{
-    emit_server_info, fetch_and_store_location, send_location_notification, sleep_schedule_inner,
-    update_discord_rpc,
+    emit_player_joined, emit_server_info, fetch_and_store_location, send_location_notification,
+    sleep_schedule_inner, update_discord_rpc,
 };
 use super::patterns::{
     re_bloxstrap_rpc, re_join, re_joined, re_leave, re_private_server_access_code, re_udmux,
@@ -37,6 +37,7 @@ pub(super) async fn handle_line(
             .get(2)
             .and_then(|m| m.as_str().parse().ok())
             .unwrap_or(0);
+        let join_ip = caps.get(3).map(|m| m.as_str().to_string());
 
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
@@ -48,6 +49,9 @@ pub(super) async fn handle_line(
         state.activity.join_initiated = true;
         state.activity.place_id = Some(place_id);
         state.activity.instance_id = Some(instance_id);
+        // Best-effort IP from the join line itself, always available immediately.
+        // UDMUX (if it fires) overwrites this later with the more precise server address.
+        state.pending_server_ip = join_ip;
         log::info!(
             "joining place {} instance {}",
             place_id,
@@ -215,16 +219,36 @@ async fn on_joined(
         log::info!("aborting logging warpped")
     }
 
-    if let Some(id) = state.activity.instance_id.as_deref() {
+    if let Some(id) = state.activity.instance_id.clone() {
         let location = state.pending_server_location.clone().unwrap_or_default();
+        let ip = state.pending_server_ip.clone().unwrap_or_default();
         emit_server_info(
             app,
-            id,
+            &id,
             place_id,
             &location,
             state.activity.is_private_server,
             state.activity.access_code.clone(),
+            &ip,
         );
+
+        // Only fire the one-shot "joined" signal once we actually have both the
+        // resolved server IP and its geoIP-derived region — the two are only ever
+        // set together by fetch_and_store_location, so requiring both here avoids
+        // sending a submission with a ready IP but a still-empty/malformed region.
+        // If they're not ready yet, fetch_and_store_location will emit it later.
+        if !ip.is_empty() && !location.is_empty() && !state.activity.join_signaled {
+            emit_player_joined(
+                app,
+                &id,
+                place_id,
+                &location,
+                state.activity.is_private_server,
+                state.activity.access_code.clone(),
+                &ip,
+            );
+            state.activity.join_signaled = true;
+        }
         add_menu_item(app, "serverinfo", "Server Infomation").ok();
     }
 

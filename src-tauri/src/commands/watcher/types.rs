@@ -77,6 +77,7 @@ pub struct EmitServerInfomation {
     pub region_info: String,
     pub is_private_server: bool,
     pub access_code: Option<String>,
+    pub ip: String,
 }
 
 pub struct ServerInfoState(pub std::sync::Mutex<Option<EmitServerInfomation>>);

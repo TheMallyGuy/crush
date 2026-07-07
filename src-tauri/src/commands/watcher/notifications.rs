@@ -21,6 +21,7 @@ pub(super) fn emit_server_info(
     region_info: &str,
     is_private_server: bool,
     access_code: Option<String>,
+    ip: &str,
 ) {
     log::info!("{}", region_info);
     let payload = EmitServerInfomation {
@@ -29,11 +30,32 @@ pub(super) fn emit_server_info(
         region_info: region_info.to_string(),
         is_private_server,
         access_code,
+        ip: ip.to_string(),
     };
     if let Ok(mut guard) = app.state::<ServerInfoState>().0.lock() {
         *guard = Some(payload.clone());
     }
     app.emit("serverInfomation", payload).unwrap();
+}
+
+pub(super) fn emit_player_joined(
+    app: &AppHandle,
+    instance_id: &str,
+    game_id: u64,
+    region_info: &str,
+    is_private_server: bool,
+    access_code: Option<String>,
+    ip: &str,
+) {
+    let payload = EmitServerInfomation {
+        server_id: instance_id.to_string(),
+        game_id,
+        region_info: region_info.to_string(),
+        is_private_server,
+        access_code,
+        ip: ip.to_string(),
+    };
+    app.emit("playerJoined", payload).ok();
 }
 
 pub(super) async fn fetch_and_store_location(
@@ -75,18 +97,34 @@ pub(super) async fn fetch_and_store_location(
 
     if state.activity.in_game {
         if let (Some(id), Some(loc)) = (
-            state.activity.instance_id.as_deref(),
-            state.pending_server_location.as_deref(),
+            state.activity.instance_id.clone(),
+            state.pending_server_location.clone(),
         ) {
             if let Some(place_id) = state.activity.place_id {
                 emit_server_info(
                     app,
-                    id,
+                    &id,
                     place_id,
-                    loc,
+                    &loc,
                     state.activity.is_private_server,
                     state.activity.access_code.clone(),
+                    ip,
                 );
+
+                // The join happened before the UDMUX IP resolved — fire the
+                // one-shot "joined" signal now that we actually have it.
+                if !ip.is_empty() && !state.activity.join_signaled {
+                    emit_player_joined(
+                        app,
+                        &id,
+                        place_id,
+                        &loc,
+                        state.activity.is_private_server,
+                        state.activity.access_code.clone(),
+                        ip,
+                    );
+                    state.activity.join_signaled = true;
+                }
             }
         }
     }

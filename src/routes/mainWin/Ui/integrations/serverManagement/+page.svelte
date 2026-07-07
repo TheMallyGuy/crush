@@ -1,7 +1,9 @@
 <script>
+    import Button from '$lib/components/atoms/Button.svelte'
     import Switch from '$lib/components/atoms/Switch.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import SettingCard from '$lib/components/molecules/SettingCard.svelte'
+    import { serverDataHandler } from '$lib/serverSelector'
     import { Earth, MessageSquareCheck, Upload } from '@lucide/svelte'
 </script>
 
@@ -44,3 +46,4 @@
         {/snippet}
     </SettingCard>
 </div>
+<Button onlick={serverDataHandler}></Button>

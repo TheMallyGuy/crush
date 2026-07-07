@@ -17,6 +17,7 @@ pub(super) struct Activity {
     pub(super) is_private_server: bool,
     pub(super) access_code: Option<String>,
     pub(super) session_id: Option<i64>,
+    pub(super) join_signaled: bool,
 }
 
 pub(super) struct WatcherState {

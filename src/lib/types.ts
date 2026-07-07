@@ -349,6 +349,7 @@ export type ServerInfoFromBackend = {
     game_id: number,
     server_id: string,
     is_private_server: boolean,
+    ip: string,
     access_code: string | null
 }
 
