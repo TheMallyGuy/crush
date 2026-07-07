@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { loadSavedTheme } from '$lib/theme/themeLoader'
     import { background } from '$lib/stores/background.svelte'
+    import { serverInfo } from '$lib/stores/serverInfo.svelte'
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
     import { goto } from '$app/navigation'
@@ -12,6 +13,7 @@
         const win = getCurrentWindow()
         await loadSavedTheme()
         await background.init()
+        await serverInfo.init()
 
         await listen<string>('deep-link-received', (event) => {
             deepLinkUrl.set(event.payload)

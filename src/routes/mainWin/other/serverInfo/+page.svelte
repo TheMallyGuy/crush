@@ -1,19 +1,21 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
-    import type { ServerInfoFromBackend } from '$lib/types'
-    import { listen } from '@tauri-apps/api/event'
+    import { serverInfo } from '$lib/stores/serverInfo.svelte'
     import { writeText } from '@tauri-apps/plugin-clipboard-manager'
     import { fetch } from '@tauri-apps/plugin-http'
     import { _ } from 'svelte-i18n'
-    import { invoke } from '@tauri-apps/api/core'
-    import { onMount } from 'svelte'
 
-    let serverInstanceId: string = 'Unknown'
-    let gameId: number = 1234
-    let gameRegion: string = 'Unknown'
-    let serverInviteLink: string
-    let gameName: string = 'Unknown game'
+    let gameName: string = $state('Unknown game')
+
+    let serverInstanceId = $derived(serverInfo.serverId ?? 'Unknown')
+    let gameId = $derived(serverInfo.gameId ?? 0)
+    let gameRegion = $derived(serverInfo.regionInfo ?? '')
+    let isPrivateServer = $derived(serverInfo.isPrivateServer)
+    let accessCode = $derived(serverInfo.accessCode)
+    let serverInviteLink = $derived(
+        `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
+    )
 
     async function getUniverse(
         placeId: number
@@ -50,27 +52,18 @@
         await writeText(url)
     }
 
-    async function applyServerInfo(info: ServerInfoFromBackend) {
-        serverInstanceId = info.server_id
-        gameId = info.game_id
-        gameRegion = info.region_info
-        serverInviteLink = `https://deeplink.multicrew.dev?placeId=${gameId}&jobId=${serverInstanceId}`
+    $effect(() => {
+        const placeId = gameId
+        if (!placeId) return
 
-        const universeData = await getUniverse(gameId)
-        if (!universeData) {
-            gameName = 'Unknown Game'
-            return
-        }
-        const details = await getGameDetails(gameId, universeData.universeId)
-        gameName = details.name
-    }
-
-    onMount(async () => {
-        const stored = await invoke<ServerInfoFromBackend | null>('get_server_info')
-        if (stored) await applyServerInfo(stored)
-
-        listen<ServerInfoFromBackend>('serverInfomation', async (event) => {
-            await applyServerInfo(event.payload)
+        gameName = 'Unknown game'
+        getUniverse(placeId).then(async (universeData) => {
+            if (!universeData) {
+                gameName = 'Unknown Game'
+                return
+            }
+            const details = await getGameDetails(placeId, universeData.universeId)
+            gameName = details.name
         })
     })
 </script>
@@ -85,22 +78,49 @@
     >
         <div class="flex flex-col gap-3 p-4">
             <p>
+                {isPrivateServer
+                    ? $_('pages.serverInfomationPage.infomationCard.serverType.private')
+                    : $_('pages.serverInfomationPage.infomationCard.serverType.public')}
+            </p>
+            <p>
                 {$_('pages.serverInfomationPage.infomationCard.serverRegion', { values: { region: gameRegion || $_("pages.serverInfomationPage.infomationCard.waitRegion") } })}
             </p>
             <p>{$_('pages.serverInfomationPage.infomationCard.uptime')}</p>
-            <p> 
+            <p>
                 {$_('pages.serverInfomationPage.infomationCard.instanceId', {
                     values: { id: serverInstanceId },
                 })}
             </p>
-            <p class="flex items-center gap-2">
-                {$_('pages.serverInfomationPage.infomationCard.inviteLink')}d <Button
-                    variant="secondary"
-                    onclick={async () => {
-                        await copyToClipboard(serverInviteLink)
-                    }}>Copy to clipboard</Button
-                >
-            </p>
+            {#if isPrivateServer}
+                <p class="flex items-center gap-2">
+                    {$_('pages.serverInfomationPage.infomationCard.inviteLink')} <Button
+                        variant="secondary"
+                        disabled={true}>Copy to clipboard</Button
+                    >
+                </p>
+                <p class="text-sm opacity-70">
+                    {$_('pages.serverInfomationPage.infomationCard.inviteUnavailable')}
+                </p>
+                {#if accessCode}
+                    <p class="flex items-center gap-2">
+                        {$_('pages.serverInfomationPage.infomationCard.accessCode')} <Button
+                            variant="secondary"
+                            onclick={async () => {
+                                await copyToClipboard(accessCode)
+                            }}>Copy to clipboard</Button
+                        >
+                    </p>
+                {/if}
+            {:else}
+                <p class="flex items-center gap-2">
+                    {$_('pages.serverInfomationPage.infomationCard.inviteLink')} <Button
+                        variant="secondary"
+                        onclick={async () => {
+                            await copyToClipboard(serverInviteLink)
+                        }}>Copy to clipboard</Button
+                    >
+                </p>
+            {/if}
         </div>
     </ExpandableSettingCard>
 </div>

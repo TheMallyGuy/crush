@@ -19,12 +19,16 @@ pub(super) fn emit_server_info(
     instance_id: &str,
     game_id: u64,
     region_info: &str,
+    is_private_server: bool,
+    access_code: Option<String>,
 ) {
     log::info!("{}", region_info);
     let payload = EmitServerInfomation {
         server_id: instance_id.to_string(),
         game_id,
         region_info: region_info.to_string(),
+        is_private_server,
+        access_code,
     };
     if let Ok(mut guard) = app.state::<ServerInfoState>().0.lock() {
         *guard = Some(payload.clone());
@@ -75,7 +79,14 @@ pub(super) async fn fetch_and_store_location(
             state.pending_server_location.as_deref(),
         ) {
             if let Some(place_id) = state.activity.place_id {
-                emit_server_info(app, id, place_id, loc);
+                emit_server_info(
+                    app,
+                    id,
+                    place_id,
+                    loc,
+                    state.activity.is_private_server,
+                    state.activity.access_code.clone(),
+                );
             }
         }
     }

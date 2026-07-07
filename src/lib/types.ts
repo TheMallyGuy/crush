@@ -347,7 +347,9 @@ export type AppType = 'player' | 'studio'
 export type ServerInfoFromBackend = {
     region_info: string
     game_id: number,
-    server_id: string
+    server_id: string,
+    is_private_server: boolean,
+    access_code: string | null
 }
 
 //

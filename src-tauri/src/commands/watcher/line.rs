@@ -57,7 +57,7 @@ pub(super) async fn handle_line(
     }
 
     if !state.activity.in_game
-        && state.activity.place_id.is_none()
+        && state.activity.place_id.is_some()
         && line.contains("GameJoinUtil::joinGamePostPrivateServer")
     {
         state.activity.is_private_server = true;
@@ -217,7 +217,14 @@ async fn on_joined(
 
     if let Some(id) = state.activity.instance_id.as_deref() {
         let location = state.pending_server_location.clone().unwrap_or_default();
-        emit_server_info(app, id, place_id, &location);
+        emit_server_info(
+            app,
+            id,
+            place_id,
+            &location,
+            state.activity.is_private_server,
+            state.activity.access_code.clone(),
+        );
         add_menu_item(app, "serverinfo", "Server Infomation").ok();
     }
 

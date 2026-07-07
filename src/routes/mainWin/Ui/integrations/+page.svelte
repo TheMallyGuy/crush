@@ -217,6 +217,7 @@ Questions or abuse reports: contact Mally (m.aay) on Discord.
         <Button
             onclick={() => {
                 tosDialog = !tosDialog
+                goto('./integrations/serverManagement')
             }}>I agree</Button
         >
     {/snippet}
