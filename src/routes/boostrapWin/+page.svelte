@@ -19,7 +19,6 @@
     import { load } from '@tauri-apps/plugin-store'
     import { _ } from 'svelte-i18n'
     import { info } from '@tauri-apps/plugin-log'
-    import { getBestServers } from '$lib/rovalraHelper/rovalra'
     import { parseRobloxDeepLink, rebuildDeeplink } from '$lib/robloxDeepLink'
     import { Window } from '@tauri-apps/api/window'
     import { launchAppType } from '$lib/stores/launchAppType'
@@ -168,7 +167,7 @@
                     message: $_('pages.boostrapWin.steps.launch'),
                 })
 
-                await performLaunch(version, url, integrations)
+                await performLaunch(version, url)
                 await sleep(1000)
                 await invoke('watch_logs', { isVng: installation?.vng })
                 await sleep(3000)
@@ -188,11 +187,7 @@
         }
     }
 
-    async function performLaunch(
-        version: string,
-        url: string,
-        integrations: Integrations | null | undefined
-    ) {
+    async function performLaunch(version: string, url: string) {
         const parsed = parseRobloxDeepLink(url)
 
         if (!parsed.placelauncherurl) {
@@ -201,29 +196,15 @@
 
         const launchUrl = new URL(parsed.placelauncherurl)
         const request = launchUrl.searchParams.get('request')
-        const joinServerForYou =
-            integrations?.roValra?.joinServerForYouValue ?? false
 
         const isSpecialRequest =
             request === 'RequestFollowUser' || request === 'RequestPrivateGame'
-        if (isSpecialRequest || !joinServerForYou || parsed.placeId == null) {
+        if (isSpecialRequest || parsed.placeId == null) {
             info(`Launching with url: ${url}`)
             return launchPlayer(version, url)
         }
 
-        const result = await getBestServers(parsed.placeId)
-        const bestServer = result.servers[0]
-
-        if (!bestServer) {
-            return launchPlayer(version, url)
-        }
-
-        const finalUrl = rebuildDeeplink(
-            parsed,
-            parsed.placeId,
-            bestServer.server_id
-        )
-        return launchPlayer(version, finalUrl)
+        return launchPlayer(version, url)
     }
 
     async function finalizeBootstrap() {

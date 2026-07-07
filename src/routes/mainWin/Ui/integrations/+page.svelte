@@ -65,8 +65,6 @@
     let exe: shi
     let exePath: string
 
-    const roValaraLogo = '/Rovalra.png'
-
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
@@ -136,7 +134,6 @@
             serverLocationNotifier,
             disableSystemTray: disableSystemTray ?? false,
             disableLaunchAtStartUp: disableLaunchAtStartUp ?? false,
-            roValra: current?.roValra ?? { joinServerForYouValue: false },
             activityWatching: activityWatching,
             optimizer: optimizer,
         }
@@ -364,22 +361,6 @@
                     onclick={() => goto('integrations/gameHistory')}
                 >
                     {$_('pages.integrations.gameHistoryCard.button')}
-                </Button>
-            {/snippet}
-        </SettingCard>
-
-        <SettingCard
-            title={$_('pages.integrations.roValraCard.title')}
-            description={$_('pages.integrations.roValraCard.description')}
-            icon={roValaraLogo}
-            doTheGrayThing={true}
-        >
-            {#snippet action()}
-                <Button
-                    variant="secondary"
-                    onclick={() => goto('integrations/roValra')}
-                >
-                    {$_('pages.integrations.roValraCard.button')}
                 </Button>
             {/snippet}
         </SettingCard>

@@ -11,9 +11,6 @@ export type Result = {
     servers: Server[];
 }
 
-export type RoValra = {
-    joinServerForYouValue: boolean
-}
 
 export type DiscordRpc = {
     enable: boolean,
@@ -67,7 +64,6 @@ export type Integrations = {
     discordRpc?: DiscordRpc
     serverLocationNotifier?: boolean
     priority?: PriorityClass
-    roValra?: RoValra
     optimizer?: boolean
     sleepSchedule?: sleepSchedule,
     gameCache?: Record<string, GameCache>;
