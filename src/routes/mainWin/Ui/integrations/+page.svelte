@@ -13,13 +13,10 @@
         Expand,
         BedSingle,
         Sparkles,
-        ArrowDownFromLine,
         ArrowDownToDot,
         ListStart,
-        Cuboid,
         Server,
     } from '@lucide/svelte'
-    import { marked } from 'marked'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
     import { load } from '@tauri-apps/plugin-store'
@@ -29,7 +26,6 @@
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import { getCurrentInstallation } from '$lib/downloadRoblox'
-    import Dialog from '$lib/components/molecules/Dialog.svelte'
     import {
         setLaunchAtStartup,
         setMinimizeToTray,
@@ -43,50 +39,6 @@
         { value: 'REALTIME_PRIORITY_CLASS', label: 'REALTIME' },
     ]
     let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
-
-    let tosDialog: boolean = false
-    let tos = `
-# Terms of Service
-
-Last updated: 2026-07-07
-
-This document governs use of this API ("the Service"), which accepts reports of running Roblox game server instances (job ID, claimed IP, region) for tracking and approval. By sending requests to the Service, you agree to the following. The Service's source code is not public; these terms cover API usage only.
-
-## 1. What we collect
-
-For each submission we store: the reporting machine's IP (\`serverIp\`), the Roblox server's \`jobId\`, its self-reported \`claimedIp\`, the region string it provides, and the IP address the request actually came from (used only for rate limiting and abuse detection).
-
-## 2. Acceptable use
-
-- Only submit data for server instances you legitimately operate.
-- Don't spoof \`serverIp\`, \`claimedIp\`, or \`jobId\` values that don't correspond to a real server instance you control.
-- Don't attempt to exceed, bypass, or automate around the published rate limits (currently 60 requests/minute per IP on submissions).
-- Don't use the Service to probe, scan, or attack Roblox infrastructure or third parties.
-- Don't attempt to access admin-gated endpoints without an authorized key.
-
-Violating any of the above may result in your IP or game being blocked from the Service without notice.
-
-## 3. No guarantees
-
-The Service is provided as-is, run on a best-effort basis by a single maintainer. There is no uptime guarantee, no SLA, and no warranty of correctness. Data may be pruned, migrated, or reset at any time without notice. Access to the Service may be revoked at any time, for any reason.
-
-## 4. Approval is discretionary
-
-Game registration and submission approval are admin-gated actions. Submitting data does not entitle you to approval - the maintainer may accept or reject any game or submission for any reason.
-
-## 5. No license to the Service itself
-
-These terms grant you permission to use the Service's public endpoints; they do not grant any rights to the Service's source code, infrastructure, or internal implementation, which remain private and proprietary.
-
-## 6. Changes
-
-These terms, the API shape, and rate limits may change at any time. Continued use of the Service after a change constitutes acceptance of the updated terms.
-
-## 7. Contact
-
-Questions or abuse reports: contact Mally (m.aay) on Discord.
-
-`
 
     let crashHandler = false
     let discordRpc = false
@@ -200,28 +152,6 @@ Questions or abuse reports: contact Mally (m.aay) on Discord.
         }
     }
 </script>
-
-<Dialog
-    open={tosDialog}
-    onclose={() => {
-        tosDialog = !tosDialog
-    }}
-    title="TERMS OF SERVICE"
->
-    <div
-        class="tos-content max-h-64 overflow-y-auto border border-stone-800/40 bg-black/20 p-3 text-sm text-stone-300"
-    >
-        {@html marked(tos)}
-    </div>
-    {#snippet actions()}
-        <Button
-            onclick={() => {
-                tosDialog = !tosDialog
-                goto('./integrations/serverManagement')
-            }}>I agree</Button
-        >
-    {/snippet}
-</Dialog>
 
 <div class="flex flex-col gap-8">
     <div class="flex items-center justify-between">
@@ -441,49 +371,10 @@ Questions or abuse reports: contact Mally (m.aay) on Discord.
                 <Button
                     variant="secondary"
                     onclick={() => {
-                        tosDialog = !tosDialog
+                        goto('./integrations/serverManagement')
                     }}>open</Button
                 >
             {/snippet}
         </SettingCard>
     </div>
 </div>
-
-<style>
-    .tos-content :global(h1) {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-    .tos-content :global(h2) {
-        font-size: 1.05rem;
-        font-weight: 600;
-        margin-top: 1rem;
-        margin-bottom: 0.4rem;
-    }
-    .tos-content :global(p) {
-        margin-bottom: 0.75rem;
-    }
-    .tos-content :global(ul) {
-        list-style: disc;
-        padding-left: 1.25rem;
-        margin-bottom: 0.75rem;
-    }
-    .tos-content :global(li) {
-        margin-bottom: 0.25rem;
-    }
-    .tos-content :global(a) {
-        color: #f97316;
-        text-decoration: underline;
-    }
-    .tos-content :global(code) {
-        background: rgba(255, 255, 255, 0.08);
-        padding: 0.1rem 0.3rem;
-        border-radius: 0.25rem;
-        font-size: 0.85em;
-    }
-    .tos-content :global(strong) {
-        font-weight: 700;
-        color: #e7e5e4;
-    }
-</style>
