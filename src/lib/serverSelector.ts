@@ -144,7 +144,6 @@ type JoinGameResponse = {
 }
 
 async function getRandomServers(amount: number, gameId: number): Promise<ServerMetaData[]> {
-    const attemptId = crypto.randomUUID()
     const value = await getCookie()
     const cookie = `.ROBLOSECURITY=${value}`
     const csrf = await invoke<string>('get_csrf_token', { cookie })
@@ -153,6 +152,8 @@ async function getRandomServers(amount: number, gameId: number): Promise<ServerM
     let fetchedServers: ServerMetaData[] = []
 
     while (count < amount) {
+        const attemptId = crypto.randomUUID()
+
         const res: JoinGameResponse = await invoke<JoinGameResponse>("join_game", {
             cookie,
             csrf,
