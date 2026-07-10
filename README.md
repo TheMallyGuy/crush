@@ -6,8 +6,6 @@
 [![Svelte][svelteBadge]][svelte]
 [![TailwindCSS][tailwindcssBadge]][tailwindcss]
 
-> [!NOTE]
-> A Gitea mirror is available from my homelab: https://git.mally.qzz.io/Mally/crush
 
 Crush is a Roblox bootstrapper written from scratch, inspired by many other bootstrappers.
 
