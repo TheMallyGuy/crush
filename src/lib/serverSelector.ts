@@ -126,6 +126,72 @@ async function getToken(): Promise<string> {
     return data?.token
 }
 
+interface ServerMetaData {
+    serverIp: string,
+    gameId: number,
+    jobId: string;
+    fetchedRegion: string,
+}
+
+type JoinGameResponse = {
+    status: number;
+    jobId: string;
+    joinScript: {
+        UdmuxEndpoints: {
+            Address: string
+        }[]
+    }
+}
+
+async function getRandomServers(amount: number, gameId: number): Promise<ServerMetaData[]> {
+    const attemptId = crypto.randomUUID()
+    const value = await getCookie()
+    const cookie = `.ROBLOSECURITY=${value}`
+    const csrf = await invoke<string>('get_csrf_token', { cookie })
+
+    let count: number = 0
+    let fetchedServers: ServerMetaData[] = []
+
+    while (count < amount) {
+        const res: JoinGameResponse = await invoke<JoinGameResponse>("join_game", {
+            cookie,
+            csrf,
+            gameId: `${gameId}`,
+            attemptId,
+        })
+
+        const geo = await (await fetch(`https://get.geojs.io/v1/ip/geo/${res.joinScript.UdmuxEndpoints[0].Address}.json`)).json() as { city: string, country: string };
+
+
+        fetchedServers.push({
+            serverIp: res.joinScript.UdmuxEndpoints[0].Address,
+            gameId: gameId,
+            jobId: res.jobId,
+            fetchedRegion: `${geo.city}, ${geo.country}`
+        })
+        count++;
+    }
+
+    return fetchedServers
+}
+
+
+export async function submissionRandomServer(amount: number, gameId: number) {
+    const rand = await getRandomServers(amount, gameId)
+    const authorization = await getToken()
+
+    const res = await fetch(`${DOMAIN}/v1/submissions/manual`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${authorization}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(rand)
+    });
+
+    if (!res.ok) throw new Error("went wrong when sub rand servers")
+}
+
 
 async function getValidateData(authorization: string): Promise<ValidateData[]> {
     const res = await fetch(`${DOMAIN}/v1/validation/batch?limit=50`, {
@@ -160,7 +226,8 @@ async function reportDeadOrAlive(authorization: string, updated: UpdatedReport) 
     });
 
     if (!res.ok) {
-        throw new Error(`Failed to report validation results: ${res.status} ${res.statusText}`);
+        const body = await res.text().catch(() => '<no body>')
+        throw new Error(`Failed to report validation results: ${res.status} ${res.statusText} — ${body}`);
     }
 }
 
@@ -257,6 +324,10 @@ export async function validateServers() {
         } else {
             outdated.push(item.id)
         }
+    }
+
+    if (updated.length === 0 && outdated.length === 0) {
+        return // nothing to report — the server rejects an empty report as 400
     }
 
     const report: UpdatedReport = {

@@ -93,6 +93,9 @@
         },
         {
           "url": "https://gamejoin.roblox.com/v1/join-game-instance"
+        },
+        {
+          "url": "https://get.geojs.io/v1/ip/geo/*"
         }
       ],
       "deny": [

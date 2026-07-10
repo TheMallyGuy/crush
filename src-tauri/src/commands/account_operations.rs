@@ -181,6 +181,41 @@ pub async fn join_game_instance(
     Ok(body)
 }
 
+
+#[tauri::command]
+pub async fn join_game(
+    cookie: String,
+    csrf: Option<String>,
+    game_id: String,
+    attempt_id: String,
+) -> Result<serde_json::Value, String> {
+    let client = reqwest::Client::new();
+
+    let mut req = client
+        .post("https://gamejoin.roblox.com/v1/join-game")
+        .header("Cookie", &cookie)
+        .header("User-Agent", "Roblox/WinInet")
+        .header("Content-Type", "application/json")
+        .json(&serde_json::json!({
+            "gameJoinAttemptId": attempt_id,
+            "placeId": game_id,
+        }));
+
+    if let Some(csrf_token) = csrf {
+        req = req.header("X-CSRF-TOKEN", csrf_token);
+    }
+
+    let resp = req.send().await.map_err(|e| e.to_string())?;
+    let status = resp.status();
+    let body: serde_json::Value = resp.json().await.map_err(|e| e.to_string())?;
+
+    if !status.is_success() {
+        return Err(format!("HTTP {}: {}", status, body));
+    }
+
+    Ok(body)
+}
+
 #[tauri::command]
 pub async fn get_auth_ticket(
     cookie: String,

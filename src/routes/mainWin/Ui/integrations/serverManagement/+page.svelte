@@ -13,13 +13,15 @@
     } from '@lucide/svelte'
     import { serverService } from '$lib/stores/discordAuth.svelte'
     import { serverManagementSettings } from '$lib/stores/serverManagement.svelte'
-    import { fetchRegions } from '$lib/serverSelector'
+    import { fetchRegions, submissionRandomServer } from '$lib/serverSelector'
     import { onMount } from 'svelte'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
+    import { notify } from '$lib/notify'
 
     let openSub = $state(false)
     let serverAmount: number = $state(0)
+    let gameId: number = $state(0)
 
     let regionOptions = $state<{ value: string; label: string }[]>([
         { value: '', label: 'Any region' },
@@ -41,6 +43,17 @@
             console.error('[serverManagement] failed to fetch regions', e)
         }
     })
+
+    async function handleRanSub() {
+        openSub = !openSub
+        notify.send({
+            title: 'Done!',
+            description:
+                'Thanks for contributing your servers submissions to the crush server <3',
+            variant: 'success',
+        })
+        await submissionRandomServer(serverAmount, gameId)
+    }
 
     $effect(() => {
         if (!serverManagementSettings.loaded) return
@@ -76,8 +89,15 @@
         placeholder="100"
     />
 
+    <Textbox
+        type="number"
+        label="Any game id, could be your favourite game"
+        bind:value={gameId}
+        placeholder="9391468976"
+    />
+
     {#snippet actions()}
-        <Button>Begin</Button>
+        <Button onclick={handleRanSub}>Begin</Button>
     {/snippet}
 </Dialog>
 
