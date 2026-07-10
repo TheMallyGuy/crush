@@ -1,6 +1,8 @@
 import { load } from "@tauri-apps/plugin-store";
 import type { ServerInfoFromBackend } from "./types";
 import { fetch } from "@tauri-apps/plugin-http";
+import type { CloudLoginData } from "./stores/discordAuth.svelte";
+import { invoke } from "@tauri-apps/api/core";
 
 
 const DOMAIN = "https://crush-service.mally.qzz.io"
@@ -45,9 +47,25 @@ async function submitNewData(data: serverItem[]): Promise<SubmitResult> {
     return result
 }
 
+export async function fetchRegions(): Promise<string[]> {
+    const res = await fetch(`${DOMAIN}/v1/servers/regions`)
+
+    if (!res.ok) {
+        throw new Error(`Failed to fetch regions: ${res.status} ${res.statusText}`)
+    }
+
+    return res.json()
+}
+
 const BATCH_SIZE = 10
 
 export async function serverDataHandler(info: ServerInfoFromBackend) {
+    const configStore = await load("config.json")
+    const settings = await configStore.get<{ autoSubmit?: boolean }>("serverManagement")
+    if (settings?.autoSubmit === false) {
+        return
+    }
+
     if (info.is_private_server) {
         return
     }
@@ -87,4 +105,164 @@ export async function serverDataHandler(info: ServerInfoFromBackend) {
         console.error('[serverSelector] batch submission failed, keeping buffer', e)
         await store.set('servers', submittable)
     }
+}
+
+interface ValidateData {
+    id: number,
+    serverId: number,
+    gameId: number,
+    jobId: string
+}
+
+async function getToken(): Promise<string> {
+    const store = await load("config.json")
+
+    const data = await store.get<CloudLoginData>("serverService");
+
+    if (!data) {
+        throw new Error("error no key in store");
+    }
+
+    return data?.token
+}
+
+
+async function getValidateData(authorization: string): Promise<ValidateData[]> {
+    const res = await fetch(`${DOMAIN}/v1/validation/batch?limit=50`, {
+        headers: {
+            Authorization: `Bearer ${authorization}`
+        }
+    });
+
+    if (!res.ok) {
+        throw new Error(`Failed to fetch validation data: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data as ValidateData[];
+}
+
+type UpdatedReport = {
+    updated: {
+        id: number,
+    }[]
+    outdated: number[]
+}
+
+async function reportDeadOrAlive(authorization: string, updated: UpdatedReport) {
+    const res = await fetch(`${DOMAIN}/v1/validation/report`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${authorization}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updated)
+    });
+
+    if (!res.ok) {
+        throw new Error(`Failed to report validation results: ${res.status} ${res.statusText}`);
+    }
+}
+
+interface ParsedCookie {
+    domain: string
+    httpOnly: boolean
+    path: string
+    secure: boolean
+    expires: number
+    name: string
+    value: string
+}
+
+function parseNetscapeCookies(raw: string): ParsedCookie[] {
+    const chunks = raw.split(/(?=#HttpOnly_)/g)
+    const cookies: ParsedCookie[] = []
+
+    for (const chunk of chunks) {
+        const cleaned = chunk.replace(/^#HttpOnly_/, '').replace(/;\s*$/, '').trim()
+        if (!cleaned) continue
+
+        const fields = cleaned.split('\t')
+        if (fields.length < 7) continue
+
+        const [domain, , path, secure, expires, name, value] = fields
+        cookies.push({
+            domain,
+            httpOnly: chunk.startsWith('#HttpOnly_'),
+            path,
+            secure: secure === 'TRUE',
+            expires: Number(expires),
+            name,
+            value,
+        })
+    }
+
+    return cookies
+}
+
+async function getCookie(): Promise<string> {
+    const raw: string = await invoke("read_current_cookie")
+    const { CookiesData } = JSON.parse(raw) as { CookiesData: string }
+    const decrypted: string = await invoke("decrypt_cookie_data", { encrypted: CookiesData })
+
+    const robloSecurity = parseNetscapeCookies(decrypted).find((c) => c.name === '.ROBLOSECURITY')
+
+    if (!robloSecurity) {
+        throw new Error('.ROBLOSECURITY cookie not found in decrypted cookie jar')
+    }
+
+    return robloSecurity.value
+}
+
+
+async function isServerInstanceAlive(gameId: number, instance: string) {
+    const attemptId = crypto.randomUUID()
+    const value = await getCookie()
+    const cookie = `.ROBLOSECURITY=${value}`
+    const csrf = await invoke<string>('get_csrf_token', { cookie })
+
+
+    let data: { status: number }
+    try {
+        data = await invoke<{ status: number }>('join_game_instance', {
+            cookie,
+            csrf,
+            gameId: instance,
+            placeId: gameId,
+            attemptId,
+        })
+    } catch (err) {
+        throw new Error(`Failed to fetch validation data: ${err}`)
+    }
+
+    if (data.status == 2) {
+        return true
+    } else {
+        return false
+    }
+}
+
+export async function validateServers() {
+    const authKey = await getToken()
+    const serversUn = await getValidateData(authKey)
+
+    const updated: { id: number }[] = []
+    const outdated: number[] = []
+
+    for (const item of serversUn) {
+        const check = await isServerInstanceAlive(item.gameId, item.jobId)
+
+        if (check) {
+            updated.push({ id: item.id })
+        } else {
+            outdated.push(item.id)
+        }
+    }
+
+    const report: UpdatedReport = {
+        updated: updated,
+        outdated: outdated
+    }
+
+    await reportDeadOrAlive(authKey, report)
 }

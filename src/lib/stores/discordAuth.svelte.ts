@@ -8,7 +8,7 @@ interface DiscordProfile {
     avatar: string | null
 }
 
-interface CloudLoginData {
+export interface CloudLoginData {
     token: string
     expiresAt?: string
     user?: DiscordProfile
@@ -113,7 +113,7 @@ export class CloudService {
 
             this.authError = 'Login timed out'
         } catch (e) {
-            console.error('[serverManagement] auth error', e)
+            console.error('[discordAuth] auth error', e)
             this.authError = e instanceof Error ? e.message : String(e)
         } finally {
             this.inAuth = false
