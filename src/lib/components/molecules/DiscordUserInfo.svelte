@@ -29,6 +29,8 @@
         >
         <span class="text-stone-600">·</span>
         <span>{serverService.validatedCount} validated</span>
+        <span class="text-stone-600">·</span>
+        <span>{serverService.submittedCount} submissions</span>
     </div>
 {:else if serverService.authError}
     <p class="text-sm text-red-400 {className}">{serverService.authError}</p>

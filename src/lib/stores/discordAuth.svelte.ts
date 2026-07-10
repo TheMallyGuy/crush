@@ -24,9 +24,11 @@ export class CloudService {
     authError = $state<string | null>(null)
     user = $state<DiscordProfile | null>(null)
     validatedCount = $state(0)
+    submittedCount = $state(0)
 
     #config: Store | null = null
     #token = ''
+    #expiresAt: string | undefined = undefined
 
     async #getStore(): Promise<Store> {
         if (!this.#config) {
@@ -43,10 +45,33 @@ export class CloudService {
 
     async #clear() {
         this.#token = ''
+        this.#expiresAt = undefined
         this.user = null
         this.isLoggedIn = false
         this.validatedCount = 0
+        this.submittedCount = 0
         await this.#persist({ token: '' })
+    }
+
+    // Fetches fresh profile + stats using the currently-set token. Returns
+    // false (and clears state) if the token turned out to be invalid.
+    async #refreshStats(): Promise<boolean> {
+        const res = await fetch(`${DOMAIN}/v1/validation/me`, {
+            headers: { Authorization: `Bearer ${this.#token}` },
+        })
+
+        if (!res.ok) {
+            await this.#clear()
+            return false
+        }
+
+        const me = await res.json()
+        this.user = { id: me.id, username: me.username, avatar: me.avatar }
+        this.validatedCount = me.validatedCount ?? 0
+        this.submittedCount = me.submittedCount ?? 0
+        this.isLoggedIn = true
+        await this.#persist({ token: this.#token, expiresAt: this.#expiresAt, user: this.user })
+        return true
     }
 
     async init() {
@@ -54,6 +79,7 @@ export class CloudService {
         const loginData: CloudLoginData = (await store.get('serverService')) ?? { token: '' }
 
         this.#token = loginData.token
+        this.#expiresAt = loginData.expiresAt
         this.user = loginData.user ?? null
 
         if (!this.#token) {
@@ -61,20 +87,7 @@ export class CloudService {
             return
         }
 
-        const res = await fetch(`${DOMAIN}/v1/validation/me`, {
-            headers: { Authorization: `Bearer ${this.#token}` },
-        })
-
-        if (!res.ok) {
-            await this.#clear()
-            return
-        }
-
-        const me = await res.json()
-        this.user = { id: me.id, username: me.username, avatar: me.avatar }
-        this.validatedCount = me.validatedCount ?? 0
-        this.isLoggedIn = true
-        await this.#persist({ token: this.#token, user: this.user })
+        await this.#refreshStats()
     }
 
     async auth() {
@@ -93,13 +106,8 @@ export class CloudService {
                 if (res.status === 200) {
                     const body = await res.json()
                     this.#token = body.token
-                    this.user = body.user
-                    this.isLoggedIn = true
-                    await this.#persist({
-                        token: body.token,
-                        expiresAt: body.expiresAt,
-                        user: body.user,
-                    })
+                    this.#expiresAt = body.expiresAt
+                    await this.#refreshStats()
                     return
                 }
 
