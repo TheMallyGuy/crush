@@ -3,6 +3,7 @@ import type { ServerInfoFromBackend } from "./types";
 import { fetch } from "@tauri-apps/plugin-http";
 import type { CloudLoginData } from "./stores/discordAuth.svelte";
 import { invoke } from "@tauri-apps/api/core";
+import { convertColorSpace } from "three/src/nodes/display/ColorSpaceNode.js";
 
 
 const DOMAIN = "https://crush-service.mally.qzz.io"
@@ -140,7 +141,46 @@ type JoinGameResponse = {
         UdmuxEndpoints: {
             Address: string
         }[]
+    } | null
+}
+
+interface RobloxServerListEntry {
+    id: string
+    maxPlayers: number
+    playing: number
+    fps: number
+    ping: number
+}
+
+interface RobloxServerListResponse {
+    data: RobloxServerListEntry[]
+    nextPageCursor: string | null
+}
+
+async function listPublicServers(gameId: number, amount: number): Promise<RobloxServerListEntry[]> {
+    const servers: RobloxServerListEntry[] = []
+    let cursor: string | null = null
+
+    while (servers.length < amount) {
+        const url = new URL(`https://games.roblox.com/v1/games/${gameId}/servers/Public`)
+        url.searchParams.set('sortOrder', 'Asc')
+        url.searchParams.set('limit', '100')
+        if (cursor) url.searchParams.set('cursor', cursor)
+
+        const res = await fetch(url.toString())
+
+        if (!res.ok) {
+            throw new Error(`Failed to list servers: ${res.status} ${res.statusText}`)
+        }
+
+        const page = await res.json() as RobloxServerListResponse
+        servers.push(...page.data)
+
+        if (!page.nextPageCursor) break
+        cursor = page.nextPageCursor
     }
+
+    return servers.slice(0, amount)
 }
 
 async function getRandomServers(amount: number, gameId: number): Promise<ServerMetaData[]> {
@@ -148,21 +188,32 @@ async function getRandomServers(amount: number, gameId: number): Promise<ServerM
     const cookie = `.ROBLOSECURITY=${value}`
     const csrf = await invoke<string>('get_csrf_token', { cookie })
 
-    let count: number = 0
-    let fetchedServers: ServerMetaData[] = []
+    const targets = await listPublicServers(gameId, amount)
+    const fetchedServers: ServerMetaData[] = []
 
-    while (count < amount) {
+    for (const server of targets) {
         const attemptId = crypto.randomUUID()
 
-        const res: JoinGameResponse = await invoke<JoinGameResponse>("join_game", {
-            cookie,
-            csrf,
-            gameId: `${gameId}`,
-            attemptId,
-        })
+        let res: JoinGameResponse
+        try {
+            res = await invoke<JoinGameResponse>('join_game_instance', {
+                cookie,
+                csrf,
+                gameId: server.id,
+                placeId: gameId,
+                attemptId,
+            })
+        } catch (err) {
+            console.warn(`[serverSelector] join failed for instance ${server.id}, skipping`, err)
+            continue
+        }
+
+        if (res.status !== 2 || !res.joinScript) {
+            console.warn(`[serverSelector] instance ${server.id} not joinable (status ${res.status}), skipping`)
+            continue
+        }
 
         const geo = await (await fetch(`https://get.geojs.io/v1/ip/geo/${res.joinScript.UdmuxEndpoints[0].Address}.json`)).json() as { city: string, country: string };
-
 
         fetchedServers.push({
             serverIp: res.joinScript.UdmuxEndpoints[0].Address,
@@ -170,7 +221,6 @@ async function getRandomServers(amount: number, gameId: number): Promise<ServerM
             jobId: res.jobId,
             fetchedRegion: `${geo.city}, ${geo.country}`
         })
-        count++;
     }
 
     return fetchedServers
