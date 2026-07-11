@@ -15,7 +15,6 @@
         Cuboid,
         ScrollText,
         Shield,
-        Cloud,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -253,23 +252,6 @@
                 bind:value={settings.currentLocale}
                 options={$dropdownOptions}
             />
-        {/snippet}
-    </SettingCard>
-
-    <SettingCard
-        title={$_('pages.settings.cloudSyncCard.title')}
-        description={$_('pages.settings.cloudSyncCard.description')}
-        icon={Cloud}
-    >
-        {#snippet action()}
-            <Button
-                variant="secondary"
-                onclick={() => {
-                    goto('./settings/cloud')
-                }}
-            >
-                {$_('pages.settings.cloudSyncCard.button')}
-            </Button>
         {/snippet}
     </SettingCard>
 
