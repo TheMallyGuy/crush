@@ -1,3 +1,5 @@
+use std::{fs, path::PathBuf};
+
 use windows_dpapi::{decrypt_data, encrypt_data, Scope};
 
 #[tauri::command]
@@ -122,6 +124,96 @@ pub async fn get_csrf_token(cookie: String) -> Result<String, String> {
         .and_then(|v| v.to_str().ok())
         .map(|s| s.to_string())
         .ok_or("No CSRF token found".to_string())
+}
+
+#[tauri::command]
+pub async fn read_current_cookie(is_vng: Option<bool>) -> Result<String, String> {
+    let mut roblox_path: PathBuf =
+        dirs::data_local_dir().ok_or("Could not find local data directory")?;
+
+    roblox_path.push(if is_vng.unwrap_or(false) {
+        "RobloxPCVNG"
+    } else {
+        "Roblox"
+    });
+
+    roblox_path.push("LocalStorage");
+    roblox_path.push("RobloxCookies.dat");
+
+    log::info!("{:?}", roblox_path);
+
+    fs::read_to_string(&roblox_path).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub async fn join_game_instance(
+    cookie: String,
+    csrf: Option<String>,
+    game_id: String,
+    place_id: u64,
+    attempt_id: String,
+) -> Result<serde_json::Value, String> {
+    let client = reqwest::Client::new();
+
+    let mut req = client
+        .post("https://gamejoin.roblox.com/v1/join-game-instance")
+        .header("Cookie", &cookie)
+        .header("User-Agent", "Roblox/WinInet")
+        .header("Content-Type", "application/json")
+        .json(&serde_json::json!({
+            "gameId": game_id,
+            "gameJoinAttemptId": attempt_id,
+            "placeId": place_id,
+        }));
+
+    if let Some(csrf_token) = csrf {
+        req = req.header("X-CSRF-TOKEN", csrf_token);
+    }
+
+    let resp = req.send().await.map_err(|e| e.to_string())?;
+    let status = resp.status();
+    let body: serde_json::Value = resp.json().await.map_err(|e| e.to_string())?;
+
+    if !status.is_success() {
+        return Err(format!("HTTP {}: {}", status, body));
+    }
+
+    Ok(body)
+}
+
+
+#[tauri::command]
+pub async fn join_game(
+    cookie: String,
+    csrf: Option<String>,
+    game_id: String,
+    attempt_id: String,
+) -> Result<serde_json::Value, String> {
+    let client = reqwest::Client::new();
+
+    let mut req = client
+        .post("https://gamejoin.roblox.com/v1/join-game")
+        .header("Cookie", &cookie)
+        .header("User-Agent", "Roblox/WinInet")
+        .header("Content-Type", "application/json")
+        .json(&serde_json::json!({
+            "gameJoinAttemptId": attempt_id,
+            "placeId": game_id,
+        }));
+
+    if let Some(csrf_token) = csrf {
+        req = req.header("X-CSRF-TOKEN", csrf_token);
+    }
+
+    let resp = req.send().await.map_err(|e| e.to_string())?;
+    let status = resp.status();
+    let body: serde_json::Value = resp.json().await.map_err(|e| e.to_string())?;
+
+    if !status.is_success() {
+        return Err(format!("HTTP {}: {}", status, body));
+    }
+
+    Ok(body)
 }
 
 #[tauri::command]

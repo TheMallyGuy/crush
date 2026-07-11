@@ -13,9 +13,9 @@
         Expand,
         BedSingle,
         Sparkles,
-        ArrowDownFromLine,
         ArrowDownToDot,
         ListStart,
+        Server,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { onMount } from 'svelte'
@@ -26,7 +26,6 @@
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import { getCurrentInstallation } from '$lib/downloadRoblox'
-    import Dialog from '$lib/components/molecules/Dialog.svelte'
     import {
         setLaunchAtStartup,
         setMinimizeToTray,
@@ -40,8 +39,6 @@
         { value: 'REALTIME_PRIORITY_CLASS', label: 'REALTIME' },
     ]
     let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
-
-    let warningDialog = false
 
     let crashHandler = false
     let discordRpc = false
@@ -64,8 +61,6 @@
 
     let exe: shi
     let exePath: string
-
-    const roValaraLogo = '/Rovalra.png'
 
     async function loadConfig() {
         const store = await load('config.json')
@@ -136,7 +131,6 @@
             serverLocationNotifier,
             disableSystemTray: disableSystemTray ?? false,
             disableLaunchAtStartUp: disableLaunchAtStartUp ?? false,
-            roValra: current?.roValra ?? { joinServerForYouValue: false },
             activityWatching: activityWatching,
             optimizer: optimizer,
         }
@@ -369,18 +363,17 @@
         </SettingCard>
 
         <SettingCard
-            title={$_('pages.integrations.roValraCard.title')}
-            description={$_('pages.integrations.roValraCard.description')}
-            icon={roValaraLogo}
-            doTheGrayThing={true}
+            title="Server Management"
+            description="Select region, Submission Servers"
+            icon={Server}
         >
             {#snippet action()}
                 <Button
                     variant="secondary"
-                    onclick={() => goto('integrations/roValra')}
+                    onclick={() => {
+                        goto('./integrations/serverManagement')
+                    }}>open</Button
                 >
-                    {$_('pages.integrations.roValraCard.button')}
-                </Button>
             {/snippet}
         </SettingCard>
     </div>

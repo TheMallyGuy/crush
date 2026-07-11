@@ -137,7 +137,13 @@
                 "description": "Server information about this server",
                 "uptime": "Uptime : Not fetched",
                 "instanceId": "Server Instance ID : {id}",
-                "inviteLink": "Copy invite link :"
+                "inviteLink": "Copy invite link :",
+                "serverType": {
+                    "public": "Public server",
+                    "private": "Private / Reserved server"
+                },
+                "accessCode": "Copy access code :",
+                "inviteUnavailable": "Invite links don't work for private/reserved servers"
             }
         },
         "appearance": {

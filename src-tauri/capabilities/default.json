@@ -74,7 +74,7 @@
           "url": "http://ip-api.com/json"
         },
         {
-          "url": "https://apis.rovalra.com/"
+          "url": "https://crush-service.mally.qzz.io/*"
         },
         {
           "url": "https://*.rbxcdn.com/"
@@ -90,6 +90,12 @@
         },
         {
           "url": "https://raw.githubusercontent.com/RealMeddsam/config/*"
+        },
+        {
+          "url": "https://gamejoin.roblox.com/v1/join-game-instance"
+        },
+        {
+          "url": "https://get.geojs.io/v1/ip/geo/*"
         }
       ],
       "deny": [

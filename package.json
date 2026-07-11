@@ -42,6 +42,7 @@
         "gsap": "^3.15.0",
         "motion-sv": "^0.1.12",
         "svelte-i18n": "^4.0.1",
+        "svelte-marked": "^0.8.0",
         "tailwind-merge": "^3.6.0",
         "tailwindcss": "^4.3.2",
         "tauri-plugin-cache-api": "^0.1.6",

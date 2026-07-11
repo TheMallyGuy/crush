@@ -1,6 +1,7 @@
 use commands::account_operations::{
     clear_cookies, decrypt_cookie_data, encrypt_cookie_data, export_all_cookies, get_auth_ticket,
-    get_csrf_token, quick_sign_create, quick_sign_poll, validate_roblox_cookie,
+    get_csrf_token, join_game, join_game_instance, quick_sign_create, quick_sign_poll,
+    read_current_cookie, validate_roblox_cookie,
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
@@ -47,7 +48,6 @@ pub mod simple_i18n;
 pub mod tray; // nice name choice buddy
 
 use crate::tray::setup_tray;
-
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -150,7 +150,6 @@ fn print_debug_info() {
     log::info!("Build date: {}", env!("VERGEN_BUILD_DATE"));
     log::info!("Build timestamp: {}", env!("VERGEN_BUILD_TIMESTAMP"));
 }
-
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -376,6 +375,7 @@ pub fn run() {
             watch_logs,
             set_rpc,
             copy_file,
+            join_game,
             export_boostrapconfig,
             get_latest_version_studio,
             set_process_priority,
@@ -395,6 +395,8 @@ pub fn run() {
             validate_roblox_cookie,
             relaunch_with_admins_perms,
             check_elevated,
+            read_current_cookie,
+            join_game_instance,
             kill_roblox_if_open,
             get_local_app,
             write_local_app,

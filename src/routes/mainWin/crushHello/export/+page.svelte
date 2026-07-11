@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
-    import type { BoostrapConfigs, Installation, Integrations, interactiveAPI, RoValra } from '$lib/types'
+    import type { BoostrapConfigs, Installation, Integrations, interactiveAPI } from '$lib/types'
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
 
@@ -16,10 +16,7 @@
             const config = await load("config.json")
             const integrations = await config.get<Integrations>('integrations')
             
-            const roValra: RoValra = {
-                joinServerForYouValue: boostraperConfig.EnableBetterMatchmaking ?? false
-            }
-            
+
             const windowManipulation: interactiveAPI = {
                 enable: boostraperConfig.UseWindowControl ?? false,
                 scopes: {
@@ -57,7 +54,6 @@
                     boostraperConfig.ShowServerDetails ??
                     integrations?.serverLocationNotifier ??
                     false,
-                roValra: roValra,
                 gameCache: integrations?.gameCache ?? {},
                 crushRpc:
                     boostraperConfig.UseDiscordRichPresence ??

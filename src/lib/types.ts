@@ -11,9 +11,6 @@ export type Result = {
     servers: Server[];
 }
 
-export type RoValra = {
-    joinServerForYouValue: boolean
-}
 
 export type DiscordRpc = {
     enable: boolean,
@@ -67,7 +64,6 @@ export type Integrations = {
     discordRpc?: DiscordRpc
     serverLocationNotifier?: boolean
     priority?: PriorityClass
-    roValra?: RoValra
     optimizer?: boolean
     sleepSchedule?: sleepSchedule,
     gameCache?: Record<string, GameCache>;
@@ -351,7 +347,10 @@ export type AppType = 'player' | 'studio'
 export type ServerInfoFromBackend = {
     region_info: string
     game_id: number,
-    server_id: string
+    server_id: string,
+    is_private_server: boolean,
+    ip: string,
+    access_code: string | null
 }
 
 //
