@@ -60,7 +60,7 @@
         "@sveltejs/kit": "^2.69.1",
         "@sveltejs/vite-plugin-svelte": "^7.1.2",
         "@tauri-apps/cli": "^2.11.4",
-        "@types/node": "^25.9.4",
+        "@types/node": "^26.1.1",
         "bits-ui": "^2.18.1",
         "estree-walker": "^3.0.3",
         "prettier": "^3.9.4",
