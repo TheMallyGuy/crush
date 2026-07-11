@@ -2,7 +2,7 @@ import { load } from '@tauri-apps/plugin-store'
 import { serverService } from './discordAuth.svelte'
 import { validateServers } from '../serverSelector'
 
-interface ServerManagementData {
+export interface ServerManagementData {
     autoSubmit: boolean
     preferredRegion: string
     autoValidate: boolean

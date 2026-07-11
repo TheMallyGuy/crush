@@ -1,9 +1,8 @@
 import { load } from "@tauri-apps/plugin-store";
-import type { ServerInfoFromBackend } from "./types";
+import type { ServerInfoFromBackend, Result } from "./types";
 import { fetch } from "@tauri-apps/plugin-http";
 import type { CloudLoginData } from "./stores/discordAuth.svelte";
 import { invoke } from "@tauri-apps/api/core";
-import { convertColorSpace } from "three/src/nodes/display/ColorSpaceNode.js";
 
 
 const DOMAIN = "https://crush-service.mally.qzz.io"
@@ -316,6 +315,21 @@ function parseNetscapeCookies(raw: string): ParsedCookie[] {
     }
 
     return cookies
+}
+
+export async function getPerferedRegion(gameId: number, region: string): Promise<Result> {
+    const res = await fetch(`${DOMAIN}/v1/games/give`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            gameId: gameId,
+            region: region
+        })
+    })
+
+    if (!res.ok) throw new Error(`Failed to fetch preferred-region server: ${res.status} ${res.statusText}`)
+
+    return res.json()
 }
 
 async function getCookie(): Promise<string> {
