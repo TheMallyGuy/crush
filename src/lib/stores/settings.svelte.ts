@@ -6,6 +6,7 @@ interface SettingsData {
     discordRpcEnabled: boolean
     language: string
     robloxWarpped: boolean
+    uwuEnabled: boolean
 }
 
 const DEFAULTS: SettingsData = {
@@ -14,6 +15,7 @@ const DEFAULTS: SettingsData = {
     discordRpcEnabled: true,
     language: 'en',
     robloxWarpped: true,
+    uwuEnabled: false,
 }
 
 class AppSettings {
@@ -22,6 +24,7 @@ class AppSettings {
     discordRpcEnabled = $state(true)
     currentLocale = $state('en')
     robloxWarpped = $state(true)
+    uwuEnabled = $state(false)
     loaded = $state(false)
 
     async init() {
@@ -36,12 +39,14 @@ class AppSettings {
                 discordRpcEnabled: (await store.get<boolean>('discordRpcEnabled')) ?? DEFAULTS.discordRpcEnabled,
                 language: (await store.get<string>('language')) ?? DEFAULTS.language,
                 robloxWarpped: (await store.get<boolean>('robloxWarpped')) ?? DEFAULTS.robloxWarpped,
+                uwuEnabled: (await store.get<boolean>('uwuEnabled')) ?? DEFAULTS.uwuEnabled,
             }
             await store.delete('lockedIn')
             await store.delete('redRings')
             await store.delete('discordRpcEnabled')
             await store.delete('language')
             await store.delete('robloxWarpped')
+            await store.delete('uwuEnabled')
             await store.set('settings', saved)
             await store.save()
         }
@@ -52,6 +57,7 @@ class AppSettings {
         this.currentLocale = data.language
         this.robloxWarpped = data.robloxWarpped
         this.redRings = data.redRings
+        this.uwuEnabled = data.uwuEnabled
         this.loaded = true
     }
 
@@ -63,6 +69,7 @@ class AppSettings {
             discordRpcEnabled: this.discordRpcEnabled,
             language: this.currentLocale,
             robloxWarpped: this.robloxWarpped,
+            uwuEnabled: this.uwuEnabled,
         } satisfies SettingsData)
         await store.save()
     }
@@ -74,6 +81,11 @@ class AppSettings {
 
     async setRedRings(val: boolean) {
         this.redRings = val
+        await this.save()
+    }
+
+    async setUwuEnabled(val: boolean) {
+        this.uwuEnabled = val
         await this.save()
     }
 }

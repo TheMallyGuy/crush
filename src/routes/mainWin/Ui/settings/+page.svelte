@@ -15,6 +15,7 @@
         Cuboid,
         ScrollText,
         Shield,
+        Wand2,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -135,6 +136,7 @@
 
         void settings.discordRpcEnabled
         void settings.robloxWarpped
+        void settings.uwuEnabled
 
         locale.set(lang)
         ;(async () => {
@@ -294,6 +296,12 @@
     >
         {#snippet action()}
             <Switch bind:checked={settings.redRings} />
+        {/snippet}
+    </SettingCard>
+
+    <SettingCard title="Uwuify" description="uwuify text across the app" icon={Wand2}>
+        {#snippet action()}
+            <Switch bind:checked={settings.uwuEnabled} />
         {/snippet}
     </SettingCard>
 

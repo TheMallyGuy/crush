@@ -8,9 +8,15 @@
     import { goto } from '$app/navigation'
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { invoke } from '@tauri-apps/api/core'
+    import { initUwu } from '$lib/uwuify.svelte'
+    import { settings } from '$lib/stores/settings.svelte'
 
     onMount(async () => {
         const win = getCurrentWindow()
+        if (!settings.loaded) {
+            await settings.init()
+        }
+        initUwu()
         await loadSavedTheme()
         await background.init()
         await serverInfo.init()
