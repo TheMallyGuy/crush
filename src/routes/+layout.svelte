@@ -9,6 +9,7 @@
     import { getCurrentWindow } from '@tauri-apps/api/window'
     import { invoke } from '@tauri-apps/api/core'
     import { initUwu } from '$lib/uwuify.svelte'
+    import { initHoverSfx } from '$lib/hoverSfx'
     import { settings } from '$lib/stores/settings.svelte'
 
     onMount(async () => {
@@ -17,6 +18,7 @@
             await settings.init()
         }
         initUwu()
+        initHoverSfx()
         await loadSavedTheme()
         await background.init()
         await serverInfo.init()

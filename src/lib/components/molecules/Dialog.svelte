@@ -2,6 +2,7 @@
     import type { Snippet } from 'svelte'
     import { fly, fade } from 'svelte/transition'
     import { X } from '@lucide/svelte'
+    import { playSfx } from '$lib/sfx'
 
     interface Props {
         open?: boolean
@@ -34,6 +35,12 @@
             close()
         }
     }
+
+    $effect(() => {
+        if (open) {
+            playSfx('/sfx/dialog.mp3')
+        }
+    })
 </script>
 
 <svelte:window onkeydown={handleKeyDown} />

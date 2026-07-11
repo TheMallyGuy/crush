@@ -7,6 +7,7 @@ interface SettingsData {
     language: string
     robloxWarpped: boolean
     uwuEnabled: boolean
+    hoverSfxEnabled: boolean
 }
 
 const DEFAULTS: SettingsData = {
@@ -16,6 +17,7 @@ const DEFAULTS: SettingsData = {
     language: 'en',
     robloxWarpped: true,
     uwuEnabled: false,
+    hoverSfxEnabled: false,
 }
 
 class AppSettings {
@@ -25,6 +27,7 @@ class AppSettings {
     currentLocale = $state('en')
     robloxWarpped = $state(true)
     uwuEnabled = $state(false)
+    hoverSfxEnabled = $state(false)
     loaded = $state(false)
 
     async init() {
@@ -40,6 +43,7 @@ class AppSettings {
                 language: (await store.get<string>('language')) ?? DEFAULTS.language,
                 robloxWarpped: (await store.get<boolean>('robloxWarpped')) ?? DEFAULTS.robloxWarpped,
                 uwuEnabled: (await store.get<boolean>('uwuEnabled')) ?? DEFAULTS.uwuEnabled,
+                hoverSfxEnabled: (await store.get<boolean>('hoverSfxEnabled')) ?? DEFAULTS.hoverSfxEnabled,
             }
             await store.delete('lockedIn')
             await store.delete('redRings')
@@ -47,6 +51,7 @@ class AppSettings {
             await store.delete('language')
             await store.delete('robloxWarpped')
             await store.delete('uwuEnabled')
+            await store.delete('hoverSfxEnabled')
             await store.set('settings', saved)
             await store.save()
         }
@@ -58,6 +63,7 @@ class AppSettings {
         this.robloxWarpped = data.robloxWarpped
         this.redRings = data.redRings
         this.uwuEnabled = data.uwuEnabled
+        this.hoverSfxEnabled = data.hoverSfxEnabled
         this.loaded = true
     }
 
@@ -70,6 +76,7 @@ class AppSettings {
             language: this.currentLocale,
             robloxWarpped: this.robloxWarpped,
             uwuEnabled: this.uwuEnabled,
+            hoverSfxEnabled: this.hoverSfxEnabled,
         } satisfies SettingsData)
         await store.save()
     }

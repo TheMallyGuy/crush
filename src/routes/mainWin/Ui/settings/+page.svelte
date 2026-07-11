@@ -16,6 +16,7 @@
         ScrollText,
         Shield,
         Wand2,
+        Volume2,
     } from '@lucide/svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { openUrl } from '@tauri-apps/plugin-opener'
@@ -137,6 +138,7 @@
         void settings.discordRpcEnabled
         void settings.robloxWarpped
         void settings.uwuEnabled
+        void settings.hoverSfxEnabled
 
         locale.set(lang)
         ;(async () => {
@@ -302,6 +304,12 @@
     <SettingCard title="Uwuify" description="uwuify text across the app" icon={Wand2}>
         {#snippet action()}
             <Switch bind:checked={settings.uwuEnabled} />
+        {/snippet}
+    </SettingCard>
+
+    <SettingCard title="Hover SFX" description="play a sound when hovering buttons and other interactive elements" icon={Volume2}>
+        {#snippet action()}
+            <Switch bind:checked={settings.hoverSfxEnabled} />
         {/snippet}
     </SettingCard>
 
