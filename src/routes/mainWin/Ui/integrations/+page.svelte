@@ -38,20 +38,20 @@
         { value: 'HIGH_PRIORITY_CLASS', label: 'HIGH' },
         { value: 'REALTIME_PRIORITY_CLASS', label: 'REALTIME' },
     ]
-    let processPriority: PriorityClass = 'NORMAL_PRIORITY_CLASS'
+    let processPriority: PriorityClass = $state('NORMAL_PRIORITY_CLASS')
 
-    let crashHandler = false
-    let discordRpc = false
-    let letJoin = false
-    let disableSystemTray = false
-    let disableLaunchAtStartUp = false
-    let displayAccount = false
-    let serverLocationNotifier = false
-    let optimizer: boolean
-    let activityWatching = true
-    let fullscreenOpts: boolean = false
-    let sleepSchedule: boolean = true
-    let isLateNightGamer: boolean = false
+    let crashHandler = $state(false)
+    let discordRpc = $state(false)
+    let letJoin = $state(false)
+    let disableSystemTray = $state(false)
+    let disableLaunchAtStartUp = $state(false)
+    let displayAccount = $state(false)
+    let serverLocationNotifier = $state(false)
+    let optimizer: boolean = $state(false)
+    let activityWatching = $state(true)
+    let fullscreenOpts: boolean = $state(false)
+    let sleepSchedule: boolean = $state(true)
+    let isLateNightGamer: boolean = $state(false)
 
     type shi = {
         version: string

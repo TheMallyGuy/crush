@@ -14,7 +14,7 @@ function shouldSkip(node: Node): boolean {
   return SKIP_TAGS.has(parent.tagName);
 }
 
-function applyNode(node: Text) {
+function applyFromCache(node: Text) {
   if (shouldSkip(node)) return;
   if (!originalText.has(node)) {
     if (!node.textContent?.trim()) return;
@@ -25,10 +25,19 @@ function applyNode(node: Text) {
   node.textContent = settings.uwuEnabled ? uwuifier.uwuifySentence(original) : original;
 }
 
+
+function adoptExternalChange(node: Text) {
+  if (shouldSkip(node)) return;
+  const current = node.textContent;
+  if (!current?.trim()) return;
+  originalText.set(node, current);
+  node.textContent = settings.uwuEnabled ? uwuifier.uwuifySentence(current) : current;
+}
+
 function walkAll(root: Node) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node: Node | null;
-  while ((node = walker.nextNode())) applyNode(node as Text);
+  while ((node = walker.nextNode())) applyFromCache(node as Text);
 }
 
 let observer: MutationObserver | null = null;
@@ -47,10 +56,10 @@ export function initUwu(root: HTMLElement = document.body) {
   observer = new MutationObserver((mutations) => {
     withObserverPaused(root, () => {
       for (const m of mutations) {
-        if (m.type === 'characterData') applyNode(m.target as Text);
+        if (m.type === 'characterData') adoptExternalChange(m.target as Text);
         else if (m.type === 'childList') {
           m.addedNodes.forEach((n) => {
-            if (n.nodeType === Node.TEXT_NODE) applyNode(n as Text);
+            if (n.nodeType === Node.TEXT_NODE) adoptExternalChange(n as Text);
             else if (n.nodeType === Node.ELEMENT_NODE) walkAll(n);
           });
         }

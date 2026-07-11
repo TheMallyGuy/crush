@@ -14,6 +14,9 @@
     }: Props = $props()
 
     let isOpen = $state(false)
+    let selectedLabel = $derived(
+        options.find((o) => o.value === value)?.label ?? placeholder
+    )
 
     function toggle() {
         isOpen = !isOpen
@@ -51,10 +54,7 @@
         }}
         class="flex w-full items-center justify-between border border-stone-800/40 bg-stone-900/40 backdrop-blur-sm px-4 py-2 text-sm text-stone-200 transition-all duration-150 hover:border-stone-700/60 focus:outline-none focus:ring-2 focus:ring-sapphire/20 cursor-target"
     >
-        <span class="font-medium"
-            >{options.find((o) => o.value === value)?.label ||
-                placeholder}</span
-        >
+        <span class="font-medium">{selectedLabel}</span>
         <svg
             class="h-4 w-4 text-stone-500 transition-transform duration-150 {isOpen
                 ? 'rotate-180'

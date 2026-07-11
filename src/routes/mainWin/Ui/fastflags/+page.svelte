@@ -226,7 +226,7 @@
             {#snippet action()}
                 <div class="w-50">
                     <Textbox
-                        value={wavingGrass}
+                        bind:value={wavingGrass}
                         onchange={(e) => {
                             wavingGrass = String(e)
                             save()

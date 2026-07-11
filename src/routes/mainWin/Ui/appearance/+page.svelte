@@ -404,7 +404,7 @@
                             )}
                         />
                         <Textbox
-                            value={bgColor}
+                            bind:value={bgColor}
                             fullWidth={false}
                             containerClass="w-32"
                             class="font-mono"

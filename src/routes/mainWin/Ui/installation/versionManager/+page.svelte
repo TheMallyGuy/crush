@@ -22,16 +22,16 @@
         versions: Versions[]
     }
 
-    let currentlyUsing: Versions | null = null
-    let items: Versions[] = []
+    let currentlyUsing: Versions | null = $state(null)
+    let items: Versions[] = $state([])
 
     let raw: Store
 
-    let createDialog: boolean
+    let createDialog: boolean = $state(false)
 
     let resolveCreate: ((value: string | null) => void) | null = null
-    let versionName: string
-    let versionHash: string
+    let versionName: string = $state('')
+    let versionHash: string = $state('')
 
     async function handleNewVersion() {
         createDialog = true
@@ -58,7 +58,7 @@
         }
     }
 
-    let deleteDialog: boolean
+    let deleteDialog: boolean = $state(false)
 
     let resolveDelete: ((value: boolean | null) => void) | null = null
     let deleteId: string | null = null

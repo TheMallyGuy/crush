@@ -12,14 +12,14 @@
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
 
-    let fpsLimit: number = 67
-    let graphicQuaity: number = 0
-    let fullscreen: boolean = false
-    let reducedMotion: boolean = false
-    let currentInstallation: Awaited<ReturnType<typeof getCurrentInstallation>> | undefined
+    let fpsLimit: number = $state(67)
+    let graphicQuaity: number = $state(0)
+    let fullscreen: boolean = $state(false)
+    let reducedMotion: boolean = $state(false)
+    let currentInstallation: Awaited<ReturnType<typeof getCurrentInstallation>> | undefined = $state(undefined)
 
-    let rawGBS: string = ''
-    let gbs: Record<string, SettingValue> = {}
+    let rawGBS: string = $state('')
+    let gbs: Record<string, SettingValue> = $state({})
 
     type Vector2 = { x: number; y: number }
     type SettingValue = string | number | boolean | Vector2
