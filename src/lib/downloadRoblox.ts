@@ -99,6 +99,7 @@ const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
 )
 
 import type { ProgressEvent, ProgressCallback, Installation, Versions, InstallationEntry } from './types'
+import { operating_system } from './stores/operating_system.svelte'
 
 function getAppFolder(appType: AppType, vng?: boolean): string {
     if (appType === 'studio') return 'Studio'
@@ -345,6 +346,7 @@ async function getInstallationUrls(
     const useVng = vng === true
 
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        mac: operating_system,
         player: appType === 'player',
         region: bestRegion,
         version: version || null,

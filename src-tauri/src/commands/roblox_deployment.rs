@@ -3,11 +3,12 @@ use crate::rd::{best_region, get_download_urls, latest_version_player, latest_ve
 #[tauri::command]
 pub async fn get_download_deployment_urls(
     player: bool,
+    mac : Option<bool>,
     region: Option<&str>,
     version: Option<&str>,
     vng: bool,
 ) -> Result<Vec<String>, String> {
-    let urls = get_download_urls(player, version, region, vng)
+    let urls = get_download_urls(player, mac, version, region, vng)
         .await
         .map_err(|e| e.to_string())?;
 
