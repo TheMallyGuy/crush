@@ -1,6 +1,7 @@
 use super::config::{get_transparency_bound, integration_enabled};
 use super::state::WatcherState;
 use super::types::{BloxstrapRpcMessage, RichPresence};
+#[cfg(target_os = "windows")]
 use super::window::{do_reset_window, get_or_find_hwnd, save_window_geometry};
 #[cfg(target_os = "windows")]
 use crate::interactive::{

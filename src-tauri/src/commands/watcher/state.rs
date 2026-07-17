@@ -90,30 +90,45 @@ impl Default for WatcherState {
             pending_server_location: None,
             location_notified: false,
             bloxstrap_rpc: None,
+            #[cfg(target_os = "windows")]
             roblox_hwnd: None,
             window_started: false,
 
+            #[cfg(target_os = "windows")]
             larp_started: false,
 
             sleep_schedule_count: 0,
 
+            #[cfg(target_os = "windows")]
             starting_x: 0,
+            #[cfg(target_os = "windows")]
             starting_y: 0,
+            #[cfg(target_os = "windows")]
             starting_width: 0,
+            #[cfg(target_os = "windows")]
             starting_height: 0,
 
             last_x: 0,
+            #[cfg(target_os = "windows")]
             last_y: 0,
+            #[cfg(target_os = "windows")]
             last_width: 0,
+            #[cfg(target_os = "windows")]
             last_height: 0,
 
+            #[cfg(target_os = "windows")]
             last_sc_width: 1280.0,
+            #[cfg(target_os = "windows")]
             last_sc_height: 720.0,
 
+            #[cfg(target_os = "windows")]
             last_transparency: 255,
+            #[cfg(target_os = "windows")]
             last_window_color: 0,
+            #[cfg(target_os = "windows")]
             last_transparency_mode: LWA_COLORKEY,
 
+            #[cfg(target_os = "windows")]
             borderless: false,
         }
     }
@@ -127,13 +142,15 @@ impl WatcherState {
         self.pending_server_location = None;
         self.location_notified = false;
         self.bloxstrap_rpc = None;
-        self.roblox_hwnd = None;
+        #[cfg(target_os = "windows")]
+        {
+            self.roblox_hwnd = None;
+            self.borderless = false;
+        }
         self.window_started = false;
-        self.borderless = false;
 
         remove_menu_item(app, "serverinfo").ok();
     }
-
     pub(super) fn reset_fully(&mut self) {
         *self = WatcherState::default();
     }

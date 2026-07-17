@@ -10,6 +10,7 @@ use super::patterns::{
 };
 use super::png::write_game_permission_png;
 use super::state::WatcherState;
+#[cfg(target_os = "windows")]
 use super::window::{save_window_geometry, send_bloxstrap_command};
 use crate::collector::{end_game_session, log_game, new_game_session, DbConn};
 #[cfg(target_os = "windows")]
@@ -19,8 +20,8 @@ use crate::simple_i18n::I18n;
 use crate::tray::add_menu_item;
 use chrono::Utc;
 use serde_json::{json, Value};
-use tauri::Manager;
 use tauri::AppHandle;
+use tauri::Manager;
 
 pub(super) async fn handle_line(
     app: &AppHandle,
@@ -193,7 +194,9 @@ async fn on_joined(
             log::warn!("failed to write game permission PNG: {}", e);
         }
 
+        #[cfg(target_os = "windows")]
         save_window_geometry(state);
+        #[cfg(target_os = "windows")]
         send_bloxstrap_command(hwnd, "StartWindow", Value::Null);
         state.window_started = true;
     } else {

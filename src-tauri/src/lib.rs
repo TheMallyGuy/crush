@@ -13,7 +13,9 @@ use commands::gbs_operations::{get_gbs, write_gbs};
 use commands::launch_roblox::launch;
 use commands::local_app_settings::{get_local_app, write_local_app};
 use commands::mods::apply_mod;
-use commands::pre_processing::{close_crash_handler, set_process_priority};
+use commands::pre_processing::close_crash_handler;
+#[cfg(target_os = "windows")]
+use commands::pre_processing::set_process_priority;
 use commands::process_roblox::kill_roblox_if_open;
 #[cfg(target_os = "windows")]
 use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
@@ -22,6 +24,7 @@ use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,
 };
+#[cfg(target_os = "windows")]
 use commands::shortcuts::new_shorcut;
 
 use commands::watcher::types::ServerInfoState;

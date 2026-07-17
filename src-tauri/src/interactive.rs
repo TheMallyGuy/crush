@@ -40,6 +40,7 @@ const fn swp(v: u32) -> SET_WINDOW_POS_FLAGS {
     SET_WINDOW_POS_FLAGS(v)
 }
 
+#[cfg(target_os = "windows")]
 pub fn find_windows_by_title(keyword: &str) -> Vec<HWND> {
     struct SearchData {
         keyword: String,
