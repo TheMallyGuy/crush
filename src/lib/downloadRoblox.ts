@@ -74,20 +74,32 @@ const studioExtractRoots: Record<string, string> = {
     'studiocontent-textures.zip': 'StudioContent/textures/',
 }
 
+const macPlayerExtractRoots: Record<string, string> = {
+    'robloxplayer.zip': '',
+}
+
+const macStudioExtractRoots: Record<string, string> = {
+    'robloxstudioapp.zip': '',
+}
+
+
 export type AppType = 'player' | 'studio'
 
-function getExtractRoots(appType: AppType): Record<string, string> {
+function getExtractRoots(appType: AppType, isMac = false): Record<string, string> {
+    if (isMac) {
+        return appType === 'studio' ? macStudioExtractRoots : macPlayerExtractRoots
+    }
     return appType === 'studio' ? studioExtractRoots : playerExtractRoots
 }
 
-function getSortedExtractRoots(appType: AppType) {
-    return Object.entries(getExtractRoots(appType)).sort(
+function getSortedExtractRoots(appType: AppType, isMac = false) {
+    return Object.entries(getExtractRoots(appType, isMac)).sort(
         (a, b) => b[1].length - a[1].length
     )
 }
 
-function getLowercaseExtractRoots(appType: AppType) {
-    return Object.entries(getExtractRoots(appType)).map(([k, v]) => [
+function getLowercaseExtractRoots(appType: AppType, isMac = false) {
+    return Object.entries(getExtractRoots(appType, isMac)).map(([k, v]) => [
         k.toLowerCase(),
         v,
     ])
@@ -263,13 +275,34 @@ async function extractAll(
     const installRoot = await join(dataDir, appFolder, 'Versions', versionHash)
     await ensureDir(installRoot)
 
-    const lowercaseRoots = getLowercaseExtractRoots(appType)
+    const isMac = get(operating_system) === 'macos'
+    const lowercaseRoots = getLowercaseExtractRoots(appType, isMac)
     const total = lowercaseRoots.length
 
     for (const [index, [zipName, dest]] of lowercaseRoots.entries()) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
+
+    if (isMac) {
+        await installMacApp(installRoot, appType, onProgress)
+    }
+}
+
+async function installMacApp(
+    installRoot: string,
+    appType: AppType,
+    onProgress: ProgressCallback
+) {
+    const appName = appType === 'studio' ? 'RobloxStudioApp.app' : 'RobloxPlayer.app'
+    const destName = appType === 'studio' ? 'RobloxStudio.app' : 'Roblox.app'
+
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.movingToApplications') })
+
+    await invoke('move_app_to_applications', {
+        sourcePath: await join(installRoot, appName),
+        destName,
+    })
 }
 
 async function checkForUpdates(

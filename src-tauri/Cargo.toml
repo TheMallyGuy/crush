@@ -42,7 +42,7 @@ md5 = "0.8.0"
 zip = "8.6.0"
 log = "0.4.32"
 futures = "0.3"
-tauri = { version = "2", features = [
+tauri = { version = "2", features = ["macos-private-api",
     "protocol-asset",
     "tray-icon",
     "devtools",
