@@ -136,7 +136,7 @@ export async function launchPlayer(hash: string, deeplink: string | null) {
     const args = deeplink ? ['--play', '--deeplink', deeplink] : ['--play']
 
     if (isMac) {
-        const appPath = "/Application/Roblox.app"
+        const appPath = "/Applications/Roblox.app"
         await invoke('launch_mac_app', { appPath: appPath, arguments: args })
         return
     }
