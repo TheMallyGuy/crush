@@ -69,10 +69,13 @@
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
 
-        if ($operating_system == "macos") {
-            disableWin = "This feature is only available for Windows."
-            disableWinUn = "This feature currently available for Windows, But we have plan to support your operating system."
-        } 
+        console.log($operating_system == 'macos')
+        console.log($operating_system)
+        if ($operating_system == 'macos') {
+            disableWin = 'This feature is only available for Windows.'
+            disableWinUn =
+                'This feature currently available for Windows, But we have plan to support your operating system.'
+        }
 
         // Fix: Fallback for the old typo before reading inner properties like discordRpc
         if (!savedIntegrations) {
