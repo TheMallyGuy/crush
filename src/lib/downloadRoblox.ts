@@ -395,7 +395,7 @@ async function getInstallationUrls(
     info(`${useMac}`)
 
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
-        mac: useMac,
+        macos: useMac,
         arm64: useArm64,
         player: appType === 'player',
         region: bestRegion,
