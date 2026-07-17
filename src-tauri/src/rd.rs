@@ -122,13 +122,19 @@ pub async fn best_region() -> Option<&'static str> {
     fastest
 }
 
-pub async fn latest_version_player() -> Result<LatestVersion, Box<dyn std::error::Error>> {
-    let latest: LatestVersion = get_client()
-        .get("https://clientsettings.roblox.com/v2/client-version/WindowsPlayer")
-        .send()
-        .await?
-        .json()
-        .await?;
+pub async fn latest_version_player(
+    mac_os: Option<bool>,
+) -> Result<LatestVersion, Box<dyn std::error::Error>> {
+    let url = format!(
+        "https://clientsettings.roblox.com/v2/client-version/{}",
+        if mac_os.unwrap_or(false) {
+            "MacPlayer"
+        } else {
+            "WindowsPlayer"
+        }
+    );
+
+    let latest: LatestVersion = get_client().get(url).send().await?.json().await?;
 
     Ok(latest)
 }
@@ -153,8 +159,12 @@ pub async fn get_download_urls(
     let raw_hash: String = match version_hash {
         Some(hash) => hash.to_string(),
         None => {
+            let is_macos = cfg!(target_os = "macos");
+
             if is_player {
-                latest_version_player().await?.client_version_upload
+                latest_version_player(Some(is_macos))
+                    .await?
+                    .client_version_upload
             } else {
                 latest_version_studio().await?.client_version_upload
             }

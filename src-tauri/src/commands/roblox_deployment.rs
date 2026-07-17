@@ -30,7 +30,9 @@ pub async fn get_best_region() -> String {
 
 #[tauri::command]
 pub async fn get_latest_version_player() -> Result<String, String> {
-    latest_version_player()
+    let is_macos = cfg!(target_os = "macos");
+
+    latest_version_player(Some(is_macos))
         .await
         .map(|v| v.client_version_upload)
         .map_err(|e| e.to_string())
