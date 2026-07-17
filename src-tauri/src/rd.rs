@@ -152,6 +152,8 @@ pub async fn latest_version_studio() -> Result<LatestVersion, Box<dyn std::error
 
 pub async fn get_download_urls(
     is_player: bool,
+    mac_os: Option<bool>,
+    arm64: Option<bool>,
     version_hash: Option<&str>,
     region_url: Option<&str>,
     vng: bool,
@@ -194,7 +196,19 @@ pub async fn get_download_urls(
         }
     };
 
-    let urls: Vec<String> = if is_player {
+    let urls: Vec<String> = if mac_os.unwrap_or(false) {
+        let mac_dir = if arm64.unwrap_or(true) {
+            "/mac/arm64"
+        } else {
+            "/mac"
+        };
+        let file = if is_player {
+            "RobloxPlayer.zip"
+        } else {
+            "RobloxStudioApp.zip"
+        };
+        vec![format!("{base_url}{mac_dir}/{base_version}-{file}")]
+    } else if is_player {
         PLAYER_FILES
             .iter()
             .map(|file| format!("{base_url}/{base_version}-{file}"))

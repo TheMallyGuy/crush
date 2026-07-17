@@ -2,6 +2,7 @@ import { fetch } from '@tauri-apps/plugin-http'
 import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
+import { arch } from '@tauri-apps/plugin-os'
 import { exists, BaseDirectory, writeFile, mkdir, readDir, remove } from '@tauri-apps/plugin-fs'
 import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
@@ -285,7 +286,15 @@ async function extractAll(
     }
 
     if (isMac) {
-        await installMacApp(installRoot, appType, onProgress)
+        const appName = appType === 'studio' ? 'RobloxStudioApp.app' : 'RobloxPlayer.app'
+        const destName = appType === 'studio' ? 'RobloxStudio.app' : 'Roblox.app'
+
+        onProgress({ type: 'status', message: get(_)('typescript.downloader.movingToApplications') })
+
+        await invoke('move_app_to_applications', {
+            sourcePath: await join(installRoot, appName),
+            destName,
+        })
     }
 }
 
@@ -376,18 +385,16 @@ async function getInstallationUrls(
         message: get(_)('typescript.downloader.fetchingUrls'),
     })
 
-    const useVng = vng === true
+    const useMac = get(operating_system) === 'macos'
 
-    let useMac
-
-    if (get(operating_system) === "macos") {
-        useMac = true
-    } else {
-        useMac = false
+    let useArm64 = true
+    if (useMac) {
+        useArm64 = (await arch()) === 'aarch64'
     }
 
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         mac: useMac,
+        arm64: useArm64,
         player: appType === 'player',
         region: bestRegion,
         version: version || null,
@@ -576,8 +583,9 @@ export function getPackageForFile(
     relativePath: string,
     appType: AppType = 'player'
 ): string | null {
+    const isMac = get(operating_system) === 'macos'
     const normalized = relativePath.replace(/\\/g, '/').toLowerCase()
-    const sorted = getSortedExtractRoots(appType)
+    const sorted = getSortedExtractRoots(appType, isMac)
     const [packageName] =
         sorted.find(
             ([, prefix]) => prefix === '' || normalized.startsWith(prefix.toLowerCase())
@@ -646,7 +654,8 @@ export function resolvePackageInfo(
     isPackageInput: boolean,
     appType: AppType = 'player'
 ) {
-    const extractRoots = getExtractRoots(appType)
+    const isMac = get(operating_system) === 'macos'
+    const extractRoots = getExtractRoots(appType, isMac)
 
     if (isPackageInput) {
         return {
@@ -656,7 +665,7 @@ export function resolvePackageInfo(
     }
 
     const normalized = input.replace(/\\/g, '/').toLowerCase()
-    const sorted = getSortedExtractRoots(appType)
+    const sorted = getSortedExtractRoots(appType, isMac)
     const [packageName, prefix] =
         sorted.find(
             ([, p]) => p === '' || normalized.startsWith(p.toLowerCase())
