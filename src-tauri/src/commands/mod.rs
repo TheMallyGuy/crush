@@ -13,6 +13,7 @@ pub mod process_roblox;
 pub mod properity;
 pub mod rename;
 pub mod roblox_deployment;
+#[cfg(target_os = "windows")]
 pub mod shortcuts;
 pub mod watcher;
 pub mod window;
