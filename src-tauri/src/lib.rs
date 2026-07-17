@@ -99,6 +99,7 @@ fn handle_received_url(app_handle: &tauri::AppHandle, url: String) {
 }
 
 fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
     app.deep_link().register_all()?;
 
     let app_handle = app.handle().clone();
