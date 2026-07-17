@@ -201,7 +201,7 @@ pub async fn get_download_urls(
             .map(|file| {
                 format!(
                     "{base_url}{}/{base_version}-{file}",
-                    if mac_os.unwrap_or(false) { "mac" } else { "" }
+                    if mac_os.unwrap_or(false) { "/mac" } else { "" }
                 )
             })
             .collect()
