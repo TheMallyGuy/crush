@@ -10,6 +10,7 @@
         "frontendDist": "../build"
     },
     "app": {
+        "macOSPrivateApi": true,
         "windows": [
             {
                 "label": "crushBoostrapChoiceWindow",
@@ -70,7 +71,6 @@
             "./libraries/vcruntime140_1.dll"
         ]
     },
-    "macosprivateapi" : true,
     "plugins": {
         "deep-link": {
             "desktop": {
