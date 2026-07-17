@@ -392,6 +392,8 @@ async function getInstallationUrls(
         useArm64 = (await arch()) === 'aarch64'
     }
 
+    info(`${useMac}`)
+
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
         mac: useMac,
         arm64: useArm64,
