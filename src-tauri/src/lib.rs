@@ -389,6 +389,7 @@ pub fn run() {
             new_shorcut,
             extract_zip,
             extract_files_from_zip,
+            #[cfg(target_os = "windows")]
             launch,
             get_latest_version_player,
             rename,
