@@ -5,7 +5,7 @@ use commands::account_operations::{
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
-use commands::crush::{check_elevated, crush, relaunch_with_admins_perms};
+use commands::crush::{crush, get_current_os};
 use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::gbs_operations::{get_gbs, write_gbs};
@@ -399,8 +399,7 @@ pub fn run() {
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
-            relaunch_with_admins_perms,
-            check_elevated,
+            get_current_os,
             read_current_cookie,
             join_game_instance,
             kill_roblox_if_open,
