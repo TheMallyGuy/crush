@@ -4,6 +4,7 @@ use commands::account_operations::{
     read_current_cookie, validate_roblox_cookie,
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
+#[cfg(target_os = "windows")]
 use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::{crush, get_current_os};
 use commands::discord_rpc::set_rpc;
@@ -40,9 +41,12 @@ use simple_i18n::I18n;
 
 pub mod collector;
 mod crypto_state;
+#[cfg(target_os = "windows")]
 pub mod interactive;
-pub mod island;
+#[cfg(target_os = "windows")]
 pub mod larp_focuser;
+
+pub mod island;
 pub mod priorites;
 pub mod rd;
 pub mod rpc;

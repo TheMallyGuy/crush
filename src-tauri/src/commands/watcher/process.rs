@@ -27,6 +27,7 @@ pub(super) fn get_roblox_pid(system: &mut System) -> Option<u32> {
         .map(|p| p.pid().as_u32())
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn find_hwnd_by_pid(target_pid: u32) -> Option<HWND> {
     struct SearchState {
         pid: u32,
