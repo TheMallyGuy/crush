@@ -11,7 +11,7 @@ use commands::discord_rpc::set_rpc;
 use commands::fs::copy_file;
 use commands::gbs_operations::{get_gbs, write_gbs};
 #[cfg(target_os = "macos")]
-use commands::install_roblox_mac::install_roblox_mac;
+use crate::commands::install_roblox_mac;
 use commands::launch_roblox::launch;
 use commands::local_app_settings::{get_local_app, write_local_app};
 use commands::mods::apply_mod;
