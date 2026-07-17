@@ -258,6 +258,18 @@
           "path": "$APPDATA/**"
         },
         {
+          "path": "/Applications"
+        },
+        {
+          "path": "/Applications/*"
+        },
+        {
+          "path": "$HOME/Applications"
+        },
+        {
+          "path": "$HOME/Applications/*"
+        },
+        {
           "path": "$LOCALDATA/**"
         },
         {
