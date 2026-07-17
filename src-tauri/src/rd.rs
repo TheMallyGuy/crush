@@ -199,9 +199,10 @@ pub async fn get_download_urls(
         PLAYER_FILES
             .iter()
             .map(|file| {
+                let use_mac = mac_os.unwrap_or(false) && file.contains("RobloxPlayer.zip");
                 format!(
                     "{base_url}{}/{base_version}-{file}",
-                    if mac_os.unwrap_or(false) { "/mac" } else { "" }
+                    if use_mac { "/mac" } else { "" }
                 )
             })
             .collect()
