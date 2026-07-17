@@ -62,8 +62,8 @@
 
     let exe: shi
     let exePath: string
-    let disableWin: string | undefined
-    let disableWinUn: string | undefined
+    let disableWin: string | undefined = $state()
+    let disableWinUn: string | undefined = $state()
 
     async function loadConfig() {
         const store = await load('config.json')
