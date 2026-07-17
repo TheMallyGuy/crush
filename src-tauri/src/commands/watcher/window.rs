@@ -1,11 +1,14 @@
 use super::state::WatcherState;
+#[cfg(target_os = "windows")]
 use crate::interactive::{
     find_windows_by_title, get_window_rect, move_window, reset_layered, set_borderless,
     set_window_title, LWA_COLORKEY,
 };
 use serde_json::{json, Value};
+#[cfg(target_os = "windows")]
 use windows::Win32::Foundation::HWND;
 
+#[cfg(target_os = "windows")]
 pub(super) fn save_window_geometry(state: &mut WatcherState) {
     let Some(hwnd) = state.roblox_hwnd else {
         return;
@@ -24,6 +27,7 @@ pub(super) fn save_window_geometry(state: &mut WatcherState) {
     state.last_sc_height = 720.0;
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn do_reset_window(hwnd: HWND, state: &mut WatcherState) {
     state.last_x = state.starting_x;
     state.last_y = state.starting_y;
@@ -46,6 +50,7 @@ pub(super) fn do_reset_window(hwnd: HWND, state: &mut WatcherState) {
     state.borderless = false;
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
     if let Some(hwnd) = state.roblox_hwnd {
         return Some(hwnd);

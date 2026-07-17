@@ -1,10 +1,13 @@
 use regex::Regex;
 use std::sync::OnceLock;
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
+#[cfg(target_os = "windows")]
 use windows::Win32::Foundation::{HWND, LPARAM};
+#[cfg(target_os = "windows")]
 use windows::Win32::UI::WindowsAndMessaging::{
     EnumWindows, GetWindowThreadProcessId, IsWindowVisible,
 };
+#[cfg(target_os = "windows")]
 use windows_result::BOOL;
 
 pub(super) fn is_roblox_running(system: &mut System) -> bool {

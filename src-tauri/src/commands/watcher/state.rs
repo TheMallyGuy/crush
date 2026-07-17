@@ -4,6 +4,7 @@ use crate::tray::remove_menu_item;
 use std::path::PathBuf;
 use std::time::Instant;
 use tauri::AppHandle;
+#[cfg(target_os = "windows")]
 use windows::Win32::Foundation::HWND;
 
 #[derive(Default, Debug)]
@@ -30,35 +31,50 @@ pub(super) struct WatcherState {
     pub(super) pending_server_location: Option<String>,
     pub(super) location_notified: bool,
     pub(super) bloxstrap_rpc: Option<RichPresence>,
+    #[cfg(target_os = "windows")]
     pub(super) roblox_hwnd: Option<HWND>,
     pub(super) window_started: bool,
 
     pub(super) sleep_schedule_count: u64,
 
+    #[cfg(target_os = "windows")]
     pub(super) larp_started: bool,
 
     // window geometry saved at StartWindow
+    #[cfg(target_os = "windows")]
     pub(super) starting_x: i32,
+    #[cfg(target_os = "windows")]
     pub(super) starting_y: i32,
+    #[cfg(target_os = "windows")]
     pub(super) starting_width: i32,
+    #[cfg(target_os = "windows")]
     pub(super) starting_height: i32,
 
     // last applied geometry (updated by SetWindow)
     pub(super) last_x: i32,
+    #[cfg(target_os = "windows")]
     pub(super) last_y: i32,
+    #[cfg(target_os = "windows")]
     pub(super) last_width: i32,
+    #[cfg(target_os = "windows")]
     pub(super) last_height: i32,
 
     // scale reference resolution (updated by scaleWidth/scaleHeight fields)
+    #[cfg(target_os = "windows")]
     pub(super) last_sc_width: f64,
+    #[cfg(target_os = "windows")]
     pub(super) last_sc_height: f64,
 
     // transparency state
+    #[cfg(target_os = "windows")]
     pub(super) last_transparency: u8,
+    #[cfg(target_os = "windows")]
     pub(super) last_window_color: u32,
+    #[cfg(target_os = "windows")]
     pub(super) last_transparency_mode: u32,
 
     // misc window state
+    #[cfg(target_os = "windows")]
     pub(super) borderless: bool,
 }
 

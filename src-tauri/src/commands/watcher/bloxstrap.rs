@@ -2,6 +2,7 @@ use super::config::{get_transparency_bound, integration_enabled};
 use super::state::WatcherState;
 use super::types::{BloxstrapRpcMessage, RichPresence};
 use super::window::{do_reset_window, get_or_find_hwnd, save_window_geometry};
+#[cfg(target_os = "windows")]
 use crate::interactive::{
     get_monitor_info, get_primary_screen_size, get_virtual_screen_size, move_window, reset_layered,
     set_borderless, set_layered_transparency, set_window_color, set_window_title, LWA_ALPHA,
@@ -82,10 +83,11 @@ pub(super) async fn on_bloxstrap_rpc(
             });
         }
 
+        #[cfg(target_os = "windows")]
         "RequestWindowPermission" => {
             log::info!("BloxstrapRPC: RequestWindowPermission (handled via PNG)");
         }
-
+        #[cfg(target_os = "windows")]
         "StartWindow" => {
             if state.window_started {
                 return Ok(());
@@ -98,7 +100,7 @@ pub(super) async fn on_bloxstrap_rpc(
                 log::warn!("BloxstrapRPC: StartWindow – no HWND");
             }
         }
-
+        #[cfg(target_os = "windows")]
         "StopWindow" => {
             if !state.window_started {
                 return Ok(());
@@ -109,7 +111,7 @@ pub(super) async fn on_bloxstrap_rpc(
             state.window_started = false;
             log::info!("BloxstrapRPC: StopWindow");
         }
-
+        #[cfg(target_os = "windows")]
         "ResetWindow" => {
             if !state.window_started {
                 return Ok(());
@@ -120,7 +122,7 @@ pub(super) async fn on_bloxstrap_rpc(
             do_reset_window(hwnd, state);
             log::info!("BloxstrapRPC: ResetWindow");
         }
-
+        #[cfg(target_os = "windows")]
         "SetWindow" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
@@ -196,7 +198,7 @@ pub(super) async fn on_bloxstrap_rpc(
                  → move({final_x},{final_y},{final_w},{final_h})"
             );
         }
-
+        #[cfg(target_os = "windows")]
         "SetWindowTitle" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
@@ -210,7 +212,7 @@ pub(super) async fn on_bloxstrap_rpc(
             let title = msg.data.as_str().unwrap_or("Roblox");
             set_window_title(hwnd, title);
         }
-
+        #[cfg(target_os = "windows")]
         "SetWindowTransparency" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
@@ -254,7 +256,7 @@ pub(super) async fn on_bloxstrap_rpc(
                 );
             }
         }
-
+        #[cfg(target_os = "windows")]
         "SetWindowBorderless" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
@@ -274,7 +276,7 @@ pub(super) async fn on_bloxstrap_rpc(
             state.borderless = enabled;
             log::info!("BloxstrapRPC: SetWindowBorderless = {}", enabled);
         }
-
+        #[cfg(target_os = "windows")]
         "SetWindowColor" => {
             if !integration_enabled(store, &["interactive", "enable"]) {
                 return Ok(());
@@ -312,7 +314,7 @@ pub(super) async fn on_bloxstrap_rpc(
                 border
             );
         }
-
+        #[cfg(target_os = "windows")]
         "SendNotification" => {
             let title = msg
                 .data

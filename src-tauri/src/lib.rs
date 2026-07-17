@@ -15,6 +15,7 @@ use commands::local_app_settings::{get_local_app, write_local_app};
 use commands::mods::apply_mod;
 use commands::pre_processing::{close_crash_handler, set_process_priority};
 use commands::process_roblox::kill_roblox_if_open;
+#[cfg(target_os = "windows")]
 use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
 use commands::rename::rename;
 use commands::roblox_deployment::{
@@ -47,6 +48,7 @@ pub mod interactive;
 pub mod larp_focuser;
 
 pub mod island;
+#[cfg(target_os = "windows")]
 pub mod priorites;
 pub mod rd;
 pub mod rpc;
@@ -374,6 +376,7 @@ pub fn run() {
             get_download_deployment_urls,
             get_best_region,
             create_or_focus_window,
+            #[cfg(target_os = "windows")]
             new_shorcut,
             extract_zip,
             extract_files_from_zip,
@@ -386,13 +389,17 @@ pub fn run() {
             set_rpc,
             copy_file,
             join_game,
+            #[cfg(target_os = "windows")]
             export_boostrapconfig,
             get_latest_version_studio,
+            #[cfg(target_os = "windows")]
             set_process_priority,
             close_crash_handler,
             get_gbs,
             write_gbs,
+            #[cfg(target_os = "windows")]
             set_fullscreen_prop,
+            #[cfg(target_os = "windows")]
             read_fullscreen_prop,
             get_csrf_token,
             get_auth_ticket,

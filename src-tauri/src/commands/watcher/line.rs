@@ -12,6 +12,7 @@ use super::png::write_game_permission_png;
 use super::state::WatcherState;
 use super::window::{save_window_geometry, send_bloxstrap_command};
 use crate::collector::{end_game_session, log_game, new_game_session, DbConn};
+#[cfg(target_os = "windows")]
 use crate::interactive::find_windows_by_title;
 use crate::rpc::{apply_rpc, RpcState};
 use crate::simple_i18n::I18n;
