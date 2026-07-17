@@ -62,6 +62,7 @@ pub(super) fn get_or_find_hwnd(state: &mut WatcherState) -> Option<HWND> {
     hwnd
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn send_bloxstrap_command(_hwnd: HWND, command: &str, data: Value) {
     let payload =
         serde_json::to_string(&json!({ "command": command, "data": data })).unwrap_or_default();

@@ -110,6 +110,7 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
             #[cfg(target_os = "windows")]
             if state.window_started {
                 if let Some(hwnd) = state.roblox_hwnd {
+                    #[cfg(target_os = "windows")]
                     send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
                 }
             }

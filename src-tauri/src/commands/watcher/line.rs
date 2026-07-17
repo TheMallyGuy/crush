@@ -41,6 +41,7 @@ pub(super) async fn handle_line(
             .unwrap_or(0);
         let join_ip = caps.get(3).map(|m| m.as_str().to_string());
 
+        #[cfg(target_os = "windows")]
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
@@ -111,8 +112,10 @@ pub(super) async fn handle_line(
             log::info!("aborted logging warpped")
         }
 
+        #[cfg(target_os = "windows")]
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
+                #[cfg(target_os = "windows")]
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
             }
             state.window_started = false;
@@ -166,6 +169,7 @@ async fn on_joined(
 
     state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
 
+    #[cfg(target_os = "windows")]
     if let Some(hwnd) = state.roblox_hwnd {
         log::info!("cached Roblox HWND");
 

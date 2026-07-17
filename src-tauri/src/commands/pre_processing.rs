@@ -1,3 +1,4 @@
+#[cfg(target_os = "windows")]
 use crate::priorites::set_priority;
 use sysinfo::{ProcessesToUpdate, System};
 #[cfg(target_os = "windows")]

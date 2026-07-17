@@ -1,4 +1,5 @@
 use super::types::RichPresence;
+#[cfg(target_os = "windows")]
 use crate::interactive::LWA_COLORKEY;
 use crate::tray::remove_menu_item;
 use std::path::PathBuf;
