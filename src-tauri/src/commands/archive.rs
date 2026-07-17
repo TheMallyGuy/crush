@@ -21,7 +21,25 @@ pub fn extract_zip(zip_path: String, dest: String) -> Result<(), String> {
         let mut entry = archive
             .by_index(i)
             .map_err(|e| format!("Cannot read entry {}: {}", i, e))?;
+
+        #[cfg(unix)]
+        let unix_mode = entry.unix_mode();
+        #[cfg(unix)]
+        let outpath = dest_path.join(entry.mangled_name());
+
         extract_entry(&mut entry, dest_path)?;
+
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            if !entry.is_dir() {
+                if let Some(mode) = unix_mode {
+                    fs::set_permissions(&outpath, fs::Permissions::from_mode(mode)).map_err(
+                        |e| format!("Cannot set permissions on '{}': {}", outpath.display(), e),
+                    )?;
+                }
+            }
+        }
     }
 
     Ok(())
