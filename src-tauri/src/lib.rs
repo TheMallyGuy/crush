@@ -250,7 +250,7 @@ pub fn run() {
 
             app.manage(i18n);
 
-            if platform != "windows" {
+            if platform == "linux" {
                 app.dialog()
                     .message(format!(
                         "This app can't work on {}. However, we will have plans for {}.",
