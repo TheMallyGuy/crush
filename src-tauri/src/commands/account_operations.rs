@@ -1,6 +1,5 @@
+use crate::CryptoState;
 use std::{fs, path::PathBuf};
-
-use windows_dpapi::{decrypt_data, encrypt_data, Scope};
 
 #[tauri::command]
 pub async fn clear_cookies(webview: tauri::Webview) -> Result<(), String> {
@@ -63,25 +62,19 @@ pub async fn export_all_cookies(webview: tauri::Webview) -> Result<String, Strin
 }
 
 #[tauri::command]
-pub async fn decrypt_cookie_data(encrypted: String) -> Result<String, String> {
-    let encrypted_bytes =
-        base64::Engine::decode(&base64::engine::general_purpose::STANDARD, encrypted)
-            .map_err(|e| e.to_string())?;
-    let decrypted_data = decrypt_data(&encrypted_bytes, Scope::User, None)
-        .map_err(|e| format!("Failed to decrypt data: {}", e))?;
-
-    String::from_utf8(decrypted_data).map_err(|e| e.to_string())
+pub async fn decrypt_cookie_data(
+    encrypted: String,
+    crypto: tauri::State<'_, CryptoState>,
+) -> Result<String, String> {
+    crypto.decrypt(&encrypted).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
-pub async fn encrypt_cookie_data(decrypted: String) -> Result<String, String> {
-    let encrypted_data = encrypt_data(decrypted.as_bytes(), Scope::User, None)
-        .map_err(|e| format!("Failed to encrypt data: {}", e))?;
-
-    Ok(base64::Engine::encode(
-        &base64::engine::general_purpose::STANDARD,
-        encrypted_data,
-    ))
+pub async fn encrypt_cookie_data(
+    decrypted: String,
+    crypto: tauri::State<'_, CryptoState>,
+) -> Result<String, String> {
+    crypto.encrypt(&decrypted).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
@@ -180,7 +173,6 @@ pub async fn join_game_instance(
 
     Ok(body)
 }
-
 
 #[tauri::command]
 pub async fn join_game(

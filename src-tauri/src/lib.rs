@@ -34,10 +34,12 @@ use tauri_plugin_store::StoreExt;
 use tauri_plugin_updater::UpdaterExt;
 mod commands;
 use crate::rpc::kill_rpc;
+use crypto_state::CryptoState;
 use rpc::RpcState;
 use simple_i18n::I18n;
 
 pub mod collector;
+mod crypto_state;
 pub mod interactive;
 pub mod island;
 pub mod larp_focuser;
@@ -153,6 +155,9 @@ fn print_debug_info() {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let crypto =
+        CryptoState::new("com.mally.crush", "default_user").expect("failed to init crypto state");
+
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cache::init())
         .plugin(tauri_plugin_cli::init())
@@ -205,6 +210,7 @@ pub fn run() {
     builder
         .manage(RpcState::new())
         .manage(ServerInfoState(Mutex::new(None)))
+        .manage(crypto)
         .setup(|app| {
             print_debug_info();
 
