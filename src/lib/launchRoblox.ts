@@ -136,7 +136,7 @@ export async function launchPlayer(hash: string, deeplink: string | null) {
     const args = deeplink ? ['--play', '--deeplink', deeplink] : ['--play']
 
     if (isMac) {
-        const appPath = await resolveMacAppPath('Roblox.app')
+        const appPath = "/Application/Roblox.app"
         await invoke('launch_mac_app', { appPath, arguments: args })
         return
     }
@@ -153,15 +153,6 @@ export async function launchPlayer(hash: string, deeplink: string | null) {
     await invoke('launch', { path: playerLocation, arguments: args })
 }
 
-async function resolveMacAppPath(appName: string): Promise<string> {
-    const systemPath = `/Applications/${appName}`
-    if (await exists(systemPath)) return systemPath
-
-    const home = await join(await homeDir(), 'Applications', appName)
-    if (await exists(home)) return home
-
-    throw new Error(`Could not find ${appName} in /Applications or ~/Applications`)
-}
 
 export async function launchStudio(hash: string, placeFile?: string | null) {
     if (!hash) {
