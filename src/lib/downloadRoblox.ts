@@ -380,11 +380,13 @@ async function completeInstallation(
     })
     await extractAll(versionHash, onProgress, appType, vng)
 
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.xmlWriting'),
-    })
-    await writeAppSettings(versionHash, appType, vng)
+    if (get(operating_system) !== "macos") {
+        onProgress({
+            type: 'status',
+            message: get(_)('typescript.downloader.xmlWriting'),
+        })
+        await writeAppSettings(versionHash, appType, vng)
+    }
 }
 
 async function performFullInstallation(
