@@ -345,8 +345,16 @@ async function getInstallationUrls(
 
     const useVng = vng === true
 
+    let useMac
+
+    if (get(operating_system) === "macos") {
+        useMac = true
+    } else {
+        useMac = false
+    }
+
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
-        mac: operating_system,
+        mac: useMac,
         player: appType === 'player',
         region: bestRegion,
         version: version || null,
