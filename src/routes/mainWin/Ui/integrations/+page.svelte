@@ -69,7 +69,7 @@
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
 
-        if ($operating_system != "windows") {
+        if ($operating_system == "macos") {
             disableWin = "This feature is only available for Windows."
             disableWinUn = "This feature currently available for Windows, But we have plan to support your operating system."
         } 
