@@ -30,6 +30,7 @@
         setLaunchAtStartup,
         setMinimizeToTray,
     } from '$lib/localAppJsonHelper'
+    import { operating_system } from '$lib/stores/operating_system.svelte'
 
     let processPriorityItems = [
         { value: 'BELOW_NORMAL_PRIORITY_CLASS', label: 'BELOW_NORMAL' },
@@ -61,10 +62,17 @@
 
     let exe: shi
     let exePath: string
+    let disableWin: string | undefined
+    let disableWinUn: string | undefined
 
     async function loadConfig() {
         const store = await load('config.json')
         let savedIntegrations = await store.get<Integrations>('integrations')
+
+        if ($operating_system != "windows") {
+            disableWin = "This feature is only available for Windows."
+            disableWinUn = "This feature currently available for Windows, But we have plan to support your operating system."
+        } 
 
         // Fix: Fallback for the old typo before reading inner properties like discordRpc
         if (!savedIntegrations) {
@@ -220,6 +228,7 @@
             description={$_(
                 'pages.integrations.processPriorityCard.description'
             )}
+            disabled={disableWin}
             icon={Cpu}
         >
             {#snippet action()}
@@ -234,6 +243,7 @@
         <SettingCard
             title="Disable system tray"
             description="Roblox is watching."
+            disabled={disableWinUn}
             icon={ArrowDownToDot}
         >
             {#snippet action()}
@@ -247,6 +257,7 @@
         <SettingCard
             title="Disable launch Roblox at startup"
             description="Don't launch Roblox when you turn on your computer."
+            disabled={disableWinUn}
             icon={ListStart}
         >
             {#snippet action()}
@@ -260,6 +271,7 @@
         <SettingCard
             title={$_('pages.integrations.optimizerCard.title')}
             description={$_('pages.integrations.optimizerCard.description')}
+            disabled={disableWin}
             icon={Sparkles}
         >
             {#snippet action()}
@@ -274,6 +286,7 @@
             description={$_(
                 'pages.integrations.disableFullscreenoptimizationCard.description'
             )}
+            disabled={disableWin}
             icon={Expand}
         >
             {#snippet action()}
@@ -334,6 +347,7 @@
                 'pages.integrations.windowManipulationCard.description'
             )}
             icon={CodeXml}
+            disabled={disableWin}
         >
             {#snippet action()}
                 <Button

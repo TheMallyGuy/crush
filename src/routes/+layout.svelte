@@ -11,6 +11,7 @@
     import { initUwu } from '$lib/uwuify.svelte'
     import { initHoverSfx } from '$lib/hoverSfx'
     import { settings } from '$lib/stores/settings.svelte'
+    import { operating_system } from '$lib/stores/operating_system.svelte'
 
     onMount(async () => {
         const win = getCurrentWindow()
@@ -22,6 +23,8 @@
         await loadSavedTheme()
         await background.init()
         await serverInfo.init()
+
+        operating_system.set(await invoke('get_current_os'))
 
         await listen<string>('deep-link-received', (event) => {
             deepLinkUrl.set(event.payload)
@@ -37,9 +40,9 @@
 
         // On startup, we only redirect to the bootstrapper if a deep link was actually received.
         // This prevents the app from launching into Roblox instantly every time it's opened normally.
-        const urls = await invoke<string[]>('plugin:deep-link|get_current').catch(
-            () => []
-        )
+        const urls = await invoke<string[]>(
+            'plugin:deep-link|get_current'
+        ).catch(() => [])
         if (
             win.label === 'crushBoostrapChoiceWindow' &&
             urls.length > 0 &&

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Info } from '@lucide/svelte'
     import type { Component, Snippet } from 'svelte'
 
     interface Props {
@@ -7,6 +8,7 @@
         icon?: Component | string | null
         doTheGrayThing?: boolean
         clickable?: boolean
+        disabled?: string | null
         class?: string
         iconSlot?: Snippet
         action?: Snippet
@@ -19,6 +21,7 @@
         icon = null,
         doTheGrayThing = false,
         clickable = false,
+        disabled = null,
         class: className = '',
         iconSlot,
         action,
@@ -31,13 +34,29 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
     class="group relative flex w-full flex-col p-3 transition-all duration-150
-    {clickable
+    {clickable && !disabled
         ? 'cursor-pointer hover:bg-stone-900/50 active:scale-[0.995]'
         : ''}
+    {disabled ? 'cursor-not-allowed opacity-50' : ''}
     {className}"
     onmouseenter={() => (hovered = true)}
     onmouseleave={() => (hovered = false)}
 >
+    {#if disabled && hovered}
+        <div
+            class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-max max-w-xs -translate-x-1/2 rounded-lg border border-stone-800 bg-stone-950 px-3 py-2 text-sm font-medium text-white"
+        >
+            <div class="flex flex-row gap-3">
+                <Info size={19} />
+                {disabled}
+            </div>
+
+            <div
+                class="absolute left-1/2 top-full -mt-px h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-stone-800 bg-stone-950"
+            ></div>
+        </div>
+    {/if}
+
     <div class="flex items-center justify-between gap-5">
         <div class="flex items-center gap-5">
             {#if icon || iconSlot}
