@@ -167,7 +167,10 @@ async fn on_joined(
     state.activity.in_game = true;
     state.activity.notified = true;
 
-    state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+    #[cfg(target_os = "windows")]
+    {
+        state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+    }
 
     #[cfg(target_os = "windows")]
     if let Some(hwnd) = state.roblox_hwnd {
