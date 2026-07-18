@@ -2,6 +2,7 @@
 use std::path::Path;
 #[cfg(target_os = "windows")]
 use std::sync::OnceLock;
+#[cfg(target_os = "windows")]
 use tauri::{AppHandle, Manager};
 
 #[cfg(target_os = "windows")]
