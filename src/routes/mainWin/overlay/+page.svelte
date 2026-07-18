@@ -5,6 +5,7 @@
     import { flip } from 'svelte/animate'
     import { operating_system } from '$lib/stores/operating_system.svelte'
     import { getCurrentWindow } from '@tauri-apps/api/window'
+    import { info } from '@tauri-apps/plugin-log'
 
     async function sleep(ms: number): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, ms))
@@ -15,11 +16,13 @@
         return () => {
             unlisten.then((fn) => fn())
         }
-
-        sleep(3000)
+    })
+    onMount(async () => {
+        await sleep(3000)
 
         if ($operating_system === 'macos') {
-            getCurrentWindow().close()
+            info("closing island because its wont work well with macos")
+            await getCurrentWindow().close()
         }
     })
 </script>
