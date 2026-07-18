@@ -1,4 +1,6 @@
-use super::config::{get_transparency_bound, integration_enabled};
+#[cfg(target_os = "windows")]
+use super::config::get_transparency_bound;
+use super::config::integration_enabled;
 use super::state::WatcherState;
 use super::types::{BloxstrapRpcMessage, RichPresence};
 #[cfg(target_os = "windows")]

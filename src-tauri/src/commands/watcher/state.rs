@@ -11,6 +11,7 @@ use windows::Win32::Foundation::HWND;
 #[derive(Default, Debug)]
 pub(super) struct Activity {
     pub(super) place_id: Option<u64>,
+    #[cfg(target_os = "windows")]
     pub(super) universe_id: Option<u64>,
     pub(super) instance_id: Option<String>,
     pub(super) in_game: bool,
@@ -110,6 +111,7 @@ impl Default for WatcherState {
             #[cfg(target_os = "windows")]
             starting_height: 0,
 
+            #[cfg(target_os = "windows")]
             last_x: 0,
             #[cfg(target_os = "windows")]
             last_y: 0,

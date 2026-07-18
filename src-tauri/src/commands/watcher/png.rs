@@ -1,4 +1,6 @@
+#[cfg(target_os = "windows")]
 use std::path::Path;
+#[cfg(target_os = "windows")]
 use std::sync::OnceLock;
 use tauri::{AppHandle, Manager};
 

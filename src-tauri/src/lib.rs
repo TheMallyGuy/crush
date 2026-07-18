@@ -51,10 +51,9 @@ pub mod collector;
 mod crypto_state;
 #[cfg(target_os = "windows")]
 pub mod interactive;
+pub mod island;
 #[cfg(target_os = "windows")]
 pub mod larp_focuser;
-
-pub mod island;
 #[cfg(target_os = "windows")]
 pub mod priorites;
 pub mod rd;
