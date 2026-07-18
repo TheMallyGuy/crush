@@ -8,7 +8,7 @@ use commands::archive::{extract_files_from_zip, extract_zip};
 use commands::boostrapper_importer::export_boostrapconfig;
 use commands::crush::{crush, get_current_os};
 use commands::discord_rpc::set_rpc;
-use commands::fs::copy_file;
+use commands::fs::{copy_file, rename};
 use commands::gbs_operations::{get_gbs, write_gbs};
 #[cfg(target_os = "macos")]
 use commands::install_roblox_mac::move_app_to_applications;
@@ -24,7 +24,6 @@ use commands::pre_processing::set_process_priority;
 use commands::process_roblox::kill_roblox_if_open;
 #[cfg(target_os = "windows")]
 use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
-use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,

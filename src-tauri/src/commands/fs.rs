@@ -11,3 +11,8 @@ pub async fn copy_file(from: String, to: String) -> Result<(), String> {
         .map(|_| ())
         .map_err(|e| format!("Failed to copy file: {}", e))
 }
+
+#[tauri::command]
+pub fn rename(name: String, new_name: String) -> Result<(), String> {
+    std::fs::rename(&name, &new_name).map_err(|e| format!("Rename failed: {}", e))
+}

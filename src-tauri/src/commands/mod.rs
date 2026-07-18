@@ -12,7 +12,6 @@ pub mod pre_processing;
 pub mod process_roblox;
 #[cfg(target_os = "windows")]
 pub mod properity;
-pub mod rename;
 pub mod roblox_deployment;
 #[cfg(target_os = "windows")]
 pub mod shortcuts;
