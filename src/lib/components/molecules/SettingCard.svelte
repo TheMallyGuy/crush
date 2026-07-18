@@ -41,6 +41,13 @@
     {className}"
     onmouseenter={() => (hovered = true)}
     onmouseleave={() => (hovered = false)}
+    onclickcapture={(e) => {
+        if (disabled) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+        }
+    }}
+    aria-disabled={disabled ? 'true' : undefined}
 >
     {#if disabled && hovered}
         <div
