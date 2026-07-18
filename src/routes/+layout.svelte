@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { loadSavedTheme } from '$lib/theme/themeLoader'
-    import { background } from '$lib/stores/background.svelte'
     import { serverInfo } from '$lib/stores/serverInfo.svelte'
     import { listen } from '@tauri-apps/api/event'
     import { deepLinkUrl } from '$lib/stores/deeplink'
@@ -21,7 +20,6 @@
         initUwu()
         initHoverSfx()
         await loadSavedTheme()
-        await background.init()
         await serverInfo.init()
 
         operating_system.set(await invoke('get_current_os'))
