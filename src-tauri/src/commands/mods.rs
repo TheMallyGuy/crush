@@ -1,6 +1,9 @@
-use std::{fs, io::Read, path::Path};
 #[cfg(not(target_os = "windows"))]
 use dirs::home_dir;
+#[cfg(not(target_os = "windows"))]
+use std::path::PathBuf;
+
+use std::{fs, io::Read, path::Path};
 
 use md5;
 
