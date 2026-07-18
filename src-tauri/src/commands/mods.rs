@@ -63,7 +63,7 @@ pub async fn apply_mod(mod_dir: String) -> Vec<String> {
 fn process_mod_entry(entry: walkdir::DirEntry, mod_dir: impl AsRef<Path>) -> Option<String> {
     let src = entry.path();
     let relative = src.strip_prefix(mod_dir).ok()?;
-    let dest: PathBuf = home_dir()
+    let dest: PathBuf = home_dir()?
         .join("Applications")
         .join("Roblox.app")
         .join("Resources");
