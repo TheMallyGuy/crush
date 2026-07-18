@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Emitter, Runtime};
+use tauri_plugin_notification::NotificationExt;
 
 pub const OVERLAY_WINDOW_LABEL: &str = "crushOverlay";
 
@@ -15,9 +16,18 @@ pub struct IslandPayload {
 }
 
 pub fn emit<R: Runtime>(app: &AppHandle<R>, payload: IslandPayload) {
+    #[cfg(target_os = "windows")]
     if let Err(e) = app.emit_to(OVERLAY_WINDOW_LABEL, "dynamic-island", payload) {
         log::warn!("island: failed to emit to overlay window: {}", e);
     }
+
+    #[cfg(target_os = "macos")]
+    app.notification()
+        .builder()
+        .title(&payload.title.to_string())
+        .body(&payload.description.unwrap_or_default())
+        .show()
+        .unwrap();
 }
 
 pub fn show<R: Runtime>(app: &AppHandle<R>, title: impl Into<String>, description: Option<&str>) {
