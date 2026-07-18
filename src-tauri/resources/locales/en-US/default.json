@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Launch"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Crush",
@@ -76,7 +80,6 @@
                     "🐘",
                     "ily",
                     "me updating 100 billons updates to crush",
-                    "Mally isn't Mally, he IS someone before...",
                     "Join our community server!",
                     "I've detected your homework folder over 10 TB, whats going on there?",
                     "Big thanks for bratic for promoting crush",
@@ -88,7 +91,27 @@
                     "collect my lost souls",
                     "keep yourself safe",
                     "i have food the other day its was good",
-                    "682204753517871156 is my rivals",
+                    "\"Quick doctor help him!\" \" What is his type? \" \" He's into mommies \" \" ??? 😭😭 \" ",
+                    "Tell your crush to use crush",
+                    "\"claude know all my api keys\"",
+                    "DM mally for daily instagram reels",
+                    "\"I wish an older woman groomed me when I was a teen maybe I wouldn’t be so awkward around women then\"",
+                    "ALT + F4 for free robux",
+                    "local bars hate me when i pull this move",
+                    "duh",
+                    "This text can be funny sometimes",
+                    "Ocean Dih",
+                    "Think like an engineer",
+                    "i hope your day is better",
+                    "Thank you John C. Rush",
+                    "Im gonna murder all my mods",
+                    "Mally think he is tuff but im tuffer, Sigma sigma boy",
+                    "im gooning to find you bro",
+                    "go to sleep cute boy",
+                    "Can you build crush in build a boat?",
+                    "\"eat poop\" - 0xf9",
+                    "we may now kiss",
+                    "fuck you :3",
                     "This is a fun fact",
                     "Make lil crushies with your crush gng 💔🥀",
                     "Crush started its development on March, 14 2026, 10 days after Mally's birthday!",
@@ -151,7 +174,7 @@
             "description": "Customize the look and feel of the Roblox bootstrapper.",
             "bootstrapThemeCard": {
                 "title": "Bootstrapper Theme",
-                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all Bloxstrap themes work.",
+                "description": "Choose between the default Crush theme or a custom XML theme. Bloxstrap and HTML are supported. Note that not all bloxstrap theme works.",
                 "dropdown": {
                     "default": "Default (Crush)",
                     "custom": "Custom"
@@ -226,7 +249,7 @@
             },
             "activityWatcherCard": {
                 "title": "Activity Watcher",
-                "description": "Watch your activity on Roblox. Some features require this to be enabled."
+                "description": "Watch your activity on Roblox. Some feature required this to be enabled."
             },
             "sleepScheduleCard": {
                 "title": "Sleep schedule",
@@ -241,8 +264,8 @@
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
@@ -257,6 +280,14 @@
                 "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Let people join your game",
                 "option2": "Display your account when playing Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Your game history",
@@ -490,7 +521,7 @@
                 },
                 "grassAnimationCard": {
                     "title": "Grass waving animation",
-                    "description": "Adjusts the intensity of grass movement. (0 is no reduction; 999 or any higher number will freeze the grass. 0 & 1 slightly reduce motion, and values greater than 1 strongly reduce motion, approaching stillness.)"
+                    "description": "Adjusts the intensity of grass movement. (0 is no reduction, 999 or any higher number will freeze the grass, 0 & 1 slightly reduces motion and values greater than 1 strongly reduce motion, approaching stillness)"
                 },
                 "overwriteTextureQualityCard": {
                     "title": "Overwrite texture quality level",

@@ -41,7 +41,7 @@
     },
     "crossplatform": {
         "notAvailableWindowsOnly": "This feature is only available for Windows.",
-        "notAvailableWindowsPlanned" : "This feature currently available for Windows, But we have plan to support your operating system."
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
     },
     "pages": {
         "choiceWin": {
@@ -264,8 +264,8 @@
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
@@ -280,6 +280,14 @@
                 "description": "Replace the Roblox Rich Presence with Crush's.",
                 "option1": "Let people join your game",
                 "option2": "Display your account when playing Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Your game history",

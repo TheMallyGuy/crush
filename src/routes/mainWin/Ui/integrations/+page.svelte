@@ -241,9 +241,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Disable system tray"
-            description="Roblox is watching."
-            disabled={disableWinUn}
+            title={$_("pages.integrations.disableSystemTrayCard.title")}
+            description={$_("pages.integrations.disableSystemTrayCard.description")}
             icon={ArrowDownToDot}
         >
             {#snippet action()}
@@ -255,9 +254,8 @@
         </SettingCard>
 
         <SettingCard
-            title="Disable launch Roblox at startup"
-            description="Don't launch Roblox when you turn on your computer."
-            disabled={disableWinUn}
+            title={$_("pages.integrations.disableLaunchAtStartup.description")}
+            description={$_("pages.integrations.disableLaunchAtStartup.description")}
             icon={ListStart}
         >
             {#snippet action()}
