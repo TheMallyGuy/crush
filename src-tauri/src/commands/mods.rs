@@ -1,6 +1,9 @@
 use std::{fs, io::Read, path::Path};
+#[cfg(not(target_os = "windows"))]
+use dirs::home_dir;
 
 use md5;
+
 use tauri::command;
 use walkdir::WalkDir;
 
@@ -60,7 +63,10 @@ pub async fn apply_mod(mod_dir: String) -> Vec<String> {
 fn process_mod_entry(entry: walkdir::DirEntry, mod_dir: impl AsRef<Path>) -> Option<String> {
     let src = entry.path();
     let relative = src.strip_prefix(mod_dir).ok()?;
-    let dest: PathBuf = home.join("Applications").join("Roblox.app").join("Resources");
+    let dest: PathBuf = home_dir()
+        .join("Applications")
+        .join("Roblox.app")
+        .join("Resources");
     let rel_str = relative.to_string_lossy().into_owned();
 
     if is_file_up_to_date(src, &dest) {
