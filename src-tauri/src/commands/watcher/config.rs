@@ -33,6 +33,7 @@ pub fn config_bool(
         .unwrap_or(false)
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn get_transparency_bound(
     store: &tauri_plugin_store::Store<tauri::Wry>,
     key: &str,

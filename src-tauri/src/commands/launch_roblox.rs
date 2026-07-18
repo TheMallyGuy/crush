@@ -1,5 +1,6 @@
 use tokio::process::Command;
 
+#[cfg(target_os = "windows")]
 #[tauri::command]
 pub async fn launch(path: String, arguments: Option<Vec<String>>) -> Result<(), String> {
     let mut cmd = Command::new(&path);
@@ -20,6 +21,7 @@ pub async fn launch_mac_app(app_path: String, arguments: Vec<String>) -> Result<
         cmd.arg("--args");
         cmd.args(&arguments);
     }
-    cmd.spawn().map_err(|e| format!("Failed to launch {}: {}", app_path, e))?;
+    cmd.spawn()
+        .map_err(|e| format!("Failed to launch {}: {}", app_path, e))?;
     Ok(())
 }
