@@ -18,7 +18,7 @@
         }
     })
     onMount(async () => {
-        await sleep(3000)
+        await sleep(2000)
 
         if ($operating_system === 'macos') {
             info("closing island because its wont work well with macos")
