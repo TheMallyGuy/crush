@@ -16,6 +16,7 @@
     import Button from '$lib/components/atoms/Button.svelte'
     import { goto } from '$app/navigation'
     import Dialog from '$lib/components/molecules/Dialog.svelte'
+    import { operating_system } from '$lib/stores/operating_system.svelte'
 
     const vngLogo = '/VNG.png'
 
@@ -62,8 +63,15 @@
         }
     }
 
+    let disableWin: string | undefined = $state()
+    let disableWinUn: string | undefined = $state()
+
     onMount(async () => {
         console.log('test')
+        if ($operating_system == 'macos') {
+            disableWin = $_('crossplatform.notAvailableWindowsOnly')
+            disableWinUn = $_('crossplatform.notAvailableWindowsPlanned')
+        }
 
         invoke('set_rpc', {
             details: $_('rpc.general'),
@@ -98,22 +106,22 @@
     description={$_('pages.installations.dialogs.vngWarning.description')}
 >
     {#snippet actions()}
-    <div>
-        <Button
-            variant="secondary"
-            size="sm"
-            onclick={() => resolveWarning?.(false)}
-        >
-            {$_('pages.installations.dialogs.vngWarning.cancel')}
-        </Button>
-        <Button
-            variant="danger"
-            size="sm"
-            onclick={() => resolveWarning?.(true)}
-        >
-            {$_('pages.installations.dialogs.vngWarning.confirm')}
-        </Button>
-    </div>
+        <div>
+            <Button
+                variant="secondary"
+                size="sm"
+                onclick={() => resolveWarning?.(false)}
+            >
+                {$_('pages.installations.dialogs.vngWarning.cancel')}
+            </Button>
+            <Button
+                variant="danger"
+                size="sm"
+                onclick={() => resolveWarning?.(true)}
+            >
+                {$_('pages.installations.dialogs.vngWarning.confirm')}
+            </Button>
+        </div>
     {/snippet}
 </Dialog>
 
@@ -138,14 +146,14 @@
             icon={Rocket}
         >
             {#snippet action()}
-            <Button
-                variant="secondary"
-                onclick={() => {
-                    goto('./installation/versionManager')
-                }}
-            >
-                {$_('pages.installations.versionManagerCard.button')}
-            </Button>
+                <Button
+                    variant="secondary"
+                    onclick={() => {
+                        goto('./installation/versionManager')
+                    }}
+                >
+                    {$_('pages.installations.versionManagerCard.button')}
+                </Button>
             {/snippet}
         </SettingCard>
 
@@ -154,14 +162,15 @@
             description={$_(
                 'pages.installations.parallelDownloadingCard.description'
             )}
+            disabled={disableWin}
             icon={Folders}
         >
             {#snippet action()}
-            <Textbox
-                class="w-30 h-8 text-sm"
-                bind:value={parallel}
-                onchange={handleChanges}
-            />
+                <Textbox
+                    class="w-30 h-8 text-sm"
+                    bind:value={parallel}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
@@ -173,23 +182,21 @@
             icon={HardDriveDownload}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={forceReinstall}
-                onchange={handleChanges}
-            />
+                <Switch
+                    bind:checked={forceReinstall}
+                    onchange={handleChanges}
+                />
             {/snippet}
         </SettingCard>
 
         <SettingCard
             title={$_('pages.installations.useVNGCard.title')}
             description={$_('pages.installations.useVNGCard.description')}
+            disabled={disableWin}
             icon={vngLogo}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={vng}
-                onchange={handleWarning}
-            />
+                <Switch bind:checked={vng} onchange={handleWarning} />
             {/snippet}
         </SettingCard>
 
@@ -199,10 +206,7 @@
             icon={CircleFadingArrowUp}
         >
             {#snippet action()}
-            <Switch
-                bind:checked={dontUpdate}
-                onchange={handleChanges}
-            />
+                <Switch bind:checked={dontUpdate} onchange={handleChanges} />
             {/snippet}
         </SettingCard>
     </div>
