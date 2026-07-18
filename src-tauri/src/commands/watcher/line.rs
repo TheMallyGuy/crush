@@ -1,3 +1,4 @@
+#[cfg(target_os = "windows")]
 use super::api::fetch_universe_id;
 use super::bloxstrap::on_bloxstrap_rpc;
 use super::config::{config_bool, integration_enabled};
@@ -8,6 +9,7 @@ use super::notifications::{
 use super::patterns::{
     re_bloxstrap_rpc, re_join, re_joined, re_leave, re_private_server_access_code, re_udmux,
 };
+#[cfg(target_os = "windows")]
 use super::png::write_game_permission_png;
 use super::state::WatcherState;
 #[cfg(target_os = "windows")]

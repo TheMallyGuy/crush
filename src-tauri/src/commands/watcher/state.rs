@@ -52,6 +52,7 @@ pub(super) struct WatcherState {
     pub(super) starting_height: i32,
 
     // last applied geometry (updated by SetWindow)
+    #[cfg(target_os = "windows")]
     pub(super) last_x: i32,
     #[cfg(target_os = "windows")]
     pub(super) last_y: i32,

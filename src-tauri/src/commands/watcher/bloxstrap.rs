@@ -12,6 +12,7 @@ use crate::interactive::{
 use crate::rpc::{apply_rpc_full, start_rpc, RpcState};
 use std::time::Duration;
 use tauri::{AppHandle, Manager};
+#[cfg(target_os = "windows")]
 use tauri_plugin_notification::NotificationExt;
 
 pub(super) async fn on_bloxstrap_rpc(

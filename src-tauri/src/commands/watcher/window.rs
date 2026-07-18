@@ -1,9 +1,11 @@
+#[cfg(target_os = "windows")]
 use super::state::WatcherState;
 #[cfg(target_os = "windows")]
 use crate::interactive::{
     find_windows_by_title, get_window_rect, move_window, reset_layered, set_borderless,
     set_window_title, LWA_COLORKEY,
 };
+#[cfg(target_os = "windows")]
 use serde_json::{json, Value};
 #[cfg(target_os = "windows")]
 use windows::Win32::Foundation::HWND;

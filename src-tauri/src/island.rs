@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Emitter, Runtime};
+#[cfg(target_os = "macos")]
 use tauri_plugin_notification::NotificationExt;
 
 pub const OVERLAY_WINDOW_LABEL: &str = "crushOverlay";

@@ -2,6 +2,7 @@ use std::path::Path;
 use std::sync::OnceLock;
 use tauri::{AppHandle, Manager};
 
+#[cfg(target_os = "windows")]
 pub(super) fn write_game_permission_png(
     game_id: u64,
     allow_control: bool,
@@ -69,6 +70,7 @@ pub(super) fn write_game_permission_png(
     Ok(())
 }
 
+#[cfg(target_os = "windows")]
 fn write_png_rgba(path: &Path, width: u32, height: u32, rgba: &[u8]) -> Result<(), String> {
     fn adler32(data: &[u8]) -> u32 {
         let (mut a, mut b) = (1u32, 0u32);

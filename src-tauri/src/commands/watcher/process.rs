@@ -20,6 +20,7 @@ pub(super) fn is_roblox_running(system: &mut System) -> bool {
         .any(|p| re.is_match(p.name().to_string_lossy().as_ref()))
 }
 
+#[cfg(target_os = "windows")]
 pub(super) fn get_roblox_pid(system: &mut System) -> Option<u32> {
     static R: OnceLock<Regex> = OnceLock::new();
     let re = R.get_or_init(|| Regex::new(r"(?i)robloxplayerbeta").unwrap());
