@@ -81,7 +81,7 @@
             <div class="flex flex-col gap-0.5">
                 {#if title}
                     <h3
-                        class="text-base font-semibold tracking-tight text-stone-100 break-all"
+                        class="text-base tracking-tight text-stone-100 break-all"
                     >
                         {title}
                     </h3>

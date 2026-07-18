@@ -417,22 +417,22 @@
     description={$_('pages.accountManagement.dialogs.delete.description')}
 >
     {#snippet actions()}
-    <div>
-        <Button
-            variant="secondary"
-            size="sm"
-            onclick={() => resolveDelete?.(false)}
-        >
-            {$_('pages.accountManagement.dialogs.delete.cancel')}
-        </Button>
-        <Button
-            variant="danger"
-            size="sm"
-            onclick={() => resolveDelete?.(true)}
-        >
-            {$_('pages.accountManagement.dialogs.delete.confirm')}
-        </Button>
-    </div>
+        <div>
+            <Button
+                variant="secondary"
+                size="sm"
+                onclick={() => resolveDelete?.(false)}
+            >
+                {$_('pages.accountManagement.dialogs.delete.cancel')}
+            </Button>
+            <Button
+                variant="danger"
+                size="sm"
+                onclick={() => resolveDelete?.(true)}
+            >
+                {$_('pages.accountManagement.dialogs.delete.confirm')}
+            </Button>
+        </div>
     {/snippet}
 </Dialog>
 
@@ -445,10 +445,7 @@
     <Tabs {tabs} bind:activeTab>
         {#if activeTab === 'webView'}
             {#if openedWebview}
-                <Button
-                    variant="primary"
-                    size="sm"
-                    onclick={checkWebviewCookie}
+                <Button variant="primary" size="sm" onclick={checkWebviewCookie}
                     >{$_(
                         'pages.accountManagement.dialogs.add.tabs.webview.check'
                     )}</Button
@@ -484,8 +481,7 @@
                         )}
                     </p>
                     <div class="flex items-center justify-center w-full">
-                        <code
-                            class="text-2xl font-bold tracking-tight text-stone-100"
+                        <code class="text-2xl tracking-tight text-stone-100"
                             >{quickSignCode}</code
                         >
                     </div>
@@ -512,20 +508,20 @@
         {/if}
     </Tabs>
     {#snippet actions()}
-    <div class="flex items-center justify-end gap-2">
-        <Checkbox bind:checked={vngAccount}
-            >{$_(
-                'pages.accountManagement.dialogs.add.tabs.quickSignIn.checkbox'
-            )}</Checkbox
-        >
-    </div>
+        <div class="flex items-center justify-end gap-2">
+            <Checkbox bind:checked={vngAccount}
+                >{$_(
+                    'pages.accountManagement.dialogs.add.tabs.quickSignIn.checkbox'
+                )}</Checkbox
+            >
+        </div>
     {/snippet}
 </Dialog>
 
 <div class="flex flex-col gap-5">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+            <h1 class="text-3xl tracking-tight text-stone-100">
                 {$_('pages.accountManagement.accountManagement')}
             </h1>
             <p class="text-stone-400 mt-1">
@@ -547,34 +543,36 @@
 
     <SortableList items={accountsData ?? []}>
         {#snippet children(item)}
-        <div class="flex items-center justify-between w-full pr-2">
-            <div class="flex flex-col gap-0.5">
-                <span class="text-sm font-medium text-stone-100">
-                    {item.id}
-                    <span
-                        class="ml-2 text-xs {item.type === 'vng'
-                            ? 'text-orange-400'
-                            : 'text-blue-400'}"
-                        >{item.type === 'vng' ? 'VNG' : 'Global'}</span
+            <div class="flex items-center justify-between w-full pr-2">
+                <div class="flex flex-col gap-0.5">
+                    <span class="text-sm font-medium text-stone-100">
+                        {item.id}
+                        <span
+                            class="ml-2 text-xs {item.type === 'vng'
+                                ? 'text-orange-400'
+                                : 'text-blue-400'}"
+                            >{item.type === 'vng' ? 'VNG' : 'Global'}</span
+                        >
+                    </span>
+                    <span class="text-xs text-stone-400"
+                        >{item.username} ({item.userId})</span
                     >
-                </span>
-                <span class="text-xs text-stone-400"
-                    >{item.username} ({item.userId})</span
-                >
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <Button
+                        variant="secondary"
+                        size="sm"
+                        onclick={() => useAccount(item.id)}
+                        >{$_('pages.accountManagement.use')}</Button
+                    >
+                    <Button
+                        variant="danger"
+                        size="sm"
+                        onclick={() => deleteAccount(item.id)}
+                        >{$_('pages.accountManagement.delete')}</Button
+                    >
+                </div>
             </div>
-            <div class="flex items-center gap-1.5">
-                <Button
-                    variant="secondary"
-                    size="sm"
-                    onclick={() => useAccount(item.id)}>{$_("pages.accountManagement.use")}</Button
-                >
-                <Button
-                    variant="danger"
-                    size="sm"
-                    onclick={() => deleteAccount(item.id)}>{$_("pages.accountManagement.delete")}</Button
-                >
-            </div>
-        </div>
         {/snippet}
     </SortableList>
 </div>
