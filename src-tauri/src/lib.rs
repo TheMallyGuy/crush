@@ -17,7 +17,7 @@ use commands::launch_roblox::launch_mac_app;
 use commands::local_app_settings::{get_local_app, write_local_app};
 #[cfg(target_os = "macos")]
 use commands::mac::{
-    move_app_to_applications, remove_mac_client_settings, write_mac_client_settings,
+    move_app_to_applications, remove_mac_client_settings, write_mac_client_settings, find_roblox_installation
 };
 use commands::mods::apply_mod;
 use commands::pre_processing::close_crash_handler;
@@ -440,6 +440,8 @@ pub fn run() {
             clear_cookies,
             decrypt_cookie_data,
             encrypt_cookie_data,
+            #[cfg(target_os = "macos")]
+            find_roblox_installation,
             #[cfg(target_os = "macos")]
             move_app_to_applications,
             #[cfg(target_os = "macos")]

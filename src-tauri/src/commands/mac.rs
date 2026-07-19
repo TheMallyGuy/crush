@@ -1,5 +1,7 @@
+use regex::Regex;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::process::Command;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 #[tauri::command]
@@ -118,7 +120,6 @@ fn copy_symlink(src: &Path, dst: &Path) -> Result<(), String> {
         .map_err(|e| format!("Cannot copy '{}': {}", src.display(), e))
 }
 
-
 fn client_settings_path(app_bundle: &str) -> Result<PathBuf, String> {
     if app_bundle.is_empty()
         || app_bundle.contains('/')
@@ -127,33 +128,52 @@ fn client_settings_path(app_bundle: &str) -> Result<PathBuf, String> {
     {
         return Err(format!("Invalid app bundle name: '{}'", app_bundle));
     }
- 
+
     Ok(Path::new("/Applications")
         .join(app_bundle)
         .join("Contents/MacOS/ClientSettings/ClientAppSettings.json"))
 }
- 
 
 #[tauri::command]
 pub fn write_mac_client_settings(app_bundle: String, content: String) -> Result<(), String> {
     let path = client_settings_path(&app_bundle)?;
- 
+
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent)
             .map_err(|e| format!("Cannot create dir '{}': {}", parent.display(), e))?;
     }
- 
+
     fs::write(&path, content).map_err(|e| format!("Cannot write '{}': {}", path.display(), e))
 }
- 
 
 #[tauri::command]
 pub fn remove_mac_client_settings(app_bundle: String) -> Result<(), String> {
     let path = client_settings_path(&app_bundle)?;
- 
+
     if path.exists() {
         fs::remove_file(&path).map_err(|e| format!("Cannot remove '{}': {}", path.display(), e))?;
     }
- 
+
     Ok(())
+}
+
+#[tauri::command]
+pub fn find_roblox_installation() -> Result<String, String> {
+    let output = Command::new("mdfind")
+        .arg("Roblox.app")
+        .output()
+        .expect("failed to execute process");
+
+    let word = "Roblox.app";
+    let pattern = format!(r"\b{}\b", regex::escape(word));
+    let re = Regex::new(&pattern).unwrap();
+    let stdout = String::from_utf8_lossy(&output.stdout);
+
+    for line in stdout.lines() {
+        if re.is_match(line) {
+            return Ok(line.to_string());
+        }
+    }
+
+    Err("no matching line found".to_string())
 }
