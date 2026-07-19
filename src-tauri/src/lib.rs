@@ -263,7 +263,7 @@ pub fn run() {
                 .unwrap_or(false);
 
             #[cfg(target_os = "macos")]
-            if platform == "macos" && warn_dialog_macos{
+            if platform == "macos" && !warn_dialog_macos{
 
                 app.dialog()
                     .message("This app has experimental macos support. Please report bugs to our community server if there's any!")
