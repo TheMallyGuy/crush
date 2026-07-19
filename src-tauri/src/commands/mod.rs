@@ -5,8 +5,6 @@ pub mod crush;
 pub mod discord_rpc;
 pub mod fs;
 pub mod gbs_operations;
-#[cfg(target_os = "macos")]
-pub mod install_roblox_mac;
 pub mod launch_roblox;
 pub mod local_app_settings;
 pub mod mods;
