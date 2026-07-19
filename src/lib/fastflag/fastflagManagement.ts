@@ -8,11 +8,14 @@
 // import type { AppType } from '$lib/types'
 
 import type { AppType } from "$lib/downloadRoblox";
+import { operating_system } from "$lib/stores/operating_system.svelte";
+import { invoke } from "@tauri-apps/api/core";
 import { appDataDir, join } from "@tauri-apps/api/path";
 import { BaseDirectory, exists, mkdir, readTextFile, remove, writeTextFile } from "@tauri-apps/plugin-fs";
 import { info } from "@tauri-apps/plugin-log";
 import { load, Store } from "@tauri-apps/plugin-store";
 import { store } from "@tauri-store/svelte";
+import { get } from "svelte/store";
 
 // async function ensureDir(path: string) {
 //     if (!(await exists(path))) {
@@ -33,7 +36,13 @@ function decoerceValue(value: unknown): string {
     return String(value)
 }
 
+function isMacOs(): boolean {
+    return get(operating_system) === 'macos'
+}
 
+function getMacAppBundleName(app_type: AppType): string {
+    return app_type === 'studio' ? 'RobloxStudio.app' : 'Roblox.app'
+}
 
 // export async function saveFastFlags(
 //     version_hash: string,
@@ -127,6 +136,20 @@ function decoerceValue(value: unknown): string {
 //     }
 // }
 
+
+async function resolveVersionClientSettingsPaths(
+    app_type: AppType,
+    version: string,
+    vng?: boolean
+): Promise<{ dir: string; file: string }> {
+    const folder = app_type === 'player' ? (vng ? 'PlayerVNG' : 'Player') : 'Studio'
+    const versionDir = await join(await appDataDir(), folder, 'Versions', version)
+    const dir = await join(versionDir, 'ClientSettings')
+    const file = await join(dir, 'ClientAppSettings.json')
+
+    return { dir, file }
+}
+
 export async function getFastFlags(app_type: AppType = 'player'): Promise<Record<string, string>> {
     const clientSettings = `${app_type}GlobalClientSettings.json`
 
@@ -161,30 +184,36 @@ export async function saveFastFlags(
 }
 
 export async function loadFlag(app_type: AppType, version: string, disable: boolean, vng?: boolean) {
-    let path
-
-    if (app_type === "player") {
-        const folder = vng ? "PlayerVNG" : "Player"
-        path = await join(await appDataDir(), folder, "Versions", version)
-    } else {
-        path = await join(await appDataDir(), "Studio", "Versions", version)
-    }
-
-    const clientSettingDir = await join(path, "ClientSettings")
-    const clientSettingPath = await join(clientSettingDir, "ClientAppSettings.json")
-
     const clientSettings = `${app_type}GlobalClientSettings.json`
     if (!(await exists(clientSettings, { baseDir: BaseDirectory.AppData }))) return
 
-    const raw = await readTextFile(clientSettings, { baseDir: BaseDirectory.AppData })
+    if (isMacOs()) {
+        const appBundle = getMacAppBundleName(app_type)
 
-    if (!(await exists(clientSettingDir))) {
-        await mkdir(clientSettingDir, { recursive: true })
+        if (!disable) {
+            const raw = await readTextFile(clientSettings, { baseDir: BaseDirectory.AppData })
+            await invoke('write_mac_client_settings', { appBundle, content: raw })
+        } else {
+            await invoke('remove_mac_client_settings', { appBundle })
+        }
+        return
     }
 
+    const { dir: clientSettingDir, file: clientSettingPath } = await resolveVersionClientSettingsPaths(
+        app_type,
+        version,
+        vng
+    )
+
     if (!disable) {
+        const raw = await readTextFile(clientSettings, { baseDir: BaseDirectory.AppData })
+
+        if (!(await exists(clientSettingDir))) {
+            await mkdir(clientSettingDir, { recursive: true })
+        }
+
         await writeTextFile(clientSettingPath, raw)
-    } else {
+    } else if (await exists(clientSettingPath)) {
         await remove(clientSettingPath)
     }
 }

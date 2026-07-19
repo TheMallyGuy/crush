@@ -8,7 +8,15 @@ concurrency:
 jobs:
     build:
         if: github.head_ref != 'l10n_crowdin_translations'
-        runs-on: windows-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - platform: windows-latest
+                      target: ''
+                    - platform: macos-latest
+                      target: universal-apple-darwin
+        runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v7
@@ -20,18 +28,35 @@ jobs:
                   node-version: 20
             - name: Setup Rust
               uses: dtolnay/rust-toolchain@stable
+              with:
+                  targets: ${{ matrix.target }}
             - name: Cache Rust
               uses: Swatinem/rust-cache@v2
             - name: Install frontend deps
               run: bun install
-            - name: Build Tauri
+            - name: Build Tauri (Windows)
+              if: matrix.platform == 'windows-latest'
               env:
                 TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
               run: bun tauri build
-            - name: Upload build artifacts
+            - name: Build Tauri (macOS universal)
+              if: matrix.platform == 'macos-latest'
+              env:
+                TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+              run: bun tauri build --target universal-apple-darwin
+            - name: Upload build artifacts (Windows)
+              if: matrix.platform == 'windows-latest'
               uses: actions/upload-artifact@v7
               with:
                   name: tauri-windows-build
                   path: |
                       src-tauri/target/release/bundle/msi/*.msi
                       src-tauri/target/release/bundle/nsis/*.exe
+            - name: Upload build artifacts (macOS)
+              if: matrix.platform == 'macos-latest'
+              uses: actions/upload-artifact@v7
+              with:
+                  name: tauri-macos-build
+                  path: |
+                      src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
+                      src-tauri/target/universal-apple-darwin/release/bundle/macos/*.app

@@ -10,9 +10,13 @@ pub mod local_app_settings;
 pub mod mods;
 pub mod pre_processing;
 pub mod process_roblox;
+#[cfg(target_os = "windows")]
 pub mod properity;
-pub mod rename;
 pub mod roblox_deployment;
+#[cfg(target_os = "windows")]
 pub mod shortcuts;
+
+#[cfg(target_os = "macos")]
+pub mod mac;
 pub mod watcher;
 pub mod window;

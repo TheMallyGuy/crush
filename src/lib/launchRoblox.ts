@@ -1,9 +1,11 @@
-import { appDataDir, join } from '@tauri-apps/api/path'
+import { appDataDir, homeDir, join } from '@tauri-apps/api/path'
 import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
 import type { AppType ,Mod } from '$lib/types'
 import { restoreFileFromPackage, getPackageForFile } from '$lib/downloadRoblox'
 import { exists } from '@tauri-apps/plugin-fs'
+import { operating_system } from './stores/operating_system.svelte'
+import { get } from 'svelte/store'
 
 function getAppFolder(appType: AppType, vng?: boolean): string {
     if (appType === 'studio') return 'Studio'
@@ -130,6 +132,15 @@ export async function removeMod(mod: Mod, robloxHash: string, appType: AppType =
 export async function launchPlayer(hash: string, deeplink: string | null) {
     const config = await load('config.json')
     const useVng = (await config.get<{ vng?: boolean }>('installation'))?.vng === true
+    const isMac = get(operating_system) === 'macos'
+    const args = deeplink ? ['--play', '--deeplink', deeplink] : ['--play']
+
+    if (isMac) {
+        const appPath = "/Applications/Roblox.app"
+        await invoke('launch_mac_app', { appPath: appPath, arguments: args })
+        return
+    }
+
     const appData = await appDataDir()
     const playerLocation = await join(
         appData,
@@ -138,10 +149,10 @@ export async function launchPlayer(hash: string, deeplink: string | null) {
         hash,
         'RobloxPlayerBeta.exe'
     )
-    const args = deeplink ? ['--play', '--deeplink', deeplink] : ['--play']
 
     await invoke('launch', { path: playerLocation, arguments: args })
 }
+
 
 export async function launchStudio(hash: string, placeFile?: string | null) {
     if (!hash) {

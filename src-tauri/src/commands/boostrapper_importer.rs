@@ -1,7 +1,10 @@
+#[cfg(target_os = "windows")]
 use serde::{Deserialize, Serialize};
+#[cfg(target_os = "windows")]
 use std::fs;
+#[cfg(target_os = "windows")]
 use std::path::PathBuf;
-
+#[cfg(target_os = "windows")]
 #[allow(non_snake_case)]
 #[derive(Deserialize, Serialize, Debug)]
 pub struct BloxstrapConfig {
@@ -30,6 +33,7 @@ pub struct BloxstrapConfig {
     pub WindowTransparencyAllowed: bool,
 }
 
+#[cfg(target_os = "windows")]
 #[tauri::command]
 pub async fn export_boostrapconfig(
     boostrap_config_path: String,

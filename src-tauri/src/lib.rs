@@ -4,22 +4,33 @@ use commands::account_operations::{
     read_current_cookie, validate_roblox_cookie,
 };
 use commands::archive::{extract_files_from_zip, extract_zip};
+#[cfg(target_os = "windows")]
 use commands::boostrapper_importer::export_boostrapconfig;
-use commands::crush::{check_elevated, crush, relaunch_with_admins_perms};
+use commands::crush::{crush, get_current_os};
 use commands::discord_rpc::set_rpc;
-use commands::fs::copy_file;
+use commands::fs::{copy_file, rename};
 use commands::gbs_operations::{get_gbs, write_gbs};
+#[cfg(target_os = "windows")]
 use commands::launch_roblox::launch;
+#[cfg(target_os = "macos")]
+use commands::launch_roblox::launch_mac_app;
 use commands::local_app_settings::{get_local_app, write_local_app};
+#[cfg(target_os = "macos")]
+use commands::mac::{
+    move_app_to_applications, remove_mac_client_settings, write_mac_client_settings,
+};
 use commands::mods::apply_mod;
-use commands::pre_processing::{close_crash_handler, set_process_priority};
+use commands::pre_processing::close_crash_handler;
+#[cfg(target_os = "windows")]
+use commands::pre_processing::set_process_priority;
 use commands::process_roblox::kill_roblox_if_open;
+#[cfg(target_os = "windows")]
 use commands::properity::{read_fullscreen_prop, set_fullscreen_prop};
-use commands::rename::rename;
 use commands::roblox_deployment::{
     get_best_region, get_download_deployment_urls, get_latest_version_player,
     get_latest_version_studio,
 };
+#[cfg(target_os = "windows")]
 use commands::shortcuts::new_shorcut;
 
 use commands::watcher::types::ServerInfoState;
@@ -34,13 +45,18 @@ use tauri_plugin_store::StoreExt;
 use tauri_plugin_updater::UpdaterExt;
 mod commands;
 use crate::rpc::kill_rpc;
+use crypto_state::CryptoState;
 use rpc::RpcState;
 use simple_i18n::I18n;
 
 pub mod collector;
+mod crypto_state;
+#[cfg(target_os = "windows")]
 pub mod interactive;
 pub mod island;
+#[cfg(target_os = "windows")]
 pub mod larp_focuser;
+#[cfg(target_os = "windows")]
 pub mod priorites;
 pub mod rd;
 pub mod rpc;
@@ -88,6 +104,7 @@ fn handle_received_url(app_handle: &tauri::AppHandle, url: String) {
 }
 
 fn setup_deep_links(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
     app.deep_link().register_all()?;
 
     let app_handle = app.handle().clone();
@@ -153,6 +170,9 @@ fn print_debug_info() {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let crypto =
+        CryptoState::new("com.mally.crush", "default_user").expect("failed to init crypto state");
+
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_cache::init())
         .plugin(tauri_plugin_cli::init())
@@ -205,6 +225,7 @@ pub fn run() {
     builder
         .manage(RpcState::new())
         .manage(ServerInfoState(Mutex::new(None)))
+        .manage(crypto)
         .setup(|app| {
             print_debug_info();
 
@@ -235,7 +256,30 @@ pub fn run() {
 
             app.manage(i18n);
 
-            if platform != "windows" {
+            #[cfg(target_os = "macos")]
+            let store = app.store("config.json")?;
+            #[cfg(target_os = "macos")]
+            let warn_dialog_macos: bool = store
+                .get("warningDialogMacos")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+
+            #[cfg(target_os = "macos")]
+            if platform == "macos" && !warn_dialog_macos{
+
+                app.dialog()
+                    .message("This app has experimental macos support. Please report bugs to our community server if there's any!")
+                    .title("Warning")
+                    .kind(tauri_plugin_dialog::MessageDialogKind::Warning)
+                    .blocking_show();
+
+                store.set("warningDialogMacos", true);
+            }
+
+            #[cfg(target_os = "macos")]
+            store.close_resource();
+
+            if platform == "linux" {
                 app.dialog()
                     .message(format!(
                         "This app can't work on {}. However, we will have plans for {}.",
@@ -364,9 +408,11 @@ pub fn run() {
             get_download_deployment_urls,
             get_best_region,
             create_or_focus_window,
+            #[cfg(target_os = "windows")]
             new_shorcut,
             extract_zip,
             extract_files_from_zip,
+            #[cfg(target_os = "windows")]
             launch,
             get_latest_version_player,
             rename,
@@ -376,13 +422,17 @@ pub fn run() {
             set_rpc,
             copy_file,
             join_game,
+            #[cfg(target_os = "windows")]
             export_boostrapconfig,
             get_latest_version_studio,
+            #[cfg(target_os = "windows")]
             set_process_priority,
             close_crash_handler,
             get_gbs,
             write_gbs,
+            #[cfg(target_os = "windows")]
             set_fullscreen_prop,
+            #[cfg(target_os = "windows")]
             read_fullscreen_prop,
             get_csrf_token,
             get_auth_ticket,
@@ -390,11 +440,18 @@ pub fn run() {
             clear_cookies,
             decrypt_cookie_data,
             encrypt_cookie_data,
+            #[cfg(target_os = "macos")]
+            move_app_to_applications,
+            #[cfg(target_os = "macos")]
+            launch_mac_app,
+            #[cfg(target_os = "macos")]
+            write_mac_client_settings,
+            #[cfg(target_os = "macos")]
+            remove_mac_client_settings,
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
-            relaunch_with_admins_perms,
-            check_elevated,
+            get_current_os,
             read_current_cookie,
             join_game_instance,
             kill_roblox_if_open,

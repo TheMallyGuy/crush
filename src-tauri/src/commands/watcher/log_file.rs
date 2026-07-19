@@ -3,6 +3,9 @@ use super::line::handle_line;
 use super::state::WatcherState;
 use crate::rpc::{apply_rpc, RpcState};
 use crate::simple_i18n::I18n;
+#[cfg(target_os = "macos")]
+use dirs::home_dir;
+#[cfg(target_os = "windows")]
 use dirs_next::data_local_dir;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Seek, SeekFrom};
@@ -10,9 +13,16 @@ use std::path::PathBuf;
 use tauri::{AppHandle, Manager};
 
 pub(super) fn get_latest_log(vng: bool) -> Option<PathBuf> {
+    #[cfg(target_os = "windows")]
     let dir = data_local_dir()?
         .join(if vng { "RobloxPCVNG" } else { "Roblox" })
         .join("logs");
+
+    #[cfg(target_os = "macos")]
+    let dir = home_dir()?
+        .join("Roblox")
+        .join("logs");
+
     std::fs::read_dir(dir)
         .ok()?
         .filter_map(|e| {

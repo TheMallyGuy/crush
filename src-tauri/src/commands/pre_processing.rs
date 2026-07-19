@@ -1,10 +1,13 @@
+#[cfg(target_os = "windows")]
 use crate::priorites::set_priority;
 use sysinfo::{ProcessesToUpdate, System};
+#[cfg(target_os = "windows")]
 use windows::Win32::System::Threading::{
     ABOVE_NORMAL_PRIORITY_CLASS, BELOW_NORMAL_PRIORITY_CLASS, HIGH_PRIORITY_CLASS,
     NORMAL_PRIORITY_CLASS, PROCESS_CREATION_FLAGS, REALTIME_PRIORITY_CLASS,
 };
 
+#[cfg(target_os = "windows")]
 pub fn parse_priority(name: &str) -> Option<PROCESS_CREATION_FLAGS> {
     match name {
         "BELOW_NORMAL_PRIORITY_CLASS" => Some(BELOW_NORMAL_PRIORITY_CLASS),
@@ -16,11 +19,12 @@ pub fn parse_priority(name: &str) -> Option<PROCESS_CREATION_FLAGS> {
     }
 }
 
+#[cfg(target_os = "windows")]
 #[tauri::command]
 pub async fn set_process_priority(priority: &str) -> Result<(), String> {
     log::info!("priority called");
-    let priority = parse_priority(priority)
-        .ok_or_else(|| format!("Unknown priority class: {}", priority))?;
+    let priority =
+        parse_priority(priority).ok_or_else(|| format!("Unknown priority class: {}", priority))?;
     let mut sys = System::new_all();
 
     sys.refresh_processes(ProcessesToUpdate::All, true);

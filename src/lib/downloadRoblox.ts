@@ -2,8 +2,9 @@ import { fetch } from '@tauri-apps/plugin-http'
 import { invoke } from '@tauri-apps/api/core'
 import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
+import { arch } from '@tauri-apps/plugin-os'
 import { exists, BaseDirectory, writeFile, mkdir, readDir, remove } from '@tauri-apps/plugin-fs'
-import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
+import { appCacheDir, appDataDir, homeDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
 
@@ -74,35 +75,78 @@ const studioExtractRoots: Record<string, string> = {
     'studiocontent-textures.zip': 'StudioContent/textures/',
 }
 
+const macPlayerExtractRoots: Record<string, string> = {
+    'robloxplayer.zip': '',
+}
+
+const macStudioExtractRoots: Record<string, string> = {
+    'robloxstudioapp.zip': '',
+}
+
 export type AppType = 'player' | 'studio'
 
-function getExtractRoots(appType: AppType): Record<string, string> {
+function getExtractRoots(appType: AppType, isMac = false): Record<string, string> {
+    if (isMac) {
+        return appType === 'studio' ? macStudioExtractRoots : macPlayerExtractRoots
+    }
     return appType === 'studio' ? studioExtractRoots : playerExtractRoots
 }
 
-function getSortedExtractRoots(appType: AppType) {
-    return Object.entries(getExtractRoots(appType)).sort(
+function getSortedExtractRoots(appType: AppType, isMac = false) {
+    return Object.entries(getExtractRoots(appType, isMac)).sort(
         (a, b) => b[1].length - a[1].length
     )
 }
 
-function getLowercaseExtractRoots(appType: AppType) {
-    return Object.entries(getExtractRoots(appType)).map(([k, v]) => [
+function getLowercaseExtractRoots(appType: AppType, isMac = false) {
+    return Object.entries(getExtractRoots(appType, isMac)).map(([k, v]) => [
         k.toLowerCase(),
         v,
     ])
 }
 
-// Keep legacy non-parameterised references for Player (backwards compat)
 const sortedExtractRoots = Object.entries(playerExtractRoots).sort(
     (a, b) => b[1].length - a[1].length
 )
 
 import type { ProgressEvent, ProgressCallback, Installation, Versions, InstallationEntry } from './types'
+import { operating_system } from './stores/operating_system.svelte'
 
 function getAppFolder(appType: AppType, vng?: boolean): string {
     if (appType === 'studio') return 'Studio'
     return vng ? 'PlayerVNG' : 'Player'
+}
+
+function isMacOs(): boolean {
+    return get(operating_system) === 'macos'
+}
+
+function getMacAppNames(appType: AppType): { appName: string; destName: string } {
+    return appType === 'studio'
+        ? { appName: 'RobloxStudioApp.app', destName: 'RobloxStudio.app' }
+        : { appName: 'RobloxPlayer.app', destName: 'Roblox.app' }
+}
+
+function getVersionStoreKey(appType: AppType): string {
+    return appType === 'studio' ? 'studio-versions.json' : 'versions.json'
+}
+
+async function getVersionStoreForAppType(appType: AppType): Promise<Store> {
+    return load(getVersionStoreKey(appType))
+}
+
+const noopProgress: ProgressCallback = () => { }
+
+
+async function getMacActivatedVersion(appType: AppType): Promise<string | null> {
+    const versionStore = await getVersionStoreForAppType(appType)
+    return (await versionStore.get<string>('macActivatedVersion')) ?? null
+}
+
+async function markMacVersionActivated(appType: AppType, versionHash: string) {
+    const versionStore = await getVersionStoreForAppType(appType)
+    await versionStore.set('macActivatedVersion', versionHash)
+    await versionStore.save()
 }
 
 async function reindexVersions(appType: AppType = 'player', vng?: boolean): Promise<InstallationEntry[]> {
@@ -132,11 +176,7 @@ async function reindexVersions(appType: AppType = 'player', vng?: boolean): Prom
         if (!entry.name || typeof entry.name !== 'string') continue
         if (!entry.name.startsWith('version-')) continue
 
-        const exePath = await join(versionsDir, entry.name, exeName)
-
-        const appSettingsPath = await join(versionsDir, entry.name, 'AppSettings.xml')
-
-        const isComplete = await exists(exePath) && await exists(appSettingsPath)
+        const isComplete = await isVersionFolderComplete(versionsDir, entry.name, appType, exeName)
 
         if (!isComplete) {
             info(`removing incomplete installation: ${entry.name}`)
@@ -169,6 +209,27 @@ async function reindexVersions(appType: AppType = 'player', vng?: boolean): Prom
     await versionStore.save()
 
     return validEntries
+}
+
+async function isVersionFolderComplete(
+    versionsDir: string,
+    versionHash: string,
+    appType: AppType,
+    exeName: string
+): Promise<boolean> {
+    if (isMacOs()) {
+        const { appName } = getMacAppNames(appType)
+        const appPath = await join(versionsDir, versionHash, appName)
+        if (await exists(appPath)) return true
+
+
+        const activated = await getMacActivatedVersion(appType)
+        return activated === versionHash
+    }
+
+    const exePath = await join(versionsDir, versionHash, exeName)
+    const appSettingsPath = await join(versionsDir, versionHash, 'AppSettings.xml')
+    return (await exists(exePath)) && (await exists(appSettingsPath))
 }
 
 async function ensureDir(path: string) {
@@ -255,20 +316,39 @@ async function extractAll(
     onProgress: ProgressCallback,
     appType: AppType = 'player',
     vng?: boolean
-) {
+): Promise<string> {
     const cacheDir = await appCacheDir()
     const dataDir = await appDataDir()
     const appFolder = getAppFolder(appType, vng)
     const installRoot = await join(dataDir, appFolder, 'Versions', versionHash)
     await ensureDir(installRoot)
 
-    const lowercaseRoots = getLowercaseExtractRoots(appType)
+    const isMac = isMacOs()
+    const lowercaseRoots = getLowercaseExtractRoots(appType, isMac)
     const total = lowercaseRoots.length
 
     for (const [index, [zipName, dest]] of lowercaseRoots.entries()) {
         await extractIndividualZip(zipName, dest, installRoot, cacheDir)
         onProgress({ type: 'extract', file: zipName, done: index + 1, total })
     }
+
+    return installRoot
+}
+
+
+async function installMacApp(
+    installRoot: string,
+    appType: AppType,
+    onProgress: ProgressCallback
+) {
+    const { appName, destName } = getMacAppNames(appType)
+
+    onProgress({ type: 'status', message: get(_)('typescript.downloader.movingToApplications') })
+
+    await invoke('move_app_to_applications', {
+        sourcePath: await join(installRoot, appName),
+        destName,
+    })
 }
 
 async function checkForUpdates(
@@ -342,9 +422,18 @@ async function getInstallationUrls(
         message: get(_)('typescript.downloader.fetchingUrls'),
     })
 
-    const useVng = vng === true
+    const useMac = isMacOs()
+
+    let useArm64 = true
+    if (useMac) {
+        useArm64 = (await arch()) === 'aarch64'
+    }
+
+    info(`${useMac}`)
 
     const assetsUrls: string[] = await invoke('get_download_deployment_urls', {
+        macos: useMac,
+        arm64: useArm64,
         player: appType === 'player',
         region: bestRegion,
         version: version || null,
@@ -358,6 +447,7 @@ async function getInstallationUrls(
     return assetsUrls
 }
 
+
 async function completeInstallation(
     onProgress: ProgressCallback,
     versionHash: string,
@@ -368,13 +458,18 @@ async function completeInstallation(
         type: 'status',
         message: get(_)('typescript.downloader.extractingFiles'),
     })
-    await extractAll(versionHash, onProgress, appType, vng)
+    const installRoot = await extractAll(versionHash, onProgress, appType, vng)
 
-    onProgress({
-        type: 'status',
-        message: get(_)('typescript.downloader.xmlWriting'),
-    })
-    await writeAppSettings(versionHash, appType, vng)
+    if (isMacOs()) {
+        await installMacApp(installRoot, appType, onProgress)
+        await markMacVersionActivated(appType, versionHash)
+    } else {
+        onProgress({
+            type: 'status',
+            message: get(_)('typescript.downloader.xmlWriting'),
+        })
+        await writeAppSettings(versionHash, appType, vng)
+    }
 }
 
 async function performFullInstallation(
@@ -414,10 +509,10 @@ async function checkInstallationExists(
     if (!version || typeof version !== 'string') return false
     const dataDir = await appDataDir()
     const appFolder = getAppFolder(appType, vng)
+    const versionsDir = await join(dataDir, appFolder, 'Versions')
     const exeName =
         appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
-    const exePath = await join(dataDir, appFolder, 'Versions', version, exeName)
-    return await exists(exePath)
+    return await isVersionFolderComplete(versionsDir, version, appType, exeName)
 }
 
 export async function downloadRoblox(
@@ -527,12 +622,40 @@ async function saveVersion(
     onProgress({ type: 'status', message: get(_)('typescript.downloader.installationComplete') })
 }
 
+async function ensureMacAppActivated(
+    installPath: string,
+    versionHash: string,
+    appType: AppType
+): Promise<boolean> {
+    const activated = await getMacActivatedVersion(appType)
+
+    if (activated === versionHash) {
+        return true
+    }
+
+    const { appName } = getMacAppNames(appType)
+
+    const bundlePath = await join(installPath, appName)
+
+    if (!(await exists(bundlePath))) {
+        return false
+    }
+
+    await installMacApp(installPath, appType, noopProgress)
+
+    await markMacVersionActivated(appType, versionHash)
+
+    return true
+}
+
+
 export function getPackageForFile(
     relativePath: string,
     appType: AppType = 'player'
 ): string | null {
+    const isMac = isMacOs()
     const normalized = relativePath.replace(/\\/g, '/').toLowerCase()
-    const sorted = getSortedExtractRoots(appType)
+    const sorted = getSortedExtractRoots(appType, isMac)
     const [packageName] =
         sorted.find(
             ([, prefix]) => prefix === '' || normalized.startsWith(prefix.toLowerCase())
@@ -601,7 +724,8 @@ export function resolvePackageInfo(
     isPackageInput: boolean,
     appType: AppType = 'player'
 ) {
-    const extractRoots = getExtractRoots(appType)
+    const isMac = isMacOs()
+    const extractRoots = getExtractRoots(appType, isMac)
 
     if (isPackageInput) {
         return {
@@ -611,7 +735,7 @@ export function resolvePackageInfo(
     }
 
     const normalized = input.replace(/\\/g, '/').toLowerCase()
-    const sorted = getSortedExtractRoots(appType)
+    const sorted = getSortedExtractRoots(appType, isMac)
     const [packageName, prefix] =
         sorted.find(
             ([, p]) => p === '' || normalized.startsWith(p.toLowerCase())
@@ -648,21 +772,34 @@ export async function getCurrentInstallation(appType: AppType = 'player'): Promi
     installPath: string
     exists: boolean
 } | null> {
-    const storeKey = appType === 'studio' ? 'studio-versions.json' : 'versions.json'
-    const versionStore = await load(storeKey)
+    const versionStore = await getVersionStoreForAppType(appType)
     const versionList = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
-    const latest = versionList.filter(e => e.appType === appType).at(-1)
+    const entriesForType = versionList.filter(e => e.appType === appType)
+
+    const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
+    const latest =
+        (currentlyUsing?.appType === appType
+            ? (entriesForType.find(e => e.id === currentlyUsing.id) ?? currentlyUsing)
+            : undefined) ?? entriesForType.at(-1)
 
     if (!latest) return null
 
-
     const dataDir = await appDataDir()
     const appFolder = getAppFolder(appType, latest.channel === 'vng')
-    const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const installPath = await join(dataDir, appFolder, 'Versions', latest.versionHash)
+
+    if (isMacOs()) {
+        const installExists = await ensureMacAppActivated(installPath, latest.versionHash, appType)
+        return {
+            version: latest.versionHash,
+            installPath,
+            exists: installExists,
+        }
+    }
+
+    const exeName = appType === 'studio' ? 'RobloxStudioBeta.exe' : 'RobloxPlayerBeta.exe'
     const exePath = await join(installPath, exeName)
     const installExists = await exists(exePath)
-
 
     return {
         version: latest.versionHash,

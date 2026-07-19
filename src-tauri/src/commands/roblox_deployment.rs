@@ -3,11 +3,13 @@ use crate::rd::{best_region, get_download_urls, latest_version_player, latest_ve
 #[tauri::command]
 pub async fn get_download_deployment_urls(
     player: bool,
+    macos: Option<bool>,
+    arm64: Option<bool>,
     region: Option<&str>,
     version: Option<&str>,
     vng: bool,
 ) -> Result<Vec<String>, String> {
-    let urls = get_download_urls(player, version, region, vng)
+    let urls = get_download_urls(player, macos, arm64, version, region, vng)
         .await
         .map_err(|e| e.to_string())?;
 
@@ -30,7 +32,9 @@ pub async fn get_best_region() -> String {
 
 #[tauri::command]
 pub async fn get_latest_version_player() -> Result<String, String> {
-    latest_version_player()
+    let is_macos = cfg!(target_os = "macos");
+
+    latest_version_player(Some(is_macos))
         .await
         .map(|v| v.client_version_upload)
         .map_err(|e| e.to_string())

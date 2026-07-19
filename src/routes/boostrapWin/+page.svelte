@@ -26,6 +26,7 @@
     import { loadFlag } from '$lib/fastflag/fastflagManagement'
     import Text from '$lib/components/molecules/Text.svelte'
     import type { ServerManagementData } from '$lib/stores/serverManagement.svelte'
+    import { operating_system } from '$lib/stores/operating_system.svelte'
 
     let state: ThemeState | null = null
     let windowReady = false
@@ -210,9 +211,12 @@
                 await sleep(1000)
                 await invoke('watch_logs', { isVng: installation?.vng })
                 await sleep(3000)
-                await invoke('set_process_priority', {
-                    priority: integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
-                })
+                if ($operating_system === 'windows') {
+                    await invoke('set_process_priority', {
+                        priority:
+                            integrations?.priority ?? 'NORMAL_PRIORITY_CLASS',
+                    })
+                }
                 await sleep(3000)
 
                 if (integrations?.closeCrashHandler) {

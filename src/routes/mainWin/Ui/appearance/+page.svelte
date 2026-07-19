@@ -1,32 +1,21 @@
 <script lang="ts">
     import {
-        loadThemeFromDialog,
         saveActiveTheme,
         listThemes,
+        loadThemeFromDialog,
         loadThemeFromAppData,
         removeTheme,
     } from '$lib/theme/themeLoader'
     import { _ } from 'svelte-i18n'
     import { themeStore } from '$lib/theme/themeStore'
     import { onMount } from 'svelte'
-    import {
-        Brush,
-        Trash2,
-        Plus,
-        Check,
-        RotateCcw,
-        Image as ImageIcon,
-    } from '@lucide/svelte'
+    import { Brush, Trash2, Plus, Check, RotateCcw } from '@lucide/svelte'
     import ExpandableSettingCard from '$lib/components/molecules/ExpandableSettingCard.svelte'
     import Dropdown from '$lib/components/molecules/Dropdown.svelte'
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { load } from '@tauri-apps/plugin-store'
-    import {
-        background,
-        type BackgroundType,
-    } from '$lib/stores/background.svelte'
 
     type State = 'idle' | 'loading' | 'error'
 
@@ -49,43 +38,6 @@
     ]
 
     let isInitialized = false
-
-    const backgroundTypeOptions = [
-        {
-            value: 'default',
-            label: $_('pages.appearance.backgroundCard.dropdown.default'),
-        },
-        {
-            value: 'color',
-            label: $_('pages.appearance.backgroundCard.dropdown.color'),
-        },
-        {
-            value: 'image',
-            label: $_('pages.appearance.backgroundCard.dropdown.image'),
-        },
-    ]
-
-    let bgType: BackgroundType = 'default'
-    let bgColor = '#0a0a0a'
-    let bgInitialized = false
-
-    async function pickBackgroundImage() {
-        await background.pickImage()
-        bgType = background.type
-    }
-
-    let colorTimer: ReturnType<typeof setTimeout> | undefined
-    function onColorInput(value: string) {
-        bgColor = value
-        bgType = 'color'
-        clearTimeout(colorTimer)
-        colorTimer = setTimeout(() => background.setColor(value), 150)
-    }
-
-    // Persist when the dropdown type changes (after initial sync)
-    $: if (bgInitialized && bgType !== background.type) {
-        background.setType(bgType)
-    }
 
     async function refreshThemes() {
         themes = await listThemes()
@@ -157,12 +109,6 @@
             details: $_('rpc.general'),
             stateText: $_('rpc.appearance'),
         })
-        ;(async () => {
-            if (!background.loaded) await background.init()
-            bgType = background.type
-            bgColor = background.color
-            bgInitialized = true
-        })()
 
         let unsub: (() => void) | undefined
         let isMounted = true
@@ -212,21 +158,21 @@
             {/snippet}
 
             {#snippet action()}
-            <div>
-                {#if themeType === 'custom'}
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        class="h-8 w-8 !p-0"
-                        onclick={(e) => {
-                            e.stopPropagation()
-                            themeType = 'default'
-                        }}
-                    >
-                        <RotateCcw size={16} />
-                    </Button>
-                {/if}
-            </div>
+                <div>
+                    {#if themeType === 'custom'}
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            class="h-8 w-8 !p-0"
+                            onclick={(e) => {
+                                e.stopPropagation()
+                                themeType = 'default'
+                            }}
+                        >
+                            <RotateCcw size={16} />
+                        </Button>
+                    {/if}
+                </div>
             {/snippet}
 
             <div class="flex flex-col gap-4">
@@ -356,72 +302,6 @@
                             />
                         </svg>
                         <span>{error}</span>
-                    </div>
-                {/if}
-            </div>
-        </ExpandableSettingCard>
-
-        <ExpandableSettingCard
-            title={$_('pages.appearance.backgroundCard.title')}
-            description={$_('pages.appearance.backgroundCard.description')}
-            isOpen={bgType !== 'default'}
-        >
-            {#snippet iconSlot()}
-                <ImageIcon />
-            {/snippet}
-
-            {#snippet action()}
-            <div>
-                {#if bgType !== 'default'}
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        class="h-8 w-8 !p-0"
-                        onclick={(e) => {
-                            e.stopPropagation()
-                            bgType = 'default'
-                        }}
-                    >
-                        <RotateCcw size={16} />
-                    </Button>
-                {/if}
-            </div>
-            {/snippet}
-
-            <div class="flex flex-col gap-4">
-                <Dropdown bind:value={bgType} options={backgroundTypeOptions} />
-
-                {#if bgType === 'color'}
-                    <div class="flex items-center gap-3">
-                        <input
-                            type="color"
-                            value={bgColor}
-                            oninput={(e) =>
-                                onColorInput(e.currentTarget.value)}
-                            class="h-10 w-16 cursor-pointer bg-transparent border border-stone-800 p-1"
-                            aria-label={$_(
-                                'pages.appearance.backgroundCard.colorLabel'
-                            )}
-                        />
-                        <Textbox
-                            bind:value={bgColor}
-                            fullWidth={false}
-                            containerClass="w-32"
-                            class="font-mono"
-                            oninput={(v) => onColorInput(String(v))}
-                        />
-                    </div>
-                {/if}
-
-                {#if bgType === 'image'}
-                    <div class="flex flex-col gap-3">
-                        <button
-                            onclick={pickBackgroundImage}
-                            class="flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 transition-colors uppercase tracking-wider font-semibold whitespace-nowrap"
-                        >
-                            <Plus size={14} />
-                            {$_('pages.appearance.backgroundCard.chooseImage')}
-                        </button>
                     </div>
                 {/if}
             </div>

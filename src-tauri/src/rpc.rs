@@ -68,7 +68,7 @@ pub async fn apply_rpc_full(
     activity_type: Option<ActivityType>,
     status_display_type: Option<StatusDisplayType>,
     buttons: Option<Vec<(String, String)>>,
-    img_key: Option<&str>
+    img_key: Option<&str>,
 ) -> Result<(), String> {
     if let Some(ref btns) = buttons {
         if btns.len() > 2 {

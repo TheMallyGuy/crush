@@ -72,7 +72,7 @@
 </script>
 
 <aside
-    class="flex flex-col h-screen backdrop-blur-2xl text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
+    class="flex flex-col h-screen text-stone-400 p-2 pt-8 transition-all duration-150 w-16 sm:w-64 border-r border-white/5"
 >
     <div class="flex items-center justify-center sm:justify-start p-2 mb-4">
         <button class="hover:text-stone-100 transition-colors">

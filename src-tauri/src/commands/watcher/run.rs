@@ -1,11 +1,16 @@
 use super::config::integration_enabled;
 use super::log_file::{get_latest_log, maybe_switch_log_file, read_new_lines};
 use super::notifications::sleep_schedule_inner;
-use super::process::{find_hwnd_by_pid, get_roblox_pid, is_roblox_running};
+use super::process::is_roblox_running;
+#[cfg(target_os = "windows")]
+use super::process::{find_hwnd_by_pid, get_roblox_pid};
 use super::state::WatcherState;
+#[cfg(target_os = "windows")]
 use super::window::send_bloxstrap_command;
+#[cfg(target_os = "windows")]
 use crate::larp_focuser::start_larping;
 use crate::rpc::{kill_rpc, RpcState};
+#[cfg(target_os = "windows")]
 use serde_json::Value;
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
@@ -13,6 +18,7 @@ use sysinfo::System;
 use tauri::{AppHandle, Manager};
 use tauri_plugin_store::StoreExt;
 use tokio_util::sync::CancellationToken;
+#[cfg(target_os = "windows")]
 use windows::Win32::Foundation::HWND;
 
 static WATCHER_CANCEL: Mutex<Option<CancellationToken>> = Mutex::new(None);
@@ -66,20 +72,19 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
     let mut was_running = false;
     let store = app.store("config.json").map_err(|e| e.to_string())?;
     let mut last_sleep_check = Instant::now() - Duration::from_secs(61);
-    // throttle expensive operations so they don't run every tick
     let mut last_process_check = Instant::now() - Duration::from_millis(501);
     let mut cached_running = false;
     let mut last_log_dir_check = Instant::now() - Duration::from_secs(3);
     log::info!("watcher is now running");
 
     loop {
-        // full process enumeration is expensive — only do it every 500ms
         if last_process_check.elapsed() >= Duration::from_millis(500) {
             last_process_check = Instant::now();
             cached_running = is_roblox_running(&mut system);
         }
         let running = cached_running;
 
+        #[cfg(target_os = "windows")]
         if running && state.roblox_hwnd.is_none() {
             let roblox_pid = get_roblox_pid(&mut system);
 
@@ -87,6 +92,8 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
                 state.roblox_hwnd = find_hwnd_by_pid(pid);
             }
         }
+
+        #[cfg(target_os = "windows")]
         if let Some(hwnd) = state.roblox_hwnd {
             if integration_enabled(&store, &["optimizer"]) && !state.larp_started {
                 state.larp_started = true;
@@ -100,8 +107,10 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
         }
 
         if was_running && !running {
+            #[cfg(target_os = "windows")]
             if state.window_started {
                 if let Some(hwnd) = state.roblox_hwnd {
+                    #[cfg(target_os = "windows")]
                     send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
                 }
             }
@@ -112,7 +121,6 @@ async fn run_watcher(app: AppHandle, is_vng: bool) -> Result<(), String> {
         was_running = running;
 
         if running {
-            // directory listing is cheap but still unnecessary at 10/s — 2s is plenty
             if last_log_dir_check.elapsed() >= Duration::from_secs(2) {
                 last_log_dir_check = Instant::now();
                 if let Some(path) = get_latest_log(is_vng) {

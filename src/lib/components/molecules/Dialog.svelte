@@ -60,7 +60,7 @@
             transition:fly={{ y: 20, duration: 250, opacity: 0 }}
         >
             <div class="flex items-start justify-between mb-2">
-                <h3 class="text-xl font-bold tracking-tight text-stone-100">
+                <h3 class="text-xl tracking-tight text-stone-100">
                     {title}
                 </h3>
                 <button

@@ -1,11 +1,17 @@
 use std::fs;
 use std::path::PathBuf;
 extern crate dirs;
+#[cfg(target_os = "macos")]
+use dirs::home_dir;
 
 #[tauri::command]
 pub async fn get_local_app(vng: Option<bool>) -> Result<String, String> {
+    #[cfg(target_os = "windows")]
     let mut roblox_path: PathBuf =
         dirs::data_local_dir().ok_or("Could not find local data directory")?;
+
+    #[cfg(target_os = "macos")]
+    let mut roblox_path: PathBuf = home_dir().ok_or("Could not find local data directory")?;
 
     roblox_path.push(if vng.unwrap_or(false) {
         "RobloxPCVNG"
@@ -20,8 +26,12 @@ pub async fn get_local_app(vng: Option<bool>) -> Result<String, String> {
 
 #[tauri::command]
 pub async fn write_local_app(content: String, vng: Option<bool>) -> Result<(), String> {
+    #[cfg(target_os = "windows")]
     let mut roblox_path: PathBuf =
         dirs::data_local_dir().ok_or("Could not find local data directory")?;
+
+    #[cfg(target_os = "macos")]
+    let mut roblox_path: PathBuf = home_dir().ok_or("Could not find local data directory")?;
 
     roblox_path.push(if vng.unwrap_or(false) {
         "RobloxPCVNG"

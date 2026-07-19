@@ -1,3 +1,4 @@
+#[cfg(target_os = "windows")]
 use super::api::fetch_universe_id;
 use super::bloxstrap::on_bloxstrap_rpc;
 use super::config::{config_bool, integration_enabled};
@@ -8,18 +9,21 @@ use super::notifications::{
 use super::patterns::{
     re_bloxstrap_rpc, re_join, re_joined, re_leave, re_private_server_access_code, re_udmux,
 };
+#[cfg(target_os = "windows")]
 use super::png::write_game_permission_png;
 use super::state::WatcherState;
+#[cfg(target_os = "windows")]
 use super::window::{save_window_geometry, send_bloxstrap_command};
 use crate::collector::{end_game_session, log_game, new_game_session, DbConn};
+#[cfg(target_os = "windows")]
 use crate::interactive::find_windows_by_title;
 use crate::rpc::{apply_rpc, RpcState};
 use crate::simple_i18n::I18n;
 use crate::tray::add_menu_item;
 use chrono::Utc;
 use serde_json::{json, Value};
-use tauri::Manager;
 use tauri::AppHandle;
+use tauri::Manager;
 
 pub(super) async fn handle_line(
     app: &AppHandle,
@@ -39,6 +43,7 @@ pub(super) async fn handle_line(
             .unwrap_or(0);
         let join_ip = caps.get(3).map(|m| m.as_str().to_string());
 
+        #[cfg(target_os = "windows")]
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
@@ -109,8 +114,10 @@ pub(super) async fn handle_line(
             log::info!("aborted logging warpped")
         }
 
+        #[cfg(target_os = "windows")]
         if state.window_started {
             if let Some(hwnd) = state.roblox_hwnd {
+                #[cfg(target_os = "windows")]
                 send_bloxstrap_command(hwnd, "StopWindow", Value::Null);
             }
             state.window_started = false;
@@ -162,8 +169,12 @@ async fn on_joined(
     state.activity.in_game = true;
     state.activity.notified = true;
 
-    state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+    #[cfg(target_os = "windows")]
+    {
+        state.roblox_hwnd = find_windows_by_title("Roblox").into_iter().next();
+    }
 
+    #[cfg(target_os = "windows")]
     if let Some(hwnd) = state.roblox_hwnd {
         log::info!("cached Roblox HWND");
 
@@ -192,7 +203,9 @@ async fn on_joined(
             log::warn!("failed to write game permission PNG: {}", e);
         }
 
+        #[cfg(target_os = "windows")]
         save_window_geometry(state);
+        #[cfg(target_os = "windows")]
         send_bloxstrap_command(hwnd, "StartWindow", Value::Null);
         state.window_started = true;
     } else {
