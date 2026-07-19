@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "실행"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "\n\t\t\t\t크러시\t\t\t",
@@ -260,8 +264,8 @@
                 "description": "매우 실험적입니다. Roblox 프로세스 우선순위를 변경합니다. 성능이 향상될 수 있습니다."
             },
             "optimizerCard": {
-                "title": "최적화 도구 활성화",
-                "description": "Roblox가 사용할 수 있는 리소스를 제한하여 최적화합니다. GitHub의 8damon/TASX-Roblox-Optimizer에서 영감을 받았습니다. 요즘은 모든 것이 Rust로 재작성되었습니다."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "전체 화면 최적화 비활성화",
@@ -276,6 +280,14 @@
                 "description": "로블록스 리치 프레즌스를 크러쉬로 교체.",
                 "option1": "사람들이 내 게임에 참여하도록 하세요",
                 "option2": "Roblox 플레이 시 계정 표시"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "게임 기록",

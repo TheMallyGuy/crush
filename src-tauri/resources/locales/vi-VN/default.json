@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Khởi chạy"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Crush",
@@ -260,8 +264,8 @@
                 "description": "ĐANG THỬ NGHIỆM. Thay đổi mức độ ưu tiên của tiến trình Roblox. Có thể tăng hiệu suất."
             },
             "optimizerCard": {
-                "title": "Bật trình tối ưu hóa",
-                "description": "Tối ưu Roblox bằng cách giới hạn tài nguyên sử dụng của nó. Lấy cảm hứng từ cách hoạt động của 8damon/TASX-Roblox-Optimizer trên github. Tất cả ở đây đều viết từ đầu."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Vô hiệu tối ưu hóa toàn màn hình",
@@ -276,6 +280,14 @@
                 "description": "Thay thế trạng thái hoạt động Roblox bằng của Crush.",
                 "option1": "Cho phép mọi người tham gia trò chơi của bạn",
                 "option2": "Hiển thị tài khoản của bạn khi đang chơi Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Lịch sử Trò chơi",

@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Lancement"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Cage de parage",
@@ -260,8 +264,8 @@
                 "description": "EXTRÊMEMENT EXPÉRIMENTAL. Changer la priorité du processus Roblox. Peut améliorer les performances."
             },
             "optimizerCard": {
-                "title": "Activer l'optimiseur",
-                "description": "Optimiser Roblox en limitant les ressources qu'il peut utiliser. Inspiré par le fonctionnement de 8damon/TASX-Roblox-Optimizer sur GitHub. De nos jours, tout est réécrit en Rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Désactiver l'optimisation du plein écran",
@@ -276,6 +280,14 @@
                 "description": "Remplacez le Roblox Rich Presence par Crush's.",
                 "option1": "Laissez les gens se joindre à votre jeu",
                 "option2": "Afficher votre compte lorsque vous jouez à Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Votre historique des jeux",

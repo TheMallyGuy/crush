@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Launch"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Penjat",
@@ -260,8 +264,8 @@
                 "description": "EXTREMADAMENT EXPERIMENTAL. Canvia la prioritat del procés de Roblox. Pot millorar el rendiment."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Desactivar optimització de pantalla completa",
@@ -276,6 +280,14 @@
                 "description": "Substitueix Roblox Rich Presence per Crush's.",
                 "option1": "Deixa que la gent s'uneixi al teu joc",
                 "option2": "Display your account when playing Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "El teu historial de joc",

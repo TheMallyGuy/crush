@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "启动"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "粉碎",
@@ -260,8 +264,8 @@
                 "description": "极度实验性。更改 Roblox 进程优先级。可能提升性能。"
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "禁用全屏优化",
@@ -276,6 +280,14 @@
                 "description": "将Roblox Rich Presence替换为Crush的.",
                 "option1": "让人们加入您的游戏",
                 "option2": "播放Roblox时显示您的帐户"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "您的游戏历史记录",

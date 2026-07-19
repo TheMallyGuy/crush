@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "立ち上げ"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "押しつぶし",
@@ -260,8 +264,8 @@
                 "description": "極めて実験的です。Robloxのプロセス優先度を変更します。パフォーマンスが向上する可能性があります。"
             },
             "optimizerCard": {
-                "title": "オプティマイザーを有効にする",
-                "description": "Robloxが使用できるリソースを制限して最適化します。GitHubの8damon/TASX-Roblox-Optimizerの仕組みに着想を得ました。最近はすべてRustで書き直されています。"
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "全画面表示の最適化を無効化",
@@ -276,6 +280,14 @@
                 "description": "Roblox Rich PresenceをCrushの.",
                 "option1": "他の人にあなたのゲームに参加してもらう",
                 "option2": "Robloxをプレイしているときにアカウントを表示する"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "ゲーム履歴",
