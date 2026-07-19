@@ -4,7 +4,7 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
 import { arch } from '@tauri-apps/plugin-os'
 import { exists, BaseDirectory, writeFile, mkdir, readDir, remove } from '@tauri-apps/plugin-fs'
-import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
+import { appCacheDir, appDataDir, homeDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
 
@@ -648,6 +648,7 @@ async function ensureMacAppActivated(
     return true
 }
 
+
 export function getPackageForFile(
     relativePath: string,
     appType: AppType = 'player'
@@ -775,9 +776,6 @@ export async function getCurrentInstallation(appType: AppType = 'player'): Promi
     const versionList = (await versionStore.get<InstallationEntry[]>('versions')) ?? []
     const entriesForType = versionList.filter(e => e.appType === appType)
 
-    // Prefer whatever the version manager marked as currentlyUsing (this is
-    // the entry the Play button sets) — only fall back to "last in the list"
-    // if that key isn't set yet for this appType.
     const currentlyUsing = await versionStore.get<InstallationEntry>('currentlyUsing')
     const latest =
         (currentlyUsing?.appType === appType

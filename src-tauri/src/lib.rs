@@ -11,7 +11,7 @@ use commands::discord_rpc::set_rpc;
 use commands::fs::{copy_file, rename};
 use commands::gbs_operations::{get_gbs, write_gbs};
 #[cfg(target_os = "macos")]
-use commands::install_roblox_mac::move_app_to_applications;
+use commands::mac_install::move_app_to_applications;
 #[cfg(target_os = "windows")]
 use commands::launch_roblox::launch;
 #[cfg(target_os = "macos")]

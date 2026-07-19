@@ -18,5 +18,7 @@ pub mod roblox_deployment;
 #[cfg(target_os = "windows")]
 pub mod shortcuts;
 
+#[cfg(target_os = "macos")]
+pub mod mac;
 pub mod watcher;
 pub mod window;
