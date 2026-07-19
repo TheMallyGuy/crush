@@ -1,16 +1,19 @@
 <script lang="ts">
     import Button from '$lib/components/atoms/Button.svelte'
     import Textbox from '$lib/components/atoms/Textbox.svelte'
+    import { operating_system } from '$lib/stores/operating_system.svelte'
     import { invoke } from '@tauri-apps/api/core'
     import { appDataDir, join } from '@tauri-apps/api/path'
     import { BaseDirectory, create, exists, mkdir } from '@tauri-apps/plugin-fs'
     import { fetch } from '@tauri-apps/plugin-http'
     import { error, info } from '@tauri-apps/plugin-log'
+    import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
 
     let image = $state(null as string | null)
     let gameId = $state('' as string)
     let status = $state($_('pages.shortcuts.creator.status.idle') as string)
+    let os: string | undefined = $state()
 
     async function getGameUniverse(placeID: number): Promise<number | null> {
         const res = await fetch(
@@ -138,43 +141,53 @@
 
         return () => clearTimeout(timeout)
     })
+
+    onMount(() => {
+        os = $operating_system
+    })
 </script>
 
-<div class="flex flex-col gap-8">
-    <div class="flex items-center justify-between">
-        <div>
-            <h1 class="text-3xl font-bold tracking-tight text-stone-100">
-                {$_('pages.shortcuts.shortcuts')}
-            </h1>
-            <p class="text-stone-400 mt-1">
-                {$_('pages.shortcuts.description')}
-            </p>
-        </div>
-    </div>
-
-    <div
-        class="group relative gap-10 flex w-full flex-row bg-anthracite/40 p-5 transition-all duration-150"
-    >
-        <div class="h-40 w-60 bg-anthracite/40 cursor-target">
-            <img src={image} />
-        </div>
-
-        <div class="flex flex-col w-full gap-5">
-            <Textbox
-                label={$_('pages.shortcuts.creator.gameIdInput')}
-                placeholder=""
-                bind:value={gameId}
-            />
-
-            <div class="flex w-full flex-row gap-5 justify-between relative">
-                <p class="opacity-75 text-xs text-wrap wrap-normal w-2/3">
-                    {status}
+{#if os == 'windows'}
+    <div class="flex flex-col gap-8">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-stone-100">
+                    {$_('pages.shortcuts.shortcuts')}
+                </h1>
+                <p class="text-stone-400 mt-1">
+                    {$_('pages.shortcuts.description')}
                 </p>
+            </div>
+        </div>
 
-                <Button class="" onclick={createShortCut}
-                    >{$_('pages.shortcuts.creator.button')}</Button
+        <div
+            class="group relative gap-10 flex w-full flex-row bg-anthracite/40 p-5 transition-all duration-150"
+        >
+            <div class="h-40 w-60 bg-anthracite/40 cursor-target">
+                <img src={image} />
+            </div>
+
+            <div class="flex flex-col w-full gap-5">
+                <Textbox
+                    label={$_('pages.shortcuts.creator.gameIdInput')}
+                    placeholder=""
+                    bind:value={gameId}
+                />
+
+                <div
+                    class="flex w-full flex-row gap-5 justify-between relative"
                 >
+                    <p class="opacity-75 text-xs text-wrap wrap-normal w-2/3">
+                        {status}
+                    </p>
+
+                    <Button class="" onclick={createShortCut}
+                        >{$_('pages.shortcuts.creator.button')}</Button
+                    >
+                </div>
             </div>
         </div>
     </div>
-</div>
+{:else}
+    {$_('crossplatform.notAvailableWindowsPlanned')}
+{/if}
