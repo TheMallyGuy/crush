@@ -254,6 +254,29 @@ pub fn run() {
 
             app.manage(i18n);
 
+            #[cfg(target_os = "macos")]
+            let store = app.store("config.json")?;
+            #[cfg(target_os = "macos")]
+            let warn_dialog_macos: bool = store
+                .get("warningDialogMacos")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+
+            #[cfg(target_os = "macos")]
+            if platform == "macos" && warn_dialog_macos{
+
+                app.dialog()
+                    .message("This app has experimental macos support. Please report bugs to our community server if there's any!")
+                    .title("Warning")
+                    .kind(tauri_plugin_dialog::MessageDialogKind::Warning)
+                    .blocking_show();
+
+                store.set("warningDialogMacos", true);
+            }
+
+            #[cfg(target_os = "macos")]
+            store.close_resource();
+
             if platform == "linux" {
                 app.dialog()
                     .message(format!(
