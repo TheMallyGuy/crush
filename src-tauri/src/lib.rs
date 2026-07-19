@@ -10,13 +10,15 @@ use commands::crush::{crush, get_current_os};
 use commands::discord_rpc::set_rpc;
 use commands::fs::{copy_file, rename};
 use commands::gbs_operations::{get_gbs, write_gbs};
-#[cfg(target_os = "macos")]
-use commands::mac_install::move_app_to_applications;
 #[cfg(target_os = "windows")]
 use commands::launch_roblox::launch;
 #[cfg(target_os = "macos")]
 use commands::launch_roblox::launch_mac_app;
 use commands::local_app_settings::{get_local_app, write_local_app};
+#[cfg(target_os = "macos")]
+use commands::mac::{
+    move_app_to_applications, remove_mac_client_settings, write_mac_client_settings,
+};
 use commands::mods::apply_mod;
 use commands::pre_processing::close_crash_handler;
 #[cfg(target_os = "windows")]
@@ -442,6 +444,10 @@ pub fn run() {
             move_app_to_applications,
             #[cfg(target_os = "macos")]
             launch_mac_app,
+            #[cfg(target_os = "macos")]
+            write_mac_client_settings,
+            #[cfg(target_os = "macos")]
+            remove_mac_client_settings,
             quick_sign_poll,
             quick_sign_create,
             validate_roblox_cookie,
