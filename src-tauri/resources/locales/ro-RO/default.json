@@ -50,93 +50,7 @@
             "config": "Configurație",
             "discord": "Comunitatea noastră",
             "funFacts": {
-                "fallback": "This suppose to display fun facts, but something broke down...",
-                "items": [
-                    "Hello",
-                    "Have you ever tried getting your crush like you?",
-                    "roblox vn community rn:",
-                    "Hello everybody",
-                    "we are all slandering vng",
-                    "leventgameing is the GOAT",
-                    "eek!",
-                    "Loading malware....",
-                    "Deleting system32....",
-                    "I suppose",
-                    "Are you reading this yes?",
-                    "Say hi to the new miawuawua",
-                    "I have a crush but she didnt know it yet",
-                    "What's a high tier app look like to a low tier boostraper?",
-                    "Let's make crush mainstream",
-                    "meow",
-                    "100 cp fans vs happiness",
-                    "Everything but adding Server region selection to crush",
-                    "\"I have crush, you are not\"",
-                    "i am really sorry about that",
-                    "binary (10010100101) non-binary (HelloWorld\"(Print)\")",
-                    "im adding an injector next week",
-                    "successfully installed c++ on your machine",
-                    "you know what? i also installed c# on your machine!",
-                    "Having a dumb person around proved to expand expand a person's lifespan. Thanks for being here!",
-                    "🐘",
-                    "ily",
-                    "me updating 100 billons updates to crush",
-                    "Join our community server!",
-                    "I've detected your homework folder over 10 TB, whats going on there?",
-                    "Big thanks for bratic for promoting crush",
-                    "ouh shii 👀👀",
-                    "You're cute lowk",
-                    "Have you ever have a dessert",
-                    "fym ouh shii 😭😭",
-                    "i know where you are",
-                    "collect my lost souls",
-                    "keep yourself safe",
-                    "i have food the other day its was good",
-                    "\"Quick doctor help him!\" \" What is his type? \" \" He's into mommies \" \" ??? 😭😭 \" ",
-                    "Tell your crush to use crush",
-                    "\"claude know all my api keys\"",
-                    "DM mally for daily instagram reels",
-                    "\"I wish an older woman groomed me when I was a teen maybe I wouldn’t be so awkward around women then\"",
-                    "ALT + F4 for free robux",
-                    "local bars hate me when i pull this move",
-                    "duh",
-                    "This text can be funny sometimes",
-                    "Ocean Dih",
-                    "Think like an engineer",
-                    "i hope your day is better",
-                    "Thank you John C. Rush",
-                    "Im gonna murder all my mods",
-                    "Mally think he is tuff but im tuffer, Sigma sigma boy",
-                    "im gooning to find you bro",
-                    "go to sleep cute boy",
-                    "Can you build crush in build a boat?",
-                    "\"eat poop\" - 0xf9",
-                    "we may now kiss",
-                    "fuck you :3",
-                    "This is a fun fact",
-                    "Make lil crushies with your crush gng 💔🥀",
-                    "Crush started its development on March, 14 2026, 10 days after Mally's birthday!",
-                    "Shoutout to alexdahumbleone",
-                    "infinity update ahh",
-                    "stop larping python in your bio that is not tuff",
-                    "thanks for using crush bro you're so tuff",
-                    ">be me",
-                    "\"kernal cheats using python\" 😭😭😭😭",
-                    "Something is coming in 3 days.",
-                    "what the fu-",
-                    "these text are mostly qouted from discord",
-                    "Thank you Mr John C. Rush thanks for you legacy",
-                    "they are calling",
-                    "You have 10+ messages pending.",
-                    "its so cool",
-                    "i WILL eat you",
-                    "This is crush!",
-                    "Hello gamers",
-                    "BRO BE HATING ON ANYTHING 😭😭",
-                    "Also try out Bloxstrap",
-                    "Also try out Froststrap",
-                    "Also try out Voidstrap",
-                    "Also try out Fishstrap"
-                ]
+                "fallback": "This suppose to display fun facts, but something went wrong..."
             }
         },
         "boostrapWin": {
@@ -206,47 +120,6 @@
                 "description": "This swifttunnel integration is unoffcial. Although we used the default SDK forked it synced with the latest app to be used with crush. Please dont complain Swifttunnel with us.",
                 "confirm": "Got it!"
             },
-            "swiftTunnel": {
-                "title": "SwiftTunnel",
-                "description": "Configure SwiftTunnel right in crush.",
-                "back": "Back",
-                "notLoggedIn": "You're not logged in.",
-                "loginTimeout": "Login timed out. Please try again.",
-                "loadingMessage": "Please continue in your browser. Auto-cancels after 1 min.",
-                "loginButton": "Login via browser",
-                "enableTunnelingCard": {
-                    "title": "Enable Tunneling",
-                    "description": "Enable tunneling to route Roblox through the VPN"
-                },
-                "disconnectWhenRobloxIsClosed": {
-                    "title": "Disconnect on Roblox is closed",
-                    "description": "Option to kill SwiftTunnel when roblox is closed"
-                },
-                "multipleAssetsThoughRelays": {
-                    "title": "Route assets to multiple relays",
-                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
-                },
-                "enableRoutingCard": {
-                    "title": "Enable Roblox Routing",
-                    "description": "Route all Roblox API requests through the VPN. This can be used to evade blocked games in some countries."
-                },
-                "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
-                },
-                "enablePartialCountryBanCard": {
-                    "title": "Bypass Partial Ban",
-                    "description": "Relays only Roblox control-plane traffic so blocked games appear and join. Gameplay UDP stays direct so you keep your real in-game ping. Use this if only specific games are blocked in your country (e.g. Vietnam)."
-                },
-                "preferredRegionCard": {
-                    "title": "Preferred Region",
-                    "description": "Configure your preferred region"
-                },
-                "serverList": {
-                    "title": "Server List",
-                    "empty": "No servers available."
-                }
-            },
             "activityWatcherCard": {
                 "title": "Observator Activități",
                 "description": "Urmărește activitatea ta pe Roblox. Unele caracteristici sunt necesare pentru a fi activate."
@@ -261,7 +134,7 @@
             },
             "processPriorityCard": {
                 "title": "Process Priority",
-                "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
+                "description": "Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
                 "title": "Trim memmory when not focused",
@@ -298,18 +171,6 @@
                 "title": "Manipularea Ferestrei (API anterior interactiv)",
                 "description": "Permiteți jocurilor acceptate să vă mute fereastra, să vă redimensioneze, să notificați și să interacționați cu hardware-ul. Acceptă doar jocurile cu manipularea ferestrei - nu funcționează toate jocurile. Inspirate prin modul în care funcționează BloxstrapRPC & Funkstrap.",
                 "button": "Deschide"
-            },
-            "roValraCard": {
-                "title": "O mai bună potrivire cu RoValra",
-                "description": "Zdrobirea are o integrare integratoare. Se aplică Politica de confidenţialitate a RoValra.",
-                "button": "Deschide"
-            },
-            "roValra": {
-                "description": "Configurare",
-                "joinServerForYouCard": {
-                    "title": "Lăsați Zdrobirea să se alăture unui server pentru tine",
-                    "description": "În loc de potrivire Roblox, vom folosi API-ul RoValra pentru a găsi cel mai bun server."
-                }
             },
             "gameHistory": {
                 "title": "Istoricul jocurilor",
@@ -507,7 +368,7 @@
             "preset": {
                 "preset": "Presetări",
                 "description": "Folosește presetările noastre rapide încorporate.",
-                "disableFastflag": {
+                "disableFastFlag": {
                     "title": "Disable Fastflag",
                     "description": "Disable Fastflag."
                 },
