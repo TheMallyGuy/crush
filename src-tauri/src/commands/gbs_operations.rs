@@ -4,7 +4,6 @@ extern crate dirs;
 #[cfg(not(target_os = "windows"))]
 use dirs::home_dir;
 
-
 #[tauri::command]
 pub async fn get_gbs(vng: Option<bool>) -> Result<String, String> {
     #[cfg(target_os = "windows")]

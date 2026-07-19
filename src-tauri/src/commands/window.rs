@@ -40,7 +40,12 @@ pub async fn create_or_focus_window(
 
 #[command]
 pub fn get_server_info(app: AppHandle) -> Option<EmitServerInfomation> {
-    app.state::<ServerInfoState>().inner().0.lock().ok()?.clone()
+    app.state::<ServerInfoState>()
+        .inner()
+        .0
+        .lock()
+        .ok()?
+        .clone()
 }
 
 #[command]
