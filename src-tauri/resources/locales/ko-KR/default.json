@@ -50,93 +50,7 @@
             "config": "구성",
             "discord": "우리 커뮤니티",
             "funFacts": {
-                "fallback": "This suppose to display fun facts, but something broke down...",
-                "items": [
-                    "Hello",
-                    "Have you ever tried getting your crush like you?",
-                    "roblox vn community rn:",
-                    "Hello everybody",
-                    "we are all slandering vng",
-                    "leventgameing is the GOAT",
-                    "eek!",
-                    "Loading malware....",
-                    "Deleting system32....",
-                    "I suppose",
-                    "Are you reading this yes?",
-                    "Say hi to the new miawuawua",
-                    "I have a crush but she didnt know it yet",
-                    "What's a high tier app look like to a low tier boostraper?",
-                    "Let's make crush mainstream",
-                    "meow",
-                    "100 cp fans vs happiness",
-                    "Everything but adding Server region selection to crush",
-                    "\"I have crush, you are not\"",
-                    "i am really sorry about that",
-                    "binary (10010100101) non-binary (HelloWorld\"(Print)\")",
-                    "im adding an injector next week",
-                    "successfully installed c++ on your machine",
-                    "you know what? i also installed c# on your machine!",
-                    "Having a dumb person around proved to expand expand a person's lifespan. Thanks for being here!",
-                    "🐘",
-                    "ily",
-                    "me updating 100 billons updates to crush",
-                    "Join our community server!",
-                    "I've detected your homework folder over 10 TB, whats going on there?",
-                    "Big thanks for bratic for promoting crush",
-                    "ouh shii 👀👀",
-                    "You're cute lowk",
-                    "Have you ever have a dessert",
-                    "fym ouh shii 😭😭",
-                    "i know where you are",
-                    "collect my lost souls",
-                    "keep yourself safe",
-                    "i have food the other day its was good",
-                    "\"Quick doctor help him!\" \" What is his type? \" \" He's into mommies \" \" ??? 😭😭 \" ",
-                    "Tell your crush to use crush",
-                    "\"claude know all my api keys\"",
-                    "DM mally for daily instagram reels",
-                    "\"I wish an older woman groomed me when I was a teen maybe I wouldn’t be so awkward around women then\"",
-                    "ALT + F4 for free robux",
-                    "local bars hate me when i pull this move",
-                    "duh",
-                    "This text can be funny sometimes",
-                    "Ocean Dih",
-                    "Think like an engineer",
-                    "i hope your day is better",
-                    "Thank you John C. Rush",
-                    "Im gonna murder all my mods",
-                    "Mally think he is tuff but im tuffer, Sigma sigma boy",
-                    "im gooning to find you bro",
-                    "go to sleep cute boy",
-                    "Can you build crush in build a boat?",
-                    "\"eat poop\" - 0xf9",
-                    "we may now kiss",
-                    "fuck you :3",
-                    "This is a fun fact",
-                    "Make lil crushies with your crush gng 💔🥀",
-                    "Crush started its development on March, 14 2026, 10 days after Mally's birthday!",
-                    "Shoutout to alexdahumbleone",
-                    "infinity update ahh",
-                    "stop larping python in your bio that is not tuff",
-                    "thanks for using crush bro you're so tuff",
-                    ">be me",
-                    "\"kernal cheats using python\" 😭😭😭😭",
-                    "Something is coming in 3 days.",
-                    "what the fu-",
-                    "these text are mostly qouted from discord",
-                    "Thank you Mr John C. Rush thanks for you legacy",
-                    "they are calling",
-                    "You have 10+ messages pending.",
-                    "its so cool",
-                    "i WILL eat you",
-                    "This is crush!",
-                    "Hello gamers",
-                    "BRO BE HATING ON ANYTHING 😭😭",
-                    "Also try out Bloxstrap",
-                    "Also try out Froststrap",
-                    "Also try out Voidstrap",
-                    "Also try out Fishstrap"
-                ]
+                "fallback": "This suppose to display fun facts, but something went wrong..."
             }
         },
         "boostrapWin": {
@@ -206,47 +120,6 @@
                 "description": "이 SwiftTunnel 통합은 비공식입니다. 기본 SDK를 포크하여 최신 앱과 동기화해 Crush에서 사용할 수 있게 했습니다. SwiftTunnel 관련 불만은 저희에게 하지 말아 주세요.",
                 "confirm": "알겠어요!"
             },
-            "swiftTunnel": {
-                "title": "SwiftTunnel",
-                "description": "Crush 내에서 SwiftTunnel을 구성하세요.",
-                "back": "뒤로",
-                "notLoggedIn": "로그인되어 있지 않습니다.",
-                "loginTimeout": "로그인 시간이 초과되었습니다. 다시 시도하세요.",
-                "loadingMessage": "브라우저에서 계속 진행하세요. 1분 후 자동 취소됩니다.",
-                "loginButton": "브라우저로 로그인",
-                "enableTunnelingCard": {
-                    "title": "터널링 활성화",
-                    "description": "터널링을 활성화하여 Roblox 트래픽을 VPN으로 라우팅하세요"
-                },
-                "disconnectWhenRobloxIsClosed": {
-                    "title": "Disconnect on Roblox is closed",
-                    "description": "Option to kill SwiftTunnel when roblox is closed"
-                },
-                "multipleAssetsThoughRelays": {
-                    "title": "Route assets to multiple relays",
-                    "description": "This route assets to multiple relays, improving assets load speed. Might break authenthication, launch from web to avoid login."
-                },
-                "enableRoutingCard": {
-                    "title": "Roblox 라우팅 활성화",
-                    "description": "모든 Roblox API 요청을 VPN을 통해 라우팅합니다. 일부 국가에서 차단된 게임을 우회하는 데 사용할 수 있습니다."
-                },
-                "enableCountryBanCard": {
-                    "title": "Bypass Country Ban",
-                    "description": "Routes all Roblox bootstrap traffic through the relay and activates DPI bypass. Use this if Roblox is blocked in your country. Implies Roblox Routing."
-                },
-                "enablePartialCountryBanCard": {
-                    "title": "Bypass Partial Ban",
-                    "description": "Relays only Roblox control-plane traffic so blocked games appear and join. Gameplay UDP stays direct so you keep your real in-game ping. Use this if only specific games are blocked in your country (e.g. Vietnam)."
-                },
-                "preferredRegionCard": {
-                    "title": "선호 지역",
-                    "description": "선호 지역 구성"
-                },
-                "serverList": {
-                    "title": "서버 목록",
-                    "empty": "사용 가능한 서버가 없습니다."
-                }
-            },
             "activityWatcherCard": {
                 "title": "활동 감시",
                 "description": "Roblox에서의 활동을 감시합니다. 일부 기능은 이 기능이 활성화되어 있어야 합니다."
@@ -261,7 +134,7 @@
             },
             "processPriorityCard": {
                 "title": "프로세스 우선순위",
-                "description": "매우 실험적입니다. Roblox 프로세스 우선순위를 변경합니다. 성능이 향상될 수 있습니다."
+                "description": "Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
                 "title": "Trim memmory when not focused",
@@ -298,18 +171,6 @@
                 "title": "Window Manipulation (이전 Interactive API)",
                 "description": "지원되는 게임이 창을 이동, 크기 조정, 알림, 하드웨어와 상호작용하도록 허용합니다. Window Manipulation 기능이 있는 게임만 지원하며, 모든 게임이 작동하는 것은 아닙니다. BloxstrapRPC와 Funkstrap의 방식에서 영감을 받았습니다.",
                 "button": "열기"
-            },
-            "roValraCard": {
-                "title": "RoValra와 함께 더 나은 매치메이킹",
-                "description": "Crush에는 기본 제공 매치메이킹 통합 기능이 있습니다. RoValra의 개인정보 처리방침이 적용됩니다.",
-                "button": "열기"
-            },
-            "roValra": {
-                "description": "구성",
-                "joinServerForYouCard": {
-                    "title": "Crush가 서버에 대신 입장하도록 허용",
-                    "description": "Roblox 매치메이킹 대신 RoValra API를 사용하여 최적의 서버를 찾습니다."
-                }
             },
             "gameHistory": {
                 "title": "게임 기록",
@@ -507,7 +368,7 @@
             "preset": {
                 "preset": "사전 설정",
                 "description": "내장된 Fast Flag 프리셋을 사용합니다.",
-                "disableFastflag": {
+                "disableFastFlag": {
                     "title": "Disable Fastflag",
                     "description": "Disable Fastflag."
                 },

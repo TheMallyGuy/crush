@@ -50,93 +50,7 @@
             "config": "Cấu hình",
             "discord": "Cộng đồng chúng tôi",
             "funFacts": {
-                "fallback": "Trang này đáng lẽ ra phải hiển thị những thông tin thú vị, nhưng có vẻ như đã bị lỗi...",
-                "items": [
-                    "Xin chào",
-                    "Bạn từng thử để crush thích bạn?",
-                    "cộng đồng roblox vn bây giờ:",
-                    "Hello everybody",
-                    "we are all slandering vng",
-                    "leventgameing is the GOAT",
-                    "eek!",
-                    "Loading malware....",
-                    "Deleting system32....",
-                    "I suppose",
-                    "Are you reading this yes?",
-                    "Say hi to the new miawuawua",
-                    "I have a crush but she didnt know it yet",
-                    "What's a high tier app look like to a low tier boostraper?",
-                    "Let's make crush mainstream",
-                    "meow",
-                    "100 cp fans vs happiness",
-                    "Everything but adding Server region selection to crush",
-                    "\"I have crush, you are not\"",
-                    "i am really sorry about that",
-                    "binary (10010100101) non-binary (HelloWorld\"(Print)\")",
-                    "im adding an injector next week",
-                    "successfully installed c++ on your machine",
-                    "you know what? i also installed c# on your machine!",
-                    "Having a dumb person around proved to expand expand a person's lifespan. Thanks for being here!",
-                    "🐘",
-                    "ily",
-                    "me updating 100 billons updates to crush",
-                    "Join our community server!",
-                    "I've detected your homework folder over 10 TB, whats going on there?",
-                    "Big thanks for bratic for promoting crush",
-                    "ouh shii 👀👀",
-                    "You're cute lowk",
-                    "Have you ever have a dessert",
-                    "fym ouh shii 😭😭",
-                    "i know where you are",
-                    "collect my lost souls",
-                    "keep yourself safe",
-                    "i have food the other day its was good",
-                    "\"Quick doctor help him!\" \" What is his type? \" \" He's into mommies \" \" ??? 😭😭 \" ",
-                    "Tell your crush to use crush",
-                    "\"claude know all my api keys\"",
-                    "DM mally for daily instagram reels",
-                    "\"I wish an older woman groomed me when I was a teen maybe I wouldn’t be so awkward around women then\"",
-                    "ALT + F4 for free robux",
-                    "local bars hate me when i pull this move",
-                    "duh",
-                    "This text can be funny sometimes",
-                    "Ocean Dih",
-                    "Think like an engineer",
-                    "i hope your day is better",
-                    "Thank you John C. Rush",
-                    "Im gonna murder all my mods",
-                    "Mally think he is tuff but im tuffer, Sigma sigma boy",
-                    "im gooning to find you bro",
-                    "go to sleep cute boy",
-                    "Can you build crush in build a boat?",
-                    "\"eat poop\" - 0xf9",
-                    "we may now kiss",
-                    "fuck you :3",
-                    "This is a fun fact",
-                    "Make lil crushies with your crush gng 💔🥀",
-                    "Crush started its development on March, 14 2026, 10 days after Mally's birthday!",
-                    "Shoutout to alexdahumbleone",
-                    "infinity update ahh",
-                    "stop larping python in your bio that is not tuff",
-                    "thanks for using crush bro you're so tuff",
-                    ">be me",
-                    "\"kernal cheats using python\" 😭😭😭😭",
-                    "Something is coming in 3 days.",
-                    "what the fu-",
-                    "these text are mostly qouted from discord",
-                    "Thank you Mr John C. Rush thanks for you legacy",
-                    "they are calling",
-                    "You have 10+ messages pending.",
-                    "its so cool",
-                    "i WILL eat you",
-                    "This is crush!",
-                    "Hello gamers",
-                    "BRO BE HATING ON ANYTHING 😭😭",
-                    "Also try out Bloxstrap",
-                    "Also try out Froststrap",
-                    "Also try out Voidstrap",
-                    "Also try out Fishstrap"
-                ]
+                "fallback": "This suppose to display fun facts, but something went wrong..."
             }
         },
         "boostrapWin": {
@@ -206,47 +120,6 @@
                 "description": "Tích hợp SwiftTunnel này không chính thức. Mặc dù chúng tôi sử dụng SDK mặc định, đã fork và đồng bộ với ứng dụng mới nhất để dùng với Crush. Vui lòng không khiếu nại về SwiftTunnel với chúng tôi.",
                 "confirm": "Đã hiểu!"
             },
-            "swiftTunnel": {
-                "title": "SwiftTunnel",
-                "description": "Cấu hình SwiftTunnel ngay trong Crush.",
-                "back": "Quay lại",
-                "notLoggedIn": "Bạn chưa đăng nhập.",
-                "loginTimeout": "Đăng nhập đã hết thời gian. Vui lòng thử lại.",
-                "loadingMessage": "Vui lòng tiếp tục trên trình duyệt. Tự động hủy sau 1 phút.",
-                "loginButton": "Đăng nhập qua trình duyệt",
-                "enableTunnelingCard": {
-                    "title": "Bật Tunneling",
-                    "description": "Bật tunneling để định tuyến Roblox qua VPN"
-                },
-                "disconnectWhenRobloxIsClosed": {
-                    "title": "Ngắt kết nối khi Roblox đóng",
-                    "description": "Tùy chọn kết thúc SwiftTunnel khi Roblox đã đóng"
-                },
-                "multipleAssetsThoughRelays": {
-                    "title": "Tuyến đường tài nguyên đến nhiều lưu luợng",
-                    "description": "Tuyến đường này phân bổ tài nguyên đến nhiều máy chủ lưu lượng, cải thiện tốc độ tải tài nguyên. Có thể gây lỗi xác thực, nên khởi chạy từ web để tránh lỗi đăng nhập."
-                },
-                "enableRoutingCard": {
-                    "title": "Bật định tuyến Roblox",
-                    "description": "Định tuyến tất cả yêu cầu API Roblox qua VPN. Điều này có thể dùng để truy cập các trò chơi bị chặn ở một số quốc gia."
-                },
-                "enableCountryBanCard": {
-                    "title": "Bỏ qua lệnh cấm quốc gia",
-                    "description": "Chuyển hướng toàn bộ lưu lượng khi khởi động Roblox qua máy chủ chuyển tiếp và kích hoạt bỏ qua DPI. Sử dụng tùy chọn này nếu Roblox bị chặn ở quốc gia của bạn. Ngụ ý định tuyến Roblox."
-                },
-                "enablePartialCountryBanCard": {
-                    "title": "Bỏ qua lệnh cấm một phần",
-                    "description": "Chỉ chuyển tiếp lưu lượng của Roblox để các trò chơi bị chặn vẫn có thể hiển thị và tham gia. Kết nối UDP trong game không thay đổi nên bạn vẫn giữ nguyên ping thực trong game. Sử dụng chức năng này nếu một số trò chơi cụ thể bị chặn ở quốc gia của bạn (Ví dụ: Việt Nam)."
-                },
-                "preferredRegionCard": {
-                    "title": "Khu vực ưu tiên",
-                    "description": "Cấu hình khu vực ưu tiên của bạn"
-                },
-                "serverList": {
-                    "title": "Danh sách máy chủ",
-                    "empty": "Không có máy chủ nào khả dụng."
-                }
-            },
             "activityWatcherCard": {
                 "title": "Theo dõi hoạt động",
                 "description": "Theo dõi hoạt động của bạn trên Roblox. Một số tính năng yêu cầu bạn phải bật tính năng này."
@@ -261,7 +134,7 @@
             },
             "processPriorityCard": {
                 "title": "Ưu tiên tiến trình",
-                "description": "ĐANG THỬ NGHIỆM. Thay đổi mức độ ưu tiên của tiến trình Roblox. Có thể tăng hiệu suất."
+                "description": "Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
                 "title": "Trim memmory when not focused",
@@ -298,18 +171,6 @@
                 "title": "Thao tác cửa sổ (Trước đây là API tương tác)",
                 "description": "Cho phép trò chơi được hỗ trợ di chuyển cửa sổ, thay đổi kích thước, thông báo và tương tác với phần cứng của bạn. Chỉ hỗ trợ các trò chơi có thao tác trên cửa sổ - không phải tất cả trò chơi đều hoạt động. Lấy cảm hứng từ cách BloxstrapRPC & Funkstrap hoạt động.",
                 "button": "Mở"
-            },
-            "roValraCard": {
-                "title": "Ghép trận tốt hơn với RoValra",
-                "description": "Crush có tính năng ghép trận tích hợp sẵn. Có áp dụng Chính sách bảo mật của RoValra.",
-                "button": "Mở"
-            },
-            "roValra": {
-                "description": "Cấu hình",
-                "joinServerForYouCard": {
-                    "title": "Để Crush tham gia máy chủ cho bạn",
-                    "description": "Thay vì sử dụng hệ thống ghép trận của Roblox, chúng tôi sẽ sử dụng API của RoValra để tìm máy chủ tốt nhất."
-                }
             },
             "gameHistory": {
                 "title": "Lịch sử Trò chơi",
@@ -507,9 +368,9 @@
             "preset": {
                 "preset": "Có sẵn",
                 "description": "Sử dụng các thiết lập Fast Flag có sẵn của chúng tôi.",
-                "disableFastflag": {
-                    "title": "Tắt FastFlag",
-                    "description": "Vô hiệu tất cả FastFlag."
+                "disableFastFlag": {
+                    "title": "Disable Fastflag",
+                    "description": "Disable Fastflag."
                 },
                 "msaaCard": {
                     "title": "Chất lượng khử răng cưa (MSAA)",
