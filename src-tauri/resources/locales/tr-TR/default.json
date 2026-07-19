@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Fırlatma"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Ezmek",
@@ -260,8 +264,8 @@
                 "description": "AŞIRI DENEYSEL. Roblox işlem önceliğini değiştirir. Performansı artırabilir."
             },
             "optimizerCard": {
-                "title": "Optimizatörü Etkinleştir",
-                "description": "Roblox'un kullanabileceği kaynakları sınırlayarak optimize edin. GitHub'daki 8damon/TASX-Roblox-Optimizer'dan ilham alınmıştır. Günümüzde her şey Rust'ta yeniden yazılmıştır."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Tam Ekran Optimizasyonunu Devre Dışı Bırak",
@@ -276,6 +280,14 @@
                 "description": "Roblox Rich Varlığını Crush'ınkiyle değiştir.",
                 "option1": "İnsanların oyununuza katılmasına izin verin",
                 "option2": "Roblox oynarken hesabınızı görüntüleyin"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Oyun geçmişiniz",

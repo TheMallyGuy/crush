@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Lanzamiento"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Triturar",
@@ -260,8 +264,8 @@
                 "description": "EXTREMADAMENTE EXPERIMENTAL. Cambia la prioridad del proceso de Roblox. Puede mejorar el rendimiento."
             },
             "optimizerCard": {
-                "title": "Activar optimizador",
-                "description": "Optimiza Roblox limitando los recursos que puede usar. Inspirado en cómo funciona 8damon/TASX-Roblox-Optimizer en GitHub. Hoy en día todo está reescrito en Rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Desactivar optimización de pantalla completa",
@@ -276,6 +280,14 @@
                 "description": "Reemplace la presencia rica de Roblox con la de Crush.",
                 "option1": "Deja que la gente se una a tu juego",
                 "option2": "Mostrar tu cuenta al jugar a Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "HISTORIAL DE PARTIDAS",

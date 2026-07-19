@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "الإطلاق"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "إعجاب",
@@ -260,8 +264,8 @@
                 "description": "تجريبي للغاية. تغيير أولوية عملية Roblox. قد يعزز الأداء."
             },
             "optimizerCard": {
-                "title": "تمكين المحسن",
-                "description": "تحسين Roblox عن طريق تقييد الموارد التي يمكنه استخدامها. مستوحى من كيفية عمل 8damon/TASX-Roblox-Optimizer على GitHub. كل شيء الآن يُعاد كتابته بلغة Rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "تعطيل تحسين ملء الشاشة",
@@ -276,6 +280,14 @@
                 "description": "استبدل حضور Roblox الغني بحضور Crush's.",
                 "option1": "اسمح للأشخاص بالانضمام إلى لعبتك",
                 "option2": "عرض حسابك عند تشغيل Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "تاريخ لعبك",

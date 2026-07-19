@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Lansering"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "Krossa",
@@ -260,8 +264,8 @@
                 "description": "EXTREMELY EXPERIMENTAL. Change roblox process priority. May boost performance."
             },
             "optimizerCard": {
-                "title": "Enable optimizer",
-                "description": "Optimize Roblox by limiting resource its can use. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Disable Fullscreen optimization",
@@ -276,6 +280,14 @@
                 "description": "Byt ut Roblox Rich Presence mot Crush's.",
                 "option1": "Låt folk gå med i ditt spel",
                 "option2": "Visa ditt konto när du spelar Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Din spelhistorik",

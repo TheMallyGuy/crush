@@ -39,6 +39,10 @@
     "elements": {
         "launchBar": "Start"
     },
+    "crossplatform": {
+        "notAvailableWindowsOnly": "This feature is only available for Windows.",
+        "notAvailableWindowsPlanned": "This feature currently available for Windows, But we have plan to support your operating system."
+    },
     "pages": {
         "choiceWin": {
             "title": "knuse",
@@ -260,8 +264,8 @@
                 "description": "YDELIG EKSPERIMENTELT. Ændr Roblox procesprioritet. Kan forbedre ydeevnen."
             },
             "optimizerCard": {
-                "title": "Aktiver optimizer",
-                "description": "Optimer Roblox ved at begrænse de ressourcer, det kan bruge. Inspireret af, hvordan 8damon/TASX-Roblox-Optimizer på GitHub virker. Alt nu dage er omskrevet til Rust."
+                "title": "Trim memmory when not focused",
+                "description": "Trim's roblox memory usage when youre not looking at the window. Save resources. Inprised by how 8damon/TASX-Roblox-Optimizer on github work. Anything nowdays are all rewrite in rust."
             },
             "disableFullscreenoptimizationCard": {
                 "title": "Deaktiver fuldskærmoptimering",
@@ -276,6 +280,14 @@
                 "description": "Udskift Roblox Rich Presence med Crush's.",
                 "option1": "Lad folk deltage i dit spil",
                 "option2": "Vis din konto, når du spiller Roblox"
+            },
+            "disableSystemTrayCard": {
+                "title": "Disable system tray",
+                "description": "Disables roblox's system tray"
+            },
+            "disableLaunchAtStartup": {
+                "title": "Disable launch Roblox when you start your computer",
+                "description": "Preventing roblox from launching when you start your computer."
             },
             "gameHistoryCard": {
                 "title": "Din spilhistorik",
