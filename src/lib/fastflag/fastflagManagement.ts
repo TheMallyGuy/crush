@@ -9,7 +9,7 @@
 
 import type { AppType } from "$lib/downloadRoblox";
 import { operating_system } from "$lib/stores/operating_system.svelte";
-import { appDataDir, join } from "@tauri-apps/api/path";
+import { appDataDir, homeDir, join } from "@tauri-apps/api/path";
 import { BaseDirectory, exists, mkdir, readTextFile, remove, writeTextFile } from "@tauri-apps/plugin-fs";
 import { info } from "@tauri-apps/plugin-log";
 import { load, Store } from "@tauri-apps/plugin-store";
@@ -135,6 +135,7 @@ function getMacAppBundleName(app_type: AppType): string {
 //     }
 // }
 
+
 async function resolveClientSettingsPaths(
     app_type: AppType,
     version: string,
@@ -142,7 +143,8 @@ async function resolveClientSettingsPaths(
 ): Promise<{ dir: string; file: string }> {
     if (isMacOs()) {
         const bundleName = getMacAppBundleName(app_type)
-        const dir = await join('/Applications', bundleName, 'Contents', 'MacOS', 'ClientSettings')
+        const home = await homeDir()
+        const dir = await join(home, '/Applications', bundleName, 'Contents', 'MacOS', 'ClientSettings')
         const file = await join(dir, 'ClientAppSettings.json')
         return { dir, file }
     }

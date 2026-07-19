@@ -106,8 +106,9 @@
     },
     "log:default",
     "fs:default",
-    "fs:allow-home-read-recursive",
-    "fs:allow-home-write-recursive",
+    "fs:allow-home-read-recursive",  
+    "fs:allow-home-write-recursive",  
+    "fs:allow-home-meta-recursive",
     "opener:allow-open-path",
     {
       "identifier": "fs:allow-mkdir",
