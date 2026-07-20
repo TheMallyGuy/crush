@@ -143,6 +143,7 @@
             description={$_(
                 'pages.installations.versionManagerCard.description'
             )}
+            disabled={disableWin}
             icon={Rocket}
         >
             {#snippet action()}

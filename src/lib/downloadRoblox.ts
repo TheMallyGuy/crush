@@ -4,7 +4,7 @@ import { load, Store } from '@tauri-apps/plugin-store'
 import { info } from '@tauri-apps/plugin-log'
 import { arch } from '@tauri-apps/plugin-os'
 import { exists, BaseDirectory, writeFile, mkdir, readDir, remove } from '@tauri-apps/plugin-fs'
-import { appCacheDir, appDataDir, homeDir, join } from '@tauri-apps/api/path'
+import { appCacheDir, appDataDir, join } from '@tauri-apps/api/path'
 import { get } from 'svelte/store'
 import { _ } from 'svelte-i18n'
 
@@ -135,8 +135,7 @@ async function getVersionStoreForAppType(appType: AppType): Promise<Store> {
     return load(getVersionStoreKey(appType))
 }
 
-const noopProgress: ProgressCallback = () => { }
-
+const noopProgress: ProgressCallback = () => {}
 
 async function getMacActivatedVersion(appType: AppType): Promise<string | null> {
     const versionStore = await getVersionStoreForAppType(appType)
@@ -628,26 +627,36 @@ async function ensureMacAppActivated(
     appType: AppType
 ): Promise<boolean> {
     const activated = await getMacActivatedVersion(appType)
-
     if (activated === versionHash) {
         return true
     }
 
+    const existingInstallPath = await findExistingMacInstallation(appType)
+    if (existingInstallPath) {
+        info(`using existing mac installation at ${existingInstallPath} instead of copying`)
+        await markMacVersionActivated(appType, versionHash)
+        return true
+    }
+
     const { appName } = getMacAppNames(appType)
-
     const bundlePath = await join(installPath, appName)
-
     if (!(await exists(bundlePath))) {
         return false
     }
 
     await installMacApp(installPath, appType, noopProgress)
-
     await markMacVersionActivated(appType, versionHash)
-
     return true
 }
 
+async function findExistingMacInstallation(appType: AppType): Promise<string | null> {
+    const { destName } = getMacAppNames(appType)
+    try {
+        return await invoke<string>('find_roblox_installation', { appBundle: destName })
+    } catch {
+        return null
+    }
+}
 
 export function getPackageForFile(
     relativePath: string,
