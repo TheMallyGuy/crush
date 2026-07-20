@@ -15,7 +15,7 @@ jobs:
                     - platform: windows-latest
                       target: ''
                     - platform: macos-latest
-                      target: universal-apple-darwin
+                      target: aarch64-apple-darwin,x86_64-apple-darwin
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout repository
