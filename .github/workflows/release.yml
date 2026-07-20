@@ -21,7 +21,7 @@ jobs:
                       platform_key: windows-x86_64
                       bundle_glob: src-tauri/target/release/bundle/nsis
                     - platform: macos-latest
-                      target: universal-apple-darwin
+                      target: aarch64-apple-darwin,x86_64-apple-darwin
                       bundle_dir: dmg
                       ext: dmg
                       platform_key: darwin-universal
