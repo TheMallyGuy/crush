@@ -1,17 +1,17 @@
 ﻿{
     "rpc": {
-        "general": "一から書かれた Roblox ブートストラッパー。",
+        "general": "一から書かれた Roblox ブートストラッパー",
         "integrations": "統合ルート",
         "installation": "インストールルート内",
-        "fastflag": "高速フラグルート",
-        "mod": "モッドルート中",
-        "appearance": "外観ルート",
+        "fastflag": "ファストフラグルート内",
+        "mod": "Modルート内",
+        "appearance": "外観ルート内",
         "rust": {
             "watcher": {
-                "general": "Robloxを再生中",
-                "idle": "はない、",
-                "playing": "ゲーム中に",
-                "playingPrivate": "ゲーム内のプライベートサーバー",
+                "general": "Robloxをプレイ中",
+                "idle": "ゲームに参加していません",
+                "playing": "ゲームをプレイ中",
+                "playingPrivate": "プライベートサーバーでゲームをプレイ中",
                 "serverInfomation": {
                     "titles": {
                         "public": "公開サーバーに接続しました！",
@@ -24,13 +24,13 @@
     },
     "typescript": {
         "downloader": {
-            "updateChecking": "アップデートの確認中...",
-            "findingBestRegion": "最適なダウンロード地域を探しています...",
-            "preparingForDownload": "ダウンロードするクリップを準備中...",
-            "fetchingUrls": "アセットのURLを取得しています...",
-            "downloadingAssets": "アセットをダウンロード中...",
-            "extractingFiles": "すべてのファイルを展開",
-            "xmlWriting": "AppSettings.xmlを書き込んでいます...",
+            "updateChecking": "アップデートを確認中",
+            "findingBestRegion": "最適なダウンロード地域を検索中…",
+            "preparingForDownload": "ダウンロードの準備中",
+            "fetchingUrls": "アセットのURLを取得中…",
+            "downloadingAssets": "アセットをダウンロード中…",
+            "extractingFiles": "ファイルを展開中…",
+            "xmlWriting": "AppSettings.xmlを書き込み中…",
             "versionSaving": "バージョン情報を保存しています...",
             "installationComplete": "インストール完了",
             "packageDownloadFailed": "ダウンロードできませんでした"
