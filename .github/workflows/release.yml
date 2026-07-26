@@ -20,12 +20,16 @@ jobs:
                       ext: exe
                       platform_key: windows-x86_64
                       bundle_glob: src-tauri/target/release/bundle/nsis
+                      updater_glob: src-tauri/target/release/bundle/nsis
+                      updater_ext: exe
                     - platform: macos-latest
                       target: aarch64-apple-darwin,x86_64-apple-darwin
                       bundle_dir: dmg
                       ext: dmg
                       platform_key: darwin-universal
                       bundle_glob: src-tauri/target/universal-apple-darwin/release/bundle/dmg
+                      updater_glob: src-tauri/target/universal-apple-darwin/release/bundle/macos
+                      updater_ext: app.tar.gz
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout repository
@@ -33,7 +37,7 @@ jobs:
             - name: Setup Bun
               uses: oven-sh/setup-bun@v2
             - name: Setup Node
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: 20
             - name: Setup Rust
@@ -48,11 +52,13 @@ jobs:
               if: matrix.platform == 'windows-latest'
               env:
                   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
               run: bun tauri build
             - name: Build Tauri (macOS universal)
               if: matrix.platform == 'macos-latest'
               env:
                   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
               run: bun tauri build --target universal-apple-darwin
             - name: Get metadata
               if: startsWith(github.ref, 'refs/tags/v')
@@ -69,7 +75,7 @@ jobs:
               run: |
                   VERSION="${{ steps.meta.outputs.version }}"
                   DATE="${{ steps.meta.outputs.date }}"
-                  FILE_PATH=$(ls ${{ matrix.bundle_glob }}/*.${{ matrix.ext }} | head -n 1)
+                  FILE_PATH=$(ls ${{ matrix.updater_glob }}/*.${{ matrix.updater_ext }} | head -n 1)
                   SIG_PATH="${FILE_PATH}.sig"
                   echo "FILE: $FILE_PATH"
                   echo "SIG: $SIG_PATH"
@@ -82,7 +88,7 @@ jobs:
                   cat > updater-${{ matrix.platform_key }}.json <<EOF
                   {
                     "version": "$VERSION",
-                    "notes": "Updater test!",
+                    "notes": "update notes",
                     "pub_date": "$DATE",
                     "platforms": {
                       "${{ matrix.platform_key }}": {
@@ -98,9 +104,9 @@ jobs:
                   name: tauri-${{ matrix.platform }}-build
                   path: |
                       ${{ matrix.bundle_glob }}/*.${{ matrix.ext }}
-                      ${{ matrix.bundle_glob }}/*.sig
+                      ${{ matrix.updater_glob }}/*.${{ matrix.updater_ext }}
+                      ${{ matrix.updater_glob }}/*.${{ matrix.updater_ext }}.sig
                       updater-${{ matrix.platform_key }}.json
-
     release:
         needs: build
         if: startsWith(github.ref, 'refs/tags/v')
@@ -115,7 +121,6 @@ jobs:
               run: |
                   python3 - <<'EOF'
                   import json, glob
-
                   files = sorted(glob.glob("artifacts/**/updater-*.json", recursive=True))
                   merged = None
                   for f in files:
@@ -135,6 +140,7 @@ jobs:
                   files: |
                       artifacts/**/*.exe
                       artifacts/**/*.dmg
+                      artifacts/**/*.tar.gz
                       updater.json
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
