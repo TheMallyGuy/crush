@@ -31,9 +31,9 @@
             "downloadingAssets": "アセットをダウンロード中…",
             "extractingFiles": "ファイルを展開中…",
             "xmlWriting": "AppSettings.xmlを書き込み中…",
-            "versionSaving": "バージョン情報を保存しています...",
-            "installationComplete": "インストール完了",
-            "packageDownloadFailed": "ダウンロードできませんでした"
+            "versionSaving": "バージョン情報を保存中…",
+            "installationComplete": "インストールが完了しました！",
+            "packageDownloadFailed": "ダウンロードに失敗しました {packageName}: {error}"
         }
     },
     "elements": {
@@ -45,10 +45,10 @@
     },
     "pages": {
         "choiceWin": {
-            "title": "押しつぶし",
+            "title": "Crush",
             "playRoblox": "Robloxをプレイ",
-            "config": "構成",
-            "discord": "私たちのコミュニティ",
+            "config": "設定",
+            "discord": "公式コミュニティ",
             "funFacts": {
                 "fallback": "This suppose to display fun facts, but something went wrong..."
             }
@@ -70,11 +70,11 @@
             "title": "サーバー情報",
             "infomationCard": {
                 "serverRegion": "地域 : {region}",
-                "waitRegion": "地域を取得しています...",
+                "waitRegion": "地域を取得しています…",
                 "description": "このサーバーに関するサーバー情報",
                 "uptime": "稼働時間：取得されていません",
                 "instanceId": "サーバーインスタンスID: {id}",
-                "inviteLink": "招待リンクをコピー :",
+                "inviteLink": "招待リンクをコピー ：",
                 "serverType": {
                     "public": "Public server",
                     "private": "Private / Reserved server"
