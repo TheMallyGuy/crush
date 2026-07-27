@@ -207,7 +207,7 @@
                 {$_('pages.settings.creditsCard.dialog.localization')}
             </p>
             <p class="text-stone-300">polover - Vietnamese</p>
-            <p class="text-stone-300"era760 - Japanese</p>
+            <p class="text-stone-300">era760 - Japanese</p>
         </div>
         <div>
             <p class="text-lx1 mb-1">
