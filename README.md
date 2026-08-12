@@ -1,3 +1,5 @@
+# **Crush is discontinued. You can still use crush but crush will no longer be updated.**
+
 # Crush
 
 [![Discord][discordBadge]][discord]
